@@ -23,7 +23,7 @@ namespace MoveHeaderASM
         int[] room = {2,4,9,10,11,14,17,19,21,22,23,25,26,27,30,31,33,34,36,38,39,40,42,43,46,49,50,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,73,74,75,76,
 78,80,81,82,83,84,85,86,87,88,89,91,93,94,95,96,97,98,99,100,101,102,103,104,106,107,109,110,113,114,115,116,117,118,119,123,124,125,126,127,128,129,130,131,132,133,
 135,139,140,141,142,145,146,147,149,152,153,155,156,157,158,159,160,161,165,166,167,168,169,170,171,174,176,177,178,179,182,183,184,186,187,188,190,192,193,194,195,
-196,201,203,204,208,209,210,216,217,218,219,220,223,224,232,238,239,249,254,263,264,269,291};//,268
+196,201,203,204,208,209,210,216,217,218,219,220,223,224,232,238,239,249,251,235,254,263,264,269,291,267,185};//,268
 
             //add 0x7E,0x7F
         byte[] dungeons_sprite = {0x02,0x13,0x15,0x18,0x19,0x20,0x22,0x23,0x24,0x26,0x41,0x42,0x43,0x44,0x45,
@@ -36,34 +36,20 @@ namespace MoveHeaderASM
         byte[] WaterRoom = { 40, 56, 54, 70, 52, 22,102,118 }; //these room need to be locked on the gfx ID : 17
         byte[] ShadowRoom = {62,159};//28,27,30
         byte[] WallMasterRoom = {57,73,86,87,88,141 };
-
+        byte[] bumperandcrystalRoom = {23,4,11,19,27,30,42,43,49,68,76,86,88,89,91,103,104,107,119,126,135,139,145,146,155,157,161,171,
+        182,191,193,196,235};
         int[] SwitchesRoom = {2,100,267,73,88 };
         byte[] TonguesRoom = { 4,206,63 };
         byte[] PushSwitchesRoom = {53,55,118 };
-
-
-
-        //STUFF TO ADD --------------------------------------
-
-
-
-
-        //27,75,93,107,109,165 can require bow
-
-        //ROOM 85 require uncle
-        //ROOM 267 require pull switch - Need to add that room in randomization
-
-
-
-        //STUFF TO ADD --------------------------------------
-
-
-
+        int[] noStatueRoom = {70,208,38 };
+        byte[] canonRoom = {92,117}; //47 on 0 //46 on 3 for room 185
+        byte[] canonRoom2 = { 185, 217}; //47 on 0 //46 on 3 for room 185
 
         //int[] NeedKillable_keys = { 14, 19, 33, 57, 61, 62, 113, 114, 128, 153, 182, 192, 193 };
-        int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA };
+        int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200 };
         int[] NeedKillable_doors = { 11, 27, 36, 40, 49, 68, 75, 83, 93, 107, 109, 110, 117, 123, 125, 133, 135, 141,165, 168, 176, 178, 210, 216, 224, 239, 268, 291 };
-        
+
+        int[] special_sprites = new int[] { 0x04E60A, 0x04E615, 0x04E618, 0x04E61B, 0x04E61E, 0x04D9E1, 0x04D9E4, 0x04D9EA, 0x04D9E, 0x04DE61, 0x04E0DF, 0x04E3A6, 0x04E417, 0x04E7F1, 0x04E9B4 };
 
         byte[] sprite_subset_0 = new byte[] { 22, 31, 47,14}; //70-72 part of guards we already have 4 guard set don't need more
         byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
@@ -113,8 +99,10 @@ namespace MoveHeaderASM
             subset_gfx_sprites[17] = new byte[] { 0x00, 0x0D };//raven,buzzblob
             subset_gfx_sprites[27] = new byte[] { 0xA8, 0xA9, 0xAA };//dw bomber/likelike
             subset_gfx_sprites[20] = new byte[] { 0xD0};//lynel
-            subset_gfx_sprites[82] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, 0x82 };//lynel
-            subset_gfx_sprites[83] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, 0x82 };//lynel
+
+            subset_gfx_sprites[81] = new byte[] { };//switches
+            subset_gfx_sprites[82] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
+            subset_gfx_sprites[83] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
         }
 
 
@@ -132,11 +120,22 @@ namespace MoveHeaderASM
             return new byte[] { sprite_subset_0[rand.Next(sprite_subset_0.Length)], sprite_subset_1[rand.Next(sprite_subset_1.Length)],
             sprite_subset_2[rand.Next(sprite_subset_2.Length)],sprite_subset_3[rand.Next(sprite_subset_3.Length)]};
         }
-        byte ps = 0, pt = 0, ws = 0, wm = 0, om = 0, sh = 0, mm = 0, im = 0, pss = 0;
+        byte ps = 0, pt = 0, ws = 0, wm = 0, om = 0, sh = 0, mm = 0, im = 0, cc = 0,c2 = 0;
         public void create_sprite_group()
         {
             //Initialize Random Seed
-            rand = new Random();//Need to put seed here use random for now
+            int seed = 0;
+            if (textBox1.Text != "")
+            {
+                 seed = Convert.ToInt32((textBox1.Text));
+            }
+            else
+            {
+                rand = new Random();
+                seed = rand.Next();
+                textBox1.Text = seed.ToString();
+            }
+            rand = new Random(seed);//Need to put seed here use random for now
 
             //Creations of the guards group :
             random_sprite_group[0] = new byte[] { }; //Do not randomize that group (Ending thing?)
@@ -152,7 +151,8 @@ namespace MoveHeaderASM
             random_sprite_group[10] = fully_randomize_that_group();
             random_sprite_group[11] = new byte[] { };//Do not randomize that group (Lanmolas)
             random_sprite_group[12] = new byte[] { }; //Do not randomize that group (Moldorm)
-            random_sprite_group[13] = new byte[] { }; //Do not randomize that group (Link's House)
+            random_sprite_group[13] = fully_randomize_that_group(); //(Link's House)/Sewer restore uncle (81)
+            random_sprite_group[13][0] = 81;
             random_sprite_group[14] = new byte[] { }; //Do not randomize that group (Npcs)
             random_sprite_group[15] = new byte[] { };//Do not randomize that group (Npcs)
             random_sprite_group[16] = new byte[] { }; //Do not randomize that group (Minigame npcs, witch)
@@ -221,7 +221,15 @@ namespace MoveHeaderASM
                     {
                         mm = (byte)i;
                     }
-                    
+                    if (random_sprite_group[i][0] == 47)
+                    {
+                        cc = (byte)i;
+                    }
+                    if (random_sprite_group[i][2] == 46)
+                    {
+                        c2 = (byte)i;
+                    }
+
                 }
             }
             //Check if we have at least one group with subset 3 setted to 82 if not then force guard group 1 for pull switches room
@@ -235,11 +243,13 @@ namespace MoveHeaderASM
             if (ps == 0)
             {
                 random_sprite_group[1][3] = 82;
+                ps = 1;
             }
 
             if (pt == 0)
             {
                 random_sprite_group[2][3] = 83;
+                pt = 2;
             }
 
             if (mm == 0)
@@ -249,7 +259,25 @@ namespace MoveHeaderASM
                     if (random_sprite_group[i].Length != 0)
                     {
                         random_sprite_group[i][0] = 14;
+                        mm = (byte)i;
                         break;
+                    }
+                }
+            }
+
+            if (cc == 0)
+            {
+                for (int i = 5; i < 60; i++)
+                {
+                    if (random_sprite_group[i].Length != 0)
+                    {
+                        if (random_sprite_group[i][0] != 14)
+                        {
+                            random_sprite_group[i][0] = 47;
+                            cc = (byte)i;
+                            break;
+                        }
+                        
                     }
                 }
             }
@@ -260,14 +288,30 @@ namespace MoveHeaderASM
                 {
                     if (random_sprite_group[i].Length !=0)
                     {
-                        if (random_sprite_group[i][1] != 14)
-                        {
                             random_sprite_group[i][1] = 32;
+                            sh = (byte)i;
+                            break;
+                    }
+                }
+            }
+
+            if (c2 == 0)
+            {
+                for (int i = 5; i < 60; i++)
+                {
+                    if (random_sprite_group[i].Length != 0)
+                    {
+                        if (random_sprite_group[i][2] != 38 | random_sprite_group[i][2] != 28 | random_sprite_group[i][2] != 34 | random_sprite_group[i][2] != 35)
+                        {
+                            random_sprite_group[i][2] = 46;
+                            c2 = (byte)i;
                             break;
                         }
                     }
                 }
             }
+
+
 
             if (wm == 0)
             {
@@ -275,9 +319,10 @@ namespace MoveHeaderASM
                 {
                     if (random_sprite_group[i].Length !=0)
                     {
-                        if (random_sprite_group[i][2] != 38 || random_sprite_group[i][2] != 28 || random_sprite_group[i][2] != 34)
+                        if (random_sprite_group[i][2] != 38 | random_sprite_group[i][2] != 28 | random_sprite_group[i][2] != 34 | random_sprite_group[i][2] != 46)
                         {
                             random_sprite_group[i][2] = 35;
+                            wm = (byte)i;
                             break;
                         }
                     }
@@ -290,9 +335,10 @@ namespace MoveHeaderASM
                 {
                     if (random_sprite_group[i].Length !=0)
                     {
-                        if (random_sprite_group[i][2] != 38 || random_sprite_group[i][2] != 35 || random_sprite_group[i][2] != 34)
+                        if (random_sprite_group[i][2] != 38 | random_sprite_group[i][2] != 35 | random_sprite_group[i][2] != 34 | random_sprite_group[i][2] != 46)
                         {
                             random_sprite_group[i][2] = 28;
+                            om = (byte)i;
                             break;
                         }
                     }
@@ -305,9 +351,10 @@ namespace MoveHeaderASM
                 {
                     if (random_sprite_group[i].Length!=0)
                     {
-                        if (random_sprite_group[i][2] != 28 || random_sprite_group[i][2] != 35 || random_sprite_group[i][2] != 34)
+                        if (random_sprite_group[i][2] != 28 | random_sprite_group[i][2] != 35 | random_sprite_group[i][2] != 34 | random_sprite_group[i][2] != 46)
                         {
                             random_sprite_group[i][2] = 38;
+                            im = (byte)i;
                             break;
                         }
                     }
@@ -320,9 +367,10 @@ namespace MoveHeaderASM
                 {
                     if (random_sprite_group[i].Length !=0)
                     {
-                        if (random_sprite_group[i][2] != 28 || random_sprite_group[i][2] != 35 || random_sprite_group[i][2] != 38)
+                        if (random_sprite_group[i][2] != 28 | random_sprite_group[i][2] != 35 | random_sprite_group[i][2] != 38 | random_sprite_group[i][2] != 46)
                         {
                             random_sprite_group[i][2] = 34;
+                            ws = (byte)i;
                             break;
                         }
                     }
@@ -353,14 +401,20 @@ namespace MoveHeaderASM
 
         //Invincible Sprites
         byte[] NonKillable = {0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x15,0x1C,0x1E,0x21,0x5B,0x5C,0x5D,0x5E,0x5F,0x60,0x61,0x66,0x67,0x68,0x69,0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,
-0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
-        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x81,0x23};
+0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
+        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80};
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (file_to_patch == "")
+            {
+                openFileDialog2.ShowDialog();
+
+            }
             create_sprite_group();
             create_subset_gfx();
-            
+            //0,2,5,12,13,14,21,31,33,41-56,64,65
+            byte[] bugged_cave_palettes = new byte[] { 0, 2, 5, 12, 13, 14, 21, 31,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56, 33, 64, 65 };
             dungeons_palettes[0] = new byte[]{ 0,1,3,8,15,16,18,24,37,44,45,47,60,71,72,105,111,120,121,122,134,136,138,148,154,223,225};//Caves(0) 
             dungeons_palettes[1] = new byte[] { 1,2,32,48,64,65,80,81,82,96,97,98,176,192,208,224};//Castle(1) 
             dungeons_palettes[2] = new byte[] { 4,19,20,21,35,36,164,180,181,182,183,196,197,198,199,213,214};//TurtleRock(2)
@@ -376,14 +430,14 @@ namespace MoveHeaderASM
             dungeons_palettes[12] = new byte[] { 137,153,168,169,170,184,185,186,216,217,218,201,200};//Eastern(12)
             dungeons_palettes[13] = new byte[] { 143,144,145,146,147,151,152,160,161,162,163,177,178,179,193,194,195,202,209,210,211,212,215};//MiseryMire(13)
 
-            FileStream fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.ReadWrite);
+           /* FileStream fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.ReadWrite);
             ROM_DATA = new byte[2097152];
             fs.Read(ROM_DATA, 0, (int)2097152);
-            fs.Close();
+            fs.Close();*/
             patch_sprite_group();
 
             List<byte> dynamic_sprite = new List<byte>();
-           Random r = new Random();
+           //Random r = new Random();
             foreach (int b in room)
             {
                 
@@ -392,8 +446,8 @@ namespace MoveHeaderASM
                     //allow water bug to be a killable sprite
                     NonKillable = new byte[]{
                         0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x15,0x1C,0x1E,0x21,0x5B,0x5C,0x5D,0x5E,0x5F,0x60,0x61,0x66,0x67,0x68,0x69,0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,
-0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
-        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x23};
+0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
+        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x23,0x80};
 
                 }
                 else
@@ -401,8 +455,8 @@ namespace MoveHeaderASM
                     //else nop !
                     NonKillable =new byte []{
                         0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x15,0x1C,0x1E,0x21,0x5B,0x5C,0x5D,0x5E,0x5F,0x60,0x61,0x66,0x67,0x68,0x69,0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,
-0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
-        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x81,0x23};
+0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,
+        0x2F,0x32,0x31,0x35,0x36,0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80};
 
                 }
 
@@ -410,77 +464,118 @@ namespace MoveHeaderASM
                 //Pick a sprite group in the group
                 byte g = 0;
                 pick_a_group:
-                byte ng = (byte)r.Next(60);
+                byte ng = (byte)rand.Next(60);
                 if (random_sprite_group[ng].Length == 0)
                 {
                     goto pick_a_group;
                 }
                 g = ng;
 
-                foreach (byte bb in WaterRoom)
+                if (glitched_checkbox.Checked == false)
                 {
-                    if (b == bb)
+                    foreach (byte bb in bumperandcrystalRoom)
                     {
-                        ng = ws;
-                        break;
-                    }
-                }
-                foreach (byte bb in ShadowRoom)
-                {
-                    if (b == bb)
-                    {
-                        ng = sh;
-                        break;
-                    }
-                }
-                foreach (int bb in SwitchesRoom)
-                {
-                    if (b == bb)
-                    {
-                        ng = ps;
-                        break;
-                    }
-                }
-                foreach (int bb in TonguesRoom)
-                {
-                    if (b == bb)
-                    {
-                        ng = pt;
-                        break;
-                    }
-                }
-                foreach (int bb in PushSwitchesRoom)
-                {
-                    if (b == bb)
-                    {
-                        ng = pt;
-                        break;
-                    }
-                }
-                foreach (byte bb in IcemanRoom)
-                {
-                    if (b == bb)
-                    {
-                        ng = im;
-                        break;
-                    }
-                }
+                        if (b == bb)
+                        {
+                            if (random_sprite_group[ng][3] == 82 || random_sprite_group[ng][3] == 83)
+                            {
 
-                foreach (byte bb in WallMasterRoom)
-                {
-                    if (b == bb)
+                            }
+                            else
+                            {
+                                goto pick_a_group;
+                            }
+                        }
+                    }
+
+                    foreach (byte bb in WaterRoom)
                     {
-                        ng = wm;
-                        break;
+                        if (b == bb)
+                        {
+                            ng = ws;
+                            break;
+                        }
+                    }
+                    foreach (byte bb in ShadowRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = sh;
+                            break;
+                        }
+                    }
+                    foreach (int bb in SwitchesRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = ps;
+                            break;
+                        }
+                    }
+                    foreach (int bb in TonguesRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = pt;
+                            break;
+                        }
+                    }
+                    foreach (int bb in PushSwitchesRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = pt;
+                            break;
+                        }
+                    }
+                    foreach (byte bb in IcemanRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = im;
+                            break;
+                        }
+                    }
+
+                    foreach (byte bb in WallMasterRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = wm;
+                            break;
+                        }
+                    }
+                    foreach (byte bb in canonRoom)
+                    {
+                        if (b == bb)
+                        {
+                            ng = cc;
+                            break;
+                        }
+                    }
+                    foreach (byte bb in canonRoom2)
+                    {
+                        if (b == bb)
+                        {
+                            ng = c2;
+                            break;
+                        }
+                    }
+
+                    if (b == 291)
+                    {
+                        ng = mm;
+                        g = mm;
+                    }
+                    if (b == 85)
+                    {
+                        ng = 13;
+                        g = 13;
                     }
                 }
-                if (b == 291)
-                {
-                    ng = mm;
-                    g = mm;
-                }
-
                 g = ng;
+
+
                 dynamic_sprite.Clear();
                 //getsubset0 of group ng
                 foreach (byte en in subset_gfx_sprites[random_sprite_group[ng][0]])
@@ -544,7 +639,7 @@ namespace MoveHeaderASM
                         while (found == false)
                         {
                             repeatloop:
-                            spr_r = (byte)r.Next(nbrofsprite);
+                            spr_r = (byte)rand.Next(nbrofsprite);
                             for (int j =0;j< NonKillable.Length ;j++)
                             {
                                 
@@ -564,15 +659,19 @@ namespace MoveHeaderASM
 
 
                         retryr:
-                        byte spr_r = (byte)r.Next(nbrofsprite);
-                        if (b == 208 && spr_r == 0x1C) //prevent statue from spawning in darkmaze of agahtower
+                        byte spr_r = (byte)rand.Next(nbrofsprite);
+                        for(int j = 0;j<noStatueRoom.Length;j++) // statue handling prevent statue from spawning in some rooms
                         {
-                            goto retryr;
+                            if (b == noStatueRoom[j])
+                            {
+                                if (spr_r == 0x1C)
+                                {
+                                    goto retryr;
+                                }
+                            }
                         }
-                        if (b == 38 && spr_r == 0x1C) //prevent statue from spawning in a room in swamp
-                        {
-                            goto retryr;
-                        }
+
+
                         for (int jj = 0; jj < key_sprite.Length; jj++)
                         {
                             if (room_sprites[b][i] == key_sprite[jj])
@@ -590,6 +689,13 @@ namespace MoveHeaderASM
                         selectedSprite = dynamic_sprite[spr_r];
                         
                     }
+                    for (int jj = 0; jj < special_sprites.Length; jj++)
+                    {
+                        if (special_sprites[jj] == room_sprites[b][i])
+                        {
+                            ROM_DATA[room_sprites[b][i] - 1] = (byte)(ROM_DATA[room_sprites[b][i] - 1] & 0x1F);
+                        }
+                    }
                     ROM_DATA[room_sprites[b][i]] = selectedSprite;
 
 
@@ -602,13 +708,26 @@ namespace MoveHeaderASM
 
             for(int i =0;i<14;i++) //dungeons palettes
             {
-                byte g = (byte)rand.Next(32);
+                byte g = (byte)rand.Next(71);
                 byte gfx = (byte)rand.Next(23);
                 byte floor = (byte)rand.Next(255);
                 for (int j = 0; j < dungeons_palettes[i].Length; j++)
                 {
                     if (palettes_checkbox.Checked)
                     {
+                        if (j == 0)
+                        {
+                            recheckpalette:
+                            for (int k = 0; k < bugged_cave_palettes.Length; k++)
+                            {
+                                if (g == bugged_cave_palettes[k])
+                                {
+                                    g = (byte)rand.Next(71);
+                                    goto recheckpalette;
+                                }
+                                    
+                            }
+                        }
                         ROM_DATA[0x120090 + ((dungeons_palettes[i][j] * 14) + 1)] = g;
                     }
                     if (gfx_checkbox.Checked)
@@ -628,18 +747,50 @@ namespace MoveHeaderASM
                     }
                 }
             }
-
-            if (palette_e_checkbox.Checked)
+            for (int j = 0; j < 0xF3; j++)
             {
-                
-                for (int j = 0; j < 0xF3; j++)
+
+
+                if (palette_e_checkbox.Checked)
                 {
-                    ROM_DATA[0x6B359+j] = (byte)((ROM_DATA[0x6B359+j] & 0xF1) + (rand.Next(15) & 0x0E));
+                    //Do not change color of collectible items
+                    if (j <= 0xD7 || j >= 0xE7)
+                    {
+                        ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
+                    }
+                }
+                if (hp_checkbox.Checked)
+                {
+                    if (ROM_DATA[0x6B173 + j] != 0xFF)
+                    {
+                        int new_hp = ROM_DATA[0x6B173 + j];
+                        new_hp += (-20 + rand.Next(40));
+                        if (new_hp >= 0xFF)
+                        {
+                            new_hp = 0xFF;
+                        }
+                        if (new_hp <= 0)
+                        {
+                            new_hp = 1;
+                        }
+                        ROM_DATA[0x6B173 + j] = (byte)new_hp;
+                    }
+                }
+
+                if (zerohp_checkbox.Checked)
+                {
+                    byte new_hp = (byte)(1);
+                    ROM_DATA[0x6B173 + j] = new_hp;
+                }
+
+                if (damage_checkbox.Checked)
+                {
+                    ROM_DATA[0x6B266 + j] = (byte)(rand.Next(8));
                 }
 
             }
 
-            fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.Write);
+            FileStream fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.Write);
             fs.Write(ROM_DATA, 0, 2097152);
             fs.Close();
             
@@ -676,6 +827,26 @@ namespace MoveHeaderASM
             openFileDialog1.ShowDialog();
         }
         string file_to_patch = "";
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://zarby89.github.io/Enimizer/");
+        }
+
+        private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
+        {
+            file_to_patch = openFileDialog2.FileName;
+            FileStream fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.ReadWrite);
+            ROM_DATA = new byte[2097152];
+            fs.Read(ROM_DATA, 0, (int)2097152);
+            fs.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Zarby89/Enimizer/issues");
+        }
+
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             if (e.Cancel)
@@ -684,41 +855,53 @@ namespace MoveHeaderASM
             }
             else
             {
-                richTextBox1.AppendText(Path.GetDirectoryName(Application.ExecutablePath));
+                /*richTextBox1.AppendText(Path.GetDirectoryName(Application.ExecutablePath));
                 file_to_patch = openFileDialog1.FileName;
                 Process process = new Process();
                 process.StartInfo.WorkingDirectory = Path.GetDirectoryName(Application.ExecutablePath);
                 process.StartInfo = new ProcessStartInfo("xkas.exe", "main.asm " + file_to_patch);
-                process.Start();
+                process.Start();*/
+
+                file_to_patch = openFileDialog1.FileName;
+                FileStream fs = new FileStream(file_to_patch, FileMode.Open, FileAccess.ReadWrite);
+                ROM_DATA = new byte[2097152];
+                fs.Read(ROM_DATA, 0, (int)2097152);
+                fs.Close();
+
+                ROM_DATA[0x0B5E7] = 0x24;//change room header bank to bank to 24
+
+                for (int i = 0; i < 320; i++)
+                {
+                    //get pointer of that room
+                    byte[] roomPointer = new byte[4];//27502
+                    roomPointer[0] = ROM_DATA[(0x271E2 + (i * 2) + 0)];
+                    roomPointer[1] = ROM_DATA[(0x271E2 + (i * 2) + 1)];
+                    roomPointer[2] = 04;
+                    int address = BitConverter.ToInt32(roomPointer, 0);
+                    int pcadd = snestopc(address);
+
+                    for (int j = 0; j < 14; j++)
+                    {
+                        ROM_DATA[0x120090 + (i * 14) + j] = ROM_DATA[pcadd + j];
+                    }
+                }
+
+
+                for (int i = 0; i < 320; i++)
+                {
+                    //0x0271E2  //rewrite all room header address
+                    //0x120090
+                    ROM_DATA[0x0271E2 + (i * 2)] = ((byte)pctosnes(0x120090 + (i * 14)));
+                    ROM_DATA[0x0271E2 + (i * 2) + 1] = ((byte)(pctosnes((0x120090 + (i * 14))) >> 8));
+
+                }
+
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             update_flags();
-
-            for (int i = 0; i < 40; i++)
-            {
-                sprite_group[i] = null;
-            }
-            sprite_group[0] = new byte[] { 0x8A, 0x15, 0x1C, 0x79, 0x82, 0xAC, 0xD1, 0xD8, 0xD9, 0xDA, 0xDB, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1, 0xE2, 0xE3, 0xE4 };
-            sprite_group[1] = new byte[] { 0x6B,0x41,0x42,0x44,0x4B,0x43,0x45,0x48,0x49,0x6D,0x6F};
-            sprite_group[4] = new byte[] { 0x6B,0x41,0x42,0x44,0x4B,0x43,0x45,0x48,0x49,0x6A};
-            sprite_group[8] = new byte[] { 0x23,0x24,0xA7,0x85,0x02,0x83,0x4E,0x4F,0x61,0x83};
-            sprite_group[10] = new byte[] { 0x71,0x63,0x64,0x4E,0x4F,0x61,0x83};
-            sprite_group[17] = new byte[] { 0xA7,0x85,0x02,0x23,0x24,0x91,0x81,0x9A,0x8F};
-            sprite_group[19] = new byte[] { 0xA7,0x85,0x02,0x23,0x24,0x26,0x13,0x8B,0x18};//,0x90
-            sprite_group[25] = new byte[] { 0x86,0x23,0x24,0xA7,0x85,0x02,0x26,0x13,0x18,0x8E};
-            sprite_group[27] = new byte[] { 0xA5,0xA6,0xC3,0x8F,0x23,0x24,0xA7,0x85,0x02,0x91,0x9D,0x9C};
-            sprite_group[28] = new byte[] { 0x99,0x8F,0x23,0x24,0xA7,0x85,0x02,0x91,0x9D,0x9C};//,0xA1
-            sprite_group[29] = new byte[] { 0x23,0x24,0xA7,0x85,0x02,0x83,0x4E,0x4F,0x61,0x9B,0x20};
-            sprite_group[30] = new byte[] { 0x5D,0x5E,0x5F,0x60,0xCA,0x23,0x24,0xA7,0x85,0x02,0x91,0x9D,0x9C,0x8F,0xC7};
-            sprite_group[31] = new byte[] { 0x9B,0x13,0x18,0x26,0xA7,0x85,0x02,0x23,0x24};
-            sprite_group[33] = new byte[] { 0x6D,0x6B,0x41,0x42,0x44,0x4B,0x43,0x45,0x48,0x49,0x6E,0x6F};
-            sprite_group[36] = new byte[] { 0x9B,0x12,0x0E,0x23,0x24,0xA7,0x85,0x02};
-            sprite_group[37] = new byte[] { 0x5D,0x5E,0x5F,0x60,0xCA,0x23,0x24,0xA7,0x85,0x02,0x26,0xC7,0x13,0x18};
-            sprite_group[38] = new byte[] { 0x5D,0x5E,0x5F,0x60,0xCA,0x23,0x24,0xA7,0x85,0x02,0x91,0x9D,0x9C,0x8F,0xC7};
-            sprite_group[39] = new byte[] { 0x46,0x47,0x41,0x42,0x44,0x4B,0x43,0x45,0x48,0x49,0x6A};
 
             for (int i = 0;i<292;i++)
             {
@@ -734,7 +917,7 @@ namespace MoveHeaderASM
             room_sprites[9] = new int[]{ 0x04D9D0,0x04D9D3,0x04D9D6};
 
 
-            room_sprites[10] = new int[]{ 0x04D9DB,0x04D9DE};
+            room_sprites[10] = new int[]{ 0x04D9DB,0x04D9DE, 0x04D9E1 , 0x04D9E4 , 0x04D9EA , 0x04D9ED };
 
             room_sprites[11] = new int[]{ 0x04D9F5,0x04D9F8,0x04D9FB,0x04D9FE,0x04DA01,0x04DA04,0x04DA07,0x04DA0A,0x04DA0D};
 
@@ -768,7 +951,9 @@ namespace MoveHeaderASM
 
             room_sprites[36] = new int[]{ 0x04DBCD,0x04DBD0,0x04DBD3,0x04DBD6,0x04DBD9,0x04DBDC,0x04DBDF};
 
-            room_sprites[38] = new int[]{ 0x04DBE6,0x04DBE9,0x04DBEC,0x04DBEF,0x04DBF2,0x04DBF5,0x04DBFB,0x04DBFE,0x04DC01,0x04DC04};
+           
+
+            room_sprites[38] = new int[]{ 0x04DC07,0x04DBE6, 0x04DBE9,0x04DBEC,0x04DBEF,0x04DBF2,0x04DBF5,0x04DBFB,0x04DBFE,0x04DC01,0x04DC04};
 
             room_sprites[39] = new int[]{ 0x04DC0C,0x04DC0F,0x04DC12,0x04DC15,0x04DC18,0x04DC1B,0x04DC1E};
 
@@ -784,13 +969,13 @@ namespace MoveHeaderASM
 
             room_sprites[50] = new int[]{ 0x04DCBD,0x04DCC0,0x04DCC3,0x04DCC6,0x04DCC9};
 
-            room_sprites[52] = new int[]{ 0x04DCD9,0x04DCDC,0x04DCDF,0x04DCE5,0x04DCE8,0x04DCEB};
+            room_sprites[52] = new int[]{ 0x04DCD9,0x04DCDC,0x04DCDF,0x04DCE5,0x04DCE8,0x04DCEB, 0x04DCE2 };
 
-            room_sprites[53] = new int[] {0x04DCF6,0x04DCF9,0x04DCFC,0x04DCFF,0x04DD02,0x04DD08,0x04DD0B,0x04DD0E};
+            room_sprites[53] = new int[] {0x04DCF6,0x04DCF9,0x04DCFC,0x04DCFF,0x04DD02,0x04DD08,0x04DD0B,0x04DD0E, 0x04DD05 };
 
             room_sprites[54] = new int[]{ 0x04DD16, 0x04DD19, 0x04DD22, 0x04DD28, 0x04DD2B }; //disabled for crash issue//0x04DD16,0x04DD19,0x04DD1C,0x04DD22,0x04DD28,0x04DD2B,0x04DD2E,0x04DD31
 
-            room_sprites[55] = new int[]{ 0x04DD39,0x04DD3C,0x04DD3F,0x04DD42,0x04DD48,0x04DD4B,0x04DD4E,0x04DD51};
+            room_sprites[55] = new int[]{ 0x04DD39,0x04DD3C,0x04DD3F,0x04DD42,0x04DD48,0x04DD4B,0x04DD4E,0x04DD51, 0x04DD45 };
 
             room_sprites[56] = new int[]{ 0x04DD56,0x04DD59,0x04DD5C,0x04DD5F,0x04DD62,0x04DD65,0x04DD68};
             
@@ -814,7 +999,7 @@ namespace MoveHeaderASM
 
             room_sprites[66] = new int[]{ 0x04DE4A,0x04DE4D,0x04DE50,0x04DE53,0x04DE56,0x04DE59};
 
-            room_sprites[67] = new int[]{ 0x04DE5E};
+            room_sprites[67] = new int[]{ 0x04DE5E, 0x04DE61 };
 
             room_sprites[68] = new int[]{ 0x04DE6C,0x04DE6F,0x04DE72,0x04DE75,0x04DE78,0x04DE7E};
 
@@ -866,7 +1051,7 @@ namespace MoveHeaderASM
 
             room_sprites[98] = new int[]{ 0x04E0D4,0x04E0D7,0x04E0DA};
 
-            room_sprites[99] = new int[]{ 0x04E0E2};
+            room_sprites[99] = new int[]{ 0x04E0E2, 0x04E0DF };
 
             room_sprites[100] = new int[]{ 0x04E0E7,0x04E0ED,0x04E0F0,0x04E0F3,0x04E0F6,0x04E0F9};
 
@@ -907,13 +1092,13 @@ namespace MoveHeaderASM
 
             room_sprites[124] = new int[]{ 0x04E2B5,0x04E2B8,0x04E2BB,0x04E2BE,0x04E2C1,0x04E2C4};
 
-            room_sprites[125] = new int[]{ 0x04E2D8,0x04E2DB,0x04E2E1,0x04E2E4,0x04E2EA};
+            room_sprites[125] = new int[]{ 0x04E2D8,0x04E2DB,0x04E2E1,0x04E2E4,0x04E2EA, 0x04E2DE, 0x04E2E7 };
 
             room_sprites[126] = new int[]{ 0x04E2F2,0x04E2F5,0x04E2FE,0x04E301};
 
             room_sprites[127] = new int[]{ 0x04E306,0x04E309,0x04E30C,0x04E30F,0x04E312,0x04E315,0x04E318,0x04E31B};
 
-            
+
             room_sprites[128] = new int[]{ 0x04E323,0x04E326};
 
             room_sprites[129] = new int[]{ 0x04E32E,0x04E331};
@@ -926,13 +1111,15 @@ namespace MoveHeaderASM
 
             room_sprites[133] = new int[]{ 0x04E378,0x04E37B,0x04E37E,0x04E381,0x04E384,0x04E387,0x04E38A,0x04E38D,0x04E390,0x04E393};
 
-            room_sprites[135] = new int[]{ 0x04E39A,0x04E39D,0x04E3A0,0x04E3A3,0x04E3B2,0x04E3B5,0x04E3B8,0x04E3BE};
+            
+            room_sprites[135] = new int[]{ 0x04E39A,0x04E39D,0x04E3A0,0x04E3A3,0x04E3B2,0x04E3B5,0x04E3B8,0x04E3BE, 0x04E3A6 };
 
             room_sprites[139] = new int[]{ 0x04E3D4,0x04E3D7,0x04E3DA,0x04E3DD,0x04E3E0};
 
-            room_sprites[140] = new int[]{ 0x04E3F7,0x04E3FA,0x04E3FD,0x04E400,0x04E406,0x04E409,0x04E40F};
+            room_sprites[140] = new int[]{ 0x04E3F7,0x04E3FA,0x04E3FD,0x04E400,0x04E406,0x04E409,0x04E40F, 0x04E40C, 0x04E403 };
 
-            room_sprites[141] = new int[]{ 0x04E41A,0x04E41D,0x04E420,0x04E423,0x04E426,0x04E42C,0x04E42F,0x04E432,0x04E435,0x04E438,0x04E43B};
+           
+            room_sprites[141] = new int[]{ 0x04E41A,0x04E41D,0x04E420,0x04E423,0x04E426,0x04E42C,0x04E42F,0x04E432,0x04E435,0x04E438,0x04E43B, 0x04E417 };
 
             room_sprites[142] = new int[]{ 0x04E443,0x04E446,0x04E449,0x04E44C,0x04E44F,0x04E452,0x04E455};
 
@@ -959,7 +1146,8 @@ namespace MoveHeaderASM
 
             room_sprites[159] = new int[] { 0x04E58B, 0x04E58E };//Might cause crashes // 0x04E57F,0x04E582,0x04E585,0x04E588,0x04E58B,0x04E58E,};
 
-            room_sprites[160] = new int[]{ 0x04E593,0x04E596};
+            
+            room_sprites[160] = new int[]{ 0x04E593,0x04E596, 0x04E599 };
 
             room_sprites[161] = new int[]{ 0x04E5A1,0x04E5A4,0x04E5A7,0x04E5AA,0x04E5AD,0x04E5B0,0x04E5B3,0x04E5B6};
 
@@ -970,10 +1158,10 @@ namespace MoveHeaderASM
             room_sprites[166] = new int[] { };
 
             room_sprites[167] = new int[]{ 0x04E5F6,0x04E5F9};
+            
+            room_sprites[168] = new int[]{ 0x04E5FE,0x04E601,0x04E604,0x04E607, 0x04E60A };
 
-            room_sprites[168] = new int[]{ 0x04E5FE,0x04E601,0x04E604,0x04E607};
-
-            room_sprites[169] = new int[]{ 0x04E60F,0x04E612,0x04E621,0x04E624};
+            room_sprites[169] = new int[]{ 0x04E60F,0x04E612,0x04E621,0x04E624, 0x04E615 , 0x04E618 , 0x04E61B , 0x04E61E };
 
             room_sprites[170] = new int[]{ 0x04E629,0x04E62C,0x04E62F,0x04E632,0x04E635,0x04E638};
 
@@ -995,6 +1183,8 @@ namespace MoveHeaderASM
 
             room_sprites[184] = new int[]{ 0x04E725,0x04E728,0x04E72B,0x04E72E,0x04E731,0x04E734};
 
+            room_sprites[185] = new int[] { };
+
             room_sprites[186] = new int[]{ 0x04E73E,0x04E741,0x04E744,0x04E747,0x04E74A,0x04E74D,0x04E750};
 
             room_sprites[187] = new int[]{ 0x04E755,0x04E758,0x04E75B,0x04E75E,0x04E761,0x04E764,0x04E76A,0x04E76D,0x04E770,0x04E773,};
@@ -1004,10 +1194,11 @@ namespace MoveHeaderASM
             room_sprites[190] = new int[]{ 0x04E7A0,0x04E7A6,0x04E7A9,0x04E7AC,0x04E7AF,0x04E7B2};
   
             room_sprites[192] = new int[]{ 0x04E7BF,0x04E7C2,0x04E7C5,0x04E7C8,0x04E7CE,0x04E7D1,0x04E7D4,0x04E7D7};
-           
-            room_sprites[193] = new int[]{ 0x04E7DF,0x04E7E2,0x04E7E5,0x04E7E8,0x04E7EE,0x04E7F4,0x04E7F7,0x04E7FA};
 
-            room_sprites[194] = new int[]{ 0x04E80B,0x04E80E,0x04E811,0x04E814,0x04E81A};
+
+            room_sprites[193] = new int[]{ 0x04E7DF,0x04E7E2,0x04E7E5,0x04E7E8,0x04E7EE,0x04E7F4,0x04E7F7,0x04E7FA, 0x04E7F1 };
+
+            room_sprites[194] = new int[]{ 0x04E80B,0x04E80E,0x04E811,0x04E814,0x04E81A, 0x04E817, 0x04E808, 0x04E805 };
 
             room_sprites[195] = new int[]{ 0x04E81F,0x04E831,0x04E834};
 
@@ -1015,9 +1206,9 @@ namespace MoveHeaderASM
 
             room_sprites[201] = new int[]{ 0x04E8A1,0x04E8A4,0x04E8A7};
 
-            room_sprites[203] = new int[]{ 0x04E8AC,0x04E8B5,0x04E8B8,0x04E8BB,0x04E8BE,0x04E8C1,0x04E8C4,0x04E8C7,0x04E8CA,0x04E8CD, 0x04E8B2 };
+            room_sprites[203] = new int[]{ 0x04E8AC,0x04E8B5,0x04E8B8,0x04E8BB,0x04E8BE,0x04E8C1,0x04E8C4,0x04E8C7,0x04E8CA,0x04E8CD, 0x04E8B2, 0x04E8AF };
 
-            room_sprites[204] = new int[]{ 0x04E8D5,0x04E8DB,0x04E8DE,0x04E8E1,0x04E8EA,0x04E8ED,0x04E8F0,0x04E8F3,0x04E8F6,0x04E8F9, 0x04E8D8, 0x04E8E4 };
+            room_sprites[204] = new int[]{ 0x04E8D2,0x04E8D5,0x04E8DB,0x04E8DE,0x04E8E1,0x04E8EA,0x04E8ED,0x04E8F0,0x04E8F3,0x04E8F6,0x04E8F9, 0x04E8D8, 0x04E8E4 };
 
             room_sprites[208] = new int[]{ 0x04E918,0x04E91B,0x04E91E,0x04E921,0x04E924,0x04E927,0x04E92A,0x04E92D,0x04E930,0x04E933,0x04E936};
 
@@ -1027,13 +1218,13 @@ namespace MoveHeaderASM
 
             room_sprites[216] = new int[]{ 0x04E991,0x04E994,0x04E997,0x04E99A,0x04E99D,0x04E9A0,0x04E9A3,0x04E9A6,0x04E9A9,0x04E9AC,0x04E9AF};
 
-            room_sprites[217] = new int[]{ 0x04E9B7,0x04E9BA,0x04E9BD};
+            room_sprites[217] = new int[]{ 0x04E9B7,0x04E9BA,0x04E9BD, 0x04E9B4 };
 
             room_sprites[218] = new int[]{ 0x04E9C2,0x04E9C5};
 
-            room_sprites[219] = new int[]{ 0x04E9CA,0x04E9CD,0x04E9D0,0x04E9D6, 0x04E9D3, 0x04E9DC };
+            room_sprites[219] = new int[]{ 0x04E9CA,0x04E9CD,0x04E9D0,0x04E9D6, 0x04E9D3, 0x04E9DC, 0x04E9D9 };
 
-            room_sprites[220] = new int[]{ 0x04E9E4,0x04E9E7,0x04E9EA,0x04E9ED,0x04E9F0,0x04E9F3,0x04E9FF, 0x04E9E1, 0x04E9F6 };
+            room_sprites[220] = new int[]{ 0x04E9E4,0x04E9E7,0x04E9EA,0x04E9ED,0x04E9F0,0x04E9F3,0x04E9FF, 0x04E9E1, 0x04E9F6, 0x04E9F9, 0x04E9FC };
 
             room_sprites[223] = new int[]{ 0x04EA0F,0x04EA12};
 
@@ -1047,11 +1238,17 @@ namespace MoveHeaderASM
 
             room_sprites[249] = new int[] { 0x04EB13, 0x04EB16, 0x04EB19, 0x04EB1C, };
 
+            room_sprites[235] = new int[] { };
+
+            room_sprites[251] = new int[] { };
+
             room_sprites[254] = new int[] { 0x04EB4A, 0x04EB4D, 0x04EB50, 0x04EB53, 0x04EB56, };
 
             room_sprites[263] = new int[] { 0x04EB8C, 0x04EB8F };
 
             room_sprites[264] = new int[] { 0x04EB94, 0x04EB97, 0x04EB9A, 0x04EB9D, };
+
+            room_sprites[267] = new int[] { 0x04EBBE };
 
             room_sprites[268] = new int[] { 0x04EBC3, 0x04EBC6, 0x04EBC9, 0x04EBCC, 0x04EBCF, 0x04EBD2, 0x04EBD5, 0x04EBD8, };
 

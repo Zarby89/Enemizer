@@ -55,6 +55,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -245,8 +248,6 @@
             // layout_checkbox
             // 
             this.layout_checkbox.AutoSize = true;
-            this.layout_checkbox.Checked = true;
-            this.layout_checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.layout_checkbox.Enabled = false;
             this.layout_checkbox.Location = new System.Drawing.Point(6, 157);
             this.layout_checkbox.Name = "layout_checkbox";
@@ -261,6 +262,7 @@
             this.randsprites_checkbox.AutoSize = true;
             this.randsprites_checkbox.Checked = true;
             this.randsprites_checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.randsprites_checkbox.Enabled = false;
             this.randsprites_checkbox.Location = new System.Drawing.Point(6, 134);
             this.randsprites_checkbox.Name = "randsprites_checkbox";
             this.randsprites_checkbox.Size = new System.Drawing.Size(166, 17);
@@ -297,6 +299,7 @@
             // gfx_checkbox
             // 
             this.gfx_checkbox.AutoSize = true;
+            this.gfx_checkbox.Enabled = false;
             this.gfx_checkbox.Location = new System.Drawing.Point(6, 65);
             this.gfx_checkbox.Name = "gfx_checkbox";
             this.gfx_checkbox.Size = new System.Drawing.Size(277, 17);
@@ -308,6 +311,7 @@
             // floors_checkbox
             // 
             this.floors_checkbox.AutoSize = true;
+            this.floors_checkbox.Enabled = false;
             this.floors_checkbox.Location = new System.Drawing.Point(6, 42);
             this.floors_checkbox.Name = "floors_checkbox";
             this.floors_checkbox.Size = new System.Drawing.Size(181, 17);
@@ -331,6 +335,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(12, 262);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -354,21 +359,49 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(404, 288);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(184, 65);
+            this.label3.Size = new System.Drawing.Size(184, 78);
             this.label3.TabIndex = 10;
             this.label3.Text = "The ROM must be patched before\r\ngenerating a seed ! to select a ROM\r\npress Patch " +
-    "ROM Button wait at least\r\n2 seconds after you selected your \r\nROM";
+    "ROM Button wait at least\r\n2 seconds after you selected your \r\nROM DO NOT PATCH T" +
+    "HE SAME\r\nROM TWICE";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(117, 330);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(99, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Report Bug";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 330);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(99, 23);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "Check Update";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 536);
+            this.ClientSize = new System.Drawing.Size(600, 370);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -381,7 +414,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
-            this.Text = "Enemizer 2.0";
+            this.Text = "Enemizer Beta 2.4";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -421,6 +454,9 @@
         private System.Windows.Forms.CheckBox glitched_checkbox;
         private System.Windows.Forms.CheckBox extra_checkbox;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 
