@@ -766,29 +766,44 @@ namespace MoveHeaderASM
                 {
                     if (ROM_DATA[0x6B173 + j] != 0xFF)
                     {
-                        int new_hp = ROM_DATA[0x6B173 + j];
-                        new_hp += (-20 + rand.Next(40));
-                        if (new_hp >= 0xFF)
+                        if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+                            && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
+                           )
                         {
-                            new_hp = 0xFF;
+                            int new_hp = ROM_DATA[0x6B173 + j];
+                            new_hp += (-20 + rand.Next(40));
+                            if (new_hp >= 0xFF)
+                            {
+                                new_hp = 0xFF;
+                            }
+                            if (new_hp <= 0)
+                            {
+                                new_hp = 1;
+                            }
+                            ROM_DATA[0x6B173 + j] = (byte)new_hp;
                         }
-                        if (new_hp <= 0)
-                        {
-                            new_hp = 1;
-                        }
-                        ROM_DATA[0x6B173 + j] = (byte)new_hp;
                     }
                 }
 
                 if (zerohp_checkbox.Checked)
                 {
-                    byte new_hp = (byte)(1);
-                    ROM_DATA[0x6B173 + j] = new_hp;
+                    if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
+   )
+                    {
+                        byte new_hp = (byte)(1);
+                        ROM_DATA[0x6B173 + j] = new_hp;
+                    }
                 }
 
                 if (damage_checkbox.Checked)
                 {
-                    ROM_DATA[0x6B266 + j] = (byte)(rand.Next(8));
+                    if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
+   )
+                    {
+                        ROM_DATA[0x6B266 + j] = (byte)(rand.Next(8));
+                    }
                 }
 
             }
