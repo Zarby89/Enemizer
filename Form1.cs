@@ -49,8 +49,8 @@ namespace MoveHeaderASM
         int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200 };
         int[] NeedKillable_doors = { 11, 27, 36, 40, 49, 68, 75, 83, 93, 107, 109, 110, 117, 123, 125, 133, 135, 141,165, 168, 176, 178, 210, 216, 224, 239, 268, 291 };
 
-        int[] special_sprites = new int[] { 0x04E60A, 0x04E615, 0x04E618, 0x04E61B, 0x04E61E, 0x04D9E1, 0x04D9E4, 0x04D9EA, 0x04D9E, 0x04DE61, 0x04E0DF, 0x04E3A6, 0x04E417, 0x04E7F1, 0x04E9B4 };
-
+        //int[] special_sprites = new int[] { 0x04E60A, 0x04E615, 0x04E618, 0x04E61B, 0x04E61E, 0x04D9E1, 0x04D9E4, 0x04D9ED, 0x04D9EA, 0x04D9E, 0x04DE61, 0x04E0DF, 0x04E3A6, 0x04E417, 0x04E7F1, 0x04E9B4 };
+        // 0x04D9E1 , 0x04D9E4 , 0x04D9EA , 0x04D9ED
         byte[] sprite_subset_0 = new byte[] { 22, 31, 47,14}; //70-72 part of guards we already have 4 guard set don't need more
         byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
         byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 42 };//19 trainee guard
@@ -606,14 +606,17 @@ namespace MoveHeaderASM
                 //add absorbable sprites
                 if (absorbable_checkbox.Checked)
                 {
-                    for(int i = 0;i< absorbable_sprites.Length;i++)
-                    {
-                        dynamic_sprite.Add(absorbable_sprites[i]);
-                    }
+                    //for(int i = 0;i< absorbable_sprites.Length;i++)
+                    //{
+                        //pick 2 random absorbable in the pool not more
+                    dynamic_sprite.Add(absorbable_sprites[rand.Next(absorbable_sprites.Length)]);
+                    dynamic_sprite.Add(absorbable_sprites[rand.Next(absorbable_sprites.Length)]);
+                    //}
+
                 }
                 else
                 {
-                    dynamic_sprite.Add(0xE4); dynamic_sprite.Add(0xE3); //key and fairy because they are fun
+                    //dynamic_sprite.Add(0xE4); dynamic_sprite.Add(0xE3); //key and fairy because they are fun
                 }
 
                 //g = dynamic_sprite;
@@ -689,13 +692,13 @@ namespace MoveHeaderASM
                         selectedSprite = dynamic_sprite[spr_r];
                         
                     }
-                    for (int jj = 0; jj < special_sprites.Length; jj++)
-                    {
-                        if (special_sprites[jj] == room_sprites[b][i])
-                        {
+                   // for (int jj = 0; jj < special_sprites.Length; jj++)
+                   // {
+                    //    if (special_sprites[jj] == room_sprites[b][i])
+                    //    {
                             ROM_DATA[room_sprites[b][i] - 1] = (byte)(ROM_DATA[room_sprites[b][i] - 1] & 0x1F);
-                        }
-                    }
+                    //    }
+                    //}
                     ROM_DATA[room_sprites[b][i]] = selectedSprite;
 
 
@@ -1187,7 +1190,7 @@ namespace MoveHeaderASM
 
             room_sprites[186] = new int[]{ 0x04E73E,0x04E741,0x04E744,0x04E747,0x04E74A,0x04E74D,0x04E750};
 
-            room_sprites[187] = new int[]{ 0x04E755,0x04E758,0x04E75B,0x04E75E,0x04E761,0x04E764,0x04E76A,0x04E76D,0x04E770,0x04E773,};
+            room_sprites[187] = new int[]{ 0x04E755,0x04E758,0x04E75B,0x04E75E,0x04E761,0x04E764,0x04E76A,0x04E76D,0x04E770,0x04E773, 0x04E767 };
 
             room_sprites[188] = new int[]{ 0x04E77B,0x04E77E,0x04E781,0x04E784,0x04E78A,0x04E78D,0x04E790,0x04E799, 0x04E778, 0x04E787, 0x04E793 };
 
