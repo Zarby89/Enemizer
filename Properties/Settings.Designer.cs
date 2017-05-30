@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MoveHeaderASM.Properties
+namespace Enemizer.Properties
 {
 
 

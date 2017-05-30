@@ -1,0 +1,9 @@
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\bin\Debug\Enemizer.exe.config
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\bin\Debug\Enemizer.exe
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\bin\Debug\Enemizer.pdb
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.csprojResolveAssemblyReference.cache
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.EnemizerForm.resources
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.Properties.Resources.resources
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.csproj.GenerateResource.Cache
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.exe
+c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.pdb

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MoveHeaderASM")]
+[assembly: AssemblyTitle("Enemizer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MoveHeaderASM")]
+[assembly: AssemblyProduct("Enemizer")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("60388317-33d3-4590-99b6-13671ac7e564")]
+[assembly: Guid("0faa42fe-8942-4cda-98dd-8bf0e8bcbd7d")]
 
 // Version information for an assembly consists of the following four values:
 //
