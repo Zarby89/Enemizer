@@ -222,12 +222,14 @@ namespace Enemizer
                     }
 
                     //for each sprites address in the room we are currently modifying
-                    int collectible_try = 0;
                     for (int i = 0; i < room_sprites[room].Length; i++)
                     {
-
+                        byte selected_sprite = sprites[rand.Next(real_sprites)];
                         //Select a new sprite from the sprites list we will put at that address
-                        byte selected_sprite = sprites[rand.Next(real_sprites + (rand.Next(3)))];
+                        if (absorbable == true)
+                        {
+                            selected_sprite = sprites[rand.Next(real_sprites + (rand.Next(3)))];
+                        }
 
 
                         if (noStatueRoom.Contains(room))
