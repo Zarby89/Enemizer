@@ -72,7 +72,7 @@ namespace Enemizer
             textBox2.Text = flags.ToString();
         }
 
-        public string[] description = new string[14]
+        public string[] description = new string[15]
         {
             "Randomize the sprites inside the\ndungeons / houses / caves",
             "Randomize the sprites on the\noverworld",
@@ -87,7 +87,8 @@ namespace Enemizer
             "allow any bosses to spawn anywhere\nin bosses rooms",
             "Set all palettes pitch black\nexcept sprites, remove dark rooms\n",
             "Shuffle all the musics played\nwhen you enter dungeon,overworld,ect...",
-            "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working :("
+            "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working :(",
+            "Allow Pots to be shuffled\nbetween same room"
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
@@ -106,11 +107,13 @@ namespace Enemizer
                     checkedListBox1.SetItemCheckState(i, CheckState.Checked);
                     flags += flags_setter[i + 1];
                 }
-                
             }
 
             textBox2.Text = flags.ToString();
         }
+
+
+
         byte[] r_data;
 
         private void button3_Click(object sender, EventArgs e)
@@ -240,6 +243,26 @@ namespace Enemizer
 
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            int flagsText = 0;
+            Int32.TryParse(textBox2.Text, out flagsText);
+
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                if ((flagsText & flags_setter[i+1]) == flags_setter[i+1])
+                {
+                    checkedListBox1.SetItemCheckState(i, CheckState.Checked);
+
+                }
+            }
+            flags = flagsText;
+        }
     }
 }

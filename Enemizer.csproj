@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="OverworldSpritesArea.cs" />
     <Compile Include="OverworldSpritesRandomization.cs" />
+    <Compile Include="PotListing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomization.cs" />

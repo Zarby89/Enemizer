@@ -152,7 +152,10 @@ namespace Enemizer
             if ((flags & 0x40) == 0x40) { Randomize_Sprites_DMG(); }
             if ((flags & 0x80) == 0x80) { Set_Sprites_ZeroHP(); }
             if ((flags & 0x100) == 0x100 | (flags & 0x400) == 0x400) { Randomize_Bosses(bossmadness); };
-            
+            if ((flags & 0x4000) == 0x4000)
+            {
+                randomizePots();
+            }
             //reset seed for all these values so they can be optional
             rand = new Random(seed);
             if ((flags & 0x04) == 0x04) { Randomize_Dungeons_Palettes(); }
@@ -184,11 +187,11 @@ namespace Enemizer
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            FileStream fs = new FileStream("Enemizer 4.9 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fs = new FileStream("Enemizer 5.0 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
             fs.Write(ROM_DATA, 0, ROM_DATA.Length);
             fs.Close();
 
-            MessageBox.Show("Enemizer 4.9 - " + Path.GetFileName(filename) + " Has been created !");
+            MessageBox.Show("Enemizer 5.0 - " + Path.GetFileName(filename) + " Has been created !");
         }
 
         
@@ -534,9 +537,9 @@ namespace Enemizer
 
             for (int i = 0; i < shade; i++)
             {
-                r = (r - (r / 4));
-                g = (g - (g/ 4));
-                b = (b - (b / 4));
+                r = (r - (r / 5));
+                g = (g - (g/ 5));
+                b = (b - (b / 5));
             }
             r = (r / 8);
             g = (g / 8);
@@ -566,7 +569,8 @@ namespace Enemizer
 
         public void Randomize_Overworld_Palettes()
         {
-            Color grass = Color.FromArgb(60+rand.Next(155), 60+rand.Next(155), 60+rand.Next(155));
+            Color grass = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+
             Color dirt = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
             Color wall = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
             Color roof = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
@@ -576,21 +580,23 @@ namespace Enemizer
             setColor(0x05FEA9, grass, 0);
             for (int i = 0; i < 4; i++)
             {
-                setColor(0x0DE892 + (i*70), grass, 1);
+                
+                setColor(0x0DE892 + (i * 70), grass, 1);
                 setColor(0x0DE886 + (i * 70), grass, 0);
 
                 setColor(0x0DE6D0 + (i * 70), grass, 1);//grass shade
                 setColor(0x0DE6D2 + (i * 70), grass, 0); //grass
 
-                setColor(0x0DE6FA + (i * 70), grass, 2);
+                setColor(0x0DE6FA + (i * 70), grass, 3);
                 setColor(0x0DE6FC + (i * 70), grass, 0);//grass shade2
                 setColor(0x0DE6FE + (i * 70), grass, 0);//??
 
                 setColor(0x0DE70A + (i * 70), grass, 0); //grass?
-                setColor(0x0DE708 + (i * 70), grass, 1); //bush?
+                setColor(0x0DE708 + (i * 70), grass, 2); //bush?
 
                 setColor(0x0DE70C + (i * 70), grass, 1); //bush?
-                
+
+                Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
                 /*setColor(0x0DE6D4 + (i * 70), dirt, 0);
 
                 setColor(0x0DE6CA + (i * 70), dirt, 8);
