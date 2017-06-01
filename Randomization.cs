@@ -187,11 +187,11 @@ namespace Enemizer
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            FileStream fs = new FileStream("Enemizer 5.0 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fs = new FileStream("Enemizer 5.1 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
             fs.Write(ROM_DATA, 0, ROM_DATA.Length);
             fs.Close();
 
-            MessageBox.Show("Enemizer 5.0 - " + Path.GetFileName(filename) + " Has been created !");
+            MessageBox.Show("Enemizer 5.1 - " + Path.GetFileName(filename) + " Has been created !");
         }
 
         

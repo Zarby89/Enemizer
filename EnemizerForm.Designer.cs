@@ -47,6 +47,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -246,11 +248,34 @@
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 17;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(269, 28);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(129, 23);
+            this.button4.TabIndex = 18;
+            this.button4.Text = "Check Update";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(269, 12);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(135, 17);
+            this.checkBox2.TabIndex = 19;
+            this.checkBox2.Text = "Check Update on Start";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 324);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label5);
@@ -270,7 +295,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 5.0";
+            this.Text = "Enemizer 5.1";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -298,6 +323,8 @@
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

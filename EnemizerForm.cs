@@ -25,6 +25,32 @@ namespace Enemizer
             {
                 comboBox1.Items.Add(f);
             }
+            if (File.Exists("setting.cfg"))
+            {
+                bool checkb = false;
+                BinaryReader fw = new BinaryReader(new FileStream("setting.cfg", FileMode.Open, FileAccess.Read));
+                checkb = fw.ReadBoolean();
+                flags = fw.ReadInt32();
+                textBox2.Text = flags.ToString();
+                fw.Close();
+                update_flags();
+                checkBox2.Checked = checkb;
+
+                if (checkb)
+                {
+                    if (Version.CheckUpdate() == true)
+                    {
+                        var window = MessageBox.Show("There is a new version avaiable do you want to download the update?", "Update Avaible", MessageBoxButtons.YesNo);
+                        if (window == DialogResult.Yes)
+                        {
+                            Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer");
+                        }
+                    }
+                }
+
+            }
+
+
         }
         Random rand = new Random();
         private void button1_Click(object sender, EventArgs e)
@@ -48,7 +74,10 @@ namespace Enemizer
             {
                 seed = int.Parse(textBox1.Text);
             }
-            
+            BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
+            fw.Write((bool)checkBox2.Checked);
+            fw.Write((int)flags);
+            fw.Close();
             Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,comboBox1.Items[comboBox1.SelectedIndex].ToString(),checkBox1.Checked);
         }
         int flags = 0;
@@ -250,19 +279,50 @@ namespace Enemizer
 
         private void textBox2_KeyUp(object sender, KeyEventArgs e)
         {
+            update_flags();
+        }
+
+        public void update_flags()
+        {
             int flagsText = 0;
             Int32.TryParse(textBox2.Text, out flagsText);
 
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
-                if ((flagsText & flags_setter[i+1]) == flags_setter[i+1])
+                if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Checked);
 
                 }
             }
             flags = flagsText;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (Version.CheckUpdate() == true)
+            {
+                //update
+                    var window = MessageBox.Show("There is a new version avaiable do you want to download the update?", "Update Avaible", MessageBoxButtons.YesNo);
+                    if (window == DialogResult.Yes)
+                    {
+                        Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer/");
+                    }
+            }
+            else
+            {
+                MessageBox.Show("No update available");
+                //noupdate
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
+            fw.Write((bool)checkBox2.Checked);
+            fw.Write((int)flags);
+            fw.Close();
         }
     }
 }
