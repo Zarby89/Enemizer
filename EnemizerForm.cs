@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+
 namespace Enemizer
 {
     public partial class EnemizerForm : Form
@@ -18,14 +19,30 @@ namespace Enemizer
             InitializeComponent();
         }
 
+        public class files_names
+        {
+            public string name = "";
+            public string file = "";
+            public files_names(string name, string file)
+            {
+                this.name = name;
+                this.file = file;
+            }
+            public override string ToString()
+            {
+                return name;
+            }
+
+        }
+
         private void EnemizerForm_Load(object sender, EventArgs e)
         {
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
             // FIXME: To start, remove the file extension; end goal: prettier names ("Frog Link", "Pony", "Minish Cap Link", "Samus", "Zelda")
             foreach(string f in Directory.GetFiles("sprites\\"))
             {
-                //
-                comboBox1.Items.Add(f);
+                files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
+                comboBox1.Items.Add(item);
             }
             if (File.Exists("setting.cfg"))
             {
@@ -80,7 +97,7 @@ namespace Enemizer
             fw.Write((bool)checkBox2.Checked);
             fw.Write((int)flags);
             fw.Close();
-            Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,comboBox1.Items[comboBox1.SelectedIndex].ToString(),checkBox1.Checked);
+            Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,((comboBox1.Items[comboBox1.SelectedIndex] as files_names).file),checkBox1.Checked);
         }
         int flags = 0;
         int[] flags_setter = new int[16] { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400,0x800,0x1000,0x2000,0x4000 };
@@ -326,5 +343,10 @@ namespace Enemizer
             fw.Write((int)flags);
             fw.Close();
         }
+
+
     }
+
+
+
 }
