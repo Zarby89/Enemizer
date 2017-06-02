@@ -7,3 +7,12 @@ c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug
 c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.csproj.GenerateResource.Cache
 c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.exe
 c:\users\adamo\documents\visual studio 2015\Projects\Enemizer\Enemizer\obj\Debug\Enemizer.pdb
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.exe.config
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.exe
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.pdb
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.exe
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.pdb
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.csprojResolveAssemblyReference.cache
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.EnemizerForm.resources
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.Properties.Resources.resources
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.csproj.GenerateResource.Cache
