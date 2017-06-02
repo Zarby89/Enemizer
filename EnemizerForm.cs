@@ -117,7 +117,7 @@ namespace Enemizer
             "Allow any bosses to spawn anywhere\nin bosses rooms",
             "Set all palettes pitch black\nexcept sprites, remove dark rooms\n",
             "Shuffle all background music",
-            "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working :(",
+            "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working",
             "Allow Pots to be shuffled\nwithin one room"
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
