@@ -24,6 +24,7 @@ namespace Enemizer
             // FIXME: To start, remove the file extension; end goal: prettier names ("Frog Link", "Pony", "Minish Cap Link", "Samus", "Zelda")
             foreach(string f in Directory.GetFiles("sprites\\"))
             {
+                //
                 comboBox1.Items.Add(f);
             }
             if (File.Exists("setting.cfg"))
