@@ -105,21 +105,21 @@
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
-            "Dungeons Sprites",
-            "Overworld Sprites",
-            "Dungeons Palettes",
-            "Sprite Palettes",
-            "Oveworld Palettes",
-            "Sprites HP Rand.",
-            "Sprites DMG Rand.",
-            "Sprites HP Zero",
-            "Bosses Shuffle",
-            "Absorbable Sprites",
-            "Bosses Madness",
+            "Dungeon Enemies",
+            "Overworld Enemies",
+            "Dungeon Palettes",
+            "Enemy Palettes",
+            "Overworld Palettes",
+            "Enemy Hit Points",
+            "Enemy DMG Output",
+            "Enemy HP to 0",
+            "Shuffle Bosses",
+            "Absorbables in Pool",
+            "Boss Madness",
             "Blackout Mode",
-            "Music Shuffle",
+            "Shuffle Music",
             "Custom Bosses (WIP)",
-            "Pot Randomization"});
+            "Shuffle Pot Contents"});
             this.checkedListBox1.Location = new System.Drawing.Point(15, 54);
             this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";
