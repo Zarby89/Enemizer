@@ -21,6 +21,7 @@ namespace Enemizer
         private void EnemizerForm_Load(object sender, EventArgs e)
         {
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
+            // FIXME: To start, remove the file extension; end goal: prettier names ("Frog Link", "Pony", "Minish Cap Link", "Samus", "Zelda")
             foreach(string f in Directory.GetFiles("sprites\\"))
             {
                 comboBox1.Items.Add(f);
@@ -40,7 +41,7 @@ namespace Enemizer
                 {
                     if (Version.CheckUpdate() == true)
                     {
-                        var window = MessageBox.Show("There is a new version avaiable do you want to download the update?", "Update Avaible", MessageBoxButtons.YesNo);
+                        var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
                         if (window == DialogResult.Yes)
                         {
                             Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer");
@@ -103,21 +104,21 @@ namespace Enemizer
 
         public string[] description = new string[15]
         {
-            "Randomize the sprites inside the\ndungeons / houses / caves",
-            "Randomize the sprites on the\noverworld",
-            "Randomize the dungeons color\npalettes",
-            "Randomize the sprites color\npalettes",
-            "Randomize the overworld color\npalettes (can be weird)",
-            "Randomize the sprites HP\nup to a max value of -10/+10\nexample a popo can't have\nmore than 11 hp",
-            "Randomize the sprites Damage\nGroup sprite could do ganon damage\nor bumper damage(0)",
-            "Set all sprites hp to 0",
-            "Shuffle All bosses except\nArrghus (every dungeons have\n a unique boss in)",
-            "Put Absorbable items like keys,\nfairy,rupees,bombs,arrows in\nthe sprites pool",
-            "allow any bosses to spawn anywhere\nin bosses rooms",
+            "Randomize enemies inside\ndungeons / houses / caves",
+            "Randomize enemies on the\noverworld",
+            "Randomize color palettes\nof dungeons",
+            "Randomize color palettes\nof enemies",
+            "Randomize color palettes\nof overworld screens\n(can be weird)",
+            "Randomize Enemy HP\nup to a max value of -10/+10\nexample a popo can't have\nmore than 11 hp",
+            "Randomize Enemy Damage\nGroup sprite could do ganon damage\nor bumper damage(0)",
+            "Set all Enemy HP to 0",
+            "Shuffle All Bosses except\nArrghus (no repeat bosses)",
+            "Put Absorbable items like keys,\nfairy,rupees,bombs,arrows in\nthe Enemy spawn pool",
+            "Allow any bosses to spawn anywhere\nin bosses rooms",
             "Set all palettes pitch black\nexcept sprites, remove dark rooms\n",
-            "Shuffle all the musics played\nwhen you enter dungeon,overworld,ect...",
+            "Shuffle all background music",
             "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working :(",
-            "Allow Pots to be shuffled\nbetween same room"
+            "Allow Pots to be shuffled\nwithin one room"
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
@@ -304,7 +305,7 @@ namespace Enemizer
             if (Version.CheckUpdate() == true)
             {
                 //update
-                    var window = MessageBox.Show("There is a new version avaiable do you want to download the update?", "Update Avaible", MessageBoxButtons.YesNo);
+                    var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
                     if (window == DialogResult.Yes)
                     {
                         Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer/");
