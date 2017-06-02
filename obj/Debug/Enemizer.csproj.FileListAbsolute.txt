@@ -1,0 +1,9 @@
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.exe.config
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.exe
+C:\Users\Adamo\Source\Repos\Enimizer\bin\Debug\Enemizer.pdb
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.csprojResolveAssemblyReference.cache
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.EnemizerForm.resources
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.Properties.Resources.resources
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.csproj.GenerateResource.Cache
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.exe
+C:\Users\Adamo\Source\Repos\Enimizer\obj\Debug\Enemizer.pdb
