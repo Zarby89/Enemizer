@@ -128,85 +128,24 @@ namespace Enemizer
 
                     foreach (byte s in subset_gfx_sprites[random_sprite_group[sprite_group][0]]) //add all subset0 sprites of the selected group
                     {
-                        if (need_killable_sprite == true)
-                        {
-                            //check if s in part of the nonkillable array if it is then skip it
-                            sprites.Add(s);
-                            for (int i = 0; i < NonKillable.Length; i++)
-                            {
-                                if (s == NonKillable[i])
-                                {
-                                    sprites.Remove(s);
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sprites.Add(s);
-                        }
+                        sprites.Add(s);
                     }
                     foreach (byte s in subset_gfx_sprites[random_sprite_group[sprite_group][1]]) //add all subset1 sprites of the selected group
                     {
-                        if (need_killable_sprite == true)
-                        {
-                            //check if s in part of the nonkillable array if it is then skip it
-                            sprites.Add(s);
-                            for (int i = 0; i < NonKillable.Length; i++)
-                            {
-                                if (s == NonKillable[i])
-                                {
-                                    sprites.Remove(s);
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sprites.Add(s);
-                        }
+                        sprites.Add(s);
                     }
                     foreach (byte s in subset_gfx_sprites[random_sprite_group[sprite_group][2]]) //add all subset2 sprites of the selected group
                     {
-                        if (need_killable_sprite == true)
-                        {
-                            //check if s in part of the nonkillable array if it is then skip it
-                            sprites.Add(s);
-                            for (int i = 0; i < NonKillable.Length; i++)
-                            {
-                                if (s == NonKillable[i])
-                                {
-                                    sprites.Remove(s);
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sprites.Add(s);
-                        }
+                        sprites.Add(s);
                     }
                     foreach (byte s in subset_gfx_sprites[random_sprite_group[sprite_group][3]]) //add all subset3 sprites of the selected group
                     {
-                        if (need_killable_sprite == true)
-                        {
-                            //check if s in part of the nonkillable array if it is then skip it
-                            sprites.Add(s);
-                            for (int i = 0; i < NonKillable.Length; i++)
-                            {
-                                if (s == NonKillable[i])
-                                {
-                                    sprites.Remove(s);
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sprites.Add(s);
-                        }
+                        sprites.Add(s);
                     }
-
+                    if (need_killable_sprite)
+                    {
+                        sprites = remove_unkillable_sprite(room, sprites);
+                    }
 
 
                     //our sprites list should contain at least 1 sprite at this point else then restart
@@ -358,5 +297,45 @@ namespace Enemizer
             //remove all sprite in the room before boss room in mire can cause problem with different boss in the room
             ROM_DATA[0x04E591] = 0xFF;
         }
+
+        public List<byte> remove_unkillable_sprite(int room,List<byte> sprites)
+        {
+            bool no_change = false;
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                no_change = false;
+                if (room == 107 || room == 109 || room == 93 || room == 27 || room == 11 || room == 123 || room == 125)
+                {
+
+                    if (bowSprites.Contains(sprites[i]))
+                    {
+                        no_change = true;
+                    }
+                    if (hammerSprites.Contains(sprites[i]))
+                    {
+                        no_change = true;
+                    }
+                }
+                if (room == 75 || room == 216 || room == 217 || room == 218)
+                {
+                    if (bowSprites.Contains(sprites[i]))
+                    {
+                        no_change = true;
+                    }
+                }
+                if (no_change == false)
+                {
+                    if (NonKillable_shutter.Contains(sprites[i]))
+                    {
+                        sprites.RemoveAt(i);
+                        continue;
+                    }
+                }
+                
+            }
+            return sprites;
+
+        }
+
     }
 }

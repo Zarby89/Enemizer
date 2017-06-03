@@ -15,10 +15,10 @@ namespace Enemizer
         public void create_dungeons_properties()
         {
 
-            //Moldorm Refight / 77 / 0x04D6C8 / 1EDF / 0x04DF1E  -  1 sprite    //SKIP THAT ONE FOR NOW
-            //Trinexx / 164 / 0x04D776 / BAE5 / 0x04E5BA - 3 sprites            //SKIP THAT ONE FOR NOW WILL REQUIRE LOGIC
-            //Kholdstare / 222 / 0x04D7EA / 01EA / 0x04EA01  -  3 sprites       //SKIP THAT ONE FOR NOW WILL REQUIRE LOGIC
-            //Arrghus / 6 / 0x04D63A / 97D9 / 0x04D997  -  14 sprites           //SKIP THAT ONE FOR NOW WILL REQUIRE LOGIC
+            //Moldorm Refight / 77 / 0x04D6C8 / 1EDF / 0x04DF1E  -  1 sprite    
+            //Trinexx / 164 / 0x04D776 / BAE5 / 0x04E5BA - 3 sprites            
+            //Kholdstare / 222 / 0x04D7EA / 01EA / 0x04EA01  -  3 sprites       
+            //Arrghus / 6 / 0x04D63A / 97D9 / 0x04D997  -  14 sprites           
             //Moldorm / 7 / 0x04D63C / C3D9 / 0x04D9C3  -  1 sprite  //ID 0
             //Armos Knight / 200 / 0x04D7BE / 87E8 / 0x04E887  -  7 sprites //ID 1
             //Mothula / 41 / 0x04D680 / 31DC / 0x04DC31  -  1 sprite //ID 2
