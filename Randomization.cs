@@ -24,7 +24,7 @@ namespace Enemizer
         //all the sprites "gfx" sheet 
         byte[] sprite_subset_0 = new byte[] { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
         byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
-        byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 42 };//19 trainee guard
+        byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37,42 };//19 trainee guard
         byte[] sprite_subset_3 = new byte[] { 17, 16, 27, 20, 82, 83 };
         //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
         byte[][] random_sprite_group = new byte[60][];
@@ -72,7 +72,7 @@ namespace Enemizer
             this.ROM_DATA = ROM_DATA;
             this.spoiler = spoiler;
 
-            if (skin != "Normal Link")
+            if (skin != "Default")
             {
                 if (skin != "")
                 {
@@ -267,6 +267,7 @@ namespace Enemizer
             subset_gfx_sprites[39] = new byte[] { 0xC7, 0xCA, 0x5D, 0x5E, 0x5F, 0x60 };//chain chomp,pokey,rollers
             subset_gfx_sprites[40] = new byte[] { 0xA5, 0xA6, 0xC3 };//zazak,gibo (patrick star)
             subset_gfx_sprites[38] = new byte[] { 0x99 };//(A1) iceman,penguin
+            subset_gfx_sprites[37] = new byte[] { 0x9B,0x20,0x5B,0x5C };//wizzrobe,sluggula,spark
             subset_gfx_sprites[41] = new byte[] { 0x9B };//wizzrobe
             subset_gfx_sprites[36] = new byte[] { 0x6D, 0x6E, 0x6F };//rat,rope,keese
             subset_gfx_sprites[42] = new byte[] { 0x8E };//turtle,kondongo ,also the digging game guy //0x86 kodongo problem

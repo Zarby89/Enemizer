@@ -38,8 +38,11 @@ namespace Enemizer
         private void EnemizerForm_Load(object sender, EventArgs e)
         {
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
-            // FIXME: To start, remove the file extension; end goal: prettier names ("Frog Link", "Pony", "Minish Cap Link", "Samus", "Zelda")
-            foreach(string f in Directory.GetFiles("sprites\\"))
+            
+            comboBox1.Items.Add(new files_names("Default", "Default"));
+            comboBox1.SelectedIndex = 0;
+
+            foreach (string f in Directory.GetFiles("sprites\\"))
             {
                 files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
                 comboBox1.Items.Add(item);
@@ -97,7 +100,7 @@ namespace Enemizer
             fw.Write((bool)checkBox2.Checked);
             fw.Write((int)flags);
             fw.Close();
-            Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,((comboBox1.Items[comboBox1.SelectedIndex] as files_names).file),checkBox1.Checked);
+            Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked);
         }
         int flags = 0;
         int[] flags_setter = new int[16] { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400,0x800,0x1000,0x2000,0x4000 };
