@@ -58,7 +58,7 @@ namespace Enemizer
         {
             bool error = false;
             patch_bosses();
-            for (int j = 0; j < 1; j++)
+            for (int j = 0; j < 20; j++)
             {
             retry:
                 dungeons.Clear();
@@ -108,7 +108,12 @@ namespace Enemizer
                         }
                         if (bosschosed == 0) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
                         {
-                            if (majorItems.Contains(ROM_DATA[0x180152]))
+
+                            if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
+                            {
+                                continue;
+                            }
+                                if (majorItems.Contains(ROM_DATA[0x180152]))
                             {
                                 continue;
                             }
@@ -124,7 +129,11 @@ namespace Enemizer
                         {
                             continue;
                         }
-                        if (bosschosed == 0) { continue; }
+
+                        if (bosschosed == 0) {
+
+                            continue;
+                        }
 
 
                         dungeons[12].boss = bosschosed;
@@ -151,7 +160,7 @@ namespace Enemizer
                         //Console.WriteLine("Infinite PoDtry");
                     }
                     byte dungeonChosed = (byte)rand.Next(12);
-                    while (bosses.Contains(7)) //since it can have multiple arrghus place all of them first where there's no drop
+                    if (bosses.Contains(8)) //since it can have multiple arrghus place all of them first where there's no drop
                     {
                         dungeonChosed = (byte)rand.Next(12);
                         if (dungeons[dungeonChosed].boss != 255)
@@ -163,14 +172,14 @@ namespace Enemizer
                             continue;
                         }
 
-                        if (scan_gtower(0x0A))
+                        if (scan_gtower(0x0A) || ROM_DATA[0x289B0] == 0x0A)
                         {
 
-                            if (dungeons[7].boss != 255)
+                            if (dungeons[7].boss == 255)
                             {
                                 //put arrghus in his original location
-                                dungeons[7].boss = 7;
-                                bosses.Remove(7);
+                                dungeons[7].boss = 8;
+                                bosses.Remove(8);
                                 continue;
                             }
                             else
@@ -179,13 +188,13 @@ namespace Enemizer
                                 goto retry;
                             }
                         }
-                        dungeons[dungeonChosed].boss = 7;
-                        bosses.Remove(7);
+                        dungeons[dungeonChosed].boss = 8;
+                        bosses.Remove(8);
                     }
 
 
                     //IF Kholdstare is not placed already place him first
-                    while (bosses.Contains(0)) //since it can have multiple kholdstare place all of them first where there's no drop
+                    if (bosses.Contains(0))
                     {
                         dungeonChosed = (byte)rand.Next(12);
                         if (dungeons[dungeonChosed].boss != 255)
@@ -197,14 +206,14 @@ namespace Enemizer
                             continue;
                         }
 
-                        if (scan_gtower(0x07))
+                        if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
                         {
 
-                            if (dungeons[8].boss != 255)
+                            if (dungeons[8].boss == 255)//???????????
                             {
                                 //put kholdstare in his original location
                                 dungeons[8].boss = 0;
-                                bosses.Remove(8);
+                                bosses.Remove(0);
                                 continue;
                             }
                             else
@@ -219,10 +228,11 @@ namespace Enemizer
 
                         //IF Trinexx is not placed already place him first
                     }
+                    
 
                     dungeonChosed = (byte)rand.Next(12);
                     //IF Kholdstare is not placed already place him first
-                    while (bosses.Contains(9)) //since it can have multiple kholdstare place all of them first where there's no drop
+                    if (bosses.Contains(9)) //since it can have multiple kholdstare place all of them first where there's no drop
                     {
                         dungeonChosed = (byte)rand.Next(12);
                         if (dungeons[dungeonChosed].boss != 255)
@@ -234,12 +244,12 @@ namespace Enemizer
                             continue;
                         }
 
-                        if (scan_gtower(0x07) || scan_gtower(0x08))
+                        if (scan_gtower(0x07) || scan_gtower(0x08) || ROM_DATA[0x289B0] == 0x07 || ROM_DATA[0x289B0] == 0x08)
                         {
 
-                            if (dungeons[9].boss != 255)
+                            if (dungeons[9].boss == 255)//???????????
                             {
-                                //put kholdstare in his original location
+                                //put trinexx in his original location
                                 dungeons[9].boss = 9;
                                 bosses.Remove(9);
                                 continue;
@@ -291,7 +301,7 @@ namespace Enemizer
                     {
                         spoilerfile.WriteLine(d.name + " : " + bossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[itemsAddress[did]]);
                     }
-                    //Console.WriteLine(d.name + " : " + bossNames[d.boss].ToString());
+                    Console.WriteLine(d.name + " : " + bossNames[d.boss].ToString());
                     ROM_DATA[d.pointerAddr] = bossOrder[d.boss][0];
                     ROM_DATA[d.pointerAddr + 1] = bossOrder[d.boss][1];
                     //Console.WriteLine((d.bossIn).Address.ToString("X6"));

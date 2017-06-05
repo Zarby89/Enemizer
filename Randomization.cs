@@ -24,7 +24,7 @@ namespace Enemizer
         //all the sprites "gfx" sheet 
         byte[] sprite_subset_0 = new byte[] { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
         byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
-        byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37,42 };//19 trainee guard
+        byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
         byte[] sprite_subset_3 = new byte[] { 17, 16, 27, 20, 82, 83 };
         //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
         byte[][] random_sprite_group = new byte[60][];
@@ -469,7 +469,7 @@ namespace Enemizer
 
             
             Color wall_color = Color.FromArgb(60+rand.Next(180), 60+rand.Next(180), 60+rand.Next(180));
-            byte shade = (byte)(10 + rand.Next(6) -((wall_color.R+wall_color.G+wall_color.B)/80));
+            byte shade = (byte)(10 + rand.Next(8) -((wall_color.R+wall_color.G+wall_color.B)/80));
 
             for (int i = 0; i < 5; i++)
             {
@@ -692,7 +692,7 @@ namespace Enemizer
 
         public void shuffle_music()
         {
-            for (int i = 0; i < 0x85; i++)
+            for (int i = 0; i < 0x70; i++)
             {
                 byte[] musics = new byte[] { 0x03, 0x07, 0x0B, 0x0E, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x22, 0x23 };
                 byte m = (byte)rand.Next(musics.Length);

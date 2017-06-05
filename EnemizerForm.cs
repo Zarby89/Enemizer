@@ -34,6 +34,129 @@ namespace Enemizer
             }
 
         }
+        Color[] palette = new Color[17];
+        Color[] palette2 = new Color[17];
+        Color[] palette3 = new Color[17];
+
+        public Color getColor(short c)
+        {
+            return Color.FromArgb(((c & 0x1F) * 8), ((c & 0x3E0) >> 5) * 8, ((c & 0x7C00) >> 10) * 8);
+        }
+
+        public void load_palette()
+        {
+            for (int i = 0; i < 15; i++)
+            {
+                palette[i + 1] = getColor((short)((data[0x7000 + (i * 2) + 1] << 8) + (data[0x7000 + (i * 2)])));
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                palette2[i + 1] = getColor((short)((data[0x7000 + 30 + (i * 2) + 1] << 8) + (data[0x7000 + 30 + (i * 2)])));
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                palette3[i + 1] = getColor((short)((data[0x7000 + 60 + (i * 2) + 1] << 8) + (data[0x7000 + 60 + (i * 2)])));
+            }
+        }
+
+
+        public void refreshEverything()
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                load4bpp(i);
+                updateGraphic(i);
+            }
+        }
+        byte[,] imgdata = new byte[128, 32];
+        byte[] data;
+        int[] positions = new int[] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
+        int hexOffset = 0x0;
+        public void load4bpp(int pos = 0)
+        {
+
+            for (int j = 0; j < 4; j++) //4 par y
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    int offset = (hexOffset + (pos * 0x800)) + ((j * 32) * 16) + (i * 32);
+                    for (int x = 0; x < 8; x++)
+                    {
+                        for (int y = 0; y < 8; y++)
+                        {
+                            byte tmpbyte = 0;
+
+                            if ((data[offset + (x * 2)] & positions[y]) == positions[y])
+                            {
+                                tmpbyte += 1;
+                            }
+                            if ((data[offset + (x * 2) + 1] & positions[y]) == positions[y])
+                            {
+                                tmpbyte += 2;
+                            }
+
+                            if ((data[offset + 16 + (x * 2)] & positions[y]) == positions[y])
+                            {
+                                tmpbyte += 4;
+                            }
+                            if ((data[offset + 16 + (x * 2) + 1] & positions[y]) == positions[y])
+                            {
+                                tmpbyte += 8;
+                            }
+
+                            imgdata[y + (i * 8), x + (j * 8)] = tmpbyte;
+
+                        }
+                    }
+                    // pos++;
+                }
+            }
+
+
+        }
+
+        Bitmap loadedblocks = new Bitmap(128, 32);
+        public void updateGraphic(int pos)
+        {
+            pictureBox1.Image = new Bitmap(128, 48);
+            loadedblocks = new Bitmap(128, 32);
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+
+            for (int x = 48; x < 64; x++)
+            {
+                for (int y = 16; y < 32; y++)
+                {
+                    //Create body with palette1
+                    loadedblocks.SetPixel(x - 48, y - 8, palette[imgdata[x, y]]);
+
+                    loadedblocks.SetPixel(x - 32, y-8, palette2[imgdata[x, y]]);
+
+                    loadedblocks.SetPixel(x - 16, y-8, palette3[imgdata[x, y]]);
+                }
+            }
+
+            for (int x = 16; x < 32; x++)
+            {
+                for (int y = 0; y < 16; y++)
+                {
+                    //Create Head with palette1
+                    if (imgdata[x, y] != 0)
+                    {
+                        loadedblocks.SetPixel(x - 16, y, palette[imgdata[x, y]]);
+
+                        loadedblocks.SetPixel(x, y, palette2[imgdata[x, y]]);
+
+                        loadedblocks.SetPixel(x + 16, y, palette3[imgdata[x, y]]);
+                    }
+                }
+            }
+            g.Clear(pictureBox1.BackColor);
+            g.DrawImage(loadedblocks,new Rectangle(2,0,128,48), new Rectangle(0, 0, 64, 24), GraphicsUnit.Pixel);
+            pictureBox1.Refresh();
+        }
+
 
         private void EnemizerForm_Load(object sender, EventArgs e)
         {
@@ -347,7 +470,19 @@ namespace Enemizer
             fw.Close();
         }
 
-
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex != 0)
+            {
+                FileStream fs = new FileStream((comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(), FileMode.Open, FileAccess.Read);
+                data = new byte[fs.Length];
+                fs.Read(data, 0, (int)fs.Length);
+                load_palette();
+                load4bpp();
+                refreshEverything();
+                fs.Close();
+            }
+        }
     }
 
 
