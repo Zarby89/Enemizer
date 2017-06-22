@@ -58,7 +58,7 @@ namespace Enemizer
         {
             bool error = false;
             patch_bosses();
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 1; j++)
             {
             retry:
                 dungeons.Clear();

@@ -12,6 +12,9 @@ namespace Enemizer
         {
             int index = 0;
 
+            ROM_DATA[0x04CF4F] = 0x10; //move bird from tree
+
+
             for (int i = 0; i < 208; i++)
             {
 
@@ -22,7 +25,7 @@ namespace Enemizer
                     {
                         while (true)
                         {
-
+                            Console.WriteLine("Overworld??? " + i.ToString());
                             // Select one of the 63 sprites group avoid the ones that are empty because they contain npcs/bosses
                             byte sprite_group = (byte)rand.Next(43);
                             if (random_sprite_group_ow[sprite_group].Length == 0) { continue; } //restart
@@ -63,6 +66,11 @@ namespace Enemizer
                             foreach (byte s in subset_gfx_sprites[random_sprite_group_ow[sprite_group][3]]) //add all subset3 sprites of the selected group
                             {
                                 sprites.Add(s);
+                            }
+
+                            if (sprite_group == 27)
+                            {
+                                sprites.Remove(0x8E);
                             }
 
 

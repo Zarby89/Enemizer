@@ -304,7 +304,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 5.2";
+            this.Text = "Enemizer 5.4 BETA";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

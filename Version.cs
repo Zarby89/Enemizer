@@ -11,7 +11,7 @@ namespace Enemizer
 
         public static bool CheckUpdate()
         {
-            string CurrentVersion = "5.2";
+            string CurrentVersion = "5.4";
             string checkVersion = "";
             using (WebClient wc = new WebClient())
             {

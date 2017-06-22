@@ -35,19 +35,26 @@ namespace Enemizer
         byte[] absorbable_sprites = new byte[] { 0xD8, 0xD9, 0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1, 0xE2, 0xE3, 0xE4 };
 
         //All the rooms that require special handling
-        byte[] IcemanRoom = { 14, 126, 142, 158, 190 }; //these room need to be locked on the gfx ID : 28
-        byte[] WaterRoom = { 40, 56, 54, 70, 52, 22, 102 }; //these room need to be locked on the gfx ID : 17 //118 removed
-        byte[] ShadowRoom = { 62, 159 };//28,27,30
-        byte[] WallMasterRoom = { 57, 73, 86, 88, 141, 104 };//force 82 on 3
-        byte[] bumperandcrystalRoom = {23,4,11,19,27,30,42,43,49,68,76,89,91,103,107,119,135,139,145,146,155,157,161,171,
-        182,191,193,196,235, 64, 74, 165, 195,197,213,214,239,61};//also laser shooting eyes //can be 82 or 83 on 3,126
-        int[] SwitchesRoom = { 2, 100, 267, 73, 88 };
-        byte[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
+        int[] IcemanRoom = { 14, 126, 142, 158, 190 }; //these room need to be locked on the gfx ID : 28
+        int[] WaterRoom = { 40, 56, 54, 70, 52, 22, 102 }; //these room need to be locked on the gfx ID : 17 //118 removed
+        int[] ShadowRoom = { 62, 159 };//28,27,30
+
+        int[] WallMasterRoom = { 57, 73, 86, 141, 104 };//force 82 on 3
+
+        int[] bumperandcrystalRoom = {23,4,11,19,27,30,42,43,49,68,76,88,89,91,103,104,107,119,135,139,145,150,146,155,157,161,171,
+        182,191,193,196,235, 64, 74, 165, 195,197,213,214,239,61,126};//also laser shooting eyes //can be 82 or 83 on 3
+        //126 IR,
+
+
+
+        int[] SwitchesRoom = { 2, 100, 267, 88 };// WM, ?? 73:no switch in that room
+
+        int[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
         //byte[] PushSwitchesRoom = { 53, 55, 118 }; //83 same as tongue
         int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87 }; //do not generate statue in these rooms
-        
+
         //ROOM 127 do not spawn  anti-faerie
-        byte[] canonRoom = { 92, 117 }; //47 on 0
+        int[] canonRoom = { 92, 117 }; //47 on 0
         int[] canonRoom2 = { 185, 217, 268 };//46 on 2
         
 
@@ -56,7 +63,7 @@ namespace Enemizer
         0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,
         0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
         0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80,0xA8,0xA9,0x19,0x7C};
+        0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80,0xA8,0xA9,0x19,0x7C,0x26,0x91};
 
         byte[] statis_sprites = new byte[]
         {0xCA,0x27,0x5D,0x5E,0x5F,0x60,0x7E,0x7F};
@@ -65,7 +72,7 @@ namespace Enemizer
         byte[] NonKillable_shutter = {0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x1E,0x21,0x66,0x67,0x68,0x69,
         0x77,0x82,0x84,0x8A,0x8E,0x90,0x93,0x9A,0xA1,0xC5,0xC6,0xD0,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
         0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0x85,0x81,0x80};
+        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26};
 
 
         byte[] bowSprites = {0x83,0x84};
@@ -86,17 +93,17 @@ namespace Enemizer
             {
                 if (skin != "")
                 {
-                    FileStream fsx = new FileStream( skin, FileMode.Open, FileAccess.Read);
-                    byte[] skin_data = new byte[0x7060];
-                    fsx.Read(skin_data, 0, 0x7060);
+                    FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
+                    byte[] skin_data = new byte[0x7078];
+                    fsx.Read(skin_data, 0, 0x7078);
                     fsx.Close();
                     for (int i = 0; i < 0x7000; i++)
                     {
                         ROM_DATA[0x80000 + i] = skin_data[i];
                     }
-                    for (int i = 0; i < 90; i++)
+                    for (int i = 0; i < 0x78; i++)
                     {
-                        ROM_DATA[0x0DD308 + i] = skin_data[0x7000+i];
+                        ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
                     }
                 }
 
@@ -197,11 +204,11 @@ namespace Enemizer
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            FileStream fs = new FileStream("Enemizer 5.2 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fs = new FileStream("Enemizer 5.4 BETA - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
             fs.Write(ROM_DATA, 0, ROM_DATA.Length);
             fs.Close();
 
-            MessageBox.Show("Enemizer 5.2 - " + Path.GetFileName(filename) + " Has been created !");
+            MessageBox.Show("Enemizer 5.4BETA - " + Path.GetFileName(filename) + " Has been created !");
         }
 
         
@@ -260,7 +267,7 @@ namespace Enemizer
             subset_gfx_sprites[44] = new byte[] { 0x4F, 0x4E, 0x61 }; //popo, beamos
             //13 contains guards same as 73
             subset_gfx_sprites[13] = new byte[] { }; //guards
-            subset_gfx_sprites[73] = new byte[] { }; //guards
+            subset_gfx_sprites[73] = new byte[] {0x42,0x41,0x45 }; //guards
             subset_gfx_sprites[19] = new byte[] { }; //guards
             subset_gfx_sprites[30] = new byte[] { 0x26, 0x13, 0x18 }; //minihelma,minimoldorm,beetle
             subset_gfx_sprites[32] = new byte[] { 0x9C, 0x9D, 0x91, 0x8F }; //stalfos knight, shadow, blob
@@ -287,7 +294,8 @@ namespace Enemizer
             subset_gfx_sprites[17] = new byte[] { 0x00, 0x0D };//raven,buzzblob
             subset_gfx_sprites[27] = new byte[] { 0xA8, 0xA9, 0xAA };//dw bomber/likelike
             subset_gfx_sprites[20] = new byte[] { 0xD0 };//lynel
-            subset_gfx_sprites[74] = new byte[] { 0x9B };//wizzrobe
+            subset_gfx_sprites[74] = new byte[] { };//wizzrobe
+            subset_gfx_sprites[80] = new byte[] {0x0B };//wizzrobe
             subset_gfx_sprites[81] = new byte[] { };//switches
             subset_gfx_sprites[93] = new byte[] { };//sanctuary mantle
             subset_gfx_sprites[82] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
@@ -388,14 +396,33 @@ namespace Enemizer
             random_sprite_group[37] = fully_randomize_that_group();
             random_sprite_group[38] = fully_randomize_that_group();
             random_sprite_group[39] = fully_randomize_that_group();
+            random_sprite_group[39][2] = 35;
+            random_sprite_group[39][3] = 82;
+
+            
+
+
+            //room 88 require bumper, switch
+            //room 104 require bumper, wall master
             random_sprite_group[40] = new byte[] { }; //Do not randomize that group (Npcs)
             for (int i = 41; i < 60; i++)
             {
                 random_sprite_group[i] = fully_randomize_that_group(); //group from 105 to 124 are empty
             }
 
+            random_sprite_group[29][0] = 47;
+            random_sprite_group[29][2] = 46;
+            random_sprite_group[30][0] = 14;
+            random_sprite_group[31][1] = 32;
+            random_sprite_group[31][2] = 28;
+            random_sprite_group[38][2] = 38;
+            random_sprite_group[38][3] = 82;
+            random_sprite_group[33][2] = 34;
+            random_sprite_group[36][3] = 83;
+            random_sprite_group[37][3] = 82;
+            random_sprite_group[41][2] = 35;
 
-            for(int i = 0;i<statis_sprites.Length;i++)
+            for (int i = 0;i<statis_sprites.Length;i++)
             {
                 ROM_DATA[0x6B44C + statis_sprites[i]] = (byte)(original_statis_sprite[statis_sprites[i]] | 0x40);
 
@@ -546,7 +573,7 @@ namespace Enemizer
                 }
 
                 setColor(0x0DD7E2 + (0xB4 * dungeon), floor_color3, 3);
-                setColor(0x0DD796 + (0xB4 * dungeon), floor_color3, 3);
+                setColor(0x0DD796 + (0xB4 * dungeon), floor_color3, 4);
             }
         }
 
@@ -579,89 +606,329 @@ namespace Enemizer
         public void Randomize_Sprites_Palettes()
         {
             //Do not change color of collectible items
-            for (int j = 0; j < 0xF3; j++)
+            /*for (int j = 0; j < 0xF3; j++)
             {
                 if (j <= 0xD7 || j >= 0xE7)
                 {
                     ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
                 }
-            }
+            }*/
+            sprite_palette_new();
 
         }
 
         public void Randomize_Overworld_Palettes()
         {
             Color grass = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
-
-            Color dirt = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            Color grass2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass3 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dirt = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dirt2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            //Color grass = Color.FromArgb(230, 230, 230);
+            //Color dirt = Color.FromArgb(140,120,64);
             Color wall = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
             Color roof = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-            Color treetrunk = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-            Color treeleaf = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            Color btreetrunk = Color.FromArgb(172, 144, 96);
+            Color treetrunk = Color.FromArgb(btreetrunk.R - 40 + rand.Next(80), btreetrunk.G - 20 + rand.Next(30), btreetrunk.B - 30 + rand.Next(60));
+            Color treeleaf = Color.FromArgb(grass.R-20 + rand.Next(30), grass.G-20+rand.Next(30), grass.B-20+rand.Next(30));
             Color bridge = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
             setColor(0x05FEA9, grass, 0);
-            for (int i = 0; i < 4; i++)
-            {
-                
+
+            setColor(0x0DD4AC, grass, 2); //desert shadow
+            setColor(0x0DE6DE, grass2, 2);
+            setColor(0x0DE75C, grass2, 2);
+            setColor(0x0DE786, grass2, 2);
+            setColor(0x0DE794, grass2, 2);
+            setColor(0x0DE99A, grass2, 2);
+
+            setColor(0x0DE6E0 , grass2, 1);
+            setColor(0x0DE6E2 , grass2, 0);
+
+            setColor(0x0DD4AE , grass2, 1);
+            setColor(0x0DE6E0 , grass2, 1);
+            setColor(0x0DE9FA , grass2, 1);
+            setColor(0x0DEA0E , grass2, 1);
+
+            setColor(0x0DE9FE, grass2, 0);
+
+
+            setColor(0x0DD3D2, grass2, 2);
+            setColor(0x0DE88C, grass2, 2);
+            setColor(0x0DE8A8, grass2, 2);
+            setColor(0x0DE9F8, grass2, 2);
+            setColor(0x0DEA4E, grass2, 2);
+            setColor(0x0DEAF6, grass2, 2);
+            setColor(0x0DEB2E, grass2, 2);
+            setColor(0x0DEB4A, grass2, 2);
+
+            int i = 0;
                 setColor(0x0DE892 + (i * 70), grass, 1);
                 setColor(0x0DE886 + (i * 70), grass, 0);
 
                 setColor(0x0DE6D0 + (i * 70), grass, 1);//grass shade
                 setColor(0x0DE6D2 + (i * 70), grass, 0); //grass
 
+
+
                 setColor(0x0DE6FA + (i * 70), grass, 3);
                 setColor(0x0DE6FC + (i * 70), grass, 0);//grass shade2
                 setColor(0x0DE6FE + (i * 70), grass, 0);//??
+
+                setColor(0x0DE884 + (i * 70), grass, 4);//tree shadow
+                
 
                 setColor(0x0DE70A + (i * 70), grass, 0); //grass?
                 setColor(0x0DE708 + (i * 70), grass, 2); //bush?
 
                 setColor(0x0DE70C + (i * 70), grass, 1); //bush?
 
-                Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
-                /*setColor(0x0DE6D4 + (i * 70), dirt, 0);
+                //Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+                setColor(0x0DE6D4 + (i * 70), dirt, 2);
 
-                setColor(0x0DE6CA + (i * 70), dirt, 8);
+                setColor(0x0DE6CA + (i * 70), dirt, 5);
                 setColor(0x0DE6CC + (i * 70), dirt, 4);
                 setColor(0x0DE6CE + (i * 70), dirt, 3);
-                setColor(0x0DE6E2 + (i * 70), dirt, 0);
+                setColor(0x0DE6E2 + (i * 70), dirt, 2);
 
-                setColor(0x0DE6D8 + (i * 70), dirt, 8);
+                setColor(0x0DE6D8 + (i * 70), dirt, 5);
                 setColor(0x0DE6DA + (i * 70), dirt, 4);
-                setColor(0x0DE6DC + (i * 70), dirt, 0);
-                setColor(0x0DE6F0 + (i * 70), dirt, 0);
+                setColor(0x0DE6DC + (i * 70), dirt, 2);
+                setColor(0x0DE6F0 + (i * 70), dirt, 2);
 
-                setColor(0x0DE6E6 + (i * 70), dirt, 8);
+                setColor(0x0DE6E6 + (i * 70), dirt, 5);
                 setColor(0x0DE6E8 + (i * 70), dirt, 4);
-                setColor(0x0DE6EA + (i * 70), dirt, 0);
+                setColor(0x0DE6EA + (i * 70), dirt, 2);
                 setColor(0x0DE6EC + (i * 70), dirt, 4);
-                setColor(0x0DE6EE + (i * 70), dirt, 0);
-                setColor(0x0DE6F0 + (i * 70), dirt, 0);*/
-            }
+                setColor(0x0DE6EE + (i * 70), dirt, 2);
+                setColor(0x0DE6F0 + (i * 70), dirt, 2);
 
-            /*setColor(0x0DE87C, bridge, 6);
-                setColor(0x0DE87E, bridge, 4);
-                setColor(0x0DE880, bridge, 2);
-                setColor(0x0DE882, bridge, 0);
+            i = 1;
+            setColor(0x0DE892 + (i * 70), grass3, 1);
+            setColor(0x0DE886 + (i * 70), grass3, 0);
 
-                setColor(0x0DE86E, wall, 6);
-                setColor(0x0DE870, wall, 4);
-                setColor(0x0DE872, wall, 2);
-                setColor(0x0DE878, wall, 0);
+            setColor(0x0DE6D0 + (i * 70), grass3, 1);//grass shade
+            setColor(0x0DE6D2 + (i * 70), grass3, 0); //grass
 
-                setColor(0x0DE88A, treetrunk, 4);
-                setColor(0x0DE88C, treetrunk, 2);
-                setColor(0x0DE88E, treetrunk, 0);
-                */
 
-            /*
-                setColor(0x0DE890, treeleaf, 4);
 
-                setColor(0x0DE894, treeleaf, 0);
+            setColor(0x0DE6FA + (i * 70), grass3, 3);
+            setColor(0x0DE6FC + (i * 70), grass3, 0);//grass shade2
+            setColor(0x0DE6FE + (i * 70), grass3, 0);//??
 
-                setColor(0x0DE874, roof, 4);
+            setColor(0x0DE884 + (i * 70), grass3, 4);//tree shadow
+
+
+            setColor(0x0DE70A + (i * 70), grass3, 0); //grass?
+            setColor(0x0DE708 + (i * 70), grass3, 2); //bush?
+
+            setColor(0x0DE70C + (i * 70), grass3, 1); //bush?
+
+            //Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            setColor(0x0DE6D4 + (i * 70), dirt, 2);
+
+            setColor(0x0DE6CA + (i * 70), dirt, 5);
+            setColor(0x0DE6CC + (i * 70), dirt, 4);
+            setColor(0x0DE6CE + (i * 70), dirt, 3);
+            setColor(0x0DE6E2 + (i * 70), dirt, 2);
+
+            setColor(0x0DE6D8 + (i * 70), dirt, 5);
+            setColor(0x0DE6DA + (i * 70), dirt, 4);
+            setColor(0x0DE6DC + (i * 70), dirt, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt, 2);
+
+            setColor(0x0DE6E6 + (i * 70), dirt, 5);
+            setColor(0x0DE6E8 + (i * 70), dirt, 4);
+            setColor(0x0DE6EA + (i * 70), dirt, 2);
+            setColor(0x0DE6EC + (i * 70), dirt, 4);
+            setColor(0x0DE6EE + (i * 70), dirt, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt, 2);
+
+
+            //setColor(0x0DE6C8 + (i * 70), dirt2, 6);
+            //setColor(0x0D7B40, dirt2, 4);
+            //setColor(0x0D7CE0, dirt2, 4);
+            //setColor(0x0D7E43, dirt2, 4);
+            //setColor(0x0DB8A1, dirt2, 4);
+            //setColor(0x0DCE9A, dirt2, 4);
+            //setColor(0x0DD804, dirt2, 4);
+            //setColor(0x0DD840, dirt2, 4);
+            setColor(0x0DE31C, dirt2, 4);
+            setColor(0x0DE660, dirt2, 4);
+            setColor(0x0DE712, dirt2, 4);
+            setColor(0x0DE720, dirt2, 4);
+            setColor(0x0DE72E, dirt2, 4);
+            setColor(0x0DE758, dirt2, 4);
+            setColor(0x0DE766, dirt2, 4);
+            setColor(0x0DE774, dirt2, 4);
+            setColor(0x0DE996, dirt2, 4); //0x0DE992
+            setColor(0x0DE9A4, dirt2, 4);
+            setColor(0x0DEAD8, dirt2, 4);
+
+            setColor(0x0DE654, grass3, 0);
+            setColor(0x0DE75E, grass3, 0);
+            setColor(0x0DE788, grass3, 0);
+            setColor(0x0DE796, grass3, 0);
+            setColor(0x0DE972, grass3, 0);
+            setColor(0x0DE98E, grass3, 0);
+            setColor(0x0DE99C, grass3, 0);
+
+            setColor(0x0DE714, dirt2, 4);
+            setColor(0x0DE722, dirt2, 4);
+            setColor(0x0DE730, dirt2, 4);
+            setColor(0x0DE732, dirt2, 4);
+            setColor(0x0DE75A, dirt2, 4);
+            setColor(0x0DE768, dirt2, 4);
+            setColor(0x0DE776, dirt2, 4);
+            setColor(0x0DE778, dirt2, 4);
+            setColor(0x0DE998, dirt2, 4);
+            setColor(0x0DE9A6, dirt2, 4);
+            setColor(0x0DEABA, dirt2, 4);
+            setColor(0x0DEADA, dirt2, 4);
+
+
+
+            setColor(0x0DE664, dirt2, 4);
+            setColor(0x0DE71A, dirt2, 4);
+            setColor(0x0DE728, dirt2, 4);
+            setColor(0x0DE734, dirt2, 4);
+            setColor(0x0DE736, dirt2, 4);
+            setColor(0x0DE760, dirt2, 4);
+            setColor(0x0DE77A, dirt2, 4);
+            setColor(0x0DE77C, dirt2, 4);
+            setColor(0x0DE798, dirt2, 4);
+            setColor(0x0DE980, dirt2, 4);
+            setColor(0x0DE99E, dirt2, 4);
+            setColor(0x0DE9AC, dirt2, 4);
+            setColor(0x0DEAC4, dirt2, 4);
+
+
+            //setColor(0x0D821A, dirt2, 5);
+            //setColor(0x0D8982, dirt2, 5);
+            //setColor(0x0D898E, dirt2, 5);
+            //setColor(0x0D8997, dirt2, 5);
+            //setColor(0x0D89A4, dirt2, 5);
+            //setColor(0x0D89BF, dirt2, 5);
+            //setColor(0x0D89CC, dirt2, 5);
+            //setColor(0x0D8A22, dirt2, 5);
+            setColor(0x0DE710, dirt2, 5);
+            setColor(0x0DE756, dirt2, 5);
+            setColor(0x0DE764, dirt2, 5);
+            setColor(0x0DE772, dirt2, 5);
+            setColor(0x0DE994, dirt2, 5);
+            setColor(0x0DE9A2, dirt2, 5);
+            setColor(0x0DEAD6, dirt2, 5);
+
+            setColor(0x0DE992, dirt2, 5);
+            setColor(0x0DE994, dirt2, 4);
+            setColor(0x0DE996, dirt2, 3);
+            setColor(0x0DE998, dirt2, 2);
+
+            setColor(0x0DE99A, grass3, 0);
+            setColor(0x0DE99C, grass3, 0);
+
+            i = 2;
+            setColor(0x0DE892 + (i * 70), grass3, 1);
+            setColor(0x0DE886 + (i * 70), grass3, 0);
+
+            setColor(0x0DE6D0 + (i * 70), grass3, 1);//grass shade
+            setColor(0x0DE6D2 + (i * 70), grass3, 0); //grass
+
+
+
+            setColor(0x0DE6FA + (i * 70), grass3, 3);
+            setColor(0x0DE6FC + (i * 70), grass3, 0);//grass shade2
+            setColor(0x0DE6FE + (i * 70), grass3, 0);//??
+
+            setColor(0x0DE884 + (i * 70), grass3, 4);//tree shadow
+
+
+            setColor(0x0DE70A + (i * 70), grass3, 0); //grass?
+            setColor(0x0DE708 + (i * 70), grass3, 2); //bush?
+
+            setColor(0x0DE70C + (i * 70), grass3, 1); //bush?
+
+            //Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            setColor(0x0DE6D4 + (i * 70), dirt2, 2);
+            setColor(0x0DE6CA + (i * 70), dirt2, 5);
+            setColor(0x0DE6CC + (i * 70), dirt2, 4);
+            setColor(0x0DE6CE + (i * 70), dirt2, 3);
+            setColor(0x0DE6E2 + (i * 70), dirt2, 2);
+
+            setColor(0x0DE8C0 + (i * 70), dirt2, 6);
+            setColor(0x0DE8CE + (i * 70), dirt2, 6);
+
+            setColor(0x0DE6C6 + (i * 70), dirt2, 6);
+            setColor(0x0DE6D8 + (i * 70), dirt2, 5);
+            setColor(0x0DE6DA + (i * 70), dirt2, 4);
+            setColor(0x0DE6DC + (i * 70), dirt2, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt2, 2);
+
+            setColor(0x0DE6E4 + (i * 70), dirt2, 6);
+            setColor(0x0DE6E6 + (i * 70), dirt2, 5);
+            setColor(0x0DE6E8 + (i * 70), dirt2, 4);
+            setColor(0x0DE6EA + (i * 70), dirt2, 2);
+            setColor(0x0DE6EC + (i * 70), dirt2, 4);
+            setColor(0x0DE6EE + (i * 70), dirt2, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt2, 2);
+
+
+
+            //lake borders
+            setColor(0x0DE91E, grass, 0);
+            setColor(0x0DE920, dirt, 2);
+            setColor(0x0DE916, dirt, 3);
+
+            setColor(0x0DE92C, grass, 0);
+            setColor(0x0DE93A, grass, 0);
+            setColor(0x0DE93C, dirt, 2);
+
+
+            setColor(0x0DE91C, grass, 1);
+
+            setColor(0x0DE92A, grass, 1);
+            setColor(0x0DE938, grass, 1);//darker?
+
+            //zora domain
+            setColor(0x0DEA1C, grass, 0);
+            setColor(0x0DEA2A, grass, 0);
+            setColor(0x0DEA30, grass, 0);
+
+            setColor(0x0DEA2E, dirt, 5);
+            setColor(0X067FE1, grass, 3); //Zora Domain Shadow
+
+            setColor(0X0DE6D0, grass, 3); //Test2
+            setColor(0x0DE884, grass, 3);
+            setColor(0x0DE8AE, grass, 3);
+            setColor(0x0DE8BE, grass, 3);
+            setColor(0x0DE8E4, grass, 3);
+            setColor(0x0DE938, grass, 3);
+            setColor(0x0DE9C4, grass, 3);
+            //Nothing Happen : 0x01E0F8,0x04E2DB,0x05FE75,0X067FAF
+            //map changed : 0x0216B8
+
+            setColor(0x0DE6D0, grass, 4);//tree shadow
+                                         /*setColor(0x0DE87C, bridge, 6);
+                                             setColor(0x0DE87E, bridge, 4);
+                                             setColor(0x0DE880, bridge, 2);
+                                             setColor(0x0DE882, bridge, 0);
+
+                                             setColor(0x0DE86E, wall, 6);
+                                             setColor(0x0DE870, wall, 4);
+                                             setColor(0x0DE872, wall, 2);
+                                             setColor(0x0DE878, wall, 0);
+
+
+                                             */
+            /*setColor(0x0DE88A, treetrunk, 2);
+            setColor(0x0DE88C, treetrunk, 1);
+            setColor(0x0DE88E, treetrunk, 0);
+            */
+            setColor(0x0DE890, treeleaf, 1);
+            setColor(0x0DE894, treeleaf, 0);
+
+                /*setColor(0x0DE874, roof, 4);
                 setColor(0x0DE876, roof, 0);*/
-            
+
         }
 
         public void Randomize_Sprites_HP()
@@ -698,6 +965,11 @@ namespace Enemizer
                 byte m = (byte)rand.Next(musics.Length);
                 m = musics[m];
                 ROM_DATA[0x015592+i] = m;
+            }
+            byte[] originalmusicafter0x85 = new byte[] { 0x12, 0x1B, 0x12, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0x11 };
+            for (int i = 0; i < 0x0A; i++)
+            {
+                ROM_DATA[00015602 + i] = originalmusicafter0x85[i];
             }
         }
 
