@@ -17,7 +17,7 @@ namespace Enemizer
         //194 for firesnake
         //All the sprites address that are dropping keys //check 192,193,
         int[] smallCorridors_sprites = { 0x04DE29 };
-        int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687 };
+        int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
         //All the rooms that need every sprite dead for doors to open
         int[] NeedKillable_doors = { 11, 27, 36, 40, 46, 49, 62, 68, 75, 83, 93, 107, 109, 110, 113, 117, 123, 125, 133, 135, 141, 165, 168, 176, 178, 182, 210, 216, 224, 239, 268, 291 };
         //room 113 is not in needkillable is it in key_sprite?
@@ -942,7 +942,7 @@ namespace Enemizer
                        && j != 0x8D && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                     {
                         int new_hp = original_sprites_hp[j];
-                        new_hp += (-20 + rand.Next(40));
+                        new_hp += (-10 + rand.Next(20));
                         if (new_hp >= 0xFF)
                         {
                             new_hp = 0xFF;

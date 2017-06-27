@@ -246,7 +246,7 @@ namespace Enemizer
             textBox2.Text = flags.ToString();
         }
 
-        public string[] description = new string[15]
+        public string[] description = new string[16]
         {
             "Randomize enemies inside\ndungeons / houses / caves",
             "Randomize enemies on the\noverworld",
@@ -262,7 +262,8 @@ namespace Enemizer
             "Set all palettes pitch black\nexcept sprites, remove dark rooms\n",
             "Shuffle all background music",
             "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working",
-            "Allow Pots to be shuffled\nwithin one room"
+            "Allow Pots to be shuffled\nwithin one room",
+            "Allow alternate room to be used\nDO NOT USE WITH SHUFFLE POTS!\nWork In Progress"
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
@@ -274,7 +275,7 @@ namespace Enemizer
         private void button2_Click(object sender, EventArgs e)
         {
             flags = 0;
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count-1; i++)
             {
                 if (i != 7 && i != 10 && i != 13 && i != 11)
                 {
@@ -432,7 +433,7 @@ namespace Enemizer
             int flagsText = 0;
             Int32.TryParse(textBox2.Text, out flagsText);
 
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count-1; i++)
             {
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])

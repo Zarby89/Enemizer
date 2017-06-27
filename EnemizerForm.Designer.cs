@@ -121,7 +121,8 @@
             "Blackout Mode",
             "Shuffle Music",
             "Custom Bosses (WIP)",
-            "Shuffle Pot Contents"});
+            "Shuffle Pot Contents",
+            "Alternate Rooms"});
             this.checkedListBox1.Location = new System.Drawing.Point(15, 54);
             this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";
@@ -304,7 +305,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 5.4 BETA";
+            this.Text = "Enemizer 5.4";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
