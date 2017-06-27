@@ -51,7 +51,7 @@ namespace Enemizer
 
         int[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
         //byte[] PushSwitchesRoom = { 53, 55, 118 }; //83 same as tongue
-        int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87 }; //do not generate statue in these rooms
+        int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87,194 }; //do not generate statue in these rooms
 
         //ROOM 127 do not spawn  anti-faerie
         int[] canonRoom = { 92, 117 }; //47 on 0
