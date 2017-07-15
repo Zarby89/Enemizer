@@ -238,18 +238,11 @@ namespace Enemizer
                                     }
                                 }
                             }
-                        }
 
-
-
-
-                        if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
-                        {
-                            continue;
-                        }
-                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
-                        {
-                            continue;
+                            if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
+                            {
+                                continue;
+                            }
                         }
 
                         if (scan_gtower(0x0A) || ROM_DATA[0x289B0] == 0x0A)
@@ -309,19 +302,12 @@ namespace Enemizer
                                     }
                                 }
                             }
+                            if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
+                            {
+                                continue;
+                            }
                         }
 
-
-
-
-                        if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
-                        {
-                            continue;
-                        }
-                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
-                        {
-                            continue;
-                        }
                         if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
                         {
 
@@ -384,18 +370,11 @@ namespace Enemizer
                                     }
                                 }
                             }
+                            if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
+                            {
+                                continue;
+                            }
                         }
-
-                        if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
-                        {
-                            continue;
-                        }
-
-                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
-                        {
-                            continue;
-                        }
-
                         
 
                         if (scan_gtower(0x07) || scan_gtower(0x08) || ROM_DATA[0x289B0] == 0x07 || ROM_DATA[0x289B0] == 0x08)
