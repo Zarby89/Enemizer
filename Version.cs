@@ -8,16 +8,16 @@ namespace Enemizer
 {
     class Version
     {
-
+        public static string CurrentVersion = "5.6";
         public static bool CheckUpdate()
         {
-            string CurrentVersion = "5.6";
+            
             string checkVersion = "";
             using (WebClient wc = new WebClient())
             {
                 checkVersion = wc.DownloadString("https://zarby89.github.io/Enimizer/version.txt");
             }
-            if (!checkVersion.Contains(CurrentVersion))
+            if (!checkVersion.Contains(Version.CurrentVersion))
             {
                 return true;
             }

@@ -241,7 +241,7 @@ namespace Enemizer
         private void EnemizerForm_Load(object sender, EventArgs e)
         {
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
-            
+            this.Text = "Enemizer " + Version.CurrentVersion;
             comboBox1.Items.Add(new files_names("Default", "Default"));
             comboBox1.Items.Add(new files_names("Random", "Random"));
             comboBox1.SelectedIndex = 0;

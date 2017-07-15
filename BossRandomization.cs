@@ -360,7 +360,7 @@ namespace Enemizer
                                     }
                                 }
                             }
-                            if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                            if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal
                             {
                                 if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
                                 {
