@@ -50,6 +50,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkPaletteCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,8 +122,7 @@
             "Blackout Mode",
             "Shuffle Music",
             "Custom Bosses (WIP)",
-            "Shuffle Pot Contents",
-            "Alternate Rooms"});
+            "Shuffle Pot Contents"});
             this.checkedListBox1.Location = new System.Drawing.Point(15, 54);
             this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";
@@ -172,7 +172,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(266, 161);
+            this.label4.Location = new System.Drawing.Point(269, 217);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 10;
@@ -185,7 +185,7 @@
             this.comboBox2.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.comboBox2.Location = new System.Drawing.Point(269, 177);
+            this.comboBox2.Location = new System.Drawing.Point(272, 233);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 11;
@@ -221,7 +221,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 201);
+            this.label5.Location = new System.Drawing.Point(266, 255);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 13);
             this.label5.TabIndex = 15;
@@ -244,7 +244,7 @@
             this.comboBox3.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.comboBox3.Location = new System.Drawing.Point(269, 217);
+            this.comboBox3.Location = new System.Drawing.Point(272, 271);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 17;
@@ -277,12 +277,25 @@
             this.pictureBox1.Size = new System.Drawing.Size(128, 48);
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // linkPaletteCheckbox
+            // 
+            this.linkPaletteCheckbox.AutoSize = true;
+            this.linkPaletteCheckbox.Location = new System.Drawing.Point(269, 151);
+            this.linkPaletteCheckbox.Name = "linkPaletteCheckbox";
+            this.linkPaletteCheckbox.Size = new System.Drawing.Size(125, 17);
+            this.linkPaletteCheckbox.TabIndex = 21;
+            this.linkPaletteCheckbox.Text = "Random Link Palette";
+            this.linkPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.linkPaletteCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.linkPaletteCheckbox_MouseClick);
             // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 324);
+            this.Controls.Add(this.linkPaletteCheckbox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.button4);
@@ -305,7 +318,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 5.4";
+            this.Text = "Enemizer 5.5";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -337,6 +350,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.CheckBox linkPaletteCheckbox;
     }
 }
 

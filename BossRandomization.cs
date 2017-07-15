@@ -40,12 +40,19 @@ namespace Enemizer
             dungeons.Add(new DungeonProperties("Gtower1 (Armos2)", 0x04D666, 28)); //0x04DB23
             dungeons.Add(new DungeonProperties("Gtower2 (Lanmo2)", 0x04D706, 108)); //0x04E1BE
             dungeons.Add(new DungeonProperties("Gtower3 (Moldorm2)", 0x04D6C8, 77));
+
+
+           
+
         }
 
         int[] itemsAddress = new int[] { 0x180152, 0x180150, 0x180155, 0x180151, 0x180153, 0x180158, 0x180156, 0x180154, 0x180157, 0x180159, 0x0, 0x0, 0x0 };
 
         byte[] majorItems = new byte[] { 0x32, 0x1D, 0x0F, 0x16, 0x2B, 0x2C, 0x2D, 0x3C, 0x3C, 0x3D, 0x48, 0x3A, 0x3B, 0x0B, 0x15, 0x18, 0x10, 0x07, 0x08, 0x1E, 0x09, 0x0A, 0x24, 0x12, 0x19, 0x1A, 0x29, 0x1F, 0x14, 0x4B, 0x0D, 0x1B, 0x13, 0x1C, 0x5E, 0x61 };
 
+        int[] crystalTypeAddresses = new int[] { 0x180052 + 8, 0x180052, 0x180052 + 6, 0x180052 + 1, 0x180052 + 4, 0x180052 + 5, 0x180052 + 9, 0x180052 + 3, 0x180052 + 7, 0x180052 + 10, 0, 0, 0 };
+        
+        int[] crystalAddresses = new int[] { 0x1209D + 8, 0x1209D, 0x1209D + 6, 0x1209D + 1, 0x1209D + 4, 0x1209D + 5, 0x1209D + 9, 0x1209D + 3, 0x1209D + 7, 0x1209D + 10, 0, 0, 0 };
 
         byte[][] bossOrder = new byte[][] { new byte[] { 0x01, 0xEA },new byte[] { 0xC3, 0xD9 }, new byte[] { 0x31, 0xDC },
                                             new byte[] { 0x57, 0xE4 },new byte[] { 0x49, 0xE0 },new byte[] { 0x87, 0xE8 },
@@ -113,7 +120,28 @@ namespace Enemizer
                             {
                                 continue;
                             }
-                                if (majorItems.Contains(ROM_DATA[0x180152]))
+                            //if it kholdstare then check if hera drop the green pendant and if sarasrala have a major item
+                            if (crystalTypeAddresses[0] == 0x00) //is pendant?
+                            {
+                                if (ROM_DATA[crystalAddresses[0]] == 0x04) //if hera is green pendant
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (crystalTypeAddresses[0] == 0x40) //is crystal?
+                            {
+                                if (ROM_DATA[crystalAddresses[0]] == 0x04 || ROM_DATA[crystalAddresses[0]] == 0x01) //if hera is crystal 5 or crystal 6
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (majorItems.Contains(ROM_DATA[0x180152]))
                             {
                                 continue;
                             }
@@ -130,10 +158,12 @@ namespace Enemizer
                             continue;
                         }
 
-                        if (bosschosed == 0) {
+                        //NEED TO BE TESTED !!!!!!!!!!!!!
+                        //New Boss code that should allow kholdstare to spawn anywhere
+                        /*if (bosschosed == 0) {
 
                             continue;
-                        }
+                        }*/
 
 
                         dungeons[12].boss = bosschosed;
@@ -141,16 +171,26 @@ namespace Enemizer
                         //Console.WriteLine("Infinite Trinexxtry");
                     }
 
-                    if (dungeons[4].boss == 255) //Palace of Darkness can't be kholdstare
+
+                    //MIGHT NOT NEED THAT CODE ANYMORE IT WAS PREVENTING KHOLDSTARE FROM SPAWNING IN POD BUT WITH NEW CODE IT SHOULD WORK
+                    /*if (dungeons[4].boss == 255) //Palace of Darkness can't be kholdstare
                     {
                         bosschosed = bosses[rand.Next(bosses.Count)];
-                        if (bosschosed == 0)
-                        {
+                        //NEED TO BE TESTED !!!!!!!!!!!!!
+                        //New Boss code that should allow kholdstare to spawn anywhere
+                        if (bosschosed == 0) {
+
                             continue;
                         }
+
+
                         if (bosschosed == 9) //if we pick trinexx check if hera drop any major items if so then put him elsewhere
                         {
                             if (majorItems.Contains(ROM_DATA[0x180153]))
+                            {
+                                continue;
+                            }
+                            if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
                             {
                                 continue;
                             }
@@ -158,7 +198,9 @@ namespace Enemizer
                         dungeons[4].boss = bosschosed;
                         bosses.Remove(bosschosed);
                         //Console.WriteLine("Infinite PoDtry");
-                    }
+                    }*/
+
+
                     byte dungeonChosed = (byte)rand.Next(12);
                     if (bosses.Contains(8)) //since it can have multiple arrghus place all of them first where there's no drop
                     {
@@ -167,7 +209,45 @@ namespace Enemizer
                         {
                             continue;
                         }
+
+
+                        //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
+
+                        //Unless it is own dungeon check for crystals/pendants blocks
+
+                        if (dungeonChosed != 7)
+                        {
+
+                            if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
                         if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
+                        {
+                            continue;
+                        }
+                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
                         {
                             continue;
                         }
@@ -201,11 +281,47 @@ namespace Enemizer
                         {
                             continue;
                         }
+
+                        //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
+
+                        //Unless it is own dungeon check for crystals/pendants blocks
+
+                        if (dungeonChosed != 8)
+                        {
+
+                            if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
                         if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
                         {
                             continue;
                         }
-
+                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
+                        {
+                            continue;
+                        }
                         if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
                         {
 
@@ -239,13 +355,52 @@ namespace Enemizer
                         {
                             dungeonChosed = (byte)rand.Next(12);
                         }
+
+
+                        //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
+
+                        //Unless it is own dungeon check for crystals/pendants blocks
+
+                        if (dungeonChosed != 9)
+                        {
+
+                            if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                            {
+                                if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                                {
+                                    if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
                         if (majorItems.Contains(ROM_DATA[itemsAddress[dungeonChosed]]))
                         {
                             continue;
                         }
 
+                        if (majorItems.Contains(ROM_DATA[0xE980]) || majorItems.Contains(ROM_DATA[0xE983]) || majorItems.Contains(ROM_DATA[0x2F1FC]))
+                        {
+                            continue;
+                        }
+
+                        
+
                         if (scan_gtower(0x07) || scan_gtower(0x08) || ROM_DATA[0x289B0] == 0x07 || ROM_DATA[0x289B0] == 0x08)
                         {
+
 
                             if (dungeons[9].boss == 255)//???????????
                             {
@@ -292,9 +447,22 @@ namespace Enemizer
                 }
 
 
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
+                //foreach (DungeonProperties d in dungeons)
+                //{
+                //    d.boss = 0;
+                //}
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
+                    //TESTING CODE
 
-
-                int did = 0;
+                    int did = 0;
                 foreach (DungeonProperties d in dungeons)
                 {
                     if (spoiler)

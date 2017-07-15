@@ -69,17 +69,17 @@ namespace Enemizer
         {0xCA,0x27,0x5D,0x5E,0x5F,0x60,0x7E,0x7F};
 
         //Non Killable in shutter doors Rooms
-        byte[] NonKillable_shutter = {0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x1E,0x21,0x66,0x67,0x68,0x69,
+        byte[] NonKillable_shutter = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x1E,0x21,0x66,0x67,0x68,0x69,
         0x77,0x82,0x84,0x8A,0x8E,0x90,0x93,0x9A,0xA1,0xC5,0xC6,0xD0,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
         0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26};
+        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26,0x81,0x19};
 
 
         byte[] bowSprites = {0x83,0x84};
         byte[] hammerSprites = { 0x8E };
         StreamWriter spoilerfile;
         bool spoiler = false;
-        public Randomization(int seed, int flags, byte[] ROM_DATA, string filename = "newrom.sfc",string skin = "",bool spoiler = false) //Initialization of the randomization
+        public Randomization(int seed, int flags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]
@@ -88,11 +88,16 @@ namespace Enemizer
             //Save the flags used in a file to remember the last flags that were used
             this.ROM_DATA = ROM_DATA;
             this.spoiler = spoiler;
-
+            rand = new Random(seed);
             if (skin != "Default")
             {
                 if (skin != "")
                 {
+                    if (skin == "Random")
+                    {
+                        string[] skins = Directory.GetFiles("sprites\\");
+                        skin = skins[rand.Next(skins.Length)];
+                    }
                     FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
                     byte[] skin_data = new byte[0x7078];
                     fsx.Read(skin_data, 0, 0x7078);
@@ -105,12 +110,52 @@ namespace Enemizer
                     {
                         ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
                     }
+
                 }
 
             }
 
+            if (linkrandompalette)
+            {
+                // getColor()
+                //for (int i = 0; i < 15; i+=1)
+                //{
+                //Color c = getColor((byte)((ROM_DATA[0xDD308 + (i*2) + 1] << 8) + ROM_DATA[0xDD308 + (i*2)]));
+                //if (i == 0) { continue; };
+                //if (i == 4) { continue; };
 
-            rand = new Random(seed);
+
+                Color c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (1 * 2), c, 0);
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (2 * 2), c, 2);
+                setColor(0xDD308 + (3 * 2), c, 0);
+                setColor(0xDD308 + (12 * 2), c, 0);
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (5 * 2), c, 0);
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (6 * 2), c, 0);
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (7 * 2), c, 0);
+
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (8 * 2), c, 2);
+                setColor(0xDD308 + (9 * 2), c, 0);
+
+                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+                setColor(0xDD308 + (10 * 2), c, 2);
+                setColor(0xDD308 + (11 * 2), c, 0);
+
+                //}
+
+            }
+
+
             if (spoiler)
             {
                 spoilerfile = new StreamWriter(seed.ToString() + " Spoiler.txt");
@@ -204,11 +249,11 @@ namespace Enemizer
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            FileStream fs = new FileStream("Enemizer 5.4 BETA - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fs = new FileStream("Enemizer 5.5 - "+Path.GetFileName(filename), FileMode.OpenOrCreate, FileAccess.Write);
             fs.Write(ROM_DATA, 0, ROM_DATA.Length);
             fs.Close();
 
-            MessageBox.Show("Enemizer 5.4BETA - " + Path.GetFileName(filename) + " Has been created !");
+            MessageBox.Show("Enemizer 5.5 - " + Path.GetFileName(filename) + " Has been created in the enemizer folder !");
         }
 
         
@@ -259,7 +304,7 @@ namespace Enemizer
             
             subset_gfx_sprites[22] = new byte[] { 0x22, 0x11 };//DW Popo, Hinox, Snapdragon (require 23)
             subset_gfx_sprites[31] = new byte[] { 0x23, 0x24, 0x85, 0xA7, 0x02, 0x7E, 0x7F, 0x80 };//bari,stalfos,firebars
-            subset_gfx_sprites[47] = new byte[] { 0x63, 0x64, 0x71 };//delalant,leever
+            subset_gfx_sprites[47] = new byte[] { 0x71 };//delalant,leever //0x64,0x63
             subset_gfx_sprites[14] = new byte[] { 0x19 };//ghini,thief
             subset_gfx_sprites[70] = new byte[] { 0x6A, 0x6B, 0x49, 0x43, 0x41, 0x42, 0x45, 0x48, 0x44, 0x4A, 0x4B };//need to be combined with 73 and 19 all guards
             subset_gfx_sprites[72] = new byte[] { 0x41, 0x42, 0x43, 0x45, 0x46, 0x47, 0x4B, 0x49 };//need to be combined with 73 and 19 all guards archers
@@ -284,10 +329,10 @@ namespace Enemizer
             subset_gfx_sprites[39] = new byte[] { 0xC7, 0xCA, 0x5D, 0x5E, 0x5F, 0x60 };//chain chomp,pokey,rollers
             subset_gfx_sprites[40] = new byte[] { 0xA5, 0xA6, 0xC3 };//zazak,gibo (patrick star)
             subset_gfx_sprites[38] = new byte[] { 0x99 };//(A1) iceman,penguin
-            subset_gfx_sprites[37] = new byte[] { 0x9B,0x20,0x5B,0x5C };//wizzrobe,sluggula,spark
+            subset_gfx_sprites[37] = new byte[] { 0x9B,0x20 };//wizzrobe,sluggula
             subset_gfx_sprites[41] = new byte[] { 0x9B };//wizzrobe
             subset_gfx_sprites[36] = new byte[] { 0x6D, 0x6E, 0x6F };//rat,rope,keese
-            subset_gfx_sprites[42] = new byte[] { 0x8E };//turtle,kondongo ,also the digging game guy //0x86 kodongo problem
+            subset_gfx_sprites[42] = new byte[] { 0x8E, 0x5B, 0x5C };//turtle,kondongo ,also the digging game guy //0x86 kodongo problem
             //74 = lumberjack
             //subset3
             subset_gfx_sprites[16] = new byte[] { 0x51, 0x27, 0xC9 };//armos,deadrock,tektite
@@ -471,6 +516,7 @@ namespace Enemizer
                 randomize_wall(i);
                 randomize_floors(i);
             }
+            //grayscale_all_dungeons();
         }
 
         public void black_all_dungeons()
@@ -489,6 +535,38 @@ namespace Enemizer
 
         }
 
+        public Color getColor(short c)
+        {
+            return Color.FromArgb(((c & 0x1F) * 8), ((c & 0x3E0) >> 5) * 8, ((c & 0x7C00) >> 10) * 8);
+        }
+
+        public void grayscale_all_dungeons()
+        {
+            for (int i = 0; i < 3600; i+=2)
+            {
+
+                Color c = getColor((byte)((ROM_DATA[0xDD734 + i+1] << 8) + ROM_DATA[0xDD734 + i]));
+                if (c.R == 40 && c.G == 40 && c.B == 40)
+                {
+
+                }
+                else
+                {
+
+                    int sum = ((c.R + c.R + c.G + c.G + c.G + c.B) / 6);
+                    setColor(0xDD734 + i, Color.FromArgb(sum, sum, sum), 0);
+                }
+            }
+
+            //Remove Dark Room
+            /*int[] dark_rooms = new int[] { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
+            for (int i = 0; i < dark_rooms.Length; i++)
+            {
+                ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] & 0xFE));
+            }*/
+
+        }
+
 
 
         public void randomize_wall(int dungeon)
@@ -496,30 +574,58 @@ namespace Enemizer
 
             
             Color wall_color = Color.FromArgb(60+rand.Next(180), 60+rand.Next(180), 60+rand.Next(180));
-            byte shade = (byte)(10 + rand.Next(8) -((wall_color.R+wall_color.G+wall_color.B)/80));
+            //byte shade = (byte)(6 + rand.Next(8) -((wall_color.R+wall_color.G+wall_color.B)/80));
 
             for (int i = 0; i < 5; i++)
             {
-                byte shadex = (byte)(shade - (i * 3));
-                if (shadex >= 200)
-                {
-                    shadex = 0;
-                }
+                
+                byte shadex = (byte)(10 - (i * 2));
                 setColor((0x0DD734 + (0xB4 * dungeon)) + (i * 2), wall_color, shadex);
                 setColor((0x0DD770 + (0xB4 * dungeon)) + (i * 2), wall_color, shadex);
                 setColor((0x0DD744 + (0xB4 * dungeon)) + (i * 2), wall_color, shadex);
-
+                if (dungeon == 0)
+                {
+                    setColor((0x0DD7CA + (0xB4 * dungeon)) + (i * 2), wall_color, shadex);
+                }
                 /*setColor(0x0DD74C - (i * 2), Color.LimeGreen, (byte)(i * 2));
                 setColor(0x0DD778 - (i * 2), Color.LimeGreen, (byte)(i * 2));
                 setColor(0x0DD73C - (i * 2), Color.LimeGreen, (byte)(i * 2));*/
             }
-            setColor(0x0DD76A + (0xB4 * dungeon), wall_color, (byte)(shade - 6));
 
-            setColor(0x0DD7E4 + (0xB4 * dungeon), wall_color, (byte)(shade-4)); //outer wall darker
-            setColor(0x0DD7E6 + (0xB4 * dungeon), wall_color, (byte)(shade - 2)); //outter wall brighter
+            if (dungeon == 2)
+            {
+                setColor((0x0DD74E + (0xB4 * dungeon)), wall_color, 3);
+                setColor((0x0DD74E+2 + (0xB4 * dungeon)), wall_color, 7);
+                setColor((0x0DD73E + (0xB4 * dungeon)), wall_color, 3);
+                setColor((0x0DD73E + 2 + (0xB4 * dungeon)), wall_color, 7);
+                
+            }
 
-            setColor((0x0DD7DA + (0xB4 * dungeon)), wall_color, (byte)(shade - (0 * 4)));
-            setColor((0x0DD7DA + 2 + (0xB4 * dungeon)), wall_color, (byte)(shade - (1 * 4)));
+            //setColor(0x0DD76A + (0xB4 * dungeon), wall_color, (byte)(shade - 6));
+
+            //Ceiling
+            setColor(0x0DD7E4 + (0xB4 * dungeon), wall_color, (byte)(2)); //outer wall darker
+            setColor(0x0DD7E6 + (0xB4 * dungeon), wall_color, (byte)(4)); //outter wall brighter
+
+
+            Color pot_color = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
+            //Pots
+            setColor(0x0DD75A + (0xB4 * dungeon), pot_color, 6);
+            setColor(0x0DD75C + (0xB4 * dungeon), pot_color, 1);
+            setColor(0x0DD75E + (0xB4 * dungeon), pot_color, 3);
+
+            //Wall Contour?
+            //f,c,m
+            setColor(0x0DD76A + (0xB4 * dungeon), wall_color, 7);
+            setColor(0x0DD76C + (0xB4 * dungeon), wall_color, 3);
+            setColor(0x0DD76E + (0xB4 * dungeon), wall_color, 5);
+
+            //Decoration?
+
+
+            //WHAT ARE THOSE !!
+            //setColor((0x0DD7DA + (0xB4 * dungeon)), wall_color, (byte)(shade - (0 * 4)));
+            //setColor((0x0DD7DA + 2 + (0xB4 * dungeon)), wall_color, (byte)(shade - (1 * 4)));
         }
 
         public void randomize_floors(int dungeon)
@@ -529,11 +635,8 @@ namespace Enemizer
             Color floor_color1 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
             Color floor_color2 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
             Color floor_color3 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
-            byte shade1 = (byte)(10 + rand.Next(6) - ((floor_color1.R + floor_color1.G + floor_color1.B) / 80));
-            byte shade2 = (byte)(10 + rand.Next(6) - ((floor_color2.R + floor_color2.G + floor_color2.B) / 80));
-            byte shade3 = (byte)(10 + rand.Next(6) - ((floor_color3.R + floor_color3.G + floor_color3.B) / 80));
 
-            if (dungeon == 7)
+            /*if (dungeon == 7)
             {
                 Console.WriteLine("Dungeon = 7");
                 for (int i = 0; i < 3; i++)
@@ -555,26 +658,30 @@ namespace Enemizer
                 setColor(0x0DD796 + (0xB4 * dungeon), floor_color1, 3);
             }
             else
-            {
+            {*/
                 for (int i = 0; i < 3; i++)
                 {
-                    setColor(0x0DD764 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade1-1 ) - (i * 3)));
-                    setColor(0x0DD782 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade1 ) - (i * 3)));
-                    setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2-1 ) - (i * 3)));
-                    setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2) - (i * 3)));
+                byte shadex = (byte)(6 - (i * 2));
+                    setColor(0x0DD764 + (0xB4 * dungeon) + (i * 2), floor_color1, shadex);
+                    setColor(0x0DD782 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)(shadex+3));
 
-                    if (i <= 1)
-                    {
-                        setColor((0x0DD764 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
-                        setColor((0x0DD782 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3) - (i * 3)));
-                        setColor((0x0DD7A0 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
-                        setColor((0x0DD7BE + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3 ) - (i * 3)));
-                    }
-                }
+                setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color2, shadex);
+                setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)(shadex + 3));
+                //setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2-1 ) - (i * 3)));
+                //setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2) - (i * 3)));
+
+                /*if (i <= 1)
+                {
+                    setColor((0x0DD764 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
+                    setColor((0x0DD782 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3) - (i * 3)));
+                    setColor((0x0DD7A0 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
+                    setColor((0x0DD7BE + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3 ) - (i * 3)));
+                }*/
+            }
 
                 setColor(0x0DD7E2 + (0xB4 * dungeon), floor_color3, 3);
                 setColor(0x0DD796 + (0xB4 * dungeon), floor_color3, 4);
-            }
+            //}
         }
 
         public void setColor(int address, Color col, byte shade)
@@ -606,22 +713,22 @@ namespace Enemizer
         public void Randomize_Sprites_Palettes()
         {
             //Do not change color of collectible items
-            /*for (int j = 0; j < 0xF3; j++)
+            for (int j = 0; j < 0xF3; j++)
             {
                 if (j <= 0xD7 || j >= 0xE7)
                 {
                     ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
                 }
-            }*/
-            sprite_palette_new();
+            }
+            //sprite_palette_new();
 
         }
 
         public void Randomize_Overworld_Palettes()
         {
-            Color grass = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
-            Color grass2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
-            Color grass3 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass = Color.FromArgb(60 + (rand.Next(155)/2), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass2 = Color.FromArgb(60 + (rand.Next(155) / 2), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass3 = Color.FromArgb(60 + (rand.Next(155) / 2), 60 + rand.Next(155), 60 + rand.Next(155));
             Color dirt = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
             Color dirt2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
             //Color grass = Color.FromArgb(230, 230, 230);
@@ -961,7 +1068,7 @@ namespace Enemizer
         {
             for (int i = 0; i < 0x70; i++)
             {
-                byte[] musics = new byte[] { 0x03, 0x07, 0x0B, 0x0E, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x22, 0x23 };
+                byte[] musics = new byte[] { 0x03, 0x07, 0x0B, 0x0E, 0x10, 0x11, 0x12, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x22, 0x23,0xF3 };
                 byte m = (byte)rand.Next(musics.Length);
                 m = musics[m];
                 ROM_DATA[0x015592+i] = m;
@@ -1198,27 +1305,31 @@ namespace Enemizer
             write_rom_data(0x0FA15C, new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0x61, 0x18, 0xFF, 0xFF });
             write_rom_data(0x06B6BE, new byte[] { 0x00 });
 
-            write_rom_data(0x121210, new byte[] { 0x22, 0x14, 0xC1, 0x09, 0xA5, 0xA0, 0xA6, 0xA1, 0xC9, 0x07, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03,
-                                                0x82, 0x5F, 0x00, 0xC9, 0xC8, 0xD0, 0x03, 0x82, 0xC2, 0x00, 0xC9, 0x29, 0xD0, 0x03, 0x82, 0xBB,
-                                                0x00, 0xC9, 0x33, 0xD0, 0x03, 0x82, 0xE9, 0x00, 0xC9, 0x5A, 0xD0, 0x03, 0x82, 0xAD, 0x00, 0xC9,
-                                                0x90, 0xD0, 0x03, 0x82, 0xDB, 0x00, 0xC9, 0xAC, 0xD0, 0x03, 0x82, 0x9F, 0x00, 0xC9, 0x06, 0xD0,
-                                                0x07, 0xE0, 0x00, 0xD0, 0x03, 0x82, 0xC9, 0x00, 0xC9, 0xDE, 0xD0, 0x03, 0x82, 0x58, 0x00, 0xC9,
-                                                0xA4, 0xD0, 0x03, 0x82, 0xBB, 0x00, 0xC9, 0x1C, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03, 0x82, 0x7B,
-                                                0x00, 0xC9, 0x6C, 0xD0, 0x03, 0x82, 0xA9, 0x00, 0xC9, 0x4D, 0xD0, 0x03, 0x82, 0x03, 0x00, 0x82,
-                                                0xD4, 0x00, 0xA2, 0x00, 0xBD, 0x10, 0x0D, 0x18, 0x69, 0x68, 0x9D, 0x10, 0x0D, 0xBD, 0x00, 0x0D,
-                                                0x18, 0x69, 0x68, 0x9D, 0x00, 0x0D, 0xE8, 0xE0, 0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x08, 0x0B,
-                                                0x18, 0x69, 0x68, 0x9D, 0x08, 0x0B, 0xBD, 0x18, 0x0B, 0x18, 0x69, 0x68, 0x9D, 0x18, 0x0B, 0xE8,
-                                                0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x9F, 0x00, 0xA2, 0x00, 0xBD, 0x20, 0x0D, 0x18, 0x69, 0x00, 0x9D,
-                                                0x20, 0x0D, 0xBD, 0x30, 0x0D, 0x18, 0x69, 0x01, 0x9D, 0x30, 0x0D, 0xE8, 0xE0, 0x10, 0xD0, 0xE9,
-                                                0xA2, 0x00, 0xBD, 0x10, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x10, 0x0B, 0xBD, 0x20, 0x0B, 0x18, 0x69,
-                                                0x00, 0x9D, 0x20, 0x0B, 0xE8, 0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x6A, 0x00, 0xA2, 0x00, 0xBD, 0x20,
-                                                0x0D, 0x18, 0x69, 0x01, 0x9D, 0x20, 0x0D, 0xBD, 0x30, 0x0D, 0x18, 0x69, 0x01, 0x9D, 0x30, 0x0D,
-                                                0xE8, 0xE0, 0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x10, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x10, 0x0B,
-                                                0xBD, 0x20, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x20, 0x0B, 0xE8, 0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x35,
-                                                0x00, 0xA2, 0x00, 0xBD, 0x20, 0x0D, 0x18, 0x69, 0x01, 0x9D, 0x20, 0x0D, 0xBD, 0x30, 0x0D, 0x18,
-                                                0x69, 0x00, 0x9D, 0x30, 0x0D, 0xE8, 0xE0, 0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x10, 0x0B, 0x18,
-                                                0x69, 0x00, 0x9D, 0x10, 0x0B, 0xBD, 0x20, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x20, 0x0B, 0xE8, 0xE0,
-                                                0x08, 0xD0, 0xE9, 0x82, 0x00, 0x00, 0x6B});
+            write_rom_data(0x121210, new byte[] {        0x22, 0x14, 0xC1, 0x09, 0xA5, 0xA0, 0xA6, 0xA1, 0xC9, 0x07, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03,
+    0x82, 0x87, 0x00, 0xC9, 0xC8, 0xD0, 0x03, 0x82, 0xEA, 0x00, 0xC9, 0x29, 0xD0, 0x03, 0x82, 0xE3,
+    0x00, 0xC9, 0x33, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0x09, 0x01,
+    0xC9, 0x5A, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0xC5, 0x00, 0xC9,
+    0x90, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0xEB, 0x00, 0xC9, 0xAC,
+    0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0xA7, 0x00, 0xC9, 0x06, 0xD0,
+    0x07, 0xE0, 0x00, 0xD0, 0x03, 0x82, 0xD1, 0x00, 0xC9, 0xDE, 0xD0, 0x03, 0x82, 0x60, 0x00, 0xC9,
+    0xA4, 0xD0, 0x03, 0x82, 0xC3, 0x00, 0xC9, 0x1C, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03, 0x82, 0x83,
+    0x00, 0xC9, 0x6C, 0xD0, 0x03, 0x82, 0xB1, 0x00, 0xC9, 0x4D, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09,
+    0x22, 0x14, 0xC1, 0x09, 0x82, 0x03, 0x00, 0x82, 0xD4, 0x00, 0xA2, 0x00, 0xBD, 0x10, 0x0D, 0x18,
+    0x69, 0x68, 0x9D, 0x10, 0x0D, 0xBD, 0x00, 0x0D, 0x18, 0x69, 0x68, 0x9D, 0x00, 0x0D, 0xE8, 0xE0,
+    0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x08, 0x0B, 0x18, 0x69, 0x68, 0x9D, 0x08, 0x0B, 0xBD, 0x18,
+    0x0B, 0x18, 0x69, 0x68, 0x9D, 0x18, 0x0B, 0xE8, 0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x9F, 0x00, 0xA2,
+    0x00, 0xBD, 0x20, 0x0D, 0x18, 0x69, 0x00, 0x9D, 0x20, 0x0D, 0xBD, 0x30, 0x0D, 0x18, 0x69, 0x01,
+    0x9D, 0x30, 0x0D, 0xE8, 0xE0, 0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x10, 0x0B, 0x18, 0x69, 0x01,
+    0x9D, 0x10, 0x0B, 0xBD, 0x20, 0x0B, 0x18, 0x69, 0x00, 0x9D, 0x20, 0x0B, 0xE8, 0xE0, 0x08, 0xD0,
+    0xE9, 0x82, 0x6A, 0x00, 0xA2, 0x00, 0xBD, 0x20, 0x0D, 0x18, 0x69, 0x01, 0x9D, 0x20, 0x0D, 0xBD,
+    0x30, 0x0D, 0x18, 0x69, 0x01, 0x9D, 0x30, 0x0D, 0xE8, 0xE0, 0x10, 0xD0, 0xE9, 0xA2, 0x00, 0xBD,
+    0x10, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x10, 0x0B, 0xBD, 0x20, 0x0B, 0x18, 0x69, 0x01, 0x9D, 0x20,
+    0x0B, 0xE8, 0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x35, 0x00, 0xA2, 0x00, 0xBD, 0x20, 0x0D, 0x18, 0x69,
+    0x01, 0x9D, 0x20, 0x0D, 0xBD, 0x30, 0x0D, 0x18, 0x69, 0x00, 0x9D, 0x30, 0x0D, 0xE8, 0xE0, 0x10,
+    0xD0, 0xE9, 0xA2, 0x00, 0xBD, 0x10, 0x0B, 0x18, 0x69, 0x00, 0x9D, 0x10, 0x0B, 0xBD, 0x20, 0x0B,
+    0x18, 0x69, 0x01, 0x9D, 0x20, 0x0B, 0xE8, 0xE0, 0x08, 0xD0, 0xE9, 0x82, 0x00, 0x00, 0x6B, 0xA5,
+    0xA0, 0xC9, 0x39, 0xD0, 0x0C, 0xBD, 0xD0, 0x0D, 0xC9, 0x09, 0xD0, 0x05, 0xA9, 0x01, 0x9D, 0xBA,
+    0x0C, 0x22, 0x5C, 0xDC, 0x06, 0x6B});
 
         }
 

@@ -220,6 +220,9 @@ namespace Enemizer
                         }
 
 
+
+
+
                         //our sprites list should contain at least 1 sprite at this point else then restart
                         if (sprites.Count <= 0) { continue; }
                         int real_sprites = sprites.Count;
@@ -229,6 +232,29 @@ namespace Enemizer
                             {
                                 //pick 3 sprite
                                 sprites.Add(absorbable_sprites[rand.Next(absorbable_sprites.Length)]); //add all the absorbable sprites
+                            }
+                        }
+                        int c = sprites.Count;
+                        //LAG REDUCTION CODE !!!
+                        if (room == 203) //add same amount of green rupee in the pool as the number of sprites
+                        {
+                            for(int i = 0;i < c;i++)
+                            {
+                                sprites.Add(0xD9);
+                            }
+                        }
+                        if (room == 204) //add same amount of green rupee in the pool as the number of sprites
+                        {
+                            for (int i = 0; i < c; i++)
+                            {
+                                sprites.Add(0xD9);
+                            }
+                        }
+                        if (room == 220) //add same amount of green rupee in the pool as the number of sprites
+                        {
+                            for (int i = 0; i < c; i++)
+                            {
+                                sprites.Add(0xD9);
                             }
                         }
 
@@ -323,19 +349,20 @@ namespace Enemizer
 
 
 
-                            if (room == 67)
+                            /*if (room == 67)
                             {
                                 if (i == 0)
                                 {
                                     ROM_DATA[room_sprites[room][i] - 2] = 0x18;
                                     ROM_DATA[room_sprites[room][i] - 1] = 0x1A;
                                 }
-                            }
+                            }*/
                             if (room == 151)
                             {
                                 ROM_DATA[room_sprites[room][i] - 2] = 0x15;
                                 ROM_DATA[room_sprites[room][i] - 1] = 0x07;
                             }
+
 
 
                             //if (fail) { continue; }
@@ -364,12 +391,13 @@ namespace Enemizer
             ROM_DATA[0x04E9F0] = 0x03;
             */
             //remove key in skull wood to prevent a softlock
-            ROM_DATA[0x04DD74] = 0x1B;
-            ROM_DATA[0x04DD75] = 0x04;
+            ROM_DATA[0x04DD74] = 0x00;
+            ROM_DATA[0x04DD75] = 0x00;
             ROM_DATA[0x04DD76] = 0xE4;
 
             //remove all sprite in the room before boss room in mire can cause problem with different boss in the room
-            ROM_DATA[0x04E591] = 0xFF;
+            //NOT NEEDED ANYMORE
+            //ROM_DATA[0x04E591] = 0xFF;
         }
 
         public List<byte> remove_unkillable_sprite(int room,List<byte> sprites)
