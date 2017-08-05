@@ -95,6 +95,14 @@ namespace Enemizer
                         sprite_group = 13; //force sprite_group to be uncle 13
                     }
 
+                    if (room == 127)
+                    {
+                        if (random_sprite_group[sprite_group][0] != 31)
+                        {
+                            continue;
+                        }
+                    }
+
 
                     /*
                     for (int i = 0; i < IcemanRoom.Length; i++)
@@ -391,8 +399,8 @@ namespace Enemizer
             ROM_DATA[0x04E9F0] = 0x03;
             */
             //remove key in skull wood to prevent a softlock
-            ROM_DATA[0x04DD74] = 0x00;
-            ROM_DATA[0x04DD75] = 0x00;
+            ROM_DATA[0x04DD74] = 0x16;
+            ROM_DATA[0x04DD75] = 0x05;
             ROM_DATA[0x04DD76] = 0xE4;
 
             //remove all sprite in the room before boss room in mire can cause problem with different boss in the room

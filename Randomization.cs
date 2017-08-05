@@ -51,7 +51,7 @@ namespace Enemizer
 
         int[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
         //byte[] PushSwitchesRoom = { 53, 55, 118 }; //83 same as tongue
-        int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87,194 }; //do not generate statue in these rooms
+        int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87,194,177 }; //do not generate statue in these rooms
 
         //ROOM 127 do not spawn  anti-faerie
         int[] canonRoom = { 92, 117 }; //47 on 0
@@ -63,7 +63,7 @@ namespace Enemizer
         0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,
         0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
         0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80,0xA8,0xA9,0x19,0x7C,0x26,0x91};
+        0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80,0xA8,0xA9,0x19,0x7C,0x26,0x91,0xAA};
 
         byte[] statis_sprites = new byte[]
         {0xCA,0x27,0x5D,0x5E,0x5F,0x60,0x7E,0x7F};
@@ -72,7 +72,7 @@ namespace Enemizer
         byte[] NonKillable_shutter = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x1E,0x21,0x66,0x67,0x68,0x69,
         0x77,0x82,0x84,0x8A,0x8E,0x90,0x93,0x9A,0xA1,0xC5,0xC6,0xD0,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
         0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26,0x81,0x19};
+        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26,0x81,0x19,0x81};
 
 
         byte[] bowSprites = {0x83,0x84};
@@ -236,6 +236,11 @@ namespace Enemizer
                 spoilerfile.Close();
             }
 
+            //Remove Trinexx Ice Floor : 
+            ROM_DATA[0x04B37E] = 0xEA;
+            ROM_DATA[0x04B37E+1] = 0xEA;
+            ROM_DATA[0x04B37E+2] = 0xEA;
+            ROM_DATA[0x04B37E+3] = 0xEA;
             /*ROM_DATA[0x5033 + 0x5E] = 0x24;
             ROM_DATA[0x5112 + 0x5E] = 0x93;
             ROM_DATA[0x51F1 + 0x5E] = 0x57;
@@ -523,7 +528,16 @@ namespace Enemizer
         {
             for (int i = 0; i < 3600; i++)
             {
-                ROM_DATA[0xDD734 + i] = 0x00;
+                int j = (i / 180);
+                if (((i - (j * 180)) < 120) || ((i - (j * 180)) >= 136))
+                {
+                    if (((i - (j * 180)) < 38) || ((i - (j * 180)) >= 44))
+                    {
+                        ROM_DATA[0xDD734 + i] = 0x00;
+                    }
+                }
+
+
             }
 
             //Remove Dark Room
@@ -840,16 +854,16 @@ namespace Enemizer
 
             setColor(0x0DE6D8 + (i * 70), dirt, 5);
             setColor(0x0DE6DA + (i * 70), dirt, 4);
-            setColor(0x0DE6DC + (i * 70), dirt, 2);
+            setColor(0x0DE6DC + (i * 70), dirt, 3);
             setColor(0x0DE6F0 + (i * 70), dirt, 2);
 
             setColor(0x0DE6E6 + (i * 70), dirt, 5);
             setColor(0x0DE6E8 + (i * 70), dirt, 4);
-            setColor(0x0DE6EA + (i * 70), dirt, 2);
-            setColor(0x0DE6EC + (i * 70), dirt, 4);
+            setColor(0x0DE6EA + (i * 70), dirt, 3);
+            setColor(0x0DE6EC + (i * 70), dirt, 3);
             setColor(0x0DE6EE + (i * 70), dirt, 2);
-            setColor(0x0DE6F0 + (i * 70), dirt, 2);
-
+            setColor(0x0DE6F0 + (i * 70), dirt, 1);
+            
 
             //setColor(0x0DE6C8 + (i * 70), dirt2, 6);
             //setColor(0x0D7B40, dirt2, 4);
@@ -879,7 +893,7 @@ namespace Enemizer
             setColor(0x0DE98E, grass3, 0);
             setColor(0x0DE99C, grass3, 0);
 
-            setColor(0x0DE714, dirt2, 4);
+           /* setColor(0x0DE714, dirt2, 4);
             setColor(0x0DE722, dirt2, 4);
             setColor(0x0DE730, dirt2, 4);
             setColor(0x0DE732, dirt2, 4);
@@ -906,7 +920,7 @@ namespace Enemizer
             setColor(0x0DE980, dirt2, 4);
             setColor(0x0DE99E, dirt2, 4);
             setColor(0x0DE9AC, dirt2, 4);
-            setColor(0x0DEAC4, dirt2, 4);
+            setColor(0x0DEAC4, dirt2, 4);*/
 
 
             //setColor(0x0D821A, dirt2, 5);
@@ -917,13 +931,14 @@ namespace Enemizer
             //setColor(0x0D89BF, dirt2, 5);
             //setColor(0x0D89CC, dirt2, 5);
             //setColor(0x0D8A22, dirt2, 5);
-            setColor(0x0DE710, dirt2, 5);
+
+            /*setColor(0x0DE710, dirt2, 5);
             setColor(0x0DE756, dirt2, 5);
             setColor(0x0DE764, dirt2, 5);
             setColor(0x0DE772, dirt2, 5);
             setColor(0x0DE994, dirt2, 5);
             setColor(0x0DE9A2, dirt2, 5);
-            setColor(0x0DEAD6, dirt2, 5);
+            setColor(0x0DEAD6, dirt2, 5);*/
 
             setColor(0x0DE992, dirt2, 5);
             setColor(0x0DE994, dirt2, 4);
@@ -962,21 +977,21 @@ namespace Enemizer
             setColor(0x0DE6E2 + (i * 70), dirt2, 2);
 
             setColor(0x0DE8C0 + (i * 70), dirt2, 6);
-            setColor(0x0DE8CE + (i * 70), dirt2, 6);
+            setColor(0x0DE8CE + (i * 70), dirt2, 5);
 
             setColor(0x0DE6C6 + (i * 70), dirt2, 6);
             setColor(0x0DE6D8 + (i * 70), dirt2, 5);
             setColor(0x0DE6DA + (i * 70), dirt2, 4);
             setColor(0x0DE6DC + (i * 70), dirt2, 2);
-            setColor(0x0DE6F0 + (i * 70), dirt2, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt2, 1);
 
             setColor(0x0DE6E4 + (i * 70), dirt2, 6);
             setColor(0x0DE6E6 + (i * 70), dirt2, 5);
             setColor(0x0DE6E8 + (i * 70), dirt2, 4);
-            setColor(0x0DE6EA + (i * 70), dirt2, 2);
-            setColor(0x0DE6EC + (i * 70), dirt2, 4);
+            setColor(0x0DE6EA + (i * 70), dirt2, 3);
+            setColor(0x0DE6EC + (i * 70), dirt2, 3);
             setColor(0x0DE6EE + (i * 70), dirt2, 2);
-            setColor(0x0DE6F0 + (i * 70), dirt2, 2);
+            setColor(0x0DE6F0 + (i * 70), dirt2, 1);
 
 
 
@@ -1076,7 +1091,7 @@ namespace Enemizer
             byte[] originalmusicafter0x85 = new byte[] { 0x12, 0x1B, 0x12, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0x11 };
             for (int i = 0; i < 0x0A; i++)
             {
-                ROM_DATA[00015602 + i] = originalmusicafter0x85[i];
+                ROM_DATA[0x015602 + i] = originalmusicafter0x85[i];
             }
         }
 
@@ -1267,8 +1282,22 @@ namespace Enemizer
 
         int[][] room_sprites = new int[292][];
 
-
-
+        //ROM_DATA[0x0271E2 + (i * 2)] = ((byte)pctosnes(0x120090 + (i* 14)));
+        //ROM_DATA[0x0271E2 + (i * 2) + 1] = ((byte)(pctosnes((0x120090 + (i* 14))) >> 8));
+        byte[][] shell_pointers = new byte[13][];
+        /*int snes_shell_pointer_7 = 0;
+        int snes_shell_pointer_200 = 0;
+        int snes_shell_pointer_41 = 0; //USELESS
+        int snes_shell_pointer_51 = 0;
+        int snes_shell_pointer_90 = 0;
+        int snes_shell_pointer_144 = 0;
+        int snes_shell_pointer_172 = 0;
+        int snes_shell_pointer_6 = 0;
+        int snes_shell_pointer_222 = 0;
+        int snes_shell_pointer_164 = 0;
+        int snes_shell_pointer_22 = 0;
+        int snes_shell_pointer_108 = 0;
+        int snes_shell_pointer_77 = 0;*/
         public void patch_bosses()
         {
            
@@ -1305,7 +1334,8 @@ namespace Enemizer
             write_rom_data(0x0FA15C, new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0x61, 0x18, 0xFF, 0xFF });
             write_rom_data(0x06B6BE, new byte[] { 0x00 });
 
-            write_rom_data(0x121210, new byte[] {        0x22, 0x14, 0xC1, 0x09, 0xA5, 0xA0, 0xA6, 0xA1, 0xC9, 0x07, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03,
+            write_rom_data(0x121210, new byte[] {
+                0x22, 0x14, 0xC1, 0x09, 0xA5, 0xA0, 0xA6, 0xA1, 0xC9, 0x07, 0xD0, 0x07, 0xE0, 0x00, 0xD0, 0x03,
     0x82, 0x87, 0x00, 0xC9, 0xC8, 0xD0, 0x03, 0x82, 0xEA, 0x00, 0xC9, 0x29, 0xD0, 0x03, 0x82, 0xE3,
     0x00, 0xC9, 0x33, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0x09, 0x01,
     0xC9, 0x5A, 0xD0, 0x0B, 0x22, 0x4E, 0xC4, 0x09, 0x22, 0x14, 0xC1, 0x09, 0x82, 0xC5, 0x00, 0xC9,
@@ -1331,6 +1361,84 @@ namespace Enemizer
     0xA0, 0xC9, 0x39, 0xD0, 0x0C, 0xBD, 0xD0, 0x0D, 0xC9, 0x09, 0xD0, 0x05, 0xA9, 0x01, 0x9D, 0xBA,
     0x0C, 0x22, 0x5C, 0xDC, 0x06, 0x6B});
 
+            /*
+ * 0xF8000*room
+7 : 0FCAEE, Length:0139
+200 : 051585, Length:0015
+41 : 0FC186, Length:006A //USELESSS NO POINTER
+51 : 0F878A, Length:000C
+90 : 0FA7CB, Length:001E
+144 : 0FBA9E, Length:0018
+172 : 0FD9AF, Length:002D
+6 : 0FA15A, Length:003C
+222 : 0FCAE1, Length:000D
+164 : 0FE700, Length:0045
+28 : 0FF749, Length:0043
+108 :0FFA56, Length:0052
+77 : 0FFD41, Length:011F
+*/
+            //0x0122000 bosses rooms tiles : 
+            int pos = 0;
+            shell_pointers[0] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_7_shell);
+            pos += room_7_shell.Length;
+
+            shell_pointers[1] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_200_shell);
+            pos += room_200_shell.Length;
+
+            shell_pointers[2] = new byte[] { 0, 0, 0 }; //Skull woods empty pointers
+
+            shell_pointers[3] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_51_shell);
+            pos += room_51_shell.Length;
+
+            shell_pointers[4] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_90_shell);
+            pos += room_90_shell.Length;
+
+            shell_pointers[5] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_144_shell);
+            pos += room_144_shell.Length;
+
+            shell_pointers[6] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_172_shell);
+            pos += room_172_shell.Length;
+
+            shell_pointers[7] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_6_shell);
+            pos += room_6_shell.Length;
+
+            shell_pointers[8] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_222_shell);
+            pos += room_222_shell.Length;
+
+            shell_pointers[9] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_164_shell);
+            pos += room_164_shell.Length;
+
+            shell_pointers[10] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_28_shell);
+            pos += room_28_shell.Length;
+
+            shell_pointers[11] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_108_shell);
+            pos += room_108_shell.Length;
+
+            shell_pointers[12] = pctosnesbytes(0x122000 + pos);
+            write_rom_data(0x0122000 + pos, room_77_shell);
+            pos += room_77_shell.Length;
+        }
+
+        public byte[] pctosnesbytes(int pos)
+        {
+            int addr = pctosnes(pos);
+
+            ROM_DATA[2] = ((byte)addr);
+            ROM_DATA[1] = ((byte)(addr >> 8));
+            ROM_DATA[0] = ((byte)(addr >> 16));
+
+            return new byte[] { (byte)(addr >> 16), ((byte)(addr >> 8)), ((byte)addr) };
         }
 
 

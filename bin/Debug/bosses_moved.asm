@@ -98,6 +98,10 @@ CPX #$00 : BNE +
 BRL .move_to_middle
 +
 CMP #200 : BNE +;Is is Eastern Palace Boss Room
+JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
+JSL $09C114;Restore the dungeon_resetsprites
+
+
 BRL .move_to_bottom_right
 +
 CMP #41 : BNE +;Is is Skull Woods Boss Room
@@ -108,6 +112,8 @@ BRL .move_to_bottom_right
 CMP #51 : BNE +;Is is Desert Palace Boss Room 
 JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
 JSL $09C114;Restore the dungeon_resetsprites
+
+
 
 BRL .move_to_bottom_left
 +
@@ -132,6 +138,8 @@ BRL .move_to_bottom_right
 +
 CMP #6 : BNE +;Is is Swamp Palace Boss Room
 CPX #$00 : BNE +
+JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
+JSL $09C114;Restore the dungeon_resetsprites
 BRL .move_to_bottom_left
 +
 CMP #222 : BNE +;Is is Ice Palace Boss Room
@@ -145,7 +153,10 @@ CPX #$00 : BNE +
 BRL .move_to_bottom_right
 +
 CMP #108 : BNE +;Is is Gtower (Lanmo2) Boss Room
+JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
+JSL $09C114;Restore the dungeon_resetsprites
 BRL .move_to_bottom_left
+
 +
 CMP #77 : BNE +;Is is Gtower (Moldorm2) Boss Room
 JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
@@ -221,7 +232,7 @@ gibdo_drop_key:
 {
 LDA $A0 : CMP #$39 : BNE .no_key_drop ;Check if the room id is skullwoods before boss
 LDA $0DD0, X : CMP #$09 : BNE .no_key_drop ;Check if the sprite is alive
-LDA #$01 : STA $0CBA, X
+LDA #$01 : STA $0CBA, X;set key
 .no_key_drop
 JSL $06DC5C ;Restore draw shadow
 RTL

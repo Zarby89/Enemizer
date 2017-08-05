@@ -344,7 +344,7 @@ namespace Enemizer
             "Shuffle all background music",
             "Allow Custom Bosses\nto replace one of the original boss\nCurrently not working",
             "Allow Pots to be shuffled\nwithin one room",
-            "Allow alternate room to be used\nDO NOT USE WITH SHUFFLE POTS!\nWork In Progress"
+            "Everytime you transition damage and hp of enemies change"
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
