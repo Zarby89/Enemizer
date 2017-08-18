@@ -7,20 +7,13 @@ lorom
 
 
 ;Gibdo key drop hardcoded in skullwoods to fix problems
-;boss is dropping a key when there's a key drop avaiable in
+;some bosses aredropping a key when there's a key drop avaiable in
 ;the previous room 
 
 org $09DD74 ;Gibdo draw code (JSL Sprite_DrawShadowLong)
 db #$00, #$00 ; Remove key drop in skull woods
 org $1EBB37 ;Gibdo draw code (JSL Sprite_DrawShadowLong)
 JSL gibdo_drop_key
-
-
-
-
-
-
-
 
 ;Move All Bosses Sprites in Top Left Quadrant
 ;Trinexx
@@ -86,10 +79,21 @@ db $FF, $FF, $FF, $FF, $F0, $FF, $61, $18, $FF, $FF
 org $0DB6BE ;Arrghus can stand on ground
 db $00
 
+
+org $1E9518
+JSL new_kholdstare_code;Write new gfx in the vram
+
+org $1DAD67 
+JSL new_trinexx_code
+
+
+
+
 org $249210
 
 boss_move:
 {
+
 JSL $09C114;Restore the dungeon_resetsprites
 LDA $A0 ; load room index
 LDX $A1
@@ -101,7 +105,6 @@ CMP #200 : BNE +;Is is Eastern Palace Boss Room
 JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
 JSL $09C114;Restore the dungeon_resetsprites
 
-
 BRL .move_to_bottom_right
 +
 CMP #41 : BNE +;Is is Skull Woods Boss Room
@@ -110,10 +113,9 @@ CMP #41 : BNE +;Is is Skull Woods Boss Room
 BRL .move_to_bottom_right
 +
 CMP #51 : BNE +;Is is Desert Palace Boss Room 
+
 JSL $09C44E;reset sprites twice in that room for some reasons (fix bug with kholdstare)
 JSL $09C114;Restore the dungeon_resetsprites
-
-
 
 BRL .move_to_bottom_left
 +
@@ -235,5 +237,78 @@ LDA $0DD0, X : CMP #$09 : BNE .no_key_drop ;Check if the sprite is alive
 LDA #$01 : STA $0CBA, X;set key
 .no_key_drop
 JSL $06DC5C ;Restore draw shadow
+RTL
+}
+
+
+
+
+
+WriteGfxBlock:
+{
+	PHA
+		LDA $4300 : PHA ; preserve DMA parameters
+		LDA $4301 : PHA ; preserve DMA parameters
+		LDA $4302 : PHA ; preserve DMA parameters
+		LDA $4303 : PHA ; preserve DMA parameters
+		LDA $4304 : PHA ; preserve DMA parameters
+		LDA $4305 : PHA ; preserve DMA parameters
+		LDA $4306 : PHA ; preserve DMA parameters
+		;--------------------------------------------------------------------------------
+		LDA.b #$80 : STA $2100
+		LDA #$80 : STA $2115
+		LDA #$00 : STA $2116 ; Set VRAM address low byte
+		LDA #$34 : STA $2117 ; Set VRAM address high byte
+		
+		LDA #$01
+		STA $4300 ;Make the DMA write one byte to $2118, then $2119. Because the VRAM port is 16-bit.
+
+		LDA #$18
+		STA $4301 ;Write to $2118 (and $2119).
+		
+		LDA #$00
+		STA $4302 ;low byte
+		LDA #$B0
+		STA $4303 ;high byte
+		LDA #$24
+		STA $4304 ;bank byte
+		; Read from $40:2010.
+		
+		LDA #$00 : STA $4305 ;low
+		LDA #$10 : STA $4306 ;high
+
+		;total bytes to copy: #$1000 bytes.
+		
+		LDA #$01
+		STA $420B ;start DMA
+		
+		;--------------------------------------------------------------------------------
+		PLA : STA $4306 ; restore DMA parameters
+		PLA : STA $4305 ; restore DMA parameters
+		PLA : STA $4304 ; restore DMA parameters
+		PLA : STA $4303 ; restore DMA parameters
+		PLA : STA $4302 ; restore DMA parameters
+		PLA : STA $4301 ; restore DMA parameters
+		PLA : STA $4300 ; restore DMA parameters
+	PLA
+RTL
+}
+
+new_kholdstare_code:
+{
+LDA $0CBA : BNE .already_iced
+LDA #$01 : STA $0CBA
+JSL WriteGfxBlock;
+.already_iced
+
+JSL $0DD97F
+RTL
+}
+
+
+new_trinexx_code:
+{
+LDA.b #$03 : STA $0DC0, X
+JSL WriteGfxBlock;
 RTL
 }

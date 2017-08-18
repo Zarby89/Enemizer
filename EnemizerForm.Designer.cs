@@ -319,7 +319,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 5.6";
+            this.Text = "Enemizer 5.7";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
