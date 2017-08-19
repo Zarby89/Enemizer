@@ -257,7 +257,6 @@ namespace Enemizer
                 BinaryReader fw = new BinaryReader(new FileStream("setting.cfg", FileMode.Open, FileAccess.Read));
                 checkb = fw.ReadBoolean();
                 flags = fw.ReadInt32();
-                textBox2.Text = flags.ToString();
                 fw.Close();
                 update_flags();
                 checkBox2.Checked = checkb;
@@ -285,6 +284,9 @@ namespace Enemizer
 
         }
 
+       // private void checkboxes_Change(object sender,)
+
+
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
@@ -292,14 +294,14 @@ namespace Enemizer
             fs.Read(rom_data, 0, (int)fs.Length);
             fs.Close();
             int seed = 0;
-            if (textBox1.Text == "")
+            /*if (textBox1.Text == "")
             {
                 seed = rand.Next();
             }
             else
             {
                 seed = int.Parse(textBox1.Text);
-            }
+            }*/
             BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
             fw.Write((bool)checkBox2.Checked);
             fw.Write((int)flags);
@@ -324,7 +326,6 @@ namespace Enemizer
                 }
             }
 
-            textBox2.Text = flags.ToString();
         }
 
         public string[] description = new string[16]
@@ -365,7 +366,6 @@ namespace Enemizer
                 }
             }
 
-            textBox2.Text = flags.ToString();
         }
 
 
@@ -512,8 +512,6 @@ namespace Enemizer
         public void update_flags()
         {
             int flagsText = 0;
-            Int32.TryParse(textBox2.Text, out flagsText);
-
             for (int i = 0; i < checkedListBox1.Items.Count-1; i++)
             {
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
@@ -588,6 +586,77 @@ namespace Enemizer
                     linkPaletteCheckbox.Checked = false;
                 }
             }
+        }
+
+        private void enemiesAbsorbableCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void checkboxes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (enemiesCheckbox.Checked)
+            { typeTrackbar.Enabled = true; }
+            else
+            { typeTrackbar.Enabled = false; }
+            if (enemiesHealthCheckbox.Checked)
+            { enemiesHealthTrackbar.Enabled = true; }
+            else
+            { enemiesHealthTrackbar.Enabled = false; }
+            if (enemiesDamageCheckbox.Checked)
+            { enemiesDamageTrackbar.Enabled = true;
+                allowzerodamageCheckbox.Enabled = true;
+            }
+            else
+            { enemiesDamageTrackbar.Enabled = false;
+                allowzerodamageCheckbox.Enabled = false;
+            }
+            if (enemiesAbsorbableCheckbox.Checked)
+            {
+                absorbableChecklist.Enabled = true;
+                spawnrateTrackbar.Enabled = true;
+            }
+            else
+            {
+                absorbableChecklist.Enabled = false;
+                spawnrateTrackbar.Enabled = false;
+            }
+        }
+        int healthMin = 0;
+        int healthMax = 0;
+        private void enemiesHealthTrackbar_Scroll(object sender, EventArgs e)
+        {
+            if (enemiesHealthTrackbar.Value != 0)
+            {
+                healthMin = 100 - (5 * enemiesHealthTrackbar.Value);
+                healthMax = (100 + (10 * enemiesHealthTrackbar.Value));
+            }
+            else
+            {
+                healthMin = 0;
+                healthMax = 0;
+            }
+            healthLabel.Text = healthMin.ToString("D2")+"% - "+ healthMax.ToString("D2") + "%";
+        }
+        string[] typeString = new string[5] {"Basic","Normal","Hard","Chaos","Insanity" };
+        private void typeTrackbar_Scroll(object sender, EventArgs e)
+        {
+            typeLabel.Text = typeString[typeTrackbar.Value];
+        }
+        int damageMin = 0;
+        int damageMax = 0;
+        int spawnRate = 0;
+        private void enemiesDamageTrackbar_Scroll(object sender, EventArgs e)
+        {
+
+            damageMin = 100 - (5 * enemiesDamageTrackbar.Value);
+            damageMax = (100 + (5 * enemiesDamageTrackbar.Value));
+            damageLabel.Text = damageMin.ToString("D2") + "% - " + damageMax.ToString("D2") + "%";
+        }
+
+        private void spawnrateTrackbar_Scroll(object sender, EventArgs e)
+        {
+            spawnRate = 5 * spawnrateTrackbar.Value;
+            spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
         }
     }
 

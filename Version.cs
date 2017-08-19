@@ -8,7 +8,7 @@ namespace Enemizer
 {
     class Version
     {
-        public static string CurrentVersion = "5.7";
+        public static string CurrentVersion = "6.0";
         public static bool CheckUpdate()
         {
             
