@@ -302,11 +302,36 @@ namespace Enemizer
             {
                 seed = int.Parse(textBox1.Text);
             }*/
+            int[] flags_data = new int[8];
+            if (enemiesCheckbox.Checked)
+            { flags_data[0] = typeTrackbar.Value; }
+            if (enemiesHealthCheckbox.Checked)
+            { flags_data[1] = enemiesHealthTrackbar.Value; } else { flags_data[1] = -1; }
+            if (enemiesDamageCheckbox.Checked)
+            { flags_data[2] = 1; }
+            else { flags_data[2] = -1; };
+            if (enemiesAbsorbableCheckbox.Checked)
+            { flags_data[3] = spawnrateTrackbar.Value;
+                for (int i = 0; i < 14; i++)
+                {
+                    if (absorbableChecklist.GetItemCheckState(i) == CheckState.Checked)
+                    {
+                        flags_data[4] += flags_setter[i+1];
+                    }
+                }
+            } else { flags_data[3] = -1; }
+
+
+
+            if (bossesCheckbox.Checked)
+            { flags_data[5] = bosstypesTrackbar.Value; }else { flags_data[5] = -1; }
+
+            
             BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
             fw.Write((bool)checkBox2.Checked);
             fw.Write((int)flags);
             fw.Close();
-            Randomization randomize = new Randomization(seed, flags, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked, linkPaletteCheckbox.Checked);
+            Randomization randomize = new Randomization(rand.Next(), flags_data, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked, linkPaletteCheckbox.Checked);
         }
         int flags = 0;
         int[] flags_setter = new int[16] { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400,0x800,0x1000,0x2000,0x4000 };
@@ -371,7 +396,7 @@ namespace Enemizer
 
 
         byte[] r_data;
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             FileStream fs = new FileStream("zeldapalettetest.sfc", FileMode.Open, FileAccess.Read);
@@ -603,11 +628,11 @@ namespace Enemizer
             else
             { enemiesHealthTrackbar.Enabled = false; }
             if (enemiesDamageCheckbox.Checked)
-            { enemiesDamageTrackbar.Enabled = true;
+            { ;
                 allowzerodamageCheckbox.Enabled = true;
             }
             else
-            { enemiesDamageTrackbar.Enabled = false;
+            { 
                 allowzerodamageCheckbox.Enabled = false;
             }
             if (enemiesAbsorbableCheckbox.Checked)
@@ -620,43 +645,66 @@ namespace Enemizer
                 absorbableChecklist.Enabled = false;
                 spawnrateTrackbar.Enabled = false;
             }
+            if (bossesCheckbox.Checked)
+            { bosstypesTrackbar.Enabled = true; }
+            else
+            { bosstypesTrackbar.Enabled = false; }
+
+            if (bosshealthCheckbox.Checked)
+            { bosshealthTrackbar.Enabled = true; }
+            else
+            { bosshealthTrackbar.Enabled = false; }
+
+            if (bossdamageCheckbox.Checked)
+            { bossdamageTrackbar.Enabled = true; }
+            else
+            { bossdamageTrackbar.Enabled = false; }
+
         }
         int healthMin = 0;
         int healthMax = 0;
         private void enemiesHealthTrackbar_Scroll(object sender, EventArgs e)
         {
-            if (enemiesHealthTrackbar.Value != 0)
-            {
-                healthMin = 100 - (5 * enemiesHealthTrackbar.Value);
-                healthMax = (100 + (10 * enemiesHealthTrackbar.Value));
-            }
-            else
-            {
-                healthMin = 0;
-                healthMax = 0;
-            }
-            healthLabel.Text = healthMin.ToString("D2")+"% - "+ healthMax.ToString("D2") + "%";
+
+            healthMin = (2 * enemiesHealthTrackbar.Value);
+            healthLabel.Text = "-"+healthMin.ToString("D2")+"/+"+ healthMin.ToString("D2");
         }
         string[] typeString = new string[5] {"Basic","Normal","Hard","Chaos","Insanity" };
+        string[] bosstypeString = new string[3] { "Basic", "Normal", "Chaos" };
         private void typeTrackbar_Scroll(object sender, EventArgs e)
         {
             typeLabel.Text = typeString[typeTrackbar.Value];
         }
-        int damageMin = 0;
-        int damageMax = 0;
         int spawnRate = 0;
-        private void enemiesDamageTrackbar_Scroll(object sender, EventArgs e)
-        {
-
-            damageMin = 100 - (5 * enemiesDamageTrackbar.Value);
-            damageMax = (100 + (5 * enemiesDamageTrackbar.Value));
-            damageLabel.Text = damageMin.ToString("D2") + "% - " + damageMax.ToString("D2") + "%";
-        }
 
         private void spawnrateTrackbar_Scroll(object sender, EventArgs e)
         {
             spawnRate = 5 * spawnrateTrackbar.Value;
             spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
+        }
+
+        private void bosstypesTrackbar_Scroll(object sender, EventArgs e)
+        {
+            typebossLabel.Text = bosstypeString[bosstypesTrackbar.Value];
+        }
+        int bossdamageMin = 0;
+        int bossdamageMax = 0;
+        int bosshealthMin = 0;
+        int bosshealthMax = 0;
+        private void bosshealthTrackbar_Scroll(object sender, EventArgs e)
+        {
+            bosshealthMin = 100 - (5 * bosshealthTrackbar.Value);
+            bosshealthMax = (100 + (10 * bosshealthTrackbar.Value));
+            bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
+
+        }
+
+        private void bossdamageTrackbar_Scroll(object sender, EventArgs e)
+        {
+
+            bossdamageMin = 100 - (5 * bossdamageTrackbar.Value);
+            bossdamageMax = (100 + (5 * bossdamageTrackbar.Value));
+            bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
         }
     }
 

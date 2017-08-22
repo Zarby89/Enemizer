@@ -458,19 +458,19 @@ namespace Enemizer
                 //TESTING CODE
                 //TESTING CODE
                 //TESTING CODE
-                /*foreach (DungeonProperties d in dungeons)
+                foreach (DungeonProperties d in dungeons)
                 {
-                    int r = rand.Next(2);
+                   /* int r = rand.Next(2);
                     if (r == 0)
-                    {
+                    {*/
                         d.boss = 0;
-                    }
-                    if (r == 1)
+                    //}
+                    /*if (r == 1)
                     {
                         d.boss = 9;
-                    }
+                    }*/
                    
-                }*/
+                }
                     //TESTING CODE
                     //TESTING CODE
                     //TESTING CODE
@@ -515,13 +515,9 @@ namespace Enemizer
                     if (d.boss == 0) // kholdstare
                     {
                         //ROM_DATA[0x120090 + ((d.room * 14) + 4)] = 04; effect
-                        ROM_DATA[0x120090 + ((d.room * 14) + 4)] = 01;
+                        ROM_DATA[0x120090 + ((d.room * 14) + 4)] = 01;//Effect
                         ROM_DATA[0x120090 + ((d.room * 14) + 2)] = 11;//gfx
                         ROM_DATA[0x120090 + ((d.room * 14) )] = 0xE0;//BG2
-                        if (d.room == 200)
-                        {
-                            ROM_DATA[0x120090 + ((216 * 14) + 2)] = 11;//gfx
-                        }
 
                         ROM_DATA[(0xF8000 + (d.room * 3))] = shell_pointers[did][2];
                         ROM_DATA[(0xF8000 + (d.room * 3)) + 1] = shell_pointers[did][1];

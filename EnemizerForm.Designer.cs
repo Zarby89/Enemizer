@@ -51,14 +51,13 @@
             this.linkPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.allowzerodamageCheckbox = new System.Windows.Forms.CheckBox();
             this.absorbableChecklist = new System.Windows.Forms.CheckedListBox();
             this.spawnrateLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.spawnrateTrackbar = new System.Windows.Forms.TrackBar();
             this.enemiesAbsorbableCheckbox = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.damageLabel = new System.Windows.Forms.Label();
-            this.enemiesDamageTrackbar = new System.Windows.Forms.TrackBar();
             this.enemiesDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.healthLabel = new System.Windows.Forms.Label();
             this.enemiesHealthTrackbar = new System.Windows.Forms.TrackBar();
@@ -68,32 +67,37 @@
             this.typeTrackbar = new System.Windows.Forms.TrackBar();
             this.enemiesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bossBehaviorCheckbox = new System.Windows.Forms.CheckBox();
+            this.bossdamageLabel = new System.Windows.Forms.Label();
+            this.bossdamageTrackbar = new System.Windows.Forms.TrackBar();
+            this.bossdamageCheckbox = new System.Windows.Forms.CheckBox();
+            this.bosshealthLabel = new System.Windows.Forms.Label();
+            this.bosshealthTrackbar = new System.Windows.Forms.TrackBar();
+            this.bosshealthCheckbox = new System.Windows.Forms.CheckBox();
+            this.typebossLabel = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.bosstypesTrackbar = new System.Windows.Forms.TrackBar();
+            this.bossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.allowzerodamageCheckbox = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.bossdamageCheckbox = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.bosshealthCheckbox = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.bossesCheckbox = new System.Windows.Forms.CheckBox();
-            this.bossBehaviorCheckbox = new System.Windows.Forms.CheckBox();
+            this.dungeonPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.overworldPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.spritebasicPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.spriteadvancedPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.blackoutPaletteCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spawnrateTrackbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.enemiesDamageTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemiesHealthTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeTrackbar)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossdamageTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bosshealthTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bosstypesTrackbar)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -132,12 +136,11 @@
             "Shuffle Music",
             "Custom Bosses (WIP)",
             "Shuffle Pot Contents"});
-            this.checkedListBox1.Location = new System.Drawing.Point(486, 303);
+            this.checkedListBox1.Location = new System.Drawing.Point(110, 37);
             this.checkedListBox1.MultiColumn = true;
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(129, 184);
+            this.checkedListBox1.Size = new System.Drawing.Size(263, 184);
             this.checkedListBox1.TabIndex = 5;
-            this.checkedListBox1.Visible = false;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             this.checkedListBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.checkedListBox1_MouseUp);
@@ -324,8 +327,6 @@
             this.tabPage1.Controls.Add(this.spawnrateTrackbar);
             this.tabPage1.Controls.Add(this.enemiesAbsorbableCheckbox);
             this.tabPage1.Controls.Add(this.checkBox5);
-            this.tabPage1.Controls.Add(this.damageLabel);
-            this.tabPage1.Controls.Add(this.enemiesDamageTrackbar);
             this.tabPage1.Controls.Add(this.enemiesDamageCheckbox);
             this.tabPage1.Controls.Add(this.healthLabel);
             this.tabPage1.Controls.Add(this.enemiesHealthTrackbar);
@@ -341,6 +342,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Enemies";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // allowzerodamageCheckbox
+            // 
+            this.allowzerodamageCheckbox.AutoSize = true;
+            this.allowzerodamageCheckbox.Enabled = false;
+            this.allowzerodamageCheckbox.Location = new System.Drawing.Point(21, 157);
+            this.allowzerodamageCheckbox.Name = "allowzerodamageCheckbox";
+            this.allowzerodamageCheckbox.Size = new System.Drawing.Size(103, 17);
+            this.allowzerodamageCheckbox.TabIndex = 16;
+            this.allowzerodamageCheckbox.Text = "Allow 0 Damage";
+            this.toolTip1.SetToolTip(this.allowzerodamageCheckbox, "Allow the sprites to do bumper effect just push you back without any damage");
+            this.allowzerodamageCheckbox.UseVisualStyleBackColor = true;
             // 
             // absorbableChecklist
             // 
@@ -371,9 +384,9 @@
             this.spawnrateLabel.AutoSize = true;
             this.spawnrateLabel.Location = new System.Drawing.Point(402, 46);
             this.spawnrateLabel.Name = "spawnrateLabel";
-            this.spawnrateLabel.Size = new System.Drawing.Size(21, 13);
+            this.spawnrateLabel.Size = new System.Drawing.Size(27, 13);
             this.spawnrateLabel.TabIndex = 15;
-            this.spawnrateLabel.Text = "5%";
+            this.spawnrateLabel.Text = "00%";
             // 
             // label8
             // 
@@ -410,39 +423,19 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
+            this.checkBox5.Enabled = false;
             this.checkBox5.Location = new System.Drawing.Point(6, 271);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(118, 17);
+            this.checkBox5.Size = new System.Drawing.Size(148, 17);
             this.checkBox5.TabIndex = 10;
-            this.checkBox5.Text = "Easy Mode Escape";
+            this.checkBox5.Text = "Easy Mode Escape (WIP)";
             this.toolTip1.SetToolTip(this.checkBox5, "No \"Unfair\" enemies will spawn during the escape\r\nfrom link\'s house to sanctuary");
             this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // damageLabel
-            // 
-            this.damageLabel.AutoSize = true;
-            this.damageLabel.Location = new System.Drawing.Point(146, 154);
-            this.damageLabel.Name = "damageLabel";
-            this.damageLabel.Size = new System.Drawing.Size(68, 13);
-            this.damageLabel.TabIndex = 9;
-            this.damageLabel.Text = "100% - 100%";
-            // 
-            // enemiesDamageTrackbar
-            // 
-            this.enemiesDamageTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.enemiesDamageTrackbar.Enabled = false;
-            this.enemiesDamageTrackbar.Location = new System.Drawing.Point(27, 148);
-            this.enemiesDamageTrackbar.Maximum = 20;
-            this.enemiesDamageTrackbar.Name = "enemiesDamageTrackbar";
-            this.enemiesDamageTrackbar.Size = new System.Drawing.Size(113, 45);
-            this.enemiesDamageTrackbar.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.enemiesDamageTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
-            this.enemiesDamageTrackbar.Scroll += new System.EventHandler(this.enemiesDamageTrackbar_Scroll);
             // 
             // enemiesDamageCheckbox
             // 
             this.enemiesDamageCheckbox.AutoSize = true;
-            this.enemiesDamageCheckbox.Location = new System.Drawing.Point(6, 125);
+            this.enemiesDamageCheckbox.Location = new System.Drawing.Point(6, 134);
             this.enemiesDamageCheckbox.Name = "enemiesDamageCheckbox";
             this.enemiesDamageCheckbox.Size = new System.Drawing.Size(165, 17);
             this.enemiesDamageCheckbox.TabIndex = 7;
@@ -468,7 +461,7 @@
             this.enemiesHealthTrackbar.Name = "enemiesHealthTrackbar";
             this.enemiesHealthTrackbar.Size = new System.Drawing.Size(113, 45);
             this.enemiesHealthTrackbar.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.enemiesHealthTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
+            this.toolTip1.SetToolTip(this.enemiesHealthTrackbar, "Randomize the hp of the enemies by a minimum/maximum from their original values");
             this.enemiesHealthTrackbar.Scroll += new System.EventHandler(this.enemiesHealthTrackbar_Scroll);
             // 
             // enemiesHealthCheckbox
@@ -476,9 +469,9 @@
             this.enemiesHealthCheckbox.AutoSize = true;
             this.enemiesHealthCheckbox.Location = new System.Drawing.Point(6, 74);
             this.enemiesHealthCheckbox.Name = "enemiesHealthCheckbox";
-            this.enemiesHealthCheckbox.Size = new System.Drawing.Size(156, 17);
+            this.enemiesHealthCheckbox.Size = new System.Drawing.Size(191, 17);
             this.enemiesHealthCheckbox.TabIndex = 4;
-            this.enemiesHealthCheckbox.Text = "Randomize Enemies Health";
+            this.enemiesHealthCheckbox.Text = "Randomize Enemies Health Range";
             this.enemiesHealthCheckbox.UseVisualStyleBackColor = true;
             this.enemiesHealthCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
             // 
@@ -517,24 +510,24 @@
             this.enemiesCheckbox.AutoSize = true;
             this.enemiesCheckbox.Location = new System.Drawing.Point(6, 6);
             this.enemiesCheckbox.Name = "enemiesCheckbox";
-            this.enemiesCheckbox.Size = new System.Drawing.Size(122, 17);
+            this.enemiesCheckbox.Size = new System.Drawing.Size(226, 17);
             this.enemiesCheckbox.TabIndex = 0;
-            this.enemiesCheckbox.Text = "Randomize Enemies";
+            this.enemiesCheckbox.Text = "Randomize Enemies (WIP) - default Chaos";
             this.enemiesCheckbox.UseVisualStyleBackColor = true;
             this.enemiesCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.bossBehaviorCheckbox);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.trackBar1);
+            this.tabPage2.Controls.Add(this.bossdamageLabel);
+            this.tabPage2.Controls.Add(this.bossdamageTrackbar);
             this.tabPage2.Controls.Add(this.bossdamageCheckbox);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.trackBar2);
+            this.tabPage2.Controls.Add(this.bosshealthLabel);
+            this.tabPage2.Controls.Add(this.bosshealthTrackbar);
             this.tabPage2.Controls.Add(this.bosshealthCheckbox);
-            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.typebossLabel);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.trackBar3);
+            this.tabPage2.Controls.Add(this.bosstypesTrackbar);
             this.tabPage2.Controls.Add(this.bossesCheckbox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -543,135 +536,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Bosses";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(458, 292);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Palettes";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(458, 292);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Extra";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // allowzerodamageCheckbox
-            // 
-            this.allowzerodamageCheckbox.AutoSize = true;
-            this.allowzerodamageCheckbox.Enabled = false;
-            this.allowzerodamageCheckbox.Location = new System.Drawing.Point(27, 178);
-            this.allowzerodamageCheckbox.Name = "allowzerodamageCheckbox";
-            this.allowzerodamageCheckbox.Size = new System.Drawing.Size(103, 17);
-            this.allowzerodamageCheckbox.TabIndex = 16;
-            this.allowzerodamageCheckbox.Text = "Allow 0 Damage";
-            this.toolTip1.SetToolTip(this.allowzerodamageCheckbox, "Allow the sprites to do bumper effect just push you back without any damage");
-            this.allowzerodamageCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(146, 154);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "100% - 100%";
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar1.Enabled = false;
-            this.trackBar1.Location = new System.Drawing.Point(27, 148);
-            this.trackBar1.Maximum = 20;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(113, 45);
-            this.trackBar1.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.trackBar1, "Randomize the hp of the enemies by a maximum / minimum percentage");
-            // 
-            // bossdamageCheckbox
-            // 
-            this.bossdamageCheckbox.AutoSize = true;
-            this.bossdamageCheckbox.Location = new System.Drawing.Point(6, 125);
-            this.bossdamageCheckbox.Name = "bossdamageCheckbox";
-            this.bossdamageCheckbox.Size = new System.Drawing.Size(159, 17);
-            this.bossdamageCheckbox.TabIndex = 24;
-            this.bossdamageCheckbox.Text = "Randomize Bosses Damage";
-            this.bossdamageCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(146, 99);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 13);
-            this.label6.TabIndex = 23;
-            this.label6.Text = " 00% - 00%";
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar2.Enabled = false;
-            this.trackBar2.Location = new System.Drawing.Point(27, 97);
-            this.trackBar2.Maximum = 20;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(113, 45);
-            this.trackBar2.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.trackBar2, "Randomize the hp of the enemies by a maximum / minimum percentage");
-            // 
-            // bosshealthCheckbox
-            // 
-            this.bosshealthCheckbox.AutoSize = true;
-            this.bosshealthCheckbox.Location = new System.Drawing.Point(6, 74);
-            this.bosshealthCheckbox.Name = "bosshealthCheckbox";
-            this.bosshealthCheckbox.Size = new System.Drawing.Size(150, 17);
-            this.bosshealthCheckbox.TabIndex = 21;
-            this.bosshealthCheckbox.Text = "Randomize Bosses Health";
-            this.bosshealthCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(146, 46);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Basic";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(24, 30);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(116, 13);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Type of Randomization";
-            // 
-            // trackBar3
-            // 
-            this.trackBar3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar3.Enabled = false;
-            this.trackBar3.Location = new System.Drawing.Point(27, 46);
-            this.trackBar3.Maximum = 2;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(113, 45);
-            this.trackBar3.TabIndex = 18;
-            this.toolTip1.SetToolTip(this.trackBar3, resources.GetString("trackBar3.ToolTip"));
-            // 
-            // bossesCheckbox
-            // 
-            this.bossesCheckbox.AutoSize = true;
-            this.bossesCheckbox.Location = new System.Drawing.Point(6, 6);
-            this.bossesCheckbox.Name = "bossesCheckbox";
-            this.bossesCheckbox.Size = new System.Drawing.Size(116, 17);
-            this.bossesCheckbox.TabIndex = 17;
-            this.bossesCheckbox.Text = "Randomize Bosses";
-            this.bossesCheckbox.UseVisualStyleBackColor = true;
             // 
             // bossBehaviorCheckbox
             // 
@@ -682,6 +546,187 @@
             this.bossBehaviorCheckbox.TabIndex = 27;
             this.bossBehaviorCheckbox.Text = "Randomize Boss Behavior (WIP)";
             this.bossBehaviorCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // bossdamageLabel
+            // 
+            this.bossdamageLabel.AutoSize = true;
+            this.bossdamageLabel.Location = new System.Drawing.Point(146, 154);
+            this.bossdamageLabel.Name = "bossdamageLabel";
+            this.bossdamageLabel.Size = new System.Drawing.Size(68, 13);
+            this.bossdamageLabel.TabIndex = 26;
+            this.bossdamageLabel.Text = "100% - 100%";
+            // 
+            // bossdamageTrackbar
+            // 
+            this.bossdamageTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bossdamageTrackbar.Enabled = false;
+            this.bossdamageTrackbar.Location = new System.Drawing.Point(27, 148);
+            this.bossdamageTrackbar.Maximum = 20;
+            this.bossdamageTrackbar.Name = "bossdamageTrackbar";
+            this.bossdamageTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bossdamageTrackbar.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.bossdamageTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
+            this.bossdamageTrackbar.Scroll += new System.EventHandler(this.bossdamageTrackbar_Scroll);
+            // 
+            // bossdamageCheckbox
+            // 
+            this.bossdamageCheckbox.AutoSize = true;
+            this.bossdamageCheckbox.Location = new System.Drawing.Point(6, 125);
+            this.bossdamageCheckbox.Name = "bossdamageCheckbox";
+            this.bossdamageCheckbox.Size = new System.Drawing.Size(159, 17);
+            this.bossdamageCheckbox.TabIndex = 24;
+            this.bossdamageCheckbox.Text = "Randomize Bosses Damage";
+            this.bossdamageCheckbox.UseVisualStyleBackColor = true;
+            this.bossdamageCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            // 
+            // bosshealthLabel
+            // 
+            this.bosshealthLabel.AutoSize = true;
+            this.bosshealthLabel.Location = new System.Drawing.Point(146, 99);
+            this.bosshealthLabel.Name = "bosshealthLabel";
+            this.bosshealthLabel.Size = new System.Drawing.Size(71, 13);
+            this.bosshealthLabel.TabIndex = 23;
+            this.bosshealthLabel.Text = " 100% - 100%";
+            // 
+            // bosshealthTrackbar
+            // 
+            this.bosshealthTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bosshealthTrackbar.Enabled = false;
+            this.bosshealthTrackbar.Location = new System.Drawing.Point(27, 97);
+            this.bosshealthTrackbar.Maximum = 20;
+            this.bosshealthTrackbar.Name = "bosshealthTrackbar";
+            this.bosshealthTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bosshealthTrackbar.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.bosshealthTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
+            this.bosshealthTrackbar.Scroll += new System.EventHandler(this.bosshealthTrackbar_Scroll);
+            // 
+            // bosshealthCheckbox
+            // 
+            this.bosshealthCheckbox.AutoSize = true;
+            this.bosshealthCheckbox.Location = new System.Drawing.Point(6, 74);
+            this.bosshealthCheckbox.Name = "bosshealthCheckbox";
+            this.bosshealthCheckbox.Size = new System.Drawing.Size(150, 17);
+            this.bosshealthCheckbox.TabIndex = 21;
+            this.bosshealthCheckbox.Text = "Randomize Bosses Health";
+            this.bosshealthCheckbox.UseVisualStyleBackColor = true;
+            this.bosshealthCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            // 
+            // typebossLabel
+            // 
+            this.typebossLabel.AutoSize = true;
+            this.typebossLabel.Location = new System.Drawing.Point(146, 46);
+            this.typebossLabel.Name = "typebossLabel";
+            this.typebossLabel.Size = new System.Drawing.Size(33, 13);
+            this.typebossLabel.TabIndex = 20;
+            this.typebossLabel.Text = "Basic";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(24, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 13);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Type of Randomization";
+            // 
+            // bosstypesTrackbar
+            // 
+            this.bosstypesTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bosstypesTrackbar.Enabled = false;
+            this.bosstypesTrackbar.Location = new System.Drawing.Point(27, 46);
+            this.bosstypesTrackbar.Maximum = 2;
+            this.bosstypesTrackbar.Name = "bosstypesTrackbar";
+            this.bosstypesTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bosstypesTrackbar.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.bosstypesTrackbar, resources.GetString("bosstypesTrackbar.ToolTip"));
+            this.bosstypesTrackbar.Scroll += new System.EventHandler(this.bosstypesTrackbar_Scroll);
+            // 
+            // bossesCheckbox
+            // 
+            this.bossesCheckbox.AutoSize = true;
+            this.bossesCheckbox.Location = new System.Drawing.Point(6, 6);
+            this.bossesCheckbox.Name = "bossesCheckbox";
+            this.bossesCheckbox.Size = new System.Drawing.Size(116, 17);
+            this.bossesCheckbox.TabIndex = 17;
+            this.bossesCheckbox.Text = "Randomize Bosses";
+            this.bossesCheckbox.UseVisualStyleBackColor = true;
+            this.bossesCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.blackoutPaletteCheckbox);
+            this.tabPage3.Controls.Add(this.spriteadvancedPaletteCheckbox);
+            this.tabPage3.Controls.Add(this.spritebasicPaletteCheckbox);
+            this.tabPage3.Controls.Add(this.overworldPaletteCheckbox);
+            this.tabPage3.Controls.Add(this.dungeonPaletteCheckbox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(458, 292);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Palettes";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.checkedListBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(458, 292);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Extra";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dungeonPaletteCheckbox
+            // 
+            this.dungeonPaletteCheckbox.AutoSize = true;
+            this.dungeonPaletteCheckbox.Location = new System.Drawing.Point(3, 4);
+            this.dungeonPaletteCheckbox.Name = "dungeonPaletteCheckbox";
+            this.dungeonPaletteCheckbox.Size = new System.Drawing.Size(172, 17);
+            this.dungeonPaletteCheckbox.TabIndex = 0;
+            this.dungeonPaletteCheckbox.Text = "Randomize Dungeons Palettes";
+            this.dungeonPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // overworldPaletteCheckbox
+            // 
+            this.overworldPaletteCheckbox.AutoSize = true;
+            this.overworldPaletteCheckbox.Location = new System.Drawing.Point(3, 49);
+            this.overworldPaletteCheckbox.Name = "overworldPaletteCheckbox";
+            this.overworldPaletteCheckbox.Size = new System.Drawing.Size(171, 17);
+            this.overworldPaletteCheckbox.TabIndex = 1;
+            this.overworldPaletteCheckbox.Text = "Randomize Overworld Palettes";
+            this.overworldPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // spritebasicPaletteCheckbox
+            // 
+            this.spritebasicPaletteCheckbox.AutoSize = true;
+            this.spritebasicPaletteCheckbox.Location = new System.Drawing.Point(3, 72);
+            this.spritebasicPaletteCheckbox.Name = "spritebasicPaletteCheckbox";
+            this.spritebasicPaletteCheckbox.Size = new System.Drawing.Size(185, 17);
+            this.spritebasicPaletteCheckbox.TabIndex = 2;
+            this.spritebasicPaletteCheckbox.Text = "Randomize Sprite Palettes (Basic)";
+            this.spritebasicPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // spriteadvancedPaletteCheckbox
+            // 
+            this.spriteadvancedPaletteCheckbox.AutoSize = true;
+            this.spriteadvancedPaletteCheckbox.Enabled = false;
+            this.spriteadvancedPaletteCheckbox.Location = new System.Drawing.Point(25, 95);
+            this.spriteadvancedPaletteCheckbox.Name = "spriteadvancedPaletteCheckbox";
+            this.spriteadvancedPaletteCheckbox.Size = new System.Drawing.Size(217, 17);
+            this.spriteadvancedPaletteCheckbox.TabIndex = 3;
+            this.spriteadvancedPaletteCheckbox.Text = "Advanced Sprite Palettes (Can be awful)";
+            this.spriteadvancedPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // blackoutPaletteCheckbox
+            // 
+            this.blackoutPaletteCheckbox.AutoSize = true;
+            this.blackoutPaletteCheckbox.Enabled = false;
+            this.blackoutPaletteCheckbox.Location = new System.Drawing.Point(25, 27);
+            this.blackoutPaletteCheckbox.Name = "blackoutPaletteCheckbox";
+            this.blackoutPaletteCheckbox.Size = new System.Drawing.Size(214, 17);
+            this.blackoutPaletteCheckbox.TabIndex = 4;
+            this.blackoutPaletteCheckbox.Text = "Set all palette to black (Black out mode)";
+            this.blackoutPaletteCheckbox.UseVisualStyleBackColor = true;
             // 
             // EnemizerForm
             // 
@@ -705,7 +750,6 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.descriptionLabel);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button1);
             this.Name = "EnemizerForm";
             this.Text = "Enemizer 6.0";
@@ -715,14 +759,16 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spawnrateTrackbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.enemiesDamageTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemiesHealthTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeTrackbar)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossdamageTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bosshealthTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bosstypesTrackbar)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -763,8 +809,6 @@
         private System.Windows.Forms.TrackBar enemiesHealthTrackbar;
         private System.Windows.Forms.CheckBox enemiesHealthCheckbox;
         private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.Label damageLabel;
-        private System.Windows.Forms.TrackBar enemiesDamageTrackbar;
         private System.Windows.Forms.CheckBox enemiesDamageCheckbox;
         private System.Windows.Forms.CheckBox enemiesAbsorbableCheckbox;
         private System.Windows.Forms.Label spawnrateLabel;
@@ -772,17 +816,22 @@
         private System.Windows.Forms.TrackBar spawnrateTrackbar;
         private System.Windows.Forms.CheckedListBox absorbableChecklist;
         private System.Windows.Forms.CheckBox allowzerodamageCheckbox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label bossdamageLabel;
+        private System.Windows.Forms.TrackBar bossdamageTrackbar;
         private System.Windows.Forms.CheckBox bossdamageCheckbox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label bosshealthLabel;
+        private System.Windows.Forms.TrackBar bosshealthTrackbar;
         private System.Windows.Forms.CheckBox bosshealthCheckbox;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label typebossLabel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar bosstypesTrackbar;
         private System.Windows.Forms.CheckBox bossesCheckbox;
         private System.Windows.Forms.CheckBox bossBehaviorCheckbox;
+        private System.Windows.Forms.CheckBox blackoutPaletteCheckbox;
+        private System.Windows.Forms.CheckBox spriteadvancedPaletteCheckbox;
+        private System.Windows.Forms.CheckBox spritebasicPaletteCheckbox;
+        private System.Windows.Forms.CheckBox overworldPaletteCheckbox;
+        private System.Windows.Forms.CheckBox dungeonPaletteCheckbox;
     }
 }
 

@@ -14,6 +14,13 @@ GFX_Kholdstare_Shell:
 incbin shell.gfx
 warnpc $24C001  ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
 
+;Move rooms header at position $248090 : 120090
+incsrc headers.asm
+
+;org $06F3F6 ;change sprites damage to go up to 128 instead of using 8 damage classes
+;original code : LDA $0CD2, X : AND.b #$0F : STA $00 : ASL A : ADC $00 : ADD $7EF35B : TAY
+;JSL new_sprites_damage
+;NOP #$12 ; Remove the 12 bytes remainings
 
 ;Gibdo key drop hardcoded in skullwoods to fix problems
 ;some bosses aredropping a key when there's a key drop avaiable in
@@ -275,4 +282,18 @@ new_trinexx_code:
     LDA.b #$03 : STA $0DC0, X
     JSL WriteGfxBlock;
     RTL
+}
+
+new_sprites_damage:
+{
+	LDA $7EF35B : STA $00 ; set armor value in $00
+	LDA $0CD2, X : AND.b #$7F ;load damage the sprite is doing
+	CPY $00 : BEQ .no_mail
+	.have_mail
+		LSR : DEY ;decrease A by half 
+	CPY $00 : BNE .have_mail ;while $00 > 0 then loop back and decrease damage by half
+		.no_mail
+	TAY
+	STA $00 : STA $0373
+	RTL
 }

@@ -35,8 +35,6 @@ namespace Enemizer
                         Console.WriteLine("Required Wall Master");
                     }
 
-
-
                     if (canonRoom.Contains(room))//if the current room is an Moving wall canon room
                     {
                         if (random_sprite_group[sprite_group][0] != 47) { continue; }
