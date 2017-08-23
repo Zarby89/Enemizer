@@ -178,12 +178,11 @@ namespace EnemizerLibrary
 
             //flags = 1;
             //Do the randomization based on flags!
-            bool absorbable = false;
-            bool bossmadness = false;
+            bool absorbable = optionFlags.EnemiesAbsorbable;
+            bool bossmadness = optionFlags.BossMadness;
             //flag[4] = absorbable%
             //flag[5] = absorbable_items (bitwise)
-            if ((flags[3] != 0)) { absorbable = true; } //check if absorbable is on and set it on or off
-            if ((flags[4]) == 2) { bossmadness = true; }
+
                 
             /*------------------
             |      Flags Informations        
@@ -223,7 +222,11 @@ namespace EnemizerLibrary
             }
             //if (((flags[2]) == 0)) { Set_Sprites_ZeroHP(); } // flags[2] is optionFlags.RandomizeEnemyDamage
 
-            if ((flags[5]) != -1) { Randomize_Bosses(bossmadness); };
+            if (optionFlags.RandomizeBosses)
+            {
+                Randomize_Bosses(bossmadness);
+            }
+            
             //if ((flags & 0x4000) == 0x4000)
             //{
                 randomizePots(); //default on for now

@@ -51,6 +51,7 @@
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />
     <Compile Include="DungeonsSpritesRandomization.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="OptionFlags.cs" />
     <Compile Include="OverworldSpritesArea.cs" />
     <Compile Include="OverworldSpritesRandomization.cs" />

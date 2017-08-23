@@ -378,6 +378,7 @@
             this.absorbableChecklist.Name = "absorbableChecklist";
             this.absorbableChecklist.Size = new System.Drawing.Size(140, 214);
             this.absorbableChecklist.TabIndex = 12;
+            this.absorbableChecklist.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.absorbableChecklist_ItemCheck);
             // 
             // spawnrateLabel
             // 
