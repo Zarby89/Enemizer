@@ -12,7 +12,7 @@ namespace Enemizer
     public partial class Randomization
     {
         Random rand;
-        byte[] ROM_DATA;
+        RomData ROM_DATA;
         int[] flags;
         //194 for firesnake
         //All the sprites address that are dropping keys //check 192,193,
@@ -88,7 +88,7 @@ namespace Enemizer
             //Save the ROM as a new file instead of overwriting the original one
             //Save the flags used in a file to remember the last flags that were used
             this.flags = flags;
-            this.ROM_DATA = ROM_DATA;
+            this.ROM_DATA = new RomData(ROM_DATA);
             this.spoiler = spoiler;
             rand = new Random(seed);
             if (skin != "Default")
@@ -1286,9 +1286,9 @@ namespace Enemizer
         {
             int addr = pctosnes(pos);
 
-            ROM_DATA[2] = ((byte)addr);
-            ROM_DATA[1] = ((byte)(addr >> 8));
-            ROM_DATA[0] = ((byte)(addr >> 16));
+            //ROM_DATA[2] = ((byte)addr);
+            //ROM_DATA[1] = ((byte)(addr >> 8));
+            //ROM_DATA[0] = ((byte)(addr >> 16));
 
             return new byte[] { (byte)(addr >> 16), ((byte)(addr >> 8)), ((byte)addr) };
         }
