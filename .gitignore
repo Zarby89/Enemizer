@@ -2,3 +2,5 @@ obj/
 bin/
 .vs/
 *.sfc
+[Dd]ebug
+[Rr]elease
