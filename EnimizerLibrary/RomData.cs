@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Enemizer
+namespace EnemizerLibrary
 {
     public class RomData
     {
