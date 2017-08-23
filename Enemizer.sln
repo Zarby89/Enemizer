@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enemizer", "EnimizerGui\Enemizer.csproj", "{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enemizer", "EnemizerGui\Enemizer.csproj", "{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerLibrary", "EnimizerLibrary\EnemizerLibrary.csproj", "{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerLibrary", "EnemizerLibrary\EnemizerLibrary.csproj", "{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{4D330833-32B5-47CE-B135-C56030F588A4}"
 	ProjectSection(SolutionItems) = preProject

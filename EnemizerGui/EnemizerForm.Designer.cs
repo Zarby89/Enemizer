@@ -57,7 +57,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.spawnrateTrackbar = new System.Windows.Forms.TrackBar();
             this.enemiesAbsorbableCheckbox = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.easyModeEscapeCheckbox = new System.Windows.Forms.CheckBox();
             this.enemiesDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.healthLabel = new System.Windows.Forms.Label();
             this.enemiesHealthTrackbar = new System.Windows.Forms.TrackBar();
@@ -79,13 +79,13 @@
             this.bosstypesTrackbar = new System.Windows.Forms.TrackBar();
             this.bossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.blackoutPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.spriteadvancedPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.spritebasicPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.overworldPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.dungeonPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.dungeonPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.overworldPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.spritebasicPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.spriteadvancedPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.blackoutPaletteCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -326,7 +326,7 @@
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.spawnrateTrackbar);
             this.tabPage1.Controls.Add(this.enemiesAbsorbableCheckbox);
-            this.tabPage1.Controls.Add(this.checkBox5);
+            this.tabPage1.Controls.Add(this.easyModeEscapeCheckbox);
             this.tabPage1.Controls.Add(this.enemiesDamageCheckbox);
             this.tabPage1.Controls.Add(this.healthLabel);
             this.tabPage1.Controls.Add(this.enemiesHealthTrackbar);
@@ -420,17 +420,17 @@
             this.enemiesAbsorbableCheckbox.UseVisualStyleBackColor = true;
             this.enemiesAbsorbableCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
             // 
-            // checkBox5
+            // easyModeEscapeCheckbox
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Enabled = false;
-            this.checkBox5.Location = new System.Drawing.Point(6, 271);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(148, 17);
-            this.checkBox5.TabIndex = 10;
-            this.checkBox5.Text = "Easy Mode Escape (WIP)";
-            this.toolTip1.SetToolTip(this.checkBox5, "No \"Unfair\" enemies will spawn during the escape\r\nfrom link\'s house to sanctuary");
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.easyModeEscapeCheckbox.AutoSize = true;
+            this.easyModeEscapeCheckbox.Enabled = false;
+            this.easyModeEscapeCheckbox.Location = new System.Drawing.Point(6, 271);
+            this.easyModeEscapeCheckbox.Name = "easyModeEscapeCheckbox";
+            this.easyModeEscapeCheckbox.Size = new System.Drawing.Size(148, 17);
+            this.easyModeEscapeCheckbox.TabIndex = 10;
+            this.easyModeEscapeCheckbox.Text = "Easy Mode Escape (WIP)";
+            this.toolTip1.SetToolTip(this.easyModeEscapeCheckbox, "No \"Unfair\" enemies will spawn during the escape\r\nfrom link\'s house to sanctuary");
+            this.easyModeEscapeCheckbox.UseVisualStyleBackColor = true;
             // 
             // enemiesDamageCheckbox
             // 
@@ -666,45 +666,16 @@
             this.tabPage3.Text = "Palettes";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // blackoutPaletteCheckbox
             // 
-            this.tabPage4.Controls.Add(this.checkedListBox1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(458, 292);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Extra";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // dungeonPaletteCheckbox
-            // 
-            this.dungeonPaletteCheckbox.AutoSize = true;
-            this.dungeonPaletteCheckbox.Location = new System.Drawing.Point(3, 4);
-            this.dungeonPaletteCheckbox.Name = "dungeonPaletteCheckbox";
-            this.dungeonPaletteCheckbox.Size = new System.Drawing.Size(172, 17);
-            this.dungeonPaletteCheckbox.TabIndex = 0;
-            this.dungeonPaletteCheckbox.Text = "Randomize Dungeons Palettes";
-            this.dungeonPaletteCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // overworldPaletteCheckbox
-            // 
-            this.overworldPaletteCheckbox.AutoSize = true;
-            this.overworldPaletteCheckbox.Location = new System.Drawing.Point(3, 49);
-            this.overworldPaletteCheckbox.Name = "overworldPaletteCheckbox";
-            this.overworldPaletteCheckbox.Size = new System.Drawing.Size(171, 17);
-            this.overworldPaletteCheckbox.TabIndex = 1;
-            this.overworldPaletteCheckbox.Text = "Randomize Overworld Palettes";
-            this.overworldPaletteCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // spritebasicPaletteCheckbox
-            // 
-            this.spritebasicPaletteCheckbox.AutoSize = true;
-            this.spritebasicPaletteCheckbox.Location = new System.Drawing.Point(3, 72);
-            this.spritebasicPaletteCheckbox.Name = "spritebasicPaletteCheckbox";
-            this.spritebasicPaletteCheckbox.Size = new System.Drawing.Size(185, 17);
-            this.spritebasicPaletteCheckbox.TabIndex = 2;
-            this.spritebasicPaletteCheckbox.Text = "Randomize Sprite Palettes (Basic)";
-            this.spritebasicPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.blackoutPaletteCheckbox.AutoSize = true;
+            this.blackoutPaletteCheckbox.Enabled = false;
+            this.blackoutPaletteCheckbox.Location = new System.Drawing.Point(25, 27);
+            this.blackoutPaletteCheckbox.Name = "blackoutPaletteCheckbox";
+            this.blackoutPaletteCheckbox.Size = new System.Drawing.Size(214, 17);
+            this.blackoutPaletteCheckbox.TabIndex = 4;
+            this.blackoutPaletteCheckbox.Text = "Set all palette to black (Black out mode)";
+            this.blackoutPaletteCheckbox.UseVisualStyleBackColor = true;
             // 
             // spriteadvancedPaletteCheckbox
             // 
@@ -717,16 +688,45 @@
             this.spriteadvancedPaletteCheckbox.Text = "Advanced Sprite Palettes (Can be awful)";
             this.spriteadvancedPaletteCheckbox.UseVisualStyleBackColor = true;
             // 
-            // blackoutPaletteCheckbox
+            // spritebasicPaletteCheckbox
             // 
-            this.blackoutPaletteCheckbox.AutoSize = true;
-            this.blackoutPaletteCheckbox.Enabled = false;
-            this.blackoutPaletteCheckbox.Location = new System.Drawing.Point(25, 27);
-            this.blackoutPaletteCheckbox.Name = "blackoutPaletteCheckbox";
-            this.blackoutPaletteCheckbox.Size = new System.Drawing.Size(214, 17);
-            this.blackoutPaletteCheckbox.TabIndex = 4;
-            this.blackoutPaletteCheckbox.Text = "Set all palette to black (Black out mode)";
-            this.blackoutPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.spritebasicPaletteCheckbox.AutoSize = true;
+            this.spritebasicPaletteCheckbox.Location = new System.Drawing.Point(3, 72);
+            this.spritebasicPaletteCheckbox.Name = "spritebasicPaletteCheckbox";
+            this.spritebasicPaletteCheckbox.Size = new System.Drawing.Size(185, 17);
+            this.spritebasicPaletteCheckbox.TabIndex = 2;
+            this.spritebasicPaletteCheckbox.Text = "Randomize Sprite Palettes (Basic)";
+            this.spritebasicPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // overworldPaletteCheckbox
+            // 
+            this.overworldPaletteCheckbox.AutoSize = true;
+            this.overworldPaletteCheckbox.Location = new System.Drawing.Point(3, 49);
+            this.overworldPaletteCheckbox.Name = "overworldPaletteCheckbox";
+            this.overworldPaletteCheckbox.Size = new System.Drawing.Size(171, 17);
+            this.overworldPaletteCheckbox.TabIndex = 1;
+            this.overworldPaletteCheckbox.Text = "Randomize Overworld Palettes";
+            this.overworldPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // dungeonPaletteCheckbox
+            // 
+            this.dungeonPaletteCheckbox.AutoSize = true;
+            this.dungeonPaletteCheckbox.Location = new System.Drawing.Point(3, 4);
+            this.dungeonPaletteCheckbox.Name = "dungeonPaletteCheckbox";
+            this.dungeonPaletteCheckbox.Size = new System.Drawing.Size(172, 17);
+            this.dungeonPaletteCheckbox.TabIndex = 0;
+            this.dungeonPaletteCheckbox.Text = "Randomize Dungeons Palettes";
+            this.dungeonPaletteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.checkedListBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(458, 292);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Extra";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // EnemizerForm
             // 
@@ -808,7 +808,7 @@
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.TrackBar enemiesHealthTrackbar;
         private System.Windows.Forms.CheckBox enemiesHealthCheckbox;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox easyModeEscapeCheckbox;
         private System.Windows.Forms.CheckBox enemiesDamageCheckbox;
         private System.Windows.Forms.CheckBox enemiesAbsorbableCheckbox;
         private System.Windows.Forms.Label spawnrateLabel;

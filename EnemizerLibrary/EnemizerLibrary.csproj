@@ -7,8 +7,8 @@
     <ProjectGuid>{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EnimizerLibrary</RootNamespace>
-    <AssemblyName>EnimizerLibrary</AssemblyName>
+    <RootNamespace>EnemizerLibrary</RootNamespace>
+    <AssemblyName>EnemizerLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -51,6 +51,7 @@
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />
     <Compile Include="DungeonsSpritesRandomization.cs" />
+    <Compile Include="OptionFlags.cs" />
     <Compile Include="OverworldSpritesArea.cs" />
     <Compile Include="OverworldSpritesRandomization.cs" />
     <Compile Include="Patch.cs" />

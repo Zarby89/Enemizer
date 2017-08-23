@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public partial class Randomization
+    public static class OverworldSpriteRandomizer
     {
-        public void Randomize_Overworld_Sprite(bool absorbable)
+        public static void RandomizeOverworldSprite(Random rand, RomData rom, int[][] overworld_sprites, byte[][] random_sprite_group_ow, byte[][] subset_gfx_sprites, byte[] absorbable_sprites, bool absorbable)
         {
             int index = 0;
 
-            ROM_DATA[0x04CF4F] = 0x10; //move bird from tree
+            rom[0x04CF4F] = 0x10; //move bird from tree
 
 
             for (int i = 0; i < 208; i++)
@@ -91,25 +91,25 @@ namespace EnemizerLibrary
                             {
                                 byte selected_sprite = sprites[rand.Next(sprites.Count)];
                                 //NEED TO ADD CONDITION FOR WATER/REMOVED SPRITES !
-                                ROM_DATA[overworld_sprites[i][j]] = selected_sprite;
-                                //ROM_DATA[map[i] - 1] = (byte)(ROM_DATA[room_sprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
+                                rom[overworld_sprites[i][j]] = selected_sprite;
+                                //rom[map[i] - 1] = (byte)(rom[room_sprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
 
                             }
 
                             if (i < 0x40)
                             {
                                 //0x07AC1
-                                ROM_DATA[0x07A81 + i] = sprite_group; //set the room header sprite gfx
+                                rom[0x07A81 + i] = sprite_group; //set the room header sprite gfx
 
                             }
                             else if (i >= 0x40 && i <= 0x80)
                             {
-                                ROM_DATA[0x07B01 + (i - 0x40)] = sprite_group; //set the room header sprite gfx
+                                rom[0x07B01 + (i - 0x40)] = sprite_group; //set the room header sprite gfx
 
                             }
                             else if (i > 0x80)
                             {
-                                ROM_DATA[0x07AC1 + (i - 0x90)] = sprite_group;//set the room header sprite gfx
+                                rom[0x07AC1 + (i - 0x90)] = sprite_group;//set the room header sprite gfx
                             }
                             break; //if everything is fine in that room then go to the next one
                         }

@@ -81,7 +81,7 @@ namespace EnemizerLibrary
         StreamWriter spoilerfile;
         bool spoiler = false;
 
-        public Randomization(int seed, int[] flags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
+        public Randomization(int seed, OptionFlags optionFlags, int[] flags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]
@@ -159,7 +159,7 @@ namespace EnemizerLibrary
 
             create_subset_gfx();
             //dungeons
-            if (((flags[0]) != -1)) // random sprites dungeons
+            if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
                 
                 create_sprite_group();
@@ -168,7 +168,7 @@ namespace EnemizerLibrary
             }
 
             //random sprite overworld
-            if (((flags[0]) != -1))
+            if (optionFlags.RandomizeEnemies)
             {
                 create_sprite_overworld_group();
                 patch_sprite_group_ow();
@@ -201,12 +201,28 @@ namespace EnemizerLibrary
              */
              create_dungeons_properties();
 
-            if(((flags[0]) != -1))  { Randomize_Dungeons_Sprite(absorbable); }
+            if(optionFlags.RandomizeEnemies)
+            {
+                Randomize_Dungeons_Sprite(absorbable);
+            }
 
-            if (((flags[0]) != -1)) { Randomize_Overworld_Sprite(absorbable); } //WIP
-            if (((flags[1]) != -1)) { Randomize_Sprites_HP(); }
-            if (((flags[2]) != -1)) { Randomize_Sprites_DMG(); }
-            //if (((flags[2]) == 0)) { Set_Sprites_ZeroHP(); }
+            if (optionFlags.RandomizeEnemies)
+            {
+                //WIP
+                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, this.absorbable_sprites, absorbable);
+            }
+
+            if (optionFlags.RandomizeEnemyHealthRange)
+            {
+                Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthRangeAmount);
+            }
+
+            if (optionFlags.RandomizeEnemyDamage)
+            {
+                Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
+            }
+            //if (((flags[2]) == 0)) { Set_Sprites_ZeroHP(); } // flags[2] is optionFlags.RandomizeEnemyDamage
+
             if ((flags[5]) != -1) { Randomize_Bosses(bossmadness); };
             //if ((flags & 0x4000) == 0x4000)
             //{
@@ -1056,7 +1072,7 @@ namespace EnemizerLibrary
 
         }
 
-        public void Randomize_Sprites_HP()
+        public void Randomize_Sprites_HP(int rangeValue)
         {
             for (int j = 0; j < 0xF3; j++)
             {
@@ -1066,7 +1082,7 @@ namespace EnemizerLibrary
                         && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
                        && j != 0x8D && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                     {
-                        int new_hp = ROM_DATA[0x6B173 + j] + rand.Next(-flags[1], flags[1]);
+                        int new_hp = ROM_DATA[0x6B173 + j] + rand.Next(-rangeValue, rangeValue);
                         if (new_hp >= 0xFF)
                         {
                             new_hp = 0xFF;
@@ -1097,7 +1113,7 @@ namespace EnemizerLibrary
             }
         }
         byte[] original_damage = new byte[] {2,4,0,8,8,16,32,32,24,64, 32, 32, 32, 32, 32, 32 };
-        public void Randomize_Sprites_DMG()
+        public void Randomize_Sprites_DMG(bool allowZeroDamage)
         {
             for (int j = 0; j < 0xF3; j++)
             {

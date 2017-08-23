@@ -168,7 +168,7 @@
       <Project>{d91e0dd6-af9f-4293-a2e0-d27c508c3883}</Project>
       <Name>Assembly</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EnimizerLibrary\EnemizerLibrary.csproj">
+    <ProjectReference Include="..\EnemizerLibrary\EnemizerLibrary.csproj">
       <Project>{e6d1c409-e9de-42b9-bd0b-b6f07eac31b4}</Project>
       <Name>EnemizerLibrary</Name>
     </ProjectReference>
