@@ -107,11 +107,11 @@ namespace EnemizerLibrary
                     fsx.Close();
                     for (int i = 0; i < 0x7000; i++)
                     {
-                        ROM_DATA[0x80000 + i] = skin_data[i];
+                        this.ROM_DATA[0x80000 + i] = skin_data[i];
                     }
                     for (int i = 0; i < 0x78; i++)
                     {
-                        ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
+                        this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
                     }
 
                 }
@@ -235,13 +235,13 @@ namespace EnemizerLibrary
             }*/
 
             //Remove Trinexx Ice Floor : 
-            ROM_DATA[0x04B37E] = 0xEA;
-            ROM_DATA[0x04B37E+1] = 0xEA;
-            ROM_DATA[0x04B37E+2] = 0xEA;
-            ROM_DATA[0x04B37E+3] = 0xEA;
-            /*ROM_DATA[0x5033 + 0x5E] = 0x24;
-            ROM_DATA[0x5112 + 0x5E] = 0x93;
-            ROM_DATA[0x51F1 + 0x5E] = 0x57;
+            this.ROM_DATA[0x04B37E] = 0xEA;
+            this.ROM_DATA[0x04B37E+1] = 0xEA;
+            this.ROM_DATA[0x04B37E+2] = 0xEA;
+            this.ROM_DATA[0x04B37E+3] = 0xEA;
+            /*this.ROM_DATA[0x5033 + 0x5E] = 0x24;
+            this.ROM_DATA[0x5112 + 0x5E] = 0x93;
+            this.ROM_DATA[0x51F1 + 0x5E] = 0x57;
 
             FileStream fsxx = new FileStream("weapons/mace.bin", FileMode.Open, FileAccess.Read);
             byte[] weapon_data = new byte[fsxx.Length];
@@ -252,9 +252,13 @@ namespace EnemizerLibrary
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
+            // patch in our assembly binary data
+            Patch patch = new Patch("patchData.json");
+            patch.PatchRom(this.ROM_DATA);
+
             string fileName = "Enemizer " + Version.CurrentVersion + " - " + Path.GetFileName(filename);
             FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-            fs.Write(ROM_DATA, 0, ROM_DATA.Length);
+            this.ROM_DATA.WriteRom(fs);
             fs.Close();
 
             MessageBox.Show("Enemizer " + Version.CurrentVersion + " - " + Path.GetFileName(filename) + " Has been created in the enemizer folder !");
