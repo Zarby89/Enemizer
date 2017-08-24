@@ -9,33 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using EnemizerLibrary;
+using Newtonsoft.Json;
 
 namespace Enemizer
 {
     public partial class EnemizerForm : Form
     {
+        readonly string configFilename = "setting.cfg";
+        EnemizerConfig config = new EnemizerConfig();
         OptionFlags optionFlags = new OptionFlags();
+        Random rand = new Random();
 
         public EnemizerForm()
         {
             InitializeComponent();
         }
 
-        public class files_names
-        {
-            public string name = "";
-            public string file = "";
-            public files_names(string name, string file)
-            {
-                this.name = name;
-                this.file = file;
-            }
-            public override string ToString()
-            {
-                return name;
-            }
-
-        }
         Color[] palette = new Color[17];
         Color[] palette2 = new Color[17];
         Color[] palette3 = new Color[17];
@@ -70,8 +59,8 @@ namespace Enemizer
                 updateGraphic(i);
             }
         }
-        byte[,] imgdata = new byte[128, 32];
-        
+
+        byte[,] imgdata = new byte[128, 32];        
         byte[] data;
         int[] positions = new int[] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
         int hexOffset = 0x0;
@@ -161,17 +150,12 @@ namespace Enemizer
             return temp_array;
         }
 
-        //
-
-
-
-
         Bitmap loadedblocks = new Bitmap(128, 32);
         public void updateGraphic(int pos)
         {
-            pictureBox1.Image = new Bitmap(128, 48);
+            linkSpritePicturebox.Image = new Bitmap(128, 48);
             loadedblocks = new Bitmap(128, 32);
-            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            Graphics g = Graphics.FromImage(linkSpritePicturebox.Image);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
 
@@ -234,9 +218,9 @@ namespace Enemizer
 
 
 
-            g.Clear(pictureBox1.BackColor);
+            g.Clear(linkSpritePicturebox.BackColor);
             g.DrawImage(loadedblocks,new Rectangle(2,0,128,48), new Rectangle(0, 0, 64, 24), GraphicsUnit.Pixel);
-            pictureBox1.Refresh();
+            linkSpritePicturebox.Refresh();
         }
 
 
@@ -244,26 +228,22 @@ namespace Enemizer
         {
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
             this.Text = "Enemizer " + EnemizerLibrary.Version.CurrentVersion;
-            comboBox1.Items.Add(new files_names("Default", "Default"));
-            comboBox1.Items.Add(new files_names("Random", "Random"));
-            comboBox1.SelectedIndex = 0;
+            linkSpriteCombobox.Items.Add(new files_names("Default", "Default"));
+            linkSpriteCombobox.Items.Add(new files_names("Random", "Random"));
+            linkSpriteCombobox.SelectedIndex = 0;
 
             foreach (string f in Directory.GetFiles("sprites\\"))
             {
                 files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
-                comboBox1.Items.Add(item);
+                linkSpriteCombobox.Items.Add(item);
             }
-            if (File.Exists("setting.cfg"))
-            {
-                bool checkb = false;
-                BinaryReader fw = new BinaryReader(new FileStream("setting.cfg", FileMode.Open, FileAccess.Read));
-                checkb = fw.ReadBoolean();
-                flags = fw.ReadInt32();
-                fw.Close();
-                update_flags();
-                checkBox2.Checked = checkb;
 
-                if (checkb)
+            if (LoadConfig())
+            {
+                update_flags();
+                checkForUpdatesCheckbox.Checked = config.CheckForUpdates;
+
+                if (config.CheckForUpdates)
                 {
                     if (EnemizerLibrary.Version.CheckUpdate() == true)
                     {
@@ -276,65 +256,337 @@ namespace Enemizer
                 }
 
             }
-
-
-        }
-        Random rand = new Random();
-        private void button1_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-
         }
 
-       // private void checkboxes_Change(object sender,)
-
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private bool LoadConfig()
         {
-            FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
-            byte[] rom_data = new byte[fs.Length];
-            fs.Read(rom_data, 0, (int)fs.Length);
-            fs.Close();
-
-            /*int seed = 0;
-            if (textBox1.Text == "")
+            try
             {
-                seed = rand.Next();
+                if (File.Exists(configFilename))
+                {
+                    config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFilename));
+                    if(config != null)
+                    {
+                        randomizeBossesCheckbox.Checked = config.OptionFlags.RandomizeBosses;
+
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                // invalid file
+                MessageBox.Show("Invalid setting file. Loading defaults.");
+            }
+
+            config = new EnemizerConfig();
+            return false;
+        }
+
+        private void SaveConfig()
+        {
+            var configJson = JsonConvert.SerializeObject(config);
+            File.WriteAllText("setting.cfg", configJson);
+        }
+
+
+        public void update_flags()
+        {
+            // TODO: update optionFlags
+
+            //int flagsText = 0;
+            //for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
+            //{
+            //    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Unchecked);
+            //    if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
+            //    {
+            //        extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
+
+            //    }
+            //}
+            //flags = flagsText;
+        }
+
+
+        /*
+         * Main form
+         */
+
+        private void checkForUpdatesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.CheckForUpdates = checkForUpdatesCheckbox.Checked;
+            SaveConfig();
+        }
+
+        private void checkForUpdatesButton_Click(object sender, EventArgs e)
+        {
+            if (EnemizerLibrary.Version.CheckUpdate() == true)
+            {
+                //update
+                var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
+                if (window == DialogResult.Yes)
+                {
+                    // TODO: is this really what we want to do?
+                    Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer/");
+                }
             }
             else
             {
-                seed = int.Parse(textBox1.Text);
-            }*/
-
-            int[] flags_data = new int[8];
-
-
-            
-            BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
-            fw.Write((bool)checkBox2.Checked);
-            fw.Write((int)flags);
-            fw.Close();
-            Randomization randomize = new Randomization(rand.Next(), optionFlags, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked, linkPaletteCheckbox.Checked);
-        }
-        int flags = 0;
-        int[] flags_setter = new int[16] { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400,0x800,0x1000,0x2000,0x4000 };
-        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-
-        }
-
-        private void checkedListBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            flags = 0;
-            for (int i = 0; i < extraSettingsCheckedList.Items.Count; i++)
-            {
-                if (extraSettingsCheckedList.GetItemCheckState(i) == CheckState.Checked)
-                {
-                    flags += flags_setter[i + 1];
-                }
+                MessageBox.Show("No update available");
+                //noupdate
             }
+        }
+
+        private void linkSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (linkSpriteCombobox.SelectedIndex > 1)
+            {
+                FileStream fs = new FileStream((linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString(), FileMode.Open, FileAccess.Read);
+                data = new byte[fs.Length];
+                fs.Read(data, 0, (int)fs.Length);
+                load_palette();
+                //load4bpp();
+                //load8x8();
+                refreshEverything();
+                fs.Close();
+            }
+        }
+
+        private void randomizeLinksPaletteCheckbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (randomizeLinksPaletteCheckbox.Checked == true)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to use random palette for link it can looks really really bad\nFor better result use link original sprite", "Confirmation", MessageBoxButtons.YesNo);
+                randomizeLinksPaletteCheckbox.Checked = (dialogResult == DialogResult.Yes);
+            }
+        }
+
+        private void weaponSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
+
+        private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateRomButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                byte[] rom_data = new byte[fs.Length];
+                fs.Read(rom_data, 0, (int)fs.Length);
+                fs.Close();
+
+                /*int seed = 0;
+                if (textBox1.Text == "")
+                {
+                    seed = rand.Next();
+                }
+                else
+                {
+                    seed = int.Parse(textBox1.Text);
+                }*/
+
+                SaveConfig();
+
+                Randomization randomize = new Randomization(rand.Next(), config.OptionFlags, rom_data, ofd.FileName, (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString(), generateSpoilerCheckbox.Checked, randomizeLinksPaletteCheckbox.Checked);
+            }
+        }
+
+        private void generateSpoilerCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.GenerateSpoilers = generateSpoilerCheckbox.Checked;
+            SaveConfig();
+        }
+
+        /*
+         * Enemies tab
+         */
+        private void randomizeEnemiesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
+            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            SaveConfig();
+        }
+
+        private void randomizationTypeTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            //typeLabel.Text = typeString[typeTrackbar.Value];
+            config.OptionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)randomizationTypeTrackbar.Value;
+            typeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+            SaveConfig();
+        }
+
+        private void randomizeEnemiesHealthCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeEnemyHealthRange = randomizeEnemiesHealthCheckbox.Checked;
+            randomizeEnemiesHealthTrackbar.Enabled = config.OptionFlags.RandomizeEnemyHealthRange;
+            SaveConfig();
+        }
+
+        private void randomizeEnemiesHealthTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var healthMin = (2 * randomizeEnemiesHealthTrackbar.Value);
+            healthLabel.Text = $"±{healthMin}%";
+            config.OptionFlags.RandomizeEnemyHealthRangeAmount = healthMin;
+            SaveConfig();
+        }
+
+        private void randomizeEnemiesDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
+            allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            SaveConfig();
+        }
+
+        private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AllowEnemyZeroDamage = allowZeroDamageCheckbox.Checked;
+            SaveConfig();
+        }
+
+        private void easyModeEscapeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.EasyModeEscape = easyModeEscapeCheckbox.Checked;
+            SaveConfig();
+        }
+
+        private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
+            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            SaveConfig();
+        }
+
+        private void absorbableItemsSpawnrateTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var spawnRate = 5 * absorbableItemsSpawnrateTrackbar.Value;
+            spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
+
+            config.OptionFlags.AbsorbableSpawnRate = spawnRate;
+            SaveConfig();
+        }
+
+        private void absorbableItemsChecklist_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var selectedItem = absorbableItemsChecklist.Items[e.Index].ToString();
+            var type = EnumEx.GetValueFromDescription<AbsorbableTypes>(selectedItem);
+            var isSet = (e.NewValue == CheckState.Checked);
+            config.OptionFlags.AbsorbableTypes[type] = isSet;
+            SaveConfig();
+        }
+
+
+        /*
+         * Bosses tab
+         */
+        private void randomizeBossesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBosses = randomizeBossesCheckbox.Checked;
+            bossRandomizationTypesTrackbar.Enabled = config.OptionFlags.RandomizeBosses;
+            SaveConfig();
+        }
+
+        private void bossRandomizationTypesTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBossesType = (RandomizeBossesType)bossRandomizationTypesTrackbar.Value;
+            typebossLabel.Text = ((RandomizeBossesType)bossRandomizationTypesTrackbar.Value).ToString();
+            SaveConfig();
+        }
+
+        private void randomizeBossHealthCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBossHealth = randomizeBossHealthCheckbox.Checked;
+            bossHealthRandomizationTrackbar.Enabled = config.OptionFlags.RandomizeBossHealth;
+            SaveConfig();
+        }
+
+        private void bossHealthRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var bosshealthMin = 100 - (5 * bossHealthRandomizationTrackbar.Value);
+            var bosshealthMax = (100 + (10 * bossHealthRandomizationTrackbar.Value));
+            bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
+
+            config.OptionFlags.RandomizeBossHealthMinAmount = bosshealthMin;
+            config.OptionFlags.RandomizeBossHealthMaxAmount = bosshealthMax;
+            SaveConfig();
+        }
+
+        private void randomizeBossDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBossDamage = randomizeBossDamageCheckbox.Checked;
+            bossDamageRandomizationTrackbar.Enabled = config.OptionFlags.RandomizeBossDamage;
+            SaveConfig();
+        }
+
+        private void bossDamageRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var bossdamageMin = 100 - (5 * bossDamageRandomizationTrackbar.Value);
+            var bossdamageMax = (100 + (5 * bossDamageRandomizationTrackbar.Value));
+            bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
+
+            config.OptionFlags.RandomizeBossDamageMinAmount = bossdamageMin;
+            config.OptionFlags.RandomizeBossDamageMaxAmount = bossdamageMax;
+            SaveConfig();
+        }
+
+        private void randomizeBossBehaviorCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBossBehavior = randomizeBossBehaviorCheckbox.Checked;
+            SaveConfig();
+        }
+
+
+        /*
+         * Palettes tab
+         */
+        private void randomizeDungeonPalettesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeDungeonPalettes = randomizeDungeonPalettesCheckbox.Checked;
+            setBlackoutModeCheckbox.Enabled = config.OptionFlags.RandomizeDungeonPalettes;
+            SaveConfig();
+        }
+
+        private void setBlackoutModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.SetBlackoutMode = setBlackoutModeCheckbox.Checked;
+            SaveConfig();
+        }
+
+        private void randomizeOverworldPalettesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeOverworldPalettes = randomizeOverworldPalettesCheckbox.Checked;
+            SaveConfig();
+        }
+
+        private void randomizeSpritePalettesBasicCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeSpritePalettes = randomizeSpritePalettesBasicCheckbox.Checked;
+            randomizeSpritePalettesAdvancedCheckbox.Enabled = config.OptionFlags.RandomizeSpritePalettes;
+            SaveConfig();
+        }
+
+        private void randomizeSpritePalettesAdvancedCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.SetAdvancedSpritePalettes = randomizeSpritePalettesAdvancedCheckbox.Checked;
+            SaveConfig();
+        }
+
+
+        /*
+         * Extras tab
+         */
+        private void extraSettingsCheckedList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // TODO: add extra flags
+            //SaveConfig();
+        }
+
 
         public string[] description = new string[16]
         {
@@ -357,370 +609,11 @@ namespace Enemizer
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void extraSettingsCheckedList_SelectedIndexChanged(object sender, EventArgs e)
         {
             descriptionLabel.Text = description[extraSettingsCheckedList.SelectedIndex];
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            flags = 0;
-            for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
-            {
-                if (i != 7 && i != 10 && i != 13 && i != 11)
-                {
-                    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
-                    flags += flags_setter[i + 1];
-                }
-            }
-
-        }
-
-
-
-        byte[] r_data;
-        
-        private void button3_Click(object sender, EventArgs e)
-        {
-            FileStream fs = new FileStream("zeldapalettetest.sfc", FileMode.Open, FileAccess.Read);
-            r_data = new byte[fs.Length];
-            fs.Read(r_data, 0, (int)fs.Length);
-            fs.Close();
-
-            /* setColor(0x0DD744, Color.Red,2);
-             setColor(0x0DD746, Color.Red,4);
-             setColor(0x0DD748, Color.Red,6);
-             setColor(0x0DD74A, Color.Red,8);
-             setColor(0x0DD74C, Color.Red,10);
-             */
-            //randomize_wall(0);
-            //randomize_floors(0);
-            // = Color.FromArgb(255, 255, 255);
-
-            byte[] changing = new byte[] //0 = no change, 1 = yes
-    {
-            0,1,1,1,0,1,1,0,0,1,1,1,0,1,1,
-            0,1,1,1,0,1,1,0,0,1,1,1,0,1,1,
-            0,1,1,1,0,1,1,0,0,0,0,0,0,0,0,
-            0,1,1,1,0,1,1,0,0,1,1,1,0,1,1
-    };
-
-            byte[] aux_changing = new byte[] //0 = no change, 1 = yes
-            {
-        1, 1, 1, 1, 1, 1, 1,0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 0, 1, 1,
-        1, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 1, 1, 1,
-        0, 1, 1, 1, 1, 1, 1,0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-        0, 0, 0, 0, 1, 1, 1,0, 0, 1, 1, 0, 1, 1,0, 1, 1, 1, 1, 1, 1,
-        0, 1, 1, 1, 1, 1, 1,0, 0, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 0, 0, 1,
-        0, 1, 1, 1, 0, 1, 1,0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 0, 1, 1,
-        0, 1, 1, 1, 0, 1, 1,1, 1, 1, 1, 1, 1, 1
-            };
-
-
-             byte[] palette_l = new byte[]
-             {
-                
-             };
-
-            
-                int pos = 0x0DD290;
-                richTextBox1.AppendText("Color c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));\n");
-                for (int i =0;i<palette_l.Length;i++)
-                {
-
-                    if (palette_l[i] == 0)
-                    {
-                        pos += 2;
-                    }
-                    else
-                    {
-                        richTextBox1.AppendText("c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));\n");
-                        for (int j = 0; j < palette_l[i]; j++)
-                        {
-                            richTextBox1.AppendText("setColor(0x" + pos.ToString("X6") + ",c," + ((palette_l[i] * 2) - (j * 2)).ToString() + ");\n");
-                            pos += 2;
-                        }
-                    }
-                }
-
- 
-
-
-            //0x0DD734 * 5 == wall1
-            //0x0DD770 * 5 == wall2
-            //0x0DD744 * 5 == wall3
-            fs = new FileStream("zeldapalettetest.sfc", FileMode.OpenOrCreate, FileAccess.Write);
-                        fs.Write(r_data, 0, r_data.Length);
-                        fs.Close();
-                    }
-
-                    public void setColor(int address, Color col, byte shade = 0)
-                    {
-
-                        byte r = col.R;
-                        byte g = col.G;
-                        byte b = col.B;
-                        if ((r / 8) - shade >= 0)
-                        {
-                            r = (byte)((r / 8) - shade);
-                        }
-                        else
-                        {
-                            r = 0;
-                        }
-                        if ((g / 8) - shade >= 0)
-                        {
-                            g = (byte)((g / 8) - shade);
-                        }
-                        else
-                        {
-                            g = 0;
-                        }
-                        if ((b / 8) - shade >= 0)
-                        {
-                            b = (byte)((b / 8) - shade);
-                        }
-                        else
-                        {
-                            b = 0;
-                        }
-                        short s = (short)(((b) << 10) | ((g) << 5) | ((r) << 0));
-
-                        /* byte[] bb = BitConverter.GetBytes(s);
-                         colorBytes[c * 2] = bb[0];
-                         colorBytes[(c * 2) + 1] = bb[1];*/
-            //Console.WriteLine("RED : " + (s & 0x1F));
-            //Console.WriteLine("GREEN : " + ((s & 0x3E0)>>5) );
-            //Console.WriteLine("BLUE : " + ((s & 0x7C00 )>>10));
-            r_data[address] = (byte)(s & 0x00FF);
-            r_data[address + 1] = (byte)((s >> 8) & 0x00FF);
-
-
-        }
-
-        public void update_flags()
-        {
-            // TODO: update optionFlags
-
-            int flagsText = 0;
-            for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
-            {
-                extraSettingsCheckedList.SetItemCheckState(i, CheckState.Unchecked);
-                if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
-                {
-                    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
-
-                }
-            }
-            flags = flagsText;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (EnemizerLibrary.Version.CheckUpdate() == true)
-            {
-                //update
-                    var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
-                    if (window == DialogResult.Yes)
-                    {
-                        Help.ShowHelp(null, @"https://zarby89.github.io/Enimizer/");
-                    }
-            }
-            else
-            {
-                MessageBox.Show("No update available");
-                //noupdate
-            }
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
-            fw.Write((bool)checkBox2.Checked);
-            fw.Write((int)flags);
-            fw.Close();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex > 1)
-            {
-                FileStream fs = new FileStream((comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(), FileMode.Open, FileAccess.Read);
-                data = new byte[fs.Length];
-                fs.Read(data, 0, (int)fs.Length);
-                load_palette();
-                //load4bpp();
-                //load8x8();
-                refreshEverything();
-                fs.Close();
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkPaletteCheckbox_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (linkPaletteCheckbox.Checked == true)
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to use random palette for link it can looks really really bad\nFor better result use link original sprite", "Confirmation", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    //do something
-                    linkPaletteCheckbox.Checked = true;
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    //do something else
-                    linkPaletteCheckbox.Checked = false;
-                }
-            }
-        }
-
-
-
-        /*
-         * Enemies tab
-         */
-        private void randomizeEnemiesCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
-            randomizationTypeTrackbar.Enabled = optionFlags.RandomizeEnemies;
-        }
-
-        private void randomizationTypeTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            //typeLabel.Text = typeString[typeTrackbar.Value];
-            optionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)randomizationTypeTrackbar.Value;
-            typeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
-        }
-
-        private void randomizeEnemiesHealthCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeEnemyHealthRange = randomizeEnemiesHealthCheckbox.Checked;
-            randomizeEnemiesHealthTrackbar.Enabled = optionFlags.RandomizeEnemyHealthRange;
-        }
-
-        private void randomizeEnemiesHealthTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            var healthMin = (2 * randomizeEnemiesHealthTrackbar.Value);
-            healthLabel.Text = $"±{healthMin}%";
-            optionFlags.RandomizeEnemyHealthRangeAmount = healthMin;
-        }
-
-        private void randomizeEnemiesDamageCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
-            allowZeroDamageCheckbox.Enabled = optionFlags.RandomizeEnemyDamage;
-        }
-
-        private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.AllowEnemyZeroDamage = allowZeroDamageCheckbox.Checked;
-        }
-
-        private void easyModeEscapeCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.EasyModeEscape = easyModeEscapeCheckbox.Checked;
-        }
-
-        private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
-            absorbableItemsChecklist.Enabled = optionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = optionFlags.EnemiesAbsorbable;
-        }
-
-        private void absorbableItemsSpawnrateTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            var spawnRate = 5 * absorbableItemsSpawnrateTrackbar.Value;
-            spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
-
-            optionFlags.AbsorbableSpawnRate = spawnRate;
-        }
-
-        private void absorbableItemsChecklist_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            var selectedItem = absorbableItemsChecklist.Items[e.Index].ToString();
-            var type = EnumEx.GetValueFromDescription<AbsorbableTypes>(selectedItem);
-            var isSet = (e.NewValue == CheckState.Checked);
-            optionFlags.AbsorbableTypes[type] = isSet;
-        }
-
-
-        /*
-         * Bosses tab
-         */
-        private void randomizeBossesCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeBosses = randomizeBossesCheckbox.Checked;
-            bossRandomizationTypesTrackbar.Enabled = optionFlags.RandomizeBosses;
-        }
-
-        private void bossRandomizationTypesTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeBossesType = (RandomizeBossesType)bossRandomizationTypesTrackbar.Value;
-            typebossLabel.Text = ((RandomizeBossesType)bossRandomizationTypesTrackbar.Value).ToString();
-        }
-
-        private void randomizeBossHealthCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeBossHealth = randomizeBossHealthCheckbox.Checked;
-            bossHealthRandomizationTrackbar.Enabled = optionFlags.RandomizeBossHealth;
-        }
-
-        private void bossHealthRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            var bosshealthMin = 100 - (5 * bossHealthRandomizationTrackbar.Value);
-            var bosshealthMax = (100 + (10 * bossHealthRandomizationTrackbar.Value));
-            bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
-
-            optionFlags.RandomizeBossHealthMinAmount = bosshealthMin;
-            optionFlags.RandomizeBossHealthMaxAmount = bosshealthMax;
-        }
-
-        private void randomizeBossDamageCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeBossDamage = randomizeBossDamageCheckbox.Checked;
-            bossDamageRandomizationTrackbar.Enabled = optionFlags.RandomizeBossDamage;
-        }
-
-        private void bossDamageRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
-        {
-            var bossdamageMin = 100 - (5 * bossDamageRandomizationTrackbar.Value);
-            var bossdamageMax = (100 + (5 * bossDamageRandomizationTrackbar.Value));
-            bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
-
-            optionFlags.RandomizeBossDamageMinAmount = bossdamageMin;
-            optionFlags.RandomizeBossDamageMaxAmount = bossdamageMax;
-        }
-
-        private void randomizeBossBehaviorCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeBossBehavior = randomizeBossBehaviorCheckbox.Checked;
-        }
-
-
-
-        /*
-         * Palettes tab
-         */
-
-
-        /*
-         * Extras tab
-         */
     }
 
 

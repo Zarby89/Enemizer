@@ -30,25 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnemizerForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.generateRomButton = new System.Windows.Forms.Button();
             this.extraSettingsCheckedList = new System.Windows.Forms.CheckedListBox();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.linkSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.weaponSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.generateSpoilerCheckbox = new System.Windows.Forms.CheckBox();
+            this.completeModificationCombobox = new System.Windows.Forms.ComboBox();
+            this.checkForUpdatesButton = new System.Windows.Forms.Button();
+            this.checkForUpdatesCheckbox = new System.Windows.Forms.CheckBox();
+            this.linkSpritePicturebox = new System.Windows.Forms.PictureBox();
+            this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.allowZeroDamageCheckbox = new System.Windows.Forms.CheckBox();
@@ -79,14 +75,14 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.blackoutPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.spriteadvancedPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.spritebasicPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.overworldPaletteCheckbox = new System.Windows.Forms.CheckBox();
-            this.dungeonPaletteCheckbox = new System.Windows.Forms.CheckBox();
+            this.setBlackoutModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.randomizeSpritePalettesAdvancedCheckbox = new System.Windows.Forms.CheckBox();
+            this.randomizeSpritePalettesBasicCheckbox = new System.Windows.Forms.CheckBox();
+            this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
+            this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.absorbableItemsSpawnrateTrackbar)).BeginInit();
@@ -100,22 +96,15 @@
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // generateRomButton
             // 
-            this.button1.Location = new System.Drawing.Point(486, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Generate!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.DefaultExt = "sfc";
-            this.openFileDialog1.FileName = "VT Randomized Rom";
-            this.openFileDialog1.Filter = "VT Randomized Rom|*.sfc";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.generateRomButton.Location = new System.Drawing.Point(486, 251);
+            this.generateRomButton.Name = "generateRomButton";
+            this.generateRomButton.Size = new System.Drawing.Size(122, 23);
+            this.generateRomButton.TabIndex = 0;
+            this.generateRomButton.Text = "Generate!";
+            this.generateRomButton.UseVisualStyleBackColor = true;
+            this.generateRomButton.Click += new System.EventHandler(this.generateRomButton_Click);
             // 
             // extraSettingsCheckedList
             // 
@@ -141,39 +130,26 @@
             this.extraSettingsCheckedList.Name = "extraSettingsCheckedList";
             this.extraSettingsCheckedList.Size = new System.Drawing.Size(263, 184);
             this.extraSettingsCheckedList.TabIndex = 5;
-            this.extraSettingsCheckedList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
-            this.extraSettingsCheckedList.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
-            this.extraSettingsCheckedList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.checkedListBox1_MouseUp);
+            this.extraSettingsCheckedList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.extraSettingsCheckedList_ItemCheck);
+            this.extraSettingsCheckedList.SelectedIndexChanged += new System.EventHandler(this.extraSettingsCheckedList_SelectedIndexChanged);
             // 
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(527, 390);
+            this.descriptionLabel.Location = new System.Drawing.Point(122, 254);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.descriptionLabel.TabIndex = 6;
             this.descriptionLabel.Text = "Descritpion";
-            this.descriptionLabel.Visible = false;
             // 
-            // button2
+            // linkSpriteCombobox
             // 
-            this.button2.Location = new System.Drawing.Point(533, 359);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Check All";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(487, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.linkSpriteCombobox.FormattingEnabled = true;
+            this.linkSpriteCombobox.Location = new System.Drawing.Point(487, 67);
+            this.linkSpriteCombobox.Name = "linkSpriteCombobox";
+            this.linkSpriteCombobox.Size = new System.Drawing.Size(128, 21);
+            this.linkSpriteCombobox.TabIndex = 8;
+            this.linkSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.linkSpriteCombobox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -193,36 +169,18 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Weapon Gfx - WIP :";
             // 
-            // comboBox2
+            // weaponSpriteCombobox
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.weaponSpriteCombobox.Enabled = false;
+            this.weaponSpriteCombobox.FormattingEnabled = true;
+            this.weaponSpriteCombobox.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.comboBox2.Location = new System.Drawing.Point(487, 184);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 11;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(532, 406);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(532, 306);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(76, 20);
-            this.panel1.TabIndex = 13;
-            this.panel1.Visible = false;
+            this.weaponSpriteCombobox.Location = new System.Drawing.Point(487, 184);
+            this.weaponSpriteCombobox.Name = "weaponSpriteCombobox";
+            this.weaponSpriteCombobox.Size = new System.Drawing.Size(121, 21);
+            this.weaponSpriteCombobox.TabIndex = 11;
+            this.weaponSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.weaponSpriteCombobox_SelectedIndexChanged);
             // 
             // richTextBox1
             // 
@@ -242,69 +200,70 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Complete Modification (Gfx)";
             // 
-            // checkBox1
+            // generateSpoilerCheckbox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(486, 280);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(126, 17);
-            this.checkBox1.TabIndex = 16;
-            this.checkBox1.Text = "Generate Spoiler Log";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.generateSpoilerCheckbox.AutoSize = true;
+            this.generateSpoilerCheckbox.Location = new System.Drawing.Point(486, 280);
+            this.generateSpoilerCheckbox.Name = "generateSpoilerCheckbox";
+            this.generateSpoilerCheckbox.Size = new System.Drawing.Size(126, 17);
+            this.generateSpoilerCheckbox.TabIndex = 16;
+            this.generateSpoilerCheckbox.Text = "Generate Spoiler Log";
+            this.generateSpoilerCheckbox.UseVisualStyleBackColor = true;
+            this.generateSpoilerCheckbox.CheckedChanged += new System.EventHandler(this.generateSpoilerCheckbox_CheckedChanged);
             // 
-            // comboBox3
+            // completeModificationCombobox
             // 
-            this.comboBox3.Enabled = false;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.completeModificationCombobox.Enabled = false;
+            this.completeModificationCombobox.FormattingEnabled = true;
+            this.completeModificationCombobox.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.comboBox3.Location = new System.Drawing.Point(487, 224);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 17;
+            this.completeModificationCombobox.Location = new System.Drawing.Point(487, 224);
+            this.completeModificationCombobox.Name = "completeModificationCombobox";
+            this.completeModificationCombobox.Size = new System.Drawing.Size(121, 21);
+            this.completeModificationCombobox.TabIndex = 17;
+            this.completeModificationCombobox.SelectedIndexChanged += new System.EventHandler(this.completeModificationCombobox_SelectedIndexChanged);
             // 
-            // button4
+            // checkForUpdatesButton
             // 
-            this.button4.Location = new System.Drawing.Point(486, 28);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 23);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "Check Update";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.checkForUpdatesButton.Location = new System.Drawing.Point(486, 28);
+            this.checkForUpdatesButton.Name = "checkForUpdatesButton";
+            this.checkForUpdatesButton.Size = new System.Drawing.Size(129, 23);
+            this.checkForUpdatesButton.TabIndex = 18;
+            this.checkForUpdatesButton.Text = "Check Update";
+            this.checkForUpdatesButton.UseVisualStyleBackColor = true;
+            this.checkForUpdatesButton.Click += new System.EventHandler(this.checkForUpdatesButton_Click);
             // 
-            // checkBox2
+            // checkForUpdatesCheckbox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(487, 8);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(135, 17);
-            this.checkBox2.TabIndex = 19;
-            this.checkBox2.Text = "Check Update on Start";
-            this.toolTip1.SetToolTip(this.checkBox2, "Automatically check if there is a new version of the enemizer");
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkForUpdatesCheckbox.AutoSize = true;
+            this.checkForUpdatesCheckbox.Location = new System.Drawing.Point(487, 8);
+            this.checkForUpdatesCheckbox.Name = "checkForUpdatesCheckbox";
+            this.checkForUpdatesCheckbox.Size = new System.Drawing.Size(135, 17);
+            this.checkForUpdatesCheckbox.TabIndex = 19;
+            this.checkForUpdatesCheckbox.Text = "Check Update on Start";
+            this.toolTip1.SetToolTip(this.checkForUpdatesCheckbox, "Automatically check if there is a new version of the enemizer");
+            this.checkForUpdatesCheckbox.UseVisualStyleBackColor = true;
+            this.checkForUpdatesCheckbox.CheckedChanged += new System.EventHandler(this.checkForUpdatesCheckbox_CheckedChanged);
             // 
-            // pictureBox1
+            // linkSpritePicturebox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(487, 94);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 48);
-            this.pictureBox1.TabIndex = 20;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.linkSpritePicturebox.Location = new System.Drawing.Point(487, 94);
+            this.linkSpritePicturebox.Name = "linkSpritePicturebox";
+            this.linkSpritePicturebox.Size = new System.Drawing.Size(128, 48);
+            this.linkSpritePicturebox.TabIndex = 20;
+            this.linkSpritePicturebox.TabStop = false;
             // 
-            // linkPaletteCheckbox
+            // randomizeLinksPaletteCheckbox
             // 
-            this.linkPaletteCheckbox.AutoSize = true;
-            this.linkPaletteCheckbox.Location = new System.Drawing.Point(487, 148);
-            this.linkPaletteCheckbox.Name = "linkPaletteCheckbox";
-            this.linkPaletteCheckbox.Size = new System.Drawing.Size(125, 17);
-            this.linkPaletteCheckbox.TabIndex = 21;
-            this.linkPaletteCheckbox.Text = "Random Link Palette";
-            this.linkPaletteCheckbox.UseVisualStyleBackColor = true;
-            this.linkPaletteCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.linkPaletteCheckbox_MouseClick);
+            this.randomizeLinksPaletteCheckbox.AutoSize = true;
+            this.randomizeLinksPaletteCheckbox.Location = new System.Drawing.Point(487, 148);
+            this.randomizeLinksPaletteCheckbox.Name = "randomizeLinksPaletteCheckbox";
+            this.randomizeLinksPaletteCheckbox.Size = new System.Drawing.Size(125, 17);
+            this.randomizeLinksPaletteCheckbox.TabIndex = 21;
+            this.randomizeLinksPaletteCheckbox.Text = "Random Link Palette";
+            this.randomizeLinksPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeLinksPaletteCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.randomizeLinksPaletteCheckbox_MouseClick);
             // 
             // tabControl1
             // 
@@ -658,11 +617,11 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.blackoutPaletteCheckbox);
-            this.tabPage3.Controls.Add(this.spriteadvancedPaletteCheckbox);
-            this.tabPage3.Controls.Add(this.spritebasicPaletteCheckbox);
-            this.tabPage3.Controls.Add(this.overworldPaletteCheckbox);
-            this.tabPage3.Controls.Add(this.dungeonPaletteCheckbox);
+            this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
+            this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
+            this.tabPage3.Controls.Add(this.randomizeSpritePalettesBasicCheckbox);
+            this.tabPage3.Controls.Add(this.randomizeOverworldPalettesCheckbox);
+            this.tabPage3.Controls.Add(this.randomizeDungeonPalettesCheckbox);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(458, 292);
@@ -670,61 +629,67 @@
             this.tabPage3.Text = "Palettes";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // blackoutPaletteCheckbox
+            // setBlackoutModeCheckbox
             // 
-            this.blackoutPaletteCheckbox.AutoSize = true;
-            this.blackoutPaletteCheckbox.Enabled = false;
-            this.blackoutPaletteCheckbox.Location = new System.Drawing.Point(25, 27);
-            this.blackoutPaletteCheckbox.Name = "blackoutPaletteCheckbox";
-            this.blackoutPaletteCheckbox.Size = new System.Drawing.Size(214, 17);
-            this.blackoutPaletteCheckbox.TabIndex = 4;
-            this.blackoutPaletteCheckbox.Text = "Set all palette to black (Black out mode)";
-            this.blackoutPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.setBlackoutModeCheckbox.AutoSize = true;
+            this.setBlackoutModeCheckbox.Enabled = false;
+            this.setBlackoutModeCheckbox.Location = new System.Drawing.Point(25, 27);
+            this.setBlackoutModeCheckbox.Name = "setBlackoutModeCheckbox";
+            this.setBlackoutModeCheckbox.Size = new System.Drawing.Size(214, 17);
+            this.setBlackoutModeCheckbox.TabIndex = 4;
+            this.setBlackoutModeCheckbox.Text = "Set all palette to black (Black out mode)";
+            this.setBlackoutModeCheckbox.UseVisualStyleBackColor = true;
+            this.setBlackoutModeCheckbox.CheckedChanged += new System.EventHandler(this.setBlackoutModeCheckbox_CheckedChanged);
             // 
-            // spriteadvancedPaletteCheckbox
+            // randomizeSpritePalettesAdvancedCheckbox
             // 
-            this.spriteadvancedPaletteCheckbox.AutoSize = true;
-            this.spriteadvancedPaletteCheckbox.Enabled = false;
-            this.spriteadvancedPaletteCheckbox.Location = new System.Drawing.Point(25, 95);
-            this.spriteadvancedPaletteCheckbox.Name = "spriteadvancedPaletteCheckbox";
-            this.spriteadvancedPaletteCheckbox.Size = new System.Drawing.Size(217, 17);
-            this.spriteadvancedPaletteCheckbox.TabIndex = 3;
-            this.spriteadvancedPaletteCheckbox.Text = "Advanced Sprite Palettes (Can be awful)";
-            this.spriteadvancedPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeSpritePalettesAdvancedCheckbox.AutoSize = true;
+            this.randomizeSpritePalettesAdvancedCheckbox.Enabled = false;
+            this.randomizeSpritePalettesAdvancedCheckbox.Location = new System.Drawing.Point(25, 95);
+            this.randomizeSpritePalettesAdvancedCheckbox.Name = "randomizeSpritePalettesAdvancedCheckbox";
+            this.randomizeSpritePalettesAdvancedCheckbox.Size = new System.Drawing.Size(217, 17);
+            this.randomizeSpritePalettesAdvancedCheckbox.TabIndex = 3;
+            this.randomizeSpritePalettesAdvancedCheckbox.Text = "Advanced Sprite Palettes (Can be awful)";
+            this.randomizeSpritePalettesAdvancedCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeSpritePalettesAdvancedCheckbox.CheckedChanged += new System.EventHandler(this.randomizeSpritePalettesAdvancedCheckbox_CheckedChanged);
             // 
-            // spritebasicPaletteCheckbox
+            // randomizeSpritePalettesBasicCheckbox
             // 
-            this.spritebasicPaletteCheckbox.AutoSize = true;
-            this.spritebasicPaletteCheckbox.Location = new System.Drawing.Point(3, 72);
-            this.spritebasicPaletteCheckbox.Name = "spritebasicPaletteCheckbox";
-            this.spritebasicPaletteCheckbox.Size = new System.Drawing.Size(185, 17);
-            this.spritebasicPaletteCheckbox.TabIndex = 2;
-            this.spritebasicPaletteCheckbox.Text = "Randomize Sprite Palettes (Basic)";
-            this.spritebasicPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeSpritePalettesBasicCheckbox.AutoSize = true;
+            this.randomizeSpritePalettesBasicCheckbox.Location = new System.Drawing.Point(3, 72);
+            this.randomizeSpritePalettesBasicCheckbox.Name = "randomizeSpritePalettesBasicCheckbox";
+            this.randomizeSpritePalettesBasicCheckbox.Size = new System.Drawing.Size(185, 17);
+            this.randomizeSpritePalettesBasicCheckbox.TabIndex = 2;
+            this.randomizeSpritePalettesBasicCheckbox.Text = "Randomize Sprite Palettes (Basic)";
+            this.randomizeSpritePalettesBasicCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeSpritePalettesBasicCheckbox.CheckedChanged += new System.EventHandler(this.randomizeSpritePalettesBasicCheckbox_CheckedChanged);
             // 
-            // overworldPaletteCheckbox
+            // randomizeOverworldPalettesCheckbox
             // 
-            this.overworldPaletteCheckbox.AutoSize = true;
-            this.overworldPaletteCheckbox.Location = new System.Drawing.Point(3, 49);
-            this.overworldPaletteCheckbox.Name = "overworldPaletteCheckbox";
-            this.overworldPaletteCheckbox.Size = new System.Drawing.Size(171, 17);
-            this.overworldPaletteCheckbox.TabIndex = 1;
-            this.overworldPaletteCheckbox.Text = "Randomize Overworld Palettes";
-            this.overworldPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeOverworldPalettesCheckbox.AutoSize = true;
+            this.randomizeOverworldPalettesCheckbox.Location = new System.Drawing.Point(3, 49);
+            this.randomizeOverworldPalettesCheckbox.Name = "randomizeOverworldPalettesCheckbox";
+            this.randomizeOverworldPalettesCheckbox.Size = new System.Drawing.Size(171, 17);
+            this.randomizeOverworldPalettesCheckbox.TabIndex = 1;
+            this.randomizeOverworldPalettesCheckbox.Text = "Randomize Overworld Palettes";
+            this.randomizeOverworldPalettesCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeOverworldPalettesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeOverworldPalettesCheckbox_CheckedChanged);
             // 
-            // dungeonPaletteCheckbox
+            // randomizeDungeonPalettesCheckbox
             // 
-            this.dungeonPaletteCheckbox.AutoSize = true;
-            this.dungeonPaletteCheckbox.Location = new System.Drawing.Point(3, 4);
-            this.dungeonPaletteCheckbox.Name = "dungeonPaletteCheckbox";
-            this.dungeonPaletteCheckbox.Size = new System.Drawing.Size(172, 17);
-            this.dungeonPaletteCheckbox.TabIndex = 0;
-            this.dungeonPaletteCheckbox.Text = "Randomize Dungeons Palettes";
-            this.dungeonPaletteCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeDungeonPalettesCheckbox.AutoSize = true;
+            this.randomizeDungeonPalettesCheckbox.Location = new System.Drawing.Point(3, 4);
+            this.randomizeDungeonPalettesCheckbox.Name = "randomizeDungeonPalettesCheckbox";
+            this.randomizeDungeonPalettesCheckbox.Size = new System.Drawing.Size(172, 17);
+            this.randomizeDungeonPalettesCheckbox.TabIndex = 0;
+            this.randomizeDungeonPalettesCheckbox.Text = "Randomize Dungeons Palettes";
+            this.randomizeDungeonPalettesCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeDungeonPalettesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeDungeonPalettesCheckbox_CheckedChanged);
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.extraSettingsCheckedList);
+            this.tabPage4.Controls.Add(this.descriptionLabel);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(458, 292);
@@ -738,27 +703,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 331);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.linkPaletteCheckbox);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.randomizeLinksPaletteCheckbox);
+            this.Controls.Add(this.linkSpritePicturebox);
+            this.Controls.Add(this.checkForUpdatesCheckbox);
+            this.Controls.Add(this.checkForUpdatesButton);
+            this.Controls.Add(this.completeModificationCombobox);
+            this.Controls.Add(this.generateSpoilerCheckbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.weaponSpriteCombobox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.descriptionLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.linkSpriteCombobox);
+            this.Controls.Add(this.generateRomButton);
             this.Name = "EnemizerForm";
             this.Text = "Enemizer 6.0";
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -773,6 +734,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -780,25 +742,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button generateRomButton;
         private System.Windows.Forms.CheckedListBox extraSettingsCheckedList;
         private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox linkSpriteCombobox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox weaponSpriteCombobox;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
-        public System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.CheckBox linkPaletteCheckbox;
+        public System.Windows.Forms.CheckBox generateSpoilerCheckbox;
+        private System.Windows.Forms.ComboBox completeModificationCombobox;
+        private System.Windows.Forms.Button checkForUpdatesButton;
+        private System.Windows.Forms.CheckBox checkForUpdatesCheckbox;
+        private System.Windows.Forms.PictureBox linkSpritePicturebox;
+        public System.Windows.Forms.CheckBox randomizeLinksPaletteCheckbox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -831,11 +789,11 @@
         private System.Windows.Forms.TrackBar bossRandomizationTypesTrackbar;
         private System.Windows.Forms.CheckBox randomizeBossesCheckbox;
         private System.Windows.Forms.CheckBox randomizeBossBehaviorCheckbox;
-        private System.Windows.Forms.CheckBox blackoutPaletteCheckbox;
-        private System.Windows.Forms.CheckBox spriteadvancedPaletteCheckbox;
-        private System.Windows.Forms.CheckBox spritebasicPaletteCheckbox;
-        private System.Windows.Forms.CheckBox overworldPaletteCheckbox;
-        private System.Windows.Forms.CheckBox dungeonPaletteCheckbox;
+        private System.Windows.Forms.CheckBox setBlackoutModeCheckbox;
+        private System.Windows.Forms.CheckBox randomizeSpritePalettesAdvancedCheckbox;
+        private System.Windows.Forms.CheckBox randomizeSpritePalettesBasicCheckbox;
+        private System.Windows.Forms.CheckBox randomizeOverworldPalettesCheckbox;
+        private System.Windows.Forms.CheckBox randomizeDungeonPalettesCheckbox;
     }
 }
 

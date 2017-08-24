@@ -117,26 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <data name="bossRandomizationTypesTrackbar.ToolTip" xml:space="preserve">
-    <value>Basic - all bosses are unique including G.Tower refights
-e.g you will have 2 lanmolas, 2 armos knigt, 2 moldorm
-Normal - same as Basic but refight are also random
-e.g you could have 2 kholdstare, 2 trinexx, 2 vitreous
-Chaos - this allow duplicated bosses
-e.g you could have 5 trinexx, 3 mothula, 2 armos, etc...</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
@@ -161,5 +141,13 @@ Hard Type - same as Normal but mix overworld enemies
 Chaos Type - Any enemies can be anywhere
 Insanity Type - Every enemies are dangerous enemies
 </value>
+  </data>
+  <data name="bossRandomizationTypesTrackbar.ToolTip" xml:space="preserve">
+    <value>Basic - all bosses are unique including G.Tower refights
+e.g you will have 2 lanmolas, 2 armos knigt, 2 moldorm
+Normal - same as Basic but refight are also random
+e.g you could have 2 kholdstare, 2 trinexx, 2 vitreous
+Chaos - this allow duplicated bosses
+e.g you could have 5 trinexx, 3 mothula, 2 armos, etc...</value>
   </data>
 </root>
