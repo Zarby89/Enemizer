@@ -374,6 +374,8 @@ namespace Enemizer
         private void generateRomButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
+            ofd.Title = "Select a Randomizer Rom File";
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
