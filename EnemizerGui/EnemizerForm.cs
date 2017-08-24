@@ -588,46 +588,6 @@ namespace Enemizer
             }
         }
 
-        private void checkboxes_CheckedChanged(object sender, EventArgs e)
-        {
-
-            optionFlags.RandomizeBosses = bossesCheckbox.Checked;
-            bosstypesTrackbar.Enabled = optionFlags.RandomizeBosses;
-
-            optionFlags.RandomizeBossHealth = bosshealthCheckbox.Checked;
-            bosshealthTrackbar.Enabled = optionFlags.RandomizeBossHealth;
-
-            optionFlags.RandomizeBossDamage = bossdamageCheckbox.Checked;
-            bossdamageTrackbar.Enabled = optionFlags.RandomizeBossDamage;
-        }
-
-        private void bosstypesTrackbar_Scroll(object sender, EventArgs e)
-        {
-            //typebossLabel.Text = bosstypeString[bosstypesTrackbar.Value];
-            optionFlags.RandomizeBossesType = (RandomizeBossesType)bosstypesTrackbar.Value;
-            typebossLabel.Text = ((RandomizeBossesType)bosstypesTrackbar.Value).ToString();
-        }
-
-        private void bosshealthTrackbar_Scroll(object sender, EventArgs e)
-        {
-            var bosshealthMin = 100 - (5 * bosshealthTrackbar.Value);
-            var bosshealthMax = (100 + (10 * bosshealthTrackbar.Value));
-            bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
-
-            optionFlags.RandomizeBossHealthMinAmount = bosshealthMin;
-            optionFlags.RandomizeBossHealthMaxAmount = bosshealthMax;
-        }
-
-        private void bossdamageTrackbar_Scroll(object sender, EventArgs e)
-        {
-
-            var bossdamageMin = 100 - (5 * bossdamageTrackbar.Value);
-            var bossdamageMax = (100 + (5 * bossdamageTrackbar.Value));
-            bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
-
-            optionFlags.RandomizeBossDamageMinAmount = bossdamageMin;
-            optionFlags.RandomizeBossDamageMaxAmount = bossdamageMax;
-        }
 
 
         /*
@@ -702,6 +662,55 @@ namespace Enemizer
         /*
          * Bosses tab
          */
+        private void randomizeBossesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeBosses = randomizeBossesCheckbox.Checked;
+            bossRandomizationTypesTrackbar.Enabled = optionFlags.RandomizeBosses;
+        }
+
+        private void bossRandomizationTypesTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeBossesType = (RandomizeBossesType)bossRandomizationTypesTrackbar.Value;
+            typebossLabel.Text = ((RandomizeBossesType)bossRandomizationTypesTrackbar.Value).ToString();
+        }
+
+        private void randomizeBossHealthCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeBossHealth = randomizeBossHealthCheckbox.Checked;
+            bossHealthRandomizationTrackbar.Enabled = optionFlags.RandomizeBossHealth;
+        }
+
+        private void bossHealthRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var bosshealthMin = 100 - (5 * bossHealthRandomizationTrackbar.Value);
+            var bosshealthMax = (100 + (10 * bossHealthRandomizationTrackbar.Value));
+            bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
+
+            optionFlags.RandomizeBossHealthMinAmount = bosshealthMin;
+            optionFlags.RandomizeBossHealthMaxAmount = bosshealthMax;
+        }
+
+        private void randomizeBossDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeBossDamage = randomizeBossDamageCheckbox.Checked;
+            bossDamageRandomizationTrackbar.Enabled = optionFlags.RandomizeBossDamage;
+        }
+
+        private void bossDamageRandomizationTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var bossdamageMin = 100 - (5 * bossDamageRandomizationTrackbar.Value);
+            var bossdamageMax = (100 + (5 * bossDamageRandomizationTrackbar.Value));
+            bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
+
+            optionFlags.RandomizeBossDamageMinAmount = bossdamageMin;
+            optionFlags.RandomizeBossDamageMaxAmount = bossdamageMax;
+        }
+
+        private void randomizeBossBehaviorCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeBossBehavior = randomizeBossBehaviorCheckbox.Checked;
+        }
+
 
 
         /*

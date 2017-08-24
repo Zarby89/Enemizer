@@ -67,17 +67,17 @@
             this.randomizationTypeTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.bossBehaviorCheckbox = new System.Windows.Forms.CheckBox();
+            this.randomizeBossBehaviorCheckbox = new System.Windows.Forms.CheckBox();
             this.bossdamageLabel = new System.Windows.Forms.Label();
-            this.bossdamageTrackbar = new System.Windows.Forms.TrackBar();
-            this.bossdamageCheckbox = new System.Windows.Forms.CheckBox();
+            this.bossDamageRandomizationTrackbar = new System.Windows.Forms.TrackBar();
+            this.randomizeBossDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.bosshealthLabel = new System.Windows.Forms.Label();
-            this.bosshealthTrackbar = new System.Windows.Forms.TrackBar();
-            this.bosshealthCheckbox = new System.Windows.Forms.CheckBox();
+            this.bossHealthRandomizationTrackbar = new System.Windows.Forms.TrackBar();
+            this.randomizeBossHealthCheckbox = new System.Windows.Forms.CheckBox();
             this.typebossLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.bosstypesTrackbar = new System.Windows.Forms.TrackBar();
-            this.bossesCheckbox = new System.Windows.Forms.CheckBox();
+            this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
+            this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.blackoutPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.spriteadvancedPaletteCheckbox = new System.Windows.Forms.CheckBox();
@@ -93,9 +93,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.randomizeEnemiesHealthTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomizationTypeTrackbar)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bossdamageTrackbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bosshealthTrackbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bosstypesTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossDamageRandomizationTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossHealthRandomizationTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
@@ -521,17 +521,17 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.bossBehaviorCheckbox);
+            this.tabPage2.Controls.Add(this.randomizeBossBehaviorCheckbox);
             this.tabPage2.Controls.Add(this.bossdamageLabel);
-            this.tabPage2.Controls.Add(this.bossdamageTrackbar);
-            this.tabPage2.Controls.Add(this.bossdamageCheckbox);
+            this.tabPage2.Controls.Add(this.bossDamageRandomizationTrackbar);
+            this.tabPage2.Controls.Add(this.randomizeBossDamageCheckbox);
             this.tabPage2.Controls.Add(this.bosshealthLabel);
-            this.tabPage2.Controls.Add(this.bosshealthTrackbar);
-            this.tabPage2.Controls.Add(this.bosshealthCheckbox);
+            this.tabPage2.Controls.Add(this.bossHealthRandomizationTrackbar);
+            this.tabPage2.Controls.Add(this.randomizeBossHealthCheckbox);
             this.tabPage2.Controls.Add(this.typebossLabel);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.bosstypesTrackbar);
-            this.tabPage2.Controls.Add(this.bossesCheckbox);
+            this.tabPage2.Controls.Add(this.bossRandomizationTypesTrackbar);
+            this.tabPage2.Controls.Add(this.randomizeBossesCheckbox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -540,15 +540,16 @@
             this.tabPage2.Text = "Bosses";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // bossBehaviorCheckbox
+            // randomizeBossBehaviorCheckbox
             // 
-            this.bossBehaviorCheckbox.AutoSize = true;
-            this.bossBehaviorCheckbox.Location = new System.Drawing.Point(6, 269);
-            this.bossBehaviorCheckbox.Name = "bossBehaviorCheckbox";
-            this.bossBehaviorCheckbox.Size = new System.Drawing.Size(180, 17);
-            this.bossBehaviorCheckbox.TabIndex = 27;
-            this.bossBehaviorCheckbox.Text = "Randomize Boss Behavior (WIP)";
-            this.bossBehaviorCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeBossBehaviorCheckbox.AutoSize = true;
+            this.randomizeBossBehaviorCheckbox.Location = new System.Drawing.Point(6, 269);
+            this.randomizeBossBehaviorCheckbox.Name = "randomizeBossBehaviorCheckbox";
+            this.randomizeBossBehaviorCheckbox.Size = new System.Drawing.Size(180, 17);
+            this.randomizeBossBehaviorCheckbox.TabIndex = 27;
+            this.randomizeBossBehaviorCheckbox.Text = "Randomize Boss Behavior (WIP)";
+            this.randomizeBossBehaviorCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeBossBehaviorCheckbox.CheckedChanged += new System.EventHandler(this.randomizeBossBehaviorCheckbox_CheckedChanged);
             // 
             // bossdamageLabel
             // 
@@ -559,28 +560,28 @@
             this.bossdamageLabel.TabIndex = 26;
             this.bossdamageLabel.Text = "100% - 100%";
             // 
-            // bossdamageTrackbar
+            // bossDamageRandomizationTrackbar
             // 
-            this.bossdamageTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bossdamageTrackbar.Enabled = false;
-            this.bossdamageTrackbar.Location = new System.Drawing.Point(27, 148);
-            this.bossdamageTrackbar.Maximum = 20;
-            this.bossdamageTrackbar.Name = "bossdamageTrackbar";
-            this.bossdamageTrackbar.Size = new System.Drawing.Size(113, 45);
-            this.bossdamageTrackbar.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.bossdamageTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
-            this.bossdamageTrackbar.Scroll += new System.EventHandler(this.bossdamageTrackbar_Scroll);
+            this.bossDamageRandomizationTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bossDamageRandomizationTrackbar.Enabled = false;
+            this.bossDamageRandomizationTrackbar.Location = new System.Drawing.Point(27, 148);
+            this.bossDamageRandomizationTrackbar.Maximum = 20;
+            this.bossDamageRandomizationTrackbar.Name = "bossDamageRandomizationTrackbar";
+            this.bossDamageRandomizationTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bossDamageRandomizationTrackbar.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.bossDamageRandomizationTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
+            this.bossDamageRandomizationTrackbar.ValueChanged += new System.EventHandler(this.bossDamageRandomizationTrackbar_ValueChanged);
             // 
-            // bossdamageCheckbox
+            // randomizeBossDamageCheckbox
             // 
-            this.bossdamageCheckbox.AutoSize = true;
-            this.bossdamageCheckbox.Location = new System.Drawing.Point(6, 125);
-            this.bossdamageCheckbox.Name = "bossdamageCheckbox";
-            this.bossdamageCheckbox.Size = new System.Drawing.Size(159, 17);
-            this.bossdamageCheckbox.TabIndex = 24;
-            this.bossdamageCheckbox.Text = "Randomize Bosses Damage";
-            this.bossdamageCheckbox.UseVisualStyleBackColor = true;
-            this.bossdamageCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            this.randomizeBossDamageCheckbox.AutoSize = true;
+            this.randomizeBossDamageCheckbox.Location = new System.Drawing.Point(6, 125);
+            this.randomizeBossDamageCheckbox.Name = "randomizeBossDamageCheckbox";
+            this.randomizeBossDamageCheckbox.Size = new System.Drawing.Size(159, 17);
+            this.randomizeBossDamageCheckbox.TabIndex = 24;
+            this.randomizeBossDamageCheckbox.Text = "Randomize Bosses Damage";
+            this.randomizeBossDamageCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeBossDamageCheckbox.CheckedChanged += new System.EventHandler(this.randomizeBossDamageCheckbox_CheckedChanged);
             // 
             // bosshealthLabel
             // 
@@ -591,28 +592,28 @@
             this.bosshealthLabel.TabIndex = 23;
             this.bosshealthLabel.Text = " 100% - 100%";
             // 
-            // bosshealthTrackbar
+            // bossHealthRandomizationTrackbar
             // 
-            this.bosshealthTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bosshealthTrackbar.Enabled = false;
-            this.bosshealthTrackbar.Location = new System.Drawing.Point(27, 97);
-            this.bosshealthTrackbar.Maximum = 20;
-            this.bosshealthTrackbar.Name = "bosshealthTrackbar";
-            this.bosshealthTrackbar.Size = new System.Drawing.Size(113, 45);
-            this.bosshealthTrackbar.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.bosshealthTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
-            this.bosshealthTrackbar.Scroll += new System.EventHandler(this.bosshealthTrackbar_Scroll);
+            this.bossHealthRandomizationTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bossHealthRandomizationTrackbar.Enabled = false;
+            this.bossHealthRandomizationTrackbar.Location = new System.Drawing.Point(27, 97);
+            this.bossHealthRandomizationTrackbar.Maximum = 20;
+            this.bossHealthRandomizationTrackbar.Name = "bossHealthRandomizationTrackbar";
+            this.bossHealthRandomizationTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bossHealthRandomizationTrackbar.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.bossHealthRandomizationTrackbar, "Randomize the hp of the enemies by a maximum / minimum percentage");
+            this.bossHealthRandomizationTrackbar.ValueChanged += new System.EventHandler(this.bossHealthRandomizationTrackbar_ValueChanged);
             // 
-            // bosshealthCheckbox
+            // randomizeBossHealthCheckbox
             // 
-            this.bosshealthCheckbox.AutoSize = true;
-            this.bosshealthCheckbox.Location = new System.Drawing.Point(6, 74);
-            this.bosshealthCheckbox.Name = "bosshealthCheckbox";
-            this.bosshealthCheckbox.Size = new System.Drawing.Size(150, 17);
-            this.bosshealthCheckbox.TabIndex = 21;
-            this.bosshealthCheckbox.Text = "Randomize Bosses Health";
-            this.bosshealthCheckbox.UseVisualStyleBackColor = true;
-            this.bosshealthCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            this.randomizeBossHealthCheckbox.AutoSize = true;
+            this.randomizeBossHealthCheckbox.Location = new System.Drawing.Point(6, 74);
+            this.randomizeBossHealthCheckbox.Name = "randomizeBossHealthCheckbox";
+            this.randomizeBossHealthCheckbox.Size = new System.Drawing.Size(150, 17);
+            this.randomizeBossHealthCheckbox.TabIndex = 21;
+            this.randomizeBossHealthCheckbox.Text = "Randomize Bosses Health";
+            this.randomizeBossHealthCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeBossHealthCheckbox.CheckedChanged += new System.EventHandler(this.randomizeBossHealthCheckbox_CheckedChanged);
             // 
             // typebossLabel
             // 
@@ -632,28 +633,28 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Type of Randomization";
             // 
-            // bosstypesTrackbar
+            // bossRandomizationTypesTrackbar
             // 
-            this.bosstypesTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bosstypesTrackbar.Enabled = false;
-            this.bosstypesTrackbar.Location = new System.Drawing.Point(27, 46);
-            this.bosstypesTrackbar.Maximum = 2;
-            this.bosstypesTrackbar.Name = "bosstypesTrackbar";
-            this.bosstypesTrackbar.Size = new System.Drawing.Size(113, 45);
-            this.bosstypesTrackbar.TabIndex = 18;
-            this.toolTip1.SetToolTip(this.bosstypesTrackbar, resources.GetString("bosstypesTrackbar.ToolTip"));
-            this.bosstypesTrackbar.Scroll += new System.EventHandler(this.bosstypesTrackbar_Scroll);
+            this.bossRandomizationTypesTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bossRandomizationTypesTrackbar.Enabled = false;
+            this.bossRandomizationTypesTrackbar.Location = new System.Drawing.Point(27, 46);
+            this.bossRandomizationTypesTrackbar.Maximum = 2;
+            this.bossRandomizationTypesTrackbar.Name = "bossRandomizationTypesTrackbar";
+            this.bossRandomizationTypesTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.bossRandomizationTypesTrackbar.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.bossRandomizationTypesTrackbar, resources.GetString("bossRandomizationTypesTrackbar.ToolTip"));
+            this.bossRandomizationTypesTrackbar.ValueChanged += new System.EventHandler(this.bossRandomizationTypesTrackbar_ValueChanged);
             // 
-            // bossesCheckbox
+            // randomizeBossesCheckbox
             // 
-            this.bossesCheckbox.AutoSize = true;
-            this.bossesCheckbox.Location = new System.Drawing.Point(6, 6);
-            this.bossesCheckbox.Name = "bossesCheckbox";
-            this.bossesCheckbox.Size = new System.Drawing.Size(116, 17);
-            this.bossesCheckbox.TabIndex = 17;
-            this.bossesCheckbox.Text = "Randomize Bosses";
-            this.bossesCheckbox.UseVisualStyleBackColor = true;
-            this.bossesCheckbox.CheckedChanged += new System.EventHandler(this.checkboxes_CheckedChanged);
+            this.randomizeBossesCheckbox.AutoSize = true;
+            this.randomizeBossesCheckbox.Location = new System.Drawing.Point(6, 6);
+            this.randomizeBossesCheckbox.Name = "randomizeBossesCheckbox";
+            this.randomizeBossesCheckbox.Size = new System.Drawing.Size(116, 17);
+            this.randomizeBossesCheckbox.TabIndex = 17;
+            this.randomizeBossesCheckbox.Text = "Randomize Bosses";
+            this.randomizeBossesCheckbox.UseVisualStyleBackColor = true;
+            this.randomizeBossesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeBossesCheckbox_CheckedChanged);
             // 
             // tabPage3
             // 
@@ -766,9 +767,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.randomizationTypeTrackbar)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bossdamageTrackbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bosshealthTrackbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bosstypesTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossDamageRandomizationTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossHealthRandomizationTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -820,16 +821,16 @@
         private System.Windows.Forms.CheckedListBox absorbableItemsChecklist;
         private System.Windows.Forms.CheckBox allowZeroDamageCheckbox;
         private System.Windows.Forms.Label bossdamageLabel;
-        private System.Windows.Forms.TrackBar bossdamageTrackbar;
-        private System.Windows.Forms.CheckBox bossdamageCheckbox;
+        private System.Windows.Forms.TrackBar bossDamageRandomizationTrackbar;
+        private System.Windows.Forms.CheckBox randomizeBossDamageCheckbox;
         private System.Windows.Forms.Label bosshealthLabel;
-        private System.Windows.Forms.TrackBar bosshealthTrackbar;
-        private System.Windows.Forms.CheckBox bosshealthCheckbox;
+        private System.Windows.Forms.TrackBar bossHealthRandomizationTrackbar;
+        private System.Windows.Forms.CheckBox randomizeBossHealthCheckbox;
         private System.Windows.Forms.Label typebossLabel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TrackBar bosstypesTrackbar;
-        private System.Windows.Forms.CheckBox bossesCheckbox;
-        private System.Windows.Forms.CheckBox bossBehaviorCheckbox;
+        private System.Windows.Forms.TrackBar bossRandomizationTypesTrackbar;
+        private System.Windows.Forms.CheckBox randomizeBossesCheckbox;
+        private System.Windows.Forms.CheckBox randomizeBossBehaviorCheckbox;
         private System.Windows.Forms.CheckBox blackoutPaletteCheckbox;
         private System.Windows.Forms.CheckBox spriteadvancedPaletteCheckbox;
         private System.Windows.Forms.CheckBox spritebasicPaletteCheckbox;
