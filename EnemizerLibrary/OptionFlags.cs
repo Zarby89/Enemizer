@@ -18,6 +18,8 @@ namespace EnemizerLibrary
         public bool RandomizeEnemyDamage { get; set; }
         public bool AllowEnemyZeroDamage { get; set; }
 
+        public bool EasyModeEscape { get; set; }
+
         public bool EnemiesAbsorbable { get; set; }
         public int AbsorbableSpawnRate { get; set; }
         public Dictionary<AbsorbableTypes, bool> AbsorbableTypes { get; set; } = new Dictionary<EnemizerLibrary.AbsorbableTypes, bool>();
@@ -26,6 +28,24 @@ namespace EnemizerLibrary
 
         public bool RandomizeBosses { get; set; }
         public RandomizeBossesType RandomizeBossesType { get; set; }
+
+        public bool RandomizeBossHealth { get; set; }
+        public int RandomizeBossHealthMinAmount { get; set; }
+        public int RandomizeBossHealthMaxAmount { get; set; }
+
+        public bool RandomizeBossDamage { get; set; }
+        public int RandomizeBossDamageMinAmount { get; set; }
+        public int RandomizeBossDamageMaxAmount { get; set; }
+
+        public bool RandomizeBossBehavior { get; set; }
+
+        public bool RandomizeDungeonPalettes { get; set; }
+        public bool SetBlackoutMode { get; set; }
+
+        public bool RandomizeOverworldPalettes { get; set; }
+
+        public bool RandomizeSpritePalettes { get; set; }
+        public bool SetAdvancedSpritePalettes { get; set; }
     }
 
     public enum RandomizeEnemiesType

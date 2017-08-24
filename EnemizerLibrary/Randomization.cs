@@ -81,7 +81,7 @@ namespace EnemizerLibrary
         StreamWriter spoilerfile;
         bool spoiler = false;
 
-        public Randomization(int seed, OptionFlags optionFlags, int[] flags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
+        public Randomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]

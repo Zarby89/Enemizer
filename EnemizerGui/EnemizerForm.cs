@@ -309,41 +309,12 @@ namespace Enemizer
             int[] flags_data = new int[8];
 
 
-
-            if (enemiesAbsorbableCheckbox.Checked)
-            {
-                flags_data[3] = spawnrateTrackbar.Value;
-
-                for (int i = 0; i < 14; i++)
-                {
-                    if (absorbableChecklist.GetItemCheckState(i) == CheckState.Checked)
-                    {
-                        flags_data[4] += flags_setter[i+1];
-                    }
-                }
-            }
-            else
-            {
-                flags_data[3] = -1;
-            }
-
-
-
-            //if (bossesCheckbox.Checked)
-            //{
-            //    flags_data[5] = bosstypesTrackbar.Value;
-            //}
-            //else
-            //{
-            //    flags_data[5] = -1;
-            //}
-
             
             BinaryWriter fw = new BinaryWriter(new FileStream("setting.cfg", FileMode.OpenOrCreate, FileAccess.Write));
             fw.Write((bool)checkBox2.Checked);
             fw.Write((int)flags);
             fw.Close();
-            Randomization randomize = new Randomization(rand.Next(), optionFlags, flags_data, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked, linkPaletteCheckbox.Checked);
+            Randomization randomize = new Randomization(rand.Next(), optionFlags, rom_data, openFileDialog1.FileName,(comboBox1.Items[comboBox1.SelectedIndex] as files_names).file.ToString(),checkBox1.Checked, linkPaletteCheckbox.Checked);
         }
         int flags = 0;
         int[] flags_setter = new int[16] { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400,0x800,0x1000,0x2000,0x4000 };
@@ -355,9 +326,9 @@ namespace Enemizer
         private void checkedListBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flags = 0;
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < extraSettingsCheckedList.Items.Count; i++)
             {
-                if (checkedListBox1.GetItemCheckState(i) == CheckState.Checked)
+                if (extraSettingsCheckedList.GetItemCheckState(i) == CheckState.Checked)
                 {
                     flags += flags_setter[i + 1];
                 }
@@ -388,17 +359,17 @@ namespace Enemizer
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            descriptionLabel.Text = description[checkedListBox1.SelectedIndex];
+            descriptionLabel.Text = description[extraSettingsCheckedList.SelectedIndex];
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             flags = 0;
-            for (int i = 0; i < checkedListBox1.Items.Count-1; i++)
+            for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
             {
                 if (i != 7 && i != 10 && i != 13 && i != 11)
                 {
-                    checkedListBox1.SetItemCheckState(i, CheckState.Checked);
+                    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
                     flags += flags_setter[i + 1];
                 }
             }
@@ -536,27 +507,17 @@ namespace Enemizer
 
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_KeyUp(object sender, KeyEventArgs e)
-        {
-            update_flags();
-        }
-
         public void update_flags()
         {
             // TODO: update optionFlags
 
             int flagsText = 0;
-            for (int i = 0; i < checkedListBox1.Items.Count-1; i++)
+            for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
             {
-                checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                extraSettingsCheckedList.SetItemCheckState(i, CheckState.Unchecked);
                 if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
                 {
-                    checkedListBox1.SetItemCheckState(i, CheckState.Checked);
+                    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
 
                 }
             }
@@ -627,92 +588,17 @@ namespace Enemizer
             }
         }
 
-        private void enemiesAbsorbableCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
         private void checkboxes_CheckedChanged(object sender, EventArgs e)
         {
-            optionFlags.RandomizeEnemies = enemiesCheckbox.Checked;
-            typeTrackbar.Enabled = optionFlags.RandomizeEnemies;
-
-            optionFlags.RandomizeEnemyHealthRange = enemiesHealthCheckbox.Checked;
-            enemiesHealthTrackbar.Enabled = optionFlags.RandomizeEnemyHealthRange;
-
-            optionFlags.RandomizeEnemyDamage = enemiesDamageCheckbox.Checked;
-            allowzerodamageCheckbox.Enabled = optionFlags.RandomizeEnemyDamage;
-
-            optionFlags.EnemiesAbsorbable = enemiesAbsorbableCheckbox.Checked;
-            absorbableChecklist.Enabled = optionFlags.EnemiesAbsorbable;
-            spawnrateTrackbar.Enabled = optionFlags.EnemiesAbsorbable;
-
-            //if (enemiesAbsorbableCheckbox.Checked)
-            //{
-            //    absorbableChecklist.Enabled = true;
-            //    spawnrateTrackbar.Enabled = true;
-            //}
-            //else
-            //{
-            //    absorbableChecklist.Enabled = false;
-            //    spawnrateTrackbar.Enabled = false;
-            //}
 
             optionFlags.RandomizeBosses = bossesCheckbox.Checked;
             bosstypesTrackbar.Enabled = optionFlags.RandomizeBosses;
 
-            //if (bossesCheckbox.Checked)
-            //{
-            //    bosstypesTrackbar.Enabled = true;
-            //}
-            //else
-            //{
-            //    bosstypesTrackbar.Enabled = false;
-            //}
+            optionFlags.RandomizeBossHealth = bosshealthCheckbox.Checked;
+            bosshealthTrackbar.Enabled = optionFlags.RandomizeBossHealth;
 
-            if (bosshealthCheckbox.Checked)
-            {
-                bosshealthTrackbar.Enabled = true;
-            }
-            else
-            {
-                bosshealthTrackbar.Enabled = false;
-            }
-
-            if (bossdamageCheckbox.Checked)
-            {
-                bossdamageTrackbar.Enabled = true;
-            }
-            else
-            {
-                bossdamageTrackbar.Enabled = false;
-            }
-
-        }
-        int healthMin = 0;
-        int healthMax = 0;
-        private void enemiesHealthTrackbar_Scroll(object sender, EventArgs e)
-        {
-            optionFlags.RandomizeEnemyHealthRangeAmount = enemiesHealthTrackbar.Value;
-
-            healthMin = (2 * enemiesHealthTrackbar.Value);
-            healthLabel.Text = "-"+healthMin.ToString("D2")+"/+"+ healthMin.ToString("D2");
-        }
-        //string[] typeString = new string[5] {"Basic","Normal","Hard","Chaos","Insanity" };
-        //string[] bosstypeString = new string[3] { "Basic", "Normal", "Chaos" };
-        private void typeTrackbar_Scroll(object sender, EventArgs e)
-        {
-            //typeLabel.Text = typeString[typeTrackbar.Value];
-            optionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)typeTrackbar.Value;
-            typeLabel.Text = ((RandomizeEnemiesType)typeTrackbar.Value).ToString();
-        }
-        int spawnRate = 0;
-
-        private void spawnrateTrackbar_Scroll(object sender, EventArgs e)
-        {
-            spawnRate = 5 * spawnrateTrackbar.Value;
-            spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
-
-            optionFlags.AbsorbableSpawnRate = spawnrateTrackbar.Value;
+            optionFlags.RandomizeBossDamage = bossdamageCheckbox.Checked;
+            bossdamageTrackbar.Enabled = optionFlags.RandomizeBossDamage;
         }
 
         private void bosstypesTrackbar_Scroll(object sender, EventArgs e)
@@ -721,33 +607,111 @@ namespace Enemizer
             optionFlags.RandomizeBossesType = (RandomizeBossesType)bosstypesTrackbar.Value;
             typebossLabel.Text = ((RandomizeBossesType)bosstypesTrackbar.Value).ToString();
         }
-        int bossdamageMin = 0;
-        int bossdamageMax = 0;
-        int bosshealthMin = 0;
-        int bosshealthMax = 0;
+
         private void bosshealthTrackbar_Scroll(object sender, EventArgs e)
         {
-            bosshealthMin = 100 - (5 * bosshealthTrackbar.Value);
-            bosshealthMax = (100 + (10 * bosshealthTrackbar.Value));
+            var bosshealthMin = 100 - (5 * bosshealthTrackbar.Value);
+            var bosshealthMax = (100 + (10 * bosshealthTrackbar.Value));
             bosshealthLabel.Text = bosshealthMin.ToString("D2") + "% - " + bosshealthMax.ToString("D2") + "%";
 
+            optionFlags.RandomizeBossHealthMinAmount = bosshealthMin;
+            optionFlags.RandomizeBossHealthMaxAmount = bosshealthMax;
         }
 
         private void bossdamageTrackbar_Scroll(object sender, EventArgs e)
         {
 
-            bossdamageMin = 100 - (5 * bossdamageTrackbar.Value);
-            bossdamageMax = (100 + (5 * bossdamageTrackbar.Value));
+            var bossdamageMin = 100 - (5 * bossdamageTrackbar.Value);
+            var bossdamageMax = (100 + (5 * bossdamageTrackbar.Value));
             bossdamageLabel.Text = bossdamageMin.ToString("D2") + "% - " + bossdamageMax.ToString("D2") + "%";
+
+            optionFlags.RandomizeBossDamageMinAmount = bossdamageMin;
+            optionFlags.RandomizeBossDamageMaxAmount = bossdamageMax;
         }
 
-        private void absorbableChecklist_ItemCheck(object sender, ItemCheckEventArgs e)
+
+        /*
+         * Enemies tab
+         */
+        private void randomizeEnemiesCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            var selectedItem = absorbableChecklist.Items[e.Index].ToString();
+            optionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
+            randomizationTypeTrackbar.Enabled = optionFlags.RandomizeEnemies;
+        }
+
+        private void randomizationTypeTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            //typeLabel.Text = typeString[typeTrackbar.Value];
+            optionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)randomizationTypeTrackbar.Value;
+            typeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+        }
+
+        private void randomizeEnemiesHealthCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeEnemyHealthRange = randomizeEnemiesHealthCheckbox.Checked;
+            randomizeEnemiesHealthTrackbar.Enabled = optionFlags.RandomizeEnemyHealthRange;
+        }
+
+        private void randomizeEnemiesHealthTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var healthMin = (2 * randomizeEnemiesHealthTrackbar.Value);
+            healthLabel.Text = $"±{healthMin}%";
+            optionFlags.RandomizeEnemyHealthRangeAmount = healthMin;
+        }
+
+        private void randomizeEnemiesDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
+            allowZeroDamageCheckbox.Enabled = optionFlags.RandomizeEnemyDamage;
+        }
+
+        private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.AllowEnemyZeroDamage = allowZeroDamageCheckbox.Checked;
+        }
+
+        private void easyModeEscapeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.EasyModeEscape = easyModeEscapeCheckbox.Checked;
+        }
+
+        private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            optionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
+            absorbableItemsChecklist.Enabled = optionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = optionFlags.EnemiesAbsorbable;
+        }
+
+        private void absorbableItemsSpawnrateTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            var spawnRate = 5 * absorbableItemsSpawnrateTrackbar.Value;
+            spawnrateLabel.Text = spawnRate.ToString("D2") + "%";
+
+            optionFlags.AbsorbableSpawnRate = spawnRate;
+        }
+
+        private void absorbableItemsChecklist_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var selectedItem = absorbableItemsChecklist.Items[e.Index].ToString();
             var type = EnumEx.GetValueFromDescription<AbsorbableTypes>(selectedItem);
             var isSet = (e.NewValue == CheckState.Checked);
             optionFlags.AbsorbableTypes[type] = isSet;
         }
+
+
+        /*
+         * Bosses tab
+         */
+
+
+        /*
+         * Palettes tab
+         */
+
+
+        /*
+         * Extras tab
+         */
     }
 
 
