@@ -82,7 +82,12 @@ namespace EnemizerLibrary
 
         OptionFlags optionFlags;
 
-        public Randomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "") //Initialization of the randomization
+        public Randomization()
+        {
+
+        }
+
+        public RomData MakeRandomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "") //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]
@@ -91,6 +96,12 @@ namespace EnemizerLibrary
             //Save the flags used in a file to remember the last flags that were used
             this.ROM_DATA = new RomData(ROM_DATA);
             this.optionFlags = optionFlags;
+
+            // patch in our assembly binary data
+            // TODO: figure out if this should be done first or after some other code below
+            // TODO: and really this should all be modified to add patches onto this and then just write everything to the rom at once if possible (but there are some reads from the rom I need to look into first)
+            Patch patch = new Patch("patchData.json");
+            patch.PatchRom(this.ROM_DATA);
 
             rand = new Random(seed);
 
@@ -130,7 +141,8 @@ namespace EnemizerLibrary
                 create_overworld_sprites();
             }
 
-             create_dungeons_properties();
+            // this also gets called by BossRandomizer...
+            create_dungeons_properties();
 
             if(optionFlags.RandomizeEnemies)
             {
@@ -199,10 +211,10 @@ namespace EnemizerLibrary
 
 
             //Remove Trinexx Ice Floor : 
-            this.ROM_DATA[0x04B37E] = 0xEA;
-            this.ROM_DATA[0x04B37E+1] = 0xEA;
-            this.ROM_DATA[0x04B37E+2] = 0xEA;
-            this.ROM_DATA[0x04B37E+3] = 0xEA;
+            this.ROM_DATA[0x04B37E] = 0xEA; // NOP
+            this.ROM_DATA[0x04B37E+1] = 0xEA; // NOP
+            this.ROM_DATA[0x04B37E+2] = 0xEA; // NOP
+            this.ROM_DATA[0x04B37E+3] = 0xEA; // NOP
 
             /*this.ROM_DATA[0x5033 + 0x5E] = 0x24;
             this.ROM_DATA[0x5112 + 0x5E] = 0x93;
@@ -217,16 +229,8 @@ namespace EnemizerLibrary
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            // patch in our assembly binary data
-            Patch patch = new Patch("patchData.json");
-            patch.PatchRom(this.ROM_DATA);
+            return this.ROM_DATA;
 
-            string fileName = "Enemizer " + Version.CurrentVersion + " - " + Path.GetFileName(filename);
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-            this.ROM_DATA.WriteRom(fs);
-            fs.Close();
-
-            MessageBox.Show("Enemizer " + Version.CurrentVersion + " - " + Path.GetFileName(filename) + " Has been created in the enemizer folder !");
         }
 
         private void MakeRandomLinkSpritePalette()

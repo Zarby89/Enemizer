@@ -273,6 +273,10 @@ namespace Enemizer
                 randomizeLinksPaletteCheckbox.Checked = (dialogResult == DialogResult.Yes);
                 config.OptionFlags.RandomizeLinkSpritePalette = randomizeLinksPaletteCheckbox.Checked;
             }
+            else
+            {
+                config.OptionFlags.RandomizeLinkSpritePalette = randomizeLinksPaletteCheckbox.Checked;
+            }
         }
 
         private void weaponSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -315,7 +319,16 @@ namespace Enemizer
                 SaveConfig();
 
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
-                Randomization randomize = new Randomization(seed, config.OptionFlags, rom_data, ofd.FileName, linkSpriteFilename);
+                Randomization randomize = new Randomization();
+                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, ofd.FileName, linkSpriteFilename);
+
+                string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
+                fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+                randomizedRom.WriteRom(fs);
+                fs.Close();
+
+                MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
+
             }
         }
 
