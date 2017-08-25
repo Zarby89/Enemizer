@@ -141,9 +141,6 @@ namespace EnemizerLibrary
                 create_overworld_sprites();
             }
 
-            // this also gets called by BossRandomizer...
-            create_dungeons_properties();
-
             if(optionFlags.RandomizeEnemies)
             {
                 Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable);
@@ -1278,8 +1275,8 @@ namespace EnemizerLibrary
             pos += room_144_shell.Length;
 
             shell_pointers[6] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_172_shell);
-            pos += room_172_shell.Length;
+            write_rom_data(0x0122000 + pos, room_172_blind_room_shell);
+            pos += room_172_blind_room_shell.Length;
 
             shell_pointers[7] = pctosnesbytes(0x122000 + pos);
             write_rom_data(0x0122000 + pos, room_6_shell);
