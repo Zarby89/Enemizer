@@ -437,11 +437,11 @@
             this.randomizeEnemiesHealthCheckbox.UseVisualStyleBackColor = true;
             this.randomizeEnemiesHealthCheckbox.CheckedChanged += new System.EventHandler(this.randomizeEnemiesHealthCheckbox_CheckedChanged);
             // 
-            // typeLabel
+            // randomizationTypeLabel
             // 
             this.randomizationTypeLabel.AutoSize = true;
             this.randomizationTypeLabel.Location = new System.Drawing.Point(146, 46);
-            this.randomizationTypeLabel.Name = "typeLabel";
+            this.randomizationTypeLabel.Name = "randomizationTypeLabel";
             this.randomizationTypeLabel.Size = new System.Drawing.Size(33, 13);
             this.randomizationTypeLabel.TabIndex = 3;
             this.randomizationTypeLabel.Text = "Basic";
@@ -718,6 +718,7 @@
             this.Controls.Add(this.generateRomButton);
             this.Name = "EnemizerForm";
             this.Text = "Enemizer 6.0";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EnemizerForm_FormClosing);
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).EndInit();
             this.tabControl1.ResumeLayout(false);

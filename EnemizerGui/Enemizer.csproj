@@ -66,6 +66,7 @@
     <Compile Include="file_names.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprite.cs" />
     <EmbeddedResource Include="EnemizerForm.resx">
       <DependentUpon>EnemizerForm.cs</DependentUpon>
     </EmbeddedResource>
