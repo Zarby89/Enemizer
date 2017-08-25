@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
+    // TODO: replace with enums that which can be replaced with enums
+
     public class ItemConstants
     {
         public static readonly byte Nothing = 0xFF,
@@ -153,6 +155,151 @@ namespace EnemizerLibrary
             ItemConstants.TitansMitt,
             ItemConstants.ProgressiveSword,
             ItemConstants.ProgressiveLiftingGlove
+        };
+    }
+
+    public class BossConstants
+    {
+        public static byte
+            KholdStareGraphics = 22,
+            MoldormGraphics = 12,
+            MothulaGraphics = 26,
+            VitriousGraphics = 22,
+            HelmasaurGraphics = 21,
+            ArmosGraphics = 9,
+            LanmolaGraphics = 11,
+            BlindGraphics = 32,
+            ArrghusGraphics = 20,
+            TrinexxGraphics = 23;
+
+        public static byte[] BossGraphics = 
+        {
+            KholdStareGraphics, MoldormGraphics, MothulaGraphics, VitriousGraphics,
+            HelmasaurGraphics, ArmosGraphics, LanmolaGraphics, BlindGraphics, ArmosGraphics, TrinexxGraphics
+        };
+
+        public static string
+            KholdstareName = "Khold",
+            MoldormName = "Moldorm",
+            MothulaName = "Moth",
+            VitriousName = "Vitty",
+            HelmasaurName = "Helma",
+            ArmosName = "Armos",
+            LanmolaName = "Lanmo",
+            BlindName = "Blind",
+            ArrghusName = "Arrghus",
+            TrinexxName = "Trinexx";
+
+        public static string[] BossNames =
+        {
+            KholdstareName, MoldormName, MothulaName, VitriousName, HelmasaurName,
+            ArmosName, LanmolaName, BlindName, ArrghusName, TrinexxName
+        };
+
+        public static int
+            TowerOfHeraBossDropItemAddress = 0x180152,
+            EasternPalaceBossDropItemAddress = 0x180150,
+            SkullWoodsBossDropItemAddress = 0x180155,
+            DesertPalaceBossDropItemAddress = 0x180151,
+            PalaceOfDarknessBossDropItemAddress = 0x180153,
+            MyseryMireBossDropItemAddress = 0x180158,
+            ThievesTownBossDropItemAddress = 0x180156,
+            SwampPalaceBossDropItemAddress = 0x180154,
+            IcePalaceBossDropItemAddress = 0x180157,
+            TurtleRockBossDropItemAddress = 0x180159,
+            GanonTower1BossDropItemAddress = 0x0,
+            GanonTower2BossDropItemAddress = 0x0,
+            GanonTower3BossDropItemAddress = 0x0;
+
+        public static int[] BossDropItemAddresses =  
+        {
+            TowerOfHeraBossDropItemAddress,
+            EasternPalaceBossDropItemAddress,
+            SkullWoodsBossDropItemAddress,
+            DesertPalaceBossDropItemAddress,
+            PalaceOfDarknessBossDropItemAddress,
+            MyseryMireBossDropItemAddress,
+            ThievesTownBossDropItemAddress,
+            SwampPalaceBossDropItemAddress,
+            IcePalaceBossDropItemAddress,
+            TurtleRockBossDropItemAddress,
+            GanonTower1BossDropItemAddress,
+            GanonTower2BossDropItemAddress,
+            GanonTower3BossDropItemAddress
+        };
+
+        public static byte[] 
+            KholdStarePointer = { 0x01, 0xEA },
+            MoldormPointer = { 0xC3, 0xD9 },
+            MothulaPointer = { 0x31, 0xDC },
+            VitriousPointer = { 0x57, 0xE4 },
+            HelmasaurPointer = { 0x49, 0xE0 },
+            ArmosPointer = { 0x87, 0xE8 },
+            LanmolaPointer = { 0xCB, 0xDC },
+            BlindPointer = { 0x54, 0xE6 },
+            ArrghusPointer = { 0x97, 0xD9 },
+            TrinexxPointer = { 0xBA, 0xE5 };
+
+        public static byte[][] BossPointers =
+        {
+            KholdStarePointer,
+            MoldormPointer,
+            MothulaPointer,
+            VitriousPointer,
+            HelmasaurPointer,
+            ArmosPointer,
+            LanmolaPointer,
+            BlindPointer,
+            ArrghusPointer,
+            TrinexxPointer
+        };
+    }
+
+    public class CrystalConstants
+    {
+        public static int CrystalTypeBaseAddress = 0x180052;
+        public static int
+            TowerOfHeraOffset = 8,
+            EasternPalaceOffset = 0,
+            SkullWoodsOffset = 6,
+            DesertPalaceOffset = 1,
+            PalaceOfDarknessOffset = 4,
+            MyseryMireOffset = 5,
+            ThievesTownOffset = 9,
+            SwampPalaceOffset = 3,
+            IcePalaceOffset = 7,
+            TurtleRockOffset = 10;
+
+        public static int[] CrystalTypeAddresses =
+        {
+            CrystalTypeBaseAddress + TowerOfHeraOffset,
+            CrystalTypeBaseAddress + EasternPalaceOffset,
+            CrystalTypeBaseAddress + SkullWoodsOffset,
+            CrystalTypeBaseAddress + DesertPalaceOffset,
+            CrystalTypeBaseAddress + PalaceOfDarknessOffset,
+            CrystalTypeBaseAddress + MyseryMireOffset,
+            CrystalTypeBaseAddress + ThievesTownOffset,
+            CrystalTypeBaseAddress + SwampPalaceOffset,
+            CrystalTypeBaseAddress + IcePalaceOffset,
+            CrystalTypeBaseAddress + TurtleRockOffset,
+            0, 0, 0 // Ganon Tower
+        };
+
+
+        public static int CrystalBaseAddress = 0x1209D;
+        public static int[] CrystalAddresses = 
+        {
+            CrystalBaseAddress + TowerOfHeraOffset,
+            CrystalBaseAddress + EasternPalaceOffset,
+            CrystalBaseAddress + SkullWoodsOffset,
+            CrystalBaseAddress + DesertPalaceOffset,
+            CrystalBaseAddress + PalaceOfDarknessOffset,
+            CrystalBaseAddress + MyseryMireOffset,
+            CrystalBaseAddress + ThievesTownOffset,
+            CrystalBaseAddress + SwampPalaceOffset,
+            CrystalBaseAddress + IcePalaceOffset,
+            CrystalBaseAddress + TurtleRockOffset,
+            0, 0, 0 // Ganon Tower
         };
     }
 }

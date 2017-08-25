@@ -72,19 +72,9 @@ namespace EnemizerLibrary
 
         //If trinexx is in XX dungeon then write the new tiles of that dungeons there
         // Hera, Eastern, Skull, Desert, PoD, MM, TT, Swamp, Ice, Turtle, GT1, GT2, GT3
-        int[] bossDropItemsAddress = new int[] { 0x180152, 0x180150, 0x180155, 0x180151, 0x180153, 0x180158, 0x180156, 0x180154, 0x180157, 0x180159, 0x0, 0x0, 0x0 };
 
-        int[] crystalTypeAddresses = new int[] { 0x180052 + 8, 0x180052, 0x180052 + 6, 0x180052 + 1, 0x180052 + 4, 0x180052 + 5, 0x180052 + 9, 0x180052 + 3, 0x180052 + 7, 0x180052 + 10, 0, 0, 0 };
-        
-        int[] crystalAddresses = new int[] { 0x1209D + 8, 0x1209D, 0x1209D + 6, 0x1209D + 1, 0x1209D + 4, 0x1209D + 5, 0x1209D + 9, 0x1209D + 3, 0x1209D + 7, 0x1209D + 10, 0, 0, 0 };
 
-        byte[][] bossPointersOrder = new byte[][] { new byte[] { 0x01, 0xEA },new byte[] { 0xC3, 0xD9 }, new byte[] { 0x31, 0xDC },
-                                            new byte[] { 0x57, 0xE4 },new byte[] { 0x49, 0xE0 },new byte[] { 0x87, 0xE8 },
-                                            new byte[] { 0xCB, 0xDC },new byte[] { 0x54, 0xE6 },new byte[] { 0x97, 0xD9 }, new byte[] { 0xBA, 0xE5 } };
-
-        byte[] bossGfx = new byte[] { 22, 12, 26, 22, 21, 9, 11, 32, 20, 23 };
         //Debugging use only :
-        string[] bossNames = new string[] { "Khold", "Moldorm", "Moth", "Vitty", "Helma", "Armos", "Lanmo", "Blind", "Arrghus", "Trinexx" };
 
         public void Randomize_Bosses(bool shuffle)
         {
@@ -146,7 +136,7 @@ namespace EnemizerLibrary
                         boss = (byte)rand.Next(5);
                     }
                     bosses.Add(boss);
-                    Console.WriteLine(bossNames[boss] + " Added in the pool");
+                    Console.WriteLine(BossConstants.BossNames[boss] + " Added in the pool");
                 }
             }
 
@@ -174,9 +164,9 @@ namespace EnemizerLibrary
                             continue;
                         }
                         //if it kholdstare then check if hera drop the green pendant and if sarasrala have a major item
-                        if (crystalTypeAddresses[0] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[0] == 0x00) //is pendant?
                         {
-                            if (ROM_DATA[crystalAddresses[0]] == 0x04) //if hera is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x04) //if hera is green pendant
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
                                 {
@@ -184,9 +174,9 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (crystalTypeAddresses[0] == 0x40) //is crystal?
+                        if (CrystalConstants.CrystalTypeAddresses[0] == 0x40) //is crystal?
                         {
-                            if (ROM_DATA[crystalAddresses[0]] == 0x04 || ROM_DATA[crystalAddresses[0]] == 0x01) //if hera is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x01) //if hera is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -271,9 +261,9 @@ namespace EnemizerLibrary
                     if (dungeonChosed != 7)
                     {
 
-                        if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
                                 {
@@ -281,9 +271,9 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -292,7 +282,7 @@ namespace EnemizerLibrary
                             }
                         }
 
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[bossDropItemsAddress[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
                         {
                             continue;
                         }
@@ -335,9 +325,9 @@ namespace EnemizerLibrary
                     if (dungeonChosed != 8)
                     {
 
-                        if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
                                 {
@@ -345,9 +335,9 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -355,7 +345,7 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[bossDropItemsAddress[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
                         {
                             continue;
                         }
@@ -403,9 +393,9 @@ namespace EnemizerLibrary
                     if (dungeonChosed != 9)
                     {
 
-                        if (crystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
                                 {
@@ -413,9 +403,9 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (crystalTypeAddresses[dungeonChosed] == 0x40) //is crystal
+                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal
                         {
-                            if (ROM_DATA[crystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[crystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -424,7 +414,7 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[bossDropItemsAddress[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
                         {
                             continue;
                         }
@@ -509,11 +499,11 @@ namespace EnemizerLibrary
             {
                 if (optionFlags.GenerateSpoilers)
                 {
-                    spoilerfile.WriteLine(d.name + " : " + bossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[bossDropItemsAddress[did]]);
+                    spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
-                Console.WriteLine(d.name + " : " + bossNames[d.boss].ToString());
-                ROM_DATA[d.pointerAddr] = bossPointersOrder[d.boss][0];
-                ROM_DATA[d.pointerAddr + 1] = bossPointersOrder[d.boss][1];
+                Console.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString());
+                ROM_DATA[d.pointerAddr] = BossConstants.BossPointers[d.boss][0];
+                ROM_DATA[d.pointerAddr + 1] = BossConstants.BossPointers[d.boss][1];
 
                 //Console.WriteLine((d.bossIn).Address.ToString("X6"));
                 /*for (int i = 0; i < (d.bossIn).Pos_array.Length; i++)
@@ -521,7 +511,7 @@ namespace EnemizerLibrary
                     ROM_DATA[(d.bossIn).Address + i] = (d.bossIn).Pos_array[i]; //patch new position of every bosses
                 }*/
 
-                ROM_DATA[0x120090 + ((d.room * 14) + 3)] = bossGfx[d.boss];
+                ROM_DATA[0x120090 + ((d.room * 14) + 3)] = BossConstants.BossGraphics[d.boss];
                 //Console.WriteLine(d.bossIn.GetType().ToString());
                 if (d.boss == 9) // trinexx?
                 {
