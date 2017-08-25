@@ -130,7 +130,8 @@ namespace EnemizerLibrary
             {
                 create_sprite_group();
                 patch_sprite_group();
-                create_rooms_sprites();
+                //create_rooms_sprites();
+                Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable);
             }
 
             //random sprite overworld
@@ -139,15 +140,6 @@ namespace EnemizerLibrary
                 create_sprite_overworld_group();
                 patch_sprite_group_ow();
                 create_overworld_sprites();
-            }
-
-            if(optionFlags.RandomizeEnemies)
-            {
-                Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable);
-            }
-
-            if (optionFlags.RandomizeEnemies)
-            {
                 //WIP
                 OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, this.absorbable_sprites, optionFlags.EnemiesAbsorbable);
             }
@@ -1209,7 +1201,6 @@ namespace EnemizerLibrary
         int[] water_rooms = new int[] { 0x00000F, 0x00002E, 0x000035, 0x000037, 0x00003B, 0x00003F, 0x00004F, 0x000056, 0x000057, 0x000070, 0x000075, 0x000076, 0x000077, 0x00007F, };
   
 
-        int[][] room_sprites = new int[292][];
 
         //ROM_DATA[0x0271E2 + (i * 2)] = ((byte)pctosnes(0x120090 + (i* 14)));
         //ROM_DATA[0x0271E2 + (i * 2) + 1] = ((byte)(pctosnes((0x120090 + (i* 14))) >> 8));

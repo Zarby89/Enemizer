@@ -10,8 +10,9 @@ namespace EnemizerLibrary
     {
         public void Randomize_Dungeons_Sprite(bool absorbable)
         {
+            var roomSprites = new RoomSpriteCollection();
 
-            foreach (int room in randomized_rooms)
+            foreach (int room in roomSprites.randomized_rooms)
             {
 
                 while (true)
@@ -188,7 +189,7 @@ namespace EnemizerLibrary
 
 
 
-                    if (room_sprites[room].Length != 0)
+                    if (roomSprites.RoomSprites[room].Length != 0)
                     {
                         //we finally have a sprite_group that contain good subset for that room
                         List<byte> sprites = new List<byte>(); //create a new list of sprite that can possibly be in the room
@@ -265,7 +266,7 @@ namespace EnemizerLibrary
                         }
 
                         //for each sprites address in the room we are currently modifying
-                        for (int i = 0; i < room_sprites[room].Length; i++)
+                        for (int i = 0; i < roomSprites.RoomSprites[room].Length; i++)
                         {
                             byte selected_sprite = sprites[rand.Next(real_sprites)];
                             //Select a new sprite from the sprites list we will put at that address
@@ -300,7 +301,7 @@ namespace EnemizerLibrary
                             }
 
 
-                            if (room_sprites[room][i] == 0x04DE29)
+                            if (roomSprites.RoomSprites[room][i] == 0x04DE29)
                             {
                                 if (selected_sprite == 0x7D | selected_sprite == 0x8A | selected_sprite == 0x61 |
                                      selected_sprite == 0x15)
@@ -313,7 +314,7 @@ namespace EnemizerLibrary
                             for (int j = 0; j < key_sprite.Length; j++)
                             {
                                 //Check if the sprite address we are modifying is a key drop sprite then it need to be a killable sprite
-                                if (room_sprites[room][i] == key_sprite[j])
+                                if (roomSprites.RoomSprites[room][i] == key_sprite[j])
                                 {
                                     byte protection_try = 0;
                                     while (true)
@@ -365,16 +366,16 @@ namespace EnemizerLibrary
                             }*/
                             if (room == 151)
                             {
-                                ROM_DATA[room_sprites[room][i] - 2] = 0x15;
-                                ROM_DATA[room_sprites[room][i] - 1] = 0x07;
+                                ROM_DATA[roomSprites.RoomSprites[room][i] - 2] = 0x15;
+                                ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = 0x07;
                             }
 
 
 
                             //if (fail) { continue; }
                             //Modify the sprite in the ROM / also set all overlord sprites on normal sprites to prevent any crashes
-                            ROM_DATA[room_sprites[room][i]] = selected_sprite;
-                            ROM_DATA[room_sprites[room][i] - 1] = (byte)(ROM_DATA[room_sprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
+                            ROM_DATA[roomSprites.RoomSprites[room][i]] = selected_sprite;
+                            ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = (byte)(ROM_DATA[roomSprites.RoomSprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
                                                                                                                      //extra_roll = 0;
                         }
                     }

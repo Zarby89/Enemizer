@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BossRandomization.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />
     <Compile Include="DungeonsSpritesRandomization.cs" />
