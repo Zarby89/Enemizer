@@ -58,7 +58,7 @@
             this.healthLabel = new System.Windows.Forms.Label();
             this.randomizeEnemiesHealthTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesHealthCheckbox = new System.Windows.Forms.CheckBox();
-            this.typeLabel = new System.Windows.Forms.Label();
+            this.randomizationTypeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.randomizationTypeTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesCheckbox = new System.Windows.Forms.CheckBox();
@@ -290,7 +290,7 @@
             this.tabPage1.Controls.Add(this.healthLabel);
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthCheckbox);
-            this.tabPage1.Controls.Add(this.typeLabel);
+            this.tabPage1.Controls.Add(this.randomizationTypeLabel);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.randomizationTypeTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesCheckbox);
@@ -439,12 +439,12 @@
             // 
             // typeLabel
             // 
-            this.typeLabel.AutoSize = true;
-            this.typeLabel.Location = new System.Drawing.Point(146, 46);
-            this.typeLabel.Name = "typeLabel";
-            this.typeLabel.Size = new System.Drawing.Size(33, 13);
-            this.typeLabel.TabIndex = 3;
-            this.typeLabel.Text = "Basic";
+            this.randomizationTypeLabel.AutoSize = true;
+            this.randomizationTypeLabel.Location = new System.Drawing.Point(146, 46);
+            this.randomizationTypeLabel.Name = "typeLabel";
+            this.randomizationTypeLabel.Size = new System.Drawing.Size(33, 13);
+            this.randomizationTypeLabel.TabIndex = 3;
+            this.randomizationTypeLabel.Text = "Basic";
             // 
             // label1
             // 
@@ -766,7 +766,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label typeLabel;
+        private System.Windows.Forms.Label randomizationTypeLabel;
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.TrackBar randomizeEnemiesHealthTrackbar;
         private System.Windows.Forms.CheckBox randomizeEnemiesHealthCheckbox;

@@ -46,6 +46,8 @@ namespace EnemizerLibrary
 
         public bool RandomizeSpritePalettes { get; set; }
         public bool SetAdvancedSpritePalettes { get; set; }
+        public bool GenerateSpoilers { get; set; }
+        public bool RandomizeLinkSpritePalette { get; set; }
     }
 
     public enum RandomizeEnemiesType

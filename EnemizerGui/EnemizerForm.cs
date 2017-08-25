@@ -240,7 +240,7 @@ namespace Enemizer
 
             if (LoadConfig())
             {
-                update_flags();
+                UpdateFlags();
                 checkForUpdatesCheckbox.Checked = config.CheckForUpdates;
 
                 if (config.CheckForUpdates)
@@ -267,8 +267,6 @@ namespace Enemizer
                     config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFilename));
                     if(config != null)
                     {
-                        randomizeBossesCheckbox.Checked = config.OptionFlags.RandomizeBosses;
-
                         return true;
                     }
                 }
@@ -290,9 +288,99 @@ namespace Enemizer
         }
 
 
-        public void update_flags()
+        public void UpdateFlags()
         {
             // TODO: update optionFlags
+
+            checkForUpdatesCheckbox.Checked = config.CheckForUpdates;
+
+            randomizeLinksPaletteCheckbox.Checked = config.OptionFlags.RandomizeLinkSpritePalette;
+
+            generateSpoilerCheckbox.Checked = config.OptionFlags.GenerateSpoilers;
+
+            // Enemies ----------------
+            randomizeEnemiesCheckbox.Checked = config.OptionFlags.RandomizeEnemies;
+            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+
+            randomizationTypeTrackbar.Value = (int)config.OptionFlags.RandomizeEnemiesType;
+            randomizationTypeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+
+            randomizeEnemiesHealthCheckbox.Checked = config.OptionFlags.RandomizeEnemyHealthRange;
+            randomizeEnemiesHealthTrackbar.Enabled = config.OptionFlags.RandomizeEnemyHealthRange;
+
+            randomizeEnemiesHealthTrackbar.Value = config.OptionFlags.RandomizeEnemyHealthRangeAmount / 2; // TODO: don't hardcode magic numbers
+            healthLabel.Text = $"±{config.OptionFlags.RandomizeEnemyHealthRangeAmount}%";
+
+            randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
+            allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+
+            allowZeroDamageCheckbox.Checked = config.OptionFlags.AllowEnemyZeroDamage;
+
+            easyModeEscapeCheckbox.Checked = config.OptionFlags.EasyModeEscape;
+
+            allowAbsorbableItemsCheckbox.Checked = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+
+            absorbableItemsSpawnrateTrackbar.Value = config.OptionFlags.AbsorbableSpawnRate / 5; // TODO: don't hardcode magic numbers
+            spawnrateLabel.Text = $"{config.OptionFlags.AbsorbableSpawnRate}%";
+
+            for(int i=0; i<absorbableItemsChecklist.Items.Count; i++)
+            {
+                var item = absorbableItemsChecklist.Items[i];
+                bool isSet = false;
+                try
+                {
+
+                    var type = EnumEx.GetValueFromDescription<AbsorbableTypes>(item.ToString());
+
+                    if (config.OptionFlags.AbsorbableTypes.TryGetValue(type, out isSet))
+                    {
+                        absorbableItemsChecklist.SetItemChecked(i, isSet);
+                    }
+                }
+                catch
+                {
+                    // probably a value that wasn't in our AbsorbableTypes enum
+                    absorbableItemsChecklist.SetItemChecked(i, false);
+                }
+            }
+
+
+            // Bosses ----------------
+
+            randomizeBossesCheckbox.Checked = config.OptionFlags.RandomizeBosses;
+            bossRandomizationTypesTrackbar.Enabled = config.OptionFlags.RandomizeBosses;
+
+            bossRandomizationTypesTrackbar.Value = (int)config.OptionFlags.RandomizeBossesType;
+            typebossLabel.Text = config.OptionFlags.RandomizeBossesType.ToString();
+
+            randomizeBossHealthCheckbox.Checked = config.OptionFlags.RandomizeBossHealth;
+            bossHealthRandomizationTrackbar.Enabled = config.OptionFlags.RandomizeBossHealth;
+
+            bossHealthRandomizationTrackbar.Value = (100 - config.OptionFlags.RandomizeBossHealthMinAmount) / 5; // TODO: don't hardcode magic numbers
+            bosshealthLabel.Text = $"{config.OptionFlags.RandomizeBossHealthMinAmount}% - {config.OptionFlags.RandomizeBossHealthMaxAmount}%";
+
+            randomizeBossDamageCheckbox.Checked = config.OptionFlags.RandomizeBossDamage;
+            bossDamageRandomizationTrackbar.Enabled = config.OptionFlags.RandomizeBossDamage;
+
+            bossDamageRandomizationTrackbar.Value = (100 - config.OptionFlags.RandomizeBossDamageMinAmount) / 5; // TODO: don't hardcode magic numbers
+            bossdamageLabel.Text = $"{config.OptionFlags.RandomizeBossDamageMinAmount}% - {config.OptionFlags.RandomizeBossDamageMaxAmount}%";
+
+            randomizeBossBehaviorCheckbox.Checked = config.OptionFlags.RandomizeBossBehavior;
+
+            // Palettes ----------------
+            randomizeDungeonPalettesCheckbox.Checked = config.OptionFlags.RandomizeDungeonPalettes;
+            setBlackoutModeCheckbox.Enabled = config.OptionFlags.RandomizeDungeonPalettes;
+
+            setBlackoutModeCheckbox.Checked = config.OptionFlags.SetBlackoutMode;
+
+            randomizeOverworldPalettesCheckbox.Checked = config.OptionFlags.RandomizeOverworldPalettes;
+
+            randomizeSpritePalettesBasicCheckbox.Checked = config.OptionFlags.RandomizeSpritePalettes;
+            randomizeSpritePalettesAdvancedCheckbox.Enabled = config.OptionFlags.RandomizeSpritePalettes;
+
+            randomizeSpritePalettesAdvancedCheckbox.Checked = config.OptionFlags.SetAdvancedSpritePalettes;
 
             //int flagsText = 0;
             //for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
@@ -358,6 +446,7 @@ namespace Enemizer
             {
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to use random palette for link it can looks really really bad\nFor better result use link original sprite", "Confirmation", MessageBoxButtons.YesNo);
                 randomizeLinksPaletteCheckbox.Checked = (dialogResult == DialogResult.Yes);
+                config.OptionFlags.RandomizeLinkSpritePalette = randomizeLinksPaletteCheckbox.Checked;
             }
         }
 
@@ -401,7 +490,7 @@ namespace Enemizer
 
         private void generateSpoilerCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            config.GenerateSpoilers = generateSpoilerCheckbox.Checked;
+            config.OptionFlags.GenerateSpoilers = generateSpoilerCheckbox.Checked;
             SaveConfig();
         }
 
@@ -419,7 +508,7 @@ namespace Enemizer
         {
             //typeLabel.Text = typeString[typeTrackbar.Value];
             config.OptionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)randomizationTypeTrackbar.Value;
-            typeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+            randomizationTypeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
             SaveConfig();
         }
 
