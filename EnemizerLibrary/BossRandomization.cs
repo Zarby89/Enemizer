@@ -480,7 +480,7 @@ namespace EnemizerLibrary
                     int did = 0;
                 foreach (DungeonProperties d in dungeons)
                 {
-                    if (spoiler)
+                    if (optionFlags.GenerateSpoilers)
                     {
                         spoilerfile.WriteLine(d.name + " : " + bossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[itemsAddress[did]]);
                     }

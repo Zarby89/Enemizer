@@ -14,7 +14,7 @@ namespace EnemizerLibrary
     {
         Random rand;
         RomData ROM_DATA;
-        int[] flags;
+
         //194 for firesnake
         //All the sprites address that are dropping keys //check 192,193,
         int[] smallCorridors_sprites = { 0x04DE29 };
@@ -79,89 +79,44 @@ namespace EnemizerLibrary
         byte[] bowSprites = {0x83,0x84};
         byte[] hammerSprites = { 0x8E };
         StreamWriter spoilerfile;
-        bool spoiler = false;
 
-        public Randomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "", bool spoiler = false, bool linkrandompalette = false) //Initialization of the randomization
+        OptionFlags optionFlags;
+
+        public Randomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "") //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]
             //We need to patch the ROM first move all headers from their original location to 0x120090
             //Save the ROM as a new file instead of overwriting the original one
             //Save the flags used in a file to remember the last flags that were used
-            this.flags = flags;
             this.ROM_DATA = new RomData(ROM_DATA);
-            this.spoiler = spoiler;
+            this.optionFlags = optionFlags;
+
             rand = new Random(seed);
-            if (skin != "Default")
+
+            if (skin != "Default" && skin != "")
             {
-                if (skin != "")
-                {
-                    if (skin == "Random")
-                    {
-                        string[] skins = Directory.GetFiles("sprites\\");
-                        skin = skins[rand.Next(skins.Length)];
-                    }
-                    FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
-                    byte[] skin_data = new byte[0x7078];
-                    fsx.Read(skin_data, 0, 0x7078);
-                    fsx.Close();
-                    for (int i = 0; i < 0x7000; i++)
-                    {
-                        this.ROM_DATA[0x80000 + i] = skin_data[i];
-                    }
-                    for (int i = 0; i < 0x78; i++)
-                    {
-                        this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
-                    }
-
-                }
-
+                ChangeSkin(skin);
             }
 
-            if (linkrandompalette)
+            if (optionFlags.RandomizeLinkSpritePalette)
             {
-                Color c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (1 * 2), c, 0);
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (2 * 2), c, 2);
-                setColor(0xDD308 + (3 * 2), c, 0);
-                setColor(0xDD308 + (12 * 2), c, 0);
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (5 * 2), c, 0);
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (6 * 2), c, 0);
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (7 * 2), c, 0);
-
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (8 * 2), c, 2);
-                setColor(0xDD308 + (9 * 2), c, 0);
-
-                c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
-                setColor(0xDD308 + (10 * 2), c, 2);
-                setColor(0xDD308 + (11 * 2), c, 0);
-
+                MakeRandomLinkSpritePalette();
             }
 
 
-            if (spoiler)
+            if (optionFlags.GenerateSpoilers)
             {
                 spoilerfile = new StreamWriter(seed.ToString() + " Spoiler.txt");
          
                 spoilerfile.WriteLine("Spoiler Log Seed : " + seed.ToString());
-
             }
 
             create_subset_gfx();
+
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
-                
                 create_sprite_group();
                 patch_sprite_group();
                 create_rooms_sprites();
@@ -175,40 +130,17 @@ namespace EnemizerLibrary
                 create_overworld_sprites();
             }
 
-
-            //flags = 1;
-            //Do the randomization based on flags!
-            bool absorbable = optionFlags.EnemiesAbsorbable;
-            bool bossmadness = optionFlags.BossMadness;
-            //flag[4] = absorbable%
-            //flag[5] = absorbable_items (bitwise)
-
-                
-            /*------------------
-            |      Flags Informations        
-            |0x01|1 - Dungeons Sprites Rand.
-            |0x02|2 - Overworld Sprites Rand.
-            |0x04|3 - Dungeons Palettes Rand.
-            |0x08|4 - Sprite Palettes Rand.
-            |0x10|5 - Oveworld Palettes Rand.
-            |0x20|6 - Sprites HP Rand.
-            |0x40|7 - Sprites DMG Rand.
-            |0x80|8 - Sprites HP 0
-            |0x100|9 - Bosses Shuffle
-            |0x200|10 - Absorbable Sprites
-            |0x400|11 - Bosses Madness
-             */
              create_dungeons_properties();
 
             if(optionFlags.RandomizeEnemies)
             {
-                Randomize_Dungeons_Sprite(absorbable);
+                Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable);
             }
 
             if (optionFlags.RandomizeEnemies)
             {
                 //WIP
-                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, this.absorbable_sprites, absorbable);
+                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, this.absorbable_sprites, optionFlags.EnemiesAbsorbable);
             }
 
             if (optionFlags.RandomizeEnemyHealthRange)
@@ -222,42 +154,56 @@ namespace EnemizerLibrary
             }
             //if (((flags[2]) == 0)) { Set_Sprites_ZeroHP(); } // flags[2] is optionFlags.RandomizeEnemyDamage
 
+
+
+
             if (optionFlags.RandomizeBosses)
             {
-                Randomize_Bosses(bossmadness);
+                Randomize_Bosses(optionFlags.BossMadness);
             }
             
-            //if ((flags & 0x4000) == 0x4000)
-            //{
+            if(optionFlags.RandomizePots)
+            {
                 randomizePots(); //default on for now
-            //}
+            }
+
             //reset seed for all these values so they can be optional
             rand = new Random(seed);
-           // if ((flags & 0x04) == 0x04) {  }
-            Randomize_Dungeons_Palettes();
+            if (optionFlags.RandomizeDungeonPalettes)
+            {
+                Randomize_Dungeons_Palettes();
+            }
+
             rand = new Random(seed);
-            Randomize_Sprites_Palettes();
-            //if ((flags & 0x08) == 0x08) { }
+            if (optionFlags.RandomizeSpritePalettes)
+            {
+                Randomize_Sprites_Palettes();
+            }
+
             rand = new Random(seed);
-            
-           // if ((flags & 0x10) == 0x10) {  } //WIP
-            Randomize_Overworld_Palettes();
+            if (optionFlags.RandomizeOverworldPalettes)
+            {
+                Randomize_Overworld_Palettes();
+            }
+
             rand = new Random(seed);
-            //if ((flags & 0x1000) == 0x1000) { shuffle_music(); }
-            /*if ((flags & 0x800) == 0x800)
+            if(optionFlags.ShuffleMusic)
+            {
+                shuffle_music();
+            }
+
+            if(optionFlags.SetBlackoutMode)
             {
                 black_all_dungeons();
             }
-            if (spoiler)
-            {
-                spoilerfile.Close();
-            }*/
+
 
             //Remove Trinexx Ice Floor : 
             this.ROM_DATA[0x04B37E] = 0xEA;
             this.ROM_DATA[0x04B37E+1] = 0xEA;
             this.ROM_DATA[0x04B37E+2] = 0xEA;
             this.ROM_DATA[0x04B37E+3] = 0xEA;
+
             /*this.ROM_DATA[0x5033 + 0x5E] = 0x24;
             this.ROM_DATA[0x5112 + 0x5E] = 0x93;
             this.ROM_DATA[0x51F1 + 0x5E] = 0x57;
@@ -283,7 +229,56 @@ namespace EnemizerLibrary
             MessageBox.Show("Enemizer " + Version.CurrentVersion + " - " + Path.GetFileName(filename) + " Has been created in the enemizer folder !");
         }
 
-        
+        private void MakeRandomLinkSpritePalette()
+        {
+            Color c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (1 * 2), c, 0);
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (2 * 2), c, 2);
+            setColor(0xDD308 + (3 * 2), c, 0);
+            setColor(0xDD308 + (12 * 2), c, 0);
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (5 * 2), c, 0);
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (6 * 2), c, 0);
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (7 * 2), c, 0);
+
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (8 * 2), c, 2);
+            setColor(0xDD308 + (9 * 2), c, 0);
+
+            c = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+            setColor(0xDD308 + (10 * 2), c, 2);
+            setColor(0xDD308 + (11 * 2), c, 0);
+        }
+
+        private void ChangeSkin(string skin)
+        {
+            if (skin == "Random")
+            {
+                string[] skins = Directory.GetFiles("sprites\\");
+                skin = skins[rand.Next(skins.Length)];
+            }
+            FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
+            byte[] skin_data = new byte[0x7078];
+            fsx.Read(skin_data, 0, 0x7078);
+            fsx.Close();
+            for (int i = 0; i < 0x7000; i++)
+            {
+                this.ROM_DATA[0x80000 + i] = skin_data[i];
+            }
+            for (int i = 0; i < 0x78; i++)
+            {
+                this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
+            }
+        }
+
 
 
         public bool scan_gtower(byte item) //0x08 = ice rod, 0x07 = fire rod

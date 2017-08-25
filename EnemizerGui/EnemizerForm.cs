@@ -287,6 +287,21 @@ namespace Enemizer
 
         private void generateRomButton_Click(object sender, EventArgs e)
         {
+            int seed = 0;
+            if (String.IsNullOrEmpty(seedNumberTextbox.Text))
+            {
+                seed = rand.Next();
+            }
+            else
+            {
+                // TODO: add validation to the textbox so it can't be anything but a number
+                if (!int.TryParse(seedNumberTextbox.Text, out seed))
+                {
+                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.");
+                    return;
+                }
+            }
+
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
             ofd.Title = "Select a Randomizer Rom File";
@@ -297,19 +312,10 @@ namespace Enemizer
                 fs.Read(rom_data, 0, (int)fs.Length);
                 fs.Close();
 
-                /*int seed = 0;
-                if (textBox1.Text == "")
-                {
-                    seed = rand.Next();
-                }
-                else
-                {
-                    seed = int.Parse(textBox1.Text);
-                }*/
-
                 SaveConfig();
 
-                Randomization randomize = new Randomization(rand.Next(), config.OptionFlags, rom_data, ofd.FileName, (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString(), generateSpoilerCheckbox.Checked, randomizeLinksPaletteCheckbox.Checked);
+                var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
+                Randomization randomize = new Randomization(seed, config.OptionFlags, rom_data, ofd.FileName, linkSpriteFilename);
             }
         }
 

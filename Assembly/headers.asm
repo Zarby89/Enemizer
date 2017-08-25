@@ -1,7 +1,8 @@
 org $01B5E7
 db #$24 ; New Bank for dungeons header
 
-org $248090
+; fix old pointer table
+org $0471E2
 dw header_room_0
 dw header_room_1
 dw header_room_2
@@ -322,7 +323,7 @@ dw header_room_316
 dw header_room_317
 dw header_room_318
 dw header_room_319
-;00120090
+
 org $248090
 ;Generated room informations
 header_room_0:

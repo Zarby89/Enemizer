@@ -14,7 +14,7 @@ GFX_Kholdstare_Shell:
 incbin shell.gfx
 warnpc $24C001  ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
 
-;Move rooms header at position $248090 : 120090
+;Move rooms header at position $248090 (0x120090)
 incsrc headers.asm
 
 ;org $06F3F6 ;change sprites damage to go up to 128 instead of using 8 damage classes

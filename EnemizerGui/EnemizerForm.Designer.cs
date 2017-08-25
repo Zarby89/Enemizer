@@ -82,6 +82,8 @@
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -98,7 +100,7 @@
             // 
             // generateRomButton
             // 
-            this.generateRomButton.Location = new System.Drawing.Point(486, 251);
+            this.generateRomButton.Location = new System.Drawing.Point(486, 278);
             this.generateRomButton.Name = "generateRomButton";
             this.generateRomButton.Size = new System.Drawing.Size(122, 23);
             this.generateRomButton.TabIndex = 0;
@@ -145,7 +147,7 @@
             // linkSpriteCombobox
             // 
             this.linkSpriteCombobox.FormattingEnabled = true;
-            this.linkSpriteCombobox.Location = new System.Drawing.Point(487, 67);
+            this.linkSpriteCombobox.Location = new System.Drawing.Point(487, 64);
             this.linkSpriteCombobox.Name = "linkSpriteCombobox";
             this.linkSpriteCombobox.Size = new System.Drawing.Size(128, 21);
             this.linkSpriteCombobox.TabIndex = 8;
@@ -154,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(484, 51);
+            this.label3.Location = new System.Drawing.Point(484, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 9;
@@ -163,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(484, 168);
+            this.label4.Location = new System.Drawing.Point(484, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 10;
@@ -176,7 +178,7 @@
             this.weaponSpriteCombobox.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.weaponSpriteCombobox.Location = new System.Drawing.Point(487, 184);
+            this.weaponSpriteCombobox.Location = new System.Drawing.Point(487, 178);
             this.weaponSpriteCombobox.Name = "weaponSpriteCombobox";
             this.weaponSpriteCombobox.Size = new System.Drawing.Size(121, 21);
             this.weaponSpriteCombobox.TabIndex = 11;
@@ -194,7 +196,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(484, 208);
+            this.label5.Location = new System.Drawing.Point(484, 202);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 13);
             this.label5.TabIndex = 15;
@@ -203,7 +205,7 @@
             // generateSpoilerCheckbox
             // 
             this.generateSpoilerCheckbox.AutoSize = true;
-            this.generateSpoilerCheckbox.Location = new System.Drawing.Point(486, 280);
+            this.generateSpoilerCheckbox.Location = new System.Drawing.Point(486, 307);
             this.generateSpoilerCheckbox.Name = "generateSpoilerCheckbox";
             this.generateSpoilerCheckbox.Size = new System.Drawing.Size(126, 17);
             this.generateSpoilerCheckbox.TabIndex = 16;
@@ -218,7 +220,7 @@
             this.completeModificationCombobox.Items.AddRange(new object[] {
             "Normal Sword",
             "Mace"});
-            this.completeModificationCombobox.Location = new System.Drawing.Point(487, 224);
+            this.completeModificationCombobox.Location = new System.Drawing.Point(487, 218);
             this.completeModificationCombobox.Name = "completeModificationCombobox";
             this.completeModificationCombobox.Size = new System.Drawing.Size(121, 21);
             this.completeModificationCombobox.TabIndex = 17;
@@ -226,7 +228,7 @@
             // 
             // checkForUpdatesButton
             // 
-            this.checkForUpdatesButton.Location = new System.Drawing.Point(486, 28);
+            this.checkForUpdatesButton.Location = new System.Drawing.Point(486, 26);
             this.checkForUpdatesButton.Name = "checkForUpdatesButton";
             this.checkForUpdatesButton.Size = new System.Drawing.Size(129, 23);
             this.checkForUpdatesButton.TabIndex = 18;
@@ -237,7 +239,7 @@
             // checkForUpdatesCheckbox
             // 
             this.checkForUpdatesCheckbox.AutoSize = true;
-            this.checkForUpdatesCheckbox.Location = new System.Drawing.Point(487, 8);
+            this.checkForUpdatesCheckbox.Location = new System.Drawing.Point(487, 7);
             this.checkForUpdatesCheckbox.Name = "checkForUpdatesCheckbox";
             this.checkForUpdatesCheckbox.Size = new System.Drawing.Size(135, 17);
             this.checkForUpdatesCheckbox.TabIndex = 19;
@@ -248,7 +250,7 @@
             // 
             // linkSpritePicturebox
             // 
-            this.linkSpritePicturebox.Location = new System.Drawing.Point(487, 94);
+            this.linkSpritePicturebox.Location = new System.Drawing.Point(487, 88);
             this.linkSpritePicturebox.Name = "linkSpritePicturebox";
             this.linkSpritePicturebox.Size = new System.Drawing.Size(128, 48);
             this.linkSpritePicturebox.TabIndex = 20;
@@ -257,7 +259,7 @@
             // randomizeLinksPaletteCheckbox
             // 
             this.randomizeLinksPaletteCheckbox.AutoSize = true;
-            this.randomizeLinksPaletteCheckbox.Location = new System.Drawing.Point(487, 148);
+            this.randomizeLinksPaletteCheckbox.Location = new System.Drawing.Point(487, 142);
             this.randomizeLinksPaletteCheckbox.Name = "randomizeLinksPaletteCheckbox";
             this.randomizeLinksPaletteCheckbox.Size = new System.Drawing.Size(125, 17);
             this.randomizeLinksPaletteCheckbox.TabIndex = 21;
@@ -697,11 +699,29 @@
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(484, 240);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Seed Number";
+            // 
+            // seedNumberTextbox
+            // 
+            this.seedNumberTextbox.Location = new System.Drawing.Point(487, 254);
+            this.seedNumberTextbox.Name = "seedNumberTextbox";
+            this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
+            this.seedNumberTextbox.TabIndex = 24;
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 331);
+            this.Controls.Add(this.seedNumberTextbox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.randomizeLinksPaletteCheckbox);
             this.Controls.Add(this.linkSpritePicturebox);
@@ -795,6 +815,8 @@
         private System.Windows.Forms.CheckBox randomizeSpritePalettesBasicCheckbox;
         private System.Windows.Forms.CheckBox randomizeOverworldPalettesCheckbox;
         private System.Windows.Forms.CheckBox randomizeDungeonPalettesCheckbox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox seedNumberTextbox;
     }
 }
 
