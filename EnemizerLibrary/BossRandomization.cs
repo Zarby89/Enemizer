@@ -126,7 +126,7 @@ namespace EnemizerLibrary
             create_dungeons_properties();
 
             List<byte> bosses = new List<byte>();
-            if (bossMadness == true) // TODO: Zarby is this backwards?
+            if (bossMadness == false)
             {
                 for (byte i = 0; i < 10; i++)
                 {
