@@ -8,6 +8,17 @@ namespace EnemizerLibrary
 {
     public partial class Randomization
     {
+        // TODO: move these
+        private const int SahasrahlaItemAddress = 0x2F1FC;
+        private const int CrystalTypePendant = 0x00;
+        private const int CrystalGreenPendant = 0x04;
+        private const int CrystalTypeCrystal = 0x40;
+        private const int Crystal5 = 0x04;
+        private const int Crystal6 = 0x01;
+        private const int FatFairyItem1Address = 0xE980;
+        private const int FatFairyItem2Address = 0xE983;
+        private const int MasterSwordPedestal = 0x289B0;
+
         //Choose a boss for each rooms swap their pointers and change their position in the room !
         //Pointers of each rooms in PC format with PC Addresses : 
         //Boss Name / Room(DEC) / Pointer Address / PointerSNES / PointerPC
@@ -76,12 +87,12 @@ namespace EnemizerLibrary
 
         //Debugging use only :
 
-        public void Randomize_Bosses(bool shuffle)
+        public void Randomize_Bosses(bool bossMadness)
         {
             bool error = false;
             patch_bosses();
 
-            while (RandomizeBosses(shuffle) != true)
+            while (RandomizeBosses(bossMadness) != true)
             {
 
             }
@@ -109,19 +120,19 @@ namespace EnemizerLibrary
             ROM_DATA[0x04DE81] = 0x00;
         }
 
-        private bool RandomizeBosses(bool shuffle)
+        private bool RandomizeBosses(bool bossMadness)
         {
             dungeons.Clear();
             create_dungeons_properties();
 
             List<byte> bosses = new List<byte>();
-            if (shuffle == true)
+            if (bossMadness == true) // TODO: Zarby is this backwards?
             {
                 for (byte i = 0; i < 10; i++)
                 {
                     bosses.Add(i);
                 }
-                bosses.Add(1); //gtower double
+                bosses.Add(1);//gtower double
                 bosses.Add(5);//gtower double
                 bosses.Add(6);//gtower double
                 Console.WriteLine("All Bosses Added in the pool");
@@ -143,60 +154,60 @@ namespace EnemizerLibrary
             //try to place boss in hera and gtower moldorm first
             //Moldorm,Kholdstare,Vitreous,Helmasaure,Mothula
 
-            //Palace of Darkness can't have Kholdstare
+            //Palace of Darkness can't have Kholdstare. Why?
 
             while (bosses.Count > 0)
             {
-                //Console.WriteLine("Infinite loop?");
-                byte bosschosed = bosses[rand.Next(bosses.Count)];
+                byte selectedBoss = bosses[rand.Next(bosses.Count)];
+
                 if (dungeons[0].boss == 255) //Hera Tower
                 {
-                    bosschosed = bosses[rand.Next(bosses.Count)];
-                    if (bosschosed > 4)
+                    selectedBoss = bosses[rand.Next(bosses.Count)];
+                    if (selectedBoss > 4)
                     {
                         continue;
                     }
-                    if (bosschosed == 0) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
+                    if (selectedBoss == 0) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
                     {
 
-                        if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
+                        if (scan_gtower(ItemConstants.FireRod) || ROM_DATA[MasterSwordPedestal] == ItemConstants.FireRod)
                         {
                             continue;
                         }
                         //if it kholdstare then check if hera drop the green pendant and if sarasrala have a major item
-                        if (CrystalConstants.CrystalTypeAddresses[0] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[0] == CrystalTypePendant) //is pendant?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x04) //if hera is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == CrystalGreenPendant) //if hera is green pendant
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[SahasrahlaItemAddress])) //sarashala items
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (CrystalConstants.CrystalTypeAddresses[0] == 0x40) //is crystal?
+                        if (CrystalConstants.CrystalTypeAddresses[0] == CrystalTypeCrystal) //is crystal?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[0]] == 0x01) //if hera is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[0]] == Crystal5 || ROM_DATA[CrystalConstants.CrystalAddresses[0]] == Crystal6) //if hera is crystal 5 or crystal 6
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[FatFairyItem1Address]) || ItemConstants.ImportantItems.Contains(ROM_DATA[FatFairyItem2Address])) //fat fairy
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x180152]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.TowerOfHeraBossDropItemAddress]))
                         {
                             continue;
                         }
                     }
-                    dungeons[0].boss = bosschosed;
-                    bosses.Remove(bosschosed);
+                    dungeons[0].boss = selectedBoss;
+                    bosses.Remove(selectedBoss);
                 }
 
                 if (dungeons[12].boss == 255) //Gtower Moldorm
                 {
-                    bosschosed = bosses[rand.Next(bosses.Count)];
-                    if (bosschosed > 4)
+                    selectedBoss = bosses[rand.Next(bosses.Count)];
+                    if (selectedBoss > 4)
                     {
                         continue;
                     }
@@ -209,46 +220,17 @@ namespace EnemizerLibrary
                     }*/
 
 
-                    dungeons[12].boss = bosschosed;
-                    bosses.Remove(bosschosed);
+                    dungeons[12].boss = selectedBoss;
+                    bosses.Remove(selectedBoss);
                     //Console.WriteLine("Infinite Trinexxtry");
                 }
 
 
-                //MIGHT NOT NEED THAT CODE ANYMORE IT WAS PREVENTING KHOLDSTARE FROM SPAWNING IN POD BUT WITH NEW CODE IT SHOULD WORK
-                /*if (dungeons[4].boss == 255) //Palace of Darkness can't be kholdstare
-                {
-                    bosschosed = bosses[rand.Next(bosses.Count)];
-                    //NEED TO BE TESTED !!!!!!!!!!!!!
-                    //New Boss code that should allow kholdstare to spawn anywhere
-                    if (bosschosed == 0) {
-
-                        continue;
-                    }
-
-
-                    if (bosschosed == 9) //if we pick trinexx check if hera drop any major items if so then put him elsewhere
-                    {
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x180153]))
-                        {
-                            continue;
-                        }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC]))
-                        {
-                            continue;
-                        }
-                    }
-                    dungeons[4].boss = bosschosed;
-                    bosses.Remove(bosschosed);
-                    //Console.WriteLine("Infinite PoDtry");
-                }*/
-
-
-                byte dungeonChosed = (byte)rand.Next(12);
+                byte selectedDungeon = (byte)rand.Next(12);
                 if (bosses.Contains(8)) //since it can have multiple arrghus place all of them first where there's no drop
                 {
-                    dungeonChosed = (byte)rand.Next(12);
-                    if (dungeons[dungeonChosed].boss != 255)
+                    selectedDungeon = (byte)rand.Next(12);
+                    if (dungeons[selectedDungeon].boss != 255)
                     {
                         continue;
                     }
@@ -258,22 +240,22 @@ namespace EnemizerLibrary
 
                     //Unless it is own dungeon check for crystals/pendants blocks
 
-                    if (dungeonChosed != 7)
+                    if (selectedDungeon != 7)
                     {
 
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == CrystalTypePendant) //is pendant?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == CrystalGreenPendant) //if is green pendant
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[SahasrahlaItemAddress])) //sarashala items
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == 0x40) //is crystal?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == 0x01) //if is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -282,13 +264,13 @@ namespace EnemizerLibrary
                             }
                         }
 
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[selectedDungeon]]))
                         {
                             continue;
                         }
                     }
 
-                    if (scan_gtower(0x0A) || ROM_DATA[0x289B0] == 0x0A)
+                    if (scan_gtower(0x0A) || ROM_DATA[MasterSwordPedestal] == 0x0A)
                     {
 
                         if (dungeons[7].boss == 255)
@@ -304,7 +286,7 @@ namespace EnemizerLibrary
                             return false;
                         }
                     }
-                    dungeons[dungeonChosed].boss = 8;
+                    dungeons[selectedDungeon].boss = 8;
                     bosses.Remove(8);
                 }
 
@@ -312,8 +294,8 @@ namespace EnemizerLibrary
                 //IF Kholdstare is not placed already place him first
                 if (bosses.Contains(0))
                 {
-                    dungeonChosed = (byte)rand.Next(12);
-                    if (dungeons[dungeonChosed].boss != 255)
+                    selectedDungeon = (byte)rand.Next(12);
+                    if (dungeons[selectedDungeon].boss != 255)
                     {
                         continue;
                     }
@@ -322,36 +304,37 @@ namespace EnemizerLibrary
 
                     //Unless it is own dungeon check for crystals/pendants blocks
 
-                    if (dungeonChosed != 8)
+                    if (selectedDungeon != 8)
                     {
 
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == CrystalTypePendant) //is pendant?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == CrystalGreenPendant) //if is green pendant
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[SahasrahlaItemAddress])) //sarashala items
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal?
+
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == CrystalTypeCrystal) //is crystal?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == Crystal5 || ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == Crystal6) //if is crystal 5 or crystal 6
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[FatFairyItem1Address]) || ItemConstants.ImportantItems.Contains(ROM_DATA[FatFairyItem2Address])) //fat fairy
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[selectedDungeon]]))
                         {
                             continue;
                         }
                     }
 
-                    if (scan_gtower(0x07) || ROM_DATA[0x289B0] == 0x07)
+                    if (scan_gtower(0x07) || ROM_DATA[MasterSwordPedestal] == 0x07)
                     {
 
                         if (dungeons[8].boss == 255)//???????????
@@ -368,21 +351,21 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    dungeons[dungeonChosed].boss = 0;
+                    dungeons[selectedDungeon].boss = 0;
                     bosses.Remove(0);
 
                     //IF Trinexx is not placed already place him first
                 }
 
 
-                dungeonChosed = (byte)rand.Next(12);
+                selectedDungeon = (byte)rand.Next(12);
                 //IF Kholdstare is not placed already place him first
                 if (bosses.Contains(9)) //since it can have multiple kholdstare place all of them first where there's no drop
                 {
-                    dungeonChosed = (byte)rand.Next(12);
-                    if (dungeons[dungeonChosed].boss != 255)
+                    selectedDungeon = (byte)rand.Next(12);
+                    if (dungeons[selectedDungeon].boss != 255)
                     {
-                        dungeonChosed = (byte)rand.Next(12);
+                        selectedDungeon = (byte)rand.Next(12);
                     }
 
 
@@ -390,22 +373,22 @@ namespace EnemizerLibrary
 
                     //Unless it is own dungeon check for crystals/pendants blocks
 
-                    if (dungeonChosed != 9)
+                    if (selectedDungeon != 9)
                     {
 
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x00) //is pendant?
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == 0x00) //is pendant?
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04) //if is green pendant
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == 0x04) //if is green pendant
                             {
-                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[0x2F1FC])) //sarashala items
+                                if (ItemConstants.ImportantItems.Contains(ROM_DATA[SahasrahlaItemAddress])) //sarashala items
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (CrystalConstants.CrystalTypeAddresses[dungeonChosed] == 0x40) //is crystal
+                        if (CrystalConstants.CrystalTypeAddresses[selectedDungeon] == 0x40) //is crystal
                         {
-                            if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonChosed]] == 0x01) //if is crystal 5 or crystal 6
+                            if (ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == 0x04 || ROM_DATA[CrystalConstants.CrystalAddresses[selectedDungeon]] == 0x01) //if is crystal 5 or crystal 6
                             {
                                 if (ItemConstants.ImportantItems.Contains(ROM_DATA[0xE980]) || ItemConstants.ImportantItems.Contains(ROM_DATA[0xE983])) //fat fairy
                                 {
@@ -414,14 +397,14 @@ namespace EnemizerLibrary
                                 }
                             }
                         }
-                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonChosed]]))
+                        if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[selectedDungeon]]))
                         {
                             continue;
                         }
                     }
 
 
-                    if (scan_gtower(0x07) || scan_gtower(0x08) || ROM_DATA[0x289B0] == 0x07 || ROM_DATA[0x289B0] == 0x08)
+                    if (scan_gtower(ItemConstants.FireRod) || scan_gtower(ItemConstants.IceRod) || ROM_DATA[MasterSwordPedestal] == ItemConstants.FireRod || ROM_DATA[MasterSwordPedestal] == ItemConstants.IceRod)
                     {
 
 
@@ -438,17 +421,17 @@ namespace EnemizerLibrary
                             return false;
                         }
                     }
-                    dungeons[dungeonChosed].boss = 9;
+                    dungeons[selectedDungeon].boss = 9;
                     bosses.Remove(9);
 
                     //IF Trinexx is not placed already place him first
                 }
-                dungeonChosed = (byte)rand.Next(12);
-                if (dungeons[dungeonChosed].boss == 255)
+                selectedDungeon = (byte)rand.Next(12);
+                if (dungeons[selectedDungeon].boss == 255)
                 {
-                    bosschosed = bosses[rand.Next(bosses.Count)];
-                    dungeons[dungeonChosed].boss = bosschosed;
-                    bosses.Remove(bosschosed);
+                    selectedBoss = bosses[rand.Next(bosses.Count)];
+                    dungeons[selectedDungeon].boss = selectedBoss;
+                    bosses.Remove(selectedBoss);
                 }
                 else
                 {
@@ -475,19 +458,19 @@ namespace EnemizerLibrary
             //TESTING CODE
             //TESTING CODE
             //TESTING CODE
-            foreach (DungeonProperties d in dungeons)
-            {
-                /* int r = rand.Next(2);
-                 if (r == 0)
-                 {*/
-                d.boss = 0;
-                //}
-                /*if (r == 1)
-                {
-                    d.boss = 9;
-                }*/
+            //foreach (DungeonProperties d in dungeons)
+            //{
+            //    /* int r = rand.Next(2);
+            //     if (r == 0)
+            //     {*/
+            //    d.boss = 0;
+            //    //}
+            //    /*if (r == 1)
+            //    {
+            //        d.boss = 9;
+            //    }*/
 
-            }
+            //}
             //TESTING CODE
             //TESTING CODE
             //TESTING CODE

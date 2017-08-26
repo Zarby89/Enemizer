@@ -47,7 +47,6 @@ namespace EnemizerLibrary
             Compass = 0x25,
             Crystal_WILL_CRASH_GAME = 0x20,
             Ether = 0x10,
-            FireRod = 0x07,
             Flippers = 0x1E,
             GreenPotion_NoBottle = 0x2F,
             Hammer = 0x09,
@@ -56,6 +55,7 @@ namespace EnemizerLibrary
             Heart = 0x42,
             BossHeart = 0x3E,
             Hookshot = 0x0A,
+            FireRod = 0x07,
             IceRod = 0x08,
             Key = 0x24,
             L1SwordAndShield = 0x00,
@@ -156,15 +156,18 @@ namespace EnemizerLibrary
             ItemConstants.ProgressiveSword,
             ItemConstants.ProgressiveLiftingGlove
         };
+
+        public static int
+            MasterSwordPedestalAddress = 0x289B0;
     }
 
     public class BossConstants
     {
         public static byte
-            KholdStareGraphics = 22,
+            KholdstareGraphics = 22,
             MoldormGraphics = 12,
             MothulaGraphics = 26,
-            VitriousGraphics = 22,
+            VitreousGraphics = 22,
             HelmasaurGraphics = 21,
             ArmosGraphics = 9,
             LanmolaGraphics = 11,
@@ -174,25 +177,25 @@ namespace EnemizerLibrary
 
         public static byte[] BossGraphics = 
         {
-            KholdStareGraphics, MoldormGraphics, MothulaGraphics, VitriousGraphics,
+            KholdstareGraphics, MoldormGraphics, MothulaGraphics, VitreousGraphics,
             HelmasaurGraphics, ArmosGraphics, LanmolaGraphics, BlindGraphics, ArmosGraphics, TrinexxGraphics
         };
 
         public static string
-            KholdstareName = "Khold",
+            KholdstareName = "Kholdstare",
             MoldormName = "Moldorm",
-            MothulaName = "Moth",
-            VitriousName = "Vitty",
-            HelmasaurName = "Helma",
-            ArmosName = "Armos",
-            LanmolaName = "Lanmo",
+            MothulaName = "Mothula",
+            VitreousName = "Vitreous",
+            HelmasaurName = "Helmasaur King",
+            ArmosName = "Armos Knights",
+            LanmolaName = "Lanmola",
             BlindName = "Blind",
             ArrghusName = "Arrghus",
             TrinexxName = "Trinexx";
 
         public static string[] BossNames =
         {
-            KholdstareName, MoldormName, MothulaName, VitriousName, HelmasaurName,
+            KholdstareName, MoldormName, MothulaName, VitreousName, HelmasaurName,
             ArmosName, LanmolaName, BlindName, ArrghusName, TrinexxName
         };
 
@@ -229,10 +232,10 @@ namespace EnemizerLibrary
         };
 
         public static byte[] 
-            KholdStarePointer = { 0x01, 0xEA },
+            KholdstarePointer = { 0x01, 0xEA },
             MoldormPointer = { 0xC3, 0xD9 },
             MothulaPointer = { 0x31, 0xDC },
-            VitriousPointer = { 0x57, 0xE4 },
+            VitreousPointer = { 0x57, 0xE4 },
             HelmasaurPointer = { 0x49, 0xE0 },
             ArmosPointer = { 0x87, 0xE8 },
             LanmolaPointer = { 0xCB, 0xDC },
@@ -242,10 +245,10 @@ namespace EnemizerLibrary
 
         public static byte[][] BossPointers =
         {
-            KholdStarePointer,
+            KholdstarePointer,
             MoldormPointer,
             MothulaPointer,
-            VitriousPointer,
+            VitreousPointer,
             HelmasaurPointer,
             ArmosPointer,
             LanmolaPointer,

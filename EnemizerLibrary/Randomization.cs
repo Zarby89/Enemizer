@@ -276,33 +276,33 @@ namespace EnemizerLibrary
 
         public bool scan_gtower(byte item) //0x08 = ice rod, 0x07 = fire rod
         {
-            if (ROM_DATA[0xEAB8] == item) { return true; };
-            if (ROM_DATA[0xEABB] == item) { return true; };
-            if (ROM_DATA[0xEABE] == item) { return true; };
-            if (ROM_DATA[0xEAC1] == item) { return true; };
-            if (ROM_DATA[0xEAD3] == item) { return true; };
-            if (ROM_DATA[0xEAD6] == item) { return true; };
-            if (ROM_DATA[0xEAD9] == item) { return true; };
-            if (ROM_DATA[0xEADC] == item) { return true; };
-            if (ROM_DATA[0xEAC4] == item) { return true; };
-            if (ROM_DATA[0xEAC7] == item) { return true; };
-            if (ROM_DATA[0xEACA] == item) { return true; };
-            if (ROM_DATA[0xEACD] == item) { return true; };
-            if (ROM_DATA[0xEADF] == item) { return true; };
-            if (ROM_DATA[0xEAE2] == item) { return true; };
-            if (ROM_DATA[0xEAE5] == item) { return true; };
-            if (ROM_DATA[0xEAE8] == item) { return true; };
-            if (ROM_DATA[0xEAEB] == item) { return true; };
-            if (ROM_DATA[0xEAEE] == item) { return true; };
-            if (ROM_DATA[0xEAD0] == item) { return true; };
-            if (ROM_DATA[0xEAFD] == item) { return true; };
-            if (ROM_DATA[0xEB00] == item) { return true; };
-            if (ROM_DATA[0xEB03] == item) { return true; };
-            if (ROM_DATA[0xEB06] == item) { return true; };
-            if (ROM_DATA[0xEAF4] == item) { return true; };
-            if (ROM_DATA[0xEAF7] == item) { return true; };
-            if (ROM_DATA[0xEAF1] == item) { return true; };
-            if (ROM_DATA[0x180161] == item) { return true; };
+            if (ROM_DATA[0xEAB8] == item) { return true; }
+            if (ROM_DATA[0xEABB] == item) { return true; }
+            if (ROM_DATA[0xEABE] == item) { return true; }
+            if (ROM_DATA[0xEAC1] == item) { return true; }
+            if (ROM_DATA[0xEAD3] == item) { return true; }
+            if (ROM_DATA[0xEAD6] == item) { return true; }
+            if (ROM_DATA[0xEAD9] == item) { return true; }
+            if (ROM_DATA[0xEADC] == item) { return true; }
+            if (ROM_DATA[0xEAC4] == item) { return true; }
+            if (ROM_DATA[0xEAC7] == item) { return true; }
+            if (ROM_DATA[0xEACA] == item) { return true; }
+            if (ROM_DATA[0xEACD] == item) { return true; }
+            if (ROM_DATA[0xEADF] == item) { return true; }
+            if (ROM_DATA[0xEAE2] == item) { return true; }
+            if (ROM_DATA[0xEAE5] == item) { return true; }
+            if (ROM_DATA[0xEAE8] == item) { return true; }
+            if (ROM_DATA[0xEAEB] == item) { return true; }
+            if (ROM_DATA[0xEAEE] == item) { return true; }
+            if (ROM_DATA[0xEAD0] == item) { return true; }
+            if (ROM_DATA[0xEAFD] == item) { return true; }
+            if (ROM_DATA[0xEB00] == item) { return true; }
+            if (ROM_DATA[0xEB03] == item) { return true; }
+            if (ROM_DATA[0xEB06] == item) { return true; }
+            if (ROM_DATA[0xEAF4] == item) { return true; }
+            if (ROM_DATA[0xEAF7] == item) { return true; }
+            if (ROM_DATA[0xEAF1] == item) { return true; }
+            if (ROM_DATA[0x180161] == item) { return true; }
 
             return false;
         }

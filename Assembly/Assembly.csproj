@@ -43,7 +43,9 @@
   <PropertyGroup>
     <PreBuildEvent>cd $(ProjectDir)
 "..\bincomp\bincomp.exe" bosses_moved.asm patchData.json
-copy patchData.json $(SolutionDir)</PreBuildEvent>
+copy patchData.json $(SolutionDir)
+copy patchData.json $(SolutionDir)\EnemizerTests\bin\Debug
+</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
