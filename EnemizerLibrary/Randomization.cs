@@ -87,7 +87,7 @@ namespace EnemizerLibrary
 
         }
 
-        public RomData MakeRandomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string filename = "newrom.sfc", string skin = "") //Initialization of the randomization
+        public RomData MakeRandomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string skin = "") //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]

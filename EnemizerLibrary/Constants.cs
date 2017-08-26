@@ -117,7 +117,7 @@ namespace EnemizerLibrary
             BigKeys = 0x90, // not sure what this is compared to big key
             SmallKeys = 0xA0;
 
-        public static IEnumerable<byte> ImportantItems = new byte[]
+        public static readonly IEnumerable<byte> ImportantItems = new byte[]
         {
             ItemConstants.BigKey,
             ItemConstants.BookOfMudora,
@@ -157,13 +157,13 @@ namespace EnemizerLibrary
             ItemConstants.ProgressiveLiftingGlove
         };
 
-        public static int
+        public static readonly int
             MasterSwordPedestalAddress = 0x289B0;
     }
 
     public class BossConstants
     {
-        public static byte
+        public static readonly byte
             KholdstareGraphics = 22,
             MoldormGraphics = 12,
             MothulaGraphics = 26,
@@ -175,13 +175,13 @@ namespace EnemizerLibrary
             ArrghusGraphics = 20,
             TrinexxGraphics = 23;
 
-        public static byte[] BossGraphics = 
+        public static readonly byte[] BossGraphics = 
         {
             KholdstareGraphics, MoldormGraphics, MothulaGraphics, VitreousGraphics,
             HelmasaurGraphics, ArmosGraphics, LanmolaGraphics, BlindGraphics, ArmosGraphics, TrinexxGraphics
         };
 
-        public static string
+        public static readonly string
             KholdstareName = "Kholdstare",
             MoldormName = "Moldorm",
             MothulaName = "Mothula",
@@ -193,13 +193,13 @@ namespace EnemizerLibrary
             ArrghusName = "Arrghus",
             TrinexxName = "Trinexx";
 
-        public static string[] BossNames =
+        public static readonly string[] BossNames =
         {
             KholdstareName, MoldormName, MothulaName, VitreousName, HelmasaurName,
             ArmosName, LanmolaName, BlindName, ArrghusName, TrinexxName
         };
 
-        public static int
+        public static readonly int
             TowerOfHeraBossDropItemAddress = 0x180152,
             EasternPalaceBossDropItemAddress = 0x180150,
             SkullWoodsBossDropItemAddress = 0x180155,
@@ -214,7 +214,7 @@ namespace EnemizerLibrary
             GanonTower2BossDropItemAddress = 0x0,
             GanonTower3BossDropItemAddress = 0x0;
 
-        public static int[] BossDropItemAddresses =  
+        public static readonly int[] BossDropItemAddresses =  
         {
             TowerOfHeraBossDropItemAddress,
             EasternPalaceBossDropItemAddress,
@@ -231,7 +231,7 @@ namespace EnemizerLibrary
             GanonTower3BossDropItemAddress
         };
 
-        public static byte[] 
+        public static readonly byte[] 
             KholdstarePointer = { 0x01, 0xEA },
             MoldormPointer = { 0xC3, 0xD9 },
             MothulaPointer = { 0x31, 0xDC },
@@ -243,7 +243,7 @@ namespace EnemizerLibrary
             ArrghusPointer = { 0x97, 0xD9 },
             TrinexxPointer = { 0xBA, 0xE5 };
 
-        public static byte[][] BossPointers =
+        public static readonly byte[][] BossPointers =
         {
             KholdstarePointer,
             MoldormPointer,
@@ -256,12 +256,24 @@ namespace EnemizerLibrary
             ArrghusPointer,
             TrinexxPointer
         };
+
+        public static readonly byte
+            KholdstareBossId = 0,
+            MoldormBossId = 1,
+            MothulaBossId = 2,
+            VitreousBossId = 3,
+            HelmasaurBossId = 4,
+            ArmosBossId = 5,
+            LanmolaBossId = 6,
+            BlindBossId = 7,
+            ArrghusBossId = 8,
+            TrixnessBossId = 9;
     }
 
     public class CrystalConstants
     {
-        public static int CrystalTypeBaseAddress = 0x180052;
-        public static int
+        public static readonly int CrystalTypeBaseAddress = 0x180052;
+        public static readonly int
             TowerOfHeraOffset = 8,
             EasternPalaceOffset = 0,
             SkullWoodsOffset = 6,
@@ -273,7 +285,7 @@ namespace EnemizerLibrary
             IcePalaceOffset = 7,
             TurtleRockOffset = 10;
 
-        public static int[] CrystalTypeAddresses =
+        public static readonly int[] CrystalTypeAddresses =
         {
             CrystalTypeBaseAddress + TowerOfHeraOffset,
             CrystalTypeBaseAddress + EasternPalaceOffset,
@@ -289,8 +301,8 @@ namespace EnemizerLibrary
         };
 
 
-        public static int CrystalBaseAddress = 0x1209D;
-        public static int[] CrystalAddresses = 
+        public static readonly int CrystalBaseAddress = 0x1209D;
+        public static readonly int[] CrystalAddresses = 
         {
             CrystalBaseAddress + TowerOfHeraOffset,
             CrystalBaseAddress + EasternPalaceOffset,

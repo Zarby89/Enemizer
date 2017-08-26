@@ -92,9 +92,9 @@ namespace EnemizerLibrary
             bool error = false;
             patch_bosses();
 
-            while (RandomizeBosses(bossMadness) != true)
+            while (TryRandomizeBosses(bossMadness) != true)
             {
-
+                // loop until we succeed (some bosses can't be in certain places so we have to retry)
             }
 
             RemoveBlindSpawnCode();
@@ -120,42 +120,54 @@ namespace EnemizerLibrary
             ROM_DATA[0x04DE81] = 0x00;
         }
 
-        private bool RandomizeBosses(bool bossMadness)
+        private bool TryRandomizeBosses(bool bossMadness)
         {
             dungeons.Clear();
             create_dungeons_properties();
 
-            List<byte> bosses = new List<byte>();
-            if (bossMadness == false)
-            {
-                for (byte i = 0; i < 10; i++)
-                {
-                    bosses.Add(i);
-                }
-                bosses.Add(1);//gtower double
-                bosses.Add(5);//gtower double
-                bosses.Add(6);//gtower double
-                Console.WriteLine("All Bosses Added in the pool");
-            }
-            else
-            {
-                for (int i = 0; i < 13; i++)
-                {
-                    byte boss = (byte)rand.Next(10);
-                    if (i <= 2)//force at least 3 middle boss
-                    {
-                        boss = (byte)rand.Next(5);
-                    }
-                    bosses.Add(boss);
-                    Console.WriteLine(BossConstants.BossNames[boss] + " Added in the pool");
-                }
-            }
+            List<byte> bosses = ShuffleBosses(bossMadness);
 
             //try to place boss in hera and gtower moldorm first
             //Moldorm,Kholdstare,Vitreous,Helmasaure,Mothula
 
             //Palace of Darkness can't have Kholdstare. Why?
 
+            if(TryRandomizeBossList(bosses) == false)
+            {
+                return false;
+            }
+
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+            //foreach (DungeonProperties d in dungeons)
+            //{
+            //    /* int r = rand.Next(2);
+            //     if (r == 0)
+            //     {*/
+            //    d.boss = 0;
+            //    //}
+            //    /*if (r == 1)
+            //    {
+            //        d.boss = 9;
+            //    }*/
+
+            //}
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+            //TESTING CODE
+
+            UpdateDungeonsInRom();
+
+            return true;
+        }
+
+        private bool TryRandomizeBossList(List<byte> bosses)
+        {
             while (bosses.Count > 0)
             {
                 byte selectedBoss = bosses[rand.Next(bosses.Count)];
@@ -360,6 +372,7 @@ namespace EnemizerLibrary
 
                 selectedDungeon = (byte)rand.Next(12);
                 //IF Kholdstare is not placed already place him first
+                // TODO: Isn't this Trinexx????
                 if (bosses.Contains(9)) //since it can have multiple kholdstare place all of them first where there's no drop
                 {
                     selectedDungeon = (byte)rand.Next(12);
@@ -452,31 +465,10 @@ namespace EnemizerLibrary
                 }
             }
 
-
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-            //foreach (DungeonProperties d in dungeons)
-            //{
-            //    /* int r = rand.Next(2);
-            //     if (r == 0)
-            //     {*/
-            //    d.boss = 0;
-            //    //}
-            //    /*if (r == 1)
-            //    {
-            //        d.boss = 9;
-            //    }*/
-
-            //}
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-            //TESTING CODE
-
+            return true;
+        }
+        private void UpdateDungeonsInRom()
+        {
             int did = 0;
             foreach (DungeonProperties d in dungeons)
             {
@@ -536,8 +528,38 @@ namespace EnemizerLibrary
 
                 did++;
             }
+        }
 
-            return true;
+        private List<byte> ShuffleBosses(bool bossMadness)
+        {
+            List<byte> bosses = new List<byte>();
+            // TODO: add a 3rd mode that will randomize the gt bosses without bossmadness set
+            if (bossMadness == false)
+            {
+                for (byte i = 0; i < 10; i++)
+                {
+                    bosses.Add(i);
+                }
+                bosses.Add(1);//gtower double
+                bosses.Add(5);//gtower double
+                bosses.Add(6);//gtower double
+                Console.WriteLine("All Bosses Added in the pool");
+            }
+            else
+            {
+                for (int i = 0; i < 13; i++)
+                {
+                    byte boss = (byte)rand.Next(10);
+                    if (i <= 2)//force at least 3 middle boss
+                    {
+                        boss = (byte)rand.Next(5);
+                    }
+                    bosses.Add(boss);
+                    Console.WriteLine(BossConstants.BossNames[boss] + " Added in the pool");
+                }
+            }
+
+            return bosses;
         }
 
         //0x2E, 0xA0, 0xFF //trinexx

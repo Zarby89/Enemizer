@@ -26,9 +26,8 @@ namespace EnemizerTests
             optionFlags.RandomizeBossesType = RandomizeBossesType.Basic;
 
             byte[] ROM_DATA = LoadRom("rando.sfc");
-            string outputFilename = "test.sfc";
             Randomization r = new Randomization();
-            RomData rom = r.MakeRandomization(seed, optionFlags, ROM_DATA, outputFilename, "Default");
+            RomData rom = r.MakeRandomization(seed, optionFlags, ROM_DATA, "Default");
 
             // this is just in case something goes wrong we can get the output and compare it in beyond compare or another program
             //string fileName = "test1output.sfc";
@@ -42,7 +41,7 @@ namespace EnemizerTests
             {
                 if (testRom[i] != rom[i])
                 {
-                    output.WriteLine($"i = {i} - testRom[i] = {testRom[i]}  rom[i] = {rom[i]}");
+                    output.WriteLine($"i = {i.ToString("X2")} - testRom[i] = {testRom[i]}  rom[i] = {rom[i]}");
                 }
                 Assert.Equal(testRom[i], rom[i]);
             }

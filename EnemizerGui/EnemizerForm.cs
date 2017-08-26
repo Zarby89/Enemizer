@@ -320,7 +320,7 @@ namespace Enemizer
 
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
                 Randomization randomize = new Randomization();
-                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, ofd.FileName, linkSpriteFilename);
+                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, linkSpriteFilename);
 
                 string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
                 fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
