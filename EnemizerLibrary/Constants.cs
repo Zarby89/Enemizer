@@ -321,7 +321,11 @@ namespace EnemizerLibrary
     public class DungeonConstants
     {
         public static readonly int
-            TowerOfHeraDungeonId = 0;
+            TowerOfHeraDungeonId = 0,
+            SwampPalaceDungeonId = 7,
+            IcePalaceDungeonId = 8,
+            TurtleRockDungeonId = 9,
+            GTower3DungeonId = 12;
 
         //0x2E, 0xA0, 0xFF //trinexx
         //0x2D, 0xA1, 0xF9 //kholdstare

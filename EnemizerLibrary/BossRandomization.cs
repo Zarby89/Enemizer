@@ -196,17 +196,20 @@ namespace EnemizerLibrary
             {
                 byte selectedBoss = bosses[rand.Next(bosses.Count)];
 
-                if (dungeons[0].boss == 255) //Hera Tower
+                //Tower of Hera
+                if (dungeons[DungeonConstants.TowerOfHeraDungeonId].boss == 255)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
+
+                    /* KholdstareBossId = 0, MoldormBossId = 1, MothulaBossId = 2, VitreousBossId = 3, HelmasaurBossId = 4,*/
                     if (selectedBoss > 4)
                     {
                         continue;
                     }
+
                     if (selectedBoss == 0) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
                     {
-
-                        if (scan_gtower(ItemConstants.FireRod) || ROM_DATA[MasterSwordPedestal] == ItemConstants.FireRod)
+                        if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod))
                         {
                             continue;
                         }
@@ -217,47 +220,40 @@ namespace EnemizerLibrary
                             continue;
                         }
                     }
-                    dungeons[0].boss = selectedBoss;
+
+                    dungeons[DungeonConstants.TowerOfHeraDungeonId].boss = selectedBoss;
                     bosses.Remove(selectedBoss);
                 }
 
-                if (dungeons[12].boss == 255) //Gtower Moldorm
+                //Gtower Moldorm
+                if (dungeons[DungeonConstants.GTower3DungeonId].boss == 255)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
+
+                    /* KholdstareBossId = 0, MoldormBossId = 1, MothulaBossId = 2, VitreousBossId = 3, HelmasaurBossId = 4,*/
                     if (selectedBoss > 4)
                     {
                         continue;
                     }
 
-                    //NEED TO BE TESTED !!!!!!!!!!!!!
-                    //New Boss code that should allow kholdstare to spawn anywhere
-                    /*if (bosschosed == 0) {
-
-                        continue;
-                    }*/
-
-
-                    dungeons[12].boss = selectedBoss;
+                    dungeons[DungeonConstants.GTower3DungeonId].boss = selectedBoss;
                     bosses.Remove(selectedBoss);
-                    //Console.WriteLine("Infinite Trinexxtry");
                 }
 
 
                 byte selectedDungeon = (byte)rand.Next(12);
-                if (bosses.Contains(8)) //since it can have multiple arrghus place all of them first where there's no drop
+
+                //since it can have multiple arrghus place all of them first where there's no drop
+                if (bosses.Contains(BossConstants.ArrghusBossId)) 
                 {
                     selectedDungeon = (byte)rand.Next(12);
+
                     if (dungeons[selectedDungeon].boss != 255)
                     {
                         continue;
                     }
 
-
-                    //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
-
-                    //Unless it is own dungeon check for crystals/pendants blocks
-
-                    if (selectedDungeon != 7)
+                    if (selectedDungeon != DungeonConstants.SwampPalaceDungeonId)
                     {
                         if (CheckIfContainsImportantItems(selectedDungeon))
                         {
@@ -265,14 +261,13 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    if (scan_gtower(ItemConstants.Hookshot) || ROM_DATA[MasterSwordPedestal] == ItemConstants.Hookshot)
+                    if (CheckGTowerAndPedestalForItems(ItemConstants.Hookshot))
                     {
-
-                        if (dungeons[7].boss == 255)
+                        if (dungeons[DungeonConstants.SwampPalaceDungeonId].boss == 255)
                         {
                             //put arrghus in his original location
-                            dungeons[7].boss = 8;
-                            bosses.Remove(8);
+                            dungeons[DungeonConstants.SwampPalaceDungeonId].boss = BossConstants.ArrghusBossId;
+                            bosses.Remove(BossConstants.ArrghusBossId);
                             continue;
                         }
                         else
@@ -281,25 +276,22 @@ namespace EnemizerLibrary
                             return false;
                         }
                     }
-                    dungeons[selectedDungeon].boss = 8;
-                    bosses.Remove(8);
+                    dungeons[selectedDungeon].boss = BossConstants.ArrghusBossId;
+                    bosses.Remove(BossConstants.ArrghusBossId);
                 }
 
 
                 //IF Kholdstare is not placed already place him first
-                if (bosses.Contains(0))
+                if (bosses.Contains(BossConstants.KholdstareBossId))
                 {
                     selectedDungeon = (byte)rand.Next(12);
+
                     if (dungeons[selectedDungeon].boss != 255)
                     {
                         continue;
                     }
 
-                    //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
-
-                    //Unless it is own dungeon check for crystals/pendants blocks
-
-                    if (selectedDungeon != 8)
+                    if (selectedDungeon != DungeonConstants.IcePalaceDungeonId)
                     {
                         if (CheckIfContainsImportantItems(selectedDungeon))
                         {
@@ -307,14 +299,13 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    if (scan_gtower(ItemConstants.FireRod) || ROM_DATA[MasterSwordPedestal] == ItemConstants.FireRod)
+                    if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod))
                     {
-
-                        if (dungeons[8].boss == 255)//???????????
+                        if (dungeons[DungeonConstants.IcePalaceDungeonId].boss == 255)
                         {
                             //put kholdstare in his original location
-                            dungeons[8].boss = 0;
-                            bosses.Remove(0);
+                            dungeons[DungeonConstants.IcePalaceDungeonId].boss = BossConstants.KholdstareBossId;
+                            bosses.Remove(BossConstants.KholdstareBossId);
                             continue;
                         }
                         else
@@ -324,30 +315,23 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    dungeons[selectedDungeon].boss = 0;
-                    bosses.Remove(0);
-
-                    //IF Trinexx is not placed already place him first
+                    dungeons[selectedDungeon].boss = BossConstants.KholdstareBossId;
+                    bosses.Remove(BossConstants.KholdstareBossId);
                 }
 
-
                 selectedDungeon = (byte)rand.Next(12);
-                //IF Kholdstare is not placed already place him first
-                // TODO: Isn't this Trinexx????
-                if (bosses.Contains(9)) //since it can have multiple kholdstare place all of them first where there's no drop
+
+                //IF Trinexx is not placed already place him first
+                if (bosses.Contains(BossConstants.TrixnessBossId))
                 {
                     selectedDungeon = (byte)rand.Next(12);
+
                     if (dungeons[selectedDungeon].boss != 255)
                     {
                         selectedDungeon = (byte)rand.Next(12);
                     }
 
-
-                    //NEW CODE FOR PENDANTS/CRYSTAL CHECKS
-
-                    //Unless it is own dungeon check for crystals/pendants blocks
-
-                    if (selectedDungeon != 9)
+                    if (selectedDungeon != DungeonConstants.TurtleRockDungeonId)
                     {
                         if (CheckIfContainsImportantItems(selectedDungeon))
                         {
@@ -355,16 +339,13 @@ namespace EnemizerLibrary
                         }
                     }
 
-
-                    if (scan_gtower(ItemConstants.FireRod) || scan_gtower(ItemConstants.IceRod) || ROM_DATA[MasterSwordPedestal] == ItemConstants.FireRod || ROM_DATA[MasterSwordPedestal] == ItemConstants.IceRod)
+                    if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod, ItemConstants.IceRod))
                     {
-
-
-                        if (dungeons[9].boss == 255)//???????????
+                        if (dungeons[DungeonConstants.TurtleRockDungeonId].boss == 255)
                         {
                             //put trinexx in his original location
-                            dungeons[9].boss = 9;
-                            bosses.Remove(9);
+                            dungeons[DungeonConstants.TurtleRockDungeonId].boss = BossConstants.TrixnessBossId;
+                            bosses.Remove(BossConstants.TrixnessBossId);
                             continue;
                         }
                         else
@@ -373,13 +354,13 @@ namespace EnemizerLibrary
                             return false;
                         }
                     }
-                    dungeons[selectedDungeon].boss = 9;
-                    bosses.Remove(9);
 
-                    //IF Trinexx is not placed already place him first
+                    dungeons[selectedDungeon].boss = BossConstants.TrixnessBossId;
+                    bosses.Remove(BossConstants.TrixnessBossId);
                 }
 
                 selectedDungeon = (byte)rand.Next(12);
+
                 if (dungeons[selectedDungeon].boss == 255)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
@@ -436,6 +417,22 @@ namespace EnemizerLibrary
                 return true;
             }
 
+            return false;
+        }
+
+        private bool CheckGTowerAndPedestalForItems(params byte[] items)
+        {
+            foreach(var item in items)
+            {
+                if(scan_gtower(item))
+                {
+                    return true;
+                }
+                if(ROM_DATA[ItemConstants.MasterSwordPedestalAddress] == item)
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
