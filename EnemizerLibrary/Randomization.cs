@@ -1220,10 +1220,6 @@ namespace EnemizerLibrary
         int snes_shell_pointer_77 = 0;*/
         public void patch_bosses()
         {
-           
-
-
-
             //write_rom_data(0x123000, ice_shell);
             /*
  * 0xF8000*room
@@ -1245,53 +1241,53 @@ namespace EnemizerLibrary
             int pos = 0;
             shell_pointers[0] = pctosnesbytes(0x122000 + pos);
             shell_pointers[2] = pctosnesbytes(0x122000 + pos); //Skull woods empty pointers
-            write_rom_data(0x0122000 + pos, room_7_shell);
-            pos += room_7_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_7_shell);
+            pos += DungeonConstants.room_7_shell.Length;
 
             shell_pointers[1] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_200_shell);
-            pos += room_200_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_200_shell);
+            pos += DungeonConstants.room_200_shell.Length;
 
 
             shell_pointers[3] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_51_shell);
-            pos += room_51_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_51_shell);
+            pos += DungeonConstants.room_51_shell.Length;
 
             shell_pointers[4] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_90_shell);
-            pos += room_90_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_90_shell);
+            pos += DungeonConstants.room_90_shell.Length;
 
             shell_pointers[5] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_144_shell);
-            pos += room_144_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_144_shell);
+            pos += DungeonConstants.room_144_shell.Length;
 
             shell_pointers[6] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_172_blind_room_shell);
-            pos += room_172_blind_room_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_172_blind_room_shell);
+            pos += DungeonConstants.room_172_blind_room_shell.Length;
 
             shell_pointers[7] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_6_shell);
-            pos += room_6_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_6_shell);
+            pos += DungeonConstants.room_6_shell.Length;
 
             shell_pointers[8] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_222_shell);
-            pos += room_222_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_222_shell);
+            pos += DungeonConstants.room_222_shell.Length;
 
             shell_pointers[9] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_164_shell);
-            pos += room_164_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_164_shell);
+            pos += DungeonConstants.room_164_shell.Length;
 
             shell_pointers[10] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_28_shell);
-            pos += room_28_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_28_shell);
+            pos += DungeonConstants.room_28_shell.Length;
 
             shell_pointers[11] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_108_shell);
-            pos += room_108_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_108_shell);
+            pos += DungeonConstants.room_108_shell.Length;
 
             shell_pointers[12] = pctosnesbytes(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, room_77_shell);
-            pos += room_77_shell.Length;
+            write_rom_data(0x0122000 + pos, DungeonConstants.room_77_shell);
+            pos += DungeonConstants.room_77_shell.Length;
         }
 
         public byte[] pctosnesbytes(int pos)
