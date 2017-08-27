@@ -16,8 +16,9 @@ namespace EnemizerLibrary
         public Boss SelectedBoss { get; set; }
         public int BossRoomId { get; set; }
         public int BossAddress { get; set; }
+        public int? BossDropItemAddress { get; set; }
 
-        List<BossType> DisallowedBosses { get; set; } = new List<BossType>();
+        public List<BossType> DisallowedBosses { get; protected set; } = new List<BossType>();
 
         public Dungeon(int priority)
         {
@@ -35,6 +36,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 200;
             BossAddress = 0x04D7BE;
+            BossDropItemAddress = 0x180150;
         }
     }
 
@@ -48,6 +50,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 51;
             BossAddress = 0x04D694;
+            BossDropItemAddress = 0x180151;
         }
     }
 
@@ -61,6 +64,13 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 7;
             BossAddress = 0x04D63C;
+            BossDropItemAddress = 0x180152;
+
+            DisallowedBosses.Add(BossType.Armos);
+            DisallowedBosses.Add(BossType.Arrghus);
+            DisallowedBosses.Add(BossType.Blind);
+            DisallowedBosses.Add(BossType.Lanmola);
+            DisallowedBosses.Add(BossType.Trixnexx);
         }
     }
 
@@ -74,6 +84,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 90;
             BossAddress = 0x04D6E2;
+            BossDropItemAddress = 0x180153;
         }
     }
 
@@ -87,6 +98,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 6;
             BossAddress = 0x04D63A;
+            BossDropItemAddress = 0x180154;
         }
     }
 
@@ -100,6 +112,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 41;
             BossAddress = 0x04D680;
+            BossDropItemAddress = 0x180155;
         }
     }
 
@@ -113,6 +126,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 172;
             BossAddress = 0x04D786;
+            BossDropItemAddress = 0x180156;
         }
     }
 
@@ -126,6 +140,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 222;
             BossAddress = 0x04D7EA;
+            BossDropItemAddress = 0x180157;
         }
     }
 
@@ -139,6 +154,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 144;
             BossAddress = 0x04D74E;
+            BossDropItemAddress = 0x180158;
         }
     }
 
@@ -152,6 +168,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 164;
             BossAddress = 0x04D776;
+            BossDropItemAddress = 0x180159;
         }
     }
 
@@ -165,6 +182,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 28;
             BossAddress = 0x04D666;
+            BossDropItemAddress = null;
         }
     }
 
@@ -178,6 +196,7 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 108;
             BossAddress = 0x04D706;
+            BossDropItemAddress = null;
         }
     }
 
@@ -191,6 +210,13 @@ namespace EnemizerLibrary
             SelectedBoss = null;
             BossRoomId = 77;
             BossAddress = 0x04D6C8;
+            BossDropItemAddress = null;
+
+            DisallowedBosses.Add(BossType.Armos);
+            DisallowedBosses.Add(BossType.Arrghus);
+            DisallowedBosses.Add(BossType.Blind);
+            DisallowedBosses.Add(BossType.Lanmola);
+            DisallowedBosses.Add(BossType.Trixnexx);
         }
     }
 }

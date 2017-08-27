@@ -158,7 +158,15 @@ namespace EnemizerLibrary
         };
 
         public static readonly int
-            MasterSwordPedestalAddress = 0x289B0;
+            MasterSwordPedestalAddress = 0x289B0,
+            SahasrahlaItemAddress = 0x2F1FC,
+            CrystalTypePendant = 0x00,
+            CrystalGreenPendant = 0x04,
+            CrystalTypeCrystal = 0x40,
+            Crystal5 = 0x04,
+            Crystal6 = 0x01,
+            FatFairyItem1Address = 0xE980,
+            FatFairyItem2Address = 0xE983;
     }
 
     public class BossConstants

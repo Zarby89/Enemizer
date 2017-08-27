@@ -369,7 +369,7 @@ namespace EnemizerLibrary
         private bool CheckIfContainsImportantItems(int dungeonId)
         {
             //if it kholdstare then check if hera drop the green pendant and if sarasrala have a major item
-            if (CrystalConstants.CrystalTypeAddresses[dungeonId] == CrystalTypePendant) //is pendant?
+            if (ROM_DATA[CrystalConstants.CrystalTypeAddresses[dungeonId]] == CrystalTypePendant) //is pendant?
             {
                 if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonId]] == CrystalGreenPendant) //if hera is green pendant
                 {
@@ -379,7 +379,7 @@ namespace EnemizerLibrary
                     }
                 }
             }
-            if (CrystalConstants.CrystalTypeAddresses[dungeonId] == CrystalTypeCrystal) //is crystal?
+            if (ROM_DATA[CrystalConstants.CrystalTypeAddresses[dungeonId]] == CrystalTypeCrystal) //is crystal?
             {
                 if (ROM_DATA[CrystalConstants.CrystalAddresses[dungeonId]] == Crystal5 || ROM_DATA[CrystalConstants.CrystalAddresses[dungeonId]] == Crystal6) //if hera is crystal 5 or crystal 6
                 {
@@ -389,7 +389,7 @@ namespace EnemizerLibrary
                     }
                 }
             }
-            if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.TowerOfHeraBossDropItemAddress]))
+            if (ItemConstants.ImportantItems.Contains(ROM_DATA[BossConstants.BossDropItemAddresses[dungeonId]]))
             {
                 return true;
             }
