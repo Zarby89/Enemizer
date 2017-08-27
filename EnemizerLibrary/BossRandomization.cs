@@ -197,17 +197,17 @@ namespace EnemizerLibrary
                 byte selectedBoss = bosses[rand.Next(bosses.Count)];
 
                 //Tower of Hera
-                if (dungeons[DungeonConstants.TowerOfHeraDungeonId].boss == 255)
+                if (dungeons[DungeonConstants.TowerOfHeraDungeonId].boss == BossConstants.NoBossSetId)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
 
                     /* KholdstareBossId = 0, MoldormBossId = 1, MothulaBossId = 2, VitreousBossId = 3, HelmasaurBossId = 4,*/
-                    if (selectedBoss > 4)
+                    if (selectedBoss > BossConstants.HelmasaurBossId) // TODO: ugly way of doing this. not obvious why wihtout looking at list
                     {
                         continue;
                     }
 
-                    if (selectedBoss == 0) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
+                    if (selectedBoss == BossConstants.KholdstareBossId) //if we pick kholdstare check if hera drop any major items if so then put him elsewhere
                     {
                         if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod))
                         {
@@ -226,12 +226,12 @@ namespace EnemizerLibrary
                 }
 
                 //Gtower Moldorm
-                if (dungeons[DungeonConstants.GTower3DungeonId].boss == 255)
+                if (dungeons[DungeonConstants.GTower3DungeonId].boss == BossConstants.NoBossSetId)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
 
                     /* KholdstareBossId = 0, MoldormBossId = 1, MothulaBossId = 2, VitreousBossId = 3, HelmasaurBossId = 4,*/
-                    if (selectedBoss > 4)
+                    if (selectedBoss > BossConstants.HelmasaurBossId)
                     {
                         continue;
                     }
@@ -248,7 +248,7 @@ namespace EnemizerLibrary
                 {
                     selectedDungeon = (byte)rand.Next(12);
 
-                    if (dungeons[selectedDungeon].boss != 255)
+                    if (dungeons[selectedDungeon].boss != BossConstants.NoBossSetId)
                     {
                         continue;
                     }
@@ -263,7 +263,7 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.Hookshot))
                     {
-                        if (dungeons[DungeonConstants.SwampPalaceDungeonId].boss == 255)
+                        if (dungeons[DungeonConstants.SwampPalaceDungeonId].boss == BossConstants.NoBossSetId)
                         {
                             //put arrghus in his original location
                             dungeons[DungeonConstants.SwampPalaceDungeonId].boss = BossConstants.ArrghusBossId;
@@ -286,7 +286,7 @@ namespace EnemizerLibrary
                 {
                     selectedDungeon = (byte)rand.Next(12);
 
-                    if (dungeons[selectedDungeon].boss != 255)
+                    if (dungeons[selectedDungeon].boss != BossConstants.NoBossSetId)
                     {
                         continue;
                     }
@@ -301,7 +301,7 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod))
                     {
-                        if (dungeons[DungeonConstants.IcePalaceDungeonId].boss == 255)
+                        if (dungeons[DungeonConstants.IcePalaceDungeonId].boss == BossConstants.NoBossSetId)
                         {
                             //put kholdstare in his original location
                             dungeons[DungeonConstants.IcePalaceDungeonId].boss = BossConstants.KholdstareBossId;
@@ -326,7 +326,7 @@ namespace EnemizerLibrary
                 {
                     selectedDungeon = (byte)rand.Next(12);
 
-                    if (dungeons[selectedDungeon].boss != 255)
+                    if (dungeons[selectedDungeon].boss != BossConstants.NoBossSetId)
                     {
                         selectedDungeon = (byte)rand.Next(12);
                     }
@@ -341,7 +341,7 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod, ItemConstants.IceRod))
                     {
-                        if (dungeons[DungeonConstants.TurtleRockDungeonId].boss == 255)
+                        if (dungeons[DungeonConstants.TurtleRockDungeonId].boss == BossConstants.NoBossSetId)
                         {
                             //put trinexx in his original location
                             dungeons[DungeonConstants.TurtleRockDungeonId].boss = BossConstants.TrixnessBossId;
@@ -361,7 +361,7 @@ namespace EnemizerLibrary
 
                 selectedDungeon = (byte)rand.Next(12);
 
-                if (dungeons[selectedDungeon].boss == 255)
+                if (dungeons[selectedDungeon].boss == BossConstants.NoBossSetId)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
                     dungeons[selectedDungeon].boss = selectedBoss;
@@ -376,7 +376,7 @@ namespace EnemizerLibrary
                 {
                     foreach (DungeonProperties d in dungeons)
                     {
-                        if (d.boss == 255)
+                        if (d.boss == BossConstants.NoBossSetId)
                         {
                             Console.WriteLine("Missing Boss in a dungeon?? just retry!");
                             //retry from the start

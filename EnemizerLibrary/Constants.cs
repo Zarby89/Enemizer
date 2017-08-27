@@ -267,7 +267,8 @@ namespace EnemizerLibrary
             LanmolaBossId = 6,
             BlindBossId = 7,
             ArrghusBossId = 8,
-            TrixnessBossId = 9;
+            TrixnessBossId = 9,
+            NoBossSetId = 255;
     }
 
     public class CrystalConstants
