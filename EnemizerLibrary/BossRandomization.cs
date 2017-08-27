@@ -110,7 +110,7 @@ namespace EnemizerLibrary
         {
             for (int i = 0; i < 15; i++) //REMOVE BLIND SPAWN CODE
             {
-                ROM_DATA[0xEA081 + i] = 0xEA;
+                ROM_DATA[0xEA081 + i] = AssemblyConstants.NoOp;
             }
         }
 
@@ -127,28 +127,16 @@ namespace EnemizerLibrary
 
             List<byte> bosses = ShuffleBosses(bossMadness);
 
-            //try to place boss in hera and gtower moldorm first
-            //Moldorm,Kholdstare,Vitreous,Helmasaure,Mothula
-
-            //Palace of Darkness can't have Kholdstare. Why?
-
             if(TryRandomizeBossList(bosses) == false)
             {
                 return false;
             }
 
-            //TESTING CODE
+            //TESTING CODE. make every boss the same
             //foreach (DungeonProperties d in dungeons)
             //{
-            //    /* int r = rand.Next(2);
-            //     if (r == 0)
-            //     {*/
-            //    d.boss = 0;
-            //    //}
-            //    /*if (r == 1)
-            //    {
-            //        d.boss = 9;
-            //    }*/
+            //    d.boss = BossConstants.KholdstareBossId;
+            //    //d.boss = BossConstants.TrixnessBossId;
             //}
             //TESTING CODE
 
@@ -177,8 +165,10 @@ namespace EnemizerLibrary
                 for (int i = 0; i < 13; i++)
                 {
                     byte boss = (byte)rand.Next(10);
-                    if (i <= 2)//force at least 3 middle boss
+
+                    if (i <= 2) //force at least 3 middle of room boss
                     {
+                        /*KholdstareBossId = 0,MoldormBossId = 1,MothulaBossId = 2,VitreousBossId = 3,HelmasaurBossId = 4,*/
                         boss = (byte)rand.Next(5);
                     }
                     bosses.Add(boss);

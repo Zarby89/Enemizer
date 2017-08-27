@@ -200,10 +200,10 @@ namespace EnemizerLibrary
 
 
             //Remove Trinexx Ice Floor : 
-            this.ROM_DATA[0x04B37E] = 0xEA; // NOP
-            this.ROM_DATA[0x04B37E+1] = 0xEA; // NOP
-            this.ROM_DATA[0x04B37E+2] = 0xEA; // NOP
-            this.ROM_DATA[0x04B37E+3] = 0xEA; // NOP
+            this.ROM_DATA[0x04B37E] = AssemblyConstants.NoOp;
+            this.ROM_DATA[0x04B37E+1] = AssemblyConstants.NoOp;
+            this.ROM_DATA[0x04B37E+2] = AssemblyConstants.NoOp;
+            this.ROM_DATA[0x04B37E+3] = AssemblyConstants.NoOp;
 
             /*this.ROM_DATA[0x5033 + 0x5E] = 0x24;
             this.ROM_DATA[0x5112 + 0x5E] = 0x93;

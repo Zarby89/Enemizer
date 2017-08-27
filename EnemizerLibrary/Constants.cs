@@ -464,4 +464,10 @@ namespace EnemizerLibrary
         };
 
     }
+
+    public class AssemblyConstants
+    {
+        public static readonly byte
+            NoOp = 0xEA;
+    }
 }
