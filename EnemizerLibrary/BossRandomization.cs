@@ -426,11 +426,8 @@ namespace EnemizerLibrary
                 PlaceBossInDungeon(bosses, dungeonId, bossId);
                 return true;
             }
-            else
-            {
-                Console.WriteLine("Woops Hookshot is in gtower can't put more than one arrghus!");
-                return false;
-            }
+
+            return false;
         }
 
         private void UpdateDungeonsInRom()
