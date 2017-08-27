@@ -205,7 +205,7 @@ namespace EnemizerLibrary
             SkullWoodsBossDropItemAddress = 0x180155,
             DesertPalaceBossDropItemAddress = 0x180151,
             PalaceOfDarknessBossDropItemAddress = 0x180153,
-            MyseryMireBossDropItemAddress = 0x180158,
+            MiseryMireBossDropItemAddress = 0x180158,
             ThievesTownBossDropItemAddress = 0x180156,
             SwampPalaceBossDropItemAddress = 0x180154,
             IcePalaceBossDropItemAddress = 0x180157,
@@ -221,7 +221,7 @@ namespace EnemizerLibrary
             SkullWoodsBossDropItemAddress,
             DesertPalaceBossDropItemAddress,
             PalaceOfDarknessBossDropItemAddress,
-            MyseryMireBossDropItemAddress,
+            MiseryMireBossDropItemAddress,
             ThievesTownBossDropItemAddress,
             SwampPalaceBossDropItemAddress,
             IcePalaceBossDropItemAddress,
@@ -280,7 +280,7 @@ namespace EnemizerLibrary
             SkullWoodsOffset = 6,
             DesertPalaceOffset = 1,
             PalaceOfDarknessOffset = 4,
-            MyseryMireOffset = 5,
+            MiseryMireOffset = 5,
             ThievesTownOffset = 9,
             SwampPalaceOffset = 3,
             IcePalaceOffset = 7,
@@ -293,13 +293,26 @@ namespace EnemizerLibrary
             CrystalTypeBaseAddress + SkullWoodsOffset,
             CrystalTypeBaseAddress + DesertPalaceOffset,
             CrystalTypeBaseAddress + PalaceOfDarknessOffset,
-            CrystalTypeBaseAddress + MyseryMireOffset,
+            CrystalTypeBaseAddress + MiseryMireOffset,
             CrystalTypeBaseAddress + ThievesTownOffset,
             CrystalTypeBaseAddress + SwampPalaceOffset,
             CrystalTypeBaseAddress + IcePalaceOffset,
             CrystalTypeBaseAddress + TurtleRockOffset,
             0, 0, 0 // Ganon Tower
         };
+
+        public static readonly int
+            TowerOfHeraCrystalTypeAddress = CrystalTypeBaseAddress + TowerOfHeraOffset,
+            EasternPalaceCrystalTypeAddress = CrystalTypeBaseAddress + EasternPalaceOffset,
+            SkullWoodsCrystalTypeAddress = CrystalTypeBaseAddress + SkullWoodsOffset,
+            DesertPalaceCrystalTypeAddress = CrystalTypeBaseAddress + DesertPalaceOffset,
+            PalaceOfDarknessCrystalTypeAddress = CrystalTypeBaseAddress + PalaceOfDarknessOffset,
+            MiseryMireCrystalTypeAddress = CrystalTypeBaseAddress + MiseryMireOffset,
+            ThievesTownCrystalTypeAddress = CrystalTypeBaseAddress + ThievesTownOffset,
+            SwampPalaceCrystalTypeAddress = CrystalTypeBaseAddress + SwampPalaceOffset,
+            IcePalaceCrystalTypeAddress = CrystalTypeBaseAddress + IcePalaceOffset,
+            TurtleRockCrystalTypeAddress = CrystalTypeBaseAddress + TurtleRockOffset;
+
 
 
         public static readonly int CrystalBaseAddress = 0x1209D;
@@ -310,13 +323,25 @@ namespace EnemizerLibrary
             CrystalBaseAddress + SkullWoodsOffset,
             CrystalBaseAddress + DesertPalaceOffset,
             CrystalBaseAddress + PalaceOfDarknessOffset,
-            CrystalBaseAddress + MyseryMireOffset,
+            CrystalBaseAddress + MiseryMireOffset,
             CrystalBaseAddress + ThievesTownOffset,
             CrystalBaseAddress + SwampPalaceOffset,
             CrystalBaseAddress + IcePalaceOffset,
             CrystalBaseAddress + TurtleRockOffset,
             0, 0, 0 // Ganon Tower
         };
+
+        public static readonly int
+            TowerOfHeraCrystalAddress = CrystalBaseAddress + TowerOfHeraOffset,
+            EasternPalaceCrystalAddress = CrystalBaseAddress + EasternPalaceOffset,
+            SkullWoodsCrystalAddress = CrystalBaseAddress + SkullWoodsOffset,
+            DesertPalaceCrystalAddress = CrystalBaseAddress + DesertPalaceOffset,
+            PalaceOfDarknessCrystalAddress = CrystalBaseAddress + PalaceOfDarknessOffset,
+            MiseryMireCrystalAddress = CrystalBaseAddress + MiseryMireOffset,
+            ThievesTownCrystalAddress = CrystalBaseAddress + ThievesTownOffset,
+            SwampPalaceCrystalAddress = CrystalBaseAddress + SwampPalaceOffset,
+            IcePalaceCrystalAddress = CrystalBaseAddress + IcePalaceOffset,
+            TurtleRockCrystalAddress = CrystalBaseAddress + TurtleRockOffset;
     }
 
     public class DungeonConstants

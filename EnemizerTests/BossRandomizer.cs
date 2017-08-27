@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace EnemizerTests
 {
-    public class BossRandomizer
+    public class BossRandomizerTests
     {
         readonly ITestOutputHelper output;
 
-        public BossRandomizer(ITestOutputHelper output)
+        public BossRandomizerTests(ITestOutputHelper output)
         {
             this.output = output;
         }

@@ -47,9 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boss.cs" />
     <Compile Include="BossRandomization.cs" />
+    <Compile Include="BossRandomizer.cs" />
     <Compile Include="Chests.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Dungeons\Dungeon.cs" />
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />
     <Compile Include="DungeonsSpritesRandomization.cs" />
