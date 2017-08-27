@@ -50,6 +50,7 @@
     <Compile Include="Boss.cs" />
     <Compile Include="BossRandomization.cs" />
     <Compile Include="BossRandomizer.cs" />
+    <Compile Include="BossShells.cs" />
     <Compile Include="Chests.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Dungeons\Dungeon.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Randomization.cs" />
     <Compile Include="RomData.cs" />
     <Compile Include="UnusedCode.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>

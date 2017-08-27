@@ -24,11 +24,15 @@ namespace EnemizerLibrary
     {
         public BossType BossType { get; set; }
         public List<Func<Dungeon, RomData, byte[], bool>> Rules { get; set; } = new List<Func<Dungeon, RomData, byte[], bool>>();
+        public byte[] BossPointer { get; internal set; }
+        public byte BossGraphics { get; internal set; }
 
         public Boss(BossType bossType)
         {
             BossType = bossType;
             FillRules();
+            BossPointer = null;
+            BossGraphics = 0;
         }
 
         protected void FillRules()
@@ -125,27 +129,47 @@ namespace EnemizerLibrary
 
     public class ArmosBoss : Boss
     {
-        public ArmosBoss() : base(BossType.Armos) { }
+        public ArmosBoss() : base(BossType.Armos)
+        {
+            BossPointer = new byte[] { 0x87, 0xE8 };
+            BossGraphics = 9;
+        }
     }
 
     public class LanmolaBoss : Boss
     {
-        public LanmolaBoss() : base(BossType.Lanmola) { }
+        public LanmolaBoss() : base(BossType.Lanmola)
+        {
+            BossPointer = new byte[] { 0xCB, 0xDC };
+            BossGraphics = 11;
+        }
     }
 
     public class MoldormBoss : Boss
     {
-        public MoldormBoss() : base(BossType.Moldorm) { }
+        public MoldormBoss() : base(BossType.Moldorm)
+        {
+            BossPointer = new byte[] { 0xC3, 0xD9 };
+            BossGraphics = 12;
+        }
     }
 
     public class HelmasaurBoss : Boss
     {
-        public HelmasaurBoss() : base(BossType.Helmasaur) { }
+        public HelmasaurBoss() : base(BossType.Helmasaur)
+        {
+            BossPointer = new byte[] { 0x49, 0xE0 };
+            BossGraphics = 21;
+        }
     }
 
     public class ArrghusBoss : Boss
     {
-        public ArrghusBoss() : base(BossType.Arrghus) { }
+        public ArrghusBoss() : base(BossType.Arrghus)
+        {
+            BossPointer = new byte[] { 0x97, 0xD9 };
+            BossGraphics = 20;
+        }
 
         protected new void FillRules()
         {
@@ -163,17 +187,29 @@ namespace EnemizerLibrary
 
     public class MothulaBoss : Boss
     {
-        public MothulaBoss() : base(BossType.Mothula) { }
+        public MothulaBoss() : base(BossType.Mothula)
+        {
+            BossPointer = new byte[] { 0x31, 0xDC };
+            BossGraphics = 26;
+        }
     }
 
     public class BlindBoss : Boss
     {
-        public BlindBoss() : base(BossType.Blind) { }
+        public BlindBoss() : base(BossType.Blind)
+        {
+            BossPointer = new byte[] { 0x54, 0xE6 };
+            BossGraphics = 32;
+        }
     }
 
     public class KholdstareBoss : Boss
     {
-        public KholdstareBoss() : base(BossType.Kholdstare) { }
+        public KholdstareBoss() : base(BossType.Kholdstare)
+        {
+            BossPointer = new byte[] { 0x01, 0xEA };
+            BossGraphics = 22;
+        }
 
         protected new void FillRules()
         {
@@ -191,12 +227,20 @@ namespace EnemizerLibrary
 
     public class VitreousBoss : Boss
     {
-        public VitreousBoss() : base(BossType.Vitreous) { }
+        public VitreousBoss() : base(BossType.Vitreous)
+        {
+            BossPointer = new byte[] { 0x57, 0xE4 };
+            BossGraphics = 22; // TODO: really?
+        }
     }
 
     public class TrinexxBoss : Boss
     {
-        public TrinexxBoss() : base(BossType.Trixnexx) { }
+        public TrinexxBoss() : base(BossType.Trixnexx)
+        {
+            BossPointer = new byte[] { 0xBA, 0xE5 };
+            BossGraphics = 23;
+        }
 
         protected new void FillRules()
         {

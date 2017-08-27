@@ -92,10 +92,13 @@ namespace EnemizerTests
             byte[] ROM_DATA = LoadRom("rando.sfc");
             RomData romData = new RomData(ROM_DATA);
 
+            Random seedRandom = new Random(123456789);
+
             //int i = 1;
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
-                BossRandomizer br = new BossRandomizer(new Random(i));
+                int seedNumber = seedRandom.Next(999999999);
+                BossRandomizer br = new BossRandomizer(new Random(seedNumber));
 
                 try
                 {
@@ -105,6 +108,7 @@ namespace EnemizerTests
                 {
                     output.WriteLine($"seed failed: i = {i}");
                 }
+                output.WriteLine($"Seed: {seedNumber} - {String.Join("\r\n", br.DungeonPool.Select(x => $"{x.Name}: {x.SelectedBoss.BossType.ToString()}"))}");
                 Assert.Equal(13, br.DungeonPool.Where(x => x.SelectedBoss != null).Count());
             }
         }

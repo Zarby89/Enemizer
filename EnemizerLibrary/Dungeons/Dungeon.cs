@@ -6,6 +6,24 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
+    public enum DungeonType
+    {
+        EasternPalace,
+        DesertPalace,
+        TowerOfHera,
+        PalaceOfDarkness,
+        SwampPalace,
+        SkullWoods,
+        ThievesTown,
+        IcePalace,
+        MiseryMire,
+        TurtleRock,
+        GanonsTower1,
+        GanonsTower2,
+        GanonsTower3,
+        NotSet
+    }
+
     public abstract class Dungeon
     {
         public string Name { get; set; }
@@ -20,6 +38,8 @@ namespace EnemizerLibrary
 
         public List<BossType> DisallowedBosses { get; protected set; } = new List<BossType>();
 
+        public DungeonType DungeonType { get; protected set; } = DungeonType.NotSet;
+
         public Dungeon(int priority)
         {
             Priority = priority;
@@ -31,6 +51,7 @@ namespace EnemizerLibrary
         public EasternPalaceDungeon(int priority = 255) : base(priority)
         {
             Name = "Eastern Palace";
+            DungeonType = DungeonType.EasternPalace;
             DungeonCrystalTypeAddress = CrystalConstants.EasternPalaceCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.EasternPalaceCrystalAddress;
             SelectedBoss = null;
@@ -45,6 +66,7 @@ namespace EnemizerLibrary
         public DesertPalaceDungeon(int priority = 255) : base(priority)
         {
             Name = "Desert Palace";
+            DungeonType = DungeonType.DesertPalace;
             DungeonCrystalTypeAddress = CrystalConstants.DesertPalaceCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.DesertPalaceCrystalAddress;
             SelectedBoss = null;
@@ -59,6 +81,7 @@ namespace EnemizerLibrary
         public TowerOfHeraDungeon(int priority = 255) : base(priority)
         {
             Name = "Tower of Hera";
+            DungeonType = DungeonType.TowerOfHera;
             DungeonCrystalTypeAddress = CrystalConstants.TowerOfHeraCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.TowerOfHeraCrystalAddress;
             SelectedBoss = null;
@@ -79,6 +102,7 @@ namespace EnemizerLibrary
         public PalaceOfDarknessDungeon(int priority = 255) : base(priority)
         {
             Name = "Palace of Darkness";
+            DungeonType = DungeonType.PalaceOfDarkness;
             DungeonCrystalTypeAddress = CrystalConstants.PalaceOfDarknessCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.PalaceOfDarknessCrystalAddress;
             SelectedBoss = null;
@@ -93,6 +117,7 @@ namespace EnemizerLibrary
         public SwampPalaceDungeon(int priority = 255) : base(priority)
         {
             Name = "Swamp Palace";
+            DungeonType = DungeonType.SwampPalace;
             DungeonCrystalTypeAddress = CrystalConstants.SwampPalaceCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.SwampPalaceCrystalAddress;
             SelectedBoss = null;
@@ -107,6 +132,7 @@ namespace EnemizerLibrary
         public SkullWoodsDungeon(int priority = 255) : base(priority)
         {
             Name = "Skull Woods";
+            DungeonType = DungeonType.SkullWoods;
             DungeonCrystalTypeAddress = CrystalConstants.SkullWoodsCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.SkullWoodsCrystalAddress;
             SelectedBoss = null;
@@ -121,6 +147,7 @@ namespace EnemizerLibrary
         public ThievesTownDungeon(int priority = 255) : base(priority)
         {
             Name = "Thieves' Town";
+            DungeonType = DungeonType.ThievesTown;
             DungeonCrystalTypeAddress = CrystalConstants.ThievesTownCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.ThievesTownCrystalAddress;
             SelectedBoss = null;
@@ -135,6 +162,7 @@ namespace EnemizerLibrary
         public IcePalaceDungeon(int priority = 255) : base(priority)
         {
             Name = "Ice Palace";
+            DungeonType = DungeonType.IcePalace;
             DungeonCrystalTypeAddress = CrystalConstants.IcePalaceCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.IcePalaceCrystalAddress;
             SelectedBoss = null;
@@ -149,6 +177,7 @@ namespace EnemizerLibrary
         public MiseryMireDungeon(int priority = 255) : base(priority)
         {
             Name = "Misery Mire";
+            DungeonType = DungeonType.MiseryMire;
             DungeonCrystalTypeAddress = CrystalConstants.MiseryMireCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.MiseryMireCrystalAddress;
             SelectedBoss = null;
@@ -163,6 +192,7 @@ namespace EnemizerLibrary
         public TurtleRockDungeon(int priority = 255) : base(priority)
         {
             Name = "Turtle Rock";
+            DungeonType = DungeonType.TurtleRock;
             DungeonCrystalTypeAddress = CrystalConstants.TurtleRockCrystalTypeAddress;
             DungeonCrystalAddress = CrystalConstants.TurtleRockCrystalAddress;
             SelectedBoss = null;
@@ -177,6 +207,7 @@ namespace EnemizerLibrary
         public GT1Dungeon(int priority = 255) : base(priority)
         {
             Name = "Ganon's Tower 1";
+            DungeonType = DungeonType.GanonsTower1;
             DungeonCrystalTypeAddress = null;
             DungeonCrystalAddress = null;
             SelectedBoss = null;
@@ -191,6 +222,7 @@ namespace EnemizerLibrary
         public GT2Dungeon(int priority = 255) : base(priority)
         {
             Name = "Ganon's Tower 2";
+            DungeonType = DungeonType.GanonsTower2;
             DungeonCrystalTypeAddress = null;
             DungeonCrystalAddress = null;
             SelectedBoss = null;
@@ -205,6 +237,7 @@ namespace EnemizerLibrary
         public GT3Dungeon(int priority = 255) : base(priority)
         {
             Name = "Ganon's Tower 3";
+            DungeonType = DungeonType.GanonsTower3;
             DungeonCrystalTypeAddress = null;
             DungeonCrystalAddress = null;
             SelectedBoss = null;

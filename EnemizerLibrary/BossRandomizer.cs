@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,21 @@ namespace EnemizerLibrary
 
         public List<Dungeon> DungeonPool { get; set; } = new List<Dungeon>();
 
+        OptionFlags optionFlags { get; set; }
+        StreamWriter spoilerFile { get; set; }
+
         Random rand;
-        public BossRandomizer(Random rand)
+        public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile)
         {
             this.rand = rand;
+            this.optionFlags = optionFlags;
+            this.spoilerFile = spoilerFile;
 
             FillDungeonPool();
             FillBossPool();
         }
+
+        public BossRandomizer(Random rand) : this(rand, new OptionFlags(), null) { }
 
         void FillDungeonPool()
         {
@@ -88,5 +96,75 @@ namespace EnemizerLibrary
                 this.PossibleBossesPool.Remove(boss);
             }
         }
+
+        public void RandomizeRom(RomData romData)
+        {
+            GenerateRandomizedBosses(romData);
+            WriteRom(romData);
+        }
+
+        private void WriteRom(RomData romData)
+        {
+            DungeonShells shells = new DungeonShells();
+            shells.FillShells();
+            shells.WriteShellsToRom(romData);
+
+            foreach(var dungeon in DungeonPool)
+            {
+                // spoilers
+                if(optionFlags.GenerateSpoilers && spoilerFile != null)
+                {
+                    spoilerFile.WriteLine($"dungeon name : boss name - drop: boss drop item");
+                    //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
+                }
+                // update boss pointer
+                romData[dungeon.BossAddress] = dungeon.SelectedBoss.BossPointer[0];
+                romData[dungeon.BossAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
+
+                // update boss graphics
+                romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
+
+                // update trinexx shell
+                if(dungeon.SelectedBoss.BossType == BossType.Trixnexx)
+                {
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2
+
+                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
+
+                    byte[] Pointer = new byte[4];
+                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
+                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
+                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
+                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
+                    romData[floors_address] = 0xF0;
+                }
+
+                // update kholdstare shell
+                if (dungeon.SelectedBoss.BossType == BossType.Kholdstare)
+                {
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
+
+                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
+                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
+
+                    byte[] Pointer = new byte[4];
+                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
+                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
+                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
+                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
+                    romData[floors_address] = 0xF0;
+                }
+            }
+        }
+
     }
 }

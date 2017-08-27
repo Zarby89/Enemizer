@@ -160,7 +160,8 @@ namespace EnemizerLibrary
 
             if (optionFlags.RandomizeBosses)
             {
-                Randomize_Bosses(optionFlags.BossMadness);
+                BossRandomizer br = new BossRandomizer(rand, optionFlags, spoilerfile);
+                //Randomize_Bosses(optionFlags.BossMadness);
             }
             
             if(optionFlags.RandomizePots)
@@ -1143,37 +1144,6 @@ namespace EnemizerLibrary
         }
 
 
-        //Deprecated now using xkas to compile code
-        /*public void move_header()
-        {
-            ROM_DATA[0x0B5E7] = 0x24;//change room header bank to bank to 24
-
-            for (int i = 0; i < 320; i++)
-            {
-                //get pointer of that room
-                byte[] roomPointer = new byte[4];//27502
-                roomPointer[0] = ROM_DATA[(0x271E2 + (i * 2) + 0)];
-                roomPointer[1] = ROM_DATA[(0x271E2 + (i * 2) + 1)];
-                roomPointer[2] = 04;
-                int address = BitConverter.ToInt32(roomPointer, 0);
-                int pcadd = snestopc(address);
-
-                for (int j = 0; j < 14; j++)
-                {
-                    ROM_DATA[0x120090 + (i * 14) + j] = ROM_DATA[pcadd + j];
-                }
-            }
-
-
-            for (int i = 0; i < 320; i++)
-            {
-                //0x0271E2  //rewrite all room header address
-                //0x120090
-                ROM_DATA[0x0271E2 + (i * 2)] = ((byte)pctosnes(0x120090 + (i * 14)));
-                ROM_DATA[0x0271E2 + (i * 2) + 1] = ((byte)(pctosnes((0x120090 + (i * 14))) >> 8));
-
-            }
-        }*/
 
         public int snestopc(int addr)
         {
@@ -1220,23 +1190,6 @@ namespace EnemizerLibrary
         int snes_shell_pointer_77 = 0;*/
         public void patch_bosses()
         {
-            //write_rom_data(0x123000, ice_shell);
-            /*
- * 0xF8000*room
-7 : 0FCAEE, Length:0139
-200 : 051585, Length:0015
-41 : 0FC186, Length:006A //USELESSS NO POINTER
-51 : 0F878A, Length:000C
-90 : 0FA7CB, Length:001E
-144 : 0FBA9E, Length:0018
-172 : 0FD9AF, Length:002D
-6 : 0FA15A, Length:003C
-222 : 0FCAE1, Length:000D
-164 : 0FE700, Length:0045
-28 : 0FF749, Length:0043
-108 :0FFA56, Length:0052
-77 : 0FFD41, Length:011F
-*/
             //0x0122000 bosses rooms tiles : 
             int pos = 0;
             shell_pointers[0] = pctosnesbytes(0x122000 + pos);
@@ -1293,10 +1246,6 @@ namespace EnemizerLibrary
         public byte[] pctosnesbytes(int pos)
         {
             int addr = pctosnes(pos);
-
-            //ROM_DATA[2] = ((byte)addr);
-            //ROM_DATA[1] = ((byte)(addr >> 8));
-            //ROM_DATA[0] = ((byte)(addr >> 16));
 
             return new byte[] { (byte)(addr >> 16), ((byte)(addr >> 8)), ((byte)addr) };
         }
