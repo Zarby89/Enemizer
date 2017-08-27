@@ -221,8 +221,7 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    dungeons[DungeonConstants.TowerOfHeraDungeonId].boss = selectedBoss;
-                    bosses.Remove(selectedBoss);
+                    PlaceBossInDungeon(bosses, DungeonConstants.TowerOfHeraDungeonId, selectedBoss);
                 }
 
                 //Gtower Moldorm
@@ -236,8 +235,7 @@ namespace EnemizerLibrary
                         continue;
                     }
 
-                    dungeons[DungeonConstants.GTower3DungeonId].boss = selectedBoss;
-                    bosses.Remove(selectedBoss);
+                    PlaceBossInDungeon(bosses, DungeonConstants.GTower3DungeonId, selectedBoss);
                 }
 
 
@@ -263,11 +261,8 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.Hookshot))
                     {
-                        if (dungeons[DungeonConstants.SwampPalaceDungeonId].boss == BossConstants.NoBossSetId)
+                        if(PlaceBossInOriginalDungeon(bosses, DungeonConstants.SwampPalaceDungeonId, BossConstants.ArrghusBossId))
                         {
-                            //put arrghus in his original location
-                            dungeons[DungeonConstants.SwampPalaceDungeonId].boss = BossConstants.ArrghusBossId;
-                            bosses.Remove(BossConstants.ArrghusBossId);
                             continue;
                         }
                         else
@@ -276,8 +271,8 @@ namespace EnemizerLibrary
                             return false;
                         }
                     }
-                    dungeons[selectedDungeon].boss = BossConstants.ArrghusBossId;
-                    bosses.Remove(BossConstants.ArrghusBossId);
+
+                    PlaceBossInDungeon(bosses, selectedDungeon, BossConstants.ArrghusBossId);
                 }
 
 
@@ -301,11 +296,8 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod))
                     {
-                        if (dungeons[DungeonConstants.IcePalaceDungeonId].boss == BossConstants.NoBossSetId)
+                        if (PlaceBossInOriginalDungeon(bosses, DungeonConstants.IcePalaceDungeonId, BossConstants.KholdstareBossId))
                         {
-                            //put kholdstare in his original location
-                            dungeons[DungeonConstants.IcePalaceDungeonId].boss = BossConstants.KholdstareBossId;
-                            bosses.Remove(BossConstants.KholdstareBossId);
                             continue;
                         }
                         else
@@ -315,8 +307,7 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    dungeons[selectedDungeon].boss = BossConstants.KholdstareBossId;
-                    bosses.Remove(BossConstants.KholdstareBossId);
+                    PlaceBossInDungeon(bosses, selectedDungeon, BossConstants.KholdstareBossId);
                 }
 
                 selectedDungeon = (byte)rand.Next(12);
@@ -341,11 +332,8 @@ namespace EnemizerLibrary
 
                     if (CheckGTowerAndPedestalForItems(ItemConstants.FireRod, ItemConstants.IceRod))
                     {
-                        if (dungeons[DungeonConstants.TurtleRockDungeonId].boss == BossConstants.NoBossSetId)
+                        if (PlaceBossInOriginalDungeon(bosses, DungeonConstants.TurtleRockDungeonId, BossConstants.TrixnessBossId))
                         {
-                            //put trinexx in his original location
-                            dungeons[DungeonConstants.TurtleRockDungeonId].boss = BossConstants.TrixnessBossId;
-                            bosses.Remove(BossConstants.TrixnessBossId);
                             continue;
                         }
                         else
@@ -355,8 +343,7 @@ namespace EnemizerLibrary
                         }
                     }
 
-                    dungeons[selectedDungeon].boss = BossConstants.TrixnessBossId;
-                    bosses.Remove(BossConstants.TrixnessBossId);
+                    PlaceBossInDungeon(bosses, selectedDungeon, BossConstants.TrixnessBossId);
                 }
 
                 selectedDungeon = (byte)rand.Next(12);
@@ -364,8 +351,8 @@ namespace EnemizerLibrary
                 if (dungeons[selectedDungeon].boss == BossConstants.NoBossSetId)
                 {
                     selectedBoss = bosses[rand.Next(bosses.Count)];
-                    dungeons[selectedDungeon].boss = selectedBoss;
-                    bosses.Remove(selectedBoss);
+
+                    PlaceBossInDungeon(bosses, selectedDungeon, selectedBoss);
                 }
                 else
                 {
@@ -434,6 +421,26 @@ namespace EnemizerLibrary
                 }
             }
             return false;
+        }
+
+        private void PlaceBossInDungeon(List<byte> bosses, int dungeonId, byte bossId)
+        {
+            dungeons[dungeonId].boss = bossId;
+            bosses.Remove(bossId);
+        }
+
+        private bool PlaceBossInOriginalDungeon(List<byte> bosses, int dungeonId, byte bossId)
+        {
+            if (dungeons[dungeonId].boss == BossConstants.NoBossSetId)
+            {
+                PlaceBossInDungeon(bosses, dungeonId, bossId);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Woops Hookshot is in gtower can't put more than one arrghus!");
+                return false;
+            }
         }
 
         private void UpdateDungeonsInRom()
