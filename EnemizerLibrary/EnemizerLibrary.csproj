@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boss.cs" />
-    <Compile Include="BossRandomization.cs" />
     <Compile Include="BossRandomizer.cs" />
     <Compile Include="BossShells.cs" />
     <Compile Include="Chests.cs" />

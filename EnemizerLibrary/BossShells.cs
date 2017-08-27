@@ -73,7 +73,7 @@ namespace EnemizerLibrary
 
         public void WriteShellsToRom(RomData romData)
         {
-            foreach(var shell in Shells)
+            foreach(var shell in Shells.Where(x => x.ShellData != null))
             {
                 for (int i = 0; i < shell.ShellData.Length; i++)
                 {

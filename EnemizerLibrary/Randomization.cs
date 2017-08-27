@@ -161,6 +161,7 @@ namespace EnemizerLibrary
             if (optionFlags.RandomizeBosses)
             {
                 BossRandomizer br = new BossRandomizer(rand, optionFlags, spoilerfile);
+                br.RandomizeRom(this.ROM_DATA);
                 //Randomize_Bosses(optionFlags.BossMadness);
             }
             

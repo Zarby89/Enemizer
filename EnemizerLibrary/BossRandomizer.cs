@@ -52,6 +52,22 @@ namespace EnemizerLibrary
             FillGTPool();
         }
 
+        // TODO: add boss madness
+        /*
+        for (int i = 0; i < 13; i++)
+        {
+            byte boss = (byte)rand.Next(10);
+
+            if (i <= 2) //force at least 3 middle of room boss
+            {
+                ///*KholdstareBossId = 0,MoldormBossId = 1,MothulaBossId = 2,VitreousBossId = 3,HelmasaurBossId = 4,
+                boss = (byte)rand.Next(5);
+            }
+            bosses.Add(boss);
+            Console.WriteLine(BossConstants.BossNames[boss] + " Added in the pool");
+        }
+         */
+
         protected void FillBasePool()
         {
             PossibleBossesPool.Add(new ArmosBoss());
@@ -164,6 +180,23 @@ namespace EnemizerLibrary
                     romData[floors_address] = 0xF0;
                 }
             }
+
+            RemoveBlindSpawnCode(romData);
+            RemoveMaidenFromThievesTown(romData);
+        }
+
+        private void RemoveBlindSpawnCode(RomData romData)
+        {
+            for (int i = 0; i < 15; i++) //REMOVE BLIND SPAWN CODE
+            {
+                romData[0xEA081 + i] = AssemblyConstants.NoOp;
+            }
+        }
+
+        private void RemoveMaidenFromThievesTown(RomData romData)
+        {
+            //REMOVE MAIDEN IN TT Basement
+            romData[0x04DE81] = 0x00;
         }
 
     }

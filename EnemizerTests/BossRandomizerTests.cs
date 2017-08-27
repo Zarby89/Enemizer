@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace EnemizerTests
 {
-    public class NewBossRandomizerTests
+    public class BossRandomizerTests
     {
         readonly ITestOutputHelper output;
         public const int seed = 0;
-        public NewBossRandomizerTests(ITestOutputHelper output)
+        public BossRandomizerTests(ITestOutputHelper output)
         {
             this.output = output;
         }
@@ -97,7 +97,7 @@ namespace EnemizerTests
             //int i = 1;
             for (int i = 0; i < 10; i++)
             {
-                int seedNumber = seedRandom.Next(999999999);
+                int seedNumber = 0;  seedRandom.Next(999999999);
                 BossRandomizer br = new BossRandomizer(new Random(seedNumber));
 
                 try

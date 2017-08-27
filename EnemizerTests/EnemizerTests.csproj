@@ -69,8 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BossRandomizer.cs" />
-    <Compile Include="NewBossRandomizer.cs" />
+    <Compile Include="BossRandomizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
