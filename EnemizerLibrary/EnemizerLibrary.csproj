@@ -48,7 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Boss.cs" />
+    <Compile Include="Boss\TrinexxBoss.cs" />
+    <Compile Include="Boss\EmptyBoss.cs" />
+    <Compile Include="Boss\BossType.cs" />
+    <Compile Include="Boss\LanmolaBoss.cs" />
+    <Compile Include="Boss\MoldormBoss.cs" />
+    <Compile Include="Boss\HelmasaurBoss.cs" />
+    <Compile Include="Boss\ArrghusBoss.cs" />
+    <Compile Include="Boss\MothulaBoss.cs" />
+    <Compile Include="Boss\BlindBoss.cs" />
+    <Compile Include="Boss\KholdstareBoss.cs" />
+    <Compile Include="Boss\VitreousBoss.cs" />
+    <Compile Include="Boss\ArmosBoss.cs" />
+    <Compile Include="Boss\Boss.cs" />
     <Compile Include="BossRandomizer.cs" />
     <Compile Include="BossShells.cs" />
     <Compile Include="Chests.cs" />
@@ -87,6 +99,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
