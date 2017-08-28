@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public class Utilities
+    public static class Utilities
     {
         public static int SnesToPCAddress(int addr)
         {

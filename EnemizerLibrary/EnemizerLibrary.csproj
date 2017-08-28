@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +53,20 @@
     <Compile Include="BossShells.cs" />
     <Compile Include="Chests.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Dungeons\TurtleRockDungeon.cs" />
+    <Compile Include="Dungeons\GT1Dungeon.cs" />
+    <Compile Include="Dungeons\GT2Dungeon.cs" />
+    <Compile Include="Dungeons\GT3Dungeon.cs" />
+    <Compile Include="Dungeons\DesertPalaceDungeon.cs" />
+    <Compile Include="Dungeons\TowerOfHeraDungeon.cs" />
+    <Compile Include="Dungeons\PalaceOfDarknessDungeon.cs" />
+    <Compile Include="Dungeons\SwampPalaceDungeon.cs" />
+    <Compile Include="Dungeons\SkullWoodsDungeon.cs" />
+    <Compile Include="Dungeons\ThievesTownDungeon.cs" />
+    <Compile Include="Dungeons\IcePalaceDungeon.cs" />
+    <Compile Include="Dungeons\MiseryMireDungeon.cs" />
+    <Compile Include="Dungeons\EasternPalaceDungeon.cs" />
+    <Compile Include="Dungeons\DungeonType.cs" />
     <Compile Include="Dungeons\Dungeon.cs" />
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />

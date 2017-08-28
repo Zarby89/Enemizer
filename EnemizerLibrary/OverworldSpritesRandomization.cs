@@ -10,8 +10,6 @@ namespace EnemizerLibrary
     {
         public static void RandomizeOverworldSprite(Random rand, RomData rom, int[][] overworld_sprites, byte[][] random_sprite_group_ow, byte[][] subset_gfx_sprites, byte[] absorbable_sprites, bool absorbable)
         {
-            int index = 0;
-
             rom[0x04CF4F] = 0x10; //move bird from tree
 
 

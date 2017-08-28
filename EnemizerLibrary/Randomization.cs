@@ -17,7 +17,11 @@ namespace EnemizerLibrary
 
         //194 for firesnake
         //All the sprites address that are dropping keys //check 192,193,
+
+        // TODO: unused?
         int[] smallCorridors_sprites = { 0x04DE29 };
+
+
         int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
         //All the rooms that need every sprite dead for doors to open
         int[] NeedKillable_doors = { 11, 27, 36, 40, 46, 49, 62, 68, 75, 83, 93, 107, 109, 110, 113, 117, 123, 125, 133, 135, 141, 165, 168, 176, 178, 182, 210, 216, 224, 239, 268, 291 };
@@ -87,7 +91,7 @@ namespace EnemizerLibrary
 
         }
 
-        public RomData MakeRandomization(int seed, OptionFlags optionFlags, byte[] ROM_DATA, string skin = "") //Initialization of the randomization
+        public RomData MakeRandomization(int seed, OptionFlags optionflags, byte[] ROM_DATA, string skin = "") //Initialization of the randomization
         {
             //We should ask for a original ROM too to prevent any problem while checking the data or including these
             //data in the code [all the original sprites infos 0x3F * 5]
@@ -95,7 +99,7 @@ namespace EnemizerLibrary
             //Save the ROM as a new file instead of overwriting the original one
             //Save the flags used in a file to remember the last flags that were used
             this.ROM_DATA = new RomData(ROM_DATA);
-            this.optionFlags = optionFlags;
+            this.optionFlags = optionflags;
 
             // patch in our assembly binary data
             // TODO: figure out if this should be done first or after some other code below
@@ -525,7 +529,9 @@ namespace EnemizerLibrary
             }
         }
 
+        // TODO: unused?
         byte[][] dungeons_palettes = new byte[14][];
+
         public void Randomize_Dungeons_Palettes()
         {
             for (int i = 0; i < 20; i++)
@@ -759,12 +765,26 @@ namespace EnemizerLibrary
             Color dirt2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
             //Color grass = Color.FromArgb(230, 230, 230);
             //Color dirt = Color.FromArgb(140,120,64);
+
+            // TODO: unused?
             Color wall = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+
+            // TODO: unused?
             Color roof = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+
+
             Color btreetrunk = Color.FromArgb(172, 144, 96);
+
+            // TODO: unused?
             Color treetrunk = Color.FromArgb(btreetrunk.R - 40 + rand.Next(80), btreetrunk.G - 20 + rand.Next(30), btreetrunk.B - 30 + rand.Next(60));
+
+
             Color treeleaf = Color.FromArgb(grass.R-20 + rand.Next(30), grass.G-20+rand.Next(30), grass.B-20+rand.Next(30));
+
+            // TODO: unused?
             Color bridge = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
+
+
             setColor(0x05FEA9, grass, 0);
 
             setColor(0x0DD4AC, grass, 2); //desert shadow
@@ -1105,7 +1125,11 @@ namespace EnemizerLibrary
                 ROM_DATA[0x015602 + i] = originalmusicafter0x85[i];
             }
         }
+
+        // TODO: unused?
         byte[] original_damage = new byte[] {2,4,0,8,8,16,32,32,24,64, 32, 32, 32, 32, 32, 32 };
+
+
         public void Randomize_Sprites_DMG(bool allowZeroDamage)
         {
             for (int j = 0; j < 0xF3; j++)
@@ -1167,8 +1191,11 @@ namespace EnemizerLibrary
 
 
         int[][] overworld_sprites = new int[208][];
+        // TODO: unused?
         int[] removed_sprites = new int[] { 0x04CF51, };
+        // TODO: unused?
         int[] water_sprites = new int[] { 0x04D005, 0x04D18E, 0x04D227, 0x04D22A, 0x04D236, 0x04D245, 0x04D24B, 0x04D24E, 0x04D26A, 0x04D281, 0x04D28A, 0x04D2B0, 0x04CBF7, 0x04CC76, 0x04CC79, 0x04CC86, 0x04CDE6, 0x04CDE9, 0x04CDF5, 0x04CDF8, 0x04CDFE, 0x04CE01, 0x04CE50, 0x04CE5C, 0x04CE6E, 0x04CE8D, 0x04CE90, 0x04CE8D, 0x04CE90, 0x04CED0, };
+        // TODO: unused?
         int[] water_rooms = new int[] { 0x00000F, 0x00002E, 0x000035, 0x000037, 0x00003B, 0x00003F, 0x00004F, 0x000056, 0x000057, 0x000070, 0x000075, 0x000076, 0x000077, 0x00007F, };
   
 

@@ -21,7 +21,7 @@ namespace EnemizerLibrary
                     // Select one of the 60 sprites group avoid the ones that are empty because they contain npcs/bosses
                     byte sprite_group = (byte)rand.Next(60);
                     if (random_sprite_group[sprite_group].Length == 0) { continue; } //restart
-                    bool fail = false;
+                    
                     //The group we selected is not empty - check if the room is part of a special room
 
                     /*NOTE Some room have multiple required sprites like shadows, crystal switches might need to force a
@@ -349,7 +349,7 @@ namespace EnemizerLibrary
                                         }
                                         break;
                                     }
-                                    if (protection_try >= 200) { fail = true; break; }//reset from the start
+                                    if (protection_try >= 200) { break; }//reset from the start
 
                                 }
                             }
