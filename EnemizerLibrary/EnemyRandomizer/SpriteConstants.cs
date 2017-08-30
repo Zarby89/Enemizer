@@ -8,6 +8,16 @@ namespace EnemizerLibrary
 {
     public static class SpriteConstants
     {
+        /*
+         * $06B44C
+         * Byte formatted thus: i s phhhhh
+         * s - 'Statis'. If set, indicates that the sprite should not be considered as "alive" in routines that try to check that property. 
+         * Functionally, the sprites might not actually be considered to be in statis though. 
+         * Example: Bubbles (aka Fire Faeries) are not considered alive for the purposes of puzzles, 
+         * because it's not expected that you always have the resources to kill them. Thus, they always have this bit set.
+         */
+        public static readonly byte statisMask = 0x40; // 0100 0000
+
         public static readonly byte
             RavenSprite = 0x00,
             VultureSprite = 0x01,

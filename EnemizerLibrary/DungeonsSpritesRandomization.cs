@@ -30,55 +30,55 @@ namespace EnemizerLibrary
                     Console.WriteLine("Start Generation " + room.ToString());
                     //tongue switch/crystal subset3 on 83
                     //switch/crystal subset3 on  82
-                    if (WallMasterRoom.Contains(room)) //if the current room is switch room
+                    if (RoomIdConstants.WallMasterRoom.Contains(room)) //if the current room is switch room
                     {
                         sprite_group = 39;
                         Console.WriteLine("Required Wall Master");
                     }
 
-                    if (canonRoom.Contains(room))//if the current room is an Moving wall canon room
+                    if (RoomIdConstants.canonRoom.Contains(room))//if the current room is an Moving wall canon room
                     {
                         if (random_sprite_group[sprite_group][0] != 47) { continue; }
                         Console.WriteLine("Required Canon1");
                     }
 
-                    if (ShadowRoom.Contains(room)) //if the current room is an Shadow room
+                    if (RoomIdConstants.ShadowRoom.Contains(room)) //if the current room is an Shadow room
                     {
                         if (random_sprite_group[sprite_group][1] != 32) { continue; }
                         Console.WriteLine("Shadow");
                     }
 
-                    if (IcemanRoom.Contains(room))
+                    if (RoomIdConstants.IcemanRoom.Contains(room))
                     {
                         if (random_sprite_group[sprite_group][2] != 38) { continue; }
                         Console.WriteLine("Required Iceman");
                     }
 
-                    if (WaterRoom.Contains(room))
+                    if (RoomIdConstants.WaterRoom.Contains(room))
                     {
                         if (random_sprite_group[sprite_group][2] != 34) { continue; }
                         Console.WriteLine("Required Water");
                     }
 
-                    if (canonRoom2.Contains(room)) //if the current room is a canon room
+                    if (RoomIdConstants.canonRoom2.Contains(room)) //if the current room is a canon room
                     {
                         if (random_sprite_group[sprite_group][2] != 46) { continue; }
                         Console.WriteLine("Required Canon2");
                     }
 
-                    if (TonguesRoom.Contains(room)) //if the current room is tongue room
+                    if (RoomIdConstants.TonguesRoom.Contains(room)) //if the current room is tongue room
                     {
                         if (random_sprite_group[sprite_group][3] != 83) { continue; }
                         Console.WriteLine("Required Tongues");
                     }
 
-                    if (SwitchesRoom.Contains(room)) //if the current room is switch room
+                    if (RoomIdConstants.SwitchesRoom.Contains(room)) //if the current room is switch room
                     {
                         if (random_sprite_group[sprite_group][3] != 82) { continue; }
                         Console.WriteLine("Required Switches");
                     }
 
-                    if (bumperandcrystalRoom.Contains(room)) //if the current room is bumper/crystal/laser eye room
+                    if (RoomIdConstants.bumperandcrystalRoom.Contains(room)) //if the current room is bumper/crystal/laser eye room
                     {
                         if (random_sprite_group[sprite_group][3] == 82 || random_sprite_group[sprite_group][3] == 83)
                         {
@@ -89,12 +89,12 @@ namespace EnemizerLibrary
                         Console.WriteLine("Required BumperCrystalEyes");
                     }
 
-                    if (room == 85) //uncle
+                    if (room == RoomIdConstants.R85_CastleSecretEntrance_UncleDeathRoom) //uncle
                     {
                         sprite_group = 13; //force sprite_group to be uncle 13
                     }
 
-                    if (room == 127)
+                    if (room == RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom)
                     {
                         if (random_sprite_group[sprite_group][0] != 31)
                         {
@@ -111,7 +111,7 @@ namespace EnemizerLibrary
 
                         bool need_killable_sprite = false;
                         //check all the sprites addresses of that room we are in check if that room is a "shutter door" room
-                        foreach (int shutterRoom in NeedKillable_doors)
+                        foreach (int shutterRoom in RoomIdConstants.NeedKillable_doors)
                         {
                             if (shutterRoom == room) //if we are in a shutterdoor room then
                             {
@@ -153,21 +153,21 @@ namespace EnemizerLibrary
                         }
                         int c = sprites.Count;
                         //LAG REDUCTION CODE !!!
-                        if (room == 203) //add same amount of green rupee in the pool as the number of sprites
+                        if (room == RoomIdConstants.R203_ThievesTown_NorthWestEntranceRoom) //add same amount of green rupee in the pool as the number of sprites
                         {
                             for(int i = 0;i < c;i++)
                             {
                                 sprites.Add(0xD9);
                             }
                         }
-                        if (room == 204) //add same amount of green rupee in the pool as the number of sprites
+                        if (room == RoomIdConstants.R204_ThievesTown_NorthEastEntranceRoom) //add same amount of green rupee in the pool as the number of sprites
                         {
                             for (int i = 0; i < c; i++)
                             {
                                 sprites.Add(0xD9);
                             }
                         }
-                        if (room == 220) //add same amount of green rupee in the pool as the number of sprites
+                        if (room == RoomIdConstants.R220_ThievesTown_SouthEastEntranceRoom) //add same amount of green rupee in the pool as the number of sprites
                         {
                             for (int i = 0; i < c; i++)
                             {
@@ -186,7 +186,7 @@ namespace EnemizerLibrary
                             }
 
 
-                            if (noStatueRoom.Contains(room))
+                            if (RoomIdConstants.noStatueRoom.Contains(room))
                             {
                                 if (selected_sprite == 0x1C)
                                 {
@@ -194,7 +194,7 @@ namespace EnemizerLibrary
                                 }
                             }
 
-                            if (room == 63 | room == 206)
+                            if (room == RoomIdConstants.R63_IcePalace_MapChestRoom | room == RoomIdConstants.R206_IcePalace_HoletoKholdstareRoom)
                             {
                                 if (selected_sprite == 0x86)
                                 {
@@ -202,7 +202,7 @@ namespace EnemizerLibrary
                                 }
                             }
 
-                            if (room == 291)
+                            if (room == RoomIdConstants.R291_MiniMoldormCave)
                             {
                                 if (selected_sprite == 0xE4)
                                 {
@@ -233,7 +233,13 @@ namespace EnemizerLibrary
                                         selected_sprite = sprites[rand.Next(sprites.Count)]; //generate a new sprite to get a killable sprite
                                         if (NonKillable.Contains(selected_sprite)) // if the selected sprite we have is invincible then restart
                                         {
-                                            if (room == 107 || room == 109 || room == 93 || room == 27 || room == 11 || room == 123 || room == 125)
+                                            if (room == RoomIdConstants.R107_GanonsTower_MimicsRooms 
+                                                || room == RoomIdConstants.R109_GanonsTower_Gauntlet4_5 
+                                                || room == RoomIdConstants.R93_GanonsTower_Gauntlet1_2_3 
+                                                || room == RoomIdConstants.R27_PalaceofDarkness_Mimics_MovingWallRoom 
+                                                || room == RoomIdConstants.R11_PalaceofDarkness_TurtleRoom 
+                                                || room == RoomIdConstants.R123_GanonsTower 
+                                                || room == RoomIdConstants.R125_GanonsTower_Winder_WarpMazeRoom)
                                             {
                                                 if (bowSprites.Contains(selected_sprite))
                                                 {
@@ -244,7 +250,10 @@ namespace EnemizerLibrary
                                                     break;
                                                 }
                                             }
-                                            if (room == 75 || room == 216 || room == 217 || room == 218)
+                                            if (room == RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom 
+                                                || room == RoomIdConstants.R216_EasternPalace_PreArmosKnightsRoom 
+                                                || room == RoomIdConstants.R217_EasternPalace_CanonballRoom 
+                                                || room == RoomIdConstants.R218_EasternPalace)
                                             {
                                                 if (bowSprites.Contains(selected_sprite))
                                                 {
@@ -264,7 +273,7 @@ namespace EnemizerLibrary
                                 }
                             }
 
-                            if (room == 151)
+                            if (room == RoomIdConstants.R151_MiseryMire_TorchPuzzle_MovingWallRoom)
                             {
                                 ROM_DATA[roomSprites.RoomSprites[room][i] - 2] = 0x15;
                                 ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = 0x07;

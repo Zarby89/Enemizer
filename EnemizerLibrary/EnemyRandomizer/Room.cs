@@ -144,6 +144,16 @@ namespace EnemizerLibrary
 
     public enum RoomRequirement
     {
-        NeedsKillableForDoors
+        NeedsKillableForDoors,
+        HasIceMan,
+        WaterRoom,
+        ShadowRoom,
+        WallmasterRoom, // TOOD: I don't like this name
+        BumperAndCrystalRoom,
+        SwitchRoom,
+        TonguesRoom,
+        NoStatueRoom,
+        CanonRoom,
+        HasKey // TODO: not sure if we care about this or if we should do it from sprite side
     }
 }

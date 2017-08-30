@@ -22,17 +22,14 @@ namespace EnemizerLibrary
         int[] smallCorridors_sprites = { 0x04DE29 };
 
 
-        int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
+        int[] key_sprite = { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
         
-        //All the rooms that need every sprite dead for doors to open
-        int[] NeedKillable_doors = { 11, 27, 36, 40, 46, 49, 62, 68, 75, 83, 93, 107, 109, 110, 113, 117, 123, 125, 133, 135, 141, 165, 168, 176, 178, 182, 210, 216, 224, 239, 268, 291 };
-        //room 113 is not in needkillable is it in key_sprite?
 
         //all the sprites "gfx" sheet 
-        byte[] sprite_subset_0 = new byte[] { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
-        byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
-        byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
-        byte[] sprite_subset_3 = new byte[] { 17, 16, 27, 20, 82, 83 };
+        byte[] sprite_subset_0 = { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
+        byte[] sprite_subset_1 = { 44, 30, 32 };//73-13
+        byte[] sprite_subset_2 = { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
+        byte[] sprite_subset_3 = { 17, 16, 27, 20, 82, 83 };
 
         //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
         byte[][] random_sprite_group = new byte[60][];
@@ -59,25 +56,6 @@ namespace EnemizerLibrary
             SpriteConstants.KeySprite // TODO: do we want this in the pool?
         };
 
-        //All the rooms that require special handling
-        int[] IcemanRoom = { 14, 126, 142, 158, 190 }; //these room need to be locked on the gfx ID : 28
-        int[] WaterRoom = { 40, 56, 54, 70, 52, 22, 102 }; //these room need to be locked on the gfx ID : 17 //118 removed
-        int[] ShadowRoom = { 62, 159 };//28,27,30
-        int[] WallMasterRoom = { 57, 73, 86, 141, 104 };//force 82 on 3
-        int[] bumperandcrystalRoom = 
-        {
-            23,4,11,19,27,30,42,43,49,68,76,88,89,91,103,104,107,119,135,139,145,150,146,155,157,161,171,
-            182,191,193,196,235, 64, 74, 165, 195,197,213,214,239,61,126
-        };//also laser shooting eyes //can be 82 or 83 on 3
-        //126 IR,
-        int[] SwitchesRoom = { 2, 100, 267, 88 };// WM, ?? 73:no switch in that room
-        int[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
-        //byte[] PushSwitchesRoom = { 53, 55, 118 }; //83 same as tongue
-        int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87,194,177 }; //do not generate statue in these rooms
-        //ROOM 127 do not spawn  anti-faerie
-        int[] canonRoom = { 92, 117 }; //47 on 0
-        int[] canonRoom2 = { 185, 217, 268 };//46 on 2
-        
 
         //For Keys
         byte[] NonKillable = 
@@ -192,7 +170,15 @@ namespace EnemizerLibrary
             SpriteConstants.YellowStalfosSprite
         };
 
-        byte[] static_sprites = // was statis_sprites???
+        /*
+         * $06B44C
+         * Byte formatted thus: i s phhhhh
+         * s - 'Statis'. If set, indicates that the sprite should not be considered as "alive" in routines that try to check that property. 
+         * Functionally, the sprites might not actually be considered to be in statis though. 
+         * Example: Bubbles (aka Fire Faeries) are not considered alive for the purposes of puzzles, 
+         * because it's not expected that you always have the resources to kill them. Thus, they always have this bit set.
+         */
+        byte[] statis_sprites = 
         {
             SpriteConstants.ChainChompSprite,
             SpriteConstants.DeadrockSprite,
@@ -574,9 +560,9 @@ namespace EnemizerLibrary
         public byte get_guard_subset_1()
         {
             int i = rand.Next(2);
-            if (i == 0) { i = 73; };
-            if (i == 1) { i = 13; };
-            if (i == 2) { i = 13; };
+            if (i == 0) { i = 73; }
+            if (i == 1) { i = 13; }
+            if (i == 2) { i = 13; }
             return (byte)i;
         }
 
@@ -696,9 +682,9 @@ namespace EnemizerLibrary
             random_sprite_group[37][3] = 82;
             random_sprite_group[41][2] = 35;
 
-            for (int i = 0;i<static_sprites.Length;i++)
+            for (int i = 0;i<statis_sprites.Length;i++)
             {
-                ROM_DATA[0x6B44C + static_sprites[i]] = (byte)(ROM_DATA[0x6B44C + static_sprites[i]] | 0x40);
+                ROM_DATA[0x6B44C + statis_sprites[i]] = (byte)(ROM_DATA[0x6B44C + statis_sprites[i]] | 0x40);
 
 
             }
@@ -767,7 +753,7 @@ namespace EnemizerLibrary
             }
 
             //Remove Dark Room
-            int[] dark_rooms = new int[] { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
+            int[] dark_rooms = { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
             for(int i = 0;i<dark_rooms.Length;i++)
             {
                 ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] & 0xFE));
@@ -1322,12 +1308,12 @@ namespace EnemizerLibrary
         {
             for (int i = 0; i < 0x70; i++)
             {
-                byte[] musics = new byte[] { 0x03, 0x07, 0x0B, 0x0E, 0x10, 0x11, 0x12, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x22, 0x23};
+                byte[] musics = { 0x03, 0x07, 0x0B, 0x0E, 0x10, 0x11, 0x12, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x22, 0x23};
                 byte m = (byte)rand.Next(musics.Length);
                 m = musics[m];
                 ROM_DATA[0x015592+i] = m;
             }
-            byte[] originalmusicafter0x85 = new byte[] { 0x12, 0x1B, 0x12, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0x11 };
+            byte[] originalmusicafter0x85 = { 0x12, 0x1B, 0x12, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0x11 };
             for (int i = 0; i < 0x0A; i++)
             {
                 ROM_DATA[0x015602 + i] = originalmusicafter0x85[i];
@@ -1335,7 +1321,7 @@ namespace EnemizerLibrary
         }
 
         // TODO: unused?
-        byte[] original_damage = new byte[] {2,4,0,8,8,16,32,32,24,64, 32, 32, 32, 32, 32, 32 };
+        byte[] original_damage = {2,4,0,8,8,16,32,32,24,64, 32, 32, 32, 32, 32, 32 };
 
 
         public void Randomize_Sprites_DMG(bool allowZeroDamage)
@@ -1400,11 +1386,11 @@ namespace EnemizerLibrary
 
         int[][] overworld_sprites = new int[208][];
         // TODO: unused?
-        int[] removed_sprites = new int[] { 0x04CF51, };
+        int[] removed_sprites = { 0x04CF51, };
         // TODO: unused?
-        int[] water_sprites = new int[] { 0x04D005, 0x04D18E, 0x04D227, 0x04D22A, 0x04D236, 0x04D245, 0x04D24B, 0x04D24E, 0x04D26A, 0x04D281, 0x04D28A, 0x04D2B0, 0x04CBF7, 0x04CC76, 0x04CC79, 0x04CC86, 0x04CDE6, 0x04CDE9, 0x04CDF5, 0x04CDF8, 0x04CDFE, 0x04CE01, 0x04CE50, 0x04CE5C, 0x04CE6E, 0x04CE8D, 0x04CE90, 0x04CE8D, 0x04CE90, 0x04CED0, };
+        int[] water_sprites = { 0x04D005, 0x04D18E, 0x04D227, 0x04D22A, 0x04D236, 0x04D245, 0x04D24B, 0x04D24E, 0x04D26A, 0x04D281, 0x04D28A, 0x04D2B0, 0x04CBF7, 0x04CC76, 0x04CC79, 0x04CC86, 0x04CDE6, 0x04CDE9, 0x04CDF5, 0x04CDF8, 0x04CDFE, 0x04CE01, 0x04CE50, 0x04CE5C, 0x04CE6E, 0x04CE8D, 0x04CE90, 0x04CE8D, 0x04CE90, 0x04CED0, };
         // TODO: unused?
-        int[] water_rooms = new int[] { 0x00000F, 0x00002E, 0x000035, 0x000037, 0x00003B, 0x00003F, 0x00004F, 0x000056, 0x000057, 0x000070, 0x000075, 0x000076, 0x000077, 0x00007F, };
+        int[] water_rooms = { 0x00000F, 0x00002E, 0x000035, 0x000037, 0x00003B, 0x00003F, 0x00004F, 0x000056, 0x000057, 0x000070, 0x000075, 0x000076, 0x000077, 0x00007F, };
   
 
 
