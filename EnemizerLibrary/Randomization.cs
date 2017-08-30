@@ -22,16 +22,7 @@ namespace EnemizerLibrary
         int[] smallCorridors_sprites = { 0x04DE29 };
 
 
-        
-
-        //all the sprites "gfx" sheet 
-        byte[] sprite_subset_0 = { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
-        byte[] sprite_subset_1 = { 44, 30, 32 };//73-13
-        byte[] sprite_subset_2 = { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
-        byte[] sprite_subset_3 = { 17, 16, 27, 20, 82, 83 };
-
         //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
-        byte[][] random_sprite_group = new byte[60][];
         byte[][] random_sprite_group_ow = new byte[43][];
 
         //all the sprites that can be used in the subset gfx sheet selected
@@ -88,10 +79,9 @@ namespace EnemizerLibrary
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
-                create_sprite_group();
-                patch_sprite_group();
                 //create_rooms_sprites();
-                DungeonSpriteRandomizer.Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable, this.ROM_DATA, this.rand, this.random_sprite_group, this.subset_gfx_sprites);
+                DungeonSpriteRandomizer dsr = new DungeonSpriteRandomizer(this.ROM_DATA, this.rand);
+                dsr.RandomizeDungeonSprites(optionFlags.EnemiesAbsorbable, this.subset_gfx_sprites);
             }
 
             //random sprite overworld
@@ -304,10 +294,10 @@ namespace EnemizerLibrary
         {
             return new byte[] 
             {
-                sprite_subset_0[rand.Next(sprite_subset_0.Length)],
-                sprite_subset_1[rand.Next(sprite_subset_1.Length)],
-                sprite_subset_2[rand.Next(sprite_subset_2.Length)],
-                sprite_subset_3[rand.Next(sprite_subset_3.Length)]
+                SpriteConstants.sprite_subset_0[rand.Next(SpriteConstants.sprite_subset_0.Length)],
+                SpriteConstants.sprite_subset_1[rand.Next(SpriteConstants.sprite_subset_1.Length)],
+                SpriteConstants.sprite_subset_2[rand.Next(SpriteConstants.sprite_subset_2.Length)],
+                SpriteConstants.sprite_subset_3[rand.Next(SpriteConstants.sprite_subset_3.Length)]
             };
         }
 
@@ -318,7 +308,7 @@ namespace EnemizerLibrary
                 random_sprite_group_ow[i] = fully_randomize_that_group(); //group from 105 to 124 are empty
             }
             //Creations of the guards group :
-            random_sprite_group_ow[0] = new byte[] { 72, get_guard_subset_1(), 19, sprite_subset_3[rand.Next(sprite_subset_3.Length)] }; //Do not randomize that group (Ending thing?)
+            random_sprite_group_ow[0] = new byte[] { 72, get_guard_subset_1(), 19, SpriteConstants.sprite_subset_3[rand.Next(SpriteConstants.sprite_subset_3.Length)] }; //Do not randomize that group (Ending thing?)
             random_sprite_group_ow[1] = new byte[] { 70, get_guard_subset_1(), 19, 29 };
             random_sprite_group_ow[2] = new byte[] {72,73,19,29 };
             random_sprite_group_ow[3][3] = 14;
@@ -340,106 +330,6 @@ namespace EnemizerLibrary
 
         }
         //
-        public void create_sprite_group()
-        {
-            //Creations of the guards group :
-            random_sprite_group[0] = new byte[] { }; //Do not randomize that group (Ending thing?)
-            random_sprite_group[1] = new byte[] { 70, get_guard_subset_1(), 19, sprite_subset_3[rand.Next(sprite_subset_3.Length)] };
-            random_sprite_group[2] = new byte[] { 70, get_guard_subset_1(), 19, 83 }; //tongue switch group
-            random_sprite_group[3] = new byte[] { 72, get_guard_subset_1(), 19, sprite_subset_3[rand.Next(sprite_subset_3.Length)] };
-            random_sprite_group[4] = new byte[] { 72, get_guard_subset_1(), 19, 82 }; //switch group
-            random_sprite_group[5] = new byte[] { }; //Do not randomize that group (Npcs, Items, some others thing)
-            random_sprite_group[6] = new byte[] { }; //Do not randomize that group (Sanctuary Mantle, Priest)
-            random_sprite_group[7] = new byte[] { };//Do not randomize that group (Npcs, Arghus)
-            random_sprite_group[8] = fully_randomize_that_group(); //Force Group 8 for Iceman subset2 on 38
-            random_sprite_group[8][2] = 38;
-            random_sprite_group[9] = new byte[] { };//Do not randomize that group (Armos Knight)
-            random_sprite_group[10] = fully_randomize_that_group(); //Force Group 10 for Watersprites subset2 on 34
-            random_sprite_group[10][2] = 34;
-            random_sprite_group[11] = new byte[] { };//Do not randomize that group (Lanmolas)
-            random_sprite_group[12] = new byte[] { }; //Do not randomize that group (Moldorm)
-            random_sprite_group[13] = fully_randomize_that_group(); //(Link's House)/Sewer restore uncle (81)
-            random_sprite_group[13][0] = 81;
-            random_sprite_group[14] = new byte[] { }; //Do not randomize that group (Npcs)
-            random_sprite_group[15] = new byte[] { };//Do not randomize that group (Npcs)
-            random_sprite_group[16] = new byte[] { }; //Do not randomize that group (Minigame npcs, witch)
-            random_sprite_group[17] = fully_randomize_that_group();//Force Group 17 for Shadow(Zoro) Subset 1 on 32
-            random_sprite_group[17][1] = 32;
-            random_sprite_group[18] = new byte[] { };//Do not randomize that group (Vitreous?,Agahnim)
-            random_sprite_group[19] = fully_randomize_that_group();//Force group 19 for Wallmaster Subset2 on 35
-            random_sprite_group[19][2] = 35;
-            random_sprite_group[20] = new byte[] { }; //Do not randomize that group (Bosses)
-            random_sprite_group[21] = new byte[] { }; //Do not randomize that group (Bosses)
-            random_sprite_group[22] = new byte[] { };//Do not randomize that group (Bosses)
-            random_sprite_group[23] = new byte[] { }; //Do not randomize that group (Bosses)
-            random_sprite_group[24] = new byte[] { }; //Do not randomize that group (Bosses)
-            random_sprite_group[25] = fully_randomize_that_group();
-            random_sprite_group[26] = new byte[] { };//Do not randomize that group (Bosses)
-            random_sprite_group[27] = fully_randomize_that_group();//Force group 27 for movingwallcanon subset0 on 47
-            random_sprite_group[27][0] = 47;
-            random_sprite_group[28] = fully_randomize_that_group();//Force group 27 for canon rooms subset2 on 46
-            random_sprite_group[28][2] = 46;
-            random_sprite_group[29] = fully_randomize_that_group();
-            random_sprite_group[30] = fully_randomize_that_group();
-            random_sprite_group[31] = fully_randomize_that_group();
-            random_sprite_group[32] = new byte[] { }; //Do not randomize that group (Bosses)
-            random_sprite_group[33] = fully_randomize_that_group();
-            random_sprite_group[34] = new byte[] { }; //Do not randomize that group (Ganon)
-            random_sprite_group[35] = new byte[] { }; //Do not randomize that group (Lanmolas)
-            random_sprite_group[36] = fully_randomize_that_group();
-            random_sprite_group[37] = fully_randomize_that_group();
-            random_sprite_group[38] = fully_randomize_that_group();
-            random_sprite_group[39] = fully_randomize_that_group();
-            random_sprite_group[39][2] = 35;
-            random_sprite_group[39][3] = 82;
-
-            
-
-
-            //room 88 require bumper, switch
-            //room 104 require bumper, wall master
-            random_sprite_group[40] = new byte[] { }; //Do not randomize that group (Npcs)
-            for (int i = 41; i < 60; i++)
-            {
-                random_sprite_group[i] = fully_randomize_that_group(); //group from 105 to 124 are empty
-            }
-
-            random_sprite_group[29][0] = 47;
-            random_sprite_group[29][2] = 46;
-            random_sprite_group[30][0] = 14;
-            random_sprite_group[31][1] = 32;
-            random_sprite_group[31][2] = 28;
-            random_sprite_group[38][2] = 38;
-            random_sprite_group[38][3] = 82;
-            random_sprite_group[33][2] = 34;
-            random_sprite_group[36][3] = 83;
-            random_sprite_group[37][3] = 82;
-            random_sprite_group[41][2] = 35;
-
-            for (int i = 0;i<SpriteConstants.statis_sprites.Length;i++)
-            {
-                ROM_DATA[0x6B44C + SpriteConstants.statis_sprites[i]] = (byte)(ROM_DATA[0x6B44C + SpriteConstants.statis_sprites[i]] | 0x40);
-
-
-            }
-
-
-
-        }
-
-        public void patch_sprite_group()
-        {
-            for (int i = 0; i < 60; i++)
-            {
-                if (random_sprite_group[i].Length != 0)
-                {
-                    ROM_DATA[0x05C97 + (i * 4)] = random_sprite_group[i][0];
-                    ROM_DATA[0x05C97 + (i * 4) + 1] = random_sprite_group[i][1];
-                    ROM_DATA[0x05C97 + (i * 4) + 2] = random_sprite_group[i][2];
-                    ROM_DATA[0x05C97 + (i * 4) + 3] = random_sprite_group[i][3];
-                }
-            }
-        }
 
         public void patch_sprite_group_ow()
         {

@@ -497,5 +497,12 @@ namespace EnemizerLibrary
         public static readonly byte[] hammerSprites = { SpriteConstants.TerrorpinSprite };
 
         public static readonly int[] key_sprite = { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
+
+        //all the sprites "gfx" sheet 
+        public static readonly byte[] sprite_subset_0 = { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
+        public static readonly byte[] sprite_subset_1 = { 44, 30, 32 };//73-13
+        public static readonly byte[] sprite_subset_2 = { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
+        public static readonly byte[] sprite_subset_3 = { 17, 16, 27, 20, 82, 83 };
+
     }
 }
