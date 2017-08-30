@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public partial class Randomization
+    public static class DungeonSpriteRandomizer
     {
-        public void Randomize_Dungeons_Sprite(bool absorbable)
+        public static void Randomize_Dungeons_Sprite(bool absorbable, RomData romData, Random rand, byte[][] random_sprite_group, byte[][] subset_gfx_sprites)
         {
             var roomSprites = new RoomSpriteCollection();
 
@@ -148,7 +148,7 @@ namespace EnemizerLibrary
                             for (int j = 0; j < 3; j++)
                             {
                                 //pick 3 sprite
-                                sprites.Add(absorbable_sprites[rand.Next(absorbable_sprites.Length)]); //add all the absorbable sprites
+                                sprites.Add(SpriteConstants.absorbable_sprites[rand.Next(SpriteConstants.absorbable_sprites.Length)]); //add all the absorbable sprites
                             }
                         }
                         int c = sprites.Count;
@@ -221,17 +221,17 @@ namespace EnemizerLibrary
                             }
 
 
-                            for (int j = 0; j < key_sprite.Length; j++)
+                            for (int j = 0; j < SpriteConstants.key_sprite.Length; j++)
                             {
                                 //Check if the sprite address we are modifying is a key drop sprite then it need to be a killable sprite
-                                if (roomSprites.RoomSprites[room][i] == key_sprite[j])
+                                if (roomSprites.RoomSprites[room][i] == SpriteConstants.key_sprite[j])
                                 {
                                     byte protection_try = 0;
                                     while (true)
                                     {
                                         protection_try++;
                                         selected_sprite = sprites[rand.Next(sprites.Count)]; //generate a new sprite to get a killable sprite
-                                        if (NonKillable.Contains(selected_sprite)) // if the selected sprite we have is invincible then restart
+                                        if (SpriteConstants.NonKillable.Contains(selected_sprite)) // if the selected sprite we have is invincible then restart
                                         {
                                             if (room == RoomIdConstants.R107_GanonsTower_MimicsRooms 
                                                 || room == RoomIdConstants.R109_GanonsTower_Gauntlet4_5 
@@ -241,11 +241,11 @@ namespace EnemizerLibrary
                                                 || room == RoomIdConstants.R123_GanonsTower 
                                                 || room == RoomIdConstants.R125_GanonsTower_Winder_WarpMazeRoom)
                                             {
-                                                if (bowSprites.Contains(selected_sprite))
+                                                if (SpriteConstants.bowSprites.Contains(selected_sprite))
                                                 {
                                                     break;
                                                 }
-                                                if (hammerSprites.Contains(selected_sprite))
+                                                if (SpriteConstants.hammerSprites.Contains(selected_sprite))
                                                 {
                                                     break;
                                                 }
@@ -255,7 +255,7 @@ namespace EnemizerLibrary
                                                 || room == RoomIdConstants.R217_EasternPalace_CanonballRoom 
                                                 || room == RoomIdConstants.R218_EasternPalace)
                                             {
-                                                if (bowSprites.Contains(selected_sprite))
+                                                if (SpriteConstants.bowSprites.Contains(selected_sprite))
                                                 {
                                                     break;
                                                 }
@@ -275,61 +275,70 @@ namespace EnemizerLibrary
 
                             if (room == RoomIdConstants.R151_MiseryMire_TorchPuzzle_MovingWallRoom)
                             {
-                                ROM_DATA[roomSprites.RoomSprites[room][i] - 2] = 0x15;
-                                ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = 0x07;
+                                romData[roomSprites.RoomSprites[room][i] - 2] = 0x15;
+                                romData[roomSprites.RoomSprites[room][i] - 1] = 0x07;
                             }
 
                             //Modify the sprite in the ROM / also set all overlord sprites on normal sprites to prevent any crashes
-                            ROM_DATA[roomSprites.RoomSprites[room][i]] = selected_sprite;
-                            ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = (byte)(ROM_DATA[roomSprites.RoomSprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
+                            romData[roomSprites.RoomSprites[room][i]] = selected_sprite;
+                            romData[roomSprites.RoomSprites[room][i] - 1] = (byte)(romData[roomSprites.RoomSprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
                                                                                                                      //extra_roll = 0;
                         }
                     }
-                    
-                    ROM_DATA[0x120090 + ((room * 14) + 3)] = sprite_group; //set the room header sprite gfx
+
+                    romData[0x120090 + ((room * 14) + 3)] = sprite_group; //set the room header sprite gfx
 
                     break; //if everything is fine in that room then go to the next one
                 }
                 
             }
             //remove key in skull wood to prevent a softlock
-            ROM_DATA[0x04DD74] = 0x16;
-            ROM_DATA[0x04DD75] = 0x05;
-            ROM_DATA[0x04DD76] = 0xE4;
+            romData[0x04DD74] = 0x16;
+            romData[0x04DD75] = 0x05;
+            romData[0x04DD76] = 0xE4;
 
             //remove all sprite in the room before boss room in mire can cause problem with different boss in the room
             //NOT NEEDED ANYMORE
             //ROM_DATA[0x04E591] = 0xFF;
         }
 
-        public List<byte> remove_unkillable_sprite(int room,List<byte> sprites)
+        public static List<byte> remove_unkillable_sprite(int room,List<byte> sprites)
         {
             bool no_change = false;
             for (int i = 0; i < sprites.Count; i++)
             {
                 no_change = false;
-                if (room == 107 || room == 109 || room == 93 || room == 27 || room == 11 || room == 123 || room == 125)
+                if (room == RoomIdConstants.R107_GanonsTower_MimicsRooms 
+                    || room == RoomIdConstants.R109_GanonsTower_Gauntlet4_5 
+                    || room == RoomIdConstants.R93_GanonsTower_Gauntlet1_2_3 
+                    || room == RoomIdConstants.R27_PalaceofDarkness_Mimics_MovingWallRoom 
+                    || room == RoomIdConstants.R11_PalaceofDarkness_TurtleRoom 
+                    || room == RoomIdConstants.R123_GanonsTower 
+                    || room == RoomIdConstants.R125_GanonsTower_Winder_WarpMazeRoom)
                 {
 
-                    if (bowSprites.Contains(sprites[i]))
+                    if (SpriteConstants.bowSprites.Contains(sprites[i]))
                     {
                         no_change = true;
                     }
-                    if (hammerSprites.Contains(sprites[i]))
+                    if (SpriteConstants.hammerSprites.Contains(sprites[i]))
                     {
                         no_change = true;
                     }
                 }
-                if (room == 75 || room == 216 || room == 217 || room == 218)
+                if (room == RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom 
+                    || room == RoomIdConstants.R216_EasternPalace_PreArmosKnightsRoom 
+                    || room == RoomIdConstants.R217_EasternPalace_CanonballRoom 
+                    || room == RoomIdConstants.R218_EasternPalace)
                 {
-                    if (bowSprites.Contains(sprites[i]))
+                    if (SpriteConstants.bowSprites.Contains(sprites[i]))
                     {
                         no_change = true;
                     }
                 }
                 if (no_change == false)
                 {
-                    if (NonKillable_shutter.Contains(sprites[i]))
+                    if (SpriteConstants.NonKillable_shutter.Contains(sprites[i]))
                     {
                         sprites.RemoveAt(i);
                         continue;

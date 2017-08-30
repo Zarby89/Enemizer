@@ -22,7 +22,6 @@ namespace EnemizerLibrary
         int[] smallCorridors_sprites = { 0x04DE29 };
 
 
-        int[] key_sprite = { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
         
 
         //all the sprites "gfx" sheet 
@@ -38,238 +37,6 @@ namespace EnemizerLibrary
         //all the sprites that can be used in the subset gfx sheet selected
         byte[][] subset_gfx_sprites = new byte[102][];
 
-        //all the absorbable sprites fairy, bombs, rupees, arrows, ect, that can be used in any rooms without any specific set selected
-        byte[] absorbable_sprites =
-        {
-            SpriteConstants.HeartSprite,
-            SpriteConstants.GreenRupeeSprite,
-            SpriteConstants.BlueRupeeSprite,
-            SpriteConstants.RedRupeeSprite,
-            SpriteConstants.BombRefill1Sprite,
-            SpriteConstants.BombRefill4Sprite,
-            SpriteConstants.BombRefill8Sprite,
-            SpriteConstants.SmallMagicRefillSprite,
-            SpriteConstants.FullMagicRefillSprite,
-            SpriteConstants.ArrowRefill5Sprite,
-            SpriteConstants.ArrowRefill10Sprite,
-            SpriteConstants.FairySprite,
-            SpriteConstants.KeySprite // TODO: do we want this in the pool?
-        };
-
-
-        //For Keys
-        byte[] NonKillable = 
-        {
-            SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite,
-            SpriteConstants.AngryBrothersSprite,
-            SpriteConstants.Antifairy_AlternateSprite,
-            SpriteConstants.AntifairyCircleSprite,
-            SpriteConstants.AntifairySprite,
-            SpriteConstants.AppleSprite,
-            SpriteConstants.ArrowRefill10Sprite,
-            SpriteConstants.ArrowRefill5Sprite,
-            SpriteConstants.ArrowTargetSprite,
-            SpriteConstants.BeamosSprite,
-            SpriteConstants.BigKeySprite,
-            SpriteConstants.BigSpikeTrapSprite,
-            SpriteConstants.Birds_HauntedGroveSprite,
-            SpriteConstants.BlindHideoutAttendantSprite,
-            SpriteConstants.BlueRupeeSprite,
-            SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite,
-            SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite,
-            SpriteConstants.BombRefill1Sprite,
-            SpriteConstants.BombRefill4Sprite,
-            SpriteConstants.BombRefill8Sprite,
-            SpriteConstants.BouldersSprite,
-            SpriteConstants.BumperSprite,
-            SpriteConstants.BunnyBeamSprite,
-            SpriteConstants.ChainChompSprite,
-            SpriteConstants.ChickenSprite,
-            SpriteConstants.CrystalSwitchSprite,
-            SpriteConstants.DeadrockSprite,
-            SpriteConstants.DesertPalaceBarriersSprite,
-            SpriteConstants.DownPipeSprite,
-            SpriteConstants.DwarvesSprite,
-            SpriteConstants.EmptySprite,
-            SpriteConstants.EyeLaser_DownSprite,
-            SpriteConstants.EyeLaser_LeftSprite,
-            SpriteConstants.EyeLaser_RightSprite,
-            SpriteConstants.EyeLaser_UpSprite,
-            SpriteConstants.FairySprite,
-            SpriteConstants.FallingIceSprite,
-            SpriteConstants.FluteSprite,
-            SpriteConstants.FlyingStalfosHeadSprite,
-            SpriteConstants.FortuneTellerSprite,
-            SpriteConstants.FourWayFireballSpittersSprite,
-            SpriteConstants.FreezorSprite,
-            SpriteConstants.FullMagicRefillSprite,
-            SpriteConstants.GargoylesDomainGateSprite,
-            SpriteConstants.GoodBee_AgainMaybeSprite,
-            SpriteConstants.GreenRupeeSprite,
-            SpriteConstants.GuruguruBar_ClockwiseSprite,
-            SpriteConstants.GuruguruBar_CounterClockwiseSprite,
-            SpriteConstants.HardhatBeetleSprite,
-            SpriteConstants.HeartSprite,
-            SpriteConstants.HyuSprite,
-            SpriteConstants.InnkeeperSprite,
-            SpriteConstants.KeeseSprite,
-            SpriteConstants.KeySprite,
-            SpriteConstants.KyameronSprite,
-            SpriteConstants.LeftPipeSprite,
-            SpriteConstants.LightningLockSprite,
-            SpriteConstants.LostOldManSprite,
-            SpriteConstants.LynelSprite,
-            SpriteConstants.MaidenInBlindDungeonSprite,
-            SpriteConstants.MedusaSprite,
-            SpriteConstants.MonologueTestingSpriteSprite,
-            SpriteConstants.MovingCannonBallShooters_DownSprite,
-            SpriteConstants.MovingCannonBallShooters_LeftSprite,
-            SpriteConstants.MovingCannonBallShooters_RightSprite,
-            SpriteConstants.MovingCannonBallShooters_UpSprite,
-            SpriteConstants.MushroomSprite,
-            SpriteConstants.Ostrich_HauntedGroveSprite,
-            SpriteConstants.PikitSprite,
-            SpriteConstants.PoeSprite,
-            SpriteConstants.PullSwitch_BadSprite,
-            SpriteConstants.PullSwitch_GoodSprite,
-            SpriteConstants.PullSwitch_Unused1Sprite,
-            SpriteConstants.PullSwitch_Unused2Sprite,
-            SpriteConstants.PushSwitchSprite,
-            SpriteConstants.RabbitSprite,
-            SpriteConstants.RaceHPNPCsSprite,
-            SpriteConstants.RavenSprite,
-            SpriteConstants.RedBariSprite,
-            SpriteConstants.RedEyegoreSprite,
-            SpriteConstants.RedRupeeSprite,
-            SpriteConstants.RightPipeSprite,
-            SpriteConstants.Roller_HorizontalMovingSprite,
-            SpriteConstants.Roller_VerticalMoving2Sprite,
-            SpriteConstants.Roller_VerticalMovingSprite,
-            SpriteConstants.RollerSprite,
-            SpriteConstants.SahasrahlaAginahSprite,
-            SpriteConstants.ShieldSprite,
-            SpriteConstants.SmallMagicRefillSprite,
-            SpriteConstants.Spark_LeftToRightSprite,
-            SpriteConstants.Spark_RightToLeftSprite,
-            SpriteConstants.SpikeTrapSprite,
-            SpriteConstants.StalfosKnightSprite,
-            SpriteConstants.StatueSprite,
-            SpriteConstants.StorytellersSprite,
-            SpriteConstants.SweepingLadySprite,
-            SpriteConstants.SwimmersSprite,
-            SpriteConstants.TerrorpinSprite,
-            SpriteConstants.TutorialSoldierSprite,
-            SpriteConstants.UpPipeSprite,
-            SpriteConstants.VillageKidSprite,
-            SpriteConstants.VultureSprite,
-            SpriteConstants.WallmasterSprite,
-            SpriteConstants.WaterfallSprite,
-            SpriteConstants.WaterTektiteSprite,
-            SpriteConstants.WinderSprite,
-            SpriteConstants.WitchSprite,
-            SpriteConstants.YellowStalfosSprite
-        };
-
-        /*
-         * $06B44C
-         * Byte formatted thus: i s phhhhh
-         * s - 'Statis'. If set, indicates that the sprite should not be considered as "alive" in routines that try to check that property. 
-         * Functionally, the sprites might not actually be considered to be in statis though. 
-         * Example: Bubbles (aka Fire Faeries) are not considered alive for the purposes of puzzles, 
-         * because it's not expected that you always have the resources to kill them. Thus, they always have this bit set.
-         */
-        byte[] statis_sprites = 
-        {
-            SpriteConstants.ChainChompSprite,
-            SpriteConstants.DeadrockSprite,
-            SpriteConstants.Roller_VerticalMovingSprite,
-            SpriteConstants.Roller_VerticalMoving2Sprite,
-            SpriteConstants.RollerSprite,
-            SpriteConstants.Roller_HorizontalMovingSprite,
-            SpriteConstants.GuruguruBar_ClockwiseSprite,
-            SpriteConstants.GuruguruBar_CounterClockwiseSprite
-        };
-
-        //Non Killable in shutter doors Rooms
-        byte[] NonKillable_shutter = 
-        {
-            SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite,
-            SpriteConstants.AngryBrothersSprite,
-            SpriteConstants.Antifairy_AlternateSprite,
-            SpriteConstants.AntifairyCircleSprite,
-            SpriteConstants.ArrowTargetSprite,
-            SpriteConstants.Birds_HauntedGroveSprite,
-            SpriteConstants.BlindHideoutAttendantSprite,
-            SpriteConstants.BouldersSprite,
-            SpriteConstants.BumperSprite,
-            SpriteConstants.ChickenSprite,
-            SpriteConstants.CrystalSwitchSprite,
-            SpriteConstants.DeadrockSprite,
-            SpriteConstants.DesertPalaceBarriersSprite,
-            SpriteConstants.DownPipeSprite,
-            SpriteConstants.DwarvesSprite,
-            SpriteConstants.EmptySprite,
-            SpriteConstants.EyeLaser_DownSprite,
-            SpriteConstants.EyeLaser_LeftSprite,
-            SpriteConstants.EyeLaser_RightSprite,
-            SpriteConstants.EyeLaser_UpSprite,
-            SpriteConstants.FluteSprite,
-            SpriteConstants.FlyingStalfosHeadSprite,
-            SpriteConstants.FortuneTellerSprite,
-            SpriteConstants.FourWayFireballSpittersSprite,
-            SpriteConstants.FreezorSprite,
-            SpriteConstants.GargoylesDomainGateSprite,
-            SpriteConstants.GoodBee_AgainMaybeSprite,
-            SpriteConstants.HardhatBeetleSprite,
-            SpriteConstants.InnkeeperSprite,
-            SpriteConstants.KeeseSprite,
-            SpriteConstants.KyameronSprite,
-            SpriteConstants.LeftPipeSprite,
-            SpriteConstants.LightningLockSprite,
-            SpriteConstants.LostOldManSprite,
-            SpriteConstants.LynelSprite,
-            SpriteConstants.MaidenInBlindDungeonSprite,
-            SpriteConstants.MedusaSprite,
-            SpriteConstants.MonologueTestingSpriteSprite,
-            SpriteConstants.MovingCannonBallShooters_DownSprite,
-            SpriteConstants.MovingCannonBallShooters_LeftSprite,
-            SpriteConstants.MovingCannonBallShooters_RightSprite,
-            SpriteConstants.MovingCannonBallShooters_UpSprite,
-            SpriteConstants.Ostrich_HauntedGroveSprite,
-            SpriteConstants.PoeSprite,
-            SpriteConstants.PullSwitch_BadSprite,
-            SpriteConstants.PullSwitch_GoodSprite,
-            SpriteConstants.PullSwitch_Unused1Sprite,
-            SpriteConstants.PullSwitch_Unused2Sprite,
-            SpriteConstants.PushSwitchSprite,
-            SpriteConstants.RabbitSprite,
-            SpriteConstants.RaceHPNPCsSprite,
-            SpriteConstants.RavenSprite,
-            SpriteConstants.RedEyegoreSprite,
-            SpriteConstants.RightPipeSprite,
-            SpriteConstants.SahasrahlaAginahSprite,
-            SpriteConstants.SpikeTrapSprite,
-            SpriteConstants.StalfosKnightSprite,
-            SpriteConstants.StatueSprite,
-            SpriteConstants.StorytellersSprite,
-            SpriteConstants.SweepingLadySprite,
-            SpriteConstants.SwimmersSprite,
-            SpriteConstants.TerrorpinSprite,
-            SpriteConstants.TutorialSoldierSprite,
-            SpriteConstants.UpPipeSprite,
-            SpriteConstants.VillageKidSprite,
-            SpriteConstants.VultureSprite,
-            SpriteConstants.WallmasterSprite,
-            SpriteConstants.WaterfallSprite,
-            SpriteConstants.WaterTektiteSprite,
-            SpriteConstants.WinderSprite,
-            SpriteConstants.WitchSprite,
-            SpriteConstants.YellowStalfosSprite
-        };
-
-
-        byte[] bowSprites = { SpriteConstants.GreenEyegoreSprite, SpriteConstants.RedEyegoreSprite };
-        byte[] hammerSprites = { SpriteConstants.TerrorpinSprite };
 
         StreamWriter spoilerfile;
 
@@ -324,7 +91,7 @@ namespace EnemizerLibrary
                 create_sprite_group();
                 patch_sprite_group();
                 //create_rooms_sprites();
-                Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable);
+                DungeonSpriteRandomizer.Randomize_Dungeons_Sprite(optionFlags.EnemiesAbsorbable, this.ROM_DATA, this.rand, this.random_sprite_group, this.subset_gfx_sprites);
             }
 
             //random sprite overworld
@@ -334,7 +101,7 @@ namespace EnemizerLibrary
                 patch_sprite_group_ow();
                 create_overworld_sprites();
                 //WIP
-                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, this.absorbable_sprites, optionFlags.EnemiesAbsorbable);
+                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, optionFlags.EnemiesAbsorbable);
             }
 
             if (optionFlags.RandomizeEnemyHealthRange)
@@ -468,39 +235,6 @@ namespace EnemizerLibrary
         }
 
 
-
-        public bool scan_gtower(byte item) //0x08 = ice rod, 0x07 = fire rod
-        {
-            if (ROM_DATA[0xEAB8] == item) { return true; }
-            if (ROM_DATA[0xEABB] == item) { return true; }
-            if (ROM_DATA[0xEABE] == item) { return true; }
-            if (ROM_DATA[0xEAC1] == item) { return true; }
-            if (ROM_DATA[0xEAD3] == item) { return true; }
-            if (ROM_DATA[0xEAD6] == item) { return true; }
-            if (ROM_DATA[0xEAD9] == item) { return true; }
-            if (ROM_DATA[0xEADC] == item) { return true; }
-            if (ROM_DATA[0xEAC4] == item) { return true; }
-            if (ROM_DATA[0xEAC7] == item) { return true; }
-            if (ROM_DATA[0xEACA] == item) { return true; }
-            if (ROM_DATA[0xEACD] == item) { return true; }
-            if (ROM_DATA[0xEADF] == item) { return true; }
-            if (ROM_DATA[0xEAE2] == item) { return true; }
-            if (ROM_DATA[0xEAE5] == item) { return true; }
-            if (ROM_DATA[0xEAE8] == item) { return true; }
-            if (ROM_DATA[0xEAEB] == item) { return true; }
-            if (ROM_DATA[0xEAEE] == item) { return true; }
-            if (ROM_DATA[0xEAD0] == item) { return true; }
-            if (ROM_DATA[0xEAFD] == item) { return true; }
-            if (ROM_DATA[0xEB00] == item) { return true; }
-            if (ROM_DATA[0xEB03] == item) { return true; }
-            if (ROM_DATA[0xEB06] == item) { return true; }
-            if (ROM_DATA[0xEAF4] == item) { return true; }
-            if (ROM_DATA[0xEAF7] == item) { return true; }
-            if (ROM_DATA[0xEAF1] == item) { return true; }
-            if (ROM_DATA[0x180161] == item) { return true; }
-
-            return false;
-        }
 
         //create all the subset gfx set them on null because lots of them need to be unchanged
         public void create_subset_gfx()
@@ -682,9 +416,9 @@ namespace EnemizerLibrary
             random_sprite_group[37][3] = 82;
             random_sprite_group[41][2] = 35;
 
-            for (int i = 0;i<statis_sprites.Length;i++)
+            for (int i = 0;i<SpriteConstants.statis_sprites.Length;i++)
             {
-                ROM_DATA[0x6B44C + statis_sprites[i]] = (byte)(ROM_DATA[0x6B44C + statis_sprites[i]] | 0x40);
+                ROM_DATA[0x6B44C + SpriteConstants.statis_sprites[i]] = (byte)(ROM_DATA[0x6B44C + SpriteConstants.statis_sprites[i]] | 0x40);
 
 
             }

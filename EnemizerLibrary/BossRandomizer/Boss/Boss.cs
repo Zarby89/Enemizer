@@ -100,10 +100,10 @@ namespace EnemizerLibrary
         {
             foreach (var item in items)
             {
-                //if (scan_gtower(item))
-                //{
-                //    return true;
-                //}
+                if (scan_gtower(romData, item))
+                {
+                    return true;
+                }
                 if (romData[ItemConstants.MasterSwordPedestalAddress] == item)
                 {
                     return true;
@@ -111,5 +111,40 @@ namespace EnemizerLibrary
             }
             return false;
         };
+
+        // TODO: Fix this function
+        protected static bool scan_gtower(RomData romData, byte item) //0x08 = ice rod, 0x07 = fire rod
+        {
+            if (romData[0xEAB8] == item) { return true; }
+            if (romData[0xEABB] == item) { return true; }
+            if (romData[0xEABE] == item) { return true; }
+            if (romData[0xEAC1] == item) { return true; }
+            if (romData[0xEAD3] == item) { return true; }
+            if (romData[0xEAD6] == item) { return true; }
+            if (romData[0xEAD9] == item) { return true; }
+            if (romData[0xEADC] == item) { return true; }
+            if (romData[0xEAC4] == item) { return true; }
+            if (romData[0xEAC7] == item) { return true; }
+            if (romData[0xEACA] == item) { return true; }
+            if (romData[0xEACD] == item) { return true; }
+            if (romData[0xEADF] == item) { return true; }
+            if (romData[0xEAE2] == item) { return true; }
+            if (romData[0xEAE5] == item) { return true; }
+            if (romData[0xEAE8] == item) { return true; }
+            if (romData[0xEAEB] == item) { return true; }
+            if (romData[0xEAEE] == item) { return true; }
+            if (romData[0xEAD0] == item) { return true; }
+            if (romData[0xEAFD] == item) { return true; }
+            if (romData[0xEB00] == item) { return true; }
+            if (romData[0xEB03] == item) { return true; }
+            if (romData[0xEB06] == item) { return true; }
+            if (romData[0xEAF4] == item) { return true; }
+            if (romData[0xEAF7] == item) { return true; }
+            if (romData[0xEAF1] == item) { return true; }
+            if (romData[0x180161] == item) { return true; }
+
+            return false;
+        }
+
     }
 }

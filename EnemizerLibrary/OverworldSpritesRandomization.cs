@@ -8,7 +8,7 @@ namespace EnemizerLibrary
 {
     public static class OverworldSpriteRandomizer
     {
-        public static void RandomizeOverworldSprite(Random rand, RomData rom, int[][] overworld_sprites, byte[][] random_sprite_group_ow, byte[][] subset_gfx_sprites, byte[] absorbable_sprites, bool absorbable)
+        public static void RandomizeOverworldSprite(Random rand, RomData rom, int[][] overworld_sprites, byte[][] random_sprite_group_ow, byte[][] subset_gfx_sprites, bool absorbable)
         {
             rom[0x04CF4F] = 0x10; //move bird from tree
 
@@ -80,7 +80,7 @@ namespace EnemizerLibrary
                             {
                                 for (int j = 0; j < 4; j++)
                                 {
-                                    sprites.Add(absorbable_sprites[rand.Next(absorbable_sprites.Length)]); //add all the absorbable sprites
+                                    sprites.Add(SpriteConstants.absorbable_sprites[rand.Next(SpriteConstants.absorbable_sprites.Length)]); //add all the absorbable sprites
                                 }
                             }
 
