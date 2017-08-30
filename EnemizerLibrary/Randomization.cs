@@ -23,65 +23,268 @@ namespace EnemizerLibrary
 
 
         int[] key_sprite = new int[] { 0x04DA20, 0x04DA5C, 0x04DB7F, 0x04DD73, 0x04DDC3, 0x04DE07, 0x04E203, 0x04E20B, 0x04E326, 0x04E4F7, 0x04E70C, 0x04E7C8, 0x04E7FA, 0x04E200, 0x04E687, 0x04E991, 0x04E994, 0x04E997, 0x04E99A, 0x04E99D, 0x04E9A0, 0x04E9A3, 0x04E9A6, 0x04E9A9, 0x04E9AC, 0x04E9AF, 0x04E790, 0x04E78D, 0x04E78A };
+        
         //All the rooms that need every sprite dead for doors to open
         int[] NeedKillable_doors = { 11, 27, 36, 40, 46, 49, 62, 68, 75, 83, 93, 107, 109, 110, 113, 117, 123, 125, 133, 135, 141, 165, 168, 176, 178, 182, 210, 216, 224, 239, 268, 291 };
         //room 113 is not in needkillable is it in key_sprite?
+
         //all the sprites "gfx" sheet 
         byte[] sprite_subset_0 = new byte[] { 22, 31, 47, 14 }; //70-72 part of guards we already have 4 guard set don't need more
         byte[] sprite_subset_1 = new byte[] { 44, 30, 32 };//73-13
         byte[] sprite_subset_2 = new byte[] { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
         byte[] sprite_subset_3 = new byte[] { 17, 16, 27, 20, 82, 83 };
+
         //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
         byte[][] random_sprite_group = new byte[60][];
         byte[][] random_sprite_group_ow = new byte[43][];
+
         //all the sprites that can be used in the subset gfx sheet selected
         byte[][] subset_gfx_sprites = new byte[102][];
+
         //all the absorbable sprites fairy, bombs, rupees, arrows, ect, that can be used in any rooms without any specific set selected
-        byte[] absorbable_sprites = new byte[] { 0xD8, 0xD9, 0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1, 0xE2, 0xE3, 0xE4 };
+        byte[] absorbable_sprites =
+        {
+            SpriteConstants.HeartSprite,
+            SpriteConstants.GreenRupeeSprite,
+            SpriteConstants.BlueRupeeSprite,
+            SpriteConstants.RedRupeeSprite,
+            SpriteConstants.BombRefill1Sprite,
+            SpriteConstants.BombRefill4Sprite,
+            SpriteConstants.BombRefill8Sprite,
+            SpriteConstants.SmallMagicRefillSprite,
+            SpriteConstants.FullMagicRefillSprite,
+            SpriteConstants.ArrowRefill5Sprite,
+            SpriteConstants.ArrowRefill10Sprite,
+            SpriteConstants.FairySprite,
+            SpriteConstants.KeySprite // TODO: do we want this in the pool?
+        };
 
         //All the rooms that require special handling
         int[] IcemanRoom = { 14, 126, 142, 158, 190 }; //these room need to be locked on the gfx ID : 28
         int[] WaterRoom = { 40, 56, 54, 70, 52, 22, 102 }; //these room need to be locked on the gfx ID : 17 //118 removed
         int[] ShadowRoom = { 62, 159 };//28,27,30
-
         int[] WallMasterRoom = { 57, 73, 86, 141, 104 };//force 82 on 3
-
-        int[] bumperandcrystalRoom = {23,4,11,19,27,30,42,43,49,68,76,88,89,91,103,104,107,119,135,139,145,150,146,155,157,161,171,
-        182,191,193,196,235, 64, 74, 165, 195,197,213,214,239,61,126};//also laser shooting eyes //can be 82 or 83 on 3
+        int[] bumperandcrystalRoom = 
+        {
+            23,4,11,19,27,30,42,43,49,68,76,88,89,91,103,104,107,119,135,139,145,150,146,155,157,161,171,
+            182,191,193,196,235, 64, 74, 165, 195,197,213,214,239,61,126
+        };//also laser shooting eyes //can be 82 or 83 on 3
         //126 IR,
-
-
-
         int[] SwitchesRoom = { 2, 100, 267, 88 };// WM, ?? 73:no switch in that room
-
         int[] TonguesRoom = { 4, 206, 63, 35, 53, 55, 118 };
         //byte[] PushSwitchesRoom = { 53, 55, 118 }; //83 same as tongue
         int[] noStatueRoom = { 70, 208, 38, 43, 118, 54, 52, 22, 40,87,194,177 }; //do not generate statue in these rooms
-
         //ROOM 127 do not spawn  anti-faerie
         int[] canonRoom = { 92, 117 }; //47 on 0
         int[] canonRoom2 = { 185, 217, 268 };//46 on 2
         
 
         //For Keys
-        byte[] NonKillable = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x15,0x1C,0x1E,0x21,0x5B,0x5C,0x5D,0x5E,0x5F,0x60,0x61,0x66,0x67,0x68,0x69,
-        0x77,0x7D,0x7E,0x7F,0x82,0x84,0x8A,0x8E,0x90,0x93,0x95,0x96,0x97,0x98,0x9A,0xA1,0xAC,0xC5,0xC6,0xD0,0xD1,0xD8,0xD9,0xDA,0xDB,0xDC,
-        0xDD,0xDE,0xDF,0xE0,0xDF,0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
-        0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xA4,0xA8,0xA9,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0xCA,0x85,0x81,0x23,0x80,0xA8,0xA9,0x19,0x7C,0x26,0x91,0xAA};
+        byte[] NonKillable = 
+        {
+            SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite,
+            SpriteConstants.AngryBrothersSprite,
+            SpriteConstants.Antifairy_AlternateSprite,
+            SpriteConstants.AntifairyCircleSprite,
+            SpriteConstants.AntifairySprite,
+            SpriteConstants.AppleSprite,
+            SpriteConstants.ArrowRefill10Sprite,
+            SpriteConstants.ArrowRefill5Sprite,
+            SpriteConstants.ArrowTargetSprite,
+            SpriteConstants.BeamosSprite,
+            SpriteConstants.BigKeySprite,
+            SpriteConstants.BigSpikeTrapSprite,
+            SpriteConstants.Birds_HauntedGroveSprite,
+            SpriteConstants.BlindHideoutAttendantSprite,
+            SpriteConstants.BlueRupeeSprite,
+            SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite,
+            SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite,
+            SpriteConstants.BombRefill1Sprite,
+            SpriteConstants.BombRefill4Sprite,
+            SpriteConstants.BombRefill8Sprite,
+            SpriteConstants.BouldersSprite,
+            SpriteConstants.BumperSprite,
+            SpriteConstants.BunnyBeamSprite,
+            SpriteConstants.ChainChompSprite,
+            SpriteConstants.ChickenSprite,
+            SpriteConstants.CrystalSwitchSprite,
+            SpriteConstants.DeadrockSprite,
+            SpriteConstants.DesertPalaceBarriersSprite,
+            SpriteConstants.DownPipeSprite,
+            SpriteConstants.DwarvesSprite,
+            SpriteConstants.EmptySprite,
+            SpriteConstants.EyeLaser_DownSprite,
+            SpriteConstants.EyeLaser_LeftSprite,
+            SpriteConstants.EyeLaser_RightSprite,
+            SpriteConstants.EyeLaser_UpSprite,
+            SpriteConstants.FairySprite,
+            SpriteConstants.FallingIceSprite,
+            SpriteConstants.FluteSprite,
+            SpriteConstants.FlyingStalfosHeadSprite,
+            SpriteConstants.FortuneTellerSprite,
+            SpriteConstants.FourWayFireballSpittersSprite,
+            SpriteConstants.FreezorSprite,
+            SpriteConstants.FullMagicRefillSprite,
+            SpriteConstants.GargoylesDomainGateSprite,
+            SpriteConstants.GoodBee_AgainMaybeSprite,
+            SpriteConstants.GreenRupeeSprite,
+            SpriteConstants.GuruguruBar_ClockwiseSprite,
+            SpriteConstants.GuruguruBar_CounterClockwiseSprite,
+            SpriteConstants.HardhatBeetleSprite,
+            SpriteConstants.HeartSprite,
+            SpriteConstants.HyuSprite,
+            SpriteConstants.InnkeeperSprite,
+            SpriteConstants.KeeseSprite,
+            SpriteConstants.KeySprite,
+            SpriteConstants.KyameronSprite,
+            SpriteConstants.LeftPipeSprite,
+            SpriteConstants.LightningLockSprite,
+            SpriteConstants.LostOldManSprite,
+            SpriteConstants.LynelSprite,
+            SpriteConstants.MaidenInBlindDungeonSprite,
+            SpriteConstants.MedusaSprite,
+            SpriteConstants.MonologueTestingSpriteSprite,
+            SpriteConstants.MovingCannonBallShooters_DownSprite,
+            SpriteConstants.MovingCannonBallShooters_LeftSprite,
+            SpriteConstants.MovingCannonBallShooters_RightSprite,
+            SpriteConstants.MovingCannonBallShooters_UpSprite,
+            SpriteConstants.MushroomSprite,
+            SpriteConstants.Ostrich_HauntedGroveSprite,
+            SpriteConstants.PikitSprite,
+            SpriteConstants.PoeSprite,
+            SpriteConstants.PullSwitch_BadSprite,
+            SpriteConstants.PullSwitch_GoodSprite,
+            SpriteConstants.PullSwitch_Unused1Sprite,
+            SpriteConstants.PullSwitch_Unused2Sprite,
+            SpriteConstants.PushSwitchSprite,
+            SpriteConstants.RabbitSprite,
+            SpriteConstants.RaceHPNPCsSprite,
+            SpriteConstants.RavenSprite,
+            SpriteConstants.RedBariSprite,
+            SpriteConstants.RedEyegoreSprite,
+            SpriteConstants.RedRupeeSprite,
+            SpriteConstants.RightPipeSprite,
+            SpriteConstants.Roller_HorizontalMovingSprite,
+            SpriteConstants.Roller_VerticalMoving2Sprite,
+            SpriteConstants.Roller_VerticalMovingSprite,
+            SpriteConstants.RollerSprite,
+            SpriteConstants.SahasrahlaAginahSprite,
+            SpriteConstants.ShieldSprite,
+            SpriteConstants.SmallMagicRefillSprite,
+            SpriteConstants.Spark_LeftToRightSprite,
+            SpriteConstants.Spark_RightToLeftSprite,
+            SpriteConstants.SpikeTrapSprite,
+            SpriteConstants.StalfosKnightSprite,
+            SpriteConstants.StatueSprite,
+            SpriteConstants.StorytellersSprite,
+            SpriteConstants.SweepingLadySprite,
+            SpriteConstants.SwimmersSprite,
+            SpriteConstants.TerrorpinSprite,
+            SpriteConstants.TutorialSoldierSprite,
+            SpriteConstants.UpPipeSprite,
+            SpriteConstants.VillageKidSprite,
+            SpriteConstants.VultureSprite,
+            SpriteConstants.WallmasterSprite,
+            SpriteConstants.WaterfallSprite,
+            SpriteConstants.WaterTektiteSprite,
+            SpriteConstants.WinderSprite,
+            SpriteConstants.WitchSprite,
+            SpriteConstants.YellowStalfosSprite
+        };
 
-        byte[] statis_sprites = new byte[]
-        {0xCA,0x27,0x5D,0x5E,0x5F,0x60,0x7E,0x7F};
+        byte[] static_sprites = // was statis_sprites???
+        {
+            SpriteConstants.ChainChompSprite,
+            SpriteConstants.DeadrockSprite,
+            SpriteConstants.Roller_VerticalMovingSprite,
+            SpriteConstants.Roller_VerticalMoving2Sprite,
+            SpriteConstants.RollerSprite,
+            SpriteConstants.Roller_HorizontalMovingSprite,
+            SpriteConstants.GuruguruBar_ClockwiseSprite,
+            SpriteConstants.GuruguruBar_CounterClockwiseSprite
+        };
 
         //Non Killable in shutter doors Rooms
-        byte[] NonKillable_shutter = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x0B,0x1E,0x21,0x66,0x67,0x68,0x69,
-        0x77,0x82,0x84,0x8A,0x8E,0x90,0x93,0x9A,0xA1,0xC5,0xC6,0xD0,0x6F,0x14,0x16,0x1A,0x27,0x28,0x29,0x2A,0x2F,0x32,0x31,0x35,0x36,
-        0x38,0x37,0x3C,0x3F,0x40,0x4D,0x57,0x72,0x94,0x95,0x96,0x97,0x98,0x9E,0x9F,0xA0,0xAF,0xAE,0xAD,0xB0,0xB1,0xB2,0xB8,
-        0xB7,0xC2,0x85,0x81,0x80,0x91,0x26,0x81,0x19,0x81};
+        byte[] NonKillable_shutter = 
+        {
+            SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite,
+            SpriteConstants.AngryBrothersSprite,
+            SpriteConstants.Antifairy_AlternateSprite,
+            SpriteConstants.AntifairyCircleSprite,
+            SpriteConstants.ArrowTargetSprite,
+            SpriteConstants.Birds_HauntedGroveSprite,
+            SpriteConstants.BlindHideoutAttendantSprite,
+            SpriteConstants.BouldersSprite,
+            SpriteConstants.BumperSprite,
+            SpriteConstants.ChickenSprite,
+            SpriteConstants.CrystalSwitchSprite,
+            SpriteConstants.DeadrockSprite,
+            SpriteConstants.DesertPalaceBarriersSprite,
+            SpriteConstants.DownPipeSprite,
+            SpriteConstants.DwarvesSprite,
+            SpriteConstants.EmptySprite,
+            SpriteConstants.EyeLaser_DownSprite,
+            SpriteConstants.EyeLaser_LeftSprite,
+            SpriteConstants.EyeLaser_RightSprite,
+            SpriteConstants.EyeLaser_UpSprite,
+            SpriteConstants.FluteSprite,
+            SpriteConstants.FlyingStalfosHeadSprite,
+            SpriteConstants.FortuneTellerSprite,
+            SpriteConstants.FourWayFireballSpittersSprite,
+            SpriteConstants.FreezorSprite,
+            SpriteConstants.GargoylesDomainGateSprite,
+            SpriteConstants.GoodBee_AgainMaybeSprite,
+            SpriteConstants.HardhatBeetleSprite,
+            SpriteConstants.InnkeeperSprite,
+            SpriteConstants.KeeseSprite,
+            SpriteConstants.KyameronSprite,
+            SpriteConstants.LeftPipeSprite,
+            SpriteConstants.LightningLockSprite,
+            SpriteConstants.LostOldManSprite,
+            SpriteConstants.LynelSprite,
+            SpriteConstants.MaidenInBlindDungeonSprite,
+            SpriteConstants.MedusaSprite,
+            SpriteConstants.MonologueTestingSpriteSprite,
+            SpriteConstants.MovingCannonBallShooters_DownSprite,
+            SpriteConstants.MovingCannonBallShooters_LeftSprite,
+            SpriteConstants.MovingCannonBallShooters_RightSprite,
+            SpriteConstants.MovingCannonBallShooters_UpSprite,
+            SpriteConstants.Ostrich_HauntedGroveSprite,
+            SpriteConstants.PoeSprite,
+            SpriteConstants.PullSwitch_BadSprite,
+            SpriteConstants.PullSwitch_GoodSprite,
+            SpriteConstants.PullSwitch_Unused1Sprite,
+            SpriteConstants.PullSwitch_Unused2Sprite,
+            SpriteConstants.PushSwitchSprite,
+            SpriteConstants.RabbitSprite,
+            SpriteConstants.RaceHPNPCsSprite,
+            SpriteConstants.RavenSprite,
+            SpriteConstants.RedEyegoreSprite,
+            SpriteConstants.RightPipeSprite,
+            SpriteConstants.SahasrahlaAginahSprite,
+            SpriteConstants.SpikeTrapSprite,
+            SpriteConstants.StalfosKnightSprite,
+            SpriteConstants.StatueSprite,
+            SpriteConstants.StorytellersSprite,
+            SpriteConstants.SweepingLadySprite,
+            SpriteConstants.SwimmersSprite,
+            SpriteConstants.TerrorpinSprite,
+            SpriteConstants.TutorialSoldierSprite,
+            SpriteConstants.UpPipeSprite,
+            SpriteConstants.VillageKidSprite,
+            SpriteConstants.VultureSprite,
+            SpriteConstants.WallmasterSprite,
+            SpriteConstants.WaterfallSprite,
+            SpriteConstants.WaterTektiteSprite,
+            SpriteConstants.WinderSprite,
+            SpriteConstants.WitchSprite,
+            SpriteConstants.YellowStalfosSprite
+        };
 
 
-        byte[] bowSprites = {0x83,0x84};
-        byte[] hammerSprites = { 0x8E };
+        byte[] bowSprites = { SpriteConstants.GreenEyegoreSprite, SpriteConstants.RedEyegoreSprite };
+        byte[] hammerSprites = { SpriteConstants.TerrorpinSprite };
+
         StreamWriter spoilerfile;
 
         OptionFlags optionFlags;
@@ -379,8 +582,13 @@ namespace EnemizerLibrary
 
         public byte[] fully_randomize_that_group()
         {
-            return new byte[] { sprite_subset_0[rand.Next(sprite_subset_0.Length)], sprite_subset_1[rand.Next(sprite_subset_1.Length)],
-            sprite_subset_2[rand.Next(sprite_subset_2.Length)],sprite_subset_3[rand.Next(sprite_subset_3.Length)]};
+            return new byte[] 
+            {
+                sprite_subset_0[rand.Next(sprite_subset_0.Length)],
+                sprite_subset_1[rand.Next(sprite_subset_1.Length)],
+                sprite_subset_2[rand.Next(sprite_subset_2.Length)],
+                sprite_subset_3[rand.Next(sprite_subset_3.Length)]
+            };
         }
 
         public void create_sprite_overworld_group()
@@ -488,9 +696,9 @@ namespace EnemizerLibrary
             random_sprite_group[37][3] = 82;
             random_sprite_group[41][2] = 35;
 
-            for (int i = 0;i<statis_sprites.Length;i++)
+            for (int i = 0;i<static_sprites.Length;i++)
             {
-                ROM_DATA[0x6B44C + statis_sprites[i]] = (byte)(ROM_DATA[0x6B44C + statis_sprites[i]] | 0x40);
+                ROM_DATA[0x6B44C + static_sprites[i]] = (byte)(ROM_DATA[0x6B44C + static_sprites[i]] | 0x40);
 
 
             }

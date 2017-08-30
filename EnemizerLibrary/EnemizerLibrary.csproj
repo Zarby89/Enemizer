@@ -83,6 +83,10 @@
     <Compile Include="DungeonProperties.cs" />
     <Compile Include="DungeonsRoomsSprites.cs" />
     <Compile Include="DungeonsSpritesRandomization.cs" />
+    <Compile Include="EnemyRandomizer\Room.cs" />
+    <Compile Include="EnemyRandomizer\Sprite.cs" />
+    <Compile Include="EnemyRandomizer\SpriteConstants.cs" />
+    <Compile Include="EnemyRandomizer\SpriteGroup.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="OptionFlags.cs" />
     <Compile Include="OverworldSpritesArea.cs" />

@@ -103,92 +103,6 @@ namespace EnemizerLibrary
                     }
 
 
-                    /*
-                    for (int i = 0; i < IcemanRoom.Length; i++)
-                    {
-                        if (IcemanRoom[i] == room) //if the current room is an iceman room
-                        {
-                            if (random_sprite_group[sprite_group][2] != 38) { fail = true; break; }
-                        }
-                    }
-
-                    if (fail) { continue; }
-                    for (int i = 0; i < WaterRoom.Length; i++)
-                    {
-                        if (WaterRoom[i] == room) //if the current room is an watersprites room
-                        {
-                            if (random_sprite_group[sprite_group][2] != 34) { fail = true; break; }
-                        }
-                    }
-
-                    if (fail) { continue; }
-
-                    for (int i = 0; i < ShadowRoom.Length; i++)
-                    {
-                        if (ShadowRoom[i] == room) //if the current room is an Shadow room
-                        {
-                            if (random_sprite_group[sprite_group][1] != 32) { fail = true; break; }
-                        }
-                    }
-                    if (fail) { continue; }
-                    for (int i = 0; i < canonRoom.Length; i++)
-                    {
-                        if (canonRoom[i] == room) //if the current room is an Moving wall canon room
-                        {
-                            if (random_sprite_group[sprite_group][0] != 47) { fail = true; break; }
-                        }
-                    }
-                    if (fail) { continue; }
-                    for (int i = 0; i < canonRoom2.Length; i++)
-                    {
-                        if (canonRoom2[i] == room) //if the current room is a canon room
-                        {
-                            if (random_sprite_group[sprite_group][2] != 46) { fail = true; break; }
-                        }
-                    }
-                    if (fail) { continue; }
-                    for (int i = 0; i < bumperandcrystalRoom.Length; i++)
-                    {
-                        if (bumperandcrystalRoom[i] == room) //if the current room is bumper/crystal/laser eye room
-                        {
-                            if (random_sprite_group[sprite_group][3] == 82 || random_sprite_group[sprite_group][3] == 83)
-                            { }
-                            else
-                            { fail = true; break; }
-
-                        }
-                    }
-                    //now stuck at room 118
-                    if (fail) { continue; }
-
-
-
-                    for (int i = 0; i < TonguesRoom.Length; i++)
-                    {
-                        if (TonguesRoom[i] == room) //if the current room is tongue room
-                        {
-                            if (random_sprite_group[sprite_group][3] != 83) { fail = true; break; }
-                        }
-                    }
-                    if (fail) { continue; }
-                    for (int i = 0; i < SwitchesRoom.Length; i++)
-                    {
-                        if (SwitchesRoom[i] == room) //if the current room is switch room
-                        {
-                            if (random_sprite_group[sprite_group][3] != 82) { fail = true; break; }
-                        }
-                    }
-
-                    if (fail) { continue; }
-
-                    if (room == 85) //uncle
-                    {
-                        sprite_group = 13; //force sprite_group to be uncle 13
-                    }
-                    */
-
-
-
                     if (roomSprites.RoomSprites[room].Length != 0)
                     {
                         //we finally have a sprite_group that contain good subset for that room
@@ -225,10 +139,6 @@ namespace EnemizerLibrary
                         {
                             sprites = remove_unkillable_sprite(room, sprites);
                         }
-
-
-
-
 
                         //our sprites list should contain at least 1 sprite at this point else then restart
                         if (sprites.Count <= 0) { continue; }
@@ -354,25 +264,12 @@ namespace EnemizerLibrary
                                 }
                             }
 
-
-
-                            /*if (room == 67)
-                            {
-                                if (i == 0)
-                                {
-                                    ROM_DATA[room_sprites[room][i] - 2] = 0x18;
-                                    ROM_DATA[room_sprites[room][i] - 1] = 0x1A;
-                                }
-                            }*/
                             if (room == 151)
                             {
                                 ROM_DATA[roomSprites.RoomSprites[room][i] - 2] = 0x15;
                                 ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = 0x07;
                             }
 
-
-
-                            //if (fail) { continue; }
                             //Modify the sprite in the ROM / also set all overlord sprites on normal sprites to prevent any crashes
                             ROM_DATA[roomSprites.RoomSprites[room][i]] = selected_sprite;
                             ROM_DATA[roomSprites.RoomSprites[room][i] - 1] = (byte)(ROM_DATA[roomSprites.RoomSprites[room][i] - 1] & 0x1F);//change overlord into normal sprite
@@ -386,17 +283,6 @@ namespace EnemizerLibrary
                 }
                 
             }
-            //remove some sprite in thieve town1 to reduce lag
-            /*ROM_DATA[0x04E8AC] = 0x03;
-            ROM_DATA[0x04E8B8] = 0x03;
-            ROM_DATA[0x04E8C7] = 0x03;
-            //remove some sprite in thieve town2 to reduce lag
-            ROM_DATA[0x04E8F0] = 0x03;
-            ROM_DATA[0x04E8ED] = 0x03;
-            ROM_DATA[0x04E8D5] = 0x03;
-            ROM_DATA[0x04E8DB] = 0x03;
-            ROM_DATA[0x04E9F0] = 0x03;
-            */
             //remove key in skull wood to prevent a softlock
             ROM_DATA[0x04DD74] = 0x16;
             ROM_DATA[0x04DD75] = 0x05;

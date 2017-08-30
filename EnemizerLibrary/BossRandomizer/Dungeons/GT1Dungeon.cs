@@ -18,6 +18,9 @@ namespace EnemizerLibrary
             BossRoomId = 28;
             BossAddress = 0x04D666;
             BossDropItemAddress = null;
+
+            // TODO: stop kholdstare from spawning in GT1?
+            //DisallowedBosses.Add(BossType.Kholdstare);
         }
     }
 }
