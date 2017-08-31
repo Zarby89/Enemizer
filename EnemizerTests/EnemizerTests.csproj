@@ -71,7 +71,8 @@
   <ItemGroup>
     <Compile Include="BossRandomizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpriteTests.cs" />
+    <Compile Include="SpriteGroupTests.cs" />
+    <Compile Include="RoomTests.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

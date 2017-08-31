@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace EnemizerTests
 {
-    public class SpriteTests
+    public class RoomTests
     {
         readonly ITestOutputHelper output;
 
-        public SpriteTests(ITestOutputHelper output)
+        public RoomTests(ITestOutputHelper output)
         {
             this.output = output;
         }
@@ -19,13 +19,12 @@ namespace EnemizerTests
         [Fact]
         public void should_load_all_sprites_for_dungeon_rooms()
         {
-            byte[] ROM_DATA = Utilities.LoadRom("rando.sfc");
-            RomData romData = new RomData(ROM_DATA);
+            RomData romData = Utilities.LoadRom("rando.sfc");
 
             RoomCollection rc = new RoomCollection(romData);
             foreach(var r in rc.Rooms)
             {
-                output.WriteLine($"RoomId: {r.RoomId}, RoomName: {r.RoomName}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "") ))}");
+                output.WriteLine($"RoomId: {r.RoomId}, RoomName: {r.RoomName}, RoomGfx: {r.GraphicsBlockId}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "") ))}");
             }
         }
     }
