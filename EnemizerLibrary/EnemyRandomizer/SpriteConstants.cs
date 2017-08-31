@@ -16,7 +16,7 @@ namespace EnemizerLibrary
          * Example: Bubbles (aka Fire Faeries) are not considered alive for the purposes of puzzles, 
          * because it's not expected that you always have the resources to kill them. Thus, they always have this bit set.
          */
-        public static readonly byte statisMask = 0x40; // 0100 0000
+        public static readonly byte StatisMask = 0x40; // 0100 0000
 
         public static readonly byte
             RavenSprite = 0x00,

@@ -10,135 +10,191 @@ namespace EnemizerLibrary
     {
         public string RoomName { get; set; }
         public int RoomId { get; set; }
-        public List<RoomRequirement> Requirements { get; set; }
+        public List<DungeonSprite> Sprites { get; set; } = new List<DungeonSprite>();
+        //public List<RoomRequirement> Requirements { get; set; }
+
+        RomData romData { get; set; }
+        int roomSpriteBaseAddress;
+        public Room(int roomId, int roomSpriteBaseAddress, RomData romData)
+        {
+            this.RoomId = roomId;
+            this.roomSpriteBaseAddress = roomSpriteBaseAddress;
+            this.romData = romData;
+
+            LoadSprites();
+        }
+
+        void LoadSprites()
+        {
+            byte byte0 = romData[roomSpriteBaseAddress];
+
+            int i = 1;
+
+            while(romData[roomSpriteBaseAddress + i] != 0xFF)
+            {
+                Sprites.Add(new DungeonSprite(romData, roomSpriteBaseAddress + i));
+                i += 3;
+            }
+        }
+    }
+
+    public class DungeonSprite
+    {
+        public byte byte0 { get; set; }
+        public byte byte1 { get; set; }
+        public byte SpriteId { get; set; }
+        public bool IsOverlord { get; set; }
+
+        public DungeonSprite(RomData romData, int address)
+        {
+            byte0 = romData[address];
+            byte1 = romData[address + 1];
+            SpriteId = romData[address + 2];
+
+            IsOverlord = (byte1 & SpriteConstants.StatisMask) != 0;
+        }
     }
 
     public class RoomCollection
     {
-        public List<Room> Rooms { get; set; }
-
-        public RoomCollection()
+        public List<Room> Rooms { get; set; } = new List<Room>();
+        RomData romData { get; set; }
+        public RoomCollection(RomData romData)
         {
-            Rooms = new List<Room>();
+            this.romData = romData;
 
-            /*
-            // No mobs
-            Room hyruleCastleNorthCorridor = new Room();
-            hyruleCastleNorthCorridor.RoomName = "Hyrule Castle (North Corridor)";
-            hyruleCastleNorthCorridor.RoomId = 0x01;
-            Rooms.Add(hyruleCastleNorthCorridor);
-            */
+            LoadRooms();
 
-            Room hyruleCastleSwitchRoom = new Room();
-            hyruleCastleSwitchRoom.RoomName = "Hyrule Castle (Switch Room)"; // rat room before sanctuary
-            hyruleCastleSwitchRoom.RoomId = 0x02;
-            // needs switches?
-            Rooms.Add(hyruleCastleSwitchRoom);
+            ///*
+            //// No mobs
+            //Room hyruleCastleNorthCorridor = new Room();
+            //hyruleCastleNorthCorridor.RoomName = "Hyrule Castle (North Corridor)";
+            //hyruleCastleNorthCorridor.RoomId = 0x01;
+            //Rooms.Add(hyruleCastleNorthCorridor);
+            //*/
 
-            Room hyruleCastleBombableStockRoom = new Room();
-            hyruleCastleBombableStockRoom.RoomName = "Hyrule Castle (Bombable Stock Room)";
-            hyruleCastleBombableStockRoom.RoomId = 0x11;
-            Rooms.Add(hyruleCastleBombableStockRoom);
+            //Room hyruleCastleSwitchRoom = new Room();
+            //hyruleCastleSwitchRoom.RoomName = "Hyrule Castle (Switch Room)"; // rat room before sanctuary
+            //hyruleCastleSwitchRoom.RoomId = 0x02;
+            //// needs switches?
+            //Rooms.Add(hyruleCastleSwitchRoom);
 
-            Room hyruleCastleKeyRatRoom = new Room();
-            hyruleCastleKeyRatRoom.RoomName = "Hyrule Castle (Key-rat Room)";
-            hyruleCastleKeyRatRoom.RoomId = 0x21;
-            // needs killable key guard/rat
-            Rooms.Add(hyruleCastleKeyRatRoom);
+            //Room hyruleCastleBombableStockRoom = new Room();
+            //hyruleCastleBombableStockRoom.RoomName = "Hyrule Castle (Bombable Stock Room)";
+            //hyruleCastleBombableStockRoom.RoomId = 0x11;
+            //Rooms.Add(hyruleCastleBombableStockRoom);
 
-            Room hyruleCastleSewerTextTriggerRoom = new Room();
-            hyruleCastleSewerTextTriggerRoom.RoomName = "Hyrule Castle (Sewer Text Trigger Room)";
-            hyruleCastleSewerTextTriggerRoom.RoomId = 0x22;
-            Rooms.Add(hyruleCastleSewerTextTriggerRoom);
+            //Room hyruleCastleKeyRatRoom = new Room();
+            //hyruleCastleKeyRatRoom.RoomName = "Hyrule Castle (Key-rat Room)";
+            //hyruleCastleKeyRatRoom.RoomId = 0x21;
+            //// needs killable key guard/rat
+            //Rooms.Add(hyruleCastleKeyRatRoom);
 
-            Room hyruleCastleSewerKeyChestRoom = new Room();
-            hyruleCastleSewerKeyChestRoom.RoomName = "Hyrule Castle (Sewer Key Chest Room)";
-            hyruleCastleSewerKeyChestRoom.RoomId = 0x32;
-            Rooms.Add(hyruleCastleSewerKeyChestRoom);
+            //Room hyruleCastleSewerTextTriggerRoom = new Room();
+            //hyruleCastleSewerTextTriggerRoom.RoomName = "Hyrule Castle (Sewer Text Trigger Room)";
+            //hyruleCastleSewerTextTriggerRoom.RoomId = 0x22;
+            //Rooms.Add(hyruleCastleSewerTextTriggerRoom);
 
-            Room hyruleCastleFirstDarkRoom = new Room();
-            hyruleCastleFirstDarkRoom.RoomName = "Hyrule Castle (First Dark Room)";
-            hyruleCastleFirstDarkRoom.RoomId = 0x41;
-            Rooms.Add(hyruleCastleFirstDarkRoom);
+            //Room hyruleCastleSewerKeyChestRoom = new Room();
+            //hyruleCastleSewerKeyChestRoom.RoomName = "Hyrule Castle (Sewer Key Chest Room)";
+            //hyruleCastleSewerKeyChestRoom.RoomId = 0x32;
+            //Rooms.Add(hyruleCastleSewerKeyChestRoom);
 
-            Room hyruleCastleSixRopesRoom = new Room();
-            hyruleCastleSixRopesRoom.RoomName = "Hyrule Castle (6 Ropes Room)";
-            hyruleCastleSixRopesRoom.RoomId = 0x42;
-            Rooms.Add(hyruleCastleSixRopesRoom);
+            //Room hyruleCastleFirstDarkRoom = new Room();
+            //hyruleCastleFirstDarkRoom.RoomName = "Hyrule Castle (First Dark Room)";
+            //hyruleCastleFirstDarkRoom.RoomId = 0x41;
+            //Rooms.Add(hyruleCastleFirstDarkRoom);
 
-            Room hyruleCastleWestCorridor = new Room();
-            hyruleCastleWestCorridor.RoomName = "Hyrule Castle (West Corridor)";
-            hyruleCastleWestCorridor.RoomId = 0x50;
-            Rooms.Add(hyruleCastleWestCorridor);
+            //Room hyruleCastleSixRopesRoom = new Room();
+            //hyruleCastleSixRopesRoom.RoomName = "Hyrule Castle (6 Ropes Room)";
+            //hyruleCastleSixRopesRoom.RoomId = 0x42;
+            //Rooms.Add(hyruleCastleSixRopesRoom);
 
-            Room hyruleCastleThroneRoom = new Room();
-            hyruleCastleThroneRoom.RoomName = "Hyrule Castle (Throne Room)";
-            hyruleCastleThroneRoom.RoomId = 0x51;
-            Rooms.Add(hyruleCastleThroneRoom);
+            //Room hyruleCastleWestCorridor = new Room();
+            //hyruleCastleWestCorridor.RoomName = "Hyrule Castle (West Corridor)";
+            //hyruleCastleWestCorridor.RoomId = 0x50;
+            //Rooms.Add(hyruleCastleWestCorridor);
 
-            Room hyruleCastleEastCorridor = new Room();
-            hyruleCastleEastCorridor.RoomName = "Hyrule Castle (East Corridor)";
-            hyruleCastleEastCorridor.RoomId = 0x52;
-            Rooms.Add(hyruleCastleEastCorridor);
+            //Room hyruleCastleThroneRoom = new Room();
+            //hyruleCastleThroneRoom.RoomName = "Hyrule Castle (Throne Room)";
+            //hyruleCastleThroneRoom.RoomId = 0x51;
+            //Rooms.Add(hyruleCastleThroneRoom);
 
-            Room hyruleCastleWestEntranceRoom = new Room();
-            hyruleCastleWestEntranceRoom.RoomName = "Hyrule Castle (West Entrance Room)";
-            hyruleCastleWestEntranceRoom.RoomId = 0x60;
-            Rooms.Add(hyruleCastleWestEntranceRoom);
+            //Room hyruleCastleEastCorridor = new Room();
+            //hyruleCastleEastCorridor.RoomName = "Hyrule Castle (East Corridor)";
+            //hyruleCastleEastCorridor.RoomId = 0x52;
+            //Rooms.Add(hyruleCastleEastCorridor);
 
-            Room hyruleCastleMainEntranceRoom = new Room();
-            hyruleCastleMainEntranceRoom.RoomName = "Hyrule Castle (Main Entrance Room)";
-            hyruleCastleMainEntranceRoom.RoomId = 0x61;
-            Rooms.Add(hyruleCastleMainEntranceRoom);
+            //Room hyruleCastleWestEntranceRoom = new Room();
+            //hyruleCastleWestEntranceRoom.RoomName = "Hyrule Castle (West Entrance Room)";
+            //hyruleCastleWestEntranceRoom.RoomId = 0x60;
+            //Rooms.Add(hyruleCastleWestEntranceRoom);
 
-            Room hyruleCastleEastEntranceRoom = new Room();
-            hyruleCastleEastEntranceRoom.RoomName = "Hyrule Castle (East Entrance Room)";
-            hyruleCastleEastEntranceRoom.RoomId = 0x62;
-            Rooms.Add(hyruleCastleEastEntranceRoom);
+            //Room hyruleCastleMainEntranceRoom = new Room();
+            //hyruleCastleMainEntranceRoom.RoomName = "Hyrule Castle (Main Entrance Room)";
+            //hyruleCastleMainEntranceRoom.RoomId = 0x61;
+            //Rooms.Add(hyruleCastleMainEntranceRoom);
 
-            /*
-            // No mobs
-            Room hyruleCastleSmallCorridorToJailCells = new Room();
-            hyruleCastleSmallCorridorToJailCells.RoomName = "Hyrule Castle (Small Corridor to Jail Cells)";
-            hyruleCastleSmallCorridorToJailCells.RoomId = 0x70;
-            Rooms.Add(hyruleCastleSmallCorridorToJailCells);
-            */
+            //Room hyruleCastleEastEntranceRoom = new Room();
+            //hyruleCastleEastEntranceRoom.RoomName = "Hyrule Castle (East Entrance Room)";
+            //hyruleCastleEastEntranceRoom.RoomId = 0x62;
+            //Rooms.Add(hyruleCastleEastEntranceRoom);
 
-            Room hyruleCastleBoomerangChestRoom = new Room();
-            hyruleCastleBoomerangChestRoom.RoomName = "Hyrule Castle (Boomerang Chest Room)";
-            hyruleCastleBoomerangChestRoom.RoomId = 0x71;
-            // needs killable key guard
-            Rooms.Add(hyruleCastleBoomerangChestRoom);
+            ///*
+            //// No mobs
+            //Room hyruleCastleSmallCorridorToJailCells = new Room();
+            //hyruleCastleSmallCorridorToJailCells.RoomName = "Hyrule Castle (Small Corridor to Jail Cells)";
+            //hyruleCastleSmallCorridorToJailCells.RoomId = 0x70;
+            //Rooms.Add(hyruleCastleSmallCorridorToJailCells);
+            //*/
 
-            Room hyruleCastleMapChestRoom = new Room();
-            hyruleCastleMapChestRoom.RoomName = "Hyrule Castle (Map Chest Room)";
-            hyruleCastleMapChestRoom.RoomId = 0x72;
-            // needs killable key guard
-            Rooms.Add(hyruleCastleMapChestRoom);
+            //Room hyruleCastleBoomerangChestRoom = new Room();
+            //hyruleCastleBoomerangChestRoom.RoomName = "Hyrule Castle (Boomerang Chest Room)";
+            //hyruleCastleBoomerangChestRoom.RoomId = 0x71;
+            //// needs killable key guard
+            //Rooms.Add(hyruleCastleBoomerangChestRoom);
 
-            Room hyruleCastleJailCellRoom = new Room();
-            hyruleCastleJailCellRoom.RoomName = "Hyrule Castle (Jail Cell Room)";
-            hyruleCastleJailCellRoom.RoomId = 0x80;
-            // needs killable big key guard
-            Rooms.Add(hyruleCastleJailCellRoom);
+            //Room hyruleCastleMapChestRoom = new Room();
+            //hyruleCastleMapChestRoom.RoomName = "Hyrule Castle (Map Chest Room)";
+            //hyruleCastleMapChestRoom.RoomId = 0x72;
+            //// needs killable key guard
+            //Rooms.Add(hyruleCastleMapChestRoom);
 
-            Room hyruleCastle = new Room();
-            hyruleCastle.RoomName = "Hyrule Castle (Two Green Guards After Chasm Room)";
-            hyruleCastle.RoomId = 0x81;
-            Rooms.Add(hyruleCastle);
+            //Room hyruleCastleJailCellRoom = new Room();
+            //hyruleCastleJailCellRoom.RoomName = "Hyrule Castle (Jail Cell Room)";
+            //hyruleCastleJailCellRoom.RoomId = 0x80;
+            //// needs killable big key guard
+            //Rooms.Add(hyruleCastleJailCellRoom);
 
-            Room hyruleCastleBasementChasmRoom = new Room();
-            hyruleCastleBasementChasmRoom.RoomName = "Hyrule Castle (Basement Chasm Room)";
-            hyruleCastleBasementChasmRoom.RoomId = 0x82;
-            Rooms.Add(hyruleCastleBasementChasmRoom);
+            //Room hyruleCastle = new Room();
+            //hyruleCastle.RoomName = "Hyrule Castle (Two Green Guards After Chasm Room)";
+            //hyruleCastle.RoomId = 0x81;
+            //Rooms.Add(hyruleCastle);
 
-            Room castleSecretEntrance = new Room();
-            castleSecretEntrance.RoomName = "Castle Secret Entrance / Uncle Death Room ";
-            castleSecretEntrance.RoomId = 0x55;
-            //needs group 13, subgroup 0 = 81
-            Rooms.Add(castleSecretEntrance);
+            //Room hyruleCastleBasementChasmRoom = new Room();
+            //hyruleCastleBasementChasmRoom.RoomName = "Hyrule Castle (Basement Chasm Room)";
+            //hyruleCastleBasementChasmRoom.RoomId = 0x82;
+            //Rooms.Add(hyruleCastleBasementChasmRoom);
+
+            //Room castleSecretEntrance = new Room();
+            //castleSecretEntrance.RoomName = "Castle Secret Entrance / Uncle Death Room ";
+            //castleSecretEntrance.RoomId = 0x55;
+            ////needs group 13, subgroup 0 = 81
+            //Rooms.Add(castleSecretEntrance);
 
 
+        }
+
+        void LoadRooms()
+        {
+            int dungeonSpriteTableBaseAddress = 0x4D62E;
+            int currentRoomId = 0;
+            for (int i=0; i<0x300; i+=2)
+            {
+                int roomSpriteDataAddress = 0x40000 + romData[dungeonSpriteTableBaseAddress + i] + (romData[dungeonSpriteTableBaseAddress + i+1]<<8);
+                Rooms.Add(new Room(currentRoomId, roomSpriteDataAddress, romData));
+                currentRoomId++;
+            }
         }
     }
 
