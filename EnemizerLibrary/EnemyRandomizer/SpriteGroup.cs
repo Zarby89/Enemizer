@@ -21,14 +21,26 @@ namespace EnemizerLibrary
         public int SubGroup3 { get; set; }
         public bool PreserveSubGroup3 { get; set; }
 
+        RomData romData;
+
         public SpriteGroup(RomData romData, int groupId)
         {
+            this.romData = romData;
+
             this.GroupId = groupId;
 
             this.SubGroup0 = romData[SpriteGroupBaseAddress + (groupId * 4) + 0];
             this.SubGroup1 = romData[SpriteGroupBaseAddress + (groupId * 4) + 1];
             this.SubGroup2 = romData[SpriteGroupBaseAddress + (groupId * 4) + 2];
             this.SubGroup3 = romData[SpriteGroupBaseAddress + (groupId * 4) + 3];
+        }
+
+        internal void UpdateRom()
+        {
+            romData[SpriteGroupBaseAddress + (GroupId * 4) + 0] = (byte)SubGroup0;
+            romData[SpriteGroupBaseAddress + (GroupId * 4) + 1] = (byte)SubGroup1;
+            romData[SpriteGroupBaseAddress + (GroupId * 4) + 2] = (byte)SubGroup2;
+            romData[SpriteGroupBaseAddress + (GroupId * 4) + 3] = (byte)SubGroup3;
         }
 
         //public SpriteGroup(int groupId, int subGroup0, bool preserveGroup0, int subGroup1, bool preserveGroup1, int subGroup2, bool preserveGroup2, int subGroup3, bool preserveGroup3)
@@ -72,7 +84,7 @@ namespace EnemizerLibrary
 
         public void UpdateRom()
         {
-
+            SpriteGroups.ForEach(x => x.UpdateRom());
         }
 
         public void RandomizeGroups()
@@ -108,7 +120,30 @@ namespace EnemizerLibrary
                 {
                     sg.SubGroup3 = GetRandomSubgroup3();
                 }
+
+                FixPairedGroups(sg);
             }
+        }
+
+        private void FixPairedGroups(SpriteGroup sg)
+        {
+            // TODO: add any others
+            // TODO: double check these
+            if (sg.SubGroup0 == 22)
+            {
+                sg.SubGroup2 = 23;
+                sg.PreserveSubGroup2 = true;
+            }
+            if(sg.SubGroup2 == 23)
+            {
+                sg.SubGroup0 = 22;
+                sg.PreserveSubGroup0 = true;
+            }
+            //if(sg.SubGroup0 == 70 || sg.SubGroup0 == 72)
+            //{
+            //    sg.SubGroup1 = 73;
+            //    sg.SubGroup2 = 19;
+            //}
         }
 
         byte GetRandomSubset1ForGuards()

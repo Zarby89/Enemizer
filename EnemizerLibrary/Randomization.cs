@@ -79,9 +79,12 @@ namespace EnemizerLibrary
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
+                DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand);
+                der.RandomizeDungeonEnemies();
+
                 //create_rooms_sprites();
-                DungeonSpriteRandomizer dsr = new DungeonSpriteRandomizer(this.ROM_DATA, this.rand);
-                dsr.RandomizeDungeonSprites(optionFlags.EnemiesAbsorbable, this.subset_gfx_sprites);
+                //DungeonSpriteRandomizer dsr = new DungeonSpriteRandomizer(this.ROM_DATA, this.rand);
+                //dsr.RandomizeDungeonSprites(optionFlags.EnemiesAbsorbable, this.subset_gfx_sprites);
             }
 
             //random sprite overworld

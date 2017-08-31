@@ -11,11 +11,14 @@ namespace EnemizerLibrary
         public byte byte0 { get; set; }
         public byte byte1 { get; set; }
         public byte SpriteId { get; set; }
+        public int Address { get; set; }
         public bool IsOverlord { get; set; }
         public bool HasAKey { get; set; }
 
         public DungeonSprite(RomData romData, int address)
         {
+            Address = address;
+
             byte0 = romData[address];
             byte1 = romData[address + 1];
             SpriteId = romData[address + 2];
@@ -29,55 +32,199 @@ namespace EnemizerLibrary
         }
     }
 
-    public class PossibleSpriteGroupCollection
+    public class GroupSubsetPossibleSprite
     {
+        public int GroupSubsetId { get; set; }
+        public int SpriteId { get; set; }
 
+        public List<int> RequiredSecondarySubsetId { get; set; } = new List<int>();
+
+        public GroupSubsetPossibleSprite(int groupSubsetId, int spriteId, int[] requiredSecondarySubsetId = null)
+        {
+            this.GroupSubsetId = groupSubsetId;
+            this.SpriteId = spriteId;
+            if (requiredSecondarySubsetId != null)
+            {
+                this.RequiredSecondarySubsetId = requiredSecondarySubsetId.ToList();
+            }
+        }
     }
-    /*
-            subset_gfx_sprites[22] = new byte[] { 0x22, 0x11 };//DW Popo, Hinox, Snapdragon (require 23)
-            subset_gfx_sprites[31] = new byte[] { 0x23, 0x24, 0x85, 0xA7, 0x02, 0x7E, 0x7F, 0x80 };//bari,stalfos,firebars
-            subset_gfx_sprites[47] = new byte[] { 0x71 };//delalant,leever //0x64,0x63
-            subset_gfx_sprites[14] = new byte[] { 0x19 };//ghini,thief
-            subset_gfx_sprites[70] = new byte[] { 0x6A, 0x6B, 0x49, 0x43, 0x41, 0x42, 0x45, 0x48, 0x44, 0x4A, 0x4B };//need to be combined with 73 and 19 all guards
-            subset_gfx_sprites[72] = new byte[] { 0x41, 0x42, 0x43, 0x45, 0x46, 0x47, 0x4B, 0x49 };//need to be combined with 73 and 19 all guards archers
-            //subset1
-            subset_gfx_sprites[44] = new byte[] { 0x4F, 0x4E, 0x61 }; //popo, beamos
+
+    public class GroupSubsetPossibleSpriteCollection
+    {
+        public List<GroupSubsetPossibleSprite> Sprites { get; set; }
+
+        public GroupSubsetPossibleSpriteCollection()
+        {
+            this.Sprites = new List<GroupSubsetPossibleSprite>();
+
+            AddPossibleSprites();
+        }
+
+        void AddPossibleSprites()
+        {
+            //ghini,thief?
+            Sprites.Add(new GroupSubsetPossibleSprite(14, SpriteConstants.PoeSprite));
+
+            // (require 23)
+            Sprites.Add(new GroupSubsetPossibleSprite(22, SpriteConstants.RopaSprite, new [] { 23 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(22, SpriteConstants.HinoxSprite, new [] { 23 }));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.RedBariSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.BlueBariSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.YellowStalfosSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.StalfosSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.FlyingStalfosHeadSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.GuruguruBar_ClockwiseSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.GuruguruBar_CounterClockwiseSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(31, SpriteConstants.WinderSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(47, SpriteConstants.LeeverSprite));
+
+            // TODO: 19 not needed for all? 73 could be 13?
+            //need to be combined with 73 and 19 all guards
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.BlueSwordSoldier_DetectPlayerSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.GreenSwordSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.RedSpearSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.AssaultSwordSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.GreenSpearSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.RedJavelinSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.RedJavelinSoldier2Sprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.RedBombSoldiersSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.GreenSoldierRecruits_HMKnightSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.BallNChainTrooperSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(70, SpriteConstants.CannonSoldierSprite, new [] { 73, 19 }));
+
+            // TODO: 19 not needed for all? 73 could be 13?
+            //need to be combined with 73 and 19 all guards archers
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.BlueSwordSoldier_DetectPlayerSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.GreenSwordSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.RedSpearSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.GreenSpearSoldierSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.BlueArcherSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.GreenArcherSprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.RedJavelinSoldier2Sprite, new [] { 73, 19 }));
+            Sprites.Add(new GroupSubsetPossibleSprite(72, SpriteConstants.GreenSoldierRecruits_HMKnightSprite, new [] { 73, 19 }));
+
+            // --- Subset 1 ---
+            //Sprites.Add(new GroupSubsetPossibleSprite(13, SpriteConstants)); // guards
             //13 contains guards same as 73
-            subset_gfx_sprites[13] = new byte[] { }; //guards
-            subset_gfx_sprites[73] = new byte[] {0x42,0x41,0x45 }; //guards
-            subset_gfx_sprites[19] = new byte[] { }; //guards
-            subset_gfx_sprites[30] = new byte[] { 0x26, 0x13, 0x18 }; //minihelma,minimoldorm,beetle
-            subset_gfx_sprites[32] = new byte[] { 0x9C, 0x9D, 0x91, 0x8F }; //stalfos knight, shadow, blob
-            //subset2
-            subset_gfx_sprites[12] = new byte[] { 0x08, 0x58, 0x0F }; //octorock,crab,octobaloon
-            subset_gfx_sprites[18] = new byte[] { 0x01, 0x4C }; //vulture, jazzhand, (Also contain tablets / rock in front of desert)
-            subset_gfx_sprites[23] = new byte[] { 0x12 }; //pigmanspear, snapdragon (require 22) 
-            subset_gfx_sprites[24] = new byte[] { 0x08 }; //dwoctorok
-            subset_gfx_sprites[28] = new byte[] { 0x6D, 0x6E, 0x6F }; //rat,rope,keese, also the oldman
-            subset_gfx_sprites[29] = new byte[] { };
-            subset_gfx_sprites[46] = new byte[] { 0x84, 0x83 }; //green/red eyegores
-            subset_gfx_sprites[34] = new byte[] { 0x9A, 0x81 }; //water sprites
-            subset_gfx_sprites[35] = new byte[] { 0x8B }; //wallmaster,gibdo
-            subset_gfx_sprites[39] = new byte[] { 0xC7, 0xCA, 0x5D, 0x5E, 0x5F, 0x60 };//chain chomp,pokey,rollers
-            subset_gfx_sprites[40] = new byte[] { 0xA5, 0xA6, 0xC3 };//zazak,gibo (patrick star)
-            subset_gfx_sprites[38] = new byte[] { 0x99 };//(A1) iceman,penguin
-            subset_gfx_sprites[37] = new byte[] { 0x9B,0x20 };//wizzrobe,sluggula
-            subset_gfx_sprites[41] = new byte[] { 0x9B };//wizzrobe
-            subset_gfx_sprites[36] = new byte[] { 0x6D, 0x6E, 0x6F };//rat,rope,keese
-            subset_gfx_sprites[42] = new byte[] { 0x8E, 0x5B, 0x5C };//turtle,kondongo ,also the digging game guy //0x86 kodongo problem
+            //subset_gfx_sprites[13] = { }; //guards
+            //subset_gfx_sprites[19] = { }; //guards
+
+            Sprites.Add(new GroupSubsetPossibleSprite(30, SpriteConstants.MiniHelmasaurSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(30, SpriteConstants.MiniMoldormSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(30, SpriteConstants.HardhatBeetleSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(32, SpriteConstants.SlimeSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(32, SpriteConstants.StalfosKnightSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(32, SpriteConstants.TadpolesSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(32, SpriteConstants.Tadpoles2Sprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(44, SpriteConstants.PopoSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(44, SpriteConstants.Popo2Sprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(44, SpriteConstants.BeamosSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(73, SpriteConstants.BlueSwordSoldier_DetectPlayerSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(73, SpriteConstants.GreenSwordSoldierSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(73, SpriteConstants.GreenSpearSoldierSprite));
+
+            // --- Subset 2 ---
+            Sprites.Add(new GroupSubsetPossibleSprite(12, SpriteConstants.Octorok_OneWaySprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(12, SpriteConstants.OctoballoonSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(12, SpriteConstants.CrabSprite));
+
+            //vulture, jazzhand, (Also contain tablets / rock in front of desert)
+            Sprites.Add(new GroupSubsetPossibleSprite(18, SpriteConstants.VultureSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(18, SpriteConstants.GeldmanSprite));
+
+            // TODO: Don't think octorock is in here? also doesn't require 22 (see group 18)?
+            //pigmanspear, snapdragon (require 22) 
+            Sprites.Add(new GroupSubsetPossibleSprite(23, SpriteConstants.Octorok_OneWaySprite, new [] { 22 }));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(24, SpriteConstants.Octorok_OneWaySprite));
+
+            //also the oldman
+            Sprites.Add(new GroupSubsetPossibleSprite(28, SpriteConstants.RatSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(28, SpriteConstants.RopeSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(28, SpriteConstants.KeeseSprite));
+
+            //subset_gfx_sprites[29] = { };
+
+            Sprites.Add(new GroupSubsetPossibleSprite(34, SpriteConstants.WaterTektiteSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(34, SpriteConstants.KyameronSprite));
+
+            //wallmaster,gibdo
+            Sprites.Add(new GroupSubsetPossibleSprite(35, SpriteConstants.GibdoSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(36, SpriteConstants.RatSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(36, SpriteConstants.RopeSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(36, SpriteConstants.KeeseSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(37, SpriteConstants.SluggulaSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(37, SpriteConstants.WizzrobeSprite));
+
+            //(A1) iceman,penguin
+            Sprites.Add(new GroupSubsetPossibleSprite(38, SpriteConstants.PengatorSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.Roller_VerticalMovingSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.Roller_VerticalMoving2Sprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.RollerSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.Roller_HorizontalMovingSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.HokkuBokkuSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(39, SpriteConstants.ChainChompSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(40, SpriteConstants.ZazakFireballSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(40, SpriteConstants.RedZazakSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(40, SpriteConstants.GiboSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(41, SpriteConstants.WizzrobeSprite));
+
+            //turtle,kondongo ,also the digging game guy //0x86 kodongo problem // KodongosSprite
+            Sprites.Add(new GroupSubsetPossibleSprite(42, SpriteConstants.TerrorpinSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(42, SpriteConstants.Spark_LeftToRightSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(42, SpriteConstants.Spark_RightToLeftSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(46, SpriteConstants.GreenEyegoreSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(46, SpriteConstants.RedEyegoreSprite));
             //74 = lumberjack
-            //subset3
-            subset_gfx_sprites[16] = new byte[] { 0x51, 0x27, 0xC9 };//armos,deadrock,tektite
-            subset_gfx_sprites[17] = new byte[] { 0x00, 0x0D };//raven,buzzblob
-            subset_gfx_sprites[27] = new byte[] { 0xA8, 0xA9, 0xAA };//dw bomber/likelike
-            subset_gfx_sprites[20] = new byte[] { 0xD0 };//lynel
-            subset_gfx_sprites[74] = new byte[] { };//wizzrobe
-            subset_gfx_sprites[80] = new byte[] {0x0B };//wizzrobe
-            subset_gfx_sprites[81] = new byte[] { };//switches
-            subset_gfx_sprites[93] = new byte[] { };//sanctuary mantle
-            subset_gfx_sprites[82] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
-            subset_gfx_sprites[83] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
-     */
+
+            // --- Subset 3 ---
+            Sprites.Add(new GroupSubsetPossibleSprite(16, SpriteConstants.ArmosSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(16, SpriteConstants.DeadrockSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(16, SpriteConstants.TektiteSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(17, SpriteConstants.RavenSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(17, SpriteConstants.BuzzblobSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(20, SpriteConstants.LynelSprite));
+
+            Sprites.Add(new GroupSubsetPossibleSprite(27, SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(27, SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(27, SpriteConstants.PikitSprite));
+
+            //subset_gfx_sprites[74] = { };//wizzrobe
+
+            //wizzrobe?
+            Sprites.Add(new GroupSubsetPossibleSprite(80, SpriteConstants.ChickenSprite));
+
+            //subset_gfx_sprites[81] = { };//switches
+
+            //0x82 };//switches
+            Sprites.Add(new GroupSubsetPossibleSprite(82, SpriteConstants.SpikeTrapSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(82, SpriteConstants.StatueSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(82, SpriteConstants.AntifairySprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(82, SpriteConstants.BigSpikeTrapSprite));
+
+            //0x82 };//switches
+            Sprites.Add(new GroupSubsetPossibleSprite(83, SpriteConstants.SpikeTrapSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(83, SpriteConstants.StatueSprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(83, SpriteConstants.AntifairySprite));
+            Sprites.Add(new GroupSubsetPossibleSprite(83, SpriteConstants.BigSpikeTrapSprite));
+
+            //subset_gfx_sprites[93] = { };//sanctuary mantle
+        }
+    }
 
     //public class Sprite
     //{

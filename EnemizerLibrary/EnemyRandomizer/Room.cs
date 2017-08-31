@@ -35,6 +35,26 @@ namespace EnemizerLibrary
             LoadSprites();
         }
 
+        public void UpdateRom()
+        {
+            UpdateHeader();
+            UpdateSprites();
+        }
+
+        private void UpdateSprites()
+        {
+            foreach(var s in Sprites)
+            {
+                romData[s.Address + 2] = s.SpriteId;
+            }
+        }
+
+        private void UpdateHeader()
+        {
+            int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
+            romData[roomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId - 0x40);
+        }
+
         void LoadHeader()
         {
             // I would prefer to do this, but you have to offset from 118000 which gets confusing
@@ -65,15 +85,17 @@ namespace EnemizerLibrary
     {
         public List<Room> Rooms { get; set; } = new List<Room>();
         RomData romData { get; set; }
-        public RoomCollection(RomData romData)
+        Random rand { get; set; }
+        public RoomCollection(RomData romData, Random rand)
         {
             this.romData = romData;
+            this.rand = rand;
 
-            // TODO: Consider moving this to the caller so we can make LoadRooms virtual? (in case we want to use this with other rom hacks)
-            LoadRooms();
+            //// TODO: Consider moving this to the caller so we can make LoadRooms virtual? (in case we want to use this with other rom hacks)
+            //LoadRooms();
         }
 
-        void LoadRooms()
+        public void LoadRooms()
         {
             //int dungeonSpriteTableBaseAddress = 0x4D62E;
             int currentRoomId = 0;
@@ -93,6 +115,19 @@ namespace EnemizerLibrary
             //    Rooms.Add(new Room(currentRoomId, roomSpriteDataAddress, romData));
             //    currentRoomId++;
             //}
+        }
+
+        public void RandomizeSpriteGroups(SpriteGroupCollection spriteGroups)
+        {
+            foreach(var r in Rooms)
+            {
+                r.GraphicsBlockId = spriteGroups.SpriteGroups[rand.Next(0x40, 0x40+60)].GroupId;
+            }
+        }
+
+        public void UpdateRom()
+        {
+            Rooms.ForEach(x => x.UpdateRom());
         }
     }
 
