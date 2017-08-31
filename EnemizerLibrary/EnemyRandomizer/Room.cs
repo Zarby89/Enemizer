@@ -44,6 +44,7 @@ namespace EnemizerLibrary
         public byte byte1 { get; set; }
         public byte SpriteId { get; set; }
         public bool IsOverlord { get; set; }
+        public bool HasAKey { get; set; }
 
         public DungeonSprite(RomData romData, int address)
         {
@@ -52,6 +53,11 @@ namespace EnemizerLibrary
             SpriteId = romData[address + 2];
 
             IsOverlord = (byte1 & SpriteConstants.StatisMask) != 0;
+
+            if(romData[address + 3] != 0xFF && romData[address + 5] == SpriteConstants.KeySprite)
+            {
+                HasAKey = true;
+            }
         }
     }
 
