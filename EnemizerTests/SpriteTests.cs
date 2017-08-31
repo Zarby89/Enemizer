@@ -25,7 +25,7 @@ namespace EnemizerTests
             RoomCollection rc = new RoomCollection(romData);
             foreach(var r in rc.Rooms)
             {
-                output.WriteLine($"RoomId: {r.RoomId}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "") ))}");
+                output.WriteLine($"RoomId: {r.RoomId}, RoomName: {r.RoomName}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "") ))}");
             }
         }
     }
