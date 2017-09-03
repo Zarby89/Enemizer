@@ -37,13 +37,13 @@ namespace EnemizerLibrary
             spriteGroupCollection.UpdateRom();
 
             roomCollection.LoadRooms();
-            roomCollection.RandomizeSpriteGroups(spriteGroupCollection);
+            roomCollection.RandomizeRoomSpriteGroups(spriteGroupCollection);
 
             GroupSubsetPossibleSpriteCollection possibleSpriteCollection = new GroupSubsetPossibleSpriteCollection();
 
-            foreach(var room in roomCollection.Rooms)
+            foreach(var room in roomCollection.Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                var spriteGroup = spriteGroupCollection.SpriteGroups.Where(x => x.GroupId == room.GraphicsBlockId).First();
+                var spriteGroup = spriteGroupCollection.SpriteGroups.Where(x => x.DungeonGroupId == room.GraphicsBlockId).First();
 
                 var possibleSprites = possibleSpriteCollection.Sprites
                     .Where(x => spriteGroup.SubGroup0 == x.GroupSubsetId
@@ -53,8 +53,25 @@ namespace EnemizerLibrary
 
                 if (possibleSprites.Length > 0)
                 {
-                    room.Sprites.Where(x => SpriteConstants.NonKillable.Contains(x.SpriteId) == false).ToList()
+                    var spritesToUpdate = room.Sprites
+                        .Where(x => x.SpriteId != SpriteConstants.KeySprite && x.SpriteId != SpriteConstants.BigKeySprite)
+                        .Where(x => SpriteConstants.NpcSprites.Contains(x.SpriteId) == false)
+                        .Where(x => SpriteConstants.NonKillable.Contains(x.SpriteId) == false).ToList();
+
+                    var keySprites = spritesToUpdate.Where(x => x.HasAKey).ToList();
+
+                    var killableSprites = possibleSprites.Where(x => SpriteConstants.NonKillable.Contains((byte)x.SpriteId) == false).ToList();
+
+                    if(keySprites.Count > 0 && killableSprites.Count == 0)
+                    {
+                        throw new Exception("Key in room without any killable enemies");
+                    }
+
+                    spritesToUpdate.Where(x => x.HasAKey == false).ToList()
                         .ForEach(x => x.SpriteId = (byte)possibleSprites[rand.Next(possibleSprites.Length)].SpriteId);
+
+                    spritesToUpdate.Where(x => x.HasAKey).ToList()
+                        .ForEach(x => x.SpriteId = (byte)killableSprites[rand.Next(killableSprites.Count)].SpriteId);
                 }
             }
             // loop through rooms

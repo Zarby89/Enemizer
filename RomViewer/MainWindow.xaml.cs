@@ -64,9 +64,6 @@ namespace RomViewer
 
             RomData romData = new RomData(rom_data);
 
-            Patch patch = new Patch("patchData.json");
-            patch.PatchRom(romData);
-
             return romData;
         }
 

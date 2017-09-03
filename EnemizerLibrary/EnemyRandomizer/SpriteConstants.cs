@@ -25,7 +25,7 @@ namespace EnemizerLibrary
             EmptySprite = 0x03,
             PullSwitch_GoodSprite = 0x04,
             PullSwitch_Unused1Sprite = 0x05,
-            PullSwitch_BadSprite = 0x06,
+            PullSwitch_TrapSprite = 0x06,
             PullSwitch_Unused2Sprite = 0x07,
             Octorok_OneWaySprite = 0x08,
             MoldormSprite = 0x09,
@@ -355,7 +355,7 @@ namespace EnemizerLibrary
             SpriteConstants.Ostrich_HauntedGroveSprite,
             SpriteConstants.PikitSprite,
             SpriteConstants.PoeSprite,
-            SpriteConstants.PullSwitch_BadSprite,
+            SpriteConstants.PullSwitch_TrapSprite,
             SpriteConstants.PullSwitch_GoodSprite,
             SpriteConstants.PullSwitch_Unused1Sprite,
             SpriteConstants.PullSwitch_Unused2Sprite,
@@ -462,7 +462,7 @@ namespace EnemizerLibrary
             SpriteConstants.MovingCannonBallShooters_UpSprite,
             SpriteConstants.Ostrich_HauntedGroveSprite,
             SpriteConstants.PoeSprite,
-            SpriteConstants.PullSwitch_BadSprite,
+            SpriteConstants.PullSwitch_TrapSprite,
             SpriteConstants.PullSwitch_GoodSprite,
             SpriteConstants.PullSwitch_Unused1Sprite,
             SpriteConstants.PullSwitch_Unused2Sprite,
@@ -504,5 +504,10 @@ namespace EnemizerLibrary
         public static readonly byte[] sprite_subset_2 = { 12, 18, 23, 24, 28, 46, 34, 35, 39, 40, 38, 41, 36, 37, 42 };//19 trainee guard
         public static readonly byte[] sprite_subset_3 = { 17, 16, 27, 20, 82, 83 };
 
+        public static readonly byte[] NpcSprites = 
+        {
+            PrincessZeldaSprite,
+            UnclePriestSprite
+        };
     }
 }

@@ -38,6 +38,7 @@ namespace EnemizerLibrary
         public void UpdateRom()
         {
             UpdateHeader();
+
             UpdateSprites();
         }
 
@@ -51,16 +52,17 @@ namespace EnemizerLibrary
 
         private void UpdateHeader()
         {
-            int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
-            romData[roomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId - 0x40);
+            int roomHeaderBaseAddress = 0x118000 + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
+            //int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
+            romData[roomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId);// - 0x40);
         }
 
         void LoadHeader()
         {
             // I would prefer to do this, but you have to offset from 118000 which gets confusing
-            //int roomHeaderBaseAddress = 0x118000 + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
+            int roomHeaderBaseAddress = 0x118000 + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
 
-            int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
+            //int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
 
             this.GraphicsBlockId = romData[roomHeaderBaseAddress + 3]; // TODO: - 0x40 ??
         }
@@ -76,7 +78,7 @@ namespace EnemizerLibrary
             while(romData[roomSpriteBaseAddress + i] != 0xFF)
             {
                 Sprites.Add(new DungeonSprite(romData, roomSpriteBaseAddress + i));
-                i += 3;
+                i += 3; // sprites are 3 byte chunks
             }
         }
     }
@@ -90,14 +92,10 @@ namespace EnemizerLibrary
         {
             this.romData = romData;
             this.rand = rand;
-
-            //// TODO: Consider moving this to the caller so we can make LoadRooms virtual? (in case we want to use this with other rom hacks)
-            //LoadRooms();
         }
 
         public void LoadRooms()
         {
-            //int dungeonSpriteTableBaseAddress = 0x4D62E;
             int currentRoomId = 0;
 
             for (int i=0; i<638; i+=2)
@@ -108,20 +106,29 @@ namespace EnemizerLibrary
 
                 currentRoomId++;
             }
-
-            //for (int i=0; i<0x300; i+=2)
-            //{
-            //    int roomSpriteDataAddress = 0x40000 + romData[dungeonSpriteTableBaseAddress + i] + (romData[dungeonSpriteTableBaseAddress + i+1]<<8);
-            //    Rooms.Add(new Room(currentRoomId, roomSpriteDataAddress, romData));
-            //    currentRoomId++;
-            //}
         }
 
-        public void RandomizeSpriteGroups(SpriteGroupCollection spriteGroups)
+        public void RandomizeRoomSpriteGroups(SpriteGroupCollection spriteGroups)
         {
-            foreach(var r in Rooms)
+            foreach(var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                r.GraphicsBlockId = spriteGroups.SpriteGroups[rand.Next(0x40, 0x40+60)].GroupId;
+                var possibleSpriteGroups = spriteGroups.UsableDungeonSpriteGroups.ToList();
+
+                if(r.Sprites.Any(x => x.HasAKey))
+                {
+                    GroupSubsetPossibleSpriteCollection possibleSpriteCollection = new GroupSubsetPossibleSpriteCollection();
+
+                    var killableSprites = possibleSpriteCollection.Sprites
+                        .Where(x => SpriteConstants.NonKillable.Contains((byte)x.SpriteId) == false)
+                        .Select(x => x.GroupSubsetId).ToArray();
+
+                    possibleSpriteGroups = possibleSpriteGroups.Where(x => killableSprites.Contains(x.SubGroup0)
+                        || killableSprites.Contains(x.SubGroup1)
+                        || killableSprites.Contains(x.SubGroup2)
+                        || killableSprites.Contains(x.SubGroup3)).ToList();
+                }
+
+                r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
             }
         }
 
@@ -129,20 +136,5 @@ namespace EnemizerLibrary
         {
             Rooms.ForEach(x => x.UpdateRom());
         }
-    }
-
-    public enum RoomRequirement
-    {
-        NeedsKillableForDoors,
-        HasIceMan,
-        WaterRoom,
-        ShadowRoom,
-        WallmasterRoom, // TOOD: I don't like this name
-        BumperAndCrystalRoom,
-        SwitchRoom,
-        TonguesRoom,
-        NoStatueRoom,
-        CanonRoom,
-        HasKey // TODO: not sure if we care about this or if we should do it from sprite side
     }
 }

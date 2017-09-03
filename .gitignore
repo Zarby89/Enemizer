@@ -61,3 +61,5 @@ bld/
 
 
 *.sfc
+/*.sql
+/Need To Test Seeds
