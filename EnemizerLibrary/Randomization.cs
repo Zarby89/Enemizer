@@ -54,6 +54,8 @@ namespace EnemizerLibrary
             Patch patch = new Patch("patchData.json");
             patch.PatchRom(this.ROM_DATA);
 
+            GeneralPatches.MoveRoomHeaders(this.ROM_DATA);
+
             rand = new Random(seed);
 
             if (skin != "Default" && skin != "")
