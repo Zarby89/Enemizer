@@ -28,7 +28,7 @@ namespace EnemizerTests
 
             foreach(var sg in der.spriteGroupCollection.SpriteGroups)
             {
-                output.WriteLine($"GroupID: {sg.GroupId} - SG0: {sg.SubGroup0} - SG1: {sg.SubGroup1} - SG2: {sg.SubGroup2} - SG3: {sg.SubGroup3}");
+                output.WriteLine($"GroupID: {sg.GroupId} (Dungeon GroupId: {sg.DungeonGroupId}) - SG0: {sg.SubGroup0} - SG1: {sg.SubGroup1} - SG2: {sg.SubGroup2} - SG3: {sg.SubGroup3}");
             }
 
             foreach (var r in der.roomCollection.Rooms)

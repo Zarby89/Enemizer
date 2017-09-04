@@ -10,7 +10,21 @@ namespace EnemizerLibrary
     {
         public byte byte0 { get; set; }
         public byte byte1 { get; set; }
-        public byte SpriteId { get; set; }
+
+        public byte spriteId;
+        public byte SpriteId
+        {
+            get
+            {
+                return spriteId;
+            }
+            set
+            {
+                spriteId = value;
+                IsOverlord = false;
+            }
+        }
+
         public int Address { get; set; }
         public bool IsOverlord { get; set; }
         public bool HasAKey { get; set; }

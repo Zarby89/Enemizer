@@ -30,7 +30,7 @@ namespace EnemizerTests
 
             foreach(var sg in sgc.SpriteGroups)
             {
-                output.WriteLine($"SpriteGroupID: {sg.GroupId}, Sub0: {sg.SubGroup0} Sub1: {sg.SubGroup1} Sub2: {sg.SubGroup2} Sub3: {sg.SubGroup3} ");
+                output.WriteLine($"SpriteGroupID: {sg.GroupId} (Dungeon GroupId: {sg.DungeonGroupId}), Sub0: {sg.SubGroup0} Sub1: {sg.SubGroup1} Sub2: {sg.SubGroup2} Sub3: {sg.SubGroup3} ");
                 if(sg.GroupId == 77)
                 {
                     Assert.Equal(81, sg.SubGroup0);

@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
     public class Room
     {
+        // enemizer header patched rom
+        const int dungeonHeaderOffsetAddress = 0x118000;
         const int dungeonHeaderBaseAddress = 0x120090;
+
+        // vanilla jp game/normal rando rom
+        //const int dungeonHeaderOffsetAddress = 0x018000;
+        //const int dungeonHeaderBaseAddress = 0x27462;
+
         const int dungeonHeaderPointerTableBaseAddress = 0x271E2;
         const int dungeonSpritePointerTableBaseAddress = 0x4D62E;
 
@@ -18,6 +22,14 @@ namespace EnemizerLibrary
 
         public List<DungeonSprite> Sprites { get; set; } = new List<DungeonSprite>();
         //public List<RoomRequirement> Requirements { get; set; }
+
+        int RoomHeaderBaseAddress
+        {
+            get
+            {
+                return dungeonHeaderOffsetAddress + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
+            }
+        }
 
         RomData romData { get; set; }
 
@@ -46,32 +58,40 @@ namespace EnemizerLibrary
         {
             foreach(var s in Sprites)
             {
+                if(s.SpriteId == 3 && s.IsOverlord == false)
+                {
+                    throw new Exception("SpriteID 3 will crash the game");
+                }
+
+                if (s.IsOverlord == false)
+                {
+                    romData[s.Address + 1] = (byte)(romData[s.Address + 1] & SpriteConstants.OverlordRemoveMask);
+                }
                 romData[s.Address + 2] = s.SpriteId;
             }
         }
 
         private void UpdateHeader()
         {
-            int roomHeaderBaseAddress = 0x118000 + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
-            //int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
-            romData[roomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId);// - 0x40);
+            romData[RoomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId);
         }
 
         void LoadHeader()
         {
-            // I would prefer to do this, but you have to offset from 118000 which gets confusing
-            int roomHeaderBaseAddress = 0x118000 + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
-
-            //int roomHeaderBaseAddress = dungeonHeaderBaseAddress + (RoomId * 14);
-
-            this.GraphicsBlockId = romData[roomHeaderBaseAddress + 3]; // TODO: - 0x40 ??
+            this.GraphicsBlockId = romData[RoomHeaderBaseAddress + 3];
         }
 
         void LoadSprites()
         {
             int roomSpriteBaseAddress = 0x40000 + romData[dungeonSpritePointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonSpritePointerTableBaseAddress + (RoomId * 2) + 1] << 8);
 
-            byte byte0 = romData[roomSpriteBaseAddress];
+            /*
+            Byte 0: Stored to $0FB3. Corresponds with "Sort Spr" in Hyrule Magic. In a layered room this indicates sprites in the foreground are to be drawn on top of sprites in the background.
+
+            Bit 0 - If 0, sprites will sort
+            Bits 7,6,5,4,3,2,1 - Unknown, should all be 1
+            */
+            //byte byte0 = romData[roomSpriteBaseAddress];
 
             int i = 1;
 
@@ -80,61 +100,6 @@ namespace EnemizerLibrary
                 Sprites.Add(new DungeonSprite(romData, roomSpriteBaseAddress + i));
                 i += 3; // sprites are 3 byte chunks
             }
-        }
-    }
-
-    public class RoomCollection
-    {
-        public List<Room> Rooms { get; set; } = new List<Room>();
-        RomData romData { get; set; }
-        Random rand { get; set; }
-        public RoomCollection(RomData romData, Random rand)
-        {
-            this.romData = romData;
-            this.rand = rand;
-        }
-
-        public void LoadRooms()
-        {
-            int currentRoomId = 0;
-
-            for (int i=0; i<638; i+=2)
-            {
-                Room r = new Room(currentRoomId, romData);
-                r.LoadRoom();
-                Rooms.Add(r);
-
-                currentRoomId++;
-            }
-        }
-
-        public void RandomizeRoomSpriteGroups(SpriteGroupCollection spriteGroups)
-        {
-            foreach(var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
-            {
-                var possibleSpriteGroups = spriteGroups.UsableDungeonSpriteGroups.ToList();
-
-                if(r.Sprites.Any(x => x.HasAKey))
-                {
-                    GroupSubsetPossibleSpriteCollection possibleSpriteCollection = new GroupSubsetPossibleSpriteCollection();
-
-                    var killableSprites = possibleSpriteCollection.Sprites
-                        .Where(x => SpriteConstants.NonKillable.Contains((byte)x.SpriteId) == false)
-                        .Select(x => x.GroupSubsetId).ToArray();
-
-                    possibleSpriteGroups = possibleSpriteGroups.Where(x => killableSprites.Contains(x.SubGroup0)
-                        || killableSprites.Contains(x.SubGroup1)
-                        || killableSprites.Contains(x.SubGroup2)
-                        || killableSprites.Contains(x.SubGroup3)).ToList();
-                }
-
-                r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
-            }
-        }
-
-        public void UpdateRom()
-        {
-            Rooms.ForEach(x => x.UpdateRom());
         }
     }
 }
