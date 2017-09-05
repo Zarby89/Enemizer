@@ -19,11 +19,12 @@ namespace EnemizerTests
         [Fact]
         public void check_rooms_are_only_in_one_group_except82and83()
         {
+            // Ugly test but whatever works.
             RoomGroupRequirementCollection reqCollection = new RoomGroupRequirementCollection();
 
             var rooms = new List<R>();
 
-            foreach(var req in reqCollection.RoomRequirements.Where(x => x.Subgroup3 != 82 && x.Subgroup3 != 83))
+            foreach(var req in reqCollection.RoomRequirements)
             {
                 req.Rooms.ForEach((roomId) =>
                 {
@@ -33,29 +34,27 @@ namespace EnemizerTests
                         r = new R() { RoomId = roomId };
                         rooms.Add(r);
                     }
-                    r.GroupId.Add(req.GroupId);
-                    r.Subgroup0.Add(req.Subgroup0);
-                    r.Subgroup1.Add(req.Subgroup1);
-                    r.Subgroup2.Add(req.Subgroup2);
-                    r.Subgroup3.Add(req.Subgroup3);
+                    if (req.GroupId != null)
+                    {
+                        r.GroupId.Add(req.GroupId);
+                    }
+                    if (req.Subgroup0 != null)
+                    {
+                        r.Subgroup0.Add(req.Subgroup0);
+                    }
+                    if (req.Subgroup1 != null)
+                    {
+                        r.Subgroup1.Add(req.Subgroup1);
+                    }
+                    if(req.Subgroup2 != null)
+                    {
+                        r.Subgroup2.Add(req.Subgroup2);
+                    }
+                    if (req.Subgroup3 != null)
+                    {
+                        r.Subgroup3.Add(req.Subgroup3);
+                    }
                 });
-
-                //var duplicate = req.Rooms.Any(x => reqCollection.RoomRequirements.Any(r => r.Rooms.Contains(x) 
-                //                            && r != req
-                //                            && (r.GroupId != req.GroupId)
-                //                            && (r.Subgroup0 != req.Subgroup0 && ((r.Subgroup0 == null && req.Subgroup0 != null) || (r.Subgroup0 != null && req.Subgroup0 == null)))
-                //                            && (r.Subgroup1 != req.Subgroup1)
-                //                            && (r.Subgroup2 != req.Subgroup2)
-                //                            && (r.Subgroup3 != req.Subgroup3)
-                //                            //&& r.GroupId != null && req.GroupId != null && r.GroupId != req.GroupId
-                //                            //&& r.Subgroup0 != null && req.Subgroup0 != null && r.Subgroup0 != req.Subgroup0
-                //                            ));
-
-                //if(duplicate)
-                //{
-                //    output.WriteLine($"req groupId: {req.GroupId}, sub0: {req.Subgroup0}, sub1: {req.Subgroup1}, sub2: {req.Subgroup2}, sub3: {req.Subgroup3}, rooms: {String.Join(",", req.Rooms)}");
-                //}
-                //Assert.Equal(false, duplicate);
             }
 
             foreach(var r in rooms)
@@ -64,7 +63,10 @@ namespace EnemizerTests
                     || r.Subgroup0.Count > 1
                     || r.Subgroup1.Count > 1
                     || r.Subgroup2.Count > 1
-                    || r.Subgroup3.Count > 1;
+                    || (r.Subgroup3.Count > 1 
+                        && (r.Subgroup3.Count(x => x.HasValue && x.Value != 82 && x.Value != 83) > 1)
+                        || (r.Subgroup3.Count(x => x.HasValue && x.Value != 82 && x.Value != 83) == 1
+                            && r.Subgroup3.Count(x => x.Value == 82 || x.Value == 83) > 0));
 
                 if(duplicate)
                 {
