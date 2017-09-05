@@ -56,7 +56,8 @@ namespace EnemizerLibrary
                     var spritesToUpdate = room.Sprites
                         .Where(x => x.SpriteId != SpriteConstants.KeySprite && x.SpriteId != SpriteConstants.BigKeySprite)
                         .Where(x => SpriteConstants.NpcSprites.Contains(x.SpriteId) == false)
-                        .Where(x => SpriteConstants.NonKillable.Contains(x.SpriteId) == false).ToList();
+                        //.Where(x => SpriteConstants.NonKillable.Contains(x.SpriteId) == false)
+                        .ToList();
 
                     var keySprites = spritesToUpdate.Where(x => x.HasAKey).ToList();
 

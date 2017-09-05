@@ -201,7 +201,8 @@ namespace EnemizerLibrary
         {
             new ManualGroup() { GroupId=14, Subset0=71, Subset1=73, Subset2=76, Subset3=80, ForceRooms=new int[] { 18, 264, 261, 266 } } // 264 is chicken lady house, do we want to force that?
         };
-        int[] DoNotRandomizeDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40 };
+        int[] DoNotRandomizeDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40,
+            9, 11, 12, 20, 21, 22, 26, 28, 32 }; // bosses. need to change to just preserve the relevant sub group
 
         //int[] DoNotRandomizeDungeonGroupIds = { 0, 5, 6, 7, 9, 11, 12, 14, 15, 16, 18, 20, 21, 22, 23, 24, 26, 32, 34, 35 };
 

@@ -133,6 +133,7 @@ namespace EnemizerLibrary
                     spoilerFile.WriteLine($"dungeon name : boss name - drop: boss drop item");
                     //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
+
                 // update boss pointer
                 romData[dungeon.BossAddress] = dungeon.SelectedBoss.BossPointer[0];
                 romData[dungeon.BossAddress + 1] = dungeon.SelectedBoss.BossPointer[1];

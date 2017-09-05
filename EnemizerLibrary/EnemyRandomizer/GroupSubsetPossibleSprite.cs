@@ -7,6 +7,13 @@ namespace EnemizerLibrary
     {
         public int GroupSubsetId { get; set; }
         public int SpriteId { get; set; }
+        public string SpriteName
+        {
+            get
+            {
+                return SpriteConstants.GetSpriteName(SpriteId);
+            }
+        }
 
         public List<int> RequiredSecondarySubsetId { get; set; } = new List<int>();
 

@@ -16,7 +16,13 @@ namespace EnemizerLibrary
         const int dungeonHeaderPointerTableBaseAddress = 0x271E2;
         const int dungeonSpritePointerTableBaseAddress = 0x4D62E;
 
-        public string RoomName { get; set; }
+        public string RoomName
+        {
+            get
+            {
+                return RoomIdConstants.GetRoomName(RoomId);
+            }
+        }
         public int RoomId { get; set; }
         public int GraphicsBlockId { get; set; }
 
@@ -36,7 +42,6 @@ namespace EnemizerLibrary
         public Room(int roomId, RomData romData)
         {
             this.RoomId = roomId;
-            this.RoomName = RoomIdConstants.GetRoomName(roomId);
             this.romData = romData;
         }
 
@@ -58,16 +63,18 @@ namespace EnemizerLibrary
         {
             foreach(var s in Sprites)
             {
-                if(s.SpriteId == 3 && s.IsOverlord == false)
-                {
-                    throw new Exception("SpriteID 3 will crash the game");
-                }
+                s.UpdateRom();
 
-                if (s.IsOverlord == false)
-                {
-                    romData[s.Address + 1] = (byte)(romData[s.Address + 1] & SpriteConstants.OverlordRemoveMask);
-                }
-                romData[s.Address + 2] = s.SpriteId;
+                //if(s.SpriteId == 3 && s.IsOverlord == false)
+                //{
+                //    throw new Exception("SpriteID 3 will crash the game");
+                //}
+
+                //if (s.IsOverlord == false)
+                //{
+                //    romData[s.Address + 1] = (byte)(romData[s.Address + 1] & SpriteConstants.OverlordRemoveMask);
+                //}
+                //romData[s.Address + 2] = s.SpriteId;
             }
         }
 

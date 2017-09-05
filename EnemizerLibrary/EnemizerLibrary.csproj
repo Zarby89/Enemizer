@@ -90,6 +90,7 @@
     <Compile Include="EnemyRandomizer\RoomCollection.cs" />
     <Compile Include="EnemyRandomizer\RoomConstants.cs" />
     <Compile Include="EnemyRandomizer\DungeonSprite.cs" />
+    <Compile Include="EnemyRandomizer\RoomRequirement.cs" />
     <Compile Include="EnemyRandomizer\SpriteConstants.cs" />
     <Compile Include="EnemyRandomizer\SpriteGroup.cs" />
     <Compile Include="EnemyRandomizer\SpriteGroupCollection.cs" />

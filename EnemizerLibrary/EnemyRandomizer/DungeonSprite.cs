@@ -28,10 +28,20 @@ namespace EnemizerLibrary
         public int Address { get; set; }
         public bool IsOverlord { get; set; }
         public bool HasAKey { get; set; }
+        public string SpriteName
+        {
+            get
+            {
+                return SpriteConstants.GetSpriteName(SpriteId);
+            }
+        }
+
+        RomData romData;
 
         public DungeonSprite(RomData romData, int address)
         {
-            Address = address;
+            this.romData = romData;
+            this.Address = address;
 
             byte0 = romData[address];
             byte1 = romData[address + 1];
@@ -43,6 +53,20 @@ namespace EnemizerLibrary
             {
                 HasAKey = true;
             }
+        }
+
+        public void UpdateRom()
+        {
+            if (spriteId == 3 && IsOverlord == false)
+            {
+                throw new Exception("SpriteID 3 will crash the game");
+            }
+
+            if (IsOverlord == false)
+            {
+                romData[Address + 1] = (byte)(romData[Address + 1] & SpriteConstants.OverlordRemoveMask);
+            }
+            romData[Address + 2] = spriteId;
         }
     }
 }
