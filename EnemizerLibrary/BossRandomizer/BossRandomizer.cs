@@ -94,13 +94,13 @@ namespace EnemizerLibrary
             foreach(var dungeon in this.DungeonPool.OrderBy(x => x.Priority))
             {
                 var possibleBosses = this.PossibleBossesPool.Where(x => dungeon.DisallowedBosses.Contains(x.BossType) == false);
-                if(possibleBosses.Count() == 0)
+                if(possibleBosses.Any() == false)
                 {
                     throw new Exception($"Couldn't find any possible bosses not disallowed for dungeon: {dungeon.Name}");
                 }
 
                 possibleBosses = possibleBosses.Where(x => x.CheckRules(dungeon, romData) == false);
-                if (possibleBosses.Count() == 0)
+                if (possibleBosses.Any() == false)
                 {
                     throw new Exception($"Couldn't find any possible bosses meeting item checks for dungeon: {dungeon.Name}");
                 }

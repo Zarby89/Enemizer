@@ -43,7 +43,7 @@ namespace EnemizerLibrary
 
             foreach(var room in roomCollection.Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                var spriteGroup = spriteGroupCollection.SpriteGroups.Where(x => x.DungeonGroupId == room.GraphicsBlockId).First();
+                var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == room.GraphicsBlockId);
 
                 var possibleSprites = possibleSpriteCollection.Sprites
                     .Where(x => spriteGroup.SubGroup0 == x.GroupSubsetId

@@ -34,7 +34,7 @@ namespace EnemizerLibrary
 
                 if (ManualGroups.Any(x => x.GroupId == sg.DungeonGroupId))
                 {
-                    var manual = ManualGroups.Where(x => x.GroupId == sg.DungeonGroupId).First();
+                    var manual = ManualGroups.First(x => x.GroupId == sg.DungeonGroupId);
                     sg.SubGroup0 = manual.Subset0;
                     sg.SubGroup1 = manual.Subset1;
                     sg.SubGroup2 = manual.Subset2;
