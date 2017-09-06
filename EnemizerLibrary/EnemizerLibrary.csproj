@@ -94,6 +94,7 @@
     <Compile Include="EnemyRandomizer\SpriteConstants.cs" />
     <Compile Include="EnemyRandomizer\SpriteGroup.cs" />
     <Compile Include="EnemyRandomizer\SpriteGroupCollection.cs" />
+    <Compile Include="EnemyRandomizer\SpriteRequirement.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GeneralPatches.cs" />
     <Compile Include="OptionFlags.cs" />

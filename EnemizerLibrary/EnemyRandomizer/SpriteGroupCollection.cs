@@ -12,7 +12,7 @@ namespace EnemizerLibrary
             get
             {
                 return SpriteGroups
-                    .Where(x => DoNotRandomizeDungeonGroupIds.Contains(x.DungeonGroupId) == false)
+                    .Where(x => DoNotUseForDungeonGroupIds.Contains(x.DungeonGroupId) == false)
                     .Where(x => x.DungeonGroupId > 0 && x.DungeonGroupId < 60);
             }
         }
@@ -28,25 +28,58 @@ namespace EnemizerLibrary
 
         public void LoadSpriteGroups()
         {
+            RoomGroupRequirementCollection reqs = new RoomGroupRequirementCollection();
+
             for(int i=0;i<144; i++)
             {
                 SpriteGroup sg = new SpriteGroup(romData, i);
 
-                if (ManualGroups.Any(x => x.GroupId == sg.DungeonGroupId))
+                var rGroup = reqs.RoomRequirements.Where(x => x.GroupId == sg.DungeonGroupId);
+
+                if(rGroup.Any())
                 {
-                    var manual = ManualGroups.First(x => x.GroupId == sg.DungeonGroupId);
-                    sg.SubGroup0 = manual.Subset0;
-                    sg.SubGroup1 = manual.Subset1;
-                    sg.SubGroup2 = manual.Subset2;
-                    sg.SubGroup3 = manual.Subset3;
-                    sg.PreserveSubGroup0 = sg.PreserveSubGroup1 = sg.PreserveSubGroup2 = sg.PreserveSubGroup3 = true;
-                    sg.ForceRoomsToGroup.AddRange(manual.ForceRooms);
+                    foreach(var r in rGroup)
+                    {
+                        if(r.Subgroup0 != null)
+                        {
+                            sg.SubGroup0 = (int)r.Subgroup0;
+                            sg.PreserveSubGroup0 = true;
+                        }
+                        if (r.Subgroup1 != null)
+                        {
+                            sg.SubGroup1 = (int)r.Subgroup1;
+                            sg.PreserveSubGroup1 = true;
+                        }
+                        if (r.Subgroup2 != null)
+                        {
+                            sg.SubGroup2 = (int)r.Subgroup2;
+                            sg.PreserveSubGroup2 = true;
+                        }
+                        if (r.Subgroup3 != null)
+                        {
+                            sg.SubGroup3 = (int)r.Subgroup3;
+                            sg.PreserveSubGroup3 = true;
+                        }
+
+                        sg.ForceRoomsToGroup.AddRange(r.Rooms.Except(sg.ForceRoomsToGroup)); // don't add duplicates because that would be silly
+                    }
                 }
+
+                //if (ManualGroups.Any(x => x.GroupId == sg.DungeonGroupId))
+                //{
+                //    var manual = ManualGroups.First(x => x.GroupId == sg.DungeonGroupId);
+                //    sg.SubGroup0 = manual.Subset0;
+                //    sg.SubGroup1 = manual.Subset1;
+                //    sg.SubGroup2 = manual.Subset2;
+                //    sg.SubGroup3 = manual.Subset3;
+                //    sg.PreserveSubGroup0 = sg.PreserveSubGroup1 = sg.PreserveSubGroup2 = sg.PreserveSubGroup3 = true;
+                //    sg.ForceRoomsToGroup.AddRange(manual.ForceRooms);
+                //}
 
                 SpriteGroups.Add(sg);
             }
 
-            SetDefaultPreservationFlags();
+            //SetDefaultPreservationFlags();
         }
 
         void SetDefaultPreservationFlags()
@@ -94,7 +127,7 @@ namespace EnemizerLibrary
             // dungeon sprite groups = 60 total. 
             foreach (var sg in UsableDungeonSpriteGroups)
             {
-                if (SetGuardSubset1GroupIds.Contains(sg.DungeonGroupId))
+                if (sg.PreserveSubGroup1 == false && SetGuardSubset1GroupIds.Contains(sg.DungeonGroupId))
                 {
                     sg.PreserveSubGroup1 = true;
                     sg.SubGroup1 = GetRandomSubset1ForGuards();
@@ -201,8 +234,12 @@ namespace EnemizerLibrary
         {
             new ManualGroup() { GroupId=14, Subset0=71, Subset1=73, Subset2=76, Subset3=80, ForceRooms=new int[] { 18, 264, 261, 266 } } // 264 is chicken lady house, do we want to force that?
         };
+        // TODO: can probably remove this
         int[] DoNotRandomizeDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40,
             9, 11, 12, 20, 21, 22, 26, 28, 32 }; // bosses. need to change to just preserve the relevant sub group
+
+        // keep this
+        int[] DoNotUseForDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40 };
 
         //int[] DoNotRandomizeDungeonGroupIds = { 0, 5, 6, 7, 9, 11, 12, 14, 15, 16, 18, 20, 21, 22, 23, 24, 26, 32, 34, 35 };
 
