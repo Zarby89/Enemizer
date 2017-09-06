@@ -18,6 +18,7 @@ namespace EnemizerLibrary
          */
         public static readonly byte StatisMask = 0x40; // 0100 0000
         public static readonly byte OverlordRemoveMask = 0x1F; // 0001 1111
+        public static readonly byte SpriteSubtypeByte0RemoveMask = 0x9F; // 1001 1111
 
         public static string GetSpriteName(int spriteId)
         {

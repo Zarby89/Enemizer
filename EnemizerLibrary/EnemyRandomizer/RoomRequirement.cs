@@ -189,6 +189,7 @@ namespace EnemizerLibrary
 
             // Cane Platform
             RoomRequirements.Add(new RoomGroupRequirement(37, null, null, 39, null,
+                RoomIdConstants.R36_TurtleRock_DoubleHokku_Bokku_BigchestRoom,
                 RoomIdConstants.R180_TurtleRock_Pre_TrinexxRoom,
                 RoomIdConstants.R181_TurtleRock_DarkMaze,
                 RoomIdConstants.R198_TurtleRock0xC6,
