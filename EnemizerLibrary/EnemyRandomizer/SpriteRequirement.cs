@@ -36,7 +36,7 @@ namespace EnemizerLibrary
         {
             SpriteRequirements = new List<SpriteRequirement>();
 
-            SpriteRequirements.Add(new SpriteRequirement());
+            //SpriteRequirements.Add(new SpriteRequirement());
         }
     }
 }

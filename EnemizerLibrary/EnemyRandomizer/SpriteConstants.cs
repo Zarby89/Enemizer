@@ -300,7 +300,7 @@ namespace EnemizerLibrary
             { 0x142, "Soldier Alerter?? (Green)" },
         };
 
-        public static readonly byte
+        public const int
             RavenSprite = 0x00,
             VultureSprite = 0x01,
             FlyingStalfosHeadSprite = 0x02,
@@ -543,7 +543,30 @@ namespace EnemizerLibrary
             CaneOfSomariaPlatform_Unused1Sprite = 0xEF,
             CaneOfSomariaPlatform_Unused2Sprite = 0xF0,
             CaneOfSomariaPlatform_Unused3Sprite = 0xF1,
-            MedallionTabletSprite = 0xF2;
+            MedallionTabletSprite = 0xF2,
+            //Overlords
+            OL_CanonBalls_EP4Walls = 0x102,
+            OL_CanonBalls_EPEntrance = 0x103,
+            OL_StalfosHeadTrap = 0x105,
+            OL_BombDrop_RopeTrap = 0x106,
+            OL_MovingFloor = 0x107,
+            OL_Transformer_BunnyBeam = 0x108,
+            OL_Wallmaster = 0x109,
+            OL_FloorDrop_Square = 0x10A,
+            OL_FloorDrop_Path = 0x10B,
+            OL_RightEvil_PirogusuSpawner = 0x110,
+            OL_LeftEvil_PirogusuSpawner = 0x111,
+            OL_DownEvil_PirogusuSpawner = 0x112,
+            OL_UpEvil_PirogusuSpawner = 0x113,
+            OL_FlyingFloorTileTrap = 0x114,
+            OL_WizzrobeSpawner = 0x115,
+            OL_BlackSpawn_Zoro_BombHole = 0x116,
+            OL_4Skull_Trap_Pot = 0x117,
+            OL_Stalfos_Spawn_Trap_EP = 0x118,
+            OL_ArmosKnight_Trigger = 0x119,
+            OL_BombDrop_BombTrap = 0x11A,
+            OL_SoldierAlerter_Blue = 0x141,
+            OL_SoldierAlerter_Green = 0x142;
 
         //all the absorbable sprites fairy, bombs, rupees, arrows, ect, that can be used in any rooms without any specific set selected
         public static readonly byte[] absorbable_sprites =

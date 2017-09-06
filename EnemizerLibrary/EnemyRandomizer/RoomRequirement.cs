@@ -173,6 +173,11 @@ namespace EnemizerLibrary
                 RoomIdConstants.R102_SwampPalace_HiddenChest_HiddenDoorRoom,
                 RoomIdConstants.R118_SwampPalace_WaterDrainRoom));
 
+            // Babasu
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, 32, null, null,
+                RoomIdConstants.R62_IcePalace_StalfosKnights_ConveyorHellway,
+                RoomIdConstants.R159_IcePalace0x9F));
+
             // Wallmaster
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 35, null,
                 RoomIdConstants.R57_SkullWoods_GibdoKey_MothulaHoleRoom,
@@ -181,6 +186,18 @@ namespace EnemizerLibrary
                 RoomIdConstants.R87_SkullWoods_BigKeyRoom,
                 RoomIdConstants.R104_SkullWoods_KeyChest_TrapRoom,
                 RoomIdConstants.R141_GanonsTower_Tile_TorchPuzzleRoom));
+
+            // Cane Platform
+            RoomRequirements.Add(new RoomGroupRequirement(37, null, null, 39, null,
+                RoomIdConstants.R180_TurtleRock_Pre_TrinexxRoom,
+                RoomIdConstants.R181_TurtleRock_DarkMaze,
+                RoomIdConstants.R198_TurtleRock0xC6,
+                RoomIdConstants.R199_TurtleRock_TorchPuzzle,
+                RoomIdConstants.R214_TurtleRock_EntranceRoom));
+
+            // Guruguru bar
+            RoomRequirements.Add(new RoomGroupRequirement(37, 31, null, null, null,
+                RoomIdConstants.R181_TurtleRock_DarkMaze));
 
             // anti-fairy
             /*RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,

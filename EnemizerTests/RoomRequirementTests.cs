@@ -24,11 +24,11 @@ namespace EnemizerTests
 
             foreach (var r in rooms)
             {
-                bool duplicate = r.GroupId.Count > 1
-                    || r.Subgroup0.Count > 1
-                    || r.Subgroup1.Count > 1
-                    || r.Subgroup2.Count > 1
-                    || (r.Subgroup3.Count > 1
+                bool duplicate = r.GroupId.Distinct().Count() > 1
+                    || r.Subgroup0.Distinct().Count() > 1
+                    || r.Subgroup1.Distinct().Count() > 1
+                    || r.Subgroup2.Distinct().Count() > 1
+                    || (r.Subgroup3.Distinct().Count() > 1
                         && (r.Subgroup3.Distinct().Count(x => x.HasValue && x.Value != 82 && x.Value != 83) > 1)
                         || (r.Subgroup3.Distinct().Count(x => x.HasValue && x.Value != 82 && x.Value != 83) == 1
                             && r.Subgroup3.Distinct().Count(x => x.Value == 82 || x.Value == 83) > 0));
