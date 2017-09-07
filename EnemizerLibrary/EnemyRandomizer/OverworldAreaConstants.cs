@@ -22,6 +22,7 @@ namespace EnemizerLibrary
 
         static Dictionary<int, string> areaNames = new Dictionary<int, string>()
         {
+            // Light World (After Saving Zelda)
             { 0x000, "Lost Woods" },
             { 0x001, "Lost Woods (2)" },
             { 0x002, "Lumber Jack House" },
@@ -73,66 +74,244 @@ namespace EnemizerLibrary
             { 0x030, "Desert of Mystery" },
             { 0x031, "Desert of Mystery (2)" },
             { 0x032, "South of Haunted Grove" },
-            { 0x033, "Northwestern Great Swamp" },
-            { 0x034, "Northeastern Great Swamp" },
+            { 0x033, "North-western Great Swamp" },
+            { 0x034, "North-eastern Great Swamp" },
             { 0x035, "Lake Hylia" },
             { 0x036, "Lake Hylia (2)" },
             { 0x037, "Ice Cave" },
             { 0x038, "Desert of Mystery (3?)" },
             { 0x039, "Desert of Mystery (4?)" },
             { 0x03A, "Path Between Desert of Mystery and Great Swamp" },
-            { 0x03B, "Southwestern Great Swamp" },
-            { 0x03C, "Southeastern Great Swamp" },
+            { 0x03B, "South-western Great Swamp" },
+            { 0x03C, "South-eastern Great Swamp" },
             { 0x03D, "Lake Hylia (3?)" },
             { 0x03E, "Lake Hylia (4?)" },
-            { 0x03F, "Path Between Lake Hylia and Ice Cave " },
+            { 0x03F, "Path Between Lake Hylia and Ice Cave" },
 
-
-            { 0x040, "Lost Woods (DW)" },
-            { 0x041, "Lumber Jack House (DW)" },
-            { 0x042, "Lumber Jack House (DW) (2)" },
+            // Dark World
+            { 0x040, "Skull Woods (DW)" },
+            { 0x041, "Lumber Jack House (DW)" }, // double check, this should be Skull Woods....
+            { 0x042, "Lumber Jack House (2) (DW)" },
             { 0x043, "West Death Mountain (DW)" },
-            { 0x044, "East Death Mountain (DW)" },
-            { 0x045, "East Death Mountain (DW) (2)" },
+            { 0x044, "East Death Mountain (DW)" }, // double check, this should be West DM....
+            { 0x045, "East Death Mountain (2) (DW)" }, // double check, this should be East 1
+            { 0x046, "??" }, // double check, this should be East (2)
+            { 0x047, "Turtle Rock" },
+            { 0x048, "Lost Woods (3?) (DW)" },
+            { 0x049, "Lost Woods (4?) (DW)" },
+            { 0x04A, "Bumper Cave Entrance (DW)" },
+            { 0x04B, "West Death Mountain (3?) (DW)" },
+            { 0x04C, "West Death Mountain (4?) (DW)" },
+            { 0x04D, "East Death Mountain (3?) (DW)" },
+            { 0x04E, "East Death Mountain (4?) (DW)" },
+            { 0x04F, "Catfish (DW)" },
+            { 0x050, "Path Between Village of Outcasts and Skull Woods (DW)" },
+            { 0x051, "Village of Outcasts Fortune Teller (DW)" },
+            { 0x052, "Pond Between Village of Outcasts Fortune Teller and Sanctuary (DW)" },
+            { 0x053, "Sanctuary (DW)" },
+            { 0x054, "Graveyard (DW)" },
+            { 0x055, "River Between Graveyard and Witch's Hut (DW)" },
+            { 0x056, "Witch's Hut (DW)" },
+            { 0x057, "East of Witch's Hut (DW)" },
+            { 0x058, "Village of Outcasts (DW)" },
+            { 0x059, "Village of Outcasts (2) (DW)" },
+            { 0x05A, "Forest Between Village of Outcasts and Pyramid (DW)" },
+            { 0x05B, "Pyramid (DW)" },
+            { 0x05C, "Pyramid (2) (DW)" },
+            { 0x05D, "Broken Bridge Between Graveyard and Witch's Hut (DW)" },
+            { 0x05E, "Palace of Darkness (DW)" },
+            { 0x05F, "Palace of Darkness (2) (DW)" },
+            { 0x060, "Village of Outcasts (3?) (DW)" },
+            { 0x061, "Village of Outcasts (4?) (DW)" },
+            { 0x062, "Smithy (DW)" },
+            { 0x063, "Pyramid (3?) (DW)" },
+            { 0x064, "Pyramid (4?) (DW)" },
+            { 0x065, "Path Between Pyramid and Palace of Darkness}} (top) (DW)" },
+            { 0x066, "Palace of Darkness (3?) (DW)" },
+            { 0x067, "Palace of Darkness (4?) (DW)" },
+            { 0x068, "Digging Game (DW)" },
+            { 0x069, "Village of Outcasts Frog Smith (DW)" },
+            { 0x06A, "Haunted Grove (DW)" },
+            { 0x06B, "Forest Between Haunted Grove and Link's House (DW)" },
+            { 0x06C, "Bomb Shop (Link's House) (DW)" },
+            { 0x06D, "Path Between Pyramid and Palace of Darkness}} (bottom) (DW)" },
+            { 0x06E, "Caves South of Palace of Darkness (left) (DW)" },
+            { 0x06F, "Caves South of Palace of Darkness (right) (DW)" },
+            { 0x070, "Misery Mire (DW)" },
+            { 0x071, "South of Haunted Grove (DW)" },
+            { 0x072, "South of Haunted Grove (DW) (Duplicate)" },
+            { 0x073, "North-western Great Swamp (DW)" },
+            { 0x074, "North-eastern Great Swamp (DW)" },
+            { 0x075, "Lake Hylia (DW)" },
+            { 0x076, "Ice Cave (DW)" },
+            { 0x077, "Ice Cave (DW)" },
+            { 0x078, "Misery Mire (3?) (DW)" },
+            { 0x079, "Misery Mire (4?) (DW)" },
+            { 0x07A, "Path Between Misery Mire and Great Swamp (DW)" },
+            { 0x07B, "South-western Great Swamp (DW)" },
+            { 0x07C, "South-eastern Great Swamp (DW)" },
+            { 0x07D, "Lake Hylia (3?) (DW)" },
+            { 0x07E, "Lake Hylia (4?) (DW)" },
+            { 0x07F, "Path Between Lake Hylia and Ice Cave (DW)" },
 
-            /*
-$07 (7) 	$47 (71) 	512 	Turtle Rock
-$0A (10) 	$4A (74) 	512 	Entrance to Death Mountain
-$0F (15) 	$4F (79) 	512 	Entrance to Zora's Domain
-$10 (16) 	$50 (80) 	512 	Path Between Kakariko Village and Lost Woods
-$11 (17) 	$51 (81) 	512 	Kakariko Village Fortune Teller
-$12 (18) 	$52 (82) 	512 	Pond Between Kakariko Village Fortune Teller and Sanctuary
-$13 (19) 	$53 (83) 	512 	Sanctuary
-$14 (20) 	$54 (84) 	512 	Graveyard
-$15 (21) 	$55 (85) 	512 	River Between Graveyard and Witch's Hut
-$16 (22) 	$56 (86) 	512 	Witch's Hut
-$17 (23) 	$57 (87) 	512 	East of Witch's Hut
-$18 (24) 	$58 (88) 	1024 	Kakariko Village
-$1A (26) 	$5A (90) 	512 	Forest Between Kakariko Village and Hyrule Castle
-$1B (27) 	$5B (91) 	1024 	Hyrule Castle
-$1D (29) 	$5D (93) 	512 	Bridge Between Graveyard and Witch's Hut
-$1E (30) 	$5E (94) 	1024 	Eastern Palace
-$22 (34) 	$62 (98) 	512 	Smithy
-$25 (37) 	$65 (101) 	512 	Path Between Hyrule Castle and Eastern Palace}} (top)
-$28 (40) 	$68 (104) 	512 	Kakariko Village Maze Race
-$29 (41) 	$69 (105) 	512 	Kakariko Village Library
-$2A (42) 	$6A (106) 	512 	Haunted Grove
-$2B (43) 	$6B (107) 	512 	Forest Between Haunted Grove and Link's House
-$2C (44) 	$6C (108) 	512 	Link's House
-$2D (45) 	$6D (109) 	512 	Path Between Hyrule Castle and Eastern Palace}} (bottom)
-$2E (46) 	$6E (110) 	512 	Caves South of Eastern Palace (left)
-$2F (47) 	$6F (111) 	512 	Caves South of Eastern Palace (right)
-$30 (48) 	$70 (112) 	1024 	Desert of Mystery
-$32 (50) 	$72 (114) 	512 	South of Haunted Grove
-$33 (51) 	$73 (115) 	512 	Northwestern Great Swamp
-$34 (52) 	$74 (116) 	512 	Northeastern Great Swamp
-$35 (53) 	$75 (117) 	1024 	Lake Hylia
-$37 (55) 	$77 (119) 	512 	Ice Cave
-$3A (58) 	$7A (122) 	512 	Path Between Desert of Mystery and Great Swamp
-$3B (59) 	$7B (123) 	512 	Southwestern Great Swamp
-$3C (60) 	$7C (124) 	512 	Southeastern Great Swamp
-$3F (63) 	$7F (127) 	512 	Path Between Lake Hylia and Ice Cave 
-*/
+            { 0x080, "Master Sword Glade / Under Bridge" },
+            { 0x081, "Zora's Domain" },
+
+            { 0x082, "??" },
+            { 0x083, "??" },
+            { 0x084, "??" },
+            { 0x085, "??" },
+            { 0x086, "??" },
+            { 0x087, "??" },
+            { 0x088, "??" },
+            { 0x089, "??" },
+            { 0x08A, "??" },
+            { 0x08B, "??" },
+            { 0x08C, "??" },
+            { 0x08D, "??" },
+            { 0x08E, "??" },
+            { 0x08F, "??" },
+
+            // after killing Aga (probably)
+            // Light World (Post-Aga)
+            { 0x090, "Lost Woods (Post-Aga)" },
+            { 0x091, "Lost Woods (2) (Post-Aga)" },
+            { 0x092, "Lumber Jack House (Post-Aga)" },
+            { 0x093, "West Death Mountain (Post-Aga)" },
+            { 0x094, "West Death Mountain (2) (Post-Aga)" },
+            { 0x095, "East Death Mountain (Post-Aga)" },
+            { 0x096, "East Death Mountain (2) (Post-Aga)" },
+            { 0x097, "East Death Mountain Warp for Turtle Rock (Post-Aga)" },
+            { 0x098, "Lost Woods (3?) (Post-Aga)" },
+            { 0x099, "Lost Woods (4?) (Post-Aga)" },
+            { 0x09A, "Entrance to Death Mountain (Post-Aga)" },
+            { 0x09B, "West Death Mountain (3?) (Post-Aga)" },
+            { 0x09C, "West Death Mountain (4?) (Post-Aga)" },
+            { 0x09D, "East Death Mountain (3?) (Post-Aga)" },
+            { 0x09E, "East Death Mountain (3?) (Post-Aga)" },
+            { 0x09F, "Entrance to Zora's Domain (Post-Aga)" },
+            { 0x0A0, "Path Between Kakariko Village and Lost Woods (Post-Aga)" },
+            { 0x0A1, "Kakariko Village Fortune Teller (Post-Aga)" },
+            { 0x0A2, "Pond Between Kakariko Village Fortune Teller and Sanctuary (Post-Aga)" },
+            { 0x0A3, "Sanctuary (Post-Aga)" },
+            { 0x0A4, "Graveyard (Post-Aga)" },
+            { 0x0A5, "River Between Graveyard and Witch's Hut (Post-Aga)" },
+            { 0x0A6, "Witch's Hut (Post-Aga)" },
+            { 0x0A7, "East of Witch's Hut (Post-Aga)" },
+            { 0x0A8, "Kakariko Village (Post-Aga)" },
+            { 0x0A9, "Kakariko Village (2) (Post-Aga)" },
+            { 0x0AA, "Forest Between Kakariko Village and Hyrule Castle (Post-Aga)" },
+            { 0x0AB, "Hyrule Castle (Post-Aga)" },
+            { 0x0AC, "Hyrule Castle (2) (Post-Aga)" },
+            { 0x0AD, "Bridge Between Graveyard and Witch's Hut (Post-Aga)" },
+            { 0x0AE, "Eastern Palace (Post-Aga)" },
+            { 0x0AF, "Eastern Palace (2) (Post-Aga)" },
+            { 0x0B0, "Kakariko Village (3?) (Post-Aga)" },
+            { 0x0B1, "Kakariko Village (4?) (Post-Aga)" },
+            { 0x0B2, "Smithy (Post-Aga)" },
+            { 0x0B3, "Hyrule Castle (3?) (Post-Aga)" },
+            { 0x0B4, "Hyrule Castle (4?) (Post-Aga)" },
+            { 0x0B5, "Path Between Hyrule Castle and Eastern Palace}} (top) (Post-Aga)" },
+            { 0x0B6, "Eastern Palace (3?) (Post-Aga)" },
+            { 0x0B7, "Eastern Palace (4?) (Post-Aga)" },
+            { 0x0B8, "Kakariko Village Maze Race (Post-Aga)" },
+            { 0x0B9, "Kakariko Village Library (Post-Aga)" },
+            { 0x0BA, "Haunted Grove (Post-Aga)" },
+            { 0x0BB, "Forest Between Haunted Grove and Link's House (Post-Aga)" },
+            { 0x0BC, "Link's House (Post-Aga)" },
+            { 0x0BD, "Path Between Hyrule Castle and Eastern Palace}} (bottom) (Post-Aga)" },
+            { 0x0BE, "Caves South of Eastern Palace (left) (Post-Aga)" },
+            { 0x0BF, "Caves South of Eastern Palace (right) (Post-Aga)" },
+            { 0x0C0, "Desert of Mystery (Post-Aga)" },
+            { 0x0C1, "Desert of Mystery (2) (Post-Aga)" },
+            { 0x0C2, "South of Haunted Grove (Post-Aga)" },
+            { 0x0C3, "North-western Great Swamp (Post-Aga)" },
+            { 0x0C4, "North-eastern Great Swamp (Post-Aga)" },
+            { 0x0C5, "Lake Hylia (Post-Aga)" },
+            //{ 0x0C6, "Lake Hylia (2) (Post-Aga)" },
+            { 0x0C6, "Ice Cave (Post-Aga)??" }, // check, should be hylia (2)
+            { 0x0C7, "Ice Cave (Post-Aga)" },
+            //{ 0x0C8, "Desert of Mystery (3?) (Post-Aga)" },
+            //{ 0x0C9, "Desert of Mystery (4?) (Post-Aga)" },
+            { 0x0C8, "Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (3)
+            { 0x0C9, "Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (4)
+            { 0x0CA, "Path Between Desert of Mystery and Great Swamp (Post-Aga)" },
+            { 0x0CB, "South-western Great Swamp (Post-Aga)" },
+            { 0x0CC, "South-eastern Great Swamp (Post-Aga)" },
+            //{ 0x0CD, "Lake Hylia (3?) (Post-Aga)" },
+            //{ 0x0CE, "Lake Hylia (4?) (Post-Aga)" },
+            { 0x0CD, "Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (3)
+            { 0x0CE, "Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (4)
+            { 0x0CF, "Path Between Lake Hylia and Ice Cave (Post-Aga)" },
+
+            // Dark World (Post-Aga?)
+            { 0x0D0, "Skull Woods (DW) (Post-Aga)" },
+            { 0x0D1, "Lumber Jack House (DW) (Post-Aga)" }, // double check, this should be Skull Woods....
+            { 0x0D2, "Lumber Jack House (2) (DW) (Post-Aga)" },
+            { 0x0D3, "West Death Mountain (DW) (Post-Aga)" },
+            { 0x0D4, "East Death Mountain (DW) (Post-Aga)" }, // double check, this should be West DM....
+            { 0x0D5, "East Death Mountain (2) (DW) (Post-Aga)" }, // double check, this should be East 1
+            { 0x0D6, "?? (Post-Aga)" }, // double check, this should be East (2)
+            { 0x0D7, "Turtle Rock (Post-Aga)" },
+            { 0x0D8, "Lost Woods (3?) (DW) (Post-Aga)" },
+            { 0x0D9, "Lost Woods (4?) (DW) (Post-Aga)" },
+            { 0x0DA, "Bumper Cave Entrance (DW) (Post-Aga)" },
+            { 0x0DB, "West Death Mountain (3?) (DW) (Post-Aga)" },
+            { 0x0DC, "West Death Mountain (4?) (DW) (Post-Aga)" },
+            { 0x0DD, "East Death Mountain (3?) (DW) (Post-Aga)" },
+            { 0x0DE, "East Death Mountain (4?) (DW) (Post-Aga)" },
+            { 0x0DF, "Catfish (DW) (Post-Aga)" },
+            { 0x0E0, "Path Between Village of Outcasts and Skull Woods (DW) (Post-Aga)" },
+            { 0x0E1, "Village of Outcasts Fortune Teller (DW) (Post-Aga)" },
+            { 0x0E2, "Pond Between Village of Outcasts Fortune Teller and Sanctuary (DW) (Post-Aga)" },
+            { 0x0E3, "Sanctuary (DW) (Post-Aga)" },
+            { 0x0E4, "Graveyard (DW) (Post-Aga)" },
+            { 0x0E5, "River Between Graveyard and Witch's Hut (DW) (Post-Aga)" },
+            { 0x0E6, "Witch's Hut (DW) (Post-Aga)" },
+            { 0x0E7, "East of Witch's Hut (DW) (Post-Aga)" },
+            { 0x0E8, "Village of Outcasts (DW) (Post-Aga)" },
+            { 0x0E9, "Village of Outcasts (2) (DW) (Post-Aga)" },
+            { 0x0EA, "Forest Between Village of Outcasts and Pyramid (DW) (Post-Aga)" },
+            { 0x0EB, "Pyramid (DW) (Post-Aga)" },
+            { 0x0EC, "Pyramid (2) (DW) (Post-Aga)" },
+            { 0x0ED, "Broken Bridge Between Graveyard and Witch's Hut (DW) (Post-Aga)" },
+            { 0x0EE, "Palace of Darkness (DW) (Post-Aga)" },
+            { 0x0EF, "Palace of Darkness (2) (DW) (Post-Aga)" },
+            { 0x0F0, "Village of Outcasts (3?) (DW) (Post-Aga)" },
+            { 0x0F1, "Village of Outcasts (4?) (DW) (Post-Aga)" },
+            { 0x0F2, "Smithy (DW) (Post-Aga)" },
+            { 0x0F3, "Pyramid (3?) (DW) (Post-Aga)" },
+            { 0x0F4, "Pyramid (4?) (DW) (Post-Aga)" },
+            { 0x0F5, "Path Between Pyramid and Palace of Darkness}} (top) (DW) (Post-Aga)" },
+            { 0x0F6, "Palace of Darkness (3?) (DW) (Post-Aga)" },
+            { 0x0F7, "Palace of Darkness (4?) (DW) (Post-Aga)" },
+            { 0x0F8, "Digging Game (DW) (Post-Aga)" },
+            { 0x0F9, "Village of Outcasts Frog Smith (DW) (Post-Aga)" },
+            { 0x0FA, "Haunted Grove (DW) (Post-Aga)" },
+            { 0x0FB, "Forest Between Haunted Grove and Link's House (DW) (Post-Aga)" },
+            { 0x0FC, "Bomb Shop (Link's House) (DW) (Post-Aga)" },
+            { 0x0FD, "Path Between Pyramid and Palace of Darkness}} (bottom) (DW) (Post-Aga)" },
+            { 0x0FE, "Caves South of Palace of Darkness (left) (DW) (Post-Aga)" },
+            { 0x0FF, "Caves South of Palace of Darkness (right) (DW) (Post-Aga)" },
+            { 0x100, "Misery Mire (DW) (Post-Aga)" },
+            { 0x101, "South of Haunted Grove (DW) (Post-Aga)" },
+            { 0x102, "South of Haunted Grove (DW) (Duplicate) (Post-Aga)" },
+            { 0x103, "North-western Great Swamp (DW) (Post-Aga)" },
+            { 0x104, "North-eastern Great Swamp (DW) (Post-Aga)" },
+            { 0x105, "Lake Hylia (DW) (Post-Aga)" },
+            { 0x106, "Ice Cave (DW) (Post-Aga)" },
+            { 0x107, "Ice Cave (DW) (Post-Aga)" },
+            { 0x108, "Misery Mire (3?) (DW) (Post-Aga)" },
+            { 0x109, "Misery Mire (4?) (DW) (Post-Aga)" },
+            { 0x10A, "Path Between Misery Mire and Great Swamp (DW) (Post-Aga)" },
+            { 0x10B, "South-western Great Swamp (DW) (Post-Aga)" },
+            { 0x10C, "South-eastern Great Swamp (DW) (Post-Aga)" },
+            { 0x10D, "Lake Hylia (3?) (DW) (Post-Aga)" },
+            { 0x10E, "Lake Hylia (4?) (DW) (Post-Aga)" },
+            { 0x10F, "Path Between Lake Hylia and Ice Cave (DW) (Post-Aga)" },
+
+            { 0x110, "Master Sword Glade / Under Bridge (Post-Aga)" },
+            { 0x111, "Zora's Domain (Post-Aga)" },
         };
     }
 }
