@@ -49,45 +49,28 @@ namespace EnemizerTests
         {
             var romData = Utilities.LoadRom("rando.sfc");
 
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData);
 
-            byte[] roomPointer = new byte[4];
-            for (int i = 0; i < 0x120; i++)
+            foreach(var owArea in areas.OverworldAreas)
             {
-                roomPointer[0] = romData[(0x04C901 + (i * 2) + 0)];
-                roomPointer[1] = romData[(0x04C901 + (i * 2) + 1)];
-                roomPointer[2] = 09;
+                output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})");
 
-                int address = BitConverter.ToInt32(roomPointer, 0);
-
-                int pcadd = EnemizerLibrary.Utilities.SnesToPCAddress(address);
-
-                bool ff = false;
-                int pos = 0;
-
-                output.WriteLine($"Map: {i.ToString("X3")}");
-                while (ff == false)
+                foreach (var s in owArea.Sprites)
                 {
-                    if (romData[pcadd + pos] != 0xFF)
-                    {
-                        var spriteAddress = pcadd + pos + 2; //address
-                        var spriteId = romData[pcadd + pos + 2]; //sprite
-                        var spriteY = romData[pcadd + pos + 0]; // Y
-                        var spriteX = romData[pcadd + pos + 1]; // X
-
-                        //randomized(0), keeped(1) or deleted(2);
-
-                        output.WriteLine($"Address: {spriteAddress.ToString("X6")}\tSpriteId: {spriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(spriteId)}\tX: {spriteX}\tY: {spriteY}\tOverlord: {(spriteId >= 0xF3 ? true : false).ToString()}");
-                        //Console.WriteLine(address.ToString("X6") +" : " + ROM_DATA[pcadd + pos].ToString() + "," + ROM_DATA[pcadd + pos + 1].ToString() + "," + ROM_DATA[pcadd + pos + 2].ToString("X2"));
-
-                        pos += 3;
-                    }
-                    else
-                    {
-                        ff = true;
-                    }
-
+                    output.WriteLine($"Address: {s.SpriteAddress.ToString("X6")}\tSpriteId: {s.SpriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(s.SpriteId)}\tX: {s.SpriteX}\tY: {s.SpriteY}\tOverlord: {(s.SpriteId >= 0xF3 ? true : false).ToString()}");
                 }
             }
+
+            //for (int i = 0; i < 0x120; i++)
+            //{
+            //    var owArea = new OverworldArea(romData, i);
+
+            //    output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})");
+            //    foreach (var s in owArea.Sprites)
+            //    {
+            //        output.WriteLine($"Address: {s.SpriteAddress.ToString("X6")}\tSpriteId: {s.SpriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(s.SpriteId)}\tX: {s.SpriteX}\tY: {s.SpriteY}\tOverlord: {(s.SpriteId >= 0xF3 ? true : false).ToString()}");
+            //    }
+            //}
 
         }
     }

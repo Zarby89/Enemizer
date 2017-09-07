@@ -35,6 +35,9 @@ namespace EnemizerLibrary
         public SpriteRequirementCollection()
         {
             SpriteRequirements = new List<SpriteRequirement>();
+            
+            // rat-guard = green recruit (0x4B) with sub 1=73, sub 2=28
+
 
             //SpriteRequirements.Add(new SpriteRequirement());
         }
