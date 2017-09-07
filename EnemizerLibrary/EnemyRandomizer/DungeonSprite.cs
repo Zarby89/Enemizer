@@ -68,5 +68,19 @@ namespace EnemizerLibrary
             }
             romData[Address + 2] = spriteId;
         }
+
+        public bool CanBeChanged()
+        {
+            // TODO: put logic in here
+            return true;
+        }
+
+        public bool NeedsToBeKillable()
+        {
+            // TODO: put logic in here
+            return true;
+        }
+
+        // TODO: add any other "logic"
     }
 }

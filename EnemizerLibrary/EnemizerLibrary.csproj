@@ -86,6 +86,7 @@
     <Compile Include="EnemyRandomizer\DungeonEnemyRandomizer.cs" />
     <Compile Include="EnemyRandomizer\GroupSubsetPossibleSprite.cs" />
     <Compile Include="EnemyRandomizer\GroupSubsetPossibleSpriteCollection.cs" />
+    <Compile Include="EnemyRandomizer\OverworldSprite.cs" />
     <Compile Include="EnemyRandomizer\Room.cs" />
     <Compile Include="EnemyRandomizer\RoomCollection.cs" />
     <Compile Include="EnemyRandomizer\RoomConstants.cs" />

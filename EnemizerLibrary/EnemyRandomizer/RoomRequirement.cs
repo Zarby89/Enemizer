@@ -104,7 +104,7 @@ namespace EnemizerLibrary
 
             RoomRequirements.Add(new RoomGroupRequirement(40, 14, 30 /* TODO: ??? nothing uses this ??? */, 74, 80,
                 RoomIdConstants.R225_Cave_LostWoodsHP,
-                RoomIdConstants.R256_Shop0x100,
+                RoomIdConstants.R256_ShopInLostWoods0x100,
                 RoomIdConstants.R291_MiniMoldormCave,
                 RoomIdConstants.R292_UnknownCave_BonkCave,
                 RoomIdConstants.R293_Cave0x125,
