@@ -16,6 +16,14 @@ namespace EnemizerLibrary
             this.romData = romData;
         }
 
+        public int Length
+        {
+            get
+            {
+                return romData.Length;
+            }
+        }
+
         public byte this[int i]
         {
             get

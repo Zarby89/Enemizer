@@ -4,7 +4,7 @@ namespace EnemizerLibrary
 {
     public class SpriteGroup
     {
-        //const int SpriteGroupBaseAddress = 0x5B57; // wtf is this address?
+        //const int SpriteGroupBaseAddress = 0x5B57; // wtf is this address? US?
         const int SpriteGroupBaseAddress = 0x5B97; // Dungeon Sprite Groups???
 
         public int GroupId { get; set; }

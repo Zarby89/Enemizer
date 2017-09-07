@@ -53,7 +53,28 @@ namespace EnemizerTests
 
             foreach(var owArea in areas.OverworldAreas)
             {
-                output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})");
+                //int offset = owArea.AreaId;
+
+                //if (owArea.AreaId >= 0x40 && owArea.AreaId < 0x80)
+                //{
+                //    offset += 0x40;
+                //}
+                //if (owArea.AreaId >= 0x90 && owArea.AreaId < 0x110)
+                //{
+                //    offset -= 0x50;
+                //}
+
+                //int graphicsBlock = romData[0x07A81 + offset];
+
+                output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})\tGraphics Block: {owArea.GraphicsBlockId} ({owArea.GraphicsBlockAddress.ToString("X4")})");
+
+                //0x07A81 + i // should be pre aga LW
+
+                //0x07AC1 + (i - 0x90) // should be post aga LW
+
+                //0x07B01 + (i - 0x40) // should be pre aga DW
+
+                // 0x07B41 // post aga DW???? doesn't look like it
 
                 foreach (var s in owArea.Sprites)
                 {
@@ -72,6 +93,32 @@ namespace EnemizerTests
             //    }
             //}
 
+        }
+
+        [Fact]
+        public void fishing_expedition()
+        {
+            var romData = Utilities.LoadRom("rando.sfc");
+            //output.WriteLine("hmm");
+
+            for(int i=0; i<romData.Length-1; i++)
+            {
+                if(romData[i] == 0x81 && romData[i+1] == 0x7A)
+                {
+                    output.WriteLine($"Maybe something: 0x7A81 at {i.ToString("X8")}");
+                    // maybe a hit
+                    for (int j=0; j<0x20; j++)
+                    {
+                        if (j+1 >= romData.Length)
+                            break;
+
+                        if(romData[j] == 0x82 && romData[j+1] == 0x7A)
+                        {
+                            output.WriteLine($"Maybe something: 0x7A81 at {i.ToString("X8")}  0x7A82 at {j.ToString("X8")}");
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -309,7 +309,7 @@ namespace EnemizerLibrary
             { 0x10D, "Lake Hylia (3?) (DW) (Post-Aga)" },
             { 0x10E, "Lake Hylia (4?) (DW) (Post-Aga)" },
             { 0x10F, "Path Between Lake Hylia and Ice Cave (DW) (Post-Aga)" },
-
+            // these seem to be pointing to the same sprite data as pre-aga (same addresses)
             { 0x110, "Master Sword Glade / Under Bridge (Post-Aga)" },
             { 0x111, "Zora's Domain (Post-Aga)" },
         };

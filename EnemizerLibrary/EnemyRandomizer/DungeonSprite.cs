@@ -21,6 +21,8 @@ namespace EnemizerLibrary
             set
             {
                 spriteId = value;
+                byte0 = (byte)(byte0 & SpriteConstants.SpriteSubtypeByte0RemoveMask);
+                byte1 = (byte)(byte1 & SpriteConstants.OverlordRemoveMask);
                 IsOverlord = false;
             }
         }
@@ -47,7 +49,7 @@ namespace EnemizerLibrary
             byte1 = romData[address + 1];
             SpriteId = romData[address + 2];
 
-            IsOverlord = (byte1 & SpriteConstants.StatisMask) != 0;
+            IsOverlord = (byte1 & SpriteConstants.OverlordMask) != 0;
 
             if (romData[address + 3] != 0xFF && (romData[address + 5] == SpriteConstants.KeySprite || romData[address + 5] == SpriteConstants.BigKeySprite))
             {
@@ -64,7 +66,8 @@ namespace EnemizerLibrary
 
             if (IsOverlord == false)
             {
-                romData[Address + 1] = (byte)(romData[Address + 1] & SpriteConstants.OverlordRemoveMask);
+                romData[Address] = byte0;
+                romData[Address + 1] = byte1;
             }
             romData[Address + 2] = spriteId;
         }
