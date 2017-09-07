@@ -88,6 +88,9 @@
     <Compile Include="EnemyRandomizer\GroupSubsetPossibleSpriteCollection.cs" />
     <Compile Include="EnemyRandomizer\OverworldArea.cs" />
     <Compile Include="EnemyRandomizer\OverworldAreaConstants.cs" />
+    <Compile Include="EnemyRandomizer\OverworldEnemyRandomizer.cs" />
+    <Compile Include="EnemyRandomizer\OverworldGroupRequirementCollection.cs" />
+    <Compile Include="EnemyRandomizer\OverworldRequirement.cs" />
     <Compile Include="EnemyRandomizer\OverworldSprite.cs" />
     <Compile Include="EnemyRandomizer\Room.cs" />
     <Compile Include="EnemyRandomizer\RoomCollection.cs" />

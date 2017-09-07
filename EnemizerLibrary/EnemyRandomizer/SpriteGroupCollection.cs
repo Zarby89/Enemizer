@@ -7,6 +7,19 @@ namespace EnemizerLibrary
     public class SpriteGroupCollection
     {
         public List<SpriteGroup> SpriteGroups { get; set; }
+
+        public IEnumerable<SpriteGroup> UsableOverworldSpriteGroups
+        {
+            get
+            {
+                // TODO: what should be the max
+                // let's assume max of 64 because that is where dungeons start
+                // but HM lets you go up to 79....
+                return SpriteGroups
+                    .Where(x => x.GroupId > 0 && x.GroupId < 0x40);
+            }
+        }
+
         public IEnumerable<SpriteGroup> UsableDungeonSpriteGroups
         {
             get
@@ -16,6 +29,7 @@ namespace EnemizerLibrary
                     .Where(x => x.DungeonGroupId > 0 && x.DungeonGroupId < 60);
             }
         }
+
         RomData romData { get; set; }
         Random rand { get; set; }
 
@@ -28,91 +42,56 @@ namespace EnemizerLibrary
 
         public void LoadSpriteGroups()
         {
-            RoomGroupRequirementCollection reqs = new RoomGroupRequirementCollection();
+            OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
+            RoomGroupRequirementCollection dungeonReqs = new RoomGroupRequirementCollection();
 
             for(int i=0;i<144; i++)
             {
                 SpriteGroup sg = new SpriteGroup(romData, i);
 
-                var rGroup = reqs.RoomRequirements.Where(x => x.GroupId == sg.DungeonGroupId);
+                SetupRequiredOverworldGroups(owReqs, sg);
 
-                if(rGroup.Any())
-                {
-                    foreach(var r in rGroup)
-                    {
-                        if(r.Subgroup0 != null)
-                        {
-                            sg.SubGroup0 = (int)r.Subgroup0;
-                            sg.PreserveSubGroup0 = true;
-                        }
-                        if (r.Subgroup1 != null)
-                        {
-                            sg.SubGroup1 = (int)r.Subgroup1;
-                            sg.PreserveSubGroup1 = true;
-                        }
-                        if (r.Subgroup2 != null)
-                        {
-                            sg.SubGroup2 = (int)r.Subgroup2;
-                            sg.PreserveSubGroup2 = true;
-                        }
-                        if (r.Subgroup3 != null)
-                        {
-                            sg.SubGroup3 = (int)r.Subgroup3;
-                            sg.PreserveSubGroup3 = true;
-                        }
-
-                        sg.ForceRoomsToGroup.AddRange(r.Rooms.Except(sg.ForceRoomsToGroup)); // don't add duplicates because that would be silly
-                    }
-                }
-
-                //if (ManualGroups.Any(x => x.GroupId == sg.DungeonGroupId))
-                //{
-                //    var manual = ManualGroups.First(x => x.GroupId == sg.DungeonGroupId);
-                //    sg.SubGroup0 = manual.Subset0;
-                //    sg.SubGroup1 = manual.Subset1;
-                //    sg.SubGroup2 = manual.Subset2;
-                //    sg.SubGroup3 = manual.Subset3;
-                //    sg.PreserveSubGroup0 = sg.PreserveSubGroup1 = sg.PreserveSubGroup2 = sg.PreserveSubGroup3 = true;
-                //    sg.ForceRoomsToGroup.AddRange(manual.ForceRooms);
-                //}
+                SetupRequiredDungeonGroups(dungeonReqs, sg);
 
                 SpriteGroups.Add(sg);
             }
-
-            //SetDefaultPreservationFlags();
         }
 
-        void SetDefaultPreservationFlags()
+        void SetupRequiredOverworldGroups(OverworldGroupRequirementCollection reqs, SpriteGroup sg)
         {
-            // dungeon sprite groups = 60 total. 
-            foreach (var sg in SpriteGroups)
+            var rGroup = reqs.OverworldRequirements.Where(x => x.GroupId == sg.GroupId);
+        }
+
+        void SetupRequiredDungeonGroups(RoomGroupRequirementCollection reqs, SpriteGroup sg)
+        {
+            var rGroup = reqs.RoomRequirements.Where(x => x.GroupId == sg.DungeonGroupId);
+
+            if (rGroup.Any())
             {
-                if (sg.DungeonGroupId < 0 || sg.DungeonGroupId > 60)
+                foreach (var r in rGroup)
                 {
-                    continue;
-                }
+                    if (r.Subgroup0 != null)
+                    {
+                        sg.SubGroup0 = (int)r.Subgroup0;
+                        sg.PreserveSubGroup0 = true;
+                    }
+                    if (r.Subgroup1 != null)
+                    {
+                        sg.SubGroup1 = (int)r.Subgroup1;
+                        sg.PreserveSubGroup1 = true;
+                    }
+                    if (r.Subgroup2 != null)
+                    {
+                        sg.SubGroup2 = (int)r.Subgroup2;
+                        sg.PreserveSubGroup2 = true;
+                    }
+                    if (r.Subgroup3 != null)
+                    {
+                        sg.SubGroup3 = (int)r.Subgroup3;
+                        sg.PreserveSubGroup3 = true;
+                    }
 
-                if (DoNotRandomizeDungeonGroupIds.Contains(sg.DungeonGroupId))
-                {
-                    sg.PreserveSubGroup0 = sg.PreserveSubGroup1 = sg.PreserveSubGroup2 = sg.PreserveSubGroup3 = true;
-                    continue;
-                }
-
-                if (PreserveDungeonSubGroup0GroupIds.Contains(sg.DungeonGroupId))
-                {
-                    sg.PreserveSubGroup0 = true;
-                }
-                if (PreserveDungeonSubGroup1GroupIds.Contains(sg.DungeonGroupId))
-                {
-                    sg.PreserveSubGroup1 = true;
-                }
-                if (PreserveDungeonSubGroup2GroupIds.Contains(sg.DungeonGroupId))
-                {
-                    sg.PreserveSubGroup2 = true;
-                }
-                if (PreserveDungeonSubGroup3GroupIds.Contains(sg.DungeonGroupId))
-                {
-                    sg.PreserveSubGroup3 = true;
+                    sg.ForceRoomsToGroup.AddRange(r.Rooms.Except(sg.ForceRoomsToGroup)); // don't add duplicates because that would be silly
                 }
             }
         }
@@ -230,13 +209,9 @@ namespace EnemizerLibrary
             14 = 71, 73, 76, 80 (change rooms 18, 264, 261, 266)
         */
         
-        ManualGroup[] ManualGroups =
-        {
-            new ManualGroup() { GroupId=14, Subset0=71, Subset1=73, Subset2=76, Subset3=80, ForceRooms=new int[] { 18, 264, 261, 266 } } // 264 is chicken lady house, do we want to force that?
-        };
         // TODO: can probably remove this
-        int[] DoNotRandomizeDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40,
-            9, 11, 12, 20, 21, 22, 26, 28, 32 }; // bosses. need to change to just preserve the relevant sub group
+        //int[] DoNotRandomizeDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40,
+        //    9, 11, 12, 20, 21, 22, 26, 28, 32 }; // bosses. need to change to just preserve the relevant sub group
 
         // keep this
         int[] DoNotUseForDungeonGroupIds = { 1, 5, 7, 13, 14, 15, 18, 23, 24, 34, 40 };
