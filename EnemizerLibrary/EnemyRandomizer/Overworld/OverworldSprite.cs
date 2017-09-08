@@ -12,6 +12,13 @@ namespace EnemizerLibrary
         public byte SpriteId { get; set; }
         public byte SpriteX { get; set; }
         public byte SpriteY { get; set; }
+        public string SpriteName
+        {
+            get
+            {
+                return SpriteConstants.GetSpriteName(SpriteId);
+            }
+        }
 
         RomData romData;
         public OverworldSprite(RomData romData, int SpriteAddress)

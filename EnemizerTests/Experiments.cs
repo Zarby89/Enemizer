@@ -3,6 +3,7 @@ using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 using EnemizerLibrary;
+using Newtonsoft.Json;
 
 namespace EnemizerTests
 {
@@ -53,46 +54,41 @@ namespace EnemizerTests
 
             foreach(var owArea in areas.OverworldAreas)
             {
-                //int offset = owArea.AreaId;
-
-                //if (owArea.AreaId >= 0x40 && owArea.AreaId < 0x80)
-                //{
-                //    offset += 0x40;
-                //}
-                //if (owArea.AreaId >= 0x90 && owArea.AreaId < 0x110)
-                //{
-                //    offset -= 0x50;
-                //}
-
-                //int graphicsBlock = romData[0x07A81 + offset];
-
                 output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})\tGraphics Block: {owArea.GraphicsBlockId} ({owArea.GraphicsBlockAddress.ToString("X4")})");
-
-                //0x07A81 + i // should be pre aga LW
-
-                //0x07AC1 + (i - 0x90) // should be post aga LW
-
-                //0x07B01 + (i - 0x40) // should be pre aga DW
-
-                // 0x07B41 // post aga DW???? doesn't look like it
 
                 foreach (var s in owArea.Sprites)
                 {
                     output.WriteLine($"Address: {s.SpriteAddress.ToString("X6")}\tSpriteId: {s.SpriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(s.SpriteId)}\tX: {s.SpriteX}\tY: {s.SpriteY}\tOverlord: {(s.SpriteId >= 0xF3 ? true : false).ToString()}");
                 }
             }
+        }
 
-            //for (int i = 0; i < 0x120; i++)
-            //{
-            //    var owArea = new OverworldArea(romData, i);
+        [Fact]
+        public void get_list_of_goodies()
+        {
+            var romData = Utilities.LoadRom("rando.sfc");
 
-            //    output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})");
-            //    foreach (var s in owArea.Sprites)
-            //    {
-            //        output.WriteLine($"Address: {s.SpriteAddress.ToString("X6")}\tSpriteId: {s.SpriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(s.SpriteId)}\tX: {s.SpriteX}\tY: {s.SpriteY}\tOverlord: {(s.SpriteId >= 0xF3 ? true : false).ToString()}");
-            //    }
-            //}
+            SpriteGroupCollection sgc = new SpriteGroupCollection(romData, new Random());
+            sgc.LoadSpriteGroups();
 
+            RoomCollection rc = new RoomCollection(romData, new Random());
+            rc.LoadRooms();
+
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData);
+            
+
+            var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }));
+            var roomJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, x.RoomName, x.GraphicsBlockId }));
+            var roomSpritesJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName, y.Address, y.HasAKey, y.IsOverlord }) } }));
+
+            var areaJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, x.AreaName, x.GraphicsBlockId }));
+            var areaSpritesJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName }) } }));
+
+            output.WriteLine(spriteGroupsJson);
+            output.WriteLine(roomJson);
+            output.WriteLine(roomSpritesJson);
+            output.WriteLine(areaJson);
+            output.WriteLine(areaSpritesJson);
         }
 
         [Fact]
