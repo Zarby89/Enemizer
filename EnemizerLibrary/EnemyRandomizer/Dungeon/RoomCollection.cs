@@ -8,12 +8,15 @@ namespace EnemizerLibrary
     public class RoomCollection
     {
         public List<Room> Rooms { get; set; } = new List<Room>();
-        RomData romData { get; set; }
-        Random rand { get; set; }
-        public RoomCollection(RomData romData, Random rand)
+        RomData romData;
+        Random rand;
+        SpriteRequirementCollection spriteRequirementCollection;
+
+        public RoomCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementCollection)
         {
             this.romData = romData;
             this.rand = rand;
+            this.spriteRequirementCollection = spriteRequirementCollection;
         }
 
         public void LoadRooms()
@@ -34,21 +37,7 @@ namespace EnemizerLibrary
         {
             foreach(var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                var possibleSpriteGroups = spriteGroups.UsableDungeonSpriteGroups.ToList();
-
-                if(r.Sprites.Any(x => x.HasAKey))
-                {
-                    GroupSubsetPossibleSpriteCollection possibleSpriteCollection = new GroupSubsetPossibleSpriteCollection();
-
-                    var killableSprites = possibleSpriteCollection.Sprites
-                        .Where(x => SpriteConstants.NonKillable.Contains((byte)x.SpriteId) == false)
-                        .Select(x => x.GroupSubsetId).ToArray();
-
-                    possibleSpriteGroups = possibleSpriteGroups.Where(x => killableSprites.Contains(x.SubGroup0)
-                        || killableSprites.Contains(x.SubGroup1)
-                        || killableSprites.Contains(x.SubGroup2)
-                        || killableSprites.Contains(x.SubGroup3)).ToList();
-                }
+                var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r.Sprites.Any(x => x.HasAKey)).ToList();
 
                 r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
             }

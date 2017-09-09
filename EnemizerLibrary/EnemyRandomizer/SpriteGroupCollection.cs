@@ -30,13 +30,39 @@ namespace EnemizerLibrary
             }
         }
 
+        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(bool needsKillable = false)
+        {
+            if(needsKillable == false)
+            {
+                return UsableDungeonSpriteGroups;
+            }
+
+            //var usableGroups = spriteRequirementsCollection.SpriteRequirements.Where(x => x.GroupId)
+            var killableGroupIds = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.GroupId).ToList();
+            var killableSub0Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup0).ToList();
+            var killableSub1Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup1).ToList();
+            var killableSub2Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup2).ToList();
+            var killableSub3Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup3).ToList();
+
+            return UsableDungeonSpriteGroups
+                .Where(x => killableGroupIds.Contains((byte)x.GroupId)
+                            || killableSub0Ids.Contains((byte)x.SubGroup0)
+                            || killableSub1Ids.Contains((byte)x.SubGroup1)
+                            || killableSub2Ids.Contains((byte)x.SubGroup2)
+                            || killableSub3Ids.Contains((byte)x.SubGroup3)
+                            );
+        }
+
         RomData romData { get; set; }
         Random rand { get; set; }
+        SpriteRequirementCollection spriteRequirementsCollection { get; set; }
 
-        public SpriteGroupCollection(RomData romData, Random rand)
+        public SpriteGroupCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementsCollection)
         {
             this.romData = romData;
             this.rand = rand;
+            this.spriteRequirementsCollection = spriteRequirementsCollection;
+
             SpriteGroups = new List<SpriteGroup>();
         }
 
@@ -47,7 +73,7 @@ namespace EnemizerLibrary
 
             for(int i=0;i<144; i++)
             {
-                SpriteGroup sg = new SpriteGroup(romData, i);
+                SpriteGroup sg = new SpriteGroup(romData, spriteRequirementsCollection, i);
 
                 SetupRequiredOverworldGroups(owReqs, sg);
 

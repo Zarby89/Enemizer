@@ -2,7 +2,7 @@
 
 namespace EnemizerLibrary
 {
-
+    /*
     public class GroupSubsetPossibleSpriteCollection
     {
         public List<GroupSubsetPossibleSprite> Sprites { get; set; }
@@ -180,4 +180,5 @@ namespace EnemizerLibrary
             //subset_gfx_sprites[93] = { };//sanctuary mantle
         }
     }
+    //*/
 }

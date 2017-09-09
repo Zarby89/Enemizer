@@ -40,11 +40,12 @@ namespace RomViewer
             if(ofd.ShowDialog() == true)
             {
                 RomData romData = LoadRom(ofd.FileName);
+                var spriteRequirements = new SpriteRequirementCollection();
 
-                SpriteGroupCollection sgc = new SpriteGroupCollection(romData, new Random());
+                SpriteGroupCollection sgc = new SpriteGroupCollection(romData, new Random(), spriteRequirements);
                 sgc.LoadSpriteGroups();
 
-                RoomCollection rc = new RoomCollection(romData, new Random());
+                RoomCollection rc = new RoomCollection(romData, new Random(), spriteRequirements);
                 rc.LoadRooms();
 
                 var vm = new VM();

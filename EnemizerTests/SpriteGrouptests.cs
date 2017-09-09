@@ -22,8 +22,9 @@ namespace EnemizerTests
             Random rand = new Random(0);
 
             RomData romData = Utilities.LoadRom("rando.sfc");
+            var spriteRequirements = new SpriteRequirementCollection();
 
-            SpriteGroupCollection sgc = new SpriteGroupCollection(romData, rand);
+            SpriteGroupCollection sgc = new SpriteGroupCollection(romData, rand, spriteRequirements);
             sgc.LoadSpriteGroups();
             sgc.RandomizeGroups();
             sgc.UpdateRom();

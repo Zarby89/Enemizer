@@ -47,7 +47,7 @@ namespace EnemizerLibrary
 
             byte0 = romData[address];
             byte1 = romData[address + 1];
-            SpriteId = romData[address + 2];
+            spriteId = romData[address + 2];
 
             IsOverlord = (byte1 & SpriteConstants.OverlordMask) != 0;
 

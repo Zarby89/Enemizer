@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace EnemizerLibrary
@@ -25,6 +26,13 @@ namespace EnemizerLibrary
         }
         public int RoomId { get; set; }
         public int GraphicsBlockId { get; set; }
+        public bool IsShutterRoom
+        {
+            get
+            {
+                return RoomIdConstants.NeedKillable_doors.Contains(RoomId);
+            }
+        }
 
         public List<DungeonSprite> Sprites { get; set; } = new List<DungeonSprite>();
         //public List<RoomRequirement> Requirements { get; set; }

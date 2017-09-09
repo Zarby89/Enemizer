@@ -78,10 +78,15 @@ namespace EnemizerLibrary
 
             create_subset_gfx();
 
+            var spriteRequirements = new SpriteRequirementCollection();
+
+            var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
+            spriteGroupCollection.LoadSpriteGroups();
+
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
-                DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand);
+                DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
                 der.RandomizeDungeonEnemies();
 
                 //create_rooms_sprites();
@@ -98,6 +103,10 @@ namespace EnemizerLibrary
                 //WIP
                 OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, optionFlags.EnemiesAbsorbable);
             }
+
+            // TODO: should this be here?
+            spriteGroupCollection.UpdateRom();
+
 
             if (optionFlags.RandomizeEnemyHealthRange)
             {

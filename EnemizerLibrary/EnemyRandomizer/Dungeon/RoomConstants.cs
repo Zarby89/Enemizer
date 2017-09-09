@@ -618,35 +618,49 @@ namespace EnemizerLibrary
         {
             R11_PalaceofDarkness_TurtleRoom,
             R27_PalaceofDarkness_Mimics_MovingWallRoom,
-            R36_TurtleRock_DoubleHokku_Bokku_BigchestRoom,
-            R40_SwampPalace_EntranceRoom,
-            R46_IcePalace_CompassRoom,
-            R49_TowerofHera_HardhatBeetlesRoom,
-            R62_IcePalace_StalfosKnights_ConveyorHellway,
-            R68_ThievesTown_BigChestRoom,
             R75_PalaceofDarkness_Warps_SouthMimicsRoom,
+
+            R36_TurtleRock_DoubleHokku_Bokku_BigchestRoom,
+            R182_TurtleRock_ChainChompsRoom,
+
+            R40_SwampPalace_EntranceRoom,
+
+            R46_IcePalace_CompassRoom,
+            R62_IcePalace_StalfosKnights_ConveyorHellway,
+            R110_IcePalace_PengatorsRoom,
+
+            R49_TowerofHera_HardhatBeetlesRoom,
+            R135_TowerofHera_TileRoom,
+
+            R68_ThievesTown_BigChestRoom,
+
             R83_DesertPalace_Popos2_BeamosHellwayRoom,
+            R117_DesertPalace_BigKeyChestRoom,
+            R133_DesertPalace_EastEntranceRoom,
+
             R93_GanonsTower_Gauntlet1_2_3,
             R107_GanonsTower_MimicsRooms,
             R109_GanonsTower_Gauntlet4_5,
-            R110_IcePalace_PengatorsRoom,
-            R113_HyruleCastle_BoomerangChestRoom,
-            R117_DesertPalace_BigKeyChestRoom,
             R123_GanonsTower,
             R125_GanonsTower_Winder_WarpMazeRoom,
-            R133_DesertPalace_EastEntranceRoom,
-            R135_TowerofHera_TileRoom,
             R141_GanonsTower_Tile_TorchPuzzleRoom,
             R165_GanonsTower_WizzrobesRooms,
+
+            R113_HyruleCastle_BoomerangChestRoom,
+
             R168_EasternPalace_StalfosSpawnRoom,
-            R176_AgahnimsTower_CircleofPots,
-            R178_MiseryMire_SlugRoom,
-            R182_TurtleRock_ChainChompsRoom,
-            R210_MiseryMire_Mire02_WizzrobesRoom,
             R216_EasternPalace_PreArmosKnightsRoom,
+
+            R176_AgahnimsTower_CircleofPots,
             R224_AgahnimsTower_EntranceRoom,
+
+            R178_MiseryMire_SlugRoom,
+            R210_MiseryMire_Mire02_WizzrobesRoom,
+
             R239_Cave_CrystalSwitch_5ChestsRoom,
+
             R268_MimicCave,
+
             R291_MiniMoldormCave
         };
         //room 113 is not in needkillable is it in key_sprite?

@@ -22,8 +22,10 @@ namespace EnemizerTests
             RomData romData = Utilities.LoadRom("rando.sfc");
 
             Random rand = new Random(0);
+            var requirements = new SpriteRequirementCollection();
+            var spriteGroups = new SpriteGroupCollection(romData, rand, requirements);
 
-            DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(romData, rand);
+            DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(romData, rand, spriteGroups, requirements);
             der.RandomizeDungeonEnemies();
 
             foreach(var sg in der.spriteGroupCollection.SpriteGroups)

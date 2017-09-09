@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EnemizerLibrary
 {
@@ -30,11 +31,21 @@ namespace EnemizerLibrary
 
         public List<int> ForceRoomsToGroup { get; set; }
 
-        RomData romData;
+        public IEnumerable<int> PossibleEnemySprites
+        {
+            get
+            {
+                return GetPossibleEnemySprites();
+            }
+        }
 
-        public SpriteGroup(RomData romData, int groupId)
+        RomData romData;
+        SpriteRequirementCollection spriteRequirementsCollection;
+
+        public SpriteGroup(RomData romData, SpriteRequirementCollection spriteRequirementsCollection, int groupId)
         {
             this.romData = romData;
+            this.spriteRequirementsCollection = spriteRequirementsCollection;
 
             this.GroupId = groupId;
 
@@ -51,8 +62,8 @@ namespace EnemizerLibrary
             this.ForceRoomsToGroup = new List<int>();
         }
 
-        public SpriteGroup(RomData romData, int groupId, params int[] forcedRooms)
-            :this(romData, groupId)
+        public SpriteGroup(RomData romData, SpriteRequirementCollection spriteRequirementsCollection, int groupId, params int[] forcedRooms)
+            :this(romData, spriteRequirementsCollection, groupId)
         {
             this.ForceRoomsToGroup.AddRange(forcedRooms);
         }
@@ -63,6 +74,21 @@ namespace EnemizerLibrary
             romData[SpriteGroupBaseAddress + (GroupId * 4) + 1] = (byte)SubGroup1;
             romData[SpriteGroupBaseAddress + (GroupId * 4) + 2] = (byte)SubGroup2;
             romData[SpriteGroupBaseAddress + (GroupId * 4) + 3] = (byte)SubGroup3;
+        }
+
+        IEnumerable<int> GetPossibleEnemySprites()
+        {
+            // TODO: add more logic to this
+            // needs to check for two subgroups, etc.
+            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => 
+                                                                    x.GroupId.Contains((byte)this.GroupId)
+                                                                    || x.SubGroup0.Contains((byte)this.SubGroup0)
+                                                                    || x.SubGroup1.Contains((byte)this.SubGroup1)
+                                                                    || x.SubGroup2.Contains((byte)this.SubGroup2)
+                                                                    || x.SubGroup3.Contains((byte)this.SubGroup3)
+                                                                );
+
+            return possibleEnemySprites.Select(x => x.SpriteId);
         }
     }
 }
