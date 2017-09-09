@@ -81,7 +81,8 @@ namespace EnemizerLibrary
                 spritesToUpdate.Where(x => x.HasAKey == false).ToList()
                     .ForEach(x => x.SpriteId = (byte)possibleSprites[rand.Next(possibleSprites.Length)]);
 
-                spritesToUpdate.Where(x => x.HasAKey).ToList()
+                // TODO: something like hacky for shutters.
+                spritesToUpdate.Where(x => x.HasAKey || room.IsShutterRoom).ToList()
                     .ForEach(x => x.SpriteId = (byte)killableSprites[rand.Next(killableSprites.Count)]);
             }
         }

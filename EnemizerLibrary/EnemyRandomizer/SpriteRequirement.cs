@@ -195,7 +195,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonSprite).SetKillable().AddSubgroup2(12));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonHatchlingsSprite).SetKillable().AddSubgroup2(12)); // TODO: double check
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonHatchlingsSprite).SetNeverUse().AddSubgroup2(12));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HinoxSprite).SetKillable().AddSubgroup0(22));
 
@@ -308,7 +308,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GeldmanSprite).SetKillable().AddSubgroup2(18));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RabbitSprite).SetKillable().AddSubgroup3(17));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RabbitSprite).AddSubgroup3(17));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PopoSprite).SetKillable().AddSubgroup1(44));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Popo2Sprite).SetKillable().AddSubgroup1(44));
@@ -404,8 +404,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairyCircleSprite).SetNeverUse().AddSubgroup3(82, 83)); // lag city
 
             // TODO: double check groups/how this sprite works. Eyegores loaded in Escape showed up completely wrong
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable().AddSubgroup1(44).AddSubgroup2(46)); // one is mimic, one is eyegore...
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite).AddSubgroup1(44).AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable()/*.AddSubgroup1(44)*/.AddSubgroup2(46)); // one is mimic, one is eyegore...
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite)/*.AddSubgroup1(44)*/.AddSubgroup2(46));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YellowStalfosSprite)); // TODO: add
 
