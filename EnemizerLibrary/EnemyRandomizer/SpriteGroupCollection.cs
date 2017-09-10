@@ -24,15 +24,22 @@ namespace EnemizerLibrary
         {
             get
             {
-                return SpriteGroups
-                    .Where(x => DoNotUseForDungeonGroupIds.Contains(x.DungeonGroupId) == false)
-                    .Where(x => x.DungeonGroupId > 0 && x.DungeonGroupId < 60);
+                return DungeonSpriteGroups;
+                    //.Where(x => DoNotUseForDungeonGroupIds.Contains(x.DungeonGroupId) == false);
             }
         }
 
-        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(bool needsKillable = false)
+        IEnumerable<SpriteGroup> DungeonSpriteGroups
         {
-            if(needsKillable == false)
+            get
+            {
+                return SpriteGroups.Where(x => x.DungeonGroupId > 0 && x.DungeonGroupId < 60);
+            }
+        }
+
+        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
+        {
+            if (needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0))
             {
                 return UsableDungeonSpriteGroups;
             }
@@ -44,13 +51,27 @@ namespace EnemizerLibrary
             var killableSub2Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup2).ToList();
             var killableSub3Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup3).ToList();
 
+            // TODO: gotta be a better way to do this
+            var doNotUpdateGroupIds = doNotUpdateSprites.SelectMany(x => x.GroupId).ToList();
+            var doNotUpdateSub0Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup0).ToList();
+            var doNotUpdateSub1Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup1).ToList();
+            var doNotUpdateSub2Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup2).ToList();
+            var doNotUpdateSub3Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup3).ToList();
+
             return UsableDungeonSpriteGroups
-                .Where(x => killableGroupIds.Contains((byte)x.GroupId)
+                .Where(x => doNotUpdateGroupIds.Count == 0 || doNotUpdateGroupIds.Contains((byte)x.GroupId))
+                .Where(x => doNotUpdateSub0Ids.Count == 0 || doNotUpdateSub0Ids.Contains((byte)x.SubGroup0))
+                .Where(x => doNotUpdateSub1Ids.Count == 0 || doNotUpdateSub1Ids.Contains((byte)x.SubGroup1))
+                .Where(x => doNotUpdateSub2Ids.Count == 0 || doNotUpdateSub2Ids.Contains((byte)x.SubGroup2))
+                .Where(x => doNotUpdateSub3Ids.Count == 0 || doNotUpdateSub3Ids.Contains((byte)x.SubGroup3))
+                .Where(x => needsKillable == false 
+                            || killableGroupIds.Contains((byte)x.GroupId)
                             || killableSub0Ids.Contains((byte)x.SubGroup0)
                             || killableSub1Ids.Contains((byte)x.SubGroup1)
                             || killableSub2Ids.Contains((byte)x.SubGroup2)
                             || killableSub3Ids.Contains((byte)x.SubGroup3)
-                            );
+                            )
+                ;
         }
 
         RomData romData { get; set; }
@@ -68,58 +89,240 @@ namespace EnemizerLibrary
 
         public void LoadSpriteGroups()
         {
-            OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
-            RoomGroupRequirementCollection dungeonReqs = new RoomGroupRequirementCollection();
-
             for(int i=0;i<144; i++)
             {
                 SpriteGroup sg = new SpriteGroup(romData, spriteRequirementsCollection, i);
 
-                SetupRequiredOverworldGroups(owReqs, sg);
-
-                SetupRequiredDungeonGroups(dungeonReqs, sg);
-
                 SpriteGroups.Add(sg);
             }
+
+            SetupRequiredOverworldGroups();
+
+            SetupRequiredDungeonGroups();
         }
 
-        void SetupRequiredOverworldGroups(OverworldGroupRequirementCollection reqs, SpriteGroup sg)
+        void SetupRequiredOverworldGroups()
         {
-            var rGroup = reqs.OverworldRequirements.Where(x => x.GroupId == sg.GroupId);
+            OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
+            //var rGroup = reqs.OverworldRequirements.Where(x => x.GroupId == sg.GroupId);
         }
 
-        void SetupRequiredDungeonGroups(RoomGroupRequirementCollection reqs, SpriteGroup sg)
+        void SetupRequiredDungeonGroups()
         {
-            var rGroup = reqs.RoomRequirements.Where(x => x.GroupId == sg.DungeonGroupId);
+            RoomGroupRequirementCollection dungeonReqs = new RoomGroupRequirementCollection();
 
-            if (rGroup.Any())
+            var rGroup = dungeonReqs.RoomRequirements.Where(x => x.GroupId != null);
+            foreach(var g in rGroup)
             {
-                foreach (var r in rGroup)
-                {
-                    if (r.Subgroup0 != null)
-                    {
-                        sg.SubGroup0 = (int)r.Subgroup0;
-                        sg.PreserveSubGroup0 = true;
+                DungeonSpriteGroups.Where(x => g.GroupId == x.DungeonGroupId).ToList()
+                    .ForEach((x) => {
+                        if(g.Subgroup0 != null)
+                        {
+                            x.SubGroup0 = (int)g.Subgroup0;
+                            x.PreserveSubGroup0 = true;
+                        }
+                        if (g.Subgroup1 != null)
+                        {
+                            x.SubGroup1 = (int)g.Subgroup1;
+                            x.PreserveSubGroup1 = true;
+                        }
+                        if (g.Subgroup2 != null)
+                        {
+                            x.SubGroup2 = (int)g.Subgroup2;
+                            x.PreserveSubGroup2 = true;
+                        }
+                        if (g.Subgroup3 != null)
+                        {
+                            x.SubGroup3 = (int)g.Subgroup3;
+                            x.PreserveSubGroup3 = true;
+                        }
                     }
-                    if (r.Subgroup1 != null)
-                    {
-                        sg.SubGroup1 = (int)r.Subgroup1;
-                        sg.PreserveSubGroup1 = true;
-                    }
-                    if (r.Subgroup2 != null)
-                    {
-                        sg.SubGroup2 = (int)r.Subgroup2;
-                        sg.PreserveSubGroup2 = true;
-                    }
-                    if (r.Subgroup3 != null)
-                    {
-                        sg.SubGroup3 = (int)r.Subgroup3;
-                        sg.PreserveSubGroup3 = true;
-                    }
+                );
+            }
 
-                    sg.ForceRoomsToGroup.AddRange(r.Rooms.Except(sg.ForceRoomsToGroup)); // don't add duplicates because that would be silly
+            var duplicateRooms = dungeonReqs.RoomRequirements.Where(x => x.GroupId == null)
+                .SelectMany(dr => dr.Rooms, (dr, r) => new RoomReq() { RoomId = r, Sub0 = dr.Subgroup0, Sub1 = dr.Subgroup1, Sub2 = dr.Subgroup2, Sub3 = dr.Subgroup3 })
+                .ToList();
+
+            var roomsDict = new Dictionary<int, RoomReq>();
+
+            foreach(var d in duplicateRooms)
+            {
+                if(!roomsDict.ContainsKey(d.RoomId))
+                {
+                    roomsDict[d.RoomId] = d;
+                }
+
+                if (d.Sub0 != null)
+                {
+                    roomsDict[d.RoomId].Sub0 = d.Sub0;
+                }
+                if (d.Sub1 != null)
+                {
+                    roomsDict[d.RoomId].Sub1 = d.Sub1;
+                }
+                if (d.Sub2 != null)
+                {
+                    roomsDict[d.RoomId].Sub2 = d.Sub2;
+                }
+                if (d.Sub3 != null)
+                {
+                    roomsDict[d.RoomId].Sub3 = d.Sub3;
                 }
             }
+
+            var rooms = roomsDict.Values.ToList();
+
+            foreach(var r in rooms)
+            {
+                // UGGGGGGGGGGGGGGGGGGGGGGG
+                // TODO: check if we already saved one for another room and skip this room
+                if(DungeonSpriteGroups
+                    .Where(x => r.Sub0 == null || (x.SubGroup0 == r.Sub0 && x.PreserveSubGroup0 == true))
+                    .Where(x => r.Sub1 == null || (x.SubGroup1 == r.Sub1 && x.PreserveSubGroup1 == true))
+                    .Where(x => r.Sub2 == null || (x.SubGroup2 == r.Sub2 && x.PreserveSubGroup2 == true))
+                    .Where(x => r.Sub3 == null || (x.SubGroup3 == r.Sub3 && x.PreserveSubGroup3 == true))
+                    .Any())
+                {
+                    // skip this room because we already have a subgroup that will work
+                    continue;
+                }
+
+
+                var possibleSubs = DungeonSpriteGroups.Where(y => (y.PreserveSubGroup0 == false)
+                                                                    || y.PreserveSubGroup1 == false
+                                                                    || y.PreserveSubGroup2 == false
+                                                                    || y.PreserveSubGroup3 == false)
+                                                    .ToList();
+
+                if(r.Sub0 != null)
+                {
+                    possibleSubs = possibleSubs.Where(x => x.PreserveSubGroup0 == false).ToList();
+                }
+                if (r.Sub1 != null)
+                {
+                    possibleSubs = possibleSubs.Where(x => x.PreserveSubGroup1 == false).ToList();
+                }
+                if (r.Sub2 != null)
+                {
+                    possibleSubs = possibleSubs.Where(x => x.PreserveSubGroup2 == false).ToList();
+                }
+                if (r.Sub3 != null)
+                {
+                    possibleSubs = possibleSubs.Where(x => x.PreserveSubGroup3 == false).ToList();
+                }
+
+                var updateSub = possibleSubs[rand.Next(possibleSubs.Count)];
+
+                if (r.Sub0 != null)
+                {
+                    updateSub.SubGroup0 = (int)r.Sub0;
+                    updateSub.PreserveSubGroup0 = true;
+                }
+                if (r.Sub1 != null)
+                {
+                    updateSub.SubGroup1 = (int)r.Sub1;
+                    updateSub.PreserveSubGroup1 = true;
+                }
+                if (r.Sub2 != null)
+                {
+                    updateSub.SubGroup2 = (int)r.Sub2;
+                    updateSub.PreserveSubGroup2 = true;
+                }
+                if (r.Sub3 != null)
+                {
+                    updateSub.SubGroup3 = (int)r.Sub3;
+                    updateSub.PreserveSubGroup3 = true;
+                }
+            }
+
+            //var rSubs = dungeonReqs.RoomRequirements.Where(x => x.GroupId == null)
+            //    //.Where(x => x.Subgroup0 == null || !DungeonSpriteGroups.Select(y => y.SubGroup0).ToList().Contains((int)x.Subgroup0))
+            //    //.Where(x => x.Subgroup1 == null || !DungeonSpriteGroups.Select(y => y.SubGroup1).ToList().Contains((int)x.Subgroup1))
+            //    //.Where(x => x.Subgroup2 == null || !DungeonSpriteGroups.Select(y => y.SubGroup2).ToList().Contains((int)x.Subgroup2))
+            //    //.Where(x => x.Subgroup3 == null || !DungeonSpriteGroups.Select(y => y.SubGroup3).ToList().Contains((int)x.Subgroup3))
+            //    .ToList();
+            
+            //if(rSubs.Any())
+            //{
+            //    // missing required sub groups
+            //    var sub0 = rSubs.Where(x => x.Subgroup0.HasValue).Select(x => x.Subgroup0).Distinct().ToList();
+            //    var sub1 = rSubs.Where(x => x.Subgroup1.HasValue).Select(x => x.Subgroup1).Distinct().ToList();
+            //    var sub2 = rSubs.Where(x => x.Subgroup2.HasValue).Select(x => x.Subgroup2).Distinct().ToList();
+            //    var sub3 = rSubs.Where(x => x.Subgroup3.HasValue).Select(x => x.Subgroup3).Distinct().ToList();
+
+            //    sub0.ForEach((x) =>
+            //    {
+            //        var possibleGroups = DungeonSpriteGroups.Where(y => y.PreserveSubGroup0 == false).ToList();
+            //        var selectedGroup = possibleGroups[rand.Next(possibleGroups.Count)];
+            //        selectedGroup.SubGroup0 = (int)x;
+            //        selectedGroup.PreserveSubGroup0 = true;
+            //    });
+
+            //    sub1.ForEach((x) =>
+            //    {
+            //        var possibleGroups = DungeonSpriteGroups.Where(y => y.PreserveSubGroup1 == false).ToList();
+            //        var selectedGroup = possibleGroups[rand.Next(possibleGroups.Count)];
+            //        selectedGroup.SubGroup1 = (int)x;
+            //        selectedGroup.PreserveSubGroup1 = true;
+            //    });
+
+            //    sub2.ForEach((x) =>
+            //    {
+            //        var possibleGroups = DungeonSpriteGroups.Where(y => y.PreserveSubGroup2 == false).ToList();
+            //        var selectedGroup = possibleGroups[rand.Next(possibleGroups.Count)];
+            //        selectedGroup.SubGroup2 = (int)x;
+            //        selectedGroup.PreserveSubGroup2 = true;
+            //    });
+
+            //    sub3.ForEach((x) =>
+            //    {
+            //        var possibleGroups = DungeonSpriteGroups.Where(y => y.PreserveSubGroup3 == false).ToList();
+            //        var selectedGroup = possibleGroups[rand.Next(possibleGroups.Count)];
+            //        selectedGroup.SubGroup3 = (int)x;
+            //        selectedGroup.PreserveSubGroup3 = true;
+            //    });
+            //}
+
+            //// complex groups
+            //// TODO: this is super ugly. simplify it
+            //List<bool[]> combinations = new List<bool[]>();
+            //for(int i=0; i<2; i++)
+            //{
+            //    for(int j=0; j<2; j++)
+            //    {
+            //        for(int k=0; k<2; k++)
+            //        {
+            //            for(int l=0; l<2; l++)
+            //            {
+            //                combinations.Add(new bool[] { (i == 0), (j == 0), (k == 0), (l == 0) });
+            //            }
+            //        }
+            //    }
+            //}
+
+            //foreach(var c in combinations)
+            //{
+            //    var reqs = dungeonReqs.RoomRequirements
+            //                    .Where(x => (c[0] == false && x.Subgroup0 == null) || (c[0] && x.Subgroup0 != null))
+            //                    .Where(x => (c[1] == false && x.Subgroup1 == null) || (c[1] && x.Subgroup1 != null))
+            //                    .Where(x => (c[2] == false && x.Subgroup2 == null) || (c[2] && x.Subgroup2 != null))
+            //                    .Where(x => (c[3] == false && x.Subgroup3 == null) || (c[3] && x.Subgroup3 != null))
+            //                    .ToList();
+            //    if(reqs.Any())
+            //    {
+
+            //    }
+            //}
+        }
+
+        class RoomReq
+        {
+            public int RoomId { get; set; }
+            public int? Sub0 { get; set; }
+            public int? Sub1 { get; set; }
+            public int? Sub2 { get; set; }
+            public int? Sub3 { get; set; }
         }
 
         public void UpdateRom()
@@ -155,7 +358,7 @@ namespace EnemizerLibrary
                     sg.SubGroup3 = GetRandomSubgroup3();
                 }
 
-                FixPairedGroups(sg);
+                //FixPairedGroups(sg);
             }
         }
 

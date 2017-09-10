@@ -11,16 +11,16 @@ namespace EnemizerLibrary
         public byte byte0 { get; set; }
         public byte byte1 { get; set; }
 
-        public byte spriteId;
-        public byte SpriteId
+        byte spriteId;
+        public int SpriteId
         {
             get
             {
-                return spriteId;
+                return spriteId + (IsOverlord ? 0x100 : 0);
             }
             set
             {
-                spriteId = value;
+                spriteId = (byte)value;
                 byte0 = (byte)(byte0 & SpriteConstants.SpriteSubtypeByte0RemoveMask);
                 byte1 = (byte)(byte1 & SpriteConstants.OverlordRemoveMask);
                 IsOverlord = false;
@@ -49,12 +49,25 @@ namespace EnemizerLibrary
             byte1 = romData[address + 1];
             spriteId = romData[address + 2];
 
-            IsOverlord = (byte1 & SpriteConstants.OverlordMask) != 0;
+            // overlords should be 00111 (keys are 11000)
+            IsOverlord = (byte1 & SpriteConstants.OverlordMask) == SpriteConstants.OverlordMask
+                        && (byte0 & SpriteConstants.SpriteSubtypeByte0Mask) != SpriteConstants.SpriteSubtypeByte0Mask;
+            if(!IsOverlord && spriteId != SpriteConstants.KeySprite)
+            {
+                // fix our guards
+                RemoveParams();
+            }
 
             if (romData[address + 3] != 0xFF && (romData[address + 5] == SpriteConstants.KeySprite || romData[address + 5] == SpriteConstants.BigKeySprite))
             {
                 HasAKey = true;
             }
+        }
+
+        void RemoveParams()
+        {
+            byte0 = (byte)(byte0 & SpriteConstants.SpriteSubtypeByte0RemoveMask);
+            byte1 = (byte)(byte1 & SpriteConstants.OverlordRemoveMask);
         }
 
         public void UpdateRom()

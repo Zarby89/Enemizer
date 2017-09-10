@@ -53,18 +53,20 @@ namespace EnemizerLibrary
 
             RoomRequirements.Add(new RoomGroupRequirement(5, 75, 77, 74, 90,
                 RoomIdConstants.R243_House_OldWoman_SahasrahlasWifeMaybe,
-                RoomIdConstants.R255_Cave0xFF,
                 RoomIdConstants.R265_WitchHut,
                 RoomIdConstants.R270_Cave0x10E,
                 RoomIdConstants.R271_Shop0x10F,
                 RoomIdConstants.R272_Shop0x110,
                 RoomIdConstants.R273_ArcherGame,
-                RoomIdConstants.R274_CaveShop0x112,
                 RoomIdConstants.R282_Mutant,
                 RoomIdConstants.R284_BombShop,
-                RoomIdConstants.R287_Shop0x11F,
                 RoomIdConstants.R289_SmithHouse,
                 RoomIdConstants.R290_FortuneTellers));
+            // TODO: these probably can be combined with above safely but leave for now
+            RoomRequirements.Add(new RoomGroupRequirement(null, 75, null, null, null,
+                RoomIdConstants.R255_Cave0xFF,
+                RoomIdConstants.R274_CaveShop0x112,
+                RoomIdConstants.R287_Shop0x11F));
 
             RoomRequirements.Add(new RoomGroupRequirement(7, 75, 77, 57, 54,
                 RoomIdConstants.R8_Cave_HealingFairy,
@@ -102,13 +104,15 @@ namespace EnemizerLibrary
             RoomRequirements.Add(new RoomGroupRequirement(34, 33, 65, 69, 51, 
                 RoomIdConstants.R0_Ganon));
 
-            RoomRequirements.Add(new RoomGroupRequirement(40, 14, 30 /* TODO: ??? nothing uses this ??? */, 74, 80,
+            RoomRequirements.Add(new RoomGroupRequirement(40, 14, null, 74, 80,
                 RoomIdConstants.R225_Cave_LostWoodsHP,
                 RoomIdConstants.R256_ShopInLostWoods0x100,
-                RoomIdConstants.R291_MiniMoldormCave,
-                RoomIdConstants.R292_UnknownCave_BonkCave,
                 RoomIdConstants.R293_Cave0x125,
+                RoomIdConstants.R292_UnknownCave_BonkCave,
                 RoomIdConstants.R294_CheckerBoardCave));
+            // this has to be here because of the damn shutter door. hard code one enemy group to make sure it doesn't go in with the above
+            RoomRequirements.Add(new RoomGroupRequirement(null, 14, 30, null, null,
+                RoomIdConstants.R291_MiniMoldormCave));
 
             RoomRequirements.Add(new RoomGroupRequirement(23, 64, null, null, 63, 
                 RoomIdConstants.R164_TurtleRock_Trinexx));
@@ -139,6 +143,9 @@ namespace EnemizerLibrary
                 RoomIdConstants.R158_IcePalace_BigChestRoom, //));
             //RoomRequirements.Add(new RoomGroupRequirement(41, null, null, 38, null, // R190 is in this originally
                 RoomIdConstants.R190_IcePalace_BlockPuzzleRoom));
+            // Freezor
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 38, 82,
+                RoomIdConstants.R126_IcePalace_HiddenChest_BombableFloorRoom));
 
             RoomRequirements.Add(new RoomGroupRequirement(12, null, null, 48, null,
                 RoomIdConstants.R7_TowerofHera_Moldorm,

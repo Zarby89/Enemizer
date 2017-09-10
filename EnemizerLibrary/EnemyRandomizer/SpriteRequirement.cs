@@ -9,6 +9,13 @@ namespace EnemizerLibrary
     public class SpriteRequirement
     {
         public int SpriteId { get; set; }
+        public string SpriteName
+        {
+            get
+            {
+                return SpriteConstants.GetSpriteName(SpriteId);
+            }
+        }
         public bool Overlord { get; set; }
         public bool Boss { get; set; }
         public bool DoNotRandomize { get; set; }
@@ -129,6 +136,32 @@ namespace EnemizerLibrary
             SpecialGlitched = true;
             return this;
         }
+
+        public bool SpriteInGroup(SpriteGroup spriteGroup)
+        {
+            if(this.GroupId != null && this.GroupId.Count > 0 && this.GroupId.Contains((byte)spriteGroup.DungeonGroupId) == false)
+            {
+                return false;
+            }
+            if(this.SubGroup0 != null && this.SubGroup0.Count > 0 && this.SubGroup0.Contains((byte)spriteGroup.SubGroup0) == false)
+            {
+                return false;
+            }
+            if (this.SubGroup1 != null && this.SubGroup1.Count > 0 && this.SubGroup1.Contains((byte)spriteGroup.SubGroup1) == false)
+            {
+                return false;
+            }
+            if (this.SubGroup2 != null && this.SubGroup2.Count > 0 && this.SubGroup2.Contains((byte)spriteGroup.SubGroup2) == false)
+            {
+                return false;
+            }
+            if (this.SubGroup3 != null && this.SubGroup3.Count > 0 && this.SubGroup3.Contains((byte)spriteGroup.SubGroup3) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 
     public class SpriteRequirementCollection
@@ -140,6 +173,14 @@ namespace EnemizerLibrary
             get
             {
                 return SpriteRequirements.Where(x => x.DoNotRandomize == false);
+            }
+        }
+
+        public List<SpriteRequirement> DoNotRandomizeSprites
+        {
+            get
+            {
+                return SpriteRequirements.Where(x => x.DoNotRandomize).ToList();
             }
         }
 
@@ -391,7 +432,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AgahnimEnergyBallSprite).SetNeverUse());
 
             // are these killable???
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HyuSprite).AddSubgroup0(31)); // TODO: check this because it only shows up as stalfos head in game??
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloatingStalfosHeadSprite).AddSubgroup0(31)); // TODO: check this because it only shows up as stalfos head in game??
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigSpikeTrapSprite).AddSubgroup3(82, 83));
 
@@ -500,11 +541,29 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WhirlpoolSprite).SetNeverUse().SetDoNotRandomize());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+
+            // TODO: What to do????????
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup0(75));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup0(75)
+            //                                                .AddSubgroup1(77)
+            //                                                .AddSubgroup3(80));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup1(77));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup0(79));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup0(14));
+            // TODO: This game....... need to add room requirements to these too...
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite) // TODO: figure out which are needed
                                                             .AddSubgroup0(75, 79, 14, 21)
                                                             .AddSubgroup1(77)
                                                             .AddSubgroup2(74)
                                                             .AddSubgroup3(80));
+            SpriteRequirements.Where(x => x.SpriteId == SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).ToList().ForEach((x) => { x.NeverUse = true; x.NPC = true; });
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+            //                                                .AddSubgroup0(21));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DrunkInTheInnSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(79).AddSubgroup1(77).AddSubgroup2(74).AddSubgroup3(80)); // TODO: figure out which are needed
 
@@ -522,9 +581,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ThiefSprite).AddSubgroup0(14, 21));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedusaSprite).SetDoNotRandomize().AddSubgroup3(14)); // TODO: this is only for graveyard fake stones to spawn poe
-
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FourWayFireballSpittersSprite).SetIsObject().SetNeverUse().AddSubgroup3(82)); // TODO: really?
+            // These are loaded into BG as objects
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedusaSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FourWayFireballSpittersSprite).SetIsObject().SetNeverUse());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HokkuBokkuSprite).AddSubgroup2(39));
 
@@ -577,9 +636,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MagicShopDude_HisItemsIncludingTheMagicPowderSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(75).AddSubgroup3(90));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartContainerSprite).SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartPieceSprite).SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushesSprite).SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartContainerSprite).SetNeverUse().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartPieceSprite).SetNeverUse().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushesSprite).SetNeverUse().SetDoNotRandomize());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CaneOfSomariaPlatformSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(39)); // TODO: verify
 

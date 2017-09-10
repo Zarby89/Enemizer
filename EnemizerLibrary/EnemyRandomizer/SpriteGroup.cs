@@ -80,13 +80,8 @@ namespace EnemizerLibrary
         {
             // TODO: add more logic to this
             // needs to check for two subgroups, etc.
-            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => 
-                                                                    x.GroupId.Contains((byte)this.GroupId)
-                                                                    || x.SubGroup0.Contains((byte)this.SubGroup0)
-                                                                    || x.SubGroup1.Contains((byte)this.SubGroup1)
-                                                                    || x.SubGroup2.Contains((byte)this.SubGroup2)
-                                                                    || x.SubGroup3.Contains((byte)this.SubGroup3)
-                                                                );
+
+            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this));
 
             return possibleEnemySprites.Select(x => x.SpriteId);
         }

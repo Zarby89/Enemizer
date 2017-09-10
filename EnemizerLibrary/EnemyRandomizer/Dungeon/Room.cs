@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace EnemizerLibrary
 {
@@ -116,5 +117,40 @@ namespace EnemizerLibrary
                 i += 3; // sprites are 3 byte chunks
             }
         }
+
+        public void RandomizeSprites(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        {
+            var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
+
+            var possibleSprites = spriteGroup.PossibleEnemySprites.ToArray();
+
+            if (possibleSprites.Length > 0)
+            {
+                var spritesToUpdate = this.Sprites.Where(x => spriteRequirementCollection.RandomizableSprites.Select(y => y.SpriteId).Contains(x.SpriteId))
+                    .ToList();
+
+
+                // TODO: something like hacky for shutters.
+                var keySprites = spritesToUpdate.Where(x => x.HasAKey || this.IsShutterRoom).ToList();
+
+                var killableSprites = spriteRequirementCollection.KillableSprites.Where(x => possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
+
+                if (keySprites.Count > 0 && killableSprites.Count == 0)
+                {
+                    throw new Exception("Key in room without any killable enemies");
+                }
+
+                Debug.Assert(possibleSprites.Contains(SpriteConstants.EmptySprite) == false);
+                Debug.Assert(killableSprites.Contains(SpriteConstants.EmptySprite) == false);
+
+                spritesToUpdate.Where(x => x.HasAKey == false).ToList()
+                    .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+
+                // TODO: something like hacky for shutters.
+                spritesToUpdate.Where(x => x.HasAKey || this.IsShutterRoom).ToList()
+                    .ForEach(x => x.SpriteId = killableSprites[rand.Next(killableSprites.Count)]);
+            }
+        }
+
     }
 }

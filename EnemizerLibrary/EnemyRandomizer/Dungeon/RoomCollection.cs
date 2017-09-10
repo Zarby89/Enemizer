@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace EnemizerLibrary
@@ -37,7 +38,10 @@ namespace EnemizerLibrary
         {
             foreach(var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r.Sprites.Any(x => x.HasAKey)).ToList();
+                List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection.DoNotRandomizeSprites.Where(x => r.Sprites.Select(y => y.SpriteId).ToList().Contains(x.SpriteId)).ToList();
+                var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r.Sprites.Any(x => x.HasAKey || r.IsShutterRoom), doNotUpdateSprites).ToList();
+
+                //Debug.Assert(possibleSpriteGroups.Count > 0);
 
                 r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
             }
