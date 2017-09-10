@@ -52,7 +52,7 @@ namespace EnemizerLibrary
             // overlords should be 00111 (keys are 11000)
             IsOverlord = (byte1 & SpriteConstants.OverlordMask) == SpriteConstants.OverlordMask
                         && (byte0 & SpriteConstants.SpriteSubtypeByte0Mask) != SpriteConstants.SpriteSubtypeByte0Mask;
-            if(!IsOverlord && spriteId != SpriteConstants.KeySprite)
+            if(!IsOverlord && spriteId != SpriteConstants.KeySprite && spriteId != SpriteConstants.WallmasterSprite) // wall masters spawn out if you remove params
             {
                 // fix our guards
                 RemoveParams();

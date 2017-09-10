@@ -32,6 +32,8 @@ namespace EnemizerLibrary
         public byte? Parameters { get; set; }
         public bool SpecialGlitched { get; set; }
 
+        List<int> ExcludedRooms = new List<int>();
+
 
         public SpriteRequirement(int SpriteId)
         {
@@ -137,6 +139,12 @@ namespace EnemizerLibrary
             return this;
         }
 
+        public SpriteRequirement AddExcludedRooms(params int[] roomIds)
+        {
+            this.ExcludedRooms.AddRange(roomIds);
+            return this;
+        }
+
         public bool SpriteInGroup(SpriteGroup spriteGroup)
         {
             if(this.GroupId != null && this.GroupId.Count > 0 && this.GroupId.Contains((byte)spriteGroup.DungeonGroupId) == false)
@@ -161,6 +169,11 @@ namespace EnemizerLibrary
             }
 
             return true;
+        }
+
+        public bool CanSpawnInRoom(Room room)
+        {
+            return ExcludedRooms.Contains(room.RoomId) == false;
         }
     }
 
@@ -260,7 +273,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowInWall_MaybeSprite).SetDoNotRandomize().SetNeverUse());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StatueSprite).SetDoNotRandomize().SetIsObject().AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StatueSprite).SetDoNotRandomize().SetIsObject().AddSubgroup3(82, 83)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WeathervaneSprite).SetDoNotRandomize().SetNeverUse());
 
@@ -368,7 +382,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WalkingZoraSprite).SetKillable().AddSubgroup2(12).AddSubgroup3(68));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DesertPalaceBarriersSprite).SetDoNotRandomize().AddSubgroup2(18));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DesertPalaceBarriersSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup2(18));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CrabSprite).SetKillable().AddSubgroup2(12));
 
@@ -383,7 +397,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RollerSprite).AddSubgroup2(39));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_HorizontalMovingSprite).AddSubgroup2(39));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BeamosSprite).AddSubgroup1(44));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BeamosSprite).AddSubgroup1(44)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MasterSwordSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(55).AddSubgroup3(54));
 
@@ -434,7 +449,8 @@ namespace EnemizerLibrary
             // are these killable???
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloatingStalfosHeadSprite).AddSubgroup0(31)); // TODO: check this because it only shows up as stalfos head in game??
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigSpikeTrapSprite).AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigSpikeTrapSprite).AddSubgroup3(82, 83)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_ClockwiseSprite).AddSubgroup0(31));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_CounterClockwiseSprite).AddSubgroup0(31));
@@ -457,7 +473,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MothulaSprite).SetBoss().AddSubgroup2(56));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MothulasBeamSprite).SetNeverUse().AddSubgroup2(56));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SpikeTrapSprite).AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SpikeTrapSprite).AddSubgroup3(82, 83)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms)); // TODO: maybe we can have them? probably better not to
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GibdoSprite).SetKillable().AddSubgroup2(35));
 
@@ -474,7 +491,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HelmasaurKingSprite).SetBoss().AddSubgroup2(58).AddSubgroup3(62));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BumperSprite).SetIsObject().SetDoNotRandomize().AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BumperSprite).SetNeverUse().SetIsObject().SetDoNotRandomize().AddSubgroup3(82, 83));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwimmersSprite).SetNeverUse().SetDoNotRandomize()); // TODO: add? what is this?
 
@@ -514,7 +531,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PikitSprite).SetKillable().AddSubgroup3(27));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MaidenSprite).SetNPC().SetDoNotRandomize()); // TODO: where is this?
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AppleSprite).SetDoNotRandomize());
+
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AppleSprite).SetDoNotRandomize().SetAbsorbable());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LostOldManSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(70).AddSubgroup1(73).AddSubgroup2(28)); // TODO: figure out which is actually needed
 
@@ -606,7 +624,9 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: find
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()); // TODO: find
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()
+                .SetNeverUse() // TODO: maybe this is a good idea? can't get the right gfx to load because it's automatic and uses OW grahics in OAM0(1)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms)); // TODO: find
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DiggingGameProprietorSprite).SetNPC().SetDoNotRandomize().AddSubgroup1(42));
 
@@ -692,5 +712,60 @@ namespace EnemizerLibrary
         //{
         //    SpriteRequirements.Add(new SpriteRequirement(SpriteId, Overlord, GroupId, SubGroup0, SubGroup1, SubGroup2, SubGroup3, Parameters, Special));
         //}
+
+        int[] DontUseImmovableSpritesRooms =
+        {
+            RoomIdConstants.R11_PalaceofDarkness_TurtleRoom, // TODO: test, probably the single turtle in the L section
+            RoomIdConstants.R22_SwampPalace_SwimmingTreadmill,
+            RoomIdConstants.R25_PalaceofDarkness_DarkMaze, // TODO: test, top mob will probably block maze
+            RoomIdConstants.R30_IcePalace_BombFloor_BariRoom, // TODO: test
+            RoomIdConstants.R38_SwampPalace_StatueRoom,
+            RoomIdConstants.R39_TowerofHera_BigChest, // TODO: test, top left dodongo
+            RoomIdConstants.R54_SwampPalace_BigChestRoom, // TODO: check bottom left waterbug
+            RoomIdConstants.R66_HyruleCastle_6RopesRoom, // only if two stack, but why push it
+            RoomIdConstants.R70_SwampPalace_CompassChestRoom,
+            RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom, // TODO: test
+            RoomIdConstants.R78_IcePalace_Bomb_JumpRoom,
+            RoomIdConstants.R85_CastleSecretEntrance_UncleDeathRoom, // TODO: test
+            RoomIdConstants.R87_SkullWoods_BigKeyRoom,
+            RoomIdConstants.R95_IcePalace_HiddenChest_SpikeFloorRoom, // TODO: would this cause problem in OHKO since you can't hookshot if middle mob is beamos,etc?
+            RoomIdConstants.R101_ThievesTown_EastAtticRoom, // only if both bottom rats
+            RoomIdConstants.R106_PalaceofDarkness_RupeeRoom, // only if two turtles in row
+            RoomIdConstants.R116_DesertPalace_MapChestRoom, // only if both antlions
+            RoomIdConstants.R118_SwampPalace_WaterDrainRoom, // would need 3 mobs to be impassible to possibly softlock (what are the odds?)
+            RoomIdConstants.R125_GanonsTower_Winder_WarpMazeRoom, // would need a lot of things exactly right, but better safe than sorry
+            RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom, // TODO: what happens to beamos over a pit?
+            RoomIdConstants.R131_DesertPalace_WestEntranceRoom, // TODO: test
+            RoomIdConstants.R132_DesertPalace_MainEntranceRoom, // TODO: test
+            RoomIdConstants.R133_DesertPalace_EastEntranceRoom, // TODO: test (only a problem for ER?)
+            RoomIdConstants.R140_GanonsTower_EastandWestDownstairs_BigChestRoom, // TODO: test (probably safe?)
+            RoomIdConstants.R141_GanonsTower_Tile_TorchPuzzleRoom, // TODO: test
+            RoomIdConstants.R146_MiseryMire_DarkBombWall_SwitchesRoom, // TODO: test
+            RoomIdConstants.R149_GanonsTower_FinalCollapsingBridgeRoom, // TODO: test, probably safe because of conveyor belts
+            RoomIdConstants.R152_MiseryMire_EntranceRoom,
+            RoomIdConstants.R155_GanonsTower_ManySpikes_WarpMazeRoom, // TODO: test, middle spike covers warp, are we randomizing those?
+            RoomIdConstants.R156_GanonsTower_InvisibleFloorMazeRoom, // TODO: test
+            RoomIdConstants.R157_GanonsTower_CompassChest_InvisibleFloorRoom, // TODO: test
+            RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom, // TODO: test
+            RoomIdConstants.R170_EasternPalace_MapChestRoom, // TODO: test
+            RoomIdConstants.R179_MiseryMire_SpikeKeyChestRoom, // TODO: test lower stalfos blocking door
+            RoomIdConstants.R186_EasternPalace_DarkAntifairy_KeyPotRoom,
+            RoomIdConstants.R187_ThievesTown_Hellway, // TODO: test, should be ok but double check
+            RoomIdConstants.R188_ThievesTown_ConveyorToilet, // TODO: test
+            RoomIdConstants.R198_TurtleRock0xC6, // technically a door is blocked off, but who would ever go there?
+            RoomIdConstants.R203_ThievesTown_NorthWestEntranceRoom,
+            RoomIdConstants.R208_AgahnimsTower_DarkMaze, // TODO: test
+            RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom,
+            RoomIdConstants.R213_TurtleRock_LaserKeyRoom,
+            RoomIdConstants.R216_EasternPalace_PreArmosKnightsRoom,
+            RoomIdConstants.R220_ThievesTown_SouthEastEntranceRoom, // TODO: test
+            RoomIdConstants.R223_Cave_BackwardsDeathMountainTopFloor,
+            RoomIdConstants.R228_Cave_LostOldManFinalCave, // who would go that way?
+            RoomIdConstants.R231_Cave0xE7,
+            RoomIdConstants.R238_Cave_SpiralCave,
+            RoomIdConstants.R249_Cave0xF9, // TODO: test, probably can get past
+            RoomIdConstants.R253_Cave0xFD,
+            RoomIdConstants.R268_MimicCave,
+        };
     }
 }

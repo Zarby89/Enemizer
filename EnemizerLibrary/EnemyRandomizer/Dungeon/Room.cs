@@ -122,7 +122,7 @@ namespace EnemizerLibrary
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
 
-            var possibleSprites = spriteGroup.PossibleEnemySprites.ToArray();
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).ToArray();
 
             if (possibleSprites.Length > 0)
             {

@@ -31,13 +31,6 @@ namespace EnemizerLibrary
 
         public List<int> ForceRoomsToGroup { get; set; }
 
-        public IEnumerable<int> PossibleEnemySprites
-        {
-            get
-            {
-                return GetPossibleEnemySprites();
-            }
-        }
 
         RomData romData;
         SpriteRequirementCollection spriteRequirementsCollection;
@@ -76,12 +69,12 @@ namespace EnemizerLibrary
             romData[SpriteGroupBaseAddress + (GroupId * 4) + 3] = (byte)SubGroup3;
         }
 
-        IEnumerable<int> GetPossibleEnemySprites()
+        public IEnumerable<int> GetPossibleEnemySprites(Room room)
         {
             // TODO: add more logic to this
             // needs to check for two subgroups, etc.
 
-            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this));
+            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
 
             return possibleEnemySprites.Select(x => x.SpriteId);
         }
