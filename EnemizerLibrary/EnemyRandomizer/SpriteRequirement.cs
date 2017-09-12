@@ -33,6 +33,8 @@ namespace EnemizerLibrary
         public bool SpecialGlitched { get; set; }
 
         List<int> ExcludedRooms = new List<int>();
+        List<int> DontRandomizeRooms = new List<int>();
+        List<int> SpawnableRooms = new List<int>();
 
 
         public SpriteRequirement(int SpriteId)
@@ -145,6 +147,18 @@ namespace EnemizerLibrary
             return this;
         }
 
+        public SpriteRequirement AddDontRandomizeRooms(params int[] roomIds)
+        {
+            this.DontRandomizeRooms.AddRange(roomIds);
+            return this;
+        }
+
+        public SpriteRequirement AddSpawnableRooms(params int[] roomIds)
+        {
+            this.SpawnableRooms.AddRange(roomIds);
+            return this;
+        }
+
         public bool SpriteInGroup(SpriteGroup spriteGroup)
         {
             if(this.GroupId != null && this.GroupId.Count > 0 && this.GroupId.Contains((byte)spriteGroup.DungeonGroupId) == false)
@@ -173,7 +187,13 @@ namespace EnemizerLibrary
 
         public bool CanSpawnInRoom(Room room)
         {
-            return ExcludedRooms.Contains(room.RoomId) == false;
+            return ExcludedRooms.Contains(room.RoomId) == false
+                && (SpawnableRooms.Count == 0 || SpawnableRooms.Contains(room.RoomId));
+        }
+
+        public bool CanBeRandomizedInRoom(Room room)
+        {
+            return !DoNotRandomize && (DontRandomizeRooms.Count == 0 || DontRandomizeRooms.Contains(room.RoomId));
         }
     }
 
@@ -452,15 +472,21 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigSpikeTrapSprite).AddSubgroup3(82, 83)
                 .AddExcludedRooms(DontUseImmovableSpritesRooms));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_ClockwiseSprite).AddSubgroup0(31));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_CounterClockwiseSprite).AddSubgroup0(31));
+            // TODO: any other rooms?
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_ClockwiseSprite).AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R181_TurtleRock_DarkMaze,
+                                        RoomIdConstants.R150_GanonsTower_Torches1Room));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GuruguruBar_CounterClockwiseSprite).AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R181_TurtleRock_DarkMaze,
+                                        RoomIdConstants.R150_GanonsTower_Torches1Room));
+
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WinderSprite).AddSubgroup0(31));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WaterTektiteSprite).SetKillable().AddSubgroup2(34));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairyCircleSprite).SetNeverUse().AddSubgroup3(82, 83)); // lag city
 
-            // TODO: double check groups/how this sprite works. Eyegores loaded in Escape showed up completely wrong
+            // TODO: mimic rooms are hard coded (4 rooms) rest are always eyegore
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable()/*.AddSubgroup1(44)*/.AddSubgroup2(46)); // one is mimic, one is eyegore...
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite)/*.AddSubgroup1(44)*/.AddSubgroup2(46));
 
@@ -561,27 +587,37 @@ namespace EnemizerLibrary
 
 
             // TODO: What to do????????
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup0(75));
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup0(75)
-            //                                                .AddSubgroup1(77)
-            //                                                .AddSubgroup3(80));
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup1(77));
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup0(79));
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup0(14));
-            // TODO: This game....... need to add room requirements to these too...
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite) // TODO: figure out which are needed
-                                                            .AddSubgroup0(75, 79, 14, 21)
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(75)
+                                                            .AddSpawnableRooms(RoomIdConstants.R255_Cave0xFF,
+                                                                                RoomIdConstants.R274_CaveShop0x112,
+                                                                                RoomIdConstants.R287_Shop0x11F));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(75)
                                                             .AddSubgroup1(77)
+                                                            .AddSubgroup3(90)
+                                                            .AddSpawnableRooms(RoomIdConstants.R271_Shop0x10F,
+                                                                                RoomIdConstants.R272_Shop0x110));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup1(77)
+                                                            .AddSpawnableRooms(RoomIdConstants.R272_Shop0x110));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(79)
+                                                            .AddSpawnableRooms(RoomIdConstants.R280_Shop0x118));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(14)
+                                                            .AddSpawnableRooms(RoomIdConstants.R256_ShopInLostWoods0x100,
+                                                                                RoomIdConstants.R291_MiniMoldormCave,
+                                                                                RoomIdConstants.R292_UnknownCave_BonkCave));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(14)
                                                             .AddSubgroup2(74)
-                                                            .AddSubgroup3(80));
-            SpriteRequirements.Where(x => x.SpriteId == SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).ToList().ForEach((x) => { x.NeverUse = true; x.NPC = true; });
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
-            //                                                .AddSubgroup0(21));
+                                                            .AddSubgroup3(80)
+                                                            .AddSpawnableRooms(RoomIdConstants.R293_Cave0x125)); // TODO: where is this???????
+            //SpriteRequirements.Where(x => x.SpriteId == SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).ToList().ForEach((x) => { x.NeverUse = true; x.NPC = true; });
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SalesmanChestgameGuy300RupeeGiverGuyChestGameThiefSprite).SetNPC().SetDoNotRandomize() // TODO: figure out which are needed
+                                                            .AddSubgroup0(21)
+                                                            .AddSpawnableRooms(RoomIdConstants.R286_HypeCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DrunkInTheInnSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(79).AddSubgroup1(77).AddSubgroup2(74).AddSubgroup3(80)); // TODO: figure out which are needed
 

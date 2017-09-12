@@ -136,6 +136,10 @@ namespace EnemizerLibrary
                             x.SubGroup3 = (int)g.Subgroup3;
                             x.PreserveSubGroup3 = true;
                         }
+                        if (g.GroupId != null)
+                        {
+                            x.ForceRoomsToGroup.AddRange(g.Rooms);
+                        }
                     }
                 );
             }

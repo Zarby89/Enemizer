@@ -36,9 +36,15 @@ namespace EnemizerLibrary
 
         public void RandomizeRoomSpriteGroups(SpriteGroupCollection spriteGroups)
         {
-            foreach(var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
+            foreach (var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection.DoNotRandomizeSprites.Where(x => r.Sprites.Select(y => y.SpriteId).ToList().Contains(x.SpriteId)).ToList();
+                List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection
+                                                            .DoNotRandomizeSprites
+                                                            .Where(x => x.CanSpawnInRoom(r)
+                                                                        && r.Sprites.Select(y => y.SpriteId).ToList().Contains(x.SpriteId)
+                                                                )
+                                                            .ToList();
+
                 var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r.Sprites.Any(x => x.HasAKey || r.IsShutterRoom), doNotUpdateSprites).ToList();
 
                 //Debug.Assert(possibleSpriteGroups.Count > 0);

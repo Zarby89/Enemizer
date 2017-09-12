@@ -71,7 +71,7 @@ namespace EnemizerLibrary
 
         public IEnumerable<int> GetPossibleEnemySprites(Room room)
         {
-            // TODO: add more logic to this
+            // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
 
             var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));

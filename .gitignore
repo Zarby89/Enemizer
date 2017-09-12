@@ -64,3 +64,4 @@ bld/
 /*.sql
 /Need To Test Seeds
 *.bak
+/alttp - VT_*.txt
