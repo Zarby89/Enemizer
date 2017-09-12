@@ -10,36 +10,52 @@ namespace EnemizerLibrary
     {
         RomData romData;
         Random rand;
+        SpriteGroupCollection spriteGroupCollection;
+        SpriteRequirementCollection spriteRequirementCollection;
+        OverworldAreaCollection areas;
 
-        public OverworldEnemyRandomizer(RomData romData, Random rand)
+        public OverworldEnemyRandomizer(RomData romData, Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             this.romData = romData;
             this.rand = rand;
+            this.spriteGroupCollection = spriteGroupCollection;
+            this.spriteRequirementCollection = spriteRequirementCollection;
+
+            areas = new OverworldAreaCollection(romData, rand, spriteRequirementCollection);
         }
 
         public void RandomizeOverworldEnemies()
         {
-            // TODO: replace this with something less hard coded because we need to move squirrels and stuff in MS glade
-            romData[0x04CF4F] = 0x10; //move bird from tree stump in lost woods
+            // TODO: replace this with something less hard coded because we also need to move squirrels and stuff in MS glade and probably Zora
+            romData[0x04CF4F] = 0x10; //move bird from tree stump in lost woods // TODO: did this cause a crash?
 
-            // Build list of Overworld Sprite Groups
-            // Randomize them
-            // Save groups
+            GenerateGroups();
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData);
-            foreach(var area in areas.OverworldAreas)
+            RandomizeAreas();
+
+            WriteRom();
+        }
+
+        private void GenerateGroups()
+        {
+            spriteGroupCollection.RandomizeOverworldGroups();
+        }
+
+        private void RandomizeAreas()
+        {
+            areas.RandomizeAreaSpriteGroups(spriteGroupCollection);
+
+            foreach (var area in areas.OverworldAreas)
             {
                 // pick random sprite group
                 //area.GraphicsBlockId = ??;
-
-                // randomize sprites for area
-                foreach(var s in area.Sprites)
-                {
-                    //s.SpriteId = ??;
-                }
+                area.RandomizeSprites(rand, spriteGroupCollection, spriteRequirementCollection);
             }
+        }
 
-            areas.SaveAreas();
+        private void WriteRom()
+        {
+            areas.UpdateRom();
         }
     }
 }

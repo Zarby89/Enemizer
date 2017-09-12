@@ -38,7 +38,7 @@ namespace EnemizerLibrary
 
         private void GenerateGroups()
         {
-            spriteGroupCollection.RandomizeGroups();
+            spriteGroupCollection.RandomizeDungeonGroups();
         }
 
         private void RandomizeRooms()

@@ -9,7 +9,7 @@ namespace EnemizerLibrary
     public class OverworldSprite
     {
         public int SpriteAddress { get; set; }
-        public byte SpriteId { get; set; }
+        public int SpriteId { get; set; }
         public byte SpriteX { get; set; }
         public byte SpriteY { get; set; }
         public string SpriteName
@@ -36,7 +36,7 @@ namespace EnemizerLibrary
 
             //romData[SpriteAddress] = SpriteY;
             //romData[SpriteAddress] = SpriteX;
-            romData[SpriteAddress + 2] = SpriteId;
+            romData[SpriteAddress + 2] = (byte)SpriteId;
         }
     }
 }

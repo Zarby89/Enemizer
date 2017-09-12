@@ -26,7 +26,7 @@ namespace EnemizerTests
 
             SpriteGroupCollection sgc = new SpriteGroupCollection(romData, rand, spriteRequirements);
             sgc.LoadSpriteGroups();
-            sgc.RandomizeGroups();
+            sgc.RandomizeDungeonGroups();
             sgc.UpdateRom();
 
             foreach(var sg in sgc.SpriteGroups)

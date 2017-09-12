@@ -50,7 +50,7 @@ namespace EnemizerTests
         {
             var romData = Utilities.LoadRom("rando.sfc");
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData);
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
 
             foreach(var owArea in areas.OverworldAreas)
             {
@@ -75,7 +75,7 @@ namespace EnemizerTests
             RoomCollection rc = new RoomCollection(romData, new Random(), spriteRequirements);
             rc.LoadRooms();
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData);
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
             
 
             var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }));

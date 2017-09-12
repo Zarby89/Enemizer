@@ -97,11 +97,13 @@ namespace EnemizerLibrary
             //random sprite overworld
             if (optionFlags.RandomizeEnemies)
             {
-                create_sprite_overworld_group();
-                patch_sprite_group_ow();
-                create_overworld_sprites();
+                //create_sprite_overworld_group();
+                //patch_sprite_group_ow();
+                //create_overworld_sprites();
                 //WIP
-                OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, optionFlags.EnemiesAbsorbable);
+                //OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, optionFlags.EnemiesAbsorbable);
+                OverworldEnemyRandomizer oer = new OverworldEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
+                oer.RandomizeOverworldEnemies();
             }
 
             // TODO: should this be here?
