@@ -435,7 +435,7 @@ namespace EnemizerLibrary
                     itemPointer[0] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 0];
                     itemPointer[1] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 1];
                     int itemaddress = BitConverter.ToInt32(itemPointer, 0);
-                    int addr = snestopc(itemaddress);
+                    int addr = Utilities.SnesToPCAddress(itemaddress);
 
                     // TODO: unused?
                     byte[] exportPots = new byte[roomPots.Count * 3];

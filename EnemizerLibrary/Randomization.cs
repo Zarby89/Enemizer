@@ -88,25 +88,15 @@ namespace EnemizerLibrary
             {
                 DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
                 der.RandomizeDungeonEnemies();
-
-                //create_rooms_sprites();
-                //DungeonSpriteRandomizer dsr = new DungeonSpriteRandomizer(this.ROM_DATA, this.rand);
-                //dsr.RandomizeDungeonSprites(optionFlags.EnemiesAbsorbable, this.subset_gfx_sprites);
             }
 
             //random sprite overworld
             if (optionFlags.RandomizeEnemies)
             {
-                //create_sprite_overworld_group();
-                //patch_sprite_group_ow();
-                //create_overworld_sprites();
-                //WIP
-                //OverworldSpriteRandomizer.RandomizeOverworldSprite(this.rand, this.ROM_DATA, this.overworld_sprites, this.random_sprite_group_ow, this.subset_gfx_sprites, optionFlags.EnemiesAbsorbable);
                 OverworldEnemyRandomizer oer = new OverworldEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
                 oer.RandomizeOverworldEnemies();
             }
 
-            // TODO: should this be here?
             spriteGroupCollection.UpdateRom();
 
 
@@ -119,16 +109,12 @@ namespace EnemizerLibrary
             {
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
-            //if (((flags[2]) == 0)) { Set_Sprites_ZeroHP(); } // flags[2] is optionFlags.RandomizeEnemyDamage
-
-
 
 
             if (optionFlags.RandomizeBosses)
             {
                 BossRandomizer br = new BossRandomizer(rand, optionFlags, spoilerfile);
                 br.RandomizeRom(this.ROM_DATA);
-                //Randomize_Bosses(optionFlags.BossMadness);
             }
             
             if(optionFlags.RandomizePots)
@@ -158,7 +144,8 @@ namespace EnemizerLibrary
             rand = new Random(seed);
             if(optionFlags.ShuffleMusic)
             {
-                shuffle_music();
+                // TODO: disable this for now because it crashes stuff sometimes
+                //shuffle_music();
             }
 
             if(optionFlags.SetBlackoutMode)
@@ -317,55 +304,6 @@ namespace EnemizerLibrary
             };
         }
 
-        public void create_sprite_overworld_group()
-        {
-            for (int i = 0; i < 43; i++)
-            {
-                random_sprite_group_ow[i] = fully_randomize_that_group(); //group from 105 to 124 are empty
-            }
-            //Creations of the guards group :
-            random_sprite_group_ow[0] = new byte[] { 72, get_guard_subset_1(), 19, SpriteConstants.sprite_subset_3[rand.Next(SpriteConstants.sprite_subset_3.Length)] }; //Do not randomize that group (Ending thing?)
-            random_sprite_group_ow[1] = new byte[] { 70, get_guard_subset_1(), 19, 29 };
-            random_sprite_group_ow[2] = new byte[] {72,73,19,29 };
-            random_sprite_group_ow[3][3] = 14;
-            random_sprite_group_ow[4][2] = 12;
-            random_sprite_group_ow[6] = new byte[] {79,73,74,80 };
-            random_sprite_group_ow[7][2] = 74;
-            random_sprite_group_ow[8][2] = 18; //death montain tablet
-            random_sprite_group_ow[9][2] = 18; //desert tablet and rocks
-            random_sprite_group_ow[10] = new byte[] {0,73,0,17 };
-            random_sprite_group_ow[14] = new byte[] { 93, 44, 12, 68 };
-            random_sprite_group_ow[15] = new byte[] {0,0,78,0 };
-            random_sprite_group_ow[16][2] = 18;
-            random_sprite_group_ow[16][3] = 16;
-            random_sprite_group_ow[21] = new byte[] {21,13,23,21 }; 
-            random_sprite_group_ow[22] = new byte[] {22,13,24,25 };
-            random_sprite_group_ow[27] = new byte[] {75,42,92,21 };
-
-            random_sprite_group_ow[12] = new byte[] { 0, 0, 55, 54};
-
-        }
-        //
-
-        public void patch_sprite_group_ow()
-        {
-            for (int i = 0; i < 43; i++)
-            {
-                if (random_sprite_group_ow[i].Length != 0)
-                {
-                    
-                    ROM_DATA[0x05B97 + (i * 4)] = random_sprite_group_ow[i][0];
-                    ROM_DATA[0x05B97 + (i * 4) + 1] = random_sprite_group_ow[i][1];
-                    ROM_DATA[0x05B97 + (i * 4) + 2] = random_sprite_group_ow[i][2];
-                    ROM_DATA[0x05B97 + (i * 4) + 3] = random_sprite_group_ow[i][3];
-
-                }
-            }
-        }
-
-        // TODO: unused?
-        byte[][] dungeons_palettes = new byte[14][];
-
         public void Randomize_Dungeons_Palettes()
         {
             for (int i = 0; i < 20; i++)
@@ -432,8 +370,6 @@ namespace EnemizerLibrary
             }*/
 
         }
-
-
 
         public void randomize_wall(int dungeon)
         {
@@ -573,8 +509,6 @@ namespace EnemizerLibrary
 
 
         }
-
-
 
         public void Randomize_Sprites_Palettes()
         {
@@ -978,7 +912,6 @@ namespace EnemizerLibrary
             }
         }
     
-
         public void Set_Sprites_ZeroHP()
         {
             for (int j = 0; j < 0xF3; j++)
@@ -1003,113 +936,61 @@ namespace EnemizerLibrary
         }
 
 
-
-        public int snestopc(int addr)
-        {
-            int temp = (addr & 0x7FFF) + ((addr / 2) & 0xFF8000);
-            return (temp);
-        }
-
-        //Convert PC Address to Snes Address
-        public int pctosnes(int addr)
-        {
-            byte[] b = BitConverter.GetBytes(addr);
-            b[2] = (byte)(b[2] * 2);
-            if (b[1] >= 0x80)
-                b[2] += 1;
-            else
-                b[1] += 0x80;
-
-            return BitConverter.ToInt32(b, 0);
-        }
-
-
-        int[][] overworld_sprites = new int[208][];
-        // TODO: unused?
-        int[] removed_sprites = { 0x04CF51, };
-        // TODO: unused?
-        int[] water_sprites = { 0x04D005, 0x04D18E, 0x04D227, 0x04D22A, 0x04D236, 0x04D245, 0x04D24B, 0x04D24E, 0x04D26A, 0x04D281, 0x04D28A, 0x04D2B0, 0x04CBF7, 0x04CC76, 0x04CC79, 0x04CC86, 0x04CDE6, 0x04CDE9, 0x04CDF5, 0x04CDF8, 0x04CDFE, 0x04CE01, 0x04CE50, 0x04CE5C, 0x04CE6E, 0x04CE8D, 0x04CE90, 0x04CE8D, 0x04CE90, 0x04CED0, };
-        // TODO: unused?
-        int[] water_rooms = { 0x00000F, 0x00002E, 0x000035, 0x000037, 0x00003B, 0x00003F, 0x00004F, 0x000056, 0x000057, 0x000070, 0x000075, 0x000076, 0x000077, 0x00007F, };
-  
-
-
-        //ROM_DATA[0x0271E2 + (i * 2)] = ((byte)pctosnes(0x120090 + (i* 14)));
-        //ROM_DATA[0x0271E2 + (i * 2) + 1] = ((byte)(pctosnes((0x120090 + (i* 14))) >> 8));
         byte[][] shell_pointers = new byte[13][];
-        /*int snes_shell_pointer_7 = 0;
-        int snes_shell_pointer_200 = 0;
-        int snes_shell_pointer_41 = 0; //USELESS
-        int snes_shell_pointer_51 = 0;
-        int snes_shell_pointer_90 = 0;
-        int snes_shell_pointer_144 = 0;
-        int snes_shell_pointer_172 = 0;
-        int snes_shell_pointer_6 = 0;
-        int snes_shell_pointer_222 = 0;
-        int snes_shell_pointer_164 = 0;
-        int snes_shell_pointer_22 = 0;
-        int snes_shell_pointer_108 = 0;
-        int snes_shell_pointer_77 = 0;*/
+
         public void patch_bosses()
         {
             //0x0122000 bosses rooms tiles : 
             int pos = 0;
-            shell_pointers[0] = pctosnesbytes(0x122000 + pos);
-            shell_pointers[2] = pctosnesbytes(0x122000 + pos); //Skull woods empty pointers
+            shell_pointers[0] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
+            shell_pointers[2] = Utilities.PCAddressToSnesByteArray(0x122000 + pos); //Skull woods empty pointers
             write_rom_data(0x0122000 + pos, DungeonConstants.room_7_shell);
             pos += DungeonConstants.room_7_shell.Length;
 
-            shell_pointers[1] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[1] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_200_shell);
             pos += DungeonConstants.room_200_shell.Length;
 
 
-            shell_pointers[3] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[3] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_51_shell);
             pos += DungeonConstants.room_51_shell.Length;
 
-            shell_pointers[4] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[4] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_90_shell);
             pos += DungeonConstants.room_90_shell.Length;
 
-            shell_pointers[5] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[5] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_144_shell);
             pos += DungeonConstants.room_144_shell.Length;
 
-            shell_pointers[6] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[6] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_172_blind_room_shell);
             pos += DungeonConstants.room_172_blind_room_shell.Length;
 
-            shell_pointers[7] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[7] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_6_shell);
             pos += DungeonConstants.room_6_shell.Length;
 
-            shell_pointers[8] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[8] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_222_shell);
             pos += DungeonConstants.room_222_shell.Length;
 
-            shell_pointers[9] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[9] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_164_shell);
             pos += DungeonConstants.room_164_shell.Length;
 
-            shell_pointers[10] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[10] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_28_shell);
             pos += DungeonConstants.room_28_shell.Length;
 
-            shell_pointers[11] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[11] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_108_shell);
             pos += DungeonConstants.room_108_shell.Length;
 
-            shell_pointers[12] = pctosnesbytes(0x122000 + pos);
+            shell_pointers[12] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
             write_rom_data(0x0122000 + pos, DungeonConstants.room_77_shell);
             pos += DungeonConstants.room_77_shell.Length;
-        }
-
-        public byte[] pctosnesbytes(int pos)
-        {
-            int addr = pctosnes(pos);
-
-            return new byte[] { (byte)(addr >> 16), ((byte)(addr >> 8)), ((byte)addr) };
         }
 
 

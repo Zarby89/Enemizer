@@ -615,8 +615,8 @@ namespace EnemizerLibrary
             A02A_HauntedGrove,
             A068_DiggingGame_DW,
             A06A_HauntedGrove_DW,
-            A080_MasterSwordGlade_UnderBridge,
-            A081_ZorasDomain,
+            //A080_MasterSwordGlade_UnderBridge,
+            //A081_ZorasDomain,
             A082_Unknown_0x82, A083_Unknown_0x83, A084_Unknown_0x84, A085_Unknown_0x85, A086_Unknown_0x86, A087_Unknown_0x87, A088_Unknown_0x88, A089_Unknown_0x89,
             A08A_Unknown_0x8A, A08B_Unknown_0x8B, A08C_Unknown_0x8C, A08D_Unknown_0x8D, A08E_Unknown_0x8E, A08F_Unknown_0x8F,
             A092_LumberJackHouse_PostAga,
@@ -628,8 +628,8 @@ namespace EnemizerLibrary
             A0BA_HauntedGrove_PostAga,
             A0F8_DiggingGame_DW_PostAga,
             A0FA_HauntedGrove_DW_PostAga,
-            A110_MasterSwordGlade_UnderBridge_PostAga,
-            A111_ZorasDomain_PostAga,
+            //A110_MasterSwordGlade_UnderBridge_PostAga,
+            //A111_ZorasDomain_PostAga,
             0x112, 0x113, 0x114, 0x115, 0x116, 0x117, 0x119, 0x120
         };
     }
