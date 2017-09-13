@@ -22,6 +22,7 @@ namespace EnemizerLibrary
         public bool Killable { get; set; }
         public bool NPC { get; set; }
         public bool NeverUse { get; set; }
+        public bool NeverUseOverworld { get; set; }
         public bool IsObject { get; set; }
         public bool Absorbable { get; set; }
         public List<byte> GroupId { get; set; } = new List<byte>();
@@ -64,7 +65,14 @@ namespace EnemizerLibrary
         public SpriteRequirement SetNeverUse()
         {
             NeverUse = true;
+            NeverUseOverworld = true;
             DoNotRandomize = true;
+            return this;
+        }
+
+        public SpriteRequirement SetNeverUseOverworld()
+        {
+            NeverUseOverworld = true;
             return this;
         }
 
@@ -226,6 +234,15 @@ namespace EnemizerLibrary
                                                     && x.Boss == false
                                                     && x.Overlord == false
                                                     && x.IsObject == false);
+            }
+        }
+
+        public IEnumerable<SpriteRequirement> UsableOverworldEnemySprites
+        {
+            get
+            {
+                // TODO: exclude absorbables for now (red rupees, bombs, etc. won't show up...)
+                return UsableEnemySprites.Where(x => x.NeverUseOverworld == false && x.Absorbable == false);
             }
         }
 
@@ -657,7 +674,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LynelSprite).AddSubgroup3(20));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite).SetDoNotRandomize()); // TODO: find
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite).SetNeverUseOverworld().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()
@@ -682,7 +699,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill10Sprite).SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FairySprite).SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeySprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetNeverUseOverworld().SetDoNotRandomize());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShieldSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(27)); // TODO: check this is for pikit
 

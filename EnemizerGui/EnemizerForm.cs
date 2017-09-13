@@ -109,7 +109,7 @@ namespace Enemizer
 
         private void SaveConfig()
         {
-            var configJson = JsonConvert.SerializeObject(config);
+            var configJson = JsonConvert.SerializeObject(config, Formatting.Indented);
             File.WriteAllText("setting.cfg", configJson);
         }
 

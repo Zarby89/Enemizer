@@ -4,6 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 using EnemizerLibrary;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace EnemizerTests
 {
@@ -64,6 +65,39 @@ namespace EnemizerTests
         }
 
         [Fact]
+        public void get_overworld_sprites_seed_0()
+        {
+            Randomization r = new Randomization();
+            OptionFlags o = new OptionFlags()
+            {
+                RandomizeBosses = true,
+                RandomizeEnemies = true,
+                GenerateSpoilers = true
+            };
+
+            FileStream fs = new FileStream("alttp - VT_no-glitches-26_normal_open_none_830270265.sfc", FileMode.Open, FileAccess.Read);
+            byte[] rom_data = new byte[fs.Length];
+            fs.Read(rom_data, 0, (int)fs.Length);
+            fs.Close();
+
+            RomData romData = r.MakeRandomization(0, o, rom_data, "");
+
+            //var romData = Utilities.LoadRom("rando.sfc");
+
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
+
+            foreach (var owArea in areas.OverworldAreas)
+            {
+                output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})\tGraphics Block: {owArea.GraphicsBlockId} ({owArea.GraphicsBlockAddress.ToString("X4")})");
+
+                foreach (var s in owArea.Sprites)
+                {
+                    output.WriteLine($"Address: {s.SpriteAddress.ToString("X6")}\tSpriteId: {s.SpriteId.ToString("X2")}\t{SpriteConstants.GetSpriteName(s.SpriteId)}\tX: {s.SpriteX}\tY: {s.SpriteY}\tOverlord: {(s.SpriteId >= 0xF3 ? true : false).ToString()}");
+                }
+            }
+        }
+
+        [Fact]
         public void get_list_of_goodies()
         {
             var romData = Utilities.LoadRom("rando.sfc");
@@ -78,12 +112,12 @@ namespace EnemizerTests
             OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
             
 
-            var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }));
-            var roomJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, x.RoomName, x.GraphicsBlockId }));
-            var roomSpritesJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName, y.Address, y.HasAKey, y.IsOverlord }) } }));
+            var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }), Formatting.Indented);
+            var roomJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, x.RoomName, x.GraphicsBlockId }), Formatting.Indented);
+            var roomSpritesJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName, y.Address, y.HasAKey, y.IsOverlord }) } }), Formatting.Indented);
 
-            var areaJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, x.AreaName, x.GraphicsBlockId }));
-            var areaSpritesJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName }) } }));
+            var areaJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, x.AreaName, x.GraphicsBlockId }), Formatting.Indented);
+            var areaSpritesJson = JsonConvert.SerializeObject(areas.OverworldAreas.Select(x => new { x.AreaId, Sprites = new { Sprites = x.Sprites.Select(y => new { y.SpriteId, y.SpriteName }) } }), Formatting.Indented);
 
             output.WriteLine(spriteGroupsJson);
             output.WriteLine(roomJson);
