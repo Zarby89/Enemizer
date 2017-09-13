@@ -233,7 +233,8 @@ namespace EnemizerLibrary
                                                     && x.NPC == false 
                                                     && x.Boss == false
                                                     && x.Overlord == false
-                                                    && x.IsObject == false);
+                                                    && x.IsObject == false
+                                                    && x.Absorbable == false);
             }
         }
 
@@ -329,7 +330,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TalkingTreeSprite).SetNPC().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TalkingTreeSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(21));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).SetKillable().AddSubgroup1(30));
 
@@ -347,6 +348,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TelepathicStones_NoIdeaWhatThisActuallyIsLikelyUnusedSprite).SetIsObject().SetNeverUse().SetDoNotRandomize());
 
+            // this uses sub2 for LW and sub3 for DW...
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FluteBoysNotesSprite).SetNeverUse().SetDoNotRandomize()); // TODO: does this use OAM2?
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RaceHPNPCsSprite).SetNPC().SetDoNotRandomize().AddGroup(6));
@@ -698,8 +700,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill5Sprite).SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill10Sprite).SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FairySprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeySprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetNeverUseOverworld().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeySprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetNeverUse().SetDoNotRandomize());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShieldSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(27)); // TODO: check this is for pikit
 

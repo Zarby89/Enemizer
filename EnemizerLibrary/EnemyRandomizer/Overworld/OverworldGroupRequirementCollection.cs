@@ -45,6 +45,8 @@ namespace EnemizerLibrary
 
             OverworldRequirements.Add(new OverworldGroupRequirement(13, null, null, 76, null, OverworldAreaConstants.A016_WitchsHut));
             OverworldRequirements.Add(new OverworldGroupRequirement(29, null, 77, null, 21, OverworldAreaConstants.A069_VillageofOutcastsFrogSmith_DW));
+            OverworldRequirements.Add(new OverworldGroupRequirement(15, null, null, 78, null, OverworldAreaConstants.A02A_HauntedGrove));
+            OverworldRequirements.Add(new OverworldGroupRequirement(17, null, null, null, 76, OverworldAreaConstants.A06A_HauntedGrove_DW));
         }
     }
 }

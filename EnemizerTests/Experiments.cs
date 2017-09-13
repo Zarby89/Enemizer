@@ -49,7 +49,7 @@ namespace EnemizerTests
         [Fact]
         public void get_overworld_sprites()
         {
-            var romData = Utilities.LoadRom("rando.sfc");
+            var romData = Utilities.LoadRom("..\\..\\..\\EnemizerGui\\bin\\Debug\\Enemizer 6.0 - alttp - VT_no-glitches-26_normal_open_none_830270265.sfc");
 
             OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
 
