@@ -104,10 +104,18 @@ namespace EnemizerLibrary
 
         public void RandomizeSprites(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
-            // randomize sprites for area
-            foreach (var s in this.Sprites)
+            var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
+
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).ToArray();
+
+            if (possibleSprites.Length > 0)
             {
-                //s.SpriteId = ??;
+                var spritesToUpdate = this.Sprites.Where(x => spriteRequirementCollection.RandomizableSprites.Select(y => y.SpriteId).Contains(x.SpriteId))
+                    .ToList();
+
+
+                spritesToUpdate
+                    .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
             }
         }
     }

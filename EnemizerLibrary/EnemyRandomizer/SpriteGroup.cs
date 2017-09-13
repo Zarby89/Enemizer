@@ -78,5 +78,15 @@ namespace EnemizerLibrary
 
             return possibleEnemySprites.Select(x => x.SpriteId);
         }
+
+        public IEnumerable<int> GetPossibleEnemySprites(OverworldArea area)
+        {
+            // TODO: add more logic to this?
+            // needs to check for two subgroups, etc.
+
+            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this));
+
+            return possibleEnemySprites.Select(x => x.SpriteId);
+        }
     }
 }
