@@ -113,7 +113,22 @@ namespace EnemizerLibrary
 
             if (optionFlags.RandomizeBosses)
             {
-                BossRandomizer br = new BossRandomizer(rand, optionFlags, spoilerfile);
+                BossRandomizer br;
+
+                switch(optionFlags.RandomizeBossesType)
+                {
+                    case RandomizeBossesType.Basic:
+                        br = new BossRandomizer(rand, optionFlags, spoilerfile);
+                        break;
+                    case RandomizeBossesType.Normal:
+                        br = new NormalBossRandomizer(rand, optionflags, spoilerfile);
+                        break;
+                    case RandomizeBossesType.Chaos:
+                        br = new ChaosBossRandomizer(rand, optionflags, spoilerfile);
+                        break;
+                    default:
+                        throw new Exception("Unknown Boss Randomization Type");
+                }
                 br.RandomizeRom(this.ROM_DATA);
             }
             
@@ -172,6 +187,9 @@ namespace EnemizerLibrary
             {
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
+
+            spoilerfile.Flush();
+
 
             return this.ROM_DATA;
 
@@ -903,8 +921,8 @@ namespace EnemizerLibrary
             for (int j = 0; j < 0xF3; j++)
             {
                 if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
-&& j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
-&& j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
+                    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
+                    && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                 {
 
                     ROM_DATA[0x6B266 + j] = (byte)((ROM_DATA[0x6B266 + j] & 0xF8) + (byte)(rand.Next(8)));
@@ -928,96 +946,5 @@ namespace EnemizerLibrary
                 }
             }
         }
-        //SEPARATE HOUSE/CAVES FROM DUNGEONS RANDOMIZATION ENEMIES
-
-        public enum room_position
-        {
-            topleft,topright,bottomleft,bottomright,middle
-        }
-
-
-        byte[][] shell_pointers = new byte[13][];
-
-        public void patch_bosses()
-        {
-            //0x0122000 bosses rooms tiles : 
-            int pos = 0;
-            shell_pointers[0] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            shell_pointers[2] = Utilities.PCAddressToSnesByteArray(0x122000 + pos); //Skull woods empty pointers
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_7_shell);
-            pos += DungeonConstants.room_7_shell.Length;
-
-            shell_pointers[1] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_200_shell);
-            pos += DungeonConstants.room_200_shell.Length;
-
-
-            shell_pointers[3] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_51_shell);
-            pos += DungeonConstants.room_51_shell.Length;
-
-            shell_pointers[4] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_90_shell);
-            pos += DungeonConstants.room_90_shell.Length;
-
-            shell_pointers[5] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_144_shell);
-            pos += DungeonConstants.room_144_shell.Length;
-
-            shell_pointers[6] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_172_blind_room_shell);
-            pos += DungeonConstants.room_172_blind_room_shell.Length;
-
-            shell_pointers[7] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_6_shell);
-            pos += DungeonConstants.room_6_shell.Length;
-
-            shell_pointers[8] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_222_shell);
-            pos += DungeonConstants.room_222_shell.Length;
-
-            shell_pointers[9] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_164_shell);
-            pos += DungeonConstants.room_164_shell.Length;
-
-            shell_pointers[10] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_28_shell);
-            pos += DungeonConstants.room_28_shell.Length;
-
-            shell_pointers[11] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_108_shell);
-            pos += DungeonConstants.room_108_shell.Length;
-
-            shell_pointers[12] = Utilities.PCAddressToSnesByteArray(0x122000 + pos);
-            write_rom_data(0x0122000 + pos, DungeonConstants.room_77_shell);
-            pos += DungeonConstants.room_77_shell.Length;
-        }
-
-
-        public void write_rom_data(int pos, byte[] data)
-        {
-            for(int i =0;i<data.Length;i++)
-            {
-                ROM_DATA[pos + i] = data[i];
-            }
-        }
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
 }

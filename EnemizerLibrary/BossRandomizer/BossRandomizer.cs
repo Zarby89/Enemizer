@@ -13,18 +13,16 @@ namespace EnemizerLibrary
 
         public List<Dungeon> DungeonPool { get; set; } = new List<Dungeon>();
 
-        OptionFlags optionFlags { get; set; }
-        StreamWriter spoilerFile { get; set; }
+        protected OptionFlags optionFlags { get; set; }
+        protected StreamWriter spoilerFile { get; set; }
 
-        Random rand;
+        protected Random rand;
+
         public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile)
         {
             this.rand = rand;
             this.optionFlags = optionFlags;
             this.spoilerFile = spoilerFile;
-
-            FillDungeonPool();
-            FillBossPool();
         }
 
         public BossRandomizer(Random rand) : this(rand, new OptionFlags(), null) { }
@@ -52,23 +50,7 @@ namespace EnemizerLibrary
             FillGTPool();
         }
 
-        // TODO: add boss madness
-        /*
-        for (int i = 0; i < 13; i++)
-        {
-            byte boss = (byte)rand.Next(10);
-
-            if (i <= 2) //force at least 3 middle of room boss
-            {
-                ///*KholdstareBossId = 0,MoldormBossId = 1,MothulaBossId = 2,VitreousBossId = 3,HelmasaurBossId = 4,
-                boss = (byte)rand.Next(5);
-            }
-            bosses.Add(boss);
-            Console.WriteLine(BossConstants.BossNames[boss] + " Added in the pool");
-        }
-         */
-
-        protected void FillBasePool()
+        protected virtual void FillBasePool()
         {
             PossibleBossesPool.Add(new ArmosBoss());
             PossibleBossesPool.Add(new LanmolaBoss());
@@ -82,11 +64,20 @@ namespace EnemizerLibrary
             PossibleBossesPool.Add(new TrinexxBoss());
         }
 
-        protected void FillGTPool()
+        protected virtual void FillGTPool()
         {
             PossibleBossesPool.Add(new ArmosBoss()); // GT1
             PossibleBossesPool.Add(new LanmolaBoss()); // GT2
             PossibleBossesPool.Add(new MoldormBoss()); // GT3
+        }
+
+        public void RandomizeRom(RomData romData)
+        {
+            FillDungeonPool();
+            FillBossPool();
+
+            GenerateRandomizedBosses(romData);
+            WriteRom(romData);
         }
 
         public void GenerateRandomizedBosses(RomData romData)
@@ -113,12 +104,6 @@ namespace EnemizerLibrary
             }
         }
 
-        public void RandomizeRom(RomData romData)
-        {
-            GenerateRandomizedBosses(romData);
-            WriteRom(romData);
-        }
-
         private void WriteRom(RomData romData)
         {
             DungeonShells shells = new DungeonShells();
@@ -130,7 +115,7 @@ namespace EnemizerLibrary
                 // spoilers
                 if(optionFlags.GenerateSpoilers && spoilerFile != null)
                 {
-                    spoilerFile.WriteLine($"dungeon name : boss name - drop: boss drop item");
+                    spoilerFile.WriteLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType} - drop: boss drop item");
                     //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
 
@@ -184,6 +169,15 @@ namespace EnemizerLibrary
 
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);
+
+            if(optionFlags.GenerateSpoilers)
+            {
+                spoilerFile.WriteLine("Bosses:");
+                foreach(var d in DungeonPool)
+                {
+
+                }
+            }
         }
 
         private void RemoveBlindSpawnCode(RomData romData)

@@ -63,6 +63,8 @@
     <Compile Include="BossRandomizer\Boss\Boss.cs" />
     <Compile Include="BossRandomizer\BossRandomizer.cs" />
     <Compile Include="BossRandomizer\BossShells.cs" />
+    <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
+    <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
     <Compile Include="Chests.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="BossRandomizer\Dungeons\TurtleRockDungeon.cs" />
@@ -106,7 +108,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomization.cs" />
     <Compile Include="RomData.cs" />
-    <Compile Include="UnusedCode.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
