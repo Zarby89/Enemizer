@@ -16,9 +16,10 @@ namespace EnemizerLibrary
         protected override void FillBasePool()
         {
             // TODO: we need to ensure x number of bosses that can be defeated (can't have all trinexx)
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Armos
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Lanmolas
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Moldorm
+            // How do we figure out how many need to be killable? Need to load up spheres....
+            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Armos
+            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Lanmolas
+            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Moldorm
             PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Helmasaur
             PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Arrghus
             PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Mothula

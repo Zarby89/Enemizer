@@ -74,7 +74,7 @@ namespace EnemizerLibrary
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
 
-            var possibleEnemySprites = spriteRequirementsCollection.UsableEnemySprites.Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
+            var possibleEnemySprites = spriteRequirementsCollection.UsableDungeonEnemySprites.Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
 
             return possibleEnemySprites.Select(x => x.SpriteId);
         }

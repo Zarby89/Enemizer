@@ -84,6 +84,44 @@ namespace EnemizerLibrary
             }
         }
 
+        public static Boss GetRandomKillableBoss(Random rand)
+        {
+            // exclude bosses that require special weapons
+            var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
+                                .Where(x => x != BossType.Trixnexx
+                                         && x != BossType.Kholdstare
+                                         && x != BossType.Arrghus
+                                         )
+                                .ToList();
+            BossType boss = bosses[rand.Next(bosses.Count)];
+
+            switch (boss)
+            {
+                case BossType.Armos:
+                    return new ArmosBoss();
+                case BossType.Arrghus:
+                    throw new Exception("Arrghus isn't 'killable'. This shouldn't happen!");
+                case BossType.Blind:
+                    return new BlindBoss();
+                case BossType.Helmasaur:
+                    return new HelmasaurBoss();
+                case BossType.Kholdstare:
+                    throw new Exception("Kholdstare isn't 'killable'. This shouldn't happen!");
+                case BossType.Lanmola:
+                    return new LanmolaBoss();
+                case BossType.Moldorm:
+                    return new MoldormBoss();
+                case BossType.Mothula:
+                    return new MothulaBoss();
+                case BossType.Trixnexx:
+                    throw new Exception("Trinexx isn't 'killable'. This shouldn't happen!");
+                case BossType.Vitreous:
+                    return new VitreousBoss();
+                default:
+                    throw new Exception("Unknown Boss Type Selected");
+            }
+        }
+
         protected Func<Dungeon, RomData, byte[], bool> CheckShabadooHasItem = (Dungeon dungeon, RomData romData, byte[] items) =>
         {
             if (dungeon.DungeonCrystalAddress == null || dungeon.DungeonCrystalTypeAddress == null)

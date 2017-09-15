@@ -134,20 +134,25 @@ namespace EnemizerLibrary
                 var keySprites = spritesToUpdate.Where(x => x.HasAKey || this.IsShutterRoom).ToList();
 
                 var killableSprites = spriteRequirementCollection.KillableSprites.Where(x => possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
+                var killableKeySprites = spriteRequirementCollection.KillableSprites.Where(x => x.CannotHaveKey == false && possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
 
-                if (keySprites.Count > 0 && killableSprites.Count == 0)
+                if (keySprites.Count > 0 && killableKeySprites.Count == 0)
                 {
                     throw new Exception("Key in room without any killable enemies");
                 }
 
                 Debug.Assert(possibleSprites.Contains(SpriteConstants.EmptySprite) == false);
                 Debug.Assert(killableSprites.Contains(SpriteConstants.EmptySprite) == false);
+                Debug.Assert(killableKeySprites.Contains(SpriteConstants.EmptySprite) == false);
 
                 spritesToUpdate.Where(x => x.HasAKey == false).ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
 
+                spritesToUpdate.Where(x => x.HasAKey).ToList()
+                    .ForEach(x => x.SpriteId = killableKeySprites[rand.Next(killableSprites.Count)]);
+
                 // TODO: something like hacky for shutters.
-                spritesToUpdate.Where(x => x.HasAKey || this.IsShutterRoom).ToList()
+                spritesToUpdate.Where(x => !x.HasAKey && this.IsShutterRoom).ToList()
                     .ForEach(x => x.SpriteId = killableSprites[rand.Next(killableSprites.Count)]);
             }
         }

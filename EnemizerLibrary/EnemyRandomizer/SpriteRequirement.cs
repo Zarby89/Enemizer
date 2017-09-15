@@ -21,8 +21,9 @@ namespace EnemizerLibrary
         public bool DoNotRandomize { get; set; }
         public bool Killable { get; set; }
         public bool NPC { get; set; }
-        public bool NeverUse { get; set; }
+        public bool NeverUseDungeon { get; set; }
         public bool NeverUseOverworld { get; set; }
+        public bool CannotHaveKey { get; set; }
         public bool IsObject { get; set; }
         public bool Absorbable { get; set; }
         public List<byte> GroupId { get; set; } = new List<byte>();
@@ -64,9 +65,15 @@ namespace EnemizerLibrary
 
         public SpriteRequirement SetNeverUse()
         {
-            NeverUse = true;
+            NeverUseDungeon = true;
             NeverUseOverworld = true;
             DoNotRandomize = true;
+            return this;
+        }
+
+        public SpriteRequirement SetNeverUseDungeon()
+        {
+            NeverUseDungeon = true;
             return this;
         }
 
@@ -92,6 +99,12 @@ namespace EnemizerLibrary
         public SpriteRequirement SetAbsorbable()
         {
             Absorbable = true;
+            return this;
+        }
+
+        public SpriteRequirement SetCannotHaveKey()
+        {
+            CannotHaveKey = true;
             return this;
         }
 
@@ -229,12 +242,19 @@ namespace EnemizerLibrary
         {
             get
             {
-                return SpriteRequirements.Where(x => x.NeverUse == false 
-                                                    && x.NPC == false 
+                return SpriteRequirements.Where(x => x.NPC == false 
                                                     && x.Boss == false
                                                     && x.Overlord == false
                                                     && x.IsObject == false
                                                     && x.Absorbable == false);
+            }
+        }
+
+        public IEnumerable<SpriteRequirement> UsableDungeonEnemySprites
+        {
+            get
+            {
+                return UsableEnemySprites.Where(x => x.NeverUseDungeon == false);
             }
         }
 
@@ -326,7 +346,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RopaSprite).SetKillable().AddSubgroup0(22));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().SetCannotHaveKey().AddSubgroup0(31));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31));
 
@@ -677,7 +697,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LynelSprite).AddSubgroup3(20));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite).SetNeverUseOverworld().SetDoNotRandomize()); // TODO: find
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetDoNotRandomize()); // TODO: find
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetNeverUseDungeon().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()
                 .SetNeverUse() // TODO: maybe this is a good idea? can't get the right gfx to load because it's automatic and uses OW grahics in OAM0(1)
@@ -747,20 +767,20 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_ArmosKnight_Trigger).SetOverlord());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_BombTrap).SetOverlord());
 
-            // "Special" sprites
-            // rat-guard = green recruit (0x4B) with sub 1=73, sub 2=28
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite)
-                                                    .IsSpecialGlitched()
-                                                    .SetKillable()
-                                                    .AddSubgroup0(73)
-                                                    .AddSubgroup1(28));
+            //// "Special" sprites
+            //// rat-guard = green recruit (0x4B) with sub 1=73, sub 2=28
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite)
+            //                                        .IsSpecialGlitched()
+            //                                        .SetKillable()
+            //                                        .AddSubgroup0(73)
+            //                                        .AddSubgroup1(28));
 
-            // Palette glitch and invisible guard (need to see if this causes any other issues)
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueSwordSoldier_DetectPlayerSprite)
-                                                    .IsSpecialGlitched()
-                                                    .SetKillable()
-                                                    .SetParameters(0x18) // 11000 should cause very bad things
-                                                    .AddSubgroup1(73));
+            //// Palette glitch and invisible guard (need to see if this causes any other issues)
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueSwordSoldier_DetectPlayerSprite)
+            //                                        .IsSpecialGlitched()
+            //                                        .SetKillable()
+            //                                        .SetParameters(0x18) // 11000 should cause very bad things
+            //                                        .AddSubgroup1(73));
         }
 
         //void AddSpriteRequirement(int SpriteId, bool Overlord, int? GroupId, int? SubGroup0, int? SubGroup1, int? SubGroup2, int? SubGroup3, byte? Parameters = null, bool Special = false)
