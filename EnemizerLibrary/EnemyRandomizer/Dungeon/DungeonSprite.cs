@@ -77,11 +77,28 @@ namespace EnemizerLibrary
                 throw new Exception("SpriteID 3 will crash the game");
             }
 
+            // TODO: make wall masters work everywhere
+            // this does bad things once you leave the room (wrong warp and crash)
+            if (spriteId == SpriteConstants.WallmasterSprite)
+            {
+                //// 5FFB4-5FFB6 set to NOP (probably break something else)
+                //romData[0x5FFB4] = AssemblyConstants.NoOp;
+                //romData[0x5FFB5] = AssemblyConstants.NoOp;
+                //romData[0x5FFB6] = AssemblyConstants.NoOp;
+
+                //romData[0x5FFB8] = 15; // this will make you warp outside
+
+                spriteId = 9;
+                byte1 |= SpriteConstants.OverlordMask;
+                IsOverlord = false;
+            }
+
             if (IsOverlord == false)
             {
                 romData[Address] = byte0;
                 romData[Address + 1] = byte1;
             }
+
             romData[Address + 2] = spriteId;
         }
 

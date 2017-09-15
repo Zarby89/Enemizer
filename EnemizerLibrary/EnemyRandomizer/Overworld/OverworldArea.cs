@@ -113,8 +113,18 @@ namespace EnemizerLibrary
                 var spritesToUpdate = this.Sprites.Where(x => spriteRequirementCollection.RandomizableSprites.Select(y => y.SpriteId).Contains(x.SpriteId))
                     .ToList();
 
+                spritesToUpdate.Where(x => x.SpriteId != SpriteConstants.RavenSprite).ToList()
+                    .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
 
-                spritesToUpdate
+                // Kodongo in Raven place will crash the game
+                possibleSprites = possibleSprites.Where(x => x != SpriteConstants.KodongosSprite).ToArray();
+
+                if(possibleSprites.Length == 0)
+                {
+                    // TODO: should throw an error but let's just leave it for now
+                    return;
+                }
+                spritesToUpdate.Where(x => x.SpriteId == SpriteConstants.RavenSprite).ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
             }
         }

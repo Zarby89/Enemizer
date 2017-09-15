@@ -209,7 +209,8 @@ namespace EnemizerLibrary
         public bool CanSpawnInRoom(Room room)
         {
             return ExcludedRooms.Contains(room.RoomId) == false
-                && (SpawnableRooms.Count == 0 || SpawnableRooms.Contains(room.RoomId));
+                && (SpawnableRooms.Count == 0 || SpawnableRooms.Contains(room.RoomId)
+                && (this.SpriteId != SpriteConstants.WallmasterSprite || room.RoomId < 256)); // wall masters need an 'exit' set and only rooms 0-255 have one
         }
 
         public bool CanBeRandomizedInRoom(Room room)
@@ -287,9 +288,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.EmptySprite).SetNeverUse());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PullSwitch_GoodSprite).SetDoNotRandomize().SetIsObject().SetNeverUse().AddSubgroup3(82));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PullSwitch_GoodSprite).SetDoNotRandomize().SetIsObject().SetNeverUse().AddSubgroup3(82, 83));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PullSwitch_TrapSprite).SetDoNotRandomize().SetIsObject().SetNeverUse().AddSubgroup3(82));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PullSwitch_TrapSprite).SetDoNotRandomize().SetIsObject().SetNeverUse().AddSubgroup3(82, 83));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Octorok_OneWaySprite).SetKillable().AddSubgroup2(12, 24));
 
@@ -466,10 +467,10 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShootingGalleryProprietorSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(75));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_RightSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(46));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_LeftSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(46));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_DownSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(46));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_UpSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_RightSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup0(47));//.AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_LeftSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup0(47));//.AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_DownSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup0(47));//.AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_UpSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup0(47));//.AddSubgroup2(46));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BallNChainTrooperSprite).SetKillable().AddSubgroup0(70).AddSubgroup1(73)); // TODO: check 73
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CannonSoldierSprite).SetKillable().AddSubgroup0(70).AddSubgroup1(73)); // TODO: verify because these don't exist in vanilla
@@ -548,8 +549,10 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TerrorpinSprite).AddSubgroup2(42));
 
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SlimeSprite)); // TODO: add? is this special?
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SlimeSprite_JumpsOutOfTheFloor).AddSubgroup1(32));
 
+            // these will never work right in the overworld
+            // and only work in room 0-255
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().AddSubgroup2(35));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).SetKillable().AddSubgroup1(32));
@@ -584,8 +587,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KholdstaresShellSprite).SetBoss()); // TODO: this is BG2
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FallingIceSprite).SetBoss().AddSubgroup2(60));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ZazakFireballSprite).SetNeverUse().SetDoNotRandomize()); // TODO: can't find this
-
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueZazakSprite).SetKillable().AddSubgroup2(40));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedZazakSprite).SetKillable().AddSubgroup2(40));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosSprite).SetKillable().AddSubgroup0(31));
@@ -781,6 +783,11 @@ namespace EnemizerLibrary
             //                                        .SetKillable()
             //                                        .SetParameters(0x18) // 11000 should cause very bad things
             //                                        .AddSubgroup1(73));
+
+            // TODO: add beefy arms
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_LeftSprite)
+            //                                          .IsSpecialGlitched()
+            //                                          .AddSubgroup0(0));
         }
 
         //void AddSpriteRequirement(int SpriteId, bool Overlord, int? GroupId, int? SubGroup0, int? SubGroup1, int? SubGroup2, int? SubGroup3, byte? Parameters = null, bool Special = false)

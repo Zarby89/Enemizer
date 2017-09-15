@@ -37,12 +37,14 @@ namespace EnemizerLibrary
             }
         }
 
-        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
+        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
         {
             if (needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0))
             {
                 return UsableDungeonSpriteGroups;
             }
+
+            var req = dungeonReqs.GetGroupRequirementForRoom(room);
 
             //var usableGroups = spriteRequirementsCollection.SpriteRequirements.Where(x => x.GroupId)
             var killableGroupIds = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.GroupId).ToList();
@@ -64,6 +66,11 @@ namespace EnemizerLibrary
                 .Where(x => doNotUpdateSub1Ids.Count == 0 || doNotUpdateSub1Ids.Contains((byte)x.SubGroup1))
                 .Where(x => doNotUpdateSub2Ids.Count == 0 || doNotUpdateSub2Ids.Contains((byte)x.SubGroup2))
                 .Where(x => doNotUpdateSub3Ids.Count == 0 || doNotUpdateSub3Ids.Contains((byte)x.SubGroup3))
+                .Where(x => req.GroupId.Count == 0 || req.GroupId.Contains((byte)x.DungeonGroupId))
+                .Where(x => req.SubGroup0.Count == 0 || req.SubGroup0.Contains((byte)x.SubGroup0))
+                .Where(x => req.SubGroup1.Count == 0 || req.SubGroup1.Contains((byte)x.SubGroup1))
+                .Where(x => req.SubGroup2.Count == 0 || req.SubGroup2.Contains((byte)x.SubGroup2))
+                .Where(x => req.SubGroup3.Count == 0 || req.SubGroup3.Contains((byte)x.SubGroup3))
                 .Where(x => needsKillable == false 
                             || killableGroupIds.Contains((byte)x.GroupId)
                             || killableSub0Ids.Contains((byte)x.SubGroup0)
@@ -99,6 +106,7 @@ namespace EnemizerLibrary
 
         RomData romData { get; set; }
         Random rand { get; set; }
+        RoomGroupRequirementCollection dungeonReqs;
         SpriteRequirementCollection spriteRequirementsCollection { get; set; }
 
         public SpriteGroupCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementsCollection)
@@ -106,6 +114,8 @@ namespace EnemizerLibrary
             this.romData = romData;
             this.rand = rand;
             this.spriteRequirementsCollection = spriteRequirementsCollection;
+
+            dungeonReqs = new RoomGroupRequirementCollection();
 
             SpriteGroups = new List<SpriteGroup>();
         }
@@ -173,7 +183,7 @@ namespace EnemizerLibrary
 
         void SetupRequiredDungeonGroups()
         {
-            RoomGroupRequirementCollection dungeonReqs = new RoomGroupRequirementCollection();
+            dungeonReqs = new RoomGroupRequirementCollection();
 
             var rGroup = dungeonReqs.RoomRequirements.Where(x => x.GroupId != null);
             foreach(var g in rGroup)

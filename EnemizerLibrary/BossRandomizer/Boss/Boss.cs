@@ -51,34 +51,24 @@ namespace EnemizerLibrary
             {
                 case BossType.Armos:
                     return new ArmosBoss();
-                    break;
                 case BossType.Arrghus:
                     return new ArrghusBoss();
-                    break;
                 case BossType.Blind:
                     return new BlindBoss();
-                    break;
                 case BossType.Helmasaur:
                     return new HelmasaurBoss();
-                    break;
                 case BossType.Kholdstare:
                     return new KholdstareBoss();
-                    break;
                 case BossType.Lanmola:
                     return new LanmolaBoss();
-                    break;
                 case BossType.Moldorm:
                     return new MoldormBoss();
-                    break;
                 case BossType.Mothula:
                     return new MothulaBoss();
-                    break;
                 case BossType.Trixnexx:
                     return new TrinexxBoss();
-                    break;
                 case BossType.Vitreous:
                     return new VitreousBoss();
-                    break;
                 default:
                     throw new Exception("Unknown Boss Type Selected");
             }

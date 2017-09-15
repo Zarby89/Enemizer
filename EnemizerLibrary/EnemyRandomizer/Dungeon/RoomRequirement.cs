@@ -15,6 +15,9 @@ namespace EnemizerLibrary
         public int? Subgroup2 { get; set; }
         public int? Subgroup3 { get; set; }
 
+        public RoomGroupRequirement()
+        {
+        }
         public RoomGroupRequirement(int? GroupId, int? Subgroup0, int? Subgroup1, int? Subgroup2, int? Subgroup3, params int[] Rooms)
         {
             if(GroupId == null && Subgroup0 == null && Subgroup1 == null && Subgroup2 == null && Subgroup3 == null)
@@ -40,6 +43,35 @@ namespace EnemizerLibrary
             RoomRequirements = new List<RoomGroupRequirement>();
 
             FillRoomRequirements();
+        }
+
+        public SpriteRequirement GetGroupRequirementForRoom(Room room)
+        {
+            var ret = new SpriteRequirement(0);
+            foreach (var req in RoomRequirements.Where(x => x.Rooms.Contains(room.RoomId)))
+            {
+                if (req.GroupId != null)
+                {
+                    ret.GroupId.Add((byte)req.GroupId);
+                }
+                if(req.Subgroup0 != null)
+                {
+                    ret.SubGroup0.Add((byte)req.Subgroup0);
+                }
+                if (req.Subgroup1 != null)
+                {
+                    ret.SubGroup1.Add((byte)req.Subgroup1);
+                }
+                if (req.Subgroup2 != null)
+                {
+                    ret.SubGroup2.Add((byte)req.Subgroup2);
+                }
+                if (req.Subgroup3 != null)
+                {
+                    ret.SubGroup3.Add((byte)req.Subgroup3);
+                }
+            }
+            return ret;
         }
 
         void FillRoomRequirements()
@@ -122,11 +154,11 @@ namespace EnemizerLibrary
                 RoomIdConstants.R200_EasternPalace_ArmosKnights,
                 RoomIdConstants.R227_Cave_HalfMagic));
 
-            RoomRequirements.Add(new RoomGroupRequirement(11, null, null, null, 49,
+            RoomRequirements.Add(new RoomGroupRequirement(11, null, null, null, 61,
                 RoomIdConstants.R144_MiseryMire_Vitreous));
 
             // combine??
-            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, null, 61,
+            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, null, 49,
                 RoomIdConstants.R51_DesertPalace_Lanmolas,
                 RoomIdConstants.R108_GanonsTower_LanmolasRoom));
             RoomRequirements.Add(new RoomGroupRequirement(22, null, null, 60, null,
@@ -136,16 +168,13 @@ namespace EnemizerLibrary
                 RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing));
 
             // Freezor
-            RoomRequirements.Add(new RoomGroupRequirement(28, null, null, 38, null,
+            RoomRequirements.Add(new RoomGroupRequirement(28, null, null, 38, 82,
                 RoomIdConstants.R14_IcePalace_EntranceRoom,
                 RoomIdConstants.R126_IcePalace_HiddenChest_BombableFloorRoom,
                 RoomIdConstants.R142_IcePalace0x8E,
                 RoomIdConstants.R158_IcePalace_BigChestRoom, //));
             //RoomRequirements.Add(new RoomGroupRequirement(41, null, null, 38, null, // R190 is in this originally
                 RoomIdConstants.R190_IcePalace_BlockPuzzleRoom));
-            // Freezor
-            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 38, 82,
-                RoomIdConstants.R126_IcePalace_HiddenChest_BombableFloorRoom));
 
             RoomRequirements.Add(new RoomGroupRequirement(12, null, null, 48, null,
                 RoomIdConstants.R7_TowerofHera_Moldorm,
@@ -167,7 +196,7 @@ namespace EnemizerLibrary
                 RoomIdConstants.R286_HypeCave));
 
             // Moving Canonball Shooters
-            RoomRequirements.Add(new RoomGroupRequirement(10, null, null, 46, null,
+            RoomRequirements.Add(new RoomGroupRequirement(10, 47, null, 46, null,
                 RoomIdConstants.R92_GanonsTower_Ganon_BallZ,
                 RoomIdConstants.R117_DesertPalace_BigKeyChestRoom,
                 RoomIdConstants.R185_EasternPalace_LobbyCannonballsRoom, // Force?
@@ -194,57 +223,15 @@ namespace EnemizerLibrary
                 RoomIdConstants.R104_SkullWoods_KeyChest_TrapRoom,
                 RoomIdConstants.R141_GanonsTower_Tile_TorchPuzzleRoom));
 
-            // Cane Platform
-            RoomRequirements.Add(new RoomGroupRequirement(37, null, null, 39, null,
+            // Guruguru bar - 31
+            // Cane Platform - 39
+            RoomRequirements.Add(new RoomGroupRequirement(37, 31, null, 39, 82,
                 RoomIdConstants.R36_TurtleRock_DoubleHokku_Bokku_BigchestRoom,
                 RoomIdConstants.R180_TurtleRock_Pre_TrinexxRoom,
                 RoomIdConstants.R181_TurtleRock_DarkMaze,
                 RoomIdConstants.R198_TurtleRock0xC6,
                 RoomIdConstants.R199_TurtleRock_TorchPuzzle,
                 RoomIdConstants.R214_TurtleRock_EntranceRoom));
-
-            // Guruguru bar
-            RoomRequirements.Add(new RoomGroupRequirement(37, 31, null, null, null,
-                RoomIdConstants.R181_TurtleRock_DarkMaze));
-
-            // anti-fairy
-            /*RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,
-                RoomIdConstants.R9_PalaceofDarkness0x09,
-                RoomIdConstants.R19_TurtleRock_Hokku_BokkuKeyRoom2,
-                RoomIdConstants.R21_TurtleRock0x15,
-                RoomIdConstants.R31_IcePalace_Pengator_BigKeyRoom,
-                RoomIdConstants.R61_GanonsTower_TorchRoom2,
-                RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom,
-                RoomIdConstants.R106_PalaceofDarkness_RupeeRoom,
-                RoomIdConstants.R107_GanonsTower_MimicsRooms,
-                RoomIdConstants.R141_GanonsTower_Tile_TorchPuzzleRoom,
-                RoomIdConstants.R159_IcePalace0x9F,
-                RoomIdConstants.R166_GanonsTower_MoldormFallRoom,
-                RoomIdConstants.R184_EasternPalace_BigKeyRoom,
-                RoomIdConstants.R187_ThievesTown_Hellway,
-                RoomIdConstants.R190_IcePalace_BlockPuzzleRoom,
-                RoomIdConstants.R195_MiseryMire_BigChestRoom,
-                RoomIdConstants.R196_TurtleRock_FinalCrystalSwitchPuzzleRoom,
-                RoomIdConstants.R140_GanonsTower_EastandWestDownstairs_BigChestRoom,
-                RoomIdConstants.R145_MiseryMire_FinalSwitchRoom,
-                RoomIdConstants.R146_MiseryMire_DarkBombWall_SwitchesRoom,
-                RoomIdConstants.R147_MiseryMire_DarkCaneFloorSwitchPuzzleRoom,
-                RoomIdConstants.R153_EasternPalace_EyegoreKeyRoom,
-                RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom,
-                RoomIdConstants.R170_EasternPalace_MapChestRoom,
-                RoomIdConstants.R177_MiseryMire_HourglassRoom,
-                RoomIdConstants.R178_MiseryMire_SlugRoom,
-                RoomIdConstants.R186_EasternPalace_DarkAntifairy_KeyPotRoom,
-                RoomIdConstants.R193_MiseryMire_CompassChest_TileRoom,
-                RoomIdConstants.R218_EasternPalace,
-                RoomIdConstants.R267_SwampFloodwayRoom)); //*/
-
-            // Big spike trap
-            /*RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,
-                RoomIdConstants.R61_GanonsTower_TorchRoom2,
-                RoomIdConstants.R94_IcePalace_LonelyFirebar,
-                RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom,
-                RoomIdConstants.R177_MiseryMire_HourglassRoom)); //*/
 
             // Bumpers
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,
@@ -264,9 +251,7 @@ namespace EnemizerLibrary
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 83,
                 RoomIdConstants.R23_TowerofHera_MoldormFallRoom,
                 RoomIdConstants.R42_PalaceofDarkness_BigHubRoom,
-                //RoomIdConstants.R68_ThievesTown_BigChestRoom,
                 RoomIdConstants.R76_GanonsTower_Mini_HelmasaurConveyorRoom,
-                //RoomIdConstants.R86_SkullWoods_KeyPot_TrapRoom,
                 RoomIdConstants.R89_SkullWoods_FinalSectionEntranceRoom,
                 RoomIdConstants.R103_SkullWoods_CompassChestRoom,
                 RoomIdConstants.R104_SkullWoods_KeyChest_TrapRoom,
@@ -311,7 +296,6 @@ namespace EnemizerLibrary
                 RoomIdConstants.R43_PalaceofDarkness_MapChest_FairyRoom,
                 RoomIdConstants.R49_TowerofHera_HardhatBeetlesRoom,
                 RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
-                //RoomIdConstants.R61_GanonsTower_TorchRoom2,
                 RoomIdConstants.R62_IcePalace_StalfosKnights_ConveyorHellway,
                 RoomIdConstants.R91_GanonsTower_SpikePitRoom,
                 RoomIdConstants.R107_GanonsTower_MimicsRooms,
@@ -338,67 +322,16 @@ namespace EnemizerLibrary
                 RoomIdConstants.R165_GanonsTower_WizzrobesRooms,
                 RoomIdConstants.R195_MiseryMire_BigChestRoom,
                 RoomIdConstants.R197_TurtleRock_LaserBridge,
-                RoomIdConstants.R213_TurtleRock_LaserKeyRoom,
-                RoomIdConstants.R214_TurtleRock_EntranceRoom
+                RoomIdConstants.R213_TurtleRock_LaserKeyRoom
                 ));
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 83,
                 RoomIdConstants.R19_TurtleRock_Hokku_BokkuKeyRoom2,
                 RoomIdConstants.R35_TurtleRock_WestExittoBalcony,
                 RoomIdConstants.R150_GanonsTower_Torches1Room,
                 RoomIdConstants.R165_GanonsTower_WizzrobesRooms,
-                //RoomIdConstants.R195_MiseryMire_BigChestRoom,
                 RoomIdConstants.R197_TurtleRock_LaserBridge,
-                RoomIdConstants.R213_TurtleRock_LaserKeyRoom,
-                RoomIdConstants.R214_TurtleRock_EntranceRoom
+                RoomIdConstants.R213_TurtleRock_LaserKeyRoom
                 ));
-
-            // spike traps
-            /*RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,
-                RoomIdConstants.R26_PalaceofDarkness_BigChestRoom,
-                RoomIdConstants.R27_PalaceofDarkness_Mimics_MovingWallRoom,
-                RoomIdConstants.R40_SwampPalace_EntranceRoom,
-                RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
-                RoomIdConstants.R57_SkullWoods_GibdoKey_MothulaHoleRoom,
-                RoomIdConstants.R59_PalaceofDarkness_SpikeBlock_ConveyorRoom,
-                RoomIdConstants.R61_GanonsTower_TorchRoom2,
-                RoomIdConstants.R76_GanonsTower_Mini_HelmasaurConveyorRoom,
-                RoomIdConstants.R86_SkullWoods_KeyPot_TrapRoom,
-                RoomIdConstants.R87_SkullWoods_BigKeyRoom,
-                RoomIdConstants.R89_SkullWoods_FinalSectionEntranceRoom,
-                RoomIdConstants.R91_GanonsTower_SpikePitRoom,
-                RoomIdConstants.R107_GanonsTower_MimicsRooms,
-                RoomIdConstants.R124_GanonsTower_EastSideCollapsingBridge_ExplodingWallRoom,
-                RoomIdConstants.R139_GanonsTower_BlockPuzzle_SpikeSkip_MapChestRoom,
-                RoomIdConstants.R140_GanonsTower_EastandWestDownstairs_BigChestRoom,
-                RoomIdConstants.R145_MiseryMire_FinalSwitchRoom,
-                RoomIdConstants.R146_MiseryMire_DarkBombWall_SwitchesRoom,
-                RoomIdConstants.R155_GanonsTower_ManySpikes_WarpMazeRoom,
-                RoomIdConstants.R165_GanonsTower_WizzrobesRooms,
-                RoomIdConstants.R171_ThievesTown_MovingSpikes_KeyPotRoom,
-                RoomIdConstants.R177_MiseryMire_HourglassRoom,
-                RoomIdConstants.R188_ThievesTown_ConveyorToilet));
-            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 83,
-                RoomIdConstants.R26_PalaceofDarkness_BigChestRoom,
-                RoomIdConstants.R27_PalaceofDarkness_Mimics_MovingWallRoom,
-                RoomIdConstants.R40_SwampPalace_EntranceRoom,
-                RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
-                RoomIdConstants.R57_SkullWoods_GibdoKey_MothulaHoleRoom,
-                RoomIdConstants.R59_PalaceofDarkness_SpikeBlock_ConveyorRoom,
-                RoomIdConstants.R61_GanonsTower_TorchRoom2,
-                RoomIdConstants.R76_GanonsTower_Mini_HelmasaurConveyorRoom,
-                RoomIdConstants.R86_SkullWoods_KeyPot_TrapRoom,
-                RoomIdConstants.R87_SkullWoods_BigKeyRoom,
-                RoomIdConstants.R89_SkullWoods_FinalSectionEntranceRoom,
-                RoomIdConstants.R91_GanonsTower_SpikePitRoom,
-                RoomIdConstants.R107_GanonsTower_MimicsRooms,
-                RoomIdConstants.R139_GanonsTower_BlockPuzzle_SpikeSkip_MapChestRoom,
-                RoomIdConstants.R145_MiseryMire_FinalSwitchRoom,
-                RoomIdConstants.R146_MiseryMire_DarkBombWall_SwitchesRoom,
-                RoomIdConstants.R155_GanonsTower_ManySpikes_WarpMazeRoom,
-                RoomIdConstants.R165_GanonsTower_WizzrobesRooms,
-                RoomIdConstants.R171_ThievesTown_MovingSpikes_KeyPotRoom,
-                RoomIdConstants.R177_MiseryMire_HourglassRoom,
-                RoomIdConstants.R188_ThievesTown_ConveyorToilet)); //*/
 
             // statues
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 82,

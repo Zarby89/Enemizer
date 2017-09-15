@@ -48,6 +48,19 @@ namespace EnemizerLibrary
             this.ROM_DATA = new RomData(ROM_DATA);
             this.optionFlags = optionflags;
 
+            // make sure we have a randomizer rom
+            if(this.ROM_DATA.IsRandomizerRom == false)
+            {
+                throw new Exception("Enemizer only supports randomizer roms for input.");
+            }
+
+            // TODO: turn this on
+            //// check that we are not trying to feed in a race rom
+            //if(this.ROM_DATA.IsRaceRom)
+            //{
+            //    throw new Exception("Enemizer does not support race roms.");
+            //}
+
             // patch in our assembly binary data
             // TODO: figure out if this should be done first or after some other code below
             // TODO: and really this should all be modified to add patches onto this and then just write everything to the rom at once if possible (but there are some reads from the rom I need to look into first)
