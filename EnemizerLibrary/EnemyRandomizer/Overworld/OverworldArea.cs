@@ -165,6 +165,8 @@ namespace EnemizerLibrary
 
         public void RandomizeAreaSpriteGroups(SpriteGroupCollection spriteGroups)
         {
+            // TODO: this needs to be updated???
+
             foreach (var a in OverworldAreas.Where(x => OverworldAreaConstants.DoNotRandomizeAreas.Contains(x.AreaId) == false))
             {
                 List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection

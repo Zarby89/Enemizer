@@ -46,6 +46,7 @@ namespace EnemizerLibrary
             //Save the ROM as a new file instead of overwriting the original one
             //Save the flags used in a file to remember the last flags that were used
             this.ROM_DATA = new RomData(ROM_DATA);
+            this.ROM_DATA.ExpandRom();
             this.optionFlags = optionflags;
 
             // make sure we have a randomizer rom
@@ -123,7 +124,7 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-
+            // do bosses after enemies or gfx blocks will get overwritten
             if (optionFlags.RandomizeBosses)
             {
                 BossRandomizer br;
@@ -203,6 +204,10 @@ namespace EnemizerLibrary
 
             spoilerfile.Flush();
 
+            // put the room id in the rupee slot
+            this.ROM_DATA[0x1017A9] = 0xA0;
+            this.ROM_DATA[0x1017A9+1] = 0x00;
+            this.ROM_DATA[0x1017A9+2] = 0x7E;
 
             return this.ROM_DATA;
 

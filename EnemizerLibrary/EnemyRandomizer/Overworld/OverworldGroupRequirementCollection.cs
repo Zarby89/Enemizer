@@ -21,7 +21,7 @@ namespace EnemizerLibrary
         {
             OverworldRequirements.Add(new OverworldGroupRequirement(7, null, null, null, null, OverworldAreaConstants.A002_LumberJackHouse));
 
-            OverworldRequirements.Add(new OverworldGroupRequirement(16, null, null, null, null, OverworldAreaConstants.A003_WestDeathMountain));
+            OverworldRequirements.Add(new OverworldGroupRequirement(16, null, null, 18, 16, OverworldAreaConstants.A003_WestDeathMountain));
 
             OverworldRequirements.Add(new OverworldGroupRequirement(4, null, null, null, null, OverworldAreaConstants.A00F_EntrancetoZorasDomain));
 

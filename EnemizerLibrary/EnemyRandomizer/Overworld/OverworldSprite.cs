@@ -33,7 +33,11 @@ namespace EnemizerLibrary
         public void UpdateRom()
         {
             // TODO: should we allow moving sprites? Would be useful for Pedestal and Zora's Domain
-
+            if(SpriteId == SpriteConstants.OW_OL_FallingRocks)
+            {
+                romData[SpriteAddress] = 0;
+                romData[SpriteAddress + 1] = 0;
+            }
             //romData[SpriteAddress] = SpriteY;
             //romData[SpriteAddress] = SpriteX;
             romData[SpriteAddress + 2] = (byte)SpriteId;

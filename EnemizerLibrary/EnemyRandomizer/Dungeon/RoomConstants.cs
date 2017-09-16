@@ -616,6 +616,8 @@ namespace EnemizerLibrary
         //All the rooms that need every sprite dead for doors to open
         public static readonly int[] NeedKillable_doors =
         {
+            R184_EasternPalace_BigKeyRoom, // for the anti-fairy circle
+
             R11_PalaceofDarkness_TurtleRoom,
             R27_PalaceofDarkness_Mimics_MovingWallRoom,
             R75_PalaceofDarkness_Warps_SouthMimicsRoom,

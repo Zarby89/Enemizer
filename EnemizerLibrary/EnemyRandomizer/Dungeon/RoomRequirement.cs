@@ -114,8 +114,10 @@ namespace EnemizerLibrary
             RoomRequirements.Add(new RoomGroupRequirement(14, 71, 73, 76, 80,
                 RoomIdConstants.R18_Sanctuary,
                 RoomIdConstants.R261_ShabadooHouse,
-                //RoomIdConstants.R264_ChickenHouse, // ???
                 RoomIdConstants.R266_Aginah));
+
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, null, 80,
+                RoomIdConstants.R264_ChickenHouse));
 
             RoomRequirements.Add(new RoomGroupRequirement(15, 79, 77, 74, 80,
                 RoomIdConstants.R244_House_AngryBrothers,
@@ -186,7 +188,7 @@ namespace EnemizerLibrary
             RoomRequirements.Add(new RoomGroupRequirement(20, null, null, 57, null,
                 RoomIdConstants.R6_SwampPalace_Arrghus));
 
-            RoomRequirements.Add(new RoomGroupRequirement(32, null, null, 59, null,
+            RoomRequirements.Add(new RoomGroupRequirement(32, null, 44, 59, null,
                 RoomIdConstants.R172_ThievesTown_BlindTheThief));
 
             RoomRequirements.Add(new RoomGroupRequirement(3, 93, null, null, null,

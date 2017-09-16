@@ -574,8 +574,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WizzrobeSprite).SetKillable().AddSubgroup2(37, 41));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TadpolesSprite).SetKillable().AddSubgroup1(32));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Tadpoles2Sprite).SetKillable().AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TadpolesSprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Tadpoles2Sprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Ostrich_HauntedGroveSprite).SetNeverUse().AddSubgroup2(78));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FluteSprite).SetNeverUse().SetDoNotRandomize()); // TODO: where is this?
@@ -674,7 +674,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GiboSprite).SetKillable().AddSubgroup2(40));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ThiefSprite).AddSubgroup0(14, 21));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ThiefSprite).SetCannotHaveKey().AddSubgroup0(14, 21));
 
             // These are loaded into BG as objects
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedusaSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
@@ -692,7 +692,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AnotherPartOfTrinexxSprite).SetBoss().AddSubgroup0(64).AddSubgroup3(63));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YetAnotherPartOfTrinexxSprite).SetBoss().AddSubgroup0(64).AddSubgroup3(63));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlindTheThiefSprite).SetBoss().AddSubgroup2(59));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlindTheThiefSprite).SetBoss().AddSubgroup1(44).AddSubgroup2(59));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwamolaSprite).SetKillable().AddSubgroup3(25));
 
@@ -747,6 +747,11 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedallionTabletSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(18));
 
+            // turn these off for now outside DM. they can only spawn in large (1024x1024 areas)
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetNeverUse().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
+
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetNeverUseDungeon().AddSubgroup2(35));
+
             // Overlords
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EP4Walls).SetOverlord().AddSubgroup2(46));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EPEntrance).SetOverlord().AddSubgroup2(46));
@@ -785,9 +790,11 @@ namespace EnemizerLibrary
             //                                        .AddSubgroup1(73));
 
             // TODO: add beefy arms
-            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_LeftSprite)
-            //                                          .IsSpecialGlitched()
-            //                                          .AddSubgroup0(0));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_RightSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_LeftSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_DownSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_UpSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
+
         }
 
         //void AddSpriteRequirement(int SpriteId, bool Overlord, int? GroupId, int? SubGroup0, int? SubGroup1, int? SubGroup2, int? SubGroup3, byte? Parameters = null, bool Special = false)
@@ -804,6 +811,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R38_SwampPalace_StatueRoom,
             RoomIdConstants.R39_TowerofHera_BigChest, // TODO: test, top left dodongo
             RoomIdConstants.R54_SwampPalace_BigChestRoom, // TODO: check bottom left waterbug
+            RoomIdConstants.R63_IcePalace_MapChestRoom, // spikes block stuff
             RoomIdConstants.R66_HyruleCastle_6RopesRoom, // only if two stack, but why push it
             RoomIdConstants.R70_SwampPalace_CompassChestRoom,
             RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom, // TODO: test
@@ -828,6 +836,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R155_GanonsTower_ManySpikes_WarpMazeRoom, // TODO: test, middle spike covers warp, are we randomizing those?
             RoomIdConstants.R156_GanonsTower_InvisibleFloorMazeRoom, // TODO: test
             RoomIdConstants.R157_GanonsTower_CompassChest_InvisibleFloorRoom, // TODO: test
+            RoomIdConstants.R158_IcePalace_BigChestRoom, // big spikes will block
             RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom, // TODO: test
             RoomIdConstants.R170_EasternPalace_MapChestRoom, // TODO: test
             RoomIdConstants.R179_MiseryMire_SpikeKeyChestRoom, // TODO: test lower stalfos blocking door
@@ -836,6 +845,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R188_ThievesTown_ConveyorToilet, // TODO: test
             RoomIdConstants.R198_TurtleRock0xC6, // technically a door is blocked off, but who would ever go there?
             RoomIdConstants.R203_ThievesTown_NorthWestEntranceRoom,
+            RoomIdConstants.R206_IcePalace_HoletoKholdstareRoom, // spikes block stuff
             RoomIdConstants.R208_AgahnimsTower_DarkMaze, // TODO: test
             RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom,
             RoomIdConstants.R213_TurtleRock_LaserKeyRoom,

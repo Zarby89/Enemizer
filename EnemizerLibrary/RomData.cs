@@ -81,6 +81,12 @@ namespace EnemizerLibrary
             }
         }
 
+        public void ExpandRom()
+        {
+            Array.Resize(ref this.romData, 3145728);
+            this.romData[0xFFD7] = 0x0C; // update header length
+        }
+
         /*
 	public function writeRandomizerLogicHash(array $bytes) : self {
 		$this->write(0x187F00, pack('C*', ...$bytes));

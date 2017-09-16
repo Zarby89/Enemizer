@@ -39,12 +39,14 @@ namespace EnemizerLibrary
 
         public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
         {
-            if (needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0))
+            var req = dungeonReqs.GetGroupRequirementForRoom(room);
+
+            if (needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0)
+                && req.GroupId.Count == 0
+                && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
                 return UsableDungeonSpriteGroups;
             }
-
-            var req = dungeonReqs.GetGroupRequirementForRoom(room);
 
             //var usableGroups = spriteRequirementsCollection.SpriteRequirements.Where(x => x.GroupId)
             var killableGroupIds = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.GroupId).ToList();

@@ -7,6 +7,15 @@ lorom
 
 incsrc DMA.asm
 
+; -------------------------------------------
+; make the rom bigger
+org $00FFD7 ; Set rom on 3-4mb
+db #$0C
+org $5FFFFF ; write at the last position to expand on 3mb
+db #$00
+; -------------------------------------------
+
+
 ; insert kholdstare shell gfx file
 ; pc file address = 0x123000
 org $24B000
