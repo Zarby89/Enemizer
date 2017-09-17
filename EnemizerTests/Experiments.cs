@@ -33,10 +33,10 @@ namespace EnemizerTests
             foreach (var r in rc.Rooms)
             {
                 var sprites = r.Sprites.Where(x => (x.byte0 & byte0mask) > 0 || (x.byte1 & byte1mask) > 0);
-                if(sprites.Any())
+                if (sprites.Any())
                 {
                     output.WriteLine($"room: {r.RoomId} ({r.RoomName})");
-                    foreach(var s in sprites)
+                    foreach (var s in sprites)
                     {
                         output.WriteLine($"addr: {s.Address.ToString("X8")} \tID: {((s.byte1 & byte1mask) == 0xE0 ? s.SpriteId + 0x100 : s.SpriteId).ToString("X2")} \tName: { SpriteConstants.GetSpriteName(((s.byte1 & byte1mask) == 0xE0 ? s.SpriteId + 0x100 : s.SpriteId)) } \tBits: {Convert.ToString((((s.byte0 & byte0mask) >> 2) | ((s.byte1 & byte1mask) >> 5)), 2).PadLeft(5, '0')} \tHM P: {(((s.byte0 & byte0mask) >> 2) | ((s.byte1 & byte1mask) >> 5)).ToString("X2")}");
 
@@ -50,10 +50,11 @@ namespace EnemizerTests
         public void get_overworld_sprites()
         {
             var romData = Utilities.LoadRom("..\\..\\..\\EnemizerGui\\bin\\Debug\\Enemizer 6.0 - alttp - VT_no-glitches-26_normal_open_none_830270265.sfc");
+            //var romData = Utilities.LoadRom("..\\..\\..\\Need To Test Seeds\\workingweirdnpc.sfc");
 
             OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
 
-            foreach(var owArea in areas.OverworldAreas)
+            foreach (var owArea in areas.OverworldAreas)
             {
                 output.WriteLine($"Map: {owArea.AreaId.ToString("X3")} ({owArea.AreaName})\tGraphics Block: {owArea.GraphicsBlockId} ({owArea.GraphicsBlockAddress.ToString("X4")})");
 
@@ -110,7 +111,7 @@ namespace EnemizerTests
             rc.LoadRooms();
 
             OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
-            
+
 
             var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }), Formatting.Indented);
             var roomJson = JsonConvert.SerializeObject(rc.Rooms.Select(x => new { x.RoomId, x.RoomName, x.GraphicsBlockId }), Formatting.Indented);
@@ -132,23 +133,37 @@ namespace EnemizerTests
             var romData = Utilities.LoadRom("rando.sfc");
             //output.WriteLine("hmm");
 
-            for(int i=0; i<romData.Length-1; i++)
+            for (int i = 0; i < romData.Length - 1; i++)
             {
-                if(romData[i] == 0x81 && romData[i+1] == 0x7A)
+                if (romData[i] == 0x81 && romData[i + 1] == 0x7A)
                 {
                     output.WriteLine($"Maybe something: 0x7A81 at {i.ToString("X8")}");
                     // maybe a hit
-                    for (int j=0; j<0x20; j++)
+                    for (int j = 0; j < 0x20; j++)
                     {
-                        if (j+1 >= romData.Length)
+                        if (j + 1 >= romData.Length)
                             break;
 
-                        if(romData[j] == 0x82 && romData[j+1] == 0x7A)
+                        if (romData[j] == 0x82 && romData[j + 1] == 0x7A)
                         {
                             output.WriteLine($"Maybe something: 0x7A81 at {i.ToString("X8")}  0x7A82 at {j.ToString("X8")}");
                         }
                     }
                 }
+            }
+        }
+
+        [Fact]
+        public void figure_out_entrances()
+        {
+            var romData = Utilities.LoadRom("rando.sfc");
+
+            EntranceCollection ec = new EntranceCollection(romData);
+            ec.LoadEntrances();
+
+            foreach(var e in ec.Entrances)
+            {
+                output.WriteLine($"Address: {e.EntranceAddress} - Value: {e.EntranceNumber} - {e.EntranceName} -> Connects to: {e.ConnectToRoomId} {e.ConnectsToRoomName}");
             }
         }
     }

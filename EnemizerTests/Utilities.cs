@@ -18,6 +18,7 @@ namespace EnemizerTests
             fs.Close();
 
             RomData romData = new RomData(rom_data);
+            romData.ExpandRom();
 
             Patch patch = new Patch("patchData.json");
             patch.PatchRom(romData);
