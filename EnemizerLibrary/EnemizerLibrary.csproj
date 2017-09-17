@@ -110,6 +110,8 @@
     <Compile Include="RomData.cs" />
     <Compile Include="Spheres\Entrance.cs" />
     <Compile Include="Spheres\EntranceConstants.cs" />
+    <Compile Include="Spheres\Exit.cs" />
+    <Compile Include="Spheres\ExitConstants.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>

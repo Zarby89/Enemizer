@@ -102,7 +102,7 @@ namespace EnemizerLibrary
 
             RoomRequirements.Add(new RoomGroupRequirement(7, 75, 77, 57, 54,
                 RoomIdConstants.R8_Cave_HealingFairy,
-                RoomIdConstants.R44_Cave0x2C,
+                RoomIdConstants.R44_Cave0x2C_HookshotCaveBackdoor,
                 RoomIdConstants.R276_WishingWell_Cave0x114,
                 RoomIdConstants.R277_WishingWell_BigFairy));
 
