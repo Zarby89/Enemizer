@@ -157,7 +157,8 @@ namespace EnemizerTests
         public void figure_out_entrances()
         {
             //var romData = Utilities.LoadRom("rando.sfc");
-            var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc");
+            //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc"); // simple
+            var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_676766069.sfc"); // insanity
 
             EntranceCollection ec = new EntranceCollection(romData);
             ec.LoadEntrances();
@@ -167,12 +168,12 @@ namespace EnemizerTests
 
             foreach(var e in ec.Entrances)
             {
-                output.WriteLine($"Address: {e.EntranceAddress.ToString("X")} - Value: {e.EntranceNumber} - {e.EntranceName} -> Connects to: {e.ConnectToRoomId} {e.ConnectsToRoomName}");
+                output.WriteLine($"Address: {e.EntranceAddress.ToString("X")} - Value: {e.EntranceNumber} - {e.EntranceSourceName} -> Connects to: {e.ConnectToRoomId} {e.ConnectsToRoomName}");
             }
 
             foreach(var e in exits.Exits)
             {
-                output.WriteLine($"RoomAddress: {e.RoomAddress.ToString("X")} Room: {e.RoomId} - {e.RoomName} AreaAddress: {e.AreaAddress.ToString("X")} Area: {e.AreaId} - {e.AreaName}");
+                output.WriteLine($"RoomAddress: {e.RoomAddress.ToString("X")} Room: {e.RoomId} -> Goes to: {e.RoomName} AreaAddress: {e.AreaAddress.ToString("X")} Area: {e.AreaId} - {e.ExitAreaName} - {e.AreaName}");
             }
         }
     }

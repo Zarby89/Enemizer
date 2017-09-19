@@ -9,9 +9,18 @@ namespace EnemizerLibrary
     public class Entrance
     {
         RomData romData;
+        public int EntranceIndex { get; set; }
         public byte EntranceNumber { get; set; }
         public int EntranceAddress { get; set; }
         public int ConnectToRoomId { get; set; }
+
+        public string EntranceSourceName
+        {
+            get
+            {
+                return EntranceConstants.GetEntranceNameFromAddress(EntranceAddress);
+            }
+        }
         public string EntranceName
         {
             get
@@ -24,14 +33,14 @@ namespace EnemizerLibrary
         {
             get
             {
-                return RoomIdConstants.GetRoomName(ConnectToRoomId);
+                return EntranceConstants.GetEntranceName(EntranceNumber) + " - " + RoomIdConstants.GetRoomName(ConnectToRoomId);
             }
         }
 
         public Entrance(RomData romData, int entranceIndex)
         {
             this.romData = romData;
-
+            this.EntranceIndex = entranceIndex;
             this.EntranceAddress = 0xDBB73 + entranceIndex;
             this.EntranceNumber = romData[EntranceAddress];
 

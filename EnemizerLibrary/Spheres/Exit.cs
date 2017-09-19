@@ -18,7 +18,7 @@ namespace EnemizerLibrary
         {
             get
             {
-                return RoomIdConstants.GetRoomName(RoomId);
+                return ExitConstants.GetExitRoomName(RoomId);
             }
         }
         public string AreaName
@@ -26,6 +26,14 @@ namespace EnemizerLibrary
             get
             {
                 return OverworldAreaConstants.GetAreaName(AreaId);
+            }
+        }
+
+        public string ExitAreaName
+        {
+            get
+            {
+                return ExitConstants.GetExitAreaName(AreaAddress);
             }
         }
 
@@ -58,10 +66,10 @@ namespace EnemizerLibrary
             for(int i=0; i<0x4F; i++)
             {
                 var exit = new Exit(romData, i);
-                if (exit.RoomId <= 295) // leave out the weird exits
-                {
+                //if (exit.RoomId <= 295) // leave out the weird exits
+                //{
                     Exits.Add(exit);
-                }
+                //}
             }
         }
     }
