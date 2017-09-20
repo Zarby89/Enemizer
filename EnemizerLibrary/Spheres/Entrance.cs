@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         public int EntranceIndex { get; set; }
         public byte EntranceNumber { get; set; }
         public int EntranceAddress { get; set; }
+        public int EntranceAreaId { get; set; }
         public int ConnectToRoomId { get; set; }
 
         public string EntranceSourceName
@@ -19,6 +20,13 @@ namespace EnemizerLibrary
             get
             {
                 return EntranceConstants.GetEntranceNameFromAddress(EntranceAddress);
+            }
+        }
+        public string EntranceAreaName
+        {
+            get
+            {
+                return OverworldAreaConstants.GetAreaName(EntranceAreaId);
             }
         }
         public string EntranceName
@@ -37,14 +45,39 @@ namespace EnemizerLibrary
             }
         }
 
-        public Entrance(RomData romData, int entranceIndex)
+        public Entrance(RomData romData)
         {
             this.romData = romData;
+        }
+    }
+
+    public class NormalEntrance : Entrance
+    {
+        public NormalEntrance(RomData romData, int entranceIndex)
+            :base(romData)
+        {
             this.EntranceIndex = entranceIndex;
             this.EntranceAddress = 0xDBB73 + entranceIndex;
             this.EntranceNumber = romData[EntranceAddress];
 
-            this.ConnectToRoomId = (romData[0x14577 + (this.EntranceNumber*2) + 1] << 8) + romData[0x14577 + (this.EntranceNumber*2)];
+            this.EntranceAreaId = (romData[0xDB96F + (entranceIndex * 2) + 1] << 8) + romData[0xDB96F + (entranceIndex * 2)];
+
+            this.ConnectToRoomId = (romData[0x14577 + (this.EntranceNumber * 2) + 1] << 8) + romData[0x14577 + (this.EntranceNumber * 2)];
+        }
+    }
+    public class DropEntrance : Entrance
+    {
+        public DropEntrance(RomData romData, int entranceIndex)
+            :base(romData)
+        {
+            this.EntranceIndex = entranceIndex;
+            this.EntranceAddress = 0xDB84C + entranceIndex;
+            this.EntranceNumber = romData[EntranceAddress];
+
+            this.EntranceAreaId = (romData[0xDB826 + (entranceIndex * 2) + 1] << 8) + romData[0xDB826 + (entranceIndex * 2)];
+
+            // hope this is the same...
+            this.ConnectToRoomId = (romData[0x14577 + (this.EntranceNumber * 2) + 1] << 8) + romData[0x14577 + (this.EntranceNumber * 2)];
         }
     }
 
@@ -60,9 +93,14 @@ namespace EnemizerLibrary
 
         public void LoadEntrances()
         {
-            for(int i=0; i<0x81; i++)
+            for (int i = 0; i < 0x13; i++)
             {
-                Entrances.Add(new Entrance(romData, i));
+                Entrances.Add(new DropEntrance(romData, i));
+            }
+
+            for (int i=0; i<0x81; i++)
+            {
+                Entrances.Add(new NormalEntrance(romData, i));
             }
         }
     }

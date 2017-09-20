@@ -20,7 +20,7 @@ namespace EnemizerLibrary
             return null;
         }
 
-        static Dictionary<int, string> roomNames = new Dictionary<int, string>()
+        public static Dictionary<int, string> roomNames = new Dictionary<int, string>()
         {
             { R0_Ganon, "Ganon" },
             { R1_HyruleCastle_NorthCorridor, "Hyrule Castle (North Corridor)" },

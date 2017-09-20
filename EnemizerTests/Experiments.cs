@@ -156,9 +156,9 @@ namespace EnemizerTests
         [Fact]
         public void figure_out_entrances()
         {
-            //var romData = Utilities.LoadRom("rando.sfc");
+            var romData = Utilities.LoadRom("rando.sfc");
             //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc"); // simple
-            var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_676766069.sfc"); // insanity
+            //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_676766069.sfc"); // insanity
 
             EntranceCollection ec = new EntranceCollection(romData);
             ec.LoadEntrances();
@@ -168,12 +168,21 @@ namespace EnemizerTests
 
             foreach(var e in ec.Entrances)
             {
-                output.WriteLine($"Address: {e.EntranceAddress.ToString("X")} - Value: {e.EntranceNumber} - {e.EntranceSourceName} -> Connects to: {e.ConnectToRoomId} {e.ConnectsToRoomName}");
+                output.WriteLine($"Address: {e.EntranceAddress.ToString("X")} - Value: {e.EntranceAreaId.ToString("X3")} - {e.EntranceAreaName} - {e.EntranceSourceName} - Entrance #: 0x{e.EntranceNumber.ToString("X2")} - -> Connects to: 0x{e.ConnectToRoomId.ToString("X3")} - {e.ConnectsToRoomName}");
             }
 
             foreach(var e in exits.Exits)
             {
-                output.WriteLine($"RoomAddress: {e.RoomAddress.ToString("X")} Room: {e.RoomId} -> Goes to: {e.RoomName} AreaAddress: {e.AreaAddress.ToString("X")} Area: {e.AreaId} - {e.ExitAreaName} - {e.AreaName}");
+                output.WriteLine($"RoomAddress: {e.RoomAddress.ToString("X")} Room: {e.RoomId} - {e.RoomName} -> Goes to: AreaAddress: {e.AreaAddress.ToString("X")} Area: {e.AreaId} - {e.ExitAreaName} - {e.AreaName}");
+            }
+        }
+
+        [Fact]
+        public void dump_rooms()
+        {
+            foreach(var r in RoomIdConstants.roomNames)
+            {
+                output.WriteLine($"roomId\t0x{r.Key.ToString("X3")}\tName\t{r.Value}");
             }
         }
     }

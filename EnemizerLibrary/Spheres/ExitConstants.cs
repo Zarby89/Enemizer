@@ -99,6 +99,8 @@ namespace EnemizerLibrary
         }
         public readonly static Dictionary<int, string> ExitRoomNames = new Dictionary<int, string>()
         {
+            { 0xFFFF, "Zora's Domain" },
+            { 0x20, "Agahnim's Tower Boss Room" },
             {0x00,"Pyramid (Drop Entrance)"},
             {0x08,"North Fairy Cave Exit"},
             {0x0C,"Ganons Tower Exit"},
@@ -180,7 +182,7 @@ namespace EnemizerLibrary
             {0x103,"Bush Covered House / Tavern (Front) / Tavern (Back Door)"},
             //{0x103,"Tavern (Front)"},
             //{0x103,"Tavern (Back Door)"},
-            {0x104,"Houlihan Cave (Drop Entrance)"},
+            {0x104,"Link's House"},
             {0x105,"Sahasrahlas Hut"},
             {0x106,"Chest Game / Doorless Hut"},
             //{0x106,"Doorless Hut"},

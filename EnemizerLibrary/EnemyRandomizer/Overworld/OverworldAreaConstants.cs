@@ -138,7 +138,7 @@ namespace EnemizerLibrary
             { 0x06E, "Caves South of Palace of Darkness (left) (DW)" },
             { 0x06F, "Caves South of Palace of Darkness (right) (DW)" },
             { 0x070, "Misery Mire (DW)" },
-            { 0x071, "South of Haunted Grove (DW)" },
+            { 0x071, "South of Haunted Grove (DW) (Should be Mire 2)" },
             { 0x072, "South of Haunted Grove (DW) (Duplicate)" },
             { 0x073, "North-western Great Swamp (DW)" },
             { 0x074, "North-eastern Great Swamp (DW)" },
