@@ -68,3 +68,5 @@ bld/
 /User Testing Results
 /ER*.txt
 /*.xlsx
+/*.graphml
+/eg map.png

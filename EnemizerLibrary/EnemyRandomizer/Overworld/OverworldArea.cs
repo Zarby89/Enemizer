@@ -106,7 +106,7 @@ namespace EnemizerLibrary
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
 
-            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).ToArray();
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Select(x => x.SpriteId).ToArray();
 
             if (possibleSprites.Length > 0)
             {
@@ -126,6 +126,17 @@ namespace EnemizerLibrary
                 }
                 spritesToUpdate.Where(x => x.SpriteId == SpriteConstants.RavenSprite).ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+            }
+        }
+
+        public void RandomizeBushSprite(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        {
+            var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
+
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Where(x => x.Overlord == false).Select(x => x.SpriteId).ToArray();
+            if(possibleSprites.Length > 0)
+            {
+                romData[SpriteConstants.RandomizedBushEnemyTableBaseAddress + this.AreaId] = (byte)possibleSprites[rand.Next(possibleSprites.Length)];
             }
         }
     }

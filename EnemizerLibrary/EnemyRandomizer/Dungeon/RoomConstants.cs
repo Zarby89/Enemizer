@@ -287,7 +287,7 @@ namespace EnemizerLibrary
             { R262_ChestGame_BombHouse, "Chest Game / Outcast Village Bomb House" },
             { R263_Library_BombFarmRoom, "Library / Bomb Farm Room" },
             { R264_ChickenHouse, "Chicken House" },
-            { R265_WitchHut, "Witch Hut?" },
+            { R265_WitchHut, "Witch Hut" },
             { R266_Aginah, "Aginah's Cave" },
             { R267_SwampFloodwayRoom, "Swamp Floodway Room" },
             { R268_MimicCave, "Mimic Cave" },

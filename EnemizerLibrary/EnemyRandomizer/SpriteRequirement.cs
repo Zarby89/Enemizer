@@ -333,7 +333,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowInWall_MaybeSprite).SetDoNotRandomize().SetNeverUse());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StatueSprite).SetDoNotRandomize().SetIsObject().AddSubgroup3(82, 83)
-                .AddExcludedRooms(DontUseImmovableSpritesRooms));
+                .AddExcludedRooms(DontUseImmovableSpritesRooms)
+                .AddExcludedRooms(RoomIdConstants.R63_IcePalace_MapChestRoom)); // statues break the pull switch in the second room
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WeathervaneSprite).SetDoNotRandomize().SetNeverUse());
 
@@ -462,8 +463,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MasterSwordSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(55).AddSubgroup3(54));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_NonShooterSprite).SetKillable().AddSubgroup0(47));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_ShooterSprite).SetKillable().AddSubgroup0(47));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_NonShooterSprite).SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_ShooterSprite).SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShootingGalleryProprietorSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(75));
 
@@ -748,9 +749,9 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedallionTabletSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(18));
 
             // turn these off for now outside DM. they can only spawn in large (1024x1024 areas)
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetNeverUse().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetOverlord().SetNeverUse().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetNeverUseDungeon().AddSubgroup2(35));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetOverlord().SetNeverUseDungeon().AddSubgroup2(35));
 
             // Overlords
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EP4Walls).SetOverlord().AddSubgroup2(46));

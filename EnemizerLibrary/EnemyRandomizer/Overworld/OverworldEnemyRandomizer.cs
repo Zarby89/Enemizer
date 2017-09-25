@@ -50,6 +50,7 @@ namespace EnemizerLibrary
                 // pick random sprite group
                 //area.GraphicsBlockId = ??;
                 area.RandomizeSprites(rand, spriteGroupCollection, spriteRequirementCollection);
+                area.RandomizeBushSprite(rand, spriteGroupCollection, spriteRequirementCollection);
             }
         }
 

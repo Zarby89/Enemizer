@@ -21,6 +21,9 @@ namespace EnemizerLibrary
         public static readonly byte SpriteSubtypeByte0Mask = 0x60; // 0110 0000
         public static readonly byte SpriteSubtypeByte0RemoveMask = 0x9F; // 1001 1111
 
+        public const int RandomizedBushEnemyTableBaseAddress = 0x200020;
+        public const int RandomizedPotEnemyTableBaseAddress = RandomizedBushEnemyTableBaseAddress + 0x80;
+
         public static string GetSpriteName(int spriteId)
         {
             string spriteName;

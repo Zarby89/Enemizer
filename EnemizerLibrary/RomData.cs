@@ -10,10 +10,52 @@ namespace EnemizerLibrary
 {
     public class RomData
     {
+        public const int EnemizerOptionFlagsBaseAddress = 0x200000;
+
         private byte[] romData;
         public RomData(byte[] romData)
         {
             this.romData = romData;
+        }
+
+        public bool RandomizeHiddenEnemies
+        {
+            get
+            {
+                return romData[EnemizerOptionFlagsBaseAddress] == 0x01;
+            }
+            set
+            {
+                romData[EnemizerOptionFlagsBaseAddress] = (byte)(value ? 0x01 : 0x00);
+            }
+        }
+
+        public void RandomizeHiddenEnemyChancePool()
+        {
+            // table is filled with Item Ids.
+            // 0x0F is used to randomly spawn an enemy
+            /*
+             * 0x0D7BBB
+            org $1AFBBB ;Increases chance of getting enemies under random bush
+            db $01, $0F, $0F, $0F, $0F, $0F, $0F, $12 
+            db $0F, $01, $0F, $0F, $11, $0F, $0F, $03
+            */
+            romData[0xD7BBB + 0] = 0x01;
+            romData[0xD7BBB + 1] = 0x0F;
+            romData[0xD7BBB + 2] = 0x0F;
+            romData[0xD7BBB + 3] = 0x0F;
+            romData[0xD7BBB + 4] = 0x0F;
+            romData[0xD7BBB + 5] = 0x0F;
+            romData[0xD7BBB + 6] = 0x0F;
+            romData[0xD7BBB + 7] = 0x12;
+            romData[0xD7BBB + 8] = 0x0F;
+            romData[0xD7BBB + 9] = 0x01;
+            romData[0xD7BBB + 10] = 0x0F;
+            romData[0xD7BBB + 11] = 0x0F;
+            romData[0xD7BBB + 12] = 0x11;
+            romData[0xD7BBB + 13] = 0x0F;
+            romData[0xD7BBB + 14] = 0x0F;
+            romData[0xD7BBB + 15] = 0x03;
         }
 
         public bool IsRandomizerRom

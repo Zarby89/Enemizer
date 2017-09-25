@@ -97,6 +97,14 @@ namespace EnemizerLibrary
             var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
             spriteGroupCollection.LoadSpriteGroups();
 
+            if(optionFlags.RandomizeEnemies)
+            {
+                this.ROM_DATA.RandomizeHiddenEnemies = true;
+                Patch bushPatch = new Patch("randomizeBushes.json");
+                bushPatch.PatchRom(this.ROM_DATA);
+                this.ROM_DATA.RandomizeHiddenEnemyChancePool();
+            }
+
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {

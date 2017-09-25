@@ -42,12 +42,16 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>cd $(ProjectDir)
+
 "..\bincomp\bincomp.exe" bosses_moved.asm patchData.json
 copy patchData.json $(SolutionDir)
+copy patchData.json $(SolutionDir)\EnemizerGui\bin\Debug
 copy patchData.json $(SolutionDir)\EnemizerTests\bin\Debug
 copy patchData.json $(SolutionDir)\RomViewer\bin\Debug
+
 "..\bincomp\bincomp.exe" randomize_bushes.asm randomizeBushes.json
 copy randomizeBushes.json $(SolutionDir)
+copy randomizeBushes.json $(SolutionDir)\EnemizerGui\bin\Debug
 copy randomizeBushes.json $(SolutionDir)\EnemizerTests\bin\Debug
 copy randomizeBushes.json $(SolutionDir)\RomViewer\bin\Debug
 </PreBuildEvent>

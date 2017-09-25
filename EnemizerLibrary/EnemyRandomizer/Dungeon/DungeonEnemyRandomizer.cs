@@ -50,6 +50,7 @@ namespace EnemizerLibrary
             foreach (var room in roomCollection.Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
                 room.RandomizeSprites(rand, spriteGroupCollection, spriteRequirementCollection);
+                room.RandomizePotSprites(rand, spriteGroupCollection, spriteRequirementCollection);
                 //RandomizeRoomSprites(room);
             }
         }

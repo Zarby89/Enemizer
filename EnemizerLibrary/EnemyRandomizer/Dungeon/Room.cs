@@ -122,7 +122,7 @@ namespace EnemizerLibrary
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
 
-            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).ToArray();
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Select(x => x.SpriteId).ToArray();
 
             if (possibleSprites.Length > 0)
             {
@@ -157,5 +157,16 @@ namespace EnemizerLibrary
             }
         }
 
+        public void RandomizePotSprites(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        {
+            var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
+
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Where(x => x.Overlord == false).Select(x => x.SpriteId).ToArray();
+
+            if(possibleSprites.Length > 0)
+            {
+                romData[SpriteConstants.RandomizedPotEnemyTableBaseAddress + this.RoomId] = (byte)possibleSprites[rand.Next(possibleSprites.Length)];
+            }
+        }
     }
 }
