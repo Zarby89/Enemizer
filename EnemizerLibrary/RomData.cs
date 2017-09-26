@@ -10,7 +10,10 @@ namespace EnemizerLibrary
 {
     public class RomData
     {
+        // 0x20 flags total
         public const int EnemizerOptionFlagsBaseAddress = 0x200000;
+        public const int RandomizeHiddenEnemiesFlag = 0x00;
+        public const int CloseBlindDoorFlag = 0x01;
 
         private byte[] romData;
         public RomData(byte[] romData)
@@ -20,26 +23,23 @@ namespace EnemizerLibrary
 
         public bool RandomizeHiddenEnemies
         {
-            get
-            {
-                return romData[EnemizerOptionFlagsBaseAddress] == 0x01;
-            }
-            set
-            {
-                romData[EnemizerOptionFlagsBaseAddress] = (byte)(value ? 0x01 : 0x00);
-            }
+            get { return GetFlag(RandomizeHiddenEnemiesFlag); }
+            set { SetFlag(RandomizeHiddenEnemiesFlag, value); }
         }
 
         public bool CloseBlindDoor
         {
-            get
-            {
-                return romData[EnemizerOptionFlagsBaseAddress+1] == 0x01;
-            }
-            set
-            {
-                romData[EnemizerOptionFlagsBaseAddress+1] = (byte)(value ? 0x01 : 0x00);
-            }
+            get { return GetFlag(CloseBlindDoorFlag); }
+            set { SetFlag(CloseBlindDoorFlag, value); }
+        }
+
+        private bool GetFlag(int offset)
+        {
+            return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
+        }
+        private void SetFlag(int offset, bool val)
+        {
+            romData[EnemizerOptionFlagsBaseAddress + offset] = (byte)(val ? 0x01 : 0x00);
         }
 
         public void RandomizeHiddenEnemyChancePool()

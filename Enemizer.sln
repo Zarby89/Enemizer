@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly", "Assembly\Assemb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerTests", "EnemizerTests\EnemizerTests.csproj", "{098A5180-0882-4C59-A557-B1CC0770856C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomViewer", "RomViewer\RomViewer.csproj", "{93803484-9944-4554-999E-26ABBB2C165C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,10 +38,6 @@ Global
 		{098A5180-0882-4C59-A557-B1CC0770856C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{098A5180-0882-4C59-A557-B1CC0770856C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{098A5180-0882-4C59-A557-B1CC0770856C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93803484-9944-4554-999E-26ABBB2C165C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93803484-9944-4554-999E-26ABBB2C165C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93803484-9944-4554-999E-26ABBB2C165C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93803484-9944-4554-999E-26ABBB2C165C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
