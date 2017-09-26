@@ -100,8 +100,9 @@ namespace EnemizerLibrary
             if(optionFlags.RandomizeEnemies)
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
-                Patch bushPatch = new Patch("randomizeBushes.json");
-                bushPatch.PatchRom(this.ROM_DATA);
+                // in main patch now.
+                //Patch bushPatch = new Patch("randomizeBushes.json");
+                //bushPatch.PatchRom(this.ROM_DATA);
                 this.ROM_DATA.RandomizeHiddenEnemyChancePool();
             }
 
