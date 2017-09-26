@@ -45,6 +45,14 @@ boss_move:
                         ; IF MAIDEN IS ALREADY RESCUED -> spawn sprites normally
         JSL $09C44E     ; removes sprites in thieve town boss room
         JSL $09C114     ; Restore the dungeon_resetsprites
+        ;Close the door if $408001 flag == 1
+        LDA !BLIND_DOOR_FLAG : BEQ .no_blind_door
+        INC $0468
+        STZ $068E
+        STZ $0690
+        INC $7E0CF3 
+         ; ;That must be called after the room load NotLikeThis !
+        .no_blind_door
         BRL .move_to_bottom_right
 	+
 
@@ -157,24 +165,24 @@ gibdo_drop_key:
 WriteGfxBlock:
 {
     ;DMA_VRAM(VRAM_HIGH,VRAM_LOW,SRC_BANK,SRC_HIGH,SRC_LOW,LENGTH_HIGH,LENGTH_LOW)
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+;    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     RTL
 }
 
 new_kholdstare_code:
 {
-    LDA $0CBA : BNE .already_iced
-    LDA #$01 : STA $0CBA
-    JSL WriteGfxBlock;
-    .already_iced
-    JSL $0DD97F
+;    LDA $0CBA : BNE .already_iced
+;    LDA #$01 : STA $0CBA
+;    JSL WriteGfxBlock;
+;    .already_iced
+;    JSL $0DD97F
     RTL
 }
 
 new_trinexx_code:
 {
-    LDA.b #$03 : STA $0DC0, X
-    JSL WriteGfxBlock;
+;    LDA.b #$03 : STA $0DC0, X
+;    JSL WriteGfxBlock;
     RTL
 }
 

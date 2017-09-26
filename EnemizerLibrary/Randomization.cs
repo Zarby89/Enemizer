@@ -136,6 +136,8 @@ namespace EnemizerLibrary
             // do bosses after enemies or gfx blocks will get overwritten
             if (optionFlags.RandomizeBosses)
             {
+                this.ROM_DATA.CloseBlindDoor = true;
+
                 BossRandomizer br;
 
                 switch(optionFlags.RandomizeBossesType)

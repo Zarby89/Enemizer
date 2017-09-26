@@ -30,6 +30,18 @@ namespace EnemizerLibrary
             }
         }
 
+        public bool CloseBlindDoor
+        {
+            get
+            {
+                return romData[EnemizerOptionFlagsBaseAddress+1] == 0x01;
+            }
+            set
+            {
+                romData[EnemizerOptionFlagsBaseAddress+1] = (byte)(value ? 0x01 : 0x00);
+            }
+        }
+
         public void RandomizeHiddenEnemyChancePool()
         {
             // table is filled with Item Ids.
