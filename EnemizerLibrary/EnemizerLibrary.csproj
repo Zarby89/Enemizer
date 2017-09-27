@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnemizerLibrary</RootNamespace>
+    <AssemblyName>EnemizerLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BossRandomizer\Boss\TrinexxBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\EmptyBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\BossType.cs" />
+    <Compile Include="BossRandomizer\Boss\LanmolaBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\MoldormBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\HelmasaurBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\ArrghusBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\MothulaBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\BlindBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\KholdstareBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\VitreousBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\ArmosBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\Boss.cs" />
+    <Compile Include="BossRandomizer\BossRandomizer.cs" />
+    <Compile Include="BossRandomizer\BossShells.cs" />
+    <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
+    <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
+    <Compile Include="Chests.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="BossRandomizer\Dungeons\TurtleRockDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\GT1Dungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\GT2Dungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\GT3Dungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\DesertPalaceDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\TowerOfHeraDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\PalaceOfDarknessDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\SwampPalaceDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\SkullWoodsDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\ThievesTownDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\IcePalaceDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\MiseryMireDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\EasternPalaceDungeon.cs" />
+    <Compile Include="BossRandomizer\Dungeons\DungeonType.cs" />
+    <Compile Include="BossRandomizer\Dungeons\Dungeon.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\DungeonEnemyRandomizer.cs" />
+    <Compile Include="EnemyRandomizer\GroupSubsetPossibleSprite.cs" />
+    <Compile Include="EnemyRandomizer\GroupSubsetPossibleSpriteCollection.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldArea.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldAreaConstants.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldEnemyRandomizer.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldGroupRequirementCollection.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldRequirement.cs" />
+    <Compile Include="EnemyRandomizer\Overworld\OverworldSprite.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\Room.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\RoomCollection.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\RoomConstants.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\DungeonSprite.cs" />
+    <Compile Include="EnemyRandomizer\Dungeon\RoomRequirement.cs" />
+    <Compile Include="EnemyRandomizer\SpriteConstants.cs" />
+    <Compile Include="EnemyRandomizer\SpriteGroup.cs" />
+    <Compile Include="EnemyRandomizer\SpriteGroupCollection.cs" />
+    <Compile Include="EnemyRandomizer\SpriteRequirement.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="GeneralPatches.cs" />
+    <Compile Include="OptionFlags.cs" />
+    <Compile Include="Patch.cs" />
+    <Compile Include="PotListing.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomization.cs" />
+    <Compile Include="RomData.cs" />
+    <Compile Include="Spheres\Entrance.cs" />
+    <Compile Include="Spheres\EntranceConstants.cs" />
+    <Compile Include="Spheres\Exit.cs" />
+    <Compile Include="Spheres\ExitConstants.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="Version.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

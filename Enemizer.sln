@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enemizer", "Enemizer.csproj", "{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enemizer", "EnemizerGui\Enemizer.csproj", "{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerLibrary", "EnemizerLibrary\EnemizerLibrary.csproj", "{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{4D330833-32B5-47CE-B135-C56030F588A4}"
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly", "Assembly\Assembly.csproj", "{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerTests", "EnemizerTests\EnemizerTests.csproj", "{098A5180-0882-4C59-A557-B1CC0770856C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,18 @@ Global
 		{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{098A5180-0882-4C59-A557-B1CC0770856C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{098A5180-0882-4C59-A557-B1CC0770856C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{098A5180-0882-4C59-A557-B1CC0770856C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{098A5180-0882-4C59-A557-B1CC0770856C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
