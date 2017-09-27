@@ -17,11 +17,13 @@ db #$00
 
 !BUSHES_FLAG = "$408000"
 !BLIND_DOOR_FLAG = "$408001"
+!MOLDORM_EYES_FLAG = "$408002"
 
 ;================================================================================
 
 incsrc hooks.asm
 incsrc bosses_hooks.asm
+incsrc moldorm_hooks.asm
 incsrc DMA.asm
 
 ;================================================================================
@@ -32,6 +34,7 @@ incsrc terrorpin.asm
 incsrc special_action.asm
 incsrc bosses_moved.asm
 incsrc bossdrop.asm
+incsrc moldorm.asm
 
 ;================================================================================
 

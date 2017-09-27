@@ -100,10 +100,10 @@ namespace EnemizerLibrary
             if(optionFlags.RandomizeEnemies)
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
-                // in main patch now.
-                //Patch bushPatch = new Patch("randomizeBushes.json");
-                //bushPatch.PatchRom(this.ROM_DATA);
-                this.ROM_DATA.RandomizeHiddenEnemyChancePool();
+                if (optionflags.RandomizeBushEnemyChance)
+                {
+                    this.ROM_DATA.RandomizeHiddenEnemyChancePool();
+                }
             }
 
             //dungeons
@@ -191,6 +191,15 @@ namespace EnemizerLibrary
             if(optionFlags.SetBlackoutMode)
             {
                 black_all_dungeons();
+            }
+
+            rand = new Random(seed);
+            if (optionflags.BootlegMagic)
+            {
+                // TODO: move this
+                byte numberOfMoldormEyes = (byte)rand.Next(0, 8);
+                this.ROM_DATA[0x0EDBB3] = numberOfMoldormEyes;
+                this.ROM_DATA[0x200002] = numberOfMoldormEyes;
             }
 
 

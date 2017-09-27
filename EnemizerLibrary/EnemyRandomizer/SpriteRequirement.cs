@@ -354,7 +354,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TalkingTreeSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(21));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).SetKillable().AddSubgroup1(30));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).AddSubgroup1(30));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16));
 
@@ -573,7 +573,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KyameronSprite).SetKillable().AddSubgroup2(34));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WizzrobeSprite).SetKillable().AddSubgroup2(37, 41));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WizzrobeSprite).AddSubgroup2(37, 41)); // can't be killed with bombs so don't put them in key/shutter rooms
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TadpolesSprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Tadpoles2Sprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));

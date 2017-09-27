@@ -21,25 +21,49 @@ namespace EnemizerLibrary
             this.romData = romData;
         }
 
+        /// <summary>
+        /// Flag to enable/disable custom enemies in grass/bushes
+        /// </summary>
         public bool RandomizeHiddenEnemies
         {
             get { return GetFlag(RandomizeHiddenEnemiesFlag); }
-            set { SetFlag(RandomizeHiddenEnemiesFlag, value); }
+            set
+            {
+                SetFlag(RandomizeHiddenEnemiesFlag, value);
+                // we probably don't need this but just to be safe
+                if(value == false)
+                {
+                    FillVanillaHiddenEnemyChancePool();
+                }
+            }
         }
 
+        /// <summary>
+        /// Flag to enable/disable Blind's boss fight room door auto-closing upon entering
+        /// </summary>
         public bool CloseBlindDoor
         {
             get { return GetFlag(CloseBlindDoorFlag); }
             set { SetFlag(CloseBlindDoorFlag, value); }
         }
 
-        private bool GetFlag(int offset)
+        internal bool GetFlag(int offset)
         {
             return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
         }
-        private void SetFlag(int offset, bool val)
+        internal void SetFlag(int offset, bool val)
         {
             romData[EnemizerOptionFlagsBaseAddress + offset] = (byte)(val ? 0x01 : 0x00);
+        }
+
+        public void FillVanillaHiddenEnemyChancePool()
+        {
+            /*
+             * 01 01 01 01 0F 01 01 12 
+             * 10 01 01 01 11 01 01 03 
+             */
+            byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
+            Array.Copy(vanilla, romData, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()

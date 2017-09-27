@@ -11,6 +11,7 @@ namespace EnemizerLibrary
     {
         public bool RandomizeEnemies { get; set; }
         public RandomizeEnemiesType RandomizeEnemiesType { get; set; } = RandomizeEnemiesType.Chaos; // default to Chaos
+        public bool RandomizeBushEnemyChance { get; set; }
 
         public bool RandomizeEnemyHealthRange { get; set; }
         public int RandomizeEnemyHealthRangeAmount { get; set; }
@@ -50,6 +51,7 @@ namespace EnemizerLibrary
         public bool RandomizeLinkSpritePalette { get; set; }
         public bool RandomizePots { get; internal set; }
         public bool ShuffleMusic { get; internal set; }
+        public bool BootlegMagic { get; set; }
     }
 
     public enum RandomizeEnemiesType

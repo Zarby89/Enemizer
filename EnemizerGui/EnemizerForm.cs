@@ -125,6 +125,8 @@ namespace Enemizer
 
             UpdatePalettesTabUIFromConfig();
 
+            UpdateExtrasTabUIFromConfig();
+
             //int flagsText = 0;
             //for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
             //{
@@ -151,9 +153,12 @@ namespace Enemizer
         {
             randomizeEnemiesCheckbox.Checked = config.OptionFlags.RandomizeEnemies;
             randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
 
             randomizationTypeTrackbar.Value = (int)config.OptionFlags.RandomizeEnemiesType;
             randomizationTypeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+
+            chkRandomizeBushEnemyChance.Checked = config.OptionFlags.RandomizeBushEnemyChance;
 
             randomizeEnemiesHealthCheckbox.Checked = config.OptionFlags.RandomizeEnemyHealthRange;
             randomizeEnemiesHealthTrackbar.Enabled = config.OptionFlags.RandomizeEnemyHealthRange;
@@ -214,6 +219,11 @@ namespace Enemizer
             randomizeSpritePalettesAdvancedCheckbox.Enabled = config.OptionFlags.RandomizeSpritePalettes;
 
             randomizeSpritePalettesAdvancedCheckbox.Checked = config.OptionFlags.SetAdvancedSpritePalettes;
+        }
+
+        private void UpdateExtrasTabUIFromConfig()
+        {
+            chkBootlegMagic.Checked = config.OptionFlags.BootlegMagic;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -358,6 +368,11 @@ namespace Enemizer
             //typeLabel.Text = typeString[typeTrackbar.Value];
             config.OptionFlags.RandomizeEnemiesType = (RandomizeEnemiesType)randomizationTypeTrackbar.Value;
             randomizationTypeLabel.Text = ((RandomizeEnemiesType)randomizationTypeTrackbar.Value).ToString();
+        }
+
+        private void chkRandomizeBushEnemyChance_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeBushEnemyChance = chkRandomizeBushEnemyChance.Checked;
         }
 
         private void randomizeEnemiesHealthCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -533,6 +548,10 @@ namespace Enemizer
             descriptionLabel.Text = description[extraSettingsCheckedList.SelectedIndex];
         }
 
+        private void chkBootlegMagic_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.BootlegMagic = chkBootlegMagic.Checked;
+        }
     }
 
 

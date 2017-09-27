@@ -84,6 +84,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
+            this.chkBootlegMagic = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -127,7 +129,7 @@
             "Shuffle Music",
             "Custom Bosses (WIP)",
             "Shuffle Pot Contents"});
-            this.extraSettingsCheckedList.Location = new System.Drawing.Point(110, 37);
+            this.extraSettingsCheckedList.Location = new System.Drawing.Point(19, 67);
             this.extraSettingsCheckedList.MultiColumn = true;
             this.extraSettingsCheckedList.Name = "extraSettingsCheckedList";
             this.extraSettingsCheckedList.Size = new System.Drawing.Size(263, 184);
@@ -281,6 +283,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkRandomizeBushEnemyChance);
             this.tabPage1.Controls.Add(this.allowZeroDamageCheckbox);
             this.tabPage1.Controls.Add(this.absorbableItemsChecklist);
             this.tabPage1.Controls.Add(this.spawnrateLabel);
@@ -308,7 +311,7 @@
             // 
             this.allowZeroDamageCheckbox.AutoSize = true;
             this.allowZeroDamageCheckbox.Enabled = false;
-            this.allowZeroDamageCheckbox.Location = new System.Drawing.Point(21, 157);
+            this.allowZeroDamageCheckbox.Location = new System.Drawing.Point(21, 199);
             this.allowZeroDamageCheckbox.Name = "allowZeroDamageCheckbox";
             this.allowZeroDamageCheckbox.Size = new System.Drawing.Size(103, 17);
             this.allowZeroDamageCheckbox.TabIndex = 16;
@@ -399,7 +402,7 @@
             // randomizeEnemiesDamageCheckbox
             // 
             this.randomizeEnemiesDamageCheckbox.AutoSize = true;
-            this.randomizeEnemiesDamageCheckbox.Location = new System.Drawing.Point(6, 134);
+            this.randomizeEnemiesDamageCheckbox.Location = new System.Drawing.Point(6, 176);
             this.randomizeEnemiesDamageCheckbox.Name = "randomizeEnemiesDamageCheckbox";
             this.randomizeEnemiesDamageCheckbox.Size = new System.Drawing.Size(165, 17);
             this.randomizeEnemiesDamageCheckbox.TabIndex = 7;
@@ -410,7 +413,7 @@
             // healthLabel
             // 
             this.healthLabel.AutoSize = true;
-            this.healthLabel.Location = new System.Drawing.Point(146, 99);
+            this.healthLabel.Location = new System.Drawing.Point(146, 140);
             this.healthLabel.Name = "healthLabel";
             this.healthLabel.Size = new System.Drawing.Size(30, 13);
             this.healthLabel.TabIndex = 6;
@@ -420,7 +423,7 @@
             // 
             this.randomizeEnemiesHealthTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.randomizeEnemiesHealthTrackbar.Enabled = false;
-            this.randomizeEnemiesHealthTrackbar.Location = new System.Drawing.Point(27, 97);
+            this.randomizeEnemiesHealthTrackbar.Location = new System.Drawing.Point(27, 138);
             this.randomizeEnemiesHealthTrackbar.Maximum = 20;
             this.randomizeEnemiesHealthTrackbar.Name = "randomizeEnemiesHealthTrackbar";
             this.randomizeEnemiesHealthTrackbar.Size = new System.Drawing.Size(113, 45);
@@ -431,7 +434,7 @@
             // randomizeEnemiesHealthCheckbox
             // 
             this.randomizeEnemiesHealthCheckbox.AutoSize = true;
-            this.randomizeEnemiesHealthCheckbox.Location = new System.Drawing.Point(6, 74);
+            this.randomizeEnemiesHealthCheckbox.Location = new System.Drawing.Point(6, 116);
             this.randomizeEnemiesHealthCheckbox.Name = "randomizeEnemiesHealthCheckbox";
             this.randomizeEnemiesHealthCheckbox.Size = new System.Drawing.Size(191, 17);
             this.randomizeEnemiesHealthCheckbox.TabIndex = 4;
@@ -690,6 +693,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.chkBootlegMagic);
             this.tabPage4.Controls.Add(this.extraSettingsCheckedList);
             this.tabPage4.Controls.Add(this.descriptionLabel);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -714,6 +718,32 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
+            // 
+            // chkRandomizeBushEnemyChance
+            // 
+            this.chkRandomizeBushEnemyChance.AutoSize = true;
+            this.chkRandomizeBushEnemyChance.Checked = true;
+            this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
+            this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
+            this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
+            this.chkRandomizeBushEnemyChance.TabIndex = 17;
+            this.chkRandomizeBushEnemyChance.Text = "Randomize Bush/Grass Enemy Chance";
+            this.chkRandomizeBushEnemyChance.UseVisualStyleBackColor = true;
+            this.chkRandomizeBushEnemyChance.CheckedChanged += new System.EventHandler(this.chkRandomizeBushEnemyChance_CheckedChanged);
+            // 
+            // chkBootlegMagic
+            // 
+            this.chkBootlegMagic.AutoSize = true;
+            this.chkBootlegMagic.Checked = true;
+            this.chkBootlegMagic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBootlegMagic.Location = new System.Drawing.Point(7, 7);
+            this.chkBootlegMagic.Name = "chkBootlegMagic";
+            this.chkBootlegMagic.Size = new System.Drawing.Size(94, 17);
+            this.chkBootlegMagic.TabIndex = 7;
+            this.chkBootlegMagic.Text = "Bootleg Magic";
+            this.chkBootlegMagic.UseVisualStyleBackColor = true;
+            this.chkBootlegMagic.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -817,6 +847,8 @@
         private System.Windows.Forms.CheckBox randomizeDungeonPalettesCheckbox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox seedNumberTextbox;
+        private System.Windows.Forms.CheckBox chkRandomizeBushEnemyChance;
+        private System.Windows.Forms.CheckBox chkBootlegMagic;
     }
 }
 
