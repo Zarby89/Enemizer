@@ -160,10 +160,10 @@ namespace EnemizerTests
             //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc"); // simple
             //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_676766069.sfc"); // insanity
 
-            EntranceCollection ec = new EntranceCollection(romData);
+            RomEntranceCollection ec = new RomEntranceCollection(romData);
             ec.LoadEntrances();
 
-            ExitCollection exits = new ExitCollection(romData);
+            RomExitCollection exits = new RomExitCollection(romData);
             exits.LoadExits();
 
             foreach(var e in ec.Entrances)
