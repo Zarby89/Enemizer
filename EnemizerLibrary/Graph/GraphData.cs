@@ -30,6 +30,12 @@ namespace EnemizerLibrary
             FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
         }
 
+        public GraphData(RomData romData)
+            :this(romData, new RomEntranceCollection(romData), new RomExitCollection(romData), new RomChestCollection(romData))
+        {
+
+        }
+
         public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits, RomChestCollection romChests)
         {
             this.romData = romData;

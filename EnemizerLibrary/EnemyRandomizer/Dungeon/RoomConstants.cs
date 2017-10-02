@@ -814,7 +814,19 @@ namespace EnemizerLibrary
             100,101,102,103,104,106,107,109,110,113,114,115,116,117,118,119,123,124,125,126,127,128,129,130,131,132,133,
             135,139,140,141,142,145,146,147,149,151,152,153,155,156,157,158,159,160,161,165,166,167,168,169,170,171,174,
             175,176,177,178,179,182,183,184,186,187,188,190,192,193,194,195,196,197,201,203,204,206,208,209,210,213,214,
-            216,217,218,219,220,223,224,228,232,238,239,240,249,251,235,254,263,264,268,269,291,267,185,286,181,150
+            216,217,218,219,220,223,224,228,232,238,239,240,249,251,235,254,263,264,268,269,291,267,185,286,181,150,
+            R200_EasternPalace_ArmosKnights,
+            R51_DesertPalace_Lanmolas,
+            R108_GanonsTower_LanmolasRoom,
+            R7_TowerofHera_Moldorm,
+            R77_GanonsTower_MoldormRoom,
+            R90_PalaceofDarkness_HelmasaurKing,
+            R6_SwampPalace_Arrghus,
+            R41_SkullWoods_Mothula,
+            R172_ThievesTown_BlindTheThief,
+            R222_IcePalace_Kholdstare,
+            R144_MiseryMire_Vitreous,
+            R164_TurtleRock_Trinexx
         };
     }
 }

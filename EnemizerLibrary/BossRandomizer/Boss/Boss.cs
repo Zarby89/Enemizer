@@ -13,6 +13,9 @@ namespace EnemizerLibrary
         public byte[] BossPointer { get; internal set; }
         public byte BossGraphics { get; internal set; }
 
+        protected string Requirements { get; set; }
+        protected string BossNode { get; set; }
+
         public Boss(BossType bossType)
         {
             BossType = bossType;
@@ -24,6 +27,12 @@ namespace EnemizerLibrary
         protected void FillRules()
         {
 
+        }
+
+        public bool CanBeUsed(Graph graph)
+        {
+            var res = graph.FindPath("cave-links-house", BossNode, true, null, Requirements);
+            return res.Success;
         }
 
         public virtual bool CheckRules(Dungeon dungeon, RomData romData)

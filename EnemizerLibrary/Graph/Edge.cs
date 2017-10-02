@@ -43,28 +43,29 @@ namespace EnemizerLibrary
             :this(sourceNode, destinationNode)
         {
             Unlocked = false;
-            foreach (var r in requirements.Split(';'))
-            {
-                if (r.Length > 0)
-                {
-                    List<Item> items = new List<Item>();
-                    foreach (var reqItem in r.Split(','))
-                    {
-                        Item item = Data.GameItems.Items.Values.Where(x => x.LogicalId == reqItem).FirstOrDefault();
-                        if(item == null)
-                        {
-                            throw new Exception($"Edge constructor - {sourceNode.LogicalId}->{destinationNode.LogicalId} could not find item {reqItem}");
-                        }
-                        items.Add(item);
-                    }
-                    this.Requirements.Add(new Requirement(items.ToArray()));
-                }
-            }
+            this.Requirements = Requirement.MakeRequirementListFromString(requirements);
+            //foreach (var r in requirements.Split(';'))
+            //{
+            //    if (r.Length > 0)
+            //    {
+            //        List<Item> items = new List<Item>();
+            //        foreach (var reqItem in r.Split(','))
+            //        {
+            //            Item item = Data.GameItems.Items.Values.Where(x => x.LogicalId == reqItem).FirstOrDefault();
+            //            if(item == null)
+            //            {
+            //                throw new Exception($"Edge constructor - {sourceNode.LogicalId}->{destinationNode.LogicalId} could not find item {reqItem}");
+            //            }
+            //            items.Add(item);
+            //        }
+            //        this.Requirements.Add(new Requirement(items.ToArray()));
+            //    }
+            //}
         }
 
         public bool MeetsRequirements(List<Item> items)
         {
-            if (Requirements.Count == 0)
+            if (Requirements == null || Requirements.Count == 0)
             {
                 return true;
             }

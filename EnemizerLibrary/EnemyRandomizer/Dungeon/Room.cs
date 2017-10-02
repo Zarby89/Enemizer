@@ -130,7 +130,7 @@ namespace EnemizerLibrary
                     .ToList();
 
 
-                // TODO: something like hacky for shutters.
+                // TODO: something less hacky for shutters.
                 var keySprites = spritesToUpdate.Where(x => x.HasAKey || this.IsShutterRoom).ToList();
 
                 var killableSprites = spriteRequirementCollection.KillableSprites.Where(x => possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
@@ -151,7 +151,7 @@ namespace EnemizerLibrary
                 spritesToUpdate.Where(x => x.HasAKey).ToList()
                     .ForEach(x => x.SpriteId = killableKeySprites[rand.Next(killableKeySprites.Count)]);
 
-                // TODO: something like hacky for shutters.
+                // TODO: something less hacky for shutters.
                 spritesToUpdate.Where(x => !x.HasAKey && this.IsShutterRoom).ToList()
                     .ForEach(x => x.SpriteId = killableSprites[rand.Next(killableSprites.Count)]);
             }

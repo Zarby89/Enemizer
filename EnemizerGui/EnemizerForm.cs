@@ -361,6 +361,7 @@ namespace Enemizer
         {
             config.OptionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
             randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
         }
 
         private void randomizationTypeTrackbar_ValueChanged(object sender, EventArgs e)

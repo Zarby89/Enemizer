@@ -51,6 +51,15 @@ namespace EnemizerLibrary
         public List<Node> Nodes { get; set; } = new List<Node>();
         public List<Edge> Edges { get; set; } = new List<Edge>();
 
+        public GraphResult FindPath(string source, string dest, bool exhaustiveSearch = false, List<Item> startingItems = null, string requirements = null)
+        {
+            var reqList = Requirement.MakeRequirementListFromString(requirements);
+            var sourceNode = Nodes.Where(x => x.LogicalId == source).FirstOrDefault();
+            var destNode = Nodes.Where(x => x.LogicalId == dest).FirstOrDefault();
+
+            return FindPath(sourceNode, destNode, exhaustiveSearch, startingItems, reqList);
+        }
+
         public GraphResult FindPath(Node sourceNode, Node destinationNode, bool exhaustiveSearch = false, List<Item> startingItems = null, List<Requirement> requirements = null)
         {
             var orderedVisit = new LinkedList<Node>();

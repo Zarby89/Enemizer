@@ -9,23 +9,25 @@ namespace EnemizerLibrary
 {
     public class BossRandomizer
     {
-        public List<Boss> PossibleBossesPool { get; set; } = new List<Boss>();
-
         public List<Dungeon> DungeonPool { get; set; } = new List<Dungeon>();
 
         protected OptionFlags optionFlags { get; set; }
         protected StreamWriter spoilerFile { get; set; }
 
         protected Random rand;
+        protected BossPool bossPool;
+        protected Graph graph;
 
-        public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile)
+        public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile, Graph graph)
         {
             this.rand = rand;
             this.optionFlags = optionFlags;
             this.spoilerFile = spoilerFile;
+            this.graph = graph;
+            this.bossPool = new BossPool(rand);
         }
 
-        public BossRandomizer(Random rand) : this(rand, new OptionFlags(), null) { }
+        public BossRandomizer(Random rand, Graph graph) : this(rand, new OptionFlags(), null, graph) { }
 
         void FillDungeonPool()
         {
@@ -46,29 +48,7 @@ namespace EnemizerLibrary
 
         protected void FillBossPool()
         {
-            FillBasePool();
-            FillGTPool();
-        }
-
-        protected virtual void FillBasePool()
-        {
-            PossibleBossesPool.Add(new ArmosBoss());
-            PossibleBossesPool.Add(new LanmolaBoss());
-            PossibleBossesPool.Add(new MoldormBoss());
-            PossibleBossesPool.Add(new HelmasaurBoss());
-            PossibleBossesPool.Add(new ArrghusBoss());
-            PossibleBossesPool.Add(new MothulaBoss());
-            PossibleBossesPool.Add(new BlindBoss());
-            PossibleBossesPool.Add(new KholdstareBoss());
-            PossibleBossesPool.Add(new VitreousBoss());
-            PossibleBossesPool.Add(new TrinexxBoss());
-        }
-
-        protected virtual void FillGTPool()
-        {
-            PossibleBossesPool.Add(new ArmosBoss()); // GT1
-            PossibleBossesPool.Add(new LanmolaBoss()); // GT2
-            PossibleBossesPool.Add(new MoldormBoss()); // GT3
+            bossPool.FillPool();
         }
 
         public void RandomizeRom(RomData romData)
@@ -76,32 +56,50 @@ namespace EnemizerLibrary
             FillDungeonPool();
             FillBossPool();
 
-            GenerateRandomizedBosses(romData);
+            GenerateRandomizedBosses();
             WriteRom(romData);
         }
 
-        public void GenerateRandomizedBosses(RomData romData)
+        void GenerateRandomizedBosses()
         {
-            foreach(var dungeon in this.DungeonPool.OrderBy(x => x.Priority))
+            var dungeonQueue = new Queue<Dungeon>(this.DungeonPool);
+
+            while(dungeonQueue.Count > 0)
             {
-                var possibleBosses = this.PossibleBossesPool.Where(x => dungeon.DisallowedBosses.Contains(x.BossType) == false);
-                if(possibleBosses.Any() == false)
-                {
-                    throw new Exception($"Couldn't find any possible bosses not disallowed for dungeon: {dungeon.Name}");
-                }
+                var dungeon = dungeonQueue.Dequeue();
 
-                possibleBosses = possibleBosses.Where(x => x.CheckRules(dungeon, romData) == false);
-                if (possibleBosses.Any() == false)
-                {
-                    throw new Exception($"Couldn't find any possible bosses meeting item checks for dungeon: {dungeon.Name}");
-                }
+                var boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
 
-                Boss boss = possibleBosses.ElementAt(rand.Next(possibleBosses.Count()));
+                //var result = graph.FindPath("cave-links-house", "triforce-room");
 
                 dungeon.SelectedBoss = boss;
 
-                this.PossibleBossesPool.Remove(boss);
+                if(dungeon.SelectedBoss == null)
+                {
+                    var readdDungeon = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).FirstOrDefault();
+                    if(readdDungeon != null)
+                    {
+                        dungeonQueue.Enqueue(readdDungeon);
+                        bossPool.ReaddBoss(readdDungeon.SelectedBoss);
+                        readdDungeon.SelectedBoss = null;
+                    }
+                    dungeonQueue.Enqueue(dungeon);
+                }
+                else
+                {
+                    bossPool.RemoveBoss(boss);
+                }
             }
+            //foreach(var dungeon in this.DungeonPool.OrderBy(x => x.Priority))
+            //{
+            //    Boss boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
+            //    if(boss == null)
+            //    {
+            //        throw new Exception("GenerateRandomizedBosses - GetRandomBoss returned null");
+            //    }
+            //    dungeon.SelectedBoss = boss;
+            //    bossPool.RemoveBoss(boss);
+            //}
         }
 
         private void WriteRom(RomData romData)
@@ -110,12 +108,21 @@ namespace EnemizerLibrary
             shells.FillShells();
             shells.WriteShellsToRom(romData);
 
-            foreach(var dungeon in DungeonPool)
+            if (optionFlags.GenerateSpoilers)
+            {
+                spoilerFile.WriteLine("Bosses:");
+                foreach (var d in DungeonPool)
+                {
+
+                }
+            }
+
+            foreach (var dungeon in DungeonPool)
             {
                 // spoilers
                 if(optionFlags.GenerateSpoilers && spoilerFile != null)
                 {
-                    spoilerFile.WriteLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType} - drop: boss drop item");
+                    spoilerFile.WriteLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType}");
                     //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
 
@@ -169,15 +176,6 @@ namespace EnemizerLibrary
 
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);
-
-            if(optionFlags.GenerateSpoilers)
-            {
-                spoilerFile.WriteLine("Bosses:");
-                foreach(var d in DungeonPool)
-                {
-
-                }
-            }
         }
 
         private void RemoveBlindSpawnCode(RomData romData)

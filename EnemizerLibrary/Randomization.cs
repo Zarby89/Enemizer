@@ -72,6 +72,8 @@ namespace EnemizerLibrary
 
             rand = new Random(seed);
 
+            Graph graph = new Graph(new GraphData(this.ROM_DATA, new RomEntranceCollection(this.ROM_DATA), new RomExitCollection(this.ROM_DATA), new RomChestCollection(this.ROM_DATA)));
+
             if (skin != "Default" && skin != "")
             {
                 ChangeSkin(skin);
@@ -92,6 +94,31 @@ namespace EnemizerLibrary
 
             create_subset_gfx();
 
+            // -----bosses---------------------
+            if (optionFlags.RandomizeBosses)
+            {
+                this.ROM_DATA.CloseBlindDoor = true;
+
+                BossRandomizer br;
+
+                switch (optionFlags.RandomizeBossesType)
+                {
+                    case RandomizeBossesType.Basic:
+                        br = new BossRandomizer(rand, optionFlags, spoilerfile, graph);
+                        break;
+                    case RandomizeBossesType.Normal:
+                        br = new NormalBossRandomizer(rand, optionflags, spoilerfile, graph);
+                        break;
+                    case RandomizeBossesType.Chaos:
+                        br = new ChaosBossRandomizer(rand, optionflags, spoilerfile, graph);
+                        break;
+                    default:
+                        throw new Exception("Unknown Boss Randomization Type");
+                }
+                br.RandomizeRom(this.ROM_DATA);
+            }
+
+            // -----sprites---------------------
             var spriteRequirements = new SpriteRequirementCollection();
 
             var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
@@ -133,29 +160,6 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            // do bosses after enemies or gfx blocks will get overwritten
-            if (optionFlags.RandomizeBosses)
-            {
-                this.ROM_DATA.CloseBlindDoor = true;
-
-                BossRandomizer br;
-
-                switch(optionFlags.RandomizeBossesType)
-                {
-                    case RandomizeBossesType.Basic:
-                        br = new BossRandomizer(rand, optionFlags, spoilerfile);
-                        break;
-                    case RandomizeBossesType.Normal:
-                        br = new NormalBossRandomizer(rand, optionflags, spoilerfile);
-                        break;
-                    case RandomizeBossesType.Chaos:
-                        br = new ChaosBossRandomizer(rand, optionflags, spoilerfile);
-                        break;
-                    default:
-                        throw new Exception("Unknown Boss Randomization Type");
-                }
-                br.RandomizeRom(this.ROM_DATA);
-            }
             
             if(optionFlags.RandomizePots)
             {
@@ -222,7 +226,11 @@ namespace EnemizerLibrary
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            spoilerfile.Flush();
+            if (spoilerfile != null)
+            {
+                spoilerfile.Flush();
+                spoilerfile.Close();
+            }
 
             // put the room id in the rupee slot
             this.ROM_DATA[0x1017A9] = 0xA0;

@@ -9,31 +9,10 @@ namespace EnemizerLibrary
 {
     public class ChaosBossRandomizer : BossRandomizer
     {
-        public ChaosBossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile)
-            : base(rand, optionFlags, spoilerFile)
+        public ChaosBossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile, Graph graph)
+            : base(rand, optionFlags, spoilerFile, graph)
         {
-        }
-        protected override void FillBasePool()
-        {
-            // TODO: we need to ensure x number of bosses that can be defeated (can't have all trinexx)
-            // How do we figure out how many need to be killable? Need to load up spheres....
-            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Armos
-            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Lanmolas
-            PossibleBossesPool.Add(Boss.GetRandomKillableBoss(rand)); // Moldorm
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Helmasaur
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Arrghus
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Mothula
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Blind
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Kholdstare
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Vitreous
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // Trinexx
         }
 
-        protected override void FillGTPool()
-        {
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // GT1
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // GT2
-            PossibleBossesPool.Add(Boss.GetRandomBoss(rand)); // GT3
-        }
     }
 }
