@@ -14,7 +14,7 @@ namespace EnemizerLibrary
         {
             this.LogicalId = logicalId;
             this.Name = name;
-            this.Boss = (SpecialItem)Data.GameItems.Items[logicalId];
+            this.Boss = (SpecialItem)Data.GameItems.Items.Values.Where(x => x.LogicalId == logicalId).FirstOrDefault();
         }
     }
 }

@@ -16,6 +16,10 @@ namespace EnemizerLibrary
         RomData romData { get; set; }
         RomEntranceCollection romEntrances { get; set; }
         RomExitCollection romExits { get; set; }
+        RomChestCollection romChests { get; set; }
+
+        // TODO: remove this, for testing
+        public RawItemLocationCollection _rawItemLocationCollection;
 
         public GraphData()
         {
@@ -26,18 +30,23 @@ namespace EnemizerLibrary
             FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
         }
 
-        public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits)
+        public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits, RomChestCollection romChests)
         {
             this.romData = romData;
             this.romEntrances = romEntrances;
             this.romExits = romExits;
+            this.romChests = romChests;
 
             RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
             RawExitCollection rawExitCollection = new RawExitCollection();
             RawItemLocationCollection rawItemLocationCollection = new RawItemLocationCollection();
 
+            romChests.LoadChests(rawItemLocationCollection);
+
             UpdateFromRom(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
             FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
+
+            _rawItemLocationCollection = rawItemLocationCollection;
         }
 
         void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection)
@@ -84,7 +93,12 @@ namespace EnemizerLibrary
 
         void UpdateItems(RawItemLocationCollection rawItemLocationCollection)
         {
-
+            foreach(var l in romChests.Chests)
+            {
+                var itemLocation = rawItemLocationCollection.RawItemLocations.Values.Where(x => x.LocationAddress == l.Address).FirstOrDefault();
+                itemLocation.ItemId = l.ItemId;
+                itemLocation.ItemName = GameItems.Values.Where(x => x.Id == l.ItemId).Select(x => x.LogicalId).FirstOrDefault();
+            }
         }
 
         public List<string> DumpData()
@@ -145,7 +159,7 @@ namespace EnemizerLibrary
         public Dictionary<string, LogicalBoss> BossNodes { get { return _bossNodes.Nodes; } }
         public Dictionary<string, string> DungeonKeys { get; } = Data.Dungeons.DungeonKeys;
         public Dictionary<string, string> DungeonBigKeys { get; } = Data.Dungeons.DungeonBigKeys;
-        public Dictionary<string, Item> GameItems { get; } = Data.GameItems.Items;
+        public Dictionary<int, Item> GameItems { get; } = Data.GameItems.Items;
         public Dictionary<string, ItemLocation> ItemLocations { get { return _itemNodes.Nodes; } }
         public List<Edge> ItemEdges { get { return _itemEdges.Edges; } }
 
@@ -162,7 +176,7 @@ namespace EnemizerLibrary
             _roomEdges = new Data.RoomEdges(_roomNodes, _overworldNodes, _bossNodes);
             _itemEdges = new ItemEdges(this);
 
-            _entranceEdges = new EntranceEdges(_overworldNodes, _roomNodes, rawEntranceCollection);
+            _entranceEdges = new EntranceEdges(_overworldNodes, _roomNodes, rawEntranceCollection, rawItemLocationCollection);
             _exitEdges = new ExitEdges(_overworldNodes, _roomNodes, rawExitCollection);
 
             FillAllEdges();

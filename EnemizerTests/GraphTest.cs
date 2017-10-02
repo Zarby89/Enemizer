@@ -25,15 +25,27 @@ namespace EnemizerTests
 
             RomEntranceCollection romEntrances = new RomEntranceCollection(romData);
             RomExitCollection romExits = new RomExitCollection(romData);
+            RomChestCollection romChests = new RomChestCollection(romData);
 
-            GraphData graphData = new GraphData(romData, romEntrances, romExits);
-            foreach(var e in graphData.AllEdges)
-            {
-                output.WriteLine(e.ToString());
-            }
+            GraphData graphData = new GraphData(romData, romEntrances, romExits, romChests);
+            //foreach(var e in graphData.AllEdges)
+            //{
+            //    output.WriteLine(e.ToString());
+            //}
+            //output.WriteLine("Rom locations");
+            //foreach (var r in romChests.Chests)
+            //{
+            //    output.WriteLine($"0x{r.Address.ToString("X")}\t0x{r.ItemId.ToString("X2")}");
+            //}
+            //output.WriteLine("Raw locations");
+            //foreach(var r in graphData._rawItemLocationCollection.RawItemLocations.Values)
+            //{
+            //    output.WriteLine($"0x{r.LocationAddress.ToString("X")}\t0x{r.ItemId.ToString("X2")}");
+            //}
+
             Graph graph = new Graph(graphData);
 
-            var result = graph.FindPath(graphData.AllNodes["cave-links-house"], graphData.AllNodes["triforce-room"]);
+            var result = graph.FindPath(graphData.AllNodes["cave-links-house"], graphData.AllNodes["triforce-room"], true);
             output.WriteLine(result.ToString());
             Assert.Equal(true, result.Success);
         }

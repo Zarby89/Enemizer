@@ -50,8 +50,8 @@ namespace EnemizerLibrary
                     List<Item> items = new List<Item>();
                     foreach (var reqItem in r.Split(','))
                     {
-                        Item item;
-                        if(!Data.GameItems.Items.TryGetValue(reqItem, out item))
+                        Item item = Data.GameItems.Items.Values.Where(x => x.LogicalId == reqItem).FirstOrDefault();
+                        if(item == null)
                         {
                             throw new Exception($"Edge constructor - {sourceNode.LogicalId}->{destinationNode.LogicalId} could not find item {reqItem}");
                         }
@@ -74,6 +74,8 @@ namespace EnemizerLibrary
                 return true;
             }
 
+            var needConsume = new List<ConsumableItem>();
+
             int swordCount = items.Where(x => x.LogicalId == "Progressive Sword").Count();
             int gloveCount = items.Where(x => x.LogicalId == "Progressive Gloves").Count();
 
@@ -88,7 +90,7 @@ namespace EnemizerLibrary
                         if(items.Contains(c) && items.Any(x => x == c && ((ConsumableItem)x).Usable))
                         {
                             count++;
-                            c.Consume();
+                            needConsume.Add(c);
                         }
                     }
                     else if(items.Contains(i))
@@ -136,6 +138,10 @@ namespace EnemizerLibrary
                     if(this.LinkedEdge != null)
                     {
                         this.LinkedEdge.Unlocked = true;
+                    }
+                    foreach(var c in needConsume)
+                    {
+                        c.Consume();
                     }
                     return true;
                 }

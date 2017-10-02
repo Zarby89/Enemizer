@@ -24,45 +24,60 @@ namespace EnemizerLibrary.Data
         {
             foreach(var raw in _rawItemLocations.RawItemLocations)
             {
-                if(GameItems.Items.ContainsKey(raw.Value.ItemName))
+                Item item = GameItems.Items.Values.Where(x => x.Id == raw.Value.ItemId).FirstOrDefault();
+                if(item == null && GameItems.Items.Values.Any(x => x.LogicalId == raw.Value.ItemName)) // fake items
                 {
-                    Nodes.Add(raw.Key, new ItemLocation(raw.Value.LogicalId, raw.Value.LocationName, GameItems.Items[raw.Value.ItemName]));
+                    item = GameItems.Items.Values.Where(x => x.LogicalId == raw.Value.ItemName).FirstOrDefault();
                 }
-                else if(raw.Value.ItemName.ToLower() == "key")
-                {
-                    Nodes.Add(raw.Key, new ItemLocation(raw.Value.LogicalId, raw.Value.LocationName, GetDungeonKey(raw.Value)));
-                }
-                else if (raw.Value.ItemName.ToLower() == "big key")
-                {
-                    Nodes.Add(raw.Key, new ItemLocation(raw.Value.LogicalId, raw.Value.LocationName, GetDungeonBigKey(raw.Value)));
-                }
-                else
+
+                if (item == null)
                 {
                     throw new Exception($"FillItemNodes - Unknown item name found '{raw.Value.ItemName}'");
                 }
+
+                if (item.Id == GameItems.Key)
+                {
+                    item = GetDungeonKey(raw.Value);
+                }
+                if(item.Id == GameItems.Big_Key)
+                {
+                    item = GetDungeonBigKey(raw.Value);
+                }
+
+                Nodes.Add(raw.Key, new ItemLocation(raw.Value.LogicalId, raw.Value.LocationName, item));
             }
         }
 
         static Item GetDungeonKey(RawItemLocation raw)
         {
-            if(raw.ItemName.ToLower() != "key")
+            if(raw.ItemId != GameItems.Key)
             {
                 throw new Exception("GetDungeonKey - Not a key!");
             }
             var dungeon = Dungeons.GetDungeonFromRoom(raw.RoomId);
             var dungeonKey = Dungeons.DungeonKeys[dungeon];
-            return GameItems.Items[dungeonKey];
+            var item = GameItems.Items.Values.Where(x => x.LogicalId == dungeonKey).FirstOrDefault();
+            if(item == null)
+            {
+                throw new Exception($"GetDungeonKey - invalid key item {dungeonKey}");
+            }
+            return item;
         }
 
         static Item GetDungeonBigKey(RawItemLocation raw)
         {
-            if (raw.ItemName.ToLower() != "big key")
+            if (raw.ItemId != GameItems.Big_Key)
             {
                 throw new Exception("GetDungeonBigKey - Not a big key!");
             }
             var dungeon = Dungeons.GetDungeonFromRoom(raw.RoomId);
             var dungeonKey = Dungeons.DungeonBigKeys[dungeon];
-            return GameItems.Items[dungeonKey];
+            var item = GameItems.Items.Values.Where(x => x.LogicalId == dungeonKey).FirstOrDefault();
+            if (item == null)
+            {
+                throw new Exception($"GetDungeonBigKey - invalid big key item {dungeonKey}");
+            }
+            return item;
         }
     }
 }

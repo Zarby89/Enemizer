@@ -70,7 +70,6 @@
     <Compile Include="BossRandomizer\BossShells.cs" />
     <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
     <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
-    <Compile Include="Chests.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="BossRandomizer\Dungeons\TurtleRockDungeon.cs" />
     <Compile Include="BossRandomizer\Dungeons\GT1Dungeon.cs" />
@@ -132,6 +131,7 @@
     <Compile Include="Graph\Node.cs" />
     <Compile Include="Graph\OverworldAreaNode.cs" />
     <Compile Include="Graph\Requirement.cs" />
+    <Compile Include="Graph\RomChests.cs" />
     <Compile Include="Graph\RoomNode.cs" />
     <Compile Include="OptionFlags.cs" />
     <Compile Include="Patch.cs" />

@@ -431,8 +431,8 @@ namespace EnemizerLibrary.Data
                         // keys
                         var dungeon = Dungeons.GetDungeonFromRoom(src.RoomId);
                         var dungeonKey = Dungeons.DungeonKeys[dungeon];
-                        Item item = null;
-                        if(!GameItems.Items.TryGetValue(dungeonKey, out item))
+                        Item item = GameItems.Items.Values.Where(x => x.LogicalId == dungeonKey).FirstOrDefault();
+                        if(item == null)
                         {
                             throw new Exception($"FillRoomEdges - Invalid dungeon item <key> {dungeonKey}");
                         }
@@ -440,8 +440,8 @@ namespace EnemizerLibrary.Data
                     }
                     else if (e.destId.StartsWith("<", StringComparison.OrdinalIgnoreCase) && e.destId.EndsWith(">", StringComparison.OrdinalIgnoreCase))
                     {
-                        Item item = null;
-                        if (!GameItems.Items.TryGetValue(e.destId, out item))
+                        Item item = GameItems.Items.Values.Where(x => x.LogicalId == e.destId).FirstOrDefault();
+                        if (item == null)
                         {
                             throw new Exception($"FillRoomEdges - Invalid special item {e.destId}");
                         }

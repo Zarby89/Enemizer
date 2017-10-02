@@ -56,7 +56,15 @@ namespace EnemizerLibrary.Data
             {
                 return DesertPalace;
             }
-            if (new int[] { 7, 23, 39, 49, 119, 135, 167 }.Contains(roomId))
+            if (new int[] {
+                            RoomIdConstants.R7_TowerofHera_Moldorm,
+                            RoomIdConstants.R23_TowerofHera_MoldormFallRoom,
+                            RoomIdConstants.R39_TowerofHera_BigChest,
+                            RoomIdConstants.R49_TowerofHera_HardhatBeetlesRoom,
+                            RoomIdConstants.R119_TowerofHera_EntranceRoom,
+                            RoomIdConstants.R135_TowerofHera_TileRoom,
+                            RoomIdConstants.R167_TowerofHera_FairyRoom
+                            }.Contains(roomId))
             {
                 return TowerOfHera;
             }
