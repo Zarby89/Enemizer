@@ -59,6 +59,7 @@ namespace EnemizerLibrary
         public RomExitCollection(RomData romData)
         {
             this.romData = romData;
+            LoadExits();
         }
 
         public void LoadExits()
@@ -66,7 +67,7 @@ namespace EnemizerLibrary
             for(int i=0; i<0x4F; i++)
             {
                 var exit = new RomExit(romData, i);
-                //if (exit.RoomId <= 295) // leave out the weird exits
+                //if (exit.RoomId <= 295) // leave out the weird ending cut-scene exits
                 //{
                     Exits.Add(exit);
                 //}

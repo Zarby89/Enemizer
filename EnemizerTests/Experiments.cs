@@ -156,8 +156,8 @@ namespace EnemizerTests
         [Fact]
         public void figure_out_entrances()
         {
-            var romData = Utilities.LoadRom("rando.sfc");
-            //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc"); // simple
+            //var romData = Utilities.LoadRom("rando.sfc");
+            var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc"); // simple
             //var romData = Utilities.LoadRom("..\\..\\..\\ER_er-no-glitches-0.4.7_normal-open-ganon_676766069.sfc"); // insanity
 
             RomEntranceCollection ec = new RomEntranceCollection(romData);

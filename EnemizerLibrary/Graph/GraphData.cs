@@ -19,35 +19,64 @@ namespace EnemizerLibrary
 
         public GraphData()
         {
-            FillNodesAndEdges();
+            RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
+            RawExitCollection rawExitCollection = new RawExitCollection();
+
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection);
         }
 
         public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits)
         {
             this.romData = romData;
+            this.romEntrances = romEntrances;
+            this.romExits = romExits;
 
-            FillNodesAndEdges();
-            UpdateFromRom();
+            RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
+            RawExitCollection rawExitCollection = new RawExitCollection();
+            UpdateFromRom(rawEntranceCollection, rawExitCollection);
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection);
         }
 
-        void UpdateFromRom()
+        void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection)
         {
-            UpdateEntrances();
-            UpdateExits();
+            UpdateEntrances(rawEntranceCollection);
+            UpdateExits(rawExitCollection);
             UpdateItems();
         }
 
-        void UpdateEntrances()
+        void UpdateEntrances(RawEntranceCollection rawEntranceCollection)
         {
+            List<RawEntrance> originalEntrances = rawEntranceCollection.RawEntrances.ToList();
+            List<RawOverworldEntrance> originalOverworldEntrances = rawEntranceCollection.RawOverworldEntrances.ToList();
+
             foreach(var e in romEntrances.Entrances)
             {
-                
+                var newEntrance = originalEntrances.Where(x => x.EntranceId == e.EntranceNumber).FirstOrDefault();
+                var owEntrance = rawEntranceCollection.RawOverworldEntrances.Where(x => x.EntranceAddress == e.EntranceAddress).FirstOrDefault();
+
+                if(owEntrance != null && newEntrance != null)
+                {
+                    owEntrance.LogicalEntranceId = newEntrance.LogicalEntranceId;
+                }
             }
         }
 
-        void UpdateExits()
+        void UpdateExits(RawExitCollection rawExitCollection)
         {
+            List<RawExit> originalExits = rawExitCollection.RawExits.ToList();
 
+            foreach(var e in romExits.Exits)
+            {
+                var exit = rawExitCollection.RawExits.Where(x => x.ExitRoomAddress == e.RoomAddress).FirstOrDefault();
+                var newExit = originalExits.Where(x => x.RoomId == e.RoomId).FirstOrDefault();
+
+                if(exit != null && newExit != null)
+                {
+                    exit.RoomId = newExit.RoomId;
+                    exit.LogicalRoomId = newExit.LogicalRoomId;
+                    exit.ExitRoomName = newExit.ExitRoomName;
+                }
+            }
         }
 
         void UpdateItems()
@@ -118,7 +147,7 @@ namespace EnemizerLibrary
         public List<Edge> ItemEdges { get { return _itemEdges.Edges; } }
 
 
-        void FillNodesAndEdges()
+        void FillNodesAndEdges(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection)
         {
             _overworldNodes = new Data.OverworldNodes();
             _roomNodes = new Data.RoomNodes();
@@ -129,8 +158,10 @@ namespace EnemizerLibrary
             _areaEdges = new Data.AreaEdges(_overworldNodes);
             _roomEdges = new Data.RoomEdges(_roomNodes, _overworldNodes, _bossNodes);
             _itemEdges = new ItemEdges(this);
-            _entranceEdges = new EntranceEdges(_overworldNodes, _roomNodes);
-            _exitEdges = new ExitEdges(_overworldNodes, _roomNodes);
+
+            _entranceEdges = new EntranceEdges(_overworldNodes, _roomNodes, rawEntranceCollection);
+            _exitEdges = new ExitEdges(_overworldNodes, _roomNodes, rawExitCollection);
+
             FillAllEdges();
         }
 

@@ -89,6 +89,7 @@ namespace EnemizerLibrary
         public RomEntranceCollection(RomData romData)
         {
             this.romData = romData;
+            LoadEntrances();
         }
 
         public void LoadEntrances()

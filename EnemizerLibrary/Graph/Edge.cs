@@ -141,11 +141,21 @@ namespace EnemizerLibrary
 
         public override string ToString()
         {
+            var sb = new StringBuilder();
+
+            sb.Append($"Edge ");
             if (this.Requirements.Count > 0)
             {
-                return $"Edge (req: {String.Join("; ", this.Requirements.Select(x => String.Join(", ", x.Requirements.Select(y => y.Name))))}) {this.SourceNode.Name} -> {this.DestinationNode.Name}";
+                sb.Append($"(req: {String.Join("; ", this.Requirements.Select(x => String.Join(", ", x.Requirements.Select(y => y.Name))))})");
             }
-            return $"Edge (no req) {this.SourceNode.Name} -> {this.DestinationNode.Name}";
+            else
+            {
+                sb.Append($"(no req)");
+            }
+
+            sb.Append($"{this.SourceNode.LogicalId} -> {this.DestinationNode.LogicalId}");
+
+            return sb.ToString();
         }
     }
 }
