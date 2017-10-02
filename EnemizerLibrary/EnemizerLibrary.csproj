@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BossRandomizer\BossPool.cs" />
+    <Compile Include="BossRandomizer\Pool\BossPool.cs" />
     <Compile Include="BossRandomizer\Boss\TrinexxBoss.cs" />
     <Compile Include="BossRandomizer\Boss\EmptyBoss.cs" />
     <Compile Include="BossRandomizer\Boss\BossType.cs" />
@@ -71,6 +71,7 @@
     <Compile Include="BossRandomizer\BossShells.cs" />
     <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
     <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
+    <Compile Include="BossRandomizer\Pool\NormalBossPool.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="BossRandomizer\Dungeons\TurtleRockDungeon.cs" />
     <Compile Include="BossRandomizer\Dungeons\GT1Dungeon.cs" />

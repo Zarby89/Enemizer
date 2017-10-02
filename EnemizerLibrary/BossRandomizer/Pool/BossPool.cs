@@ -8,8 +8,8 @@ namespace EnemizerLibrary
 {
     public class BossPool
     {
-        List<Boss> pool = new List<Boss>();
-        private readonly Random rand;
+        protected List<Boss> pool = new List<Boss>();
+        protected readonly Random rand;
 
         public BossPool(Random rand)
         {
