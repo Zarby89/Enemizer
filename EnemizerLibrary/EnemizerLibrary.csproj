@@ -119,6 +119,7 @@
     <Compile Include="Graph\Data\Nodes\BossNodes.cs" />
     <Compile Include="Graph\Data\Nodes\ItemNodes.cs" />
     <Compile Include="Graph\Data\Nodes\OverworldNodes.cs" />
+    <Compile Include="Graph\Data\Nodes\RawItemLocationCollection.cs" />
     <Compile Include="Graph\Data\Nodes\RoomNodes.cs" />
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Graph\Entrance.cs" />

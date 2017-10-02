@@ -8,12 +8,14 @@ namespace EnemizerLibrary
 {
     public class Item
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string LogicalId { get; set; }
         public string Name { get; set; }
 
-        public Item(string id, string name)
+        public Item(int id, string logicalId, string name)
         {
             this.Id = id;
+            this.LogicalId = logicalId;
             this.Name = name;
         }
 
@@ -26,19 +28,28 @@ namespace EnemizerLibrary
                 return false;
             }
 
-            return this.Id == item.Id;
+            return this.LogicalId == item.LogicalId;
         }
 
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return this.LogicalId.GetHashCode();
         }
     }
 
     public class SpecialItem : Item
     {
-        public SpecialItem(string id, string name)
-            :base(id, name)
+        public SpecialItem(int id, string logicalId, string name)
+            :base(id, logicalId, name)
+        {
+
+        }
+    }
+
+    public class BottleItem : Item
+    {
+        public BottleItem(int id, string logicalId, string name)
+            : base(id, logicalId, name)
         {
 
         }
@@ -50,8 +61,8 @@ namespace EnemizerLibrary
         public int UsedCount { get; private set; } = 0;
 
         public bool Usable { get { return FoundCount > UsedCount; } }
-        public ConsumableItem(string id, string name)
-            :base(id, name)
+        public ConsumableItem(int id, string logicalId, string name)
+            :base(id, logicalId, name)
         {
 
         }
@@ -70,8 +81,8 @@ namespace EnemizerLibrary
     public class ProgressiveItem : Item
     {
         public int Level { get; private set; }
-        public ProgressiveItem(string id, string name)
-            :base(id, name)
+        public ProgressiveItem(int id, string logicalId, string name)
+            :base(id, logicalId, name)
         {
 
         }

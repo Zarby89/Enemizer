@@ -21,7 +21,7 @@ namespace EnemizerLibrary
             result.AppendLine("--------------");
             result.AppendLine($"Visited Nodes: {String.Join(", ", OrderedNodesVisited.Select(x => x.LogicalId))}");
             result.AppendLine("--------------");
-            result.AppendLine($"Items Obtained: {String.Join(", ", ItemsObtained.Select(x => x.Id))}");
+            result.AppendLine($"Items Obtained: {String.Join(", ", ItemsObtained.Select(x => x.LogicalId))}");
             result.AppendLine("--------------");
             result.AppendLine($"Edges Not Retried: {String.Join(", ", EdgesNotRetried.Select(x => x.ToString()))}");
             return result.ToString();

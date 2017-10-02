@@ -21,8 +21,9 @@ namespace EnemizerLibrary
         {
             RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
             RawExitCollection rawExitCollection = new RawExitCollection();
+            RawItemLocationCollection rawItemLocationCollection = new RawItemLocationCollection();
 
-            FillNodesAndEdges(rawEntranceCollection, rawExitCollection);
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
         }
 
         public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits)
@@ -33,15 +34,17 @@ namespace EnemizerLibrary
 
             RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
             RawExitCollection rawExitCollection = new RawExitCollection();
-            UpdateFromRom(rawEntranceCollection, rawExitCollection);
-            FillNodesAndEdges(rawEntranceCollection, rawExitCollection);
+            RawItemLocationCollection rawItemLocationCollection = new RawItemLocationCollection();
+
+            UpdateFromRom(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
         }
 
-        void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection)
+        void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection)
         {
             UpdateEntrances(rawEntranceCollection);
             UpdateExits(rawExitCollection);
-            UpdateItems();
+            UpdateItems(rawItemLocationCollection);
         }
 
         void UpdateEntrances(RawEntranceCollection rawEntranceCollection)
@@ -79,7 +82,7 @@ namespace EnemizerLibrary
             }
         }
 
-        void UpdateItems()
+        void UpdateItems(RawItemLocationCollection rawItemLocationCollection)
         {
 
         }
@@ -147,12 +150,12 @@ namespace EnemizerLibrary
         public List<Edge> ItemEdges { get { return _itemEdges.Edges; } }
 
 
-        void FillNodesAndEdges(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection)
+        void FillNodesAndEdges(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection)
         {
             _overworldNodes = new Data.OverworldNodes();
             _roomNodes = new Data.RoomNodes();
             _bossNodes = new Data.BossNodes();
-            _itemNodes = new Data.ItemLocations();
+            _itemNodes = new Data.ItemLocations(rawItemLocationCollection);
             FillAllNodes();
 
             _areaEdges = new Data.AreaEdges(_overworldNodes);

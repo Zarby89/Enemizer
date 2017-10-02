@@ -74,8 +74,8 @@ namespace EnemizerLibrary
                 return true;
             }
 
-            int swordCount = items.Where(x => x.Id == "Progressive Sword").Count();
-            int gloveCount = items.Where(x => x.Id == "Progressive Gloves").Count();
+            int swordCount = items.Where(x => x.LogicalId == "Progressive Sword").Count();
+            int gloveCount = items.Where(x => x.LogicalId == "Progressive Gloves").Count();
 
             foreach (var r in Requirements)
             {
@@ -95,9 +95,13 @@ namespace EnemizerLibrary
                     {
                         count++;
                     }
+                    else if(i is BottleItem && items.Any(x => x is BottleItem))
+                    {
+                        count++;
+                    }
                     else if(i is ProgressiveItem)
                     {
-                        var split = i.Id.Split(' ');
+                        var split = i.LogicalId.Split(' ');
                         if(split.Length > 1)
                         {
                             int level = (int)char.GetNumericValue(split[0][1]);
@@ -119,6 +123,10 @@ namespace EnemizerLibrary
                                 default:
                                     break;
                             }
+                        }
+                        else
+                        {
+                            throw new Exception("Edge.MeetsRequirements - Invalid progressive item");
                         }
                     }
                 }
