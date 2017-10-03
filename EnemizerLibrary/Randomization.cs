@@ -204,6 +204,12 @@ namespace EnemizerLibrary
                 byte numberOfMoldormEyes = (byte)rand.Next(0, 8);
                 this.ROM_DATA[0x0EDBB3] = numberOfMoldormEyes;
                 this.ROM_DATA[0x200002] = numberOfMoldormEyes;
+
+                if(rand.Next(0, 100) == 1)
+                {
+                    // break link's water transition so he turns invisible and always gets fake flippers when he doesn't have flippers
+                    this.ROM_DATA[0xFFD7] = 0x0C;
+                }
             }
 
 

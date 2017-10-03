@@ -71,6 +71,7 @@
     <Compile Include="BossRandomizer\BossShells.cs" />
     <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
     <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
+    <Compile Include="BossRandomizer\Pool\ChaosBossPool.cs" />
     <Compile Include="BossRandomizer\Pool\NormalBossPool.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="BossRandomizer\Dungeons\TurtleRockDungeon.cs" />

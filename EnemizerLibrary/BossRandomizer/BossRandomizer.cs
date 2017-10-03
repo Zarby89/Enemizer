@@ -60,7 +60,7 @@ namespace EnemizerLibrary
             WriteRom(romData);
         }
 
-        void GenerateRandomizedBosses()
+        protected virtual void GenerateRandomizedBosses()
         {
             var dungeonQueue = new Queue<Dungeon>(this.DungeonPool);
 
@@ -90,16 +90,6 @@ namespace EnemizerLibrary
                     bossPool.RemoveBoss(boss);
                 }
             }
-            //foreach(var dungeon in this.DungeonPool.OrderBy(x => x.Priority))
-            //{
-            //    Boss boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
-            //    if(boss == null)
-            //    {
-            //        throw new Exception("GenerateRandomizedBosses - GetRandomBoss returned null");
-            //    }
-            //    dungeon.SelectedBoss = boss;
-            //    bossPool.RemoveBoss(boss);
-            //}
         }
 
         private void WriteRom(RomData romData)
@@ -134,7 +124,7 @@ namespace EnemizerLibrary
                 romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
 
                 // update trinexx shell
-                if(dungeon.SelectedBoss.BossType == BossType.Trixnexx)
+                if(dungeon.SelectedBoss.BossType == BossType.Trinexx)
                 {
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13;

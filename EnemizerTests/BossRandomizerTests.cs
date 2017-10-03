@@ -83,7 +83,7 @@ namespace EnemizerTests
         //public void default_boss_pool_contains_one_trinexx()
         //{
         //    BossRandomizer br = new BossRandomizer(new Random(seed));
-        //    Assert.Equal(1, br.PossibleBossesPool.Where(x => x.BossType == BossType.Trixnexx).Count());
+        //    Assert.Equal(1, br.PossibleBossesPool.Where(x => x.BossType == BossType.Trinexx).Count());
         //}
 
         [Fact]

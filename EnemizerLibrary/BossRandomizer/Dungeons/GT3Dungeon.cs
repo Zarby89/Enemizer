@@ -23,7 +23,7 @@ namespace EnemizerLibrary
             DisallowedBosses.Add(BossType.Arrghus);
             DisallowedBosses.Add(BossType.Blind);
             DisallowedBosses.Add(BossType.Lanmola);
-            DisallowedBosses.Add(BossType.Trixnexx);
+            DisallowedBosses.Add(BossType.Trinexx);
         }
     }
 }

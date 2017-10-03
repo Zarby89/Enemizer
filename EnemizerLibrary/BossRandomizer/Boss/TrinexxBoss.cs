@@ -8,7 +8,7 @@ namespace EnemizerLibrary
 {
     public class TrinexxBoss : Boss
     {
-        public TrinexxBoss() : base(BossType.Trixnexx)
+        public TrinexxBoss() : base(BossType.Trinexx)
         {
             BossPointer = new byte[] { 0xBA, 0xE5 };
             BossGraphics = 23;
