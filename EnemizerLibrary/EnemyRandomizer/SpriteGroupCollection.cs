@@ -6,7 +6,22 @@ namespace EnemizerLibrary
 {
     public class SpriteGroupCollection
     {
-        public List<SpriteGroup> SpriteGroups { get; set; }
+        List<SpriteGroup> spriteGroups = new List<SpriteGroup>();
+        public List<SpriteGroup> SpriteGroups
+        {
+            get
+            {
+                if (!Loaded)
+                {
+                    throw new Exception("SpriteGroupCollection - Tried to access SpriteGroups without loading them");
+                }
+                return this.spriteGroups;
+            }
+            set
+            {
+                this.spriteGroups = value;
+            }
+        }
 
         public IEnumerable<SpriteGroup> UsableOverworldSpriteGroups
         {
@@ -110,6 +125,7 @@ namespace EnemizerLibrary
         Random rand { get; set; }
         RoomGroupRequirementCollection dungeonReqs;
         SpriteRequirementCollection spriteRequirementsCollection { get; set; }
+        public bool Loaded { get; private set; }
 
         public SpriteGroupCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementsCollection)
         {
@@ -124,6 +140,8 @@ namespace EnemizerLibrary
 
         public void LoadSpriteGroups()
         {
+            Loaded = true;
+
             for(int i=0;i<144; i++)
             {
                 SpriteGroup sg = new SpriteGroup(romData, spriteRequirementsCollection, i);

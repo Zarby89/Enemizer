@@ -223,7 +223,8 @@ namespace Enemizer
 
         private void UpdateExtrasTabUIFromConfig()
         {
-            chkBootlegMagic.Checked = config.OptionFlags.BootlegMagic;
+            bootlegMagicCheckbox.Checked = config.OptionFlags.BootlegMagic;
+            debugModeCheckbox.Checked = config.OptionFlags.DebugMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -551,7 +552,12 @@ namespace Enemizer
 
         private void chkBootlegMagic_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.BootlegMagic = chkBootlegMagic.Checked;
+            config.OptionFlags.BootlegMagic = bootlegMagicCheckbox.Checked;
+        }
+
+        private void debugModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugMode = debugModeCheckbox.Checked;
         }
     }
 

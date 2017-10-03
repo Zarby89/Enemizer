@@ -99,6 +99,7 @@ namespace EnemizerLibrary
         public SpriteRequirement SetAbsorbable()
         {
             Absorbable = true;
+            CannotHaveKey = true;
             return this;
         }
 
@@ -246,26 +247,19 @@ namespace EnemizerLibrary
                 return SpriteRequirements.Where(x => x.NPC == false 
                                                     && x.Boss == false
                                                     && x.Overlord == false
-                                                    && x.IsObject == false
-                                                    && x.Absorbable == false);
+                                                    && x.IsObject == false);
             }
         }
 
-        public IEnumerable<SpriteRequirement> UsableDungeonEnemySprites
+        public IEnumerable<SpriteRequirement> GetUsableDungeonEnemySprites(bool absorbable = false)
         {
-            get
-            {
-                return UsableEnemySprites.Where(x => x.NeverUseDungeon == false);
-            }
+            return UsableEnemySprites.Where(x => x.NeverUseDungeon == false && (x.Absorbable == false || x.Absorbable == absorbable));
         }
 
-        public IEnumerable<SpriteRequirement> UsableOverworldEnemySprites
+        public IEnumerable<SpriteRequirement> GetUsableOverworldEnemySprites(bool absorbable = false)
         {
-            get
-            {
-                // TODO: exclude absorbables for now (red rupees, bombs, etc. won't show up...)
-                return UsableEnemySprites.Where(x => x.NeverUseOverworld == false && x.Absorbable == false);
-            }
+            // TODO: figure out why absorbables won't show up (red rupees, bombs, etc. won't show up...)
+            return UsableEnemySprites.Where(x => x.NeverUseOverworld == false && (x.Absorbable == false || x.Absorbable == absorbable));
         }
 
         public IEnumerable<SpriteRequirement> KillableSprites

@@ -52,6 +52,7 @@ namespace EnemizerLibrary
         public bool RandomizePots { get; internal set; }
         public bool ShuffleMusic { get; internal set; }
         public bool BootlegMagic { get; set; }
+        public bool DebugMode { get; set; }
     }
 
     public enum RandomizeEnemiesType

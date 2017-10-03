@@ -24,14 +24,14 @@ namespace EnemizerLibrary
             areas = new OverworldAreaCollection(romData, rand, spriteRequirementCollection);
         }
 
-        public void RandomizeOverworldEnemies()
+        public void RandomizeOverworldEnemies(OptionFlags optionFlags)
         {
             // TODO: replace this with something less hard coded because we also need to move squirrels and stuff in MS glade and probably Zora
             romData[0x04CF4F] = 0x10; //move bird from tree stump in lost woods // TODO: did this cause a crash?
 
             GenerateGroups();
 
-            RandomizeAreas();
+            RandomizeAreas(optionFlags);
 
             WriteRom();
         }
@@ -41,7 +41,7 @@ namespace EnemizerLibrary
             spriteGroupCollection.RandomizeOverworldGroups();
         }
 
-        private void RandomizeAreas()
+        private void RandomizeAreas(OptionFlags optionFlags)
         {
             areas.RandomizeAreaSpriteGroups(spriteGroupCollection);
 
@@ -49,7 +49,7 @@ namespace EnemizerLibrary
             {
                 // pick random sprite group
                 //area.GraphicsBlockId = ??;
-                area.RandomizeSprites(rand, spriteGroupCollection, spriteRequirementCollection);
+                area.RandomizeSprites(rand, optionFlags, spriteGroupCollection, spriteRequirementCollection);
                 area.RandomizeBushSprite(rand, spriteGroupCollection, spriteRequirementCollection);
             }
         }

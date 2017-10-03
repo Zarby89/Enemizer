@@ -118,11 +118,11 @@ namespace EnemizerLibrary
             }
         }
 
-        public void RandomizeSprites(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        public void RandomizeSprites(Random rand, OptionFlags optionFlags, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
 
-            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Select(x => x.SpriteId).ToArray();
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this, optionFlags).Select(x => x.SpriteId).ToArray();
 
             if (possibleSprites.Length > 0)
             {

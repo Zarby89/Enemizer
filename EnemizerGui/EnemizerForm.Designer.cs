@@ -47,6 +47,7 @@
             this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
             this.allowZeroDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.absorbableItemsChecklist = new System.Windows.Forms.CheckedListBox();
             this.spawnrateLabel = new System.Windows.Forms.Label();
@@ -81,11 +82,11 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.bootlegMagicCheckbox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
-            this.chkBootlegMagic = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -134,6 +135,7 @@
             this.extraSettingsCheckedList.Name = "extraSettingsCheckedList";
             this.extraSettingsCheckedList.Size = new System.Drawing.Size(263, 184);
             this.extraSettingsCheckedList.TabIndex = 5;
+            this.extraSettingsCheckedList.Visible = false;
             this.extraSettingsCheckedList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.extraSettingsCheckedList_ItemCheck);
             this.extraSettingsCheckedList.SelectedIndexChanged += new System.EventHandler(this.extraSettingsCheckedList_SelectedIndexChanged);
             // 
@@ -306,6 +308,19 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Enemies";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chkRandomizeBushEnemyChance
+            // 
+            this.chkRandomizeBushEnemyChance.AutoSize = true;
+            this.chkRandomizeBushEnemyChance.Checked = true;
+            this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
+            this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
+            this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
+            this.chkRandomizeBushEnemyChance.TabIndex = 17;
+            this.chkRandomizeBushEnemyChance.Text = "Randomize Bush/Grass Enemy Chance";
+            this.chkRandomizeBushEnemyChance.UseVisualStyleBackColor = true;
+            this.chkRandomizeBushEnemyChance.CheckedChanged += new System.EventHandler(this.chkRandomizeBushEnemyChance_CheckedChanged);
             // 
             // allowZeroDamageCheckbox
             // 
@@ -693,7 +708,8 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.chkBootlegMagic);
+            this.tabPage4.Controls.Add(this.debugModeCheckbox);
+            this.tabPage4.Controls.Add(this.bootlegMagicCheckbox);
             this.tabPage4.Controls.Add(this.extraSettingsCheckedList);
             this.tabPage4.Controls.Add(this.descriptionLabel);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -702,6 +718,30 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // debugModeCheckbox
+            // 
+            this.debugModeCheckbox.AutoSize = true;
+            this.debugModeCheckbox.Location = new System.Drawing.Point(7, 25);
+            this.debugModeCheckbox.Name = "debugModeCheckbox";
+            this.debugModeCheckbox.Size = new System.Drawing.Size(88, 17);
+            this.debugModeCheckbox.TabIndex = 8;
+            this.debugModeCheckbox.Text = "Debug Mode";
+            this.debugModeCheckbox.UseVisualStyleBackColor = true;
+            this.debugModeCheckbox.CheckedChanged += new System.EventHandler(this.debugModeCheckbox_CheckedChanged);
+            // 
+            // bootlegMagicCheckbox
+            // 
+            this.bootlegMagicCheckbox.AutoSize = true;
+            this.bootlegMagicCheckbox.Checked = true;
+            this.bootlegMagicCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bootlegMagicCheckbox.Location = new System.Drawing.Point(7, 7);
+            this.bootlegMagicCheckbox.Name = "bootlegMagicCheckbox";
+            this.bootlegMagicCheckbox.Size = new System.Drawing.Size(94, 17);
+            this.bootlegMagicCheckbox.TabIndex = 7;
+            this.bootlegMagicCheckbox.Text = "Bootleg Magic";
+            this.bootlegMagicCheckbox.UseVisualStyleBackColor = true;
+            this.bootlegMagicCheckbox.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
             // label2
             // 
@@ -718,32 +758,6 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
-            // 
-            // chkRandomizeBushEnemyChance
-            // 
-            this.chkRandomizeBushEnemyChance.AutoSize = true;
-            this.chkRandomizeBushEnemyChance.Checked = true;
-            this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
-            this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
-            this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
-            this.chkRandomizeBushEnemyChance.TabIndex = 17;
-            this.chkRandomizeBushEnemyChance.Text = "Randomize Bush/Grass Enemy Chance";
-            this.chkRandomizeBushEnemyChance.UseVisualStyleBackColor = true;
-            this.chkRandomizeBushEnemyChance.CheckedChanged += new System.EventHandler(this.chkRandomizeBushEnemyChance_CheckedChanged);
-            // 
-            // chkBootlegMagic
-            // 
-            this.chkBootlegMagic.AutoSize = true;
-            this.chkBootlegMagic.Checked = true;
-            this.chkBootlegMagic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBootlegMagic.Location = new System.Drawing.Point(7, 7);
-            this.chkBootlegMagic.Name = "chkBootlegMagic";
-            this.chkBootlegMagic.Size = new System.Drawing.Size(94, 17);
-            this.chkBootlegMagic.TabIndex = 7;
-            this.chkBootlegMagic.Text = "Bootleg Magic";
-            this.chkBootlegMagic.UseVisualStyleBackColor = true;
-            this.chkBootlegMagic.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -848,7 +862,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox seedNumberTextbox;
         private System.Windows.Forms.CheckBox chkRandomizeBushEnemyChance;
-        private System.Windows.Forms.CheckBox chkBootlegMagic;
+        private System.Windows.Forms.CheckBox bootlegMagicCheckbox;
+        private System.Windows.Forms.CheckBox debugModeCheckbox;
     }
 }
 
