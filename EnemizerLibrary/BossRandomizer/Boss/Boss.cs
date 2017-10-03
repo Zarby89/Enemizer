@@ -13,7 +13,7 @@ namespace EnemizerLibrary
         public byte[] BossPointer { get; internal set; }
         public byte BossGraphics { get; internal set; }
 
-        protected string Requirements { get; set; }
+        public string Requirements { get; protected set; }
         protected string BossNode { get; set; }
 
         public Boss(BossType bossType)

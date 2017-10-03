@@ -780,8 +780,15 @@ namespace EnemizerLibrary
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite)
             //                                        .IsSpecialGlitched()
             //                                        .SetKillable()
-            //                                        .AddSubgroup0(73)
-            //                                        .AddSubgroup1(28));
+            //                                        .AddSubgroup1(73)
+            //                                        .AddSubgroup2(28));
+
+            //// zombie-guard = green recruit (0x4B) with sub 1=73, sub 2=28
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite)
+            //                                        .IsSpecialGlitched()
+            //                                        .SetKillable()
+            //                                        .AddSubgroup1(73)
+            //                                        .AddSubgroup2(35));
 
             //// Palette glitch and invisible guard (need to see if this causes any other issues)
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueSwordSoldier_DetectPlayerSprite)

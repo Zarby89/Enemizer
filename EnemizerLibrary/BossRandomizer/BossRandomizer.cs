@@ -79,14 +79,22 @@ namespace EnemizerLibrary
                     var readdDungeon = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).FirstOrDefault();
                     if(readdDungeon != null)
                     {
+                        boss = readdDungeon.SelectedBoss;
+                        dungeon.SelectedBoss = readdDungeon.SelectedBoss;
+
                         dungeonQueue.Enqueue(readdDungeon);
-                        bossPool.ReaddBoss(readdDungeon.SelectedBoss);
                         readdDungeon.SelectedBoss = null;
+
+                        // update the graph
+                        graph.UpdateDungeonBoss(readdDungeon);
                     }
-                    dungeonQueue.Enqueue(dungeon);
                 }
-                else
+
+                if(dungeon.SelectedBoss != null)
                 {
+                    // update the graph
+                    graph.UpdateDungeonBoss(dungeon);
+
                     bossPool.RemoveBoss(boss);
                 }
             }

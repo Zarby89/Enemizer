@@ -20,6 +20,7 @@ namespace EnemizerLibrary
             foreach(var dungeon in this.DungeonPool)
             {
                 dungeon.SelectedBoss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
+                graph.UpdateDungeonBoss(dungeon);
             }
         }
     }

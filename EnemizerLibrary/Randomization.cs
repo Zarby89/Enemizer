@@ -208,6 +208,7 @@ namespace EnemizerLibrary
                 if(rand.Next(0, 100) == 1)
                 {
                     // break link's water transition so he turns invisible and always gets fake flippers when he doesn't have flippers
+                    // discovered on accident by using the SNES address instead of PC address when trying to expand the rom
                     this.ROM_DATA[0xFFD7] = 0x0C;
                 }
             }

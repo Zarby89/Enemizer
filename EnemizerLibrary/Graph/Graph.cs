@@ -51,6 +51,95 @@ namespace EnemizerLibrary
         public List<Node> Nodes { get; set; } = new List<Node>();
         public List<Edge> Edges { get; set; } = new List<Edge>();
 
+        public void UpdateDungeonBoss(Dungeon dungeon)
+        {
+            Node bossNode = GetBossNodeFromRoom(dungeon.BossRoomId);
+
+            if (bossNode == null)
+            {
+                throw new Exception($"Graph.UpdateDungeonBoss - boss not found for room {dungeon.BossRoomId}");
+            }
+
+            Edge edge = Edges.Where(x => x.DestinationNode == bossNode).FirstOrDefault();
+
+            string requirements;
+
+            if (dungeon.SelectedBoss == null)
+            {
+                // set back to default
+                requirements = "";
+                switch(dungeon.BossRoomId)
+                {
+                    case RoomIdConstants.R6_SwampPalace_Arrghus:
+                        requirements = "Hookshot";
+                        break;
+                    case RoomIdConstants.R222_IcePalace_Kholdstare:
+                        requirements = "Fire Rod;Bombos,L1 Sword";
+                        break;
+                    case RoomIdConstants.R164_TurtleRock_Trinexx:
+                        requirements = "Fire Rod,Ice Rod";
+                        break;
+                }
+            }
+            else
+            {
+                requirements = dungeon.SelectedBoss.Requirements;
+            }
+
+            if (edge != null)
+            {
+                edge.Requirements = Requirement.MakeRequirementListFromString(requirements);
+            }
+        }
+
+        public Node GetBossNodeFromRoom(int roomId)
+        {
+            Node bossNode = null;
+            switch (roomId)
+            {
+                case RoomIdConstants.R200_EasternPalace_ArmosKnights:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Eastern Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R51_DesertPalace_Lanmolas:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Desert Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R7_TowerofHera_Moldorm:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Hera Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[PoD Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R6_SwampPalace_Arrghus:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Swamp Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R41_SkullWoods_Mothula:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Skull Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R172_ThievesTown_BlindTheThief:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Thieves Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R222_IcePalace_Kholdstare:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Ice Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R144_MiseryMire_Vitreous:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Mire Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R164_TurtleRock_Trinexx:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[Turtle Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R28_GanonsTower_IceArmos:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[GT Armos Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R108_GanonsTower_LanmolasRoom:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[GT Lanmolas Boss]").FirstOrDefault();
+                    break;
+                case RoomIdConstants.R77_GanonsTower_MoldormRoom:
+                    bossNode = Nodes.Where(x => x.LogicalId == "[GT Moldorm Boss]").FirstOrDefault();
+                    break;
+            }
+            return bossNode;
+        }
+
         public GraphResult FindPath(string source, string dest, bool exhaustiveSearch = false, List<Item> startingItems = null, string requirements = null)
         {
             var reqList = Requirement.MakeRequirementListFromString(requirements);

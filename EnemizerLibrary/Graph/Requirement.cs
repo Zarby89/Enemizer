@@ -44,7 +44,7 @@ namespace EnemizerLibrary
                     List<Item> items = new List<Item>();
                     foreach (var reqItem in r.Split(','))
                     {
-                        Item item = Data.GameItems.Items.Values.Where(x => x.LogicalId == reqItem).FirstOrDefault();
+                        Item item = Data.GameItems.Items.Values.Where(x => x.LogicalId == reqItem.Trim()).FirstOrDefault();
                         if (item == null)
                         {
                             throw new Exception($"MakeRequirementListFromString - could not find item {reqItem}");
