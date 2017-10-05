@@ -9,7 +9,7 @@ namespace EnemizerLibrary
 {
     public class NormalBossRandomizer : BossRandomizer
     {
-        public NormalBossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile, Graph graph)
+        public NormalBossRandomizer(Random rand, OptionFlags optionFlags, StringBuilder spoilerFile, Graph graph)
             :base(rand, optionFlags, spoilerFile, graph)
         {
             this.bossPool = new NormalBossPool(rand);

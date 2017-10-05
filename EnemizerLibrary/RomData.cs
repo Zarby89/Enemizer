@@ -15,7 +15,21 @@ namespace EnemizerLibrary
         public const int RandomizeHiddenEnemiesFlag = 0x00;
         public const int CloseBlindDoorFlag = 0x01;
 
+        public StringBuilder Spoiler { get; private set; } = new StringBuilder();
+
+        int seed;
+        public int EnemizerSeed
+        {
+            get { return seed; }
+            set
+            {
+                // write to rom somewhere too
+                seed = value;
+            }
+        }
+
         private byte[] romData;
+
         public RomData(byte[] romData)
         {
             this.romData = romData;

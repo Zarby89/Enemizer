@@ -17,7 +17,7 @@ namespace Enemizer
     {
         readonly string configFilename = "setting.cfg";
         EnemizerConfig config = new EnemizerConfig();
-        OptionFlags optionFlags = new OptionFlags();
+        //OptionFlags optionFlags = new OptionFlags();
         Random rand = new Random();
 
         public EnemizerForm()
@@ -308,37 +308,45 @@ namespace Enemizer
                 }
             }
 
-            //try
-            //{
-                OpenFileDialog ofd = new OpenFileDialog();
+#if !DEBUG
+            try // make sure we don't crash in release build
+            {
+#endif
+            OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
                 ofd.Title = "Select a Randomizer Rom File";
-                if (ofd.ShowDialog() == DialogResult.OK)
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                byte[] rom_data = new byte[fs.Length];
+                fs.Read(rom_data, 0, (int)fs.Length);
+                fs.Close();
+
+                SaveConfig();
+
+                var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
+                Randomization randomize = new Randomization();
+                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, linkSpriteFilename);
+
+                if(config.OptionFlags.GenerateSpoilers)
                 {
-                    FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
-                    byte[] rom_data = new byte[fs.Length];
-                    fs.Read(rom_data, 0, (int)fs.Length);
-                    fs.Close();
-
-                    SaveConfig();
-
-                    var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
-                    Randomization randomize = new Randomization();
-                    RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, linkSpriteFilename);
-
-                    string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
-                    fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-                    randomizedRom.WriteRom(fs);
-                    fs.Close();
-
-                    MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
-
+                    File.WriteAllText($"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} ({randomizedRom.EnemizerSeed}) Spoiler.txt", randomizedRom.Spoiler.ToString());
                 }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
+                fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                randomizedRom.WriteRom(fs);
+                fs.Close();
+
+                MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
+            }
+#if !DEBUG
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+#endif
         }
 
         private void generateSpoilerCheckbox_CheckedChanged(object sender, EventArgs e)

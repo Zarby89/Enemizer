@@ -12,13 +12,13 @@ namespace EnemizerLibrary
         public List<Dungeon> DungeonPool { get; set; } = new List<Dungeon>();
 
         protected OptionFlags optionFlags { get; set; }
-        protected StreamWriter spoilerFile { get; set; }
+        protected StringBuilder spoilerFile { get; set; }
 
         protected Random rand;
         protected BossPool bossPool;
         protected Graph graph;
 
-        public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile, Graph graph)
+        public BossRandomizer(Random rand, OptionFlags optionFlags, StringBuilder spoilerFile, Graph graph)
         {
             this.rand = rand;
             this.optionFlags = optionFlags;
@@ -108,7 +108,7 @@ namespace EnemizerLibrary
 
             if (optionFlags.GenerateSpoilers)
             {
-                spoilerFile.WriteLine("Bosses:");
+                spoilerFile.AppendLine("Bosses:");
                 foreach (var d in DungeonPool)
                 {
 
@@ -120,7 +120,7 @@ namespace EnemizerLibrary
                 // spoilers
                 if(optionFlags.GenerateSpoilers && spoilerFile != null)
                 {
-                    spoilerFile.WriteLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType}");
+                    spoilerFile.AppendLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType}");
                     //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
 

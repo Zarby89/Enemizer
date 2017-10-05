@@ -15,7 +15,7 @@ namespace EnemizerLibrary
         Random rand;
         RomData ROM_DATA;
 
-        StreamWriter spoilerfile;
+        //StreamWriter spoilerfile;
 
         OptionFlags optionFlags;
 
@@ -24,6 +24,7 @@ namespace EnemizerLibrary
             this.ROM_DATA = new RomData(ROM_DATA);
             this.ROM_DATA.ExpandRom();
             this.ROM_DATA.SetCharacterSelectScreenVersion();
+            this.ROM_DATA.EnemizerSeed = seed;
             this.optionFlags = optionflags;
 
             // make sure we have a randomizer rom
@@ -63,9 +64,9 @@ namespace EnemizerLibrary
 
             if (optionFlags.GenerateSpoilers)
             {
-                spoilerfile = new StreamWriter(seed.ToString() + " Spoiler.txt");
-         
-                spoilerfile.WriteLine("Spoiler Log Seed : " + seed.ToString());
+                //spoilerfile = new StreamWriter($"{seed.ToString()} Spoiler.txt");
+                this.ROM_DATA.Spoiler.AppendLine($"Enemizer Spoiler Log Seed: {seed}");
+                //spoilerfile.WriteLine("Spoiler Log Seed : " + seed.ToString());
             }
 
             //create_subset_gfx();
@@ -80,13 +81,13 @@ namespace EnemizerLibrary
                 switch (optionFlags.RandomizeBossesType)
                 {
                     case RandomizeBossesType.Basic:
-                        br = new BossRandomizer(rand, optionFlags, spoilerfile, graph);
+                        br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
                         break;
                     case RandomizeBossesType.Normal:
-                        br = new NormalBossRandomizer(rand, optionflags, spoilerfile, graph);
+                        br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
                         break;
                     case RandomizeBossesType.Chaos:
-                        br = new ChaosBossRandomizer(rand, optionflags, spoilerfile, graph);
+                        br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
                         break;
                     default:
                         throw new Exception("Unknown Boss Randomization Type");
@@ -209,11 +210,11 @@ namespace EnemizerLibrary
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            if (spoilerfile != null)
-            {
-                spoilerfile.Flush();
-                spoilerfile.Close();
-            }
+            //if (spoilerfile != null)
+            //{
+            //    spoilerfile.Flush();
+            //    spoilerfile.Close();
+            //}
 
             if (optionFlags.DebugMode)
             {
