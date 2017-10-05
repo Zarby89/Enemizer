@@ -104,7 +104,6 @@ namespace EnemizerLibrary
         {
             DungeonShells shells = new DungeonShells();
             shells.FillShells();
-            shells.WriteShellsToRom(romData);
 
             if (optionFlags.GenerateSpoilers)
             {
@@ -138,7 +137,10 @@ namespace EnemizerLibrary
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2
 
-                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
+                    var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
+                    byte[] shellpointer = shell.Pointer;
+                    shell.ShellData[shell.ShellByteOffset] = 0xFF; // change shell to trinexx
+
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
@@ -159,7 +161,10 @@ namespace EnemizerLibrary
                     //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
 
-                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
+                    var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
+                    byte[] shellpointer = shell.Pointer;
+                    shell.ShellData[shell.ShellByteOffset] = 0xF9; // change shell to kholdstare (should be kholdstare by default)
+
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
                     romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
@@ -173,6 +178,7 @@ namespace EnemizerLibrary
                 }
             }
 
+            shells.WriteShellsToRom(romData);
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);
         }

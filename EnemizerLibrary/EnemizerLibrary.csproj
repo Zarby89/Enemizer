@@ -146,6 +146,7 @@
     <Compile Include="Graph\EntranceConstants.cs" />
     <Compile Include="Graph\RomExit.cs" />
     <Compile Include="Graph\ExitConstants.cs" />
+    <Compile Include="SubType2Object.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>

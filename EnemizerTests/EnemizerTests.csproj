@@ -84,6 +84,7 @@
     <Compile Include="OverworldAreaRequirementTests.cs" />
     <Compile Include="RoomRequirementTests.cs" />
     <Compile Include="GraphTest.cs" />
+    <Compile Include="ShellTests.cs" />
     <Compile Include="SpriteGroupTests.cs" />
     <Compile Include="RoomTests.cs" />
     <Compile Include="Utilities.cs" />

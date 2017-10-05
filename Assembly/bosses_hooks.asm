@@ -5,9 +5,10 @@ GFX_Kholdstare_Shell:
 incbin shell.gfx
 warnpc $24C001  ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
 ; TODO: load trinexx gfx
-;GFX_Trinexx_Shell:
-;incbin rocks.gfx
-;warnpc $24D001
+org $24C000
+GFX_Trinexx_Shell:
+incbin rocks.gfx
+warnpc $24C801
 
 ;Move rooms header at position $248090 (0x120090)
 ; put this back in the c# code
