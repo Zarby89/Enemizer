@@ -155,7 +155,8 @@ namespace EnemizerLibrary
                 if (dungeon.SelectedBoss.BossType == BossType.Kholdstare)
                 {
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
+                    // TODO: fix this. "debug" flag is set on one of these bytes
+                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
 
                     byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();

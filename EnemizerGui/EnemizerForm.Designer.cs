@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnemizerForm));
             this.generateRomButton = new System.Windows.Forms.Button();
-            this.extraSettingsCheckedList = new System.Windows.Forms.CheckedListBox();
-            this.descriptionLabel = new System.Windows.Forms.Label();
             this.linkSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -87,6 +85,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
+            this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
+            this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -110,43 +111,6 @@
             this.generateRomButton.Text = "Generate!";
             this.generateRomButton.UseVisualStyleBackColor = true;
             this.generateRomButton.Click += new System.EventHandler(this.generateRomButton_Click);
-            // 
-            // extraSettingsCheckedList
-            // 
-            this.extraSettingsCheckedList.FormattingEnabled = true;
-            this.extraSettingsCheckedList.Items.AddRange(new object[] {
-            "Dungeon Enemies",
-            "Overworld Enemies",
-            "Dungeon Palettes",
-            "Enemy Palettes",
-            "Overworld Palettes",
-            "Enemy Hit Points",
-            "Enemy DMG Output",
-            "Enemy HP to 0",
-            "Shuffle Bosses",
-            "Absorbables in Pool",
-            "Boss Madness",
-            "Blackout Mode",
-            "Shuffle Music",
-            "Custom Bosses (WIP)",
-            "Shuffle Pot Contents"});
-            this.extraSettingsCheckedList.Location = new System.Drawing.Point(19, 67);
-            this.extraSettingsCheckedList.MultiColumn = true;
-            this.extraSettingsCheckedList.Name = "extraSettingsCheckedList";
-            this.extraSettingsCheckedList.Size = new System.Drawing.Size(263, 184);
-            this.extraSettingsCheckedList.TabIndex = 5;
-            this.extraSettingsCheckedList.Visible = false;
-            this.extraSettingsCheckedList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.extraSettingsCheckedList_ItemCheck);
-            this.extraSettingsCheckedList.SelectedIndexChanged += new System.EventHandler(this.extraSettingsCheckedList_SelectedIndexChanged);
-            // 
-            // descriptionLabel
-            // 
-            this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(122, 254);
-            this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
-            this.descriptionLabel.TabIndex = 6;
-            this.descriptionLabel.Text = "Descritpion";
             // 
             // linkSpriteCombobox
             // 
@@ -708,10 +672,11 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.customBossesCheckbox);
+            this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
+            this.tabPage4.Controls.Add(this.shuffleMusicCheckBox);
             this.tabPage4.Controls.Add(this.debugModeCheckbox);
             this.tabPage4.Controls.Add(this.bootlegMagicCheckbox);
-            this.tabPage4.Controls.Add(this.extraSettingsCheckedList);
-            this.tabPage4.Controls.Add(this.descriptionLabel);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(458, 292);
@@ -722,7 +687,7 @@
             // debugModeCheckbox
             // 
             this.debugModeCheckbox.AutoSize = true;
-            this.debugModeCheckbox.Location = new System.Drawing.Point(7, 25);
+            this.debugModeCheckbox.Location = new System.Drawing.Point(7, 272);
             this.debugModeCheckbox.Name = "debugModeCheckbox";
             this.debugModeCheckbox.Size = new System.Drawing.Size(88, 17);
             this.debugModeCheckbox.TabIndex = 8;
@@ -758,6 +723,40 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
+            // 
+            // shuffleMusicCheckBox
+            // 
+            this.shuffleMusicCheckBox.AutoSize = true;
+            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 148);
+            this.shuffleMusicCheckBox.Name = "shuffleMusicCheckBox";
+            this.shuffleMusicCheckBox.Size = new System.Drawing.Size(177, 17);
+            this.shuffleMusicCheckBox.TabIndex = 9;
+            this.shuffleMusicCheckBox.Text = "Shuffle Music (May crash game)";
+            this.shuffleMusicCheckBox.UseVisualStyleBackColor = true;
+            this.shuffleMusicCheckBox.CheckedChanged += new System.EventHandler(this.shuffleMusicCheckBox_CheckedChanged);
+            // 
+            // shufflePotContentsCheckbox
+            // 
+            this.shufflePotContentsCheckbox.AutoSize = true;
+            this.shufflePotContentsCheckbox.Location = new System.Drawing.Point(158, 7);
+            this.shufflePotContentsCheckbox.Name = "shufflePotContentsCheckbox";
+            this.shufflePotContentsCheckbox.Size = new System.Drawing.Size(123, 17);
+            this.shufflePotContentsCheckbox.TabIndex = 10;
+            this.shufflePotContentsCheckbox.Text = "Shuffle Pot Contents";
+            this.shufflePotContentsCheckbox.UseVisualStyleBackColor = true;
+            this.shufflePotContentsCheckbox.CheckedChanged += new System.EventHandler(this.shufflePotContentsCheckbox_CheckedChanged);
+            // 
+            // customBossesCheckbox
+            // 
+            this.customBossesCheckbox.AutoSize = true;
+            this.customBossesCheckbox.Enabled = false;
+            this.customBossesCheckbox.Location = new System.Drawing.Point(318, 7);
+            this.customBossesCheckbox.Name = "customBossesCheckbox";
+            this.customBossesCheckbox.Size = new System.Drawing.Size(98, 17);
+            this.customBossesCheckbox.TabIndex = 11;
+            this.customBossesCheckbox.Text = "Custom Bosses";
+            this.customBossesCheckbox.UseVisualStyleBackColor = true;
+            this.customBossesCheckbox.CheckedChanged += new System.EventHandler(this.customBossesCheckbox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -808,8 +807,6 @@
         #endregion
 
         private System.Windows.Forms.Button generateRomButton;
-        private System.Windows.Forms.CheckedListBox extraSettingsCheckedList;
-        private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.ComboBox linkSpriteCombobox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -864,6 +861,9 @@
         private System.Windows.Forms.CheckBox chkRandomizeBushEnemyChance;
         private System.Windows.Forms.CheckBox bootlegMagicCheckbox;
         private System.Windows.Forms.CheckBox debugModeCheckbox;
+        private System.Windows.Forms.CheckBox customBossesCheckbox;
+        private System.Windows.Forms.CheckBox shufflePotContentsCheckbox;
+        private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
     }
 }
 

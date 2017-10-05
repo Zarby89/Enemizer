@@ -28,9 +28,11 @@ incsrc DMA.asm
 org $408000
 incsrc enemizerflags.asm
 incsrc bushes.asm
+incsrc NMI.asm
 incsrc terrorpin.asm
 incsrc special_action.asm
 incsrc bosses_moved.asm
+;incsrc sprite_damage.asm
 incsrc bossdrop.asm
 incsrc moldorm.asm
 

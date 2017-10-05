@@ -126,18 +126,6 @@ namespace Enemizer
             UpdatePalettesTabUIFromConfig();
 
             UpdateExtrasTabUIFromConfig();
-
-            //int flagsText = 0;
-            //for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
-            //{
-            //    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Unchecked);
-            //    if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
-            //    {
-            //        extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
-
-            //    }
-            //}
-            //flags = flagsText;
         }
 
         private void UpdateMainFormUIFromConfig()
@@ -225,6 +213,9 @@ namespace Enemizer
         {
             bootlegMagicCheckbox.Checked = config.OptionFlags.BootlegMagic;
             debugModeCheckbox.Checked = config.OptionFlags.DebugMode;
+            shuffleMusicCheckBox.Checked = config.OptionFlags.ShuffleMusic;
+            shufflePotContentsCheckbox.Checked = config.OptionFlags.RandomizePots;
+            customBossesCheckbox.Checked = config.OptionFlags.CustomBosses;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -517,11 +508,6 @@ namespace Enemizer
         /*
          * Extras tab
          */
-        private void extraSettingsCheckedList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            // TODO: add extra flags
-        }
-
 
         // TODO: replace this with resource file and tooltips
         public string[] description = 
@@ -545,10 +531,6 @@ namespace Enemizer
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
-        private void extraSettingsCheckedList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            descriptionLabel.Text = description[extraSettingsCheckedList.SelectedIndex];
-        }
 
         private void chkBootlegMagic_CheckedChanged(object sender, EventArgs e)
         {
@@ -558,6 +540,21 @@ namespace Enemizer
         private void debugModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.DebugMode = debugModeCheckbox.Checked;
+        }
+
+        private void shuffleMusicCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.ShuffleMusic = shuffleMusicCheckBox.Checked;
+        }
+
+        private void shufflePotContentsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizePots = shufflePotContentsCheckbox.Checked;
+        }
+
+        private void customBossesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.CustomBosses = customBossesCheckbox.Checked;
         }
     }
 

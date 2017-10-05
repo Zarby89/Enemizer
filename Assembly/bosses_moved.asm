@@ -52,7 +52,7 @@ boss_move:
         STZ $0690
         INC $7E0CF3 
          ; ;That must be called after the room load NotLikeThis !
-        .no_blind_door
+    .no_blind_door
         BRL .move_to_bottom_right
 	+
 
@@ -157,7 +157,8 @@ gibdo_drop_key:
     LDA $A0 : CMP #$39 : BNE .no_key_drop       ; Check if the room id is skullwoods before boss
     LDA $0DD0, X : CMP #$09 : BNE .no_key_drop  ; Check if the sprite is alive
     LDA #$01 : STA $0CBA, X;set key
-    .no_key_drop
+
+.no_key_drop
     JSL $06DC5C ;Restore draw shadow
     RTL
 }
@@ -165,37 +166,29 @@ gibdo_drop_key:
 WriteGfxBlock:
 {
     ;DMA_VRAM(VRAM_HIGH,VRAM_LOW,SRC_BANK,SRC_HIGH,SRC_LOW,LENGTH_HIGH,LENGTH_LOW)
-;    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     RTL
 }
 
 new_kholdstare_code:
 {
-;    LDA $0CBA : BNE .already_iced
-;    LDA #$01 : STA $0CBA
-;    JSL WriteGfxBlock;
-;    .already_iced
-;    JSL $0DD97F
+    LDA $0CBA : BNE .already_iced
+    LDA #$01 : STA $0CBA
+
+    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
+
+.already_iced
+    JSL $0DD97F         ; what is this?
     RTL
 }
 
 new_trinexx_code:
 {
-;    LDA.b #$03 : STA $0DC0, X
-;    JSL WriteGfxBlock;
-    RTL
-}
+    LDA.b #$03 : STA $0DC0, X
 
-new_sprites_damage:
-{
-	LDA $7EF35B : STA $00 ; set armor value in $00
-	LDA $0CD2, X : AND.b #$7F ;load damage the sprite is doing
-	CPY $00 : BEQ .no_mail
-	.have_mail
-		LSR : DEY ;decrease A by half 
-	CPY $00 : BNE .have_mail ;while $00 > 0 then loop back and decrease damage by half
-		.no_mail
-	TAY
-	STA $00 : STA $0373
-	RTL
+    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
+
+    RTL
 }

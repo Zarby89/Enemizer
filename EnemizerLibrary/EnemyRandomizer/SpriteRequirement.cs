@@ -527,7 +527,7 @@ namespace EnemizerLibrary
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YellowStalfosSprite)); // TODO: add
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetKillable().AddSubgroup2(42));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetNeverUseOverworld().SetKillable().AddSubgroup2(42));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlamesSprite)); // TODO: add
 
