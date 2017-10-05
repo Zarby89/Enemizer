@@ -4,6 +4,10 @@ org $24B000
 GFX_Kholdstare_Shell:
 incbin shell.gfx
 warnpc $24C001  ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
+; TODO: load trinexx gfx
+;GFX_Trinexx_Shell:
+;incbin rocks.gfx
+;warnpc $24D001
 
 ;Move rooms header at position $248090 (0x120090)
 ; put this back in the c# code
@@ -82,9 +86,13 @@ db $FF, $FF, $FF, $FF, $F0, $FF, $61, $18, $FF, $FF
 org $0DB6BE
 db $00
 
+;-----------------------------------------------
+org $0DD97F
+Kholdstare_Draw:
 
-org $1E9518
+org $1E9518 ; sprite_kholdstare.asm (154) : JSL Kholdstare_Draw
 JSL new_kholdstare_code;Write new gfx in the vram
+;-----------------------------------------------
 
-org $1DAD67 
+org $1DAD67 ; sprite_trinexx.asm (62) : LDA.b #$03 : STA $0DC0, X
 JSL new_trinexx_code

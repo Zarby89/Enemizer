@@ -22,7 +22,7 @@ namespace EnemizerLibrary
 
         public DungeonType DungeonType { get; protected set; } = DungeonType.NotSet;
 
-        public Dungeon(int priority)
+        protected Dungeon(int priority)
         {
             Priority = priority;
         }

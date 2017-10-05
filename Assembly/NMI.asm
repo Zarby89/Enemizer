@@ -4,18 +4,28 @@ NMIHookAction:
     ;-----------------------------------------
     ; do our shell stuff
     PHA
+    PHP
+
+    SEP #$20 ; get into 8-bit mode
     
-    LDA $0000 : BNE .doNothing
-    BIT #$01 : BEQ .loadKholdstare
-    BIT #$02 : BEQ .loadTrinexx
+    LDA $7F5041 : BEQ .return ; check our draw flag
+    AND #$01 : BNE .loadKholdstare
+    LDA $7F5041 : AND #$02 : BNE .loadTrinexx
+    BRA .return ; just in case
+    ;BIT #$01 : BEQ .loadKholdstare
+    ;BIT #$02 : BEQ .loadTrinexx
 
 .loadKholdstare
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    JSL DMAKholdstare
+    LDA #$00 : STA $7F5041 ; clear our draw flag
+    BRA .return
 
 .loadTrinexx
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    JSL DMATrinexx
+    LDA #$00 : STA $7F5041 ; clear our draw flag
 
-.doNothing
+.return
+    PLP
     PLA
     ;-----------------------------------------
     ; restore code Bank00.asm (164-167)
@@ -24,4 +34,17 @@ NMIHookAction:
     LDA.w #$0000 : TCD
 
 JML.l NMIHookReturn
+}
+
+DMAKholdstare:
+{
+    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    RTL
+}
+
+DMATrinexx:
+{
+    ; TODO: change this to trinexx gfx
+    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    RTL
 }

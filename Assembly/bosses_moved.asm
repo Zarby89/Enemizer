@@ -166,7 +166,7 @@ gibdo_drop_key:
 WriteGfxBlock:
 {
     ;DMA_VRAM(VRAM_HIGH,VRAM_LOW,SRC_BANK,SRC_HIGH,SRC_LOW,LENGTH_HIGH,LENGTH_LOW)
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    ;%DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     RTL
 }
 
@@ -175,20 +175,28 @@ new_kholdstare_code:
     LDA $0CBA : BNE .already_iced
     LDA #$01 : STA $0CBA
 
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    LDA #$01 : STA $7F5041 ; tell our NMI to draw the shell
+    ;%DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
 
 .already_iced
-    JSL $0DD97F         ; what is this?
+    ; restore code
+    JSL Kholdstare_Draw         ; sprite_kholdstare.asm (154) : JSL Kholdstare_Draw
     RTL
 }
 
 new_trinexx_code:
 {
-    LDA.b #$03 : STA $0DC0, X
+    LDA $0CBA : BNE .already_rocked
+    LDA #$01 : STA $0CBA
 
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    LDA #$02 : STA $7F5041 ; tell our NMI to draw the shell
+    ;%DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
+
+.already_rocked
+    ; restore code
+    LDA.b #$03 : STA $0DC0, X ; sprite_trinexx.asm (62) : LDA.b #$03 : STA $0DC0, X
 
     RTL
 }

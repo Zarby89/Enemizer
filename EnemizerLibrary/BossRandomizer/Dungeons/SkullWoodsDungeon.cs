@@ -18,6 +18,9 @@ namespace EnemizerLibrary
             BossRoomId = 41;
             BossAddress = 0x04D680;
             BossDropItemAddress = 0x180155;
+
+            DisallowedBosses.Add(BossType.Kholdstare); // the moth room does really strange stuff
+            DisallowedBosses.Add(BossType.Trinexx);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace EnemizerLibrary
         {
             this.ROM_DATA = new RomData(ROM_DATA);
             this.ROM_DATA.ExpandRom();
+            this.ROM_DATA.SetCharacterSelectScreenVersion();
             this.optionFlags = optionflags;
 
             // make sure we have a randomizer rom

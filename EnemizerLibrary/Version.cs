@@ -8,7 +8,9 @@ namespace EnemizerLibrary
 {
     public class Version
     {
-        public static string CurrentVersion = "6.0";
+        public const int MajorVersion = 6;
+        public const int MinorVersion = 0;
+        public static string CurrentVersion = $"{MajorVersion}.{MinorVersion}";
         public static bool CheckUpdate()
         {
             
