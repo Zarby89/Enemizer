@@ -13,12 +13,16 @@ db #$0C
 org $5FFFFF ; write at the last position to expand on 2mb
 db #$00
 
+; Enemizer reserved memory
+; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
+
 ;=Constants======================================================================
 
 !BUSHES_FLAG = "$408000"
 !BLIND_DOOR_FLAG = "$408001"
 !MOLDORM_EYES_FLAG = "$408002"
 
+!SHELL_DMA_FLAG = "$7F50B0"
 ;================================================================================
 
 incsrc hooks.asm

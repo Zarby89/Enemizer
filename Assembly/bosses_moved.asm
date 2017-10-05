@@ -175,7 +175,7 @@ new_kholdstare_code:
     LDA $0CBA : BNE .already_iced
     LDA #$01 : STA $0CBA
 
-    LDA #$01 : STA $7F5041 ; tell our NMI to draw the shell
+    LDA #$01 : STA !SHELL_DMA_FLAG ; tell our NMI to draw the shell
     ;%DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
 
@@ -190,7 +190,7 @@ new_trinexx_code:
     LDA $0CBA : BNE .already_rocked
     LDA #$01 : STA $0CBA
 
-    LDA #$02 : STA $7F5041 ; tell our NMI to draw the shell
+    LDA #$02 : STA !SHELL_DMA_FLAG ; tell our NMI to draw the shell
     ;%DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
     ;JSL WriteGfxBlock   ; write our shell gfx. this needs to be moved to an NMI hook
 
