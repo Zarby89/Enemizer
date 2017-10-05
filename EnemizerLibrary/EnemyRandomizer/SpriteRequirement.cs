@@ -457,8 +457,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MasterSwordSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(55).AddSubgroup3(54));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_NonShooterSprite).SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_ShooterSprite).SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
+            // TODO: exclude these for now. figure out how to add them later (they overload the sprites and cause odd stuff to happen)
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_NonShooterSprite).SetNeverUseDungeon().SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Devalant_ShooterSprite).SetNeverUseDungeon().SetNeverUseOverworld().SetKillable().AddSubgroup0(47));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShootingGalleryProprietorSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(75));
 
