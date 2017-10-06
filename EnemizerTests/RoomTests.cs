@@ -32,11 +32,18 @@ namespace EnemizerTests
         [Fact]
         public void load_object_pointer_table()
         {
-            RomData romData = Utilities.LoadRom("rando.sfc");
+            //RomData romData = Utilities.LoadRom("rando.sfc");
+            RomData romData = Utilities.LoadRom("..\\..\\..\\alttp - VT_no-glitches-26_normal_open_none_830270265.sfc");
+            //RomData romData = Utilities.LoadRom("..\\..\\..\\EnemizerGui\\bin\\Debug\\Enemizer 6.0 - alttp - VT_no-glitches-26_normal_open_none_830270265.sfc");
             var d = new DungeonObjectDataPointerCollection(romData);
+            d.RoomDungeonObjectDataPointers[172].AddShell(0x2B, 0x28, true, 0xFF2);
+            d.WriteChangesToRom(0x122000);
+
+
+            output.WriteLine($"{d.RoomDungeonObjectDataPointers.Values.Where(x => x.RoomId == 172).FirstOrDefault().ROMAddress.ToString("X")}");
 
             output.WriteLine($"Room\tSnesAddress\tRomAddress");
-            foreach (var p in d.RoomDungeonObjectDataPointers)
+            foreach (var p in d.RoomDungeonObjectDataPointers.Values)
             {
                 output.WriteLine($"{p.RoomId}\t{p.SnesAddress.ToString("X")}\t{p.ROMAddress.ToString("X")}");
             }

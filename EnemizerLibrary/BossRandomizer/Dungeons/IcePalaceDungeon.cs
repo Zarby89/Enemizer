@@ -18,6 +18,9 @@ namespace EnemizerLibrary
             BossRoomId = 222;
             BossAddress = 0x04D7EA;
             BossDropItemAddress = 0x180157;
+
+            ShellX = 0x2B;
+            ShellY = 0x08;
         }
     }
 }

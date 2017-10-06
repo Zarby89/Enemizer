@@ -21,6 +21,9 @@ namespace EnemizerLibrary
 
             DisallowedBosses.Add(BossType.Kholdstare); // the moth room does really strange stuff
             DisallowedBosses.Add(BossType.Trinexx);
+
+            ShellX = 0x2B;
+            ShellY = 0x28;
         }
     }
 }

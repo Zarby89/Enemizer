@@ -18,6 +18,10 @@ namespace EnemizerLibrary
         public int BossAddress { get; set; }
         public int? BossDropItemAddress { get; set; }
 
+        public int ShellX { get; set; }
+        public int ShellY { get; set; }
+        public bool ClearLayer2 { get; set; }
+
         public List<BossType> DisallowedBosses { get; protected set; } = new List<BossType>();
 
         public DungeonType DungeonType { get; protected set; } = DungeonType.NotSet;

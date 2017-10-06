@@ -6,20 +6,26 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public class Type1DungeonObject
+    public class LayerDungeonObject
     {
-        public static Type1DungeonObject GetDungeonObjectFromBytes(byte[] bytes)
+        public static LayerDungeonObject GetDungeonObjectFromBytes(byte[] bytes)
         {
             if(bytes.Length != 3)
             {
                 throw new Exception("Dungeon Objects must be built from 3 byte chunks.");
             }
-            if(bytes[2] >= 0xF8)
+            if(bytes[0] >= 0xFC)
             {
                 return new SubType2Object(bytes);
             }
-
-            return new Type1DungeonObject(bytes);
+            else if(bytes[2] >= 0xF8)
+            {
+                return new SubType3Object(bytes);
+            }
+            else
+            {
+                return new SubType1Object(bytes);
+            }
         }
         protected byte[] _bytes;
         public byte[] Bytes
@@ -29,7 +35,7 @@ namespace EnemizerLibrary
             {
                 if (value.Length != 3)
                 {
-                    throw new Exception("Type1DungeonObject must be composed from 3 bytes");
+                    throw new Exception("LayerDungeonObject must be composed from 3 bytes");
                 }
                 _bytes = value;
                 BuildFromBytes();
@@ -102,14 +108,14 @@ namespace EnemizerLibrary
             }
         }
 
-        public Type1DungeonObject(byte[] bytes)
+        public LayerDungeonObject(byte[] bytes)
         {
             this.Bytes = bytes;
 
             //BuildFromBytes();
         }
 
-        public Type1DungeonObject(int x, int y, int oid)
+        public LayerDungeonObject(int x, int y, int oid)
         {
             this._xCoord = x;
             this._yCoord = y;

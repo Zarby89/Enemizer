@@ -68,6 +68,13 @@ namespace EnemizerLibrary
             {
                 var dungeon = dungeonQueue.Dequeue();
 
+                if (optionFlags.DebugMode)
+                {
+                    //dungeon.SelectedBoss = new KholdstareBoss();
+                    dungeon.SelectedBoss = new TrinexxBoss();
+                    continue;
+                }
+
                 var boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
 
                 //var result = graph.FindPath("cave-links-house", "triforce-room");
@@ -105,15 +112,13 @@ namespace EnemizerLibrary
             DungeonShells shells = new DungeonShells();
             shells.FillShells();
 
-            if (optionFlags.GenerateSpoilers)
+            if (optionFlags.GenerateSpoilers && spoilerFile != null)
             {
                 spoilerFile.AppendLine("Bosses:");
-                foreach (var d in DungeonPool)
-                {
-
-                }
             }
 
+            DungeonObjectDataPointerCollection roomObjects = new DungeonObjectDataPointerCollection(romData);
+            
             foreach (var dungeon in DungeonPool)
             {
                 // spoilers
@@ -133,52 +138,59 @@ namespace EnemizerLibrary
                 // update trinexx shell
                 if(dungeon.SelectedBoss.BossType == BossType.Trinexx)
                 {
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2
+                    // TODO: figure out the X/Y coord
+                    roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY-2, dungeon.ClearLayer2, 0xFF2);
 
-                    var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
-                    byte[] shellpointer = shell.Pointer;
-                    shell.ShellData[shell.ShellByteOffset] = 0xFF; // change shell to trinexx
+                    // see "Header contents:" section of rom log
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (GFX # in Hyrule Magic)
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
 
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
+                    //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
+                    //byte[] shellpointer = shell.Pointer;
+                    //shell.ShellData[shell.ShellByteOffset] = 0xFF; // change shell to trinexx
 
-                    byte[] Pointer = new byte[4];
-                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    romData[floors_address] = 0xF0;
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
+
+                    //byte[] Pointer = new byte[4];
+                    //Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
+                    //Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
+                    //Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
+                    //int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
+                    //romData[floors_address] = 0xF0;
                 }
 
                 // update kholdstare shell
                 if (dungeon.SelectedBoss.BossType == BossType.Kholdstare)
                 {
+                    roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY, dungeon.ClearLayer2, 0xF95);
+
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01;
                     // TODO: fix this. "debug" flag is set on one of these bytes
-                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
 
-                    var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
-                    byte[] shellpointer = shell.Pointer;
-                    shell.ShellData[shell.ShellByteOffset] = 0xF9; // change shell to kholdstare (should be kholdstare by default)
+                    //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
+                    //byte[] shellpointer = shell.Pointer;
+                    //shell.ShellData[shell.ShellByteOffset] = 0xF9; // change shell to kholdstare (should be kholdstare by default)
 
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
+                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
 
-                    byte[] Pointer = new byte[4];
-                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    romData[floors_address] = 0xF0;
+                    //byte[] Pointer = new byte[4];
+                    //Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
+                    //Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
+                    //Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
+                    //int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
+                    //romData[floors_address] = 0xF0; // change the floor fill type so hera floor doesn't become black
                 }
             }
 
-            shells.WriteShellsToRom(romData);
+            roomObjects.WriteChangesToRom(0x122000);
+            //shells.WriteShellsToRom(romData);
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);
         }

@@ -24,6 +24,9 @@ namespace EnemizerLibrary
             DisallowedBosses.Add(BossType.Blind);
             DisallowedBosses.Add(BossType.Lanmola);
             DisallowedBosses.Add(BossType.Trinexx);
+
+            ShellX = 0x1B;
+            ShellY = 0x16;
         }
     }
 }
