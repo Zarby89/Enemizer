@@ -92,8 +92,8 @@ namespace EnemizerTests
         [Fact]
         public void calculate_shell_bytes2()
         {
-            SubType2Object trinexx = new SubType2Object(new byte[] { 0x6E, 0x48, 0xFF }); // 6E 48 FF // x1B, y12, 0FF:2
-            //SubType2Object trinexx = new SubType2Object(new byte[] { 0x61, 0x51, 0xFF }); 
+            //SubType2Object trinexx = new SubType2Object(new byte[] { 0x6E, 0x48, 0xFF }); // 6E 48 FF // x1B, y12, 0FF:2
+            SubType2Object trinexx = new SubType2Object(new byte[] { 0x61, 0x51, 0xFF }); 
             //SubType2Object trinexx = new SubType2Object(new byte[] { 0x2E, 0x98, 0xFF });
             output.WriteLine($"oid:{trinexx.OID.ToString("X3")}, x:{trinexx.XCoord.ToString("X2")}, y:{trinexx.YCoord.ToString("X2")}");
 

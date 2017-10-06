@@ -89,6 +89,10 @@
     <Compile Include="BossRandomizer\Dungeons\EasternPalaceDungeon.cs" />
     <Compile Include="BossRandomizer\Dungeons\DungeonType.cs" />
     <Compile Include="BossRandomizer\Dungeons\Dungeon.cs" />
+    <Compile Include="DungeonObject\Type2DungeonObject.cs" />
+    <Compile Include="DungeonObject\Type1DungeonObject.cs" />
+    <Compile Include="DungeonObject\DungeonObjectDataTable.cs" />
+    <Compile Include="DungeonObject\DungeonObjectPointerCollection.cs" />
     <Compile Include="EnemyRandomizer\Dungeon\DungeonEnemyRandomizer.cs" />
     <Compile Include="EnemyRandomizer\GroupSubsetPossibleSprite.cs" />
     <Compile Include="EnemyRandomizer\GroupSubsetPossibleSpriteCollection.cs" />
@@ -146,7 +150,7 @@
     <Compile Include="Graph\EntranceConstants.cs" />
     <Compile Include="Graph\RomExit.cs" />
     <Compile Include="Graph\ExitConstants.cs" />
-    <Compile Include="SubType2Object.cs" />
+    <Compile Include="DungeonObject\SubType2Object.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>

@@ -32,5 +32,23 @@ namespace EnemizerLibrary
 
             return new byte[] { (byte)(addr >> 16), ((byte)(addr >> 8)), ((byte)addr) };
         }
+
+        public static int SnesByteArrayTo24bitSnesAddress(byte[] addressBytes)
+        {
+            if(addressBytes.Length != 3)
+            {
+                throw new Exception($"SnesByteArrayTo24bitSnesAddress requires 3 bytes of input. {addressBytes.Length} were passed in.");
+            }
+            return (addressBytes[2] << 16) | (addressBytes[1] << 8) | (addressBytes[0]);
+        }
+
+        public static int SnesByteArrayTo16bitSnesAddress(byte[] addressBytes)
+        {
+            if (addressBytes.Length != 2)
+            {
+                throw new Exception($"SnesByteArrayTo16bitSnesAddress requires 2 bytes of input. {addressBytes.Length} were passed in.");
+            }
+            return (addressBytes[1] << 8) | (addressBytes[0]);
+        }
     }
 }

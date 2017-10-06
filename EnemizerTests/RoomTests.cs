@@ -28,5 +28,18 @@ namespace EnemizerTests
                 output.WriteLine($"RoomId: {r.RoomId}, RoomName: {r.RoomName}, RoomGfx: {r.GraphicsBlockId}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "") ))}");
             }
         }
+
+        [Fact]
+        public void load_object_pointer_table()
+        {
+            RomData romData = Utilities.LoadRom("rando.sfc");
+            var d = new DungeonObjectDataPointerCollection(romData);
+
+            output.WriteLine($"Room\tSnesAddress\tRomAddress");
+            foreach (var p in d.RoomDungeonObjectDataPointers)
+            {
+                output.WriteLine($"{p.RoomId}\t{p.SnesAddress.ToString("X")}\t{p.ROMAddress.ToString("X")}");
+            }
+        }
     }
 }

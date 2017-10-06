@@ -250,6 +250,13 @@ namespace EnemizerLibrary
             }
         }
 
+        public byte[] GetDataChunk(int startingAddress, int length)
+        {
+            var output = new byte[length];
+            Array.Copy(this.romData, startingAddress, output, 0, length);
+            return output;
+        }
+
         public void WriteRom(FileStream fs)
         {
             fs.Write(this.romData, 0, this.romData.Length);
