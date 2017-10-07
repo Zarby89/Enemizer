@@ -21,6 +21,7 @@ namespace EnemizerLibrary
 
             ShellX = 0x0B;
             ShellY = 0x28;
+            ClearLayer2 = true;
         }
     }
 }

@@ -95,6 +95,8 @@ namespace EnemizerLibrary
 
         public int WriteRom(RomData romData, int newAddess)
         {
+            //this.pointerAddress = newAddess;
+            ROMAddress = newAddess;
             var snesPointer = Utilities.PCAddressToSnesByteArray(newAddess);
             // update the pointer
             romData[this.pointerAddress] = snesPointer[2];

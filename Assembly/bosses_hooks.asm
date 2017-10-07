@@ -9,6 +9,8 @@ org $24C000
 GFX_Trinexx_Shell:
 incbin rocks.gfx
 warnpc $24C801
+GFX_Trinexx_Shell2:
+incbin rocks2.gfx
 
 ;Move rooms header at position $248090 (0x120090)
 ; put this back in the c# code

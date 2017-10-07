@@ -70,8 +70,8 @@ namespace EnemizerLibrary
 
                 if (optionFlags.DebugMode)
                 {
-                    //dungeon.SelectedBoss = new KholdstareBoss();
-                    dungeon.SelectedBoss = new TrinexxBoss();
+                    dungeon.SelectedBoss = new KholdstareBoss();
+                    //dungeon.SelectedBoss = new TrinexxBoss();
                     continue;
                 }
 
@@ -136,7 +136,7 @@ namespace EnemizerLibrary
                 romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
 
                 // update trinexx shell
-                if(dungeon.SelectedBoss.BossType == BossType.Trinexx)
+                if(dungeon.SelectedBoss.BossType == BossType.Trinexx && dungeon.BossRoomId != RoomIdConstants.R164_TurtleRock_Trinexx)
                 {
                     // TODO: figure out the X/Y coord
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY-2, dungeon.ClearLayer2, 0xFF2);
@@ -163,14 +163,14 @@ namespace EnemizerLibrary
                 }
 
                 // update kholdstare shell
-                if (dungeon.SelectedBoss.BossType == BossType.Kholdstare)
+                if (dungeon.SelectedBoss.BossType == BossType.Kholdstare && dungeon.BossRoomId != RoomIdConstants.R222_IcePalace_Kholdstare)
                 {
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY, dungeon.ClearLayer2, 0xF95);
 
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01;
                     // TODO: fix this. "debug" flag is set on one of these bytes
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; // I suspect this
 
                     //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
                     //byte[] shellpointer = shell.Pointer;

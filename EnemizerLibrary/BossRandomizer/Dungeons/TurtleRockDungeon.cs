@@ -20,7 +20,8 @@ namespace EnemizerLibrary
             BossDropItemAddress = 0x180159;
 
             ShellX = 0x0B;
-            ShellY = 0x26;
+            ShellY = 0x28;
+            ClearLayer2 = true;
         }
     }
 }

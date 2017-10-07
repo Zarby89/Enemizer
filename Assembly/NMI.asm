@@ -46,5 +46,7 @@ DMATrinexx:
 {
     ; TODO: change this to trinexx gfx
     %DMA_VRAM(#$34,#$00,#$24,#$C0,#$00,#$08,#$00)
+    %DMA_VRAM(#$3A,#$A0,#$24,#$C8,#$00,#$00,#$C0)
+
     RTL
 }
