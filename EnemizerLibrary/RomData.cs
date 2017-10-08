@@ -190,7 +190,7 @@ namespace EnemizerLibrary
 
         public void ExpandRom()
         {
-            Array.Resize(ref this.romData, 3145728);
+            Array.Resize(ref this.romData, 0x40000); // 4MB
             this.romData[0x7FD7] = 0x0C; // update header length
         }
 
