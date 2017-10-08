@@ -1,31 +1,40 @@
-; insert kholdstare shell gfx file
+;================================================================================
+; insert kholdstare & trinexx shell gfx file
+;--------------------------------------------------------------------------------
 ; pc file address = 0x123000
 org $24B000
 GFX_Kholdstare_Shell:
 incbin shell.gfx
-warnpc $24C001  ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
-; TODO: load trinexx gfx
+warnpc $24C001      ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
+
 org $24C000
 GFX_Trinexx_Shell:
 incbin rocks.gfx
 warnpc $24C801
+
 GFX_Trinexx_Shell2:
 incbin rocks2.gfx
+warnpc $24C8C1
+;--------------------------------------------------------------------------------
 
-;Move rooms header at position $248090 (0x120090)
-; put this back in the c# code
-;incsrc headers.asm
-
+;================================================================================
+; fix skull woods gibdo key drop
+;--------------------------------------------------------------------------------
 ;Gibdo key drop hardcoded in skullwoods to fix problems
 ;some bosses are dropping a key when there's a key drop avaiable in
 ;the previous room 
 
-org $09DD74 ;Gibdo draw code (JSL Sprite_DrawShadowLong)
-db #$00, #$00 ; Remove key drop in skull woods
-org $1EBB37 ;Gibdo draw code (JSL Sprite_DrawShadowLong)
-JSL gibdo_drop_key
+org $09DD74     ; Gibdo draw code (JSL Sprite_DrawShadowLong)
+db #$00, #$00   ; Remove key drop in skull woods
 
-;Move All Bosses Sprites in Top Left Quadrant
+org $1EBB37     ; Gibdo draw code (JSL Sprite_DrawShadowLong)
+JSL gibdo_drop_key
+;--------------------------------------------------------------------------------
+
+;================================================================================
+; Move All Bosses Sprites in Top Left Quadrant
+;--------------------------------------------------------------------------------
+; TODO: what is this exactly?
 ;Trinexx
 org $09E5BA
 db $00, $05, $07, $CB, $05, $07, $CC, $05, $07, $CD
@@ -69,9 +78,11 @@ db $00, $05, $07, $BD
 ;Blind
 org $09E654
 db $00, $05, $09, $CE
+;--------------------------------------------------------------------------------
 
-
-;On Room Transition -> Move Sprite depending on the room loaded
+;================================================================================
+; On Room Transition -> Move Sprite depending on the room loaded
+;--------------------------------------------------------------------------------
 org $028979 ;  JSL Dungeon_ResetSprites ; REPLACE THAT (Sprite initialization) original jsl : $09C114
 JSL boss_move
 org $028C16 ;  JSL Dungeon_ResetSprites ; REPLACE THAT (Sprite initialization) original jsl : $09C114
@@ -80,22 +91,32 @@ org $029338 ;  JSL Dungeon_ResetSprites ; REPLACE THAT (Sprite initialization) o
 JSL boss_move
 org $028256 ;  JSL Dungeon_ResetSprites ; REPLACE THAT (Sprite initialization) original jsl : $09C114
 JSL boss_move
+;--------------------------------------------------------------------------------
 
+;================================================================================
 ; water tiles removed in arrghus room
+;--------------------------------------------------------------------------------
 org $1FA15C 
 db $FF, $FF, $FF, $FF, $F0, $FF, $61, $18, $FF, $FF
 
 ; Arrghus can stand on ground
 org $0DB6BE
 db $00
+;--------------------------------------------------------------------------------
 
-;-----------------------------------------------
-org $0DD97F
+;================================================================================
+; Draw kholdstare shell
+;--------------------------------------------------------------------------------
+org $0DD97F ; jump point
 Kholdstare_Draw:
 
 org $1E9518 ; sprite_kholdstare.asm (154) : JSL Kholdstare_Draw
-JSL new_kholdstare_code;Write new gfx in the vram
-;-----------------------------------------------
+JSL new_kholdstare_code ; Write new gfx in the vram
+;--------------------------------------------------------------------------------
 
+;================================================================================
+; Draw trinexx shell
+;--------------------------------------------------------------------------------
 org $1DAD67 ; sprite_trinexx.asm (62) : LDA.b #$03 : STA $0DC0, X
 JSL new_trinexx_code
+;--------------------------------------------------------------------------------

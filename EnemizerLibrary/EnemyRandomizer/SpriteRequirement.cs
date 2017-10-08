@@ -551,7 +551,7 @@ namespace EnemizerLibrary
             // and only work in room 0-255
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().AddSubgroup2(35));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).SetKillable().AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).AddSubgroup1(32));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HelmasaurKingSprite).SetBoss().AddSubgroup2(58).AddSubgroup3(62));
 
@@ -694,7 +694,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LynelSprite).AddSubgroup3(20));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite).SetNeverUseOverworld().SetDoNotRandomize()); // TODO: find
+            // TODO: add never use LW and DW
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite)/*.SetNeverUseOverworld()*/.SetNeverUse().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetNeverUseDungeon().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()

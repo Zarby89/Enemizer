@@ -113,7 +113,7 @@ namespace EnemizerLibrary
                 var spritesToUpdate = this.Sprites.Where(x => spriteRequirementCollection.RandomizableSprites.Select(y => y.SpriteId).Contains(x.SpriteId))
                     .ToList();
 
-                spritesToUpdate.Where(x => x.SpriteId != SpriteConstants.RavenSprite).ToList()
+                spritesToUpdate/*.Where(x => x.SpriteId != SpriteConstants.RavenSprite)*/.ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
 
                 // Kodongo are not allowed in overworld for now, until ASM can be fixed, then this won't be needed at all.

@@ -27,6 +27,7 @@ db #$00
 
 incsrc hooks.asm
 incsrc DMA.asm
+;incsrc testing.asm ; make sure to comment this out for release!!!
 
 ;================================================================================
 org $408000
@@ -44,3 +45,9 @@ incsrc moldorm.asm
 
 org $0DBA71
 GetRandomInt:
+
+; org $0DBB67
+; Sound_SetSfxPanWithPlayerCoords:
+
+; org $0DBB8A
+; Sound_SetSfx3PanLong:
