@@ -143,7 +143,7 @@ namespace EnemizerLibrary
 
                     // see "Header contents:" section of rom log
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (GFX # in Hyrule Magic)
+                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
 
                     //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
@@ -169,8 +169,8 @@ namespace EnemizerLibrary
 
                     // TODO: fix this. "debug" flag is set on one of these bytes
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; // I suspect this
+                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
 
                     //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
                     //byte[] shellpointer = shell.Pointer;

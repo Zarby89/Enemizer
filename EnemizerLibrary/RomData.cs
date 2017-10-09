@@ -28,7 +28,10 @@ namespace EnemizerLibrary
             }
         }
 
-        private byte[] romData;
+        /// <summary>
+        /// Try to avoid using this because we can't set break points to find bad writes to ROM.
+        /// </summary>
+        public byte[] romData;
 
         public RomData(byte[] romData)
         {
@@ -190,7 +193,7 @@ namespace EnemizerLibrary
 
         public void ExpandRom()
         {
-            Array.Resize(ref this.romData, 0x40000); // 4MB
+            Array.Resize(ref this.romData, 0x400000); // 4MB
             this.romData[0x7FD7] = 0x0C; // update header length
         }
 

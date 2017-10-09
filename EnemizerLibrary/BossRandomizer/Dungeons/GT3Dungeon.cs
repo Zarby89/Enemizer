@@ -24,6 +24,7 @@ namespace EnemizerLibrary
             DisallowedBosses.Add(BossType.Blind);
             DisallowedBosses.Add(BossType.Lanmola);
             DisallowedBosses.Add(BossType.Trinexx);
+            //DisallowedBosses.Add(BossType.Kholdstare); // remove until we figure out why falling screws up the next room after the boss
 
             ShellX = 0x18;
             ShellY = 0x16;

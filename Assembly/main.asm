@@ -21,6 +21,7 @@ db #$00
 !BUSHES_FLAG = "$408000"
 !BLIND_DOOR_FLAG = "$408001"
 !MOLDORM_EYES_FLAG = "$408002"
+!RANDOM_SPRITE_FLAG = "$408003"
 
 !SHELL_DMA_FLAG = "$7F50B0"
 ;================================================================================
@@ -40,6 +41,7 @@ incsrc bosses_moved.asm
 ;incsrc sprite_damage.asm
 incsrc bossdrop.asm
 incsrc moldorm.asm
+incsrc sprite_randomizer.asm
 
 ;================================================================================
 

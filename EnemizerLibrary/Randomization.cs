@@ -51,7 +51,7 @@ namespace EnemizerLibrary
 
             Graph graph = new Graph(new GraphData(this.ROM_DATA));
 
-            if (skin != "Default" && skin != "")
+            if (skin != "Unchanged" && skin != "")
             {
                 ChangeSkin(skin);
             }
@@ -189,6 +189,10 @@ namespace EnemizerLibrary
                     this.ROM_DATA[0xFFD7] = 0x0C;
                 }
             }
+
+            // TODO: check for random option and set flags too
+            this.ROM_DATA[0x200003] = 0x01;
+            BuildRandomLinkSpriteTable(new Random(seed));
 
 
             //Remove Trinexx Ice Floor : 
@@ -901,6 +905,25 @@ namespace EnemizerLibrary
                         ROM_DATA[0x6B173 + j] = (byte)new_hp;
                     }
                 }
+            }
+        }
+
+        private void BuildRandomLinkSpriteTable(Random random)
+        {
+            List<string> skins = Directory.GetFiles("sprites\\").ToList();
+            int totalSprites = 32;
+            if(totalSprites > skins.Count)
+            {
+                totalSprites = skins.Count;
+            }
+
+            for (int i = 0; i < totalSprites; i++)
+            {
+                int r = random.Next(skins.Count);
+                FileStream fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
+                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Close();
+                skins.RemoveAt(r);
             }
         }
     }

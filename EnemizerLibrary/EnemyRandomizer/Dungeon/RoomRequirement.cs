@@ -391,6 +391,10 @@ namespace EnemizerLibrary
                 RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
                 RoomIdConstants.R55_SwampPalace_MapChest_WaterFillRoom,
                 RoomIdConstants.R118_SwampPalace_WaterDrainRoom));
+
+            // force water teketite
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 34, null,
+                RoomIdConstants.R40_SwampPalace_EntranceRoom));
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Enemizer
 
         private void LoadSpriteDropdown()
         {
-            linkSpriteCombobox.Items.Add(new files_names("Default", "Default"));
+            linkSpriteCombobox.Items.Add(new files_names("Unchanged", "Unchanged"));
             linkSpriteCombobox.Items.Add(new files_names("Random", "Random"));
             linkSpriteCombobox.SelectedIndex = 0;
 
