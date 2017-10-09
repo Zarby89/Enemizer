@@ -109,7 +109,17 @@ db $88, $31, $FC, $38
 ; sfx instrument 19
 org $268000
 db $09, $00, $E1, $3E
-db $70, $70, $00, $10, $19, $FF, $E0, $70, $04
+; Format: 9 bytes per sample instrument.
+; Byte 0: Left volume
+; Byte 1: Right volume
+; Byte 2: Starting pitch 1
+; Byte 3: Starting pitch 2
+; Byte 4: Sample (SRCN) number
+; Byte 5: ADSR 1 / GAIN
+; Byte 6: ADSR 2
+; Byte 7: GAIN
+; Byte 8: Tuning
+db $70, $70, $00, $00, $19, $FF, $F0, $70, $04
 ; what.brr ; 774bytes -> ARAM $3188
 db $74, $07, $88, $31
 incbin whatsmall.brr

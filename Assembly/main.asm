@@ -42,6 +42,8 @@ incsrc bosses_moved.asm
 incsrc bossdrop.asm
 incsrc moldorm.asm
 incsrc sprite_randomizer.asm
+incsrc kodongo_fixes.asm
+incsrc mimic_fixes.asm
 
 ;================================================================================
 

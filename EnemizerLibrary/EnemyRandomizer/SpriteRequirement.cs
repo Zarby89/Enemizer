@@ -538,7 +538,7 @@ namespace EnemizerLibrary
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YellowStalfosSprite)); // TODO: add
 
             // just don't use them until we fix the asm
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetNeverUse().SetKillable().AddSubgroup2(42));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetKillable().AddSubgroup2(42));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlamesSprite)); // TODO: add
 
@@ -627,7 +627,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MaidenInBlindDungeonSprite).SetNPC().SetDoNotRandomize()); // TODO: special?
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MonologueTestingSpriteSprite).SetNeverUse().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MimicSprite).AddSubgroup1(44));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).AddSubgroup1(44)); // one is mimic, one is eyegore...
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite).AddSubgroup1(44));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FeudingFriendsOnDeathMountainSprite).SetNPC().SetDoNotRandomize().AddSubgroup3(20));
 

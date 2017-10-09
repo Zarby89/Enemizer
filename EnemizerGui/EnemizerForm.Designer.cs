@@ -80,14 +80,14 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
+            this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
+            this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
             this.bootlegMagicCheckbox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
-            this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
-            this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -684,6 +684,40 @@
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // customBossesCheckbox
+            // 
+            this.customBossesCheckbox.AutoSize = true;
+            this.customBossesCheckbox.Enabled = false;
+            this.customBossesCheckbox.Location = new System.Drawing.Point(318, 7);
+            this.customBossesCheckbox.Name = "customBossesCheckbox";
+            this.customBossesCheckbox.Size = new System.Drawing.Size(98, 17);
+            this.customBossesCheckbox.TabIndex = 11;
+            this.customBossesCheckbox.Text = "Custom Bosses";
+            this.customBossesCheckbox.UseVisualStyleBackColor = true;
+            this.customBossesCheckbox.CheckedChanged += new System.EventHandler(this.customBossesCheckbox_CheckedChanged);
+            // 
+            // shufflePotContentsCheckbox
+            // 
+            this.shufflePotContentsCheckbox.AutoSize = true;
+            this.shufflePotContentsCheckbox.Location = new System.Drawing.Point(158, 7);
+            this.shufflePotContentsCheckbox.Name = "shufflePotContentsCheckbox";
+            this.shufflePotContentsCheckbox.Size = new System.Drawing.Size(123, 17);
+            this.shufflePotContentsCheckbox.TabIndex = 10;
+            this.shufflePotContentsCheckbox.Text = "Shuffle Pot Contents";
+            this.shufflePotContentsCheckbox.UseVisualStyleBackColor = true;
+            this.shufflePotContentsCheckbox.CheckedChanged += new System.EventHandler(this.shufflePotContentsCheckbox_CheckedChanged);
+            // 
+            // shuffleMusicCheckBox
+            // 
+            this.shuffleMusicCheckBox.AutoSize = true;
+            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 148);
+            this.shuffleMusicCheckBox.Name = "shuffleMusicCheckBox";
+            this.shuffleMusicCheckBox.Size = new System.Drawing.Size(177, 17);
+            this.shuffleMusicCheckBox.TabIndex = 9;
+            this.shuffleMusicCheckBox.Text = "Shuffle Music (May crash game)";
+            this.shuffleMusicCheckBox.UseVisualStyleBackColor = true;
+            this.shuffleMusicCheckBox.CheckedChanged += new System.EventHandler(this.shuffleMusicCheckBox_CheckedChanged);
+            // 
             // debugModeCheckbox
             // 
             this.debugModeCheckbox.AutoSize = true;
@@ -723,40 +757,7 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
-            // 
-            // shuffleMusicCheckBox
-            // 
-            this.shuffleMusicCheckBox.AutoSize = true;
-            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 148);
-            this.shuffleMusicCheckBox.Name = "shuffleMusicCheckBox";
-            this.shuffleMusicCheckBox.Size = new System.Drawing.Size(177, 17);
-            this.shuffleMusicCheckBox.TabIndex = 9;
-            this.shuffleMusicCheckBox.Text = "Shuffle Music (May crash game)";
-            this.shuffleMusicCheckBox.UseVisualStyleBackColor = true;
-            this.shuffleMusicCheckBox.CheckedChanged += new System.EventHandler(this.shuffleMusicCheckBox_CheckedChanged);
-            // 
-            // shufflePotContentsCheckbox
-            // 
-            this.shufflePotContentsCheckbox.AutoSize = true;
-            this.shufflePotContentsCheckbox.Location = new System.Drawing.Point(158, 7);
-            this.shufflePotContentsCheckbox.Name = "shufflePotContentsCheckbox";
-            this.shufflePotContentsCheckbox.Size = new System.Drawing.Size(123, 17);
-            this.shufflePotContentsCheckbox.TabIndex = 10;
-            this.shufflePotContentsCheckbox.Text = "Shuffle Pot Contents";
-            this.shufflePotContentsCheckbox.UseVisualStyleBackColor = true;
-            this.shufflePotContentsCheckbox.CheckedChanged += new System.EventHandler(this.shufflePotContentsCheckbox_CheckedChanged);
-            // 
-            // customBossesCheckbox
-            // 
-            this.customBossesCheckbox.AutoSize = true;
-            this.customBossesCheckbox.Enabled = false;
-            this.customBossesCheckbox.Location = new System.Drawing.Point(318, 7);
-            this.customBossesCheckbox.Name = "customBossesCheckbox";
-            this.customBossesCheckbox.Size = new System.Drawing.Size(98, 17);
-            this.customBossesCheckbox.TabIndex = 11;
-            this.customBossesCheckbox.Text = "Custom Bosses";
-            this.customBossesCheckbox.UseVisualStyleBackColor = true;
-            this.customBossesCheckbox.CheckedChanged += new System.EventHandler(this.customBossesCheckbox_CheckedChanged);
+            this.seedNumberTextbox.Text = "1760663224";
             // 
             // EnemizerForm
             // 
