@@ -37,7 +37,7 @@ RTL
 org $890D ; change Sound_LoadIntroSongBank to JSL to Sound_LoadSongBank
     JSL NewLoadSoundBank_Intro
 
-org $911F
+org $891F ; 
     JSL NewLoadSoundBank
 
 org $23F000
