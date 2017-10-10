@@ -66,6 +66,18 @@ namespace EnemizerLibrary
             set { SetFlag(CloseBlindDoorFlag, value); }
         }
 
+        public bool MoldormEyes
+        {
+            get { return GetFlag(MoldormEyesFlag); }
+            set { SetFlag(MoldormEyesFlag, value); }
+        }
+
+        public bool RandomizeSprites
+        {
+            get { return GetFlag(RandomSpriteFlag); }
+            set { SetFlag(RandomSpriteFlag, value); }
+        }
+
         internal bool GetFlag(int offset)
         {
             return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
@@ -260,6 +272,15 @@ namespace EnemizerLibrary
             var output = new byte[length];
             Array.Copy(this.romData, startingAddress, output, 0, length);
             return output;
+        }
+
+        public void WriteDataChunk(int startingAddress, byte[] data, int length = -1)
+        {
+            if(length < 0)
+            {
+                length = data.Length;
+            }
+            Array.Copy(data, 0, this.romData, startingAddress, length);
         }
 
         public void WriteRom(FileStream fs)

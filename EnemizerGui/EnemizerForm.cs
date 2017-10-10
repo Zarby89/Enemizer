@@ -225,6 +225,7 @@ namespace Enemizer
             shuffleMusicCheckBox.Checked = config.OptionFlags.ShuffleMusic;
             shufflePotContentsCheckbox.Checked = config.OptionFlags.RandomizePots;
             customBossesCheckbox.Checked = config.OptionFlags.CustomBosses;
+            andyModeCheckbox.Checked = config.OptionFlags.AndyMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -585,6 +586,10 @@ namespace Enemizer
             config.OptionFlags.CustomBosses = customBossesCheckbox.Checked;
         }
 
+        private void andyModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AndyMode = andyModeCheckbox.Checked;
+        }
     }
 
 

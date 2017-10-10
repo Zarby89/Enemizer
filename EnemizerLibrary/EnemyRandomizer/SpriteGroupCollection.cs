@@ -52,11 +52,11 @@ namespace EnemizerLibrary
             }
         }
 
-        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
+        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, bool needsKey = false, bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
         {
             var req = dungeonReqs.GetGroupRequirementForRoom(room);
 
-            if (needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0)
+            if (needsKey == false && needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0)
                 && req.GroupId.Count == 0
                 && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
@@ -69,6 +69,12 @@ namespace EnemizerLibrary
             var killableSub1Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup1).ToList();
             var killableSub2Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup2).ToList();
             var killableSub3Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup3).ToList();
+
+            var keysGroupIds = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.GroupId).ToList();
+            var keysSub0Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup0).ToList();
+            var keysSub1Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup1).ToList();
+            var keysSub2Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup2).ToList();
+            var keysSub3Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup3).ToList();
 
             // TODO: gotta be a better way to do this
             var doNotUpdateGroupIds = doNotUpdateSprites.SelectMany(x => x.GroupId).ToList();
@@ -94,6 +100,13 @@ namespace EnemizerLibrary
                             || killableSub1Ids.Contains((byte)x.SubGroup1)
                             || killableSub2Ids.Contains((byte)x.SubGroup2)
                             || killableSub3Ids.Contains((byte)x.SubGroup3)
+                            )
+                .Where(x => needsKey == false
+                            || keysGroupIds.Contains((byte)x.GroupId)
+                            || keysSub0Ids.Contains((byte)x.SubGroup0)
+                            || keysSub1Ids.Contains((byte)x.SubGroup1)
+                            || keysSub2Ids.Contains((byte)x.SubGroup2)
+                            || keysSub3Ids.Contains((byte)x.SubGroup3)
                             )
                 ;
         }

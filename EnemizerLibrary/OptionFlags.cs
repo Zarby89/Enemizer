@@ -56,6 +56,7 @@ namespace EnemizerLibrary
         public bool BootlegMagic { get; set; }
         public bool DebugMode { get; set; }
         public bool CustomBosses { get; set; }
+        public bool AndyMode { get; set; }
     }
 
     public enum RandomizeEnemiesType

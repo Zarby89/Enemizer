@@ -89,6 +89,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -678,6 +679,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.andyModeCheckbox);
             this.tabPage4.Controls.Add(this.customBossesCheckbox);
             this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
             this.tabPage4.Controls.Add(this.shuffleMusicCheckBox);
@@ -774,6 +776,17 @@
             this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
             this.pukeModeCheckbox.UseVisualStyleBackColor = true;
             this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
+            // 
+            // andyModeCheckbox
+            // 
+            this.andyModeCheckbox.AutoSize = true;
+            this.andyModeCheckbox.Location = new System.Drawing.Point(7, 30);
+            this.andyModeCheckbox.Name = "andyModeCheckbox";
+            this.andyModeCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.andyModeCheckbox.TabIndex = 12;
+            this.andyModeCheckbox.Text = "Andy Mode";
+            this.andyModeCheckbox.UseVisualStyleBackColor = true;
+            this.andyModeCheckbox.CheckedChanged += new System.EventHandler(this.andyModeCheckbox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -882,6 +895,7 @@
         private System.Windows.Forms.CheckBox shufflePotContentsCheckbox;
         private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
         private System.Windows.Forms.CheckBox pukeModeCheckbox;
+        private System.Windows.Forms.CheckBox andyModeCheckbox;
     }
 }
 

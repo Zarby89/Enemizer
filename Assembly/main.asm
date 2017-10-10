@@ -35,6 +35,7 @@ org $408000
 incsrc enemizerflags.asm
 incsrc bushes.asm
 incsrc NMI.asm
+incsrc init.asm
 incsrc terrorpin.asm
 incsrc special_action.asm
 incsrc bosses_moved.asm
@@ -44,6 +45,7 @@ incsrc moldorm.asm
 incsrc sprite_randomizer.asm
 incsrc kodongo_fixes.asm
 incsrc mimic_fixes.asm
+incsrc soundfx_changes.asm
 
 ;================================================================================
 

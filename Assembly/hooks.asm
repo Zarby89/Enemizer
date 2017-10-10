@@ -9,6 +9,7 @@ incsrc moldorm_hooks.asm
 incsrc sprite_randomizer_hooks.asm
 incsrc kodongo_hooks.asm
 incsrc mimic_hooks.asm
+incsrc soundfx_hooks.asm
 
 ; needs to be fixed
 ;incsrc sprite_damage_hooks.asm

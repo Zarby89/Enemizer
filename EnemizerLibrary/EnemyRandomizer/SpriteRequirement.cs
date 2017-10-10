@@ -93,6 +93,7 @@ namespace EnemizerLibrary
         public SpriteRequirement SetWaterSprite()
         {
             IsWaterSprite = true;
+            CannotHaveKey = true; // TODO: remove this after we fix water sprites only showing up on water areas
             return this;
         }
 

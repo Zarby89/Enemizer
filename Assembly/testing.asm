@@ -85,6 +85,9 @@ org $0CCD9D
 JSL OnInitFileSelect
 
 
+; set heart pick up sound to item get
+org $08C4CF
+db #$0F ; default is #$0B
 
 ; sound fx 3, #$0F background note
 org $1A8D58

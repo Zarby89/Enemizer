@@ -56,6 +56,18 @@ namespace EnemizerLibrary
                 ChangeSkin(skin);
             }
 
+            if(skin == "Random")
+            {
+                this.ROM_DATA.RandomizeSprites = true;
+                // TODO: check for random option and set flags too
+                //this.ROM_DATA[0x200003] = 0x01;
+                BuildRandomLinkSpriteTable(new Random(seed));
+            }
+            else
+            {
+                this.ROM_DATA.RandomizeSprites = false;
+            }
+
             if (optionFlags.RandomizeLinkSpritePalette)
             {
                 MakeRandomLinkSpritePalette();
@@ -191,13 +203,11 @@ namespace EnemizerLibrary
                 {
                     // break link's water transition so he turns invisible and always gets fake flippers when he doesn't have flippers
                     // discovered on accident by using the SNES address instead of PC address when trying to expand the rom
-                    this.ROM_DATA[0xFFD7] = 0x0C;
+                    // TODO: leave this out for now
+                    //this.ROM_DATA[0xFFD7] = 0x0C;
                 }
             }
 
-            // TODO: check for random option and set flags too
-            this.ROM_DATA[0x200003] = 0x01;
-            BuildRandomLinkSpriteTable(new Random(seed));
 
 
             //Remove Trinexx Ice Floor : 
@@ -225,6 +235,11 @@ namespace EnemizerLibrary
             //    spoilerfile.Close();
             //}
 
+            if(optionFlags.AndyMode)
+            {
+                SetAndyMode();
+            }
+
             if (optionFlags.DebugMode)
             {
                 // put the room id in the rupee slot
@@ -235,6 +250,15 @@ namespace EnemizerLibrary
 
             return this.ROM_DATA;
 
+        }
+
+        void SetAndyMode()
+        {
+            this.ROM_DATA[0xD0D58] = 0x00; // set soundfx3 background note 00
+            this.ROM_DATA[0xD0D97] = 0x00; // set soundfx3 background note 2(?) 00
+
+            byte[] newSoundInstrument = { 0xE0, 0x19, 0x7F, 0x97, 0x00 }; // set instrument 19, length 7F, play note 97 (B oct2), end
+            this.ROM_DATA.WriteDataChunk(0xD1869, newSoundInstrument); // set soundfx3 background note 00
         }
 
         private void MakeRandomLinkSpritePalette()
@@ -928,15 +952,30 @@ namespace EnemizerLibrary
         {
             List<string> skins = Directory.GetFiles("sprites\\").ToList();
             int totalSprites = 32;
-            if(totalSprites > skins.Count)
+            //if(totalSprites > skins.Count)
+            //{
+            //    totalSprites = skins.Count;
+            //}
+
+            int i = 0;
+            FileStream fsx;
+            int r;
+
+            if (optionFlags.AndyMode)
             {
-                totalSprites = skins.Count;
+                // force pug sprite
+                r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
+                fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
+                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Close();
+                skins.RemoveAt(r);
+                i++;
             }
 
-            for (int i = 0; i < totalSprites; i++)
+            for (; i < totalSprites; i++)
             {
-                int r = random.Next(skins.Count);
-                FileStream fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
+                r = random.Next(skins.Count);
+                fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
                 fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
