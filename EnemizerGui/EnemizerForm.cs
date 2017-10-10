@@ -140,7 +140,9 @@ namespace Enemizer
         private void UpdateEnemiesTabUIFromConfig()
         {
             randomizeEnemiesCheckbox.Checked = config.OptionFlags.RandomizeEnemies;
-            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            //randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            randomizationTypeLabel.Enabled = randomizationTypeTrackbar.Enabled;
+            lblTypeOfRandomization.Enabled = randomizationTypeTrackbar.Enabled;
             chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
 
             randomizationTypeTrackbar.Value = (int)config.OptionFlags.RandomizeEnemiesType;
@@ -207,6 +209,13 @@ namespace Enemizer
             randomizeSpritePalettesAdvancedCheckbox.Enabled = config.OptionFlags.RandomizeSpritePalettes;
 
             randomizeSpritePalettesAdvancedCheckbox.Checked = config.OptionFlags.SetAdvancedSpritePalettes;
+
+            pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
+            randomizeDungeonPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            setBlackoutModeCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeOverworldPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesBasicCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesAdvancedCheckbox.Enabled = !pukeModeCheckbox.Checked;
         }
 
         private void UpdateExtrasTabUIFromConfig()
@@ -360,7 +369,9 @@ namespace Enemizer
         private void randomizeEnemiesCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
-            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            //randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            randomizationTypeLabel.Enabled = randomizationTypeTrackbar.Enabled;
+            lblTypeOfRandomization.Enabled = randomizationTypeTrackbar.Enabled;
             chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
         }
 
@@ -512,6 +523,15 @@ namespace Enemizer
             config.OptionFlags.SetAdvancedSpritePalettes = randomizeSpritePalettesAdvancedCheckbox.Checked;
         }
 
+        private void pukeModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.PukeMode = pukeModeCheckbox.Checked;
+            randomizeDungeonPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            setBlackoutModeCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeOverworldPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesBasicCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesAdvancedCheckbox.Enabled = !pukeModeCheckbox.Checked;
+        }
 
         /*
          * Extras tab
@@ -564,6 +584,7 @@ namespace Enemizer
         {
             config.OptionFlags.CustomBosses = customBossesCheckbox.Checked;
         }
+
     }
 
 

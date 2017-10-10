@@ -109,8 +109,8 @@ namespace EnemizerLibrary
 
         private void WriteRom(RomData romData)
         {
-            DungeonShells shells = new DungeonShells();
-            shells.FillShells();
+            //DungeonShells shells = new DungeonShells();
+            //shells.FillShells();
 
             if (optionFlags.GenerateSpoilers && spoilerFile != null)
             {
@@ -145,21 +145,6 @@ namespace EnemizerLibrary
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
                     //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
-
-                    //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
-                    //byte[] shellpointer = shell.Pointer;
-                    //shell.ShellData[shell.ShellByteOffset] = 0xFF; // change shell to trinexx
-
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
-
-                    //byte[] Pointer = new byte[4];
-                    //Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    //Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    //Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    //int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    //romData[floors_address] = 0xF0;
                 }
 
                 // update kholdstare shell
@@ -171,21 +156,6 @@ namespace EnemizerLibrary
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
                     //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
-
-                    //var shell = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).FirstOrDefault();
-                    //byte[] shellpointer = shell.Pointer;
-                    //shell.ShellData[shell.ShellByteOffset] = 0xF9; // change shell to kholdstare (should be kholdstare by default)
-
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    //romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
-
-                    //byte[] Pointer = new byte[4];
-                    //Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    //Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    //Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    //int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    //romData[floors_address] = 0xF0; // change the floor fill type so hera floor doesn't become black
                 }
             }
 

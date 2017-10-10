@@ -44,7 +44,7 @@ resetSprite_Mimic:
 
 .notMimic
     ; restore code
-    ;LDA $0E20, X
+    LDA $0E20, X
     
     CMP.b #$7A
 

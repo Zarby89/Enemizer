@@ -174,6 +174,11 @@ namespace EnemizerLibrary
                 black_all_dungeons();
             }
 
+            if(optionFlags.PukeMode)
+            {
+                GeneratePukeModePalettes(new Random(seed));
+            }
+
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
             {
@@ -830,6 +835,17 @@ namespace EnemizerLibrary
                 /*setColor(0x0DE874, roof, 4);
                 setColor(0x0DE876, roof, 0);*/
 
+        }
+
+        public void GeneratePukeModePalettes(Random random)
+        {
+            // TODO: overworld
+
+            // indoors
+            for (int i = 0; i < 3600; i += 2)
+            {
+                setColor(0xDD734 + i, Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)), 0);
+            }
         }
 
         public void Randomize_Sprites_HP(int rangeValue)

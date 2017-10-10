@@ -17,6 +17,6 @@ org $1E8BB1
 org $0DB9A9
 db $00 ; sprite B8 needs a damage type
 
-org $06EC08 ; Bank06.asm (4593)
+org $06EC08 ; Bank06.asm (4593) - damage calcs
 JSL resetSprite_Mimic
 NOP

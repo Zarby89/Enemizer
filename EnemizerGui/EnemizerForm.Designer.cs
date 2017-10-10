@@ -58,7 +58,7 @@
             this.randomizeEnemiesHealthTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesHealthCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizationTypeLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTypeOfRandomization = new System.Windows.Forms.Label();
             this.randomizationTypeTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -88,6 +88,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -262,7 +263,7 @@
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthCheckbox);
             this.tabPage1.Controls.Add(this.randomizationTypeLabel);
-            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lblTypeOfRandomization);
             this.tabPage1.Controls.Add(this.randomizationTypeTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesCheckbox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -278,6 +279,7 @@
             this.chkRandomizeBushEnemyChance.AutoSize = true;
             this.chkRandomizeBushEnemyChance.Checked = true;
             this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRandomizeBushEnemyChance.Enabled = false;
             this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
             this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
             this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
@@ -426,29 +428,31 @@
             this.randomizationTypeLabel.AutoSize = true;
             this.randomizationTypeLabel.Location = new System.Drawing.Point(146, 46);
             this.randomizationTypeLabel.Name = "randomizationTypeLabel";
-            this.randomizationTypeLabel.Size = new System.Drawing.Size(33, 13);
+            this.randomizationTypeLabel.Size = new System.Drawing.Size(37, 13);
             this.randomizationTypeLabel.TabIndex = 3;
-            this.randomizationTypeLabel.Text = "Basic";
+            this.randomizationTypeLabel.Text = "Chaos";
             // 
-            // label1
+            // lblTypeOfRandomization
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Type of Randomization";
+            this.lblTypeOfRandomization.AutoSize = true;
+            this.lblTypeOfRandomization.Location = new System.Drawing.Point(24, 30);
+            this.lblTypeOfRandomization.Name = "lblTypeOfRandomization";
+            this.lblTypeOfRandomization.Size = new System.Drawing.Size(116, 13);
+            this.lblTypeOfRandomization.TabIndex = 2;
+            this.lblTypeOfRandomization.Text = "Type of Randomization";
             // 
             // randomizationTypeTrackbar
             // 
             this.randomizationTypeTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.randomizationTypeTrackbar.Enabled = false;
+            this.randomizationTypeTrackbar.LargeChange = 1;
             this.randomizationTypeTrackbar.Location = new System.Drawing.Point(27, 46);
             this.randomizationTypeTrackbar.Maximum = 4;
             this.randomizationTypeTrackbar.Name = "randomizationTypeTrackbar";
             this.randomizationTypeTrackbar.Size = new System.Drawing.Size(113, 45);
             this.randomizationTypeTrackbar.TabIndex = 1;
             this.toolTip1.SetToolTip(this.randomizationTypeTrackbar, resources.GetString("randomizationTypeTrackbar.ToolTip"));
+            this.randomizationTypeTrackbar.Value = 3;
             this.randomizationTypeTrackbar.ValueChanged += new System.EventHandler(this.randomizationTypeTrackbar_ValueChanged);
             // 
             // randomizeEnemiesCheckbox
@@ -456,9 +460,9 @@
             this.randomizeEnemiesCheckbox.AutoSize = true;
             this.randomizeEnemiesCheckbox.Location = new System.Drawing.Point(6, 6);
             this.randomizeEnemiesCheckbox.Name = "randomizeEnemiesCheckbox";
-            this.randomizeEnemiesCheckbox.Size = new System.Drawing.Size(226, 17);
+            this.randomizeEnemiesCheckbox.Size = new System.Drawing.Size(152, 17);
             this.randomizeEnemiesCheckbox.TabIndex = 0;
-            this.randomizeEnemiesCheckbox.Text = "Randomize Enemies (WIP) - default Chaos";
+            this.randomizeEnemiesCheckbox.Text = "Randomize Enemies (WIP)";
             this.randomizeEnemiesCheckbox.UseVisualStyleBackColor = true;
             this.randomizeEnemiesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeEnemiesCheckbox_CheckedChanged);
             // 
@@ -580,6 +584,7 @@
             // 
             this.bossRandomizationTypesTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bossRandomizationTypesTrackbar.Enabled = false;
+            this.bossRandomizationTypesTrackbar.LargeChange = 1;
             this.bossRandomizationTypesTrackbar.Location = new System.Drawing.Point(27, 46);
             this.bossRandomizationTypesTrackbar.Maximum = 2;
             this.bossRandomizationTypesTrackbar.Name = "bossRandomizationTypesTrackbar";
@@ -601,6 +606,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pukeModeCheckbox);
             this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesBasicCheckbox);
@@ -757,7 +763,17 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
-            this.seedNumberTextbox.Text = "1760663224";
+            // 
+            // pukeModeCheckbox
+            // 
+            this.pukeModeCheckbox.AutoSize = true;
+            this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
+            this.pukeModeCheckbox.Name = "pukeModeCheckbox";
+            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
+            this.pukeModeCheckbox.TabIndex = 5;
+            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
+            this.pukeModeCheckbox.UseVisualStyleBackColor = true;
+            this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -828,7 +844,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTypeOfRandomization;
         private System.Windows.Forms.Label randomizationTypeLabel;
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.TrackBar randomizeEnemiesHealthTrackbar;
@@ -865,6 +881,7 @@
         private System.Windows.Forms.CheckBox customBossesCheckbox;
         private System.Windows.Forms.CheckBox shufflePotContentsCheckbox;
         private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
+        private System.Windows.Forms.CheckBox pukeModeCheckbox;
     }
 }
 

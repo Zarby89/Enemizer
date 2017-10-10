@@ -11,9 +11,11 @@ namespace EnemizerLibrary
     public class RomData
     {
         // 0x20 flags total
-        public const int EnemizerOptionFlagsBaseAddress = 0x200000;
+        public const int EnemizerOptionFlagsBaseAddress = 0x200000; // snes 408000
         public const int RandomizeHiddenEnemiesFlag = 0x00;
         public const int CloseBlindDoorFlag = 0x01;
+        public const int MoldormEyesFlag = 0x02;
+        public const int RandomSpriteFlag = 0x03;
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
@@ -80,7 +82,7 @@ namespace EnemizerLibrary
              * 10 01 01 01 11 01 01 03 
              */
             byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
-            Array.Copy(vanilla, romData, 16);
+            Array.Copy(vanilla, 0, romData, 0xD7BBB, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()
