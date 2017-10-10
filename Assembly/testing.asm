@@ -94,11 +94,13 @@ db $00
 org $1A8D97
 db $00
 
+; 0xD1869
 org $1A9869 ; sound fx 3, #$0F tracker data
 ; original is E0 0B 10 78 B9 BA BB 60 BC 00
 db $E0, $19 ; set instrument $0B
 db $7f ; length
-db $ac ; note to play
+;db $ed, $e0
+db $97 ; note to play
 db $00 ; end
 
 
@@ -119,10 +121,10 @@ db $09, $00, $E1, $3E
 ; Byte 6: ADSR 2
 ; Byte 7: GAIN
 ; Byte 8: Tuning
-db $70, $70, $00, $00, $19, $FF, $F0, $70, $04
+db $7F, $7F, $00, $00, $19, $FF, $F0, $70, $04
 ; what.brr ; 774bytes -> ARAM $3188
 db $74, $07, $88, $31
-incbin whatsmall.brr
+incbin what4.brr
 db $00, $00, $00, $08
 
 
