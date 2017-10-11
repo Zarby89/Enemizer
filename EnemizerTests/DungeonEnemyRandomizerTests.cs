@@ -23,10 +23,12 @@ namespace EnemizerTests
 
             Random rand = new Random(0);
             var requirements = new SpriteRequirementCollection();
+            
             var spriteGroups = new SpriteGroupCollection(romData, rand, requirements);
+            spriteGroups.LoadSpriteGroups();
 
             DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(romData, rand, spriteGroups, requirements);
-            der.RandomizeDungeonEnemies();
+            der.RandomizeDungeonEnemies(new OptionFlags() { RandomizeEnemies = true, EnemiesAbsorbable = true });
 
             foreach(var sg in der.spriteGroupCollection.SpriteGroups)
             {

@@ -15,38 +15,16 @@ namespace EnemizerLibrary
         Random rand;
         RomData ROM_DATA;
 
-        //194 for firesnake
-        //All the sprites address that are dropping keys //check 192,193,
-
-        // TODO: unused?
-        int[] smallCorridors_sprites = { 0x04DE29 };
-
-
-        //the sprites group avaiable in dungeons there's 60 of them some need to stay the same (npcs, bosses)
-        byte[][] random_sprite_group_ow = new byte[43][];
-
-        //all the sprites that can be used in the subset gfx sheet selected
-        byte[][] subset_gfx_sprites = new byte[102][];
-
-
-        StreamWriter spoilerfile;
+        //StreamWriter spoilerfile;
 
         OptionFlags optionFlags;
 
-        public Randomization()
+        public RomData MakeRandomization(int seed, OptionFlags optionflags, RomData romData, string skin = "") //Initialization of the randomization
         {
-
-        }
-
-        public RomData MakeRandomization(int seed, OptionFlags optionflags, byte[] ROM_DATA, string skin = "") //Initialization of the randomization
-        {
-            //We should ask for a original ROM too to prevent any problem while checking the data or including these
-            //data in the code [all the original sprites infos 0x3F * 5]
-            //We need to patch the ROM first move all headers from their original location to 0x120090
-            //Save the ROM as a new file instead of overwriting the original one
-            //Save the flags used in a file to remember the last flags that were used
-            this.ROM_DATA = new RomData(ROM_DATA);
+            this.ROM_DATA = romData;
             this.ROM_DATA.ExpandRom();
+            this.ROM_DATA.SetCharacterSelectScreenVersion();
+            this.ROM_DATA.EnemizerSeed = seed;
             this.optionFlags = optionflags;
 
             // make sure we have a randomizer rom
@@ -55,12 +33,11 @@ namespace EnemizerLibrary
                 throw new Exception("Enemizer only supports randomizer roms for input.");
             }
 
-            // TODO: turn this on
-            //// check that we are not trying to feed in a race rom
-            //if(this.ROM_DATA.IsRaceRom)
-            //{
-            //    throw new Exception("Enemizer does not support race roms.");
-            //}
+            // check that we are not trying to feed in a race rom
+            if (this.ROM_DATA.IsRaceRom)
+            {
+                throw new Exception("Enemizer does not support race roms.");
+            }
 
             // patch in our assembly binary data
             // TODO: figure out if this should be done first or after some other code below
@@ -72,9 +49,23 @@ namespace EnemizerLibrary
 
             rand = new Random(seed);
 
-            if (skin != "Default" && skin != "")
+            Graph graph = new Graph(new GraphData(this.ROM_DATA));
+
+            if (skin != "Unchanged" && skin != "")
             {
                 ChangeSkin(skin);
+            }
+
+            if(skin == "Random")
+            {
+                this.ROM_DATA.RandomizeSprites = true;
+                // TODO: check for random option and set flags too
+                //this.ROM_DATA[0x200003] = 0x01;
+                BuildRandomLinkSpriteTable(new Random(seed));
+            }
+            else
+            {
+                this.ROM_DATA.RandomizeSprites = false;
             }
 
             if (optionFlags.RandomizeLinkSpritePalette)
@@ -85,13 +76,38 @@ namespace EnemizerLibrary
 
             if (optionFlags.GenerateSpoilers)
             {
-                spoilerfile = new StreamWriter(seed.ToString() + " Spoiler.txt");
-         
-                spoilerfile.WriteLine("Spoiler Log Seed : " + seed.ToString());
+                //spoilerfile = new StreamWriter($"{seed.ToString()} Spoiler.txt");
+                this.ROM_DATA.Spoiler.AppendLine($"Enemizer Spoiler Log Seed: {seed}");
+                //spoilerfile.WriteLine("Spoiler Log Seed : " + seed.ToString());
             }
 
-            create_subset_gfx();
+            //create_subset_gfx();
 
+            // -----bosses---------------------
+            if (optionFlags.RandomizeBosses)
+            {
+                this.ROM_DATA.CloseBlindDoor = true;
+
+                BossRandomizer br;
+
+                switch (optionFlags.RandomizeBossesType)
+                {
+                    case RandomizeBossesType.Basic:
+                        br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                        break;
+                    case RandomizeBossesType.Normal:
+                        br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                        break;
+                    case RandomizeBossesType.Chaos:
+                        br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                        break;
+                    default:
+                        throw new Exception("Unknown Boss Randomization Type");
+                }
+                br.RandomizeRom(this.ROM_DATA);
+            }
+
+            // -----sprites---------------------
             var spriteRequirements = new SpriteRequirementCollection();
 
             var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
@@ -110,14 +126,14 @@ namespace EnemizerLibrary
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
                 DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
-                der.RandomizeDungeonEnemies();
+                der.RandomizeDungeonEnemies(optionFlags);
             }
 
             //random sprite overworld
             if (optionFlags.RandomizeEnemies)
             {
                 OverworldEnemyRandomizer oer = new OverworldEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
-                oer.RandomizeOverworldEnemies();
+                oer.RandomizeOverworldEnemies(optionFlags);
             }
 
             spriteGroupCollection.UpdateRom();
@@ -133,29 +149,6 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            // do bosses after enemies or gfx blocks will get overwritten
-            if (optionFlags.RandomizeBosses)
-            {
-                this.ROM_DATA.CloseBlindDoor = true;
-
-                BossRandomizer br;
-
-                switch(optionFlags.RandomizeBossesType)
-                {
-                    case RandomizeBossesType.Basic:
-                        br = new BossRandomizer(rand, optionFlags, spoilerfile);
-                        break;
-                    case RandomizeBossesType.Normal:
-                        br = new NormalBossRandomizer(rand, optionflags, spoilerfile);
-                        break;
-                    case RandomizeBossesType.Chaos:
-                        br = new ChaosBossRandomizer(rand, optionflags, spoilerfile);
-                        break;
-                    default:
-                        throw new Exception("Unknown Boss Randomization Type");
-                }
-                br.RandomizeRom(this.ROM_DATA);
-            }
             
             if(optionFlags.RandomizePots)
             {
@@ -193,14 +186,28 @@ namespace EnemizerLibrary
                 black_all_dungeons();
             }
 
+            if(optionFlags.PukeMode)
+            {
+                GeneratePukeModePalettes(new Random(seed));
+            }
+
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
             {
-                // TODO: move this
+                // TODO: move this to its own class
                 byte numberOfMoldormEyes = (byte)rand.Next(0, 8);
                 this.ROM_DATA[0x0EDBB3] = numberOfMoldormEyes;
                 this.ROM_DATA[0x200002] = numberOfMoldormEyes;
+
+                if(rand.Next(0, 100) == 1)
+                {
+                    // break link's water transition so he turns invisible and always gets fake flippers when he doesn't have flippers
+                    // discovered on accident by using the SNES address instead of PC address when trying to expand the rom
+                    // TODO: leave this out for now
+                    //this.ROM_DATA[0xFFD7] = 0x0C;
+                }
             }
+
 
 
             //Remove Trinexx Ice Floor : 
@@ -222,15 +229,36 @@ namespace EnemizerLibrary
                 ROM_DATA[0x0121357 + i] = weapon_data[i];
             }*/
 
-            spoilerfile.Flush();
+            //if (spoilerfile != null)
+            //{
+            //    spoilerfile.Flush();
+            //    spoilerfile.Close();
+            //}
 
-            // put the room id in the rupee slot
-            this.ROM_DATA[0x1017A9] = 0xA0;
-            this.ROM_DATA[0x1017A9+1] = 0x00;
-            this.ROM_DATA[0x1017A9+2] = 0x7E;
+            if(optionFlags.AndyMode)
+            {
+                SetAndyMode();
+            }
+
+            if (optionFlags.DebugMode)
+            {
+                // put the room id in the rupee slot
+                this.ROM_DATA[0x1017A9] = 0xA0;
+                this.ROM_DATA[0x1017A9 + 1] = 0x00;
+                this.ROM_DATA[0x1017A9 + 2] = 0x7E;
+            }
 
             return this.ROM_DATA;
 
+        }
+
+        void SetAndyMode()
+        {
+            this.ROM_DATA[0xD0D58] = 0x00; // set soundfx3 background note 00
+            this.ROM_DATA[0xD0D97] = 0x00; // set soundfx3 background note 2(?) 00
+
+            byte[] newSoundInstrument = { 0xE0, 0x19, 0x7F, 0x97, 0x00 }; // set instrument 19, length 7F, play note 97 (B oct2), end
+            this.ROM_DATA.WriteDataChunk(0xD1869, newSoundInstrument); // set soundfx3 background note 00
         }
 
         private void MakeRandomLinkSpritePalette()
@@ -283,82 +311,6 @@ namespace EnemizerLibrary
             }
         }
 
-
-
-        //create all the subset gfx set them on null because lots of them need to be unchanged
-        public void create_subset_gfx()
-        {
-            for (int i = 0; i < 102; i++)
-            {
-                //subset_gfx_sprites[i] = null;
-                subset_gfx_sprites[i] = new byte[] { };
-            }
-            //subset0
-            
-            subset_gfx_sprites[22] = new byte[] { 0x22, 0x11 };//DW Popo, Hinox, Snapdragon (require 23)
-            subset_gfx_sprites[31] = new byte[] { 0x23, 0x24, 0x85, 0xA7, 0x02, 0x7E, 0x7F, 0x80 };//bari,stalfos,firebars
-            subset_gfx_sprites[47] = new byte[] { 0x71 };//delalant,leever //0x64,0x63
-            subset_gfx_sprites[14] = new byte[] { 0x19 };//ghini,thief
-            subset_gfx_sprites[70] = new byte[] { 0x6A, 0x6B, 0x49, 0x43, 0x41, 0x42, 0x45, 0x48, 0x44, 0x4A, 0x4B };//need to be combined with 73 and 19 all guards
-            subset_gfx_sprites[72] = new byte[] { 0x41, 0x42, 0x43, 0x45, 0x46, 0x47, 0x4B, 0x49 };//need to be combined with 73 and 19 all guards archers
-            //subset1
-            subset_gfx_sprites[44] = new byte[] { 0x4F, 0x4E, 0x61 }; //popo, beamos
-            //13 contains guards same as 73
-            subset_gfx_sprites[13] = new byte[] { }; //guards
-            subset_gfx_sprites[73] = new byte[] {0x42,0x41,0x45 }; //guards
-            subset_gfx_sprites[19] = new byte[] { }; //guards
-            subset_gfx_sprites[30] = new byte[] { 0x26, 0x13, 0x18 }; //minihelma,minimoldorm,beetle
-            subset_gfx_sprites[32] = new byte[] { 0x9C, 0x9D, 0x91, 0x8F }; //stalfos knight, shadow, blob
-            //subset2
-            subset_gfx_sprites[12] = new byte[] { 0x08, 0x58, 0x0F }; //octorock,crab,octobaloon
-            subset_gfx_sprites[18] = new byte[] { 0x01, 0x4C }; //vulture, jazzhand, (Also contain tablets / rock in front of desert)
-            subset_gfx_sprites[23] = new byte[] { 0x12 }; //pigmanspear, snapdragon (require 22) 
-            subset_gfx_sprites[24] = new byte[] { 0x08 }; //dwoctorok
-            subset_gfx_sprites[28] = new byte[] { 0x6D, 0x6E, 0x6F }; //rat,rope,keese, also the oldman
-            subset_gfx_sprites[29] = new byte[] { };
-            subset_gfx_sprites[46] = new byte[] { 0x84, 0x83 }; //green/red eyegores
-            subset_gfx_sprites[34] = new byte[] { 0x9A, 0x81 }; //water sprites
-            subset_gfx_sprites[35] = new byte[] { 0x8B }; //wallmaster,gibdo
-            subset_gfx_sprites[39] = new byte[] { 0xC7, 0xCA, 0x5D, 0x5E, 0x5F, 0x60 };//chain chomp,pokey,rollers
-            subset_gfx_sprites[40] = new byte[] { 0xA5, 0xA6, 0xC3 };//zazak,gibo (patrick star)
-            subset_gfx_sprites[38] = new byte[] { 0x99 };//(A1) iceman,penguin
-            subset_gfx_sprites[37] = new byte[] { 0x9B,0x20 };//wizzrobe,sluggula
-            subset_gfx_sprites[41] = new byte[] { 0x9B };//wizzrobe
-            subset_gfx_sprites[36] = new byte[] { 0x6D, 0x6E, 0x6F };//rat,rope,keese
-            subset_gfx_sprites[42] = new byte[] { 0x8E, 0x5B, 0x5C };//turtle,kondongo ,also the digging game guy //0x86 kodongo problem
-            //74 = lumberjack
-            //subset3
-            subset_gfx_sprites[16] = new byte[] { 0x51, 0x27, 0xC9 };//armos,deadrock,tektite
-            subset_gfx_sprites[17] = new byte[] { 0x00, 0x0D };//raven,buzzblob
-            subset_gfx_sprites[27] = new byte[] { 0xA8, 0xA9, 0xAA };//dw bomber/likelike
-            subset_gfx_sprites[20] = new byte[] { 0xD0 };//lynel
-            subset_gfx_sprites[74] = new byte[] { };//wizzrobe
-            subset_gfx_sprites[80] = new byte[] {0x0B };//wizzrobe
-            subset_gfx_sprites[81] = new byte[] { };//switches
-            subset_gfx_sprites[93] = new byte[] { };//sanctuary mantle
-            subset_gfx_sprites[82] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
-            subset_gfx_sprites[83] = new byte[] { 0x8A, 0x1C, 0x15, 0x7D, }; //0x82 };//switches
-        }
-
-        public byte get_guard_subset_1()
-        {
-            int i = rand.Next(2);
-            if (i == 0) { i = 73; }
-            if (i == 1) { i = 13; }
-            if (i == 2) { i = 13; }
-            return (byte)i;
-        }
-
-        public byte[] fully_randomize_that_group()
-        {
-            return new byte[] 
-            {
-                SpriteConstants.sprite_subset_0[rand.Next(SpriteConstants.sprite_subset_0.Length)],
-                SpriteConstants.sprite_subset_1[rand.Next(SpriteConstants.sprite_subset_1.Length)],
-                SpriteConstants.sprite_subset_2[rand.Next(SpriteConstants.sprite_subset_2.Length)],
-                SpriteConstants.sprite_subset_3[rand.Next(SpriteConstants.sprite_subset_3.Length)]
-            };
-        }
 
         public void Randomize_Dungeons_Palettes()
         {
@@ -909,6 +861,17 @@ namespace EnemizerLibrary
 
         }
 
+        public void GeneratePukeModePalettes(Random random)
+        {
+            // TODO: overworld
+
+            // indoors
+            for (int i = 0; i < 3600; i += 2)
+            {
+                setColor(0xDD734 + i, Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)), 0);
+            }
+        }
+
         public void Randomize_Sprites_HP(int rangeValue)
         {
             for (int j = 0; j < 0xF3; j++)
@@ -982,6 +945,40 @@ namespace EnemizerLibrary
                         ROM_DATA[0x6B173 + j] = (byte)new_hp;
                     }
                 }
+            }
+        }
+
+        private void BuildRandomLinkSpriteTable(Random random)
+        {
+            List<string> skins = Directory.GetFiles("sprites\\").ToList();
+            int totalSprites = 32;
+            //if(totalSprites > skins.Count)
+            //{
+            //    totalSprites = skins.Count;
+            //}
+
+            int i = 0;
+            FileStream fsx;
+            int r;
+
+            if (optionFlags.AndyMode)
+            {
+                // force pug sprite
+                r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
+                fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
+                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Close();
+                skins.RemoveAt(r);
+                i++;
+            }
+
+            for (; i < totalSprites; i++)
+            {
+                r = random.Next(skins.Count);
+                fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
+                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Close();
+                skins.RemoveAt(r);
             }
         }
     }

@@ -21,6 +21,9 @@ namespace EnemizerLibrary
 
             // TODO: stop kholdstare from spawning in GT1?
             //DisallowedBosses.Add(BossType.Kholdstare);
+
+            ShellX = 0x2B;
+            ShellY = 0x28;
         }
     }
 }

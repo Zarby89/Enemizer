@@ -47,11 +47,16 @@ namespace EnemizerLibrary
 
         public bool RandomizeSpritePalettes { get; set; }
         public bool SetAdvancedSpritePalettes { get; set; }
+        public bool PukeMode { get; set; }
+
         public bool GenerateSpoilers { get; set; }
         public bool RandomizeLinkSpritePalette { get; set; }
-        public bool RandomizePots { get; internal set; }
-        public bool ShuffleMusic { get; internal set; }
+        public bool RandomizePots { get; set; }
+        public bool ShuffleMusic { get; set; }
         public bool BootlegMagic { get; set; }
+        public bool DebugMode { get; set; }
+        public bool CustomBosses { get; set; }
+        public bool AndyMode { get; set; }
     }
 
     public enum RandomizeEnemiesType

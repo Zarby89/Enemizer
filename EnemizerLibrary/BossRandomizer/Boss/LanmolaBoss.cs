@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0xCB, 0xDC };
             BossGraphics = 11;
+            BossNode = "desert-lanmolas";
         }
     }
 }

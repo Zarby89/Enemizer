@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public class Exit
+    public class RomExit
     {
         RomData romData;
         public int ExitIndex { get; set; }
@@ -37,7 +37,7 @@ namespace EnemizerLibrary
             }
         }
 
-        public Exit(RomData romData, int index)
+        public RomExit(RomData romData, int index)
         {
             this.romData = romData;
             this.ExitIndex = index;
@@ -50,23 +50,24 @@ namespace EnemizerLibrary
         }
     }
 
-    public class ExitCollection
+    public class RomExitCollection
     {
         RomData romData;
 
-        public List<Exit> Exits { get; set; } = new List<Exit>();
+        public List<RomExit> Exits { get; set; } = new List<RomExit>();
 
-        public ExitCollection(RomData romData)
+        public RomExitCollection(RomData romData)
         {
             this.romData = romData;
+            LoadExits();
         }
 
         public void LoadExits()
         {
             for(int i=0; i<0x4F; i++)
             {
-                var exit = new Exit(romData, i);
-                //if (exit.RoomId <= 295) // leave out the weird exits
+                var exit = new RomExit(romData, i);
+                //if (exit.RoomId <= 295) // leave out the weird ending cut-scene exits
                 //{
                     Exits.Add(exit);
                 //}

@@ -13,6 +13,9 @@ namespace EnemizerLibrary
         public byte[] BossPointer { get; internal set; }
         public byte BossGraphics { get; internal set; }
 
+        public string Requirements { get; protected set; }
+        protected string BossNode { get; set; }
+
         public Boss(BossType bossType)
         {
             BossType = bossType;
@@ -24,6 +27,12 @@ namespace EnemizerLibrary
         protected void FillRules()
         {
 
+        }
+
+        public bool CanBeUsed(Graph graph)
+        {
+            var res = graph.FindPath("cave-links-house", BossNode, true, null, Requirements);
+            return res.Success;
         }
 
         public virtual bool CheckRules(Dungeon dungeon, RomData romData)
@@ -42,12 +51,9 @@ namespace EnemizerLibrary
             return result;
         }
 
-        public static Boss GetRandomBoss(Random rand)
+        public static Boss GetBossFromType(BossType boss)
         {
-            var bosses = Enum.GetValues(typeof(BossType));
-            BossType boss = (BossType)bosses.GetValue(rand.Next(bosses.Length));
-
-            switch(boss)
+            switch (boss)
             {
                 case BossType.Armos:
                     return new ArmosBoss();
@@ -65,7 +71,7 @@ namespace EnemizerLibrary
                     return new MoldormBoss();
                 case BossType.Mothula:
                     return new MothulaBoss();
-                case BossType.Trixnexx:
+                case BossType.Trinexx:
                     return new TrinexxBoss();
                 case BossType.Vitreous:
                     return new VitreousBoss();
@@ -74,42 +80,39 @@ namespace EnemizerLibrary
             }
         }
 
+        public static Boss GetRandomBoss(Random rand, List<BossType> excludedBossTypes=null, Graph graph=null)
+        {
+            var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
+                .Where(x => x != BossType.NoBoss)
+                .Where(x => excludedBossTypes == null || excludedBossTypes.Contains(x) == false)
+                .ToList();
+
+            Boss boss = null;
+
+            while (boss == null)
+            {
+                boss = GetBossFromType(bosses[rand.Next(bosses.Count)]);
+                if(graph != null && !boss.CanBeUsed(graph))
+                {
+                    boss = null;
+                }
+            }
+            return boss;
+        }
+
         public static Boss GetRandomKillableBoss(Random rand)
         {
             // exclude bosses that require special weapons
             var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
-                                .Where(x => x != BossType.Trixnexx
+                                .Where(x => x != BossType.NoBoss)
+                                .Where(x => x != BossType.Trinexx
                                          && x != BossType.Kholdstare
                                          && x != BossType.Arrghus
                                          )
                                 .ToList();
-            BossType boss = bosses[rand.Next(bosses.Count)];
+            var boss = bosses[rand.Next(bosses.Count)];
 
-            switch (boss)
-            {
-                case BossType.Armos:
-                    return new ArmosBoss();
-                case BossType.Arrghus:
-                    throw new Exception("Arrghus isn't 'killable'. This shouldn't happen!");
-                case BossType.Blind:
-                    return new BlindBoss();
-                case BossType.Helmasaur:
-                    return new HelmasaurBoss();
-                case BossType.Kholdstare:
-                    throw new Exception("Kholdstare isn't 'killable'. This shouldn't happen!");
-                case BossType.Lanmola:
-                    return new LanmolaBoss();
-                case BossType.Moldorm:
-                    return new MoldormBoss();
-                case BossType.Mothula:
-                    return new MothulaBoss();
-                case BossType.Trixnexx:
-                    throw new Exception("Trinexx isn't 'killable'. This shouldn't happen!");
-                case BossType.Vitreous:
-                    return new VitreousBoss();
-                default:
-                    throw new Exception("Unknown Boss Type Selected");
-            }
+            return GetBossFromType(boss);
         }
 
         protected Func<Dungeon, RomData, byte[], bool> CheckShabadooHasItem = (Dungeon dungeon, RomData romData, byte[] items) =>

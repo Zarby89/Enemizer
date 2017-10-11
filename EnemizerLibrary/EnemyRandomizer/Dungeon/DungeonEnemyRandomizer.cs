@@ -27,11 +27,11 @@ namespace EnemizerLibrary
             this.roomCollection = new RoomCollection(romData, rand, spriteRequirementCollection);
         }
 
-        public void RandomizeDungeonEnemies()
+        public void RandomizeDungeonEnemies(OptionFlags optionFlags)
         {
             GenerateGroups();
 
-            RandomizeRooms();
+            RandomizeRooms(optionFlags);
 
             WriteRom();
         }
@@ -41,7 +41,7 @@ namespace EnemizerLibrary
             spriteGroupCollection.RandomizeDungeonGroups();
         }
 
-        private void RandomizeRooms()
+        private void RandomizeRooms(OptionFlags optionFlags)
         {
             roomCollection.LoadRooms();
 
@@ -49,9 +49,11 @@ namespace EnemizerLibrary
 
             foreach (var room in roomCollection.Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
             {
-                room.RandomizeSprites(rand, spriteGroupCollection, spriteRequirementCollection);
+                room.RandomizeSprites(rand, optionFlags, spriteGroupCollection, spriteRequirementCollection);
+
+                // randomize the pot sprite table
+                // this isn't actually used yet (needs asm changes), but we will write it anyways
                 room.RandomizePotSprites(rand, spriteGroupCollection, spriteRequirementCollection);
-                //RandomizeRoomSprites(room);
             }
         }
 

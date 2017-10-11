@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0xC3, 0xD9 };
             BossGraphics = 12;
+            BossNode = "hera-moldorm";
         }
     }
 }

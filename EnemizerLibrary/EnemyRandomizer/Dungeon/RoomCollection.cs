@@ -45,7 +45,7 @@ namespace EnemizerLibrary
                                                                 )
                                                             .ToList();
 
-                var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r, r.Sprites.Any(x => x.HasAKey || r.IsShutterRoom), doNotUpdateSprites).ToList();
+                var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r, r.Sprites.Any(x => x.HasAKey), r.IsShutterRoom, doNotUpdateSprites).ToList();
 
                 //Debug.Assert(possibleSpriteGroups.Count > 0);
 

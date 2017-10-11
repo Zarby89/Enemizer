@@ -25,7 +25,10 @@ namespace EnemizerLibrary
                 throw new Exception("RoomGroupRequirement needs at least one non-null GroupId or Subgroup.");
             }
 
-            this.Rooms = Rooms.ToList();
+            if (Rooms != null)
+            {
+                this.Rooms = Rooms.ToList();
+            }
             this.GroupId = GroupId;
             this.Subgroup0 = Subgroup0;
             this.Subgroup1 = Subgroup1;
@@ -148,26 +151,26 @@ namespace EnemizerLibrary
             RoomRequirements.Add(new RoomGroupRequirement(null, 14, 30, null, null,
                 RoomIdConstants.R291_MiniMoldormCave));
 
-            RoomRequirements.Add(new RoomGroupRequirement(23, 64, null, null, 63, 
-                RoomIdConstants.R164_TurtleRock_Trinexx));
+            RoomRequirements.Add(new RoomGroupRequirement(23, 64, null, null, 63)); //, 
+                //RoomIdConstants.R164_TurtleRock_Trinexx));
 
             RoomRequirements.Add(new RoomGroupRequirement(9, null, null, null, 29,
-                RoomIdConstants.R28_GanonsTower_IceArmos,
-                RoomIdConstants.R200_EasternPalace_ArmosKnights,
+                //RoomIdConstants.R28_GanonsTower_IceArmos,
+                //RoomIdConstants.R200_EasternPalace_ArmosKnights,
                 RoomIdConstants.R227_Cave_HalfMagic));
 
-            RoomRequirements.Add(new RoomGroupRequirement(11, null, null, null, 61,
-                RoomIdConstants.R144_MiseryMire_Vitreous));
+            RoomRequirements.Add(new RoomGroupRequirement(11, null, null, null, 61));//,
+                //RoomIdConstants.R144_MiseryMire_Vitreous));
 
             // combine??
-            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, null, 49,
-                RoomIdConstants.R51_DesertPalace_Lanmolas,
-                RoomIdConstants.R108_GanonsTower_LanmolasRoom));
-            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, 60, null,
-                RoomIdConstants.R222_IcePalace_Kholdstare));
+            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, null, 49));//,
+                //RoomIdConstants.R51_DesertPalace_Lanmolas,
+                //RoomIdConstants.R108_GanonsTower_LanmolasRoom));
+            RoomRequirements.Add(new RoomGroupRequirement(22, null, null, 60, null));//,
+                //RoomIdConstants.R222_IcePalace_Kholdstare));
 
-            RoomRequirements.Add(new RoomGroupRequirement(21, null, null, 58, 62,
-                RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing));
+            RoomRequirements.Add(new RoomGroupRequirement(21, null, null, 58, 62));//,
+                //RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing));
 
             // Freezor
             RoomRequirements.Add(new RoomGroupRequirement(28, null, null, 38, 82,
@@ -178,18 +181,18 @@ namespace EnemizerLibrary
             //RoomRequirements.Add(new RoomGroupRequirement(41, null, null, 38, null, // R190 is in this originally
                 RoomIdConstants.R190_IcePalace_BlockPuzzleRoom));
 
-            RoomRequirements.Add(new RoomGroupRequirement(12, null, null, 48, null,
-                RoomIdConstants.R7_TowerofHera_Moldorm,
-                RoomIdConstants.R77_GanonsTower_MoldormRoom));
+            RoomRequirements.Add(new RoomGroupRequirement(12, null, null, 48, null));//,
+                //RoomIdConstants.R7_TowerofHera_Moldorm,
+                //RoomIdConstants.R77_GanonsTower_MoldormRoom));
 
-            RoomRequirements.Add(new RoomGroupRequirement(26, null, null, 56, null,
-                RoomIdConstants.R41_SkullWoods_Mothula));
+            RoomRequirements.Add(new RoomGroupRequirement(26, null, null, 56, null));//,
+                //RoomIdConstants.R41_SkullWoods_Mothula));
 
-            RoomRequirements.Add(new RoomGroupRequirement(20, null, null, 57, null,
-                RoomIdConstants.R6_SwampPalace_Arrghus));
+            RoomRequirements.Add(new RoomGroupRequirement(20, null, null, 57, null));//,
+                //RoomIdConstants.R6_SwampPalace_Arrghus));
 
-            RoomRequirements.Add(new RoomGroupRequirement(32, null, 44, 59, null,
-                RoomIdConstants.R172_ThievesTown_BlindTheThief));
+            RoomRequirements.Add(new RoomGroupRequirement(32, null, 44, 59, null));//,
+                //RoomIdConstants.R172_ThievesTown_BlindTheThief));
 
             RoomRequirements.Add(new RoomGroupRequirement(3, 93, null, null, null,
                 RoomIdConstants.R81_HyruleCastle_ThroneRoom));
@@ -388,6 +391,10 @@ namespace EnemizerLibrary
                 RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
                 RoomIdConstants.R55_SwampPalace_MapChest_WaterFillRoom,
                 RoomIdConstants.R118_SwampPalace_WaterDrainRoom));
+
+            // force water teketite
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 34, null,
+                RoomIdConstants.R40_SwampPalace_EntranceRoom));
         }
     }
 }

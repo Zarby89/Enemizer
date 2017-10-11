@@ -69,20 +69,20 @@ namespace EnemizerLibrary
             romData[SpriteGroupBaseAddress + (GroupId * 4) + 3] = (byte)SubGroup3;
         }
 
-        public IEnumerable<SpriteRequirement> GetPossibleEnemySprites(Room room)
+        public IEnumerable<SpriteRequirement> GetPossibleEnemySprites(Room room, OptionFlags optionFlags = null)
         {
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
 
-            return spriteRequirementsCollection.UsableDungeonEnemySprites.Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
+            return spriteRequirementsCollection.GetUsableDungeonEnemySprites(optionFlags?.EnemiesAbsorbable == true).Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
         }
 
-        public IEnumerable<SpriteRequirement> GetPossibleEnemySprites(OverworldArea area)
+        public IEnumerable<SpriteRequirement> GetPossibleEnemySprites(OverworldArea area, OptionFlags optionFlags = null)
         {
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
 
-            return spriteRequirementsCollection.UsableOverworldEnemySprites.Where(x => x.SpriteInGroup(this));
+            return spriteRequirementsCollection.GetUsableOverworldEnemySprites(optionFlags?.EnemiesAbsorbable == true).Where(x => x.SpriteInGroup(this));
         }
     }
 }

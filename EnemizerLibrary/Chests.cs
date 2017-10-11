@@ -30,8 +30,8 @@ namespace EnemizerLibrary
             }
         }
 
-        public static List<Chest> chest_list = new List<Chest>();
-        public static void add_chests()
+        //public static List<Chest> chest_list = new List<Chest>();
+        /*public static void add_chests()
         {
             //var match = ;
             chest_list.Add(new Chest("Secret Entrance [Lamp]", 0, 0, 0xE971, 53));
@@ -267,6 +267,6 @@ namespace EnemizerLibrary
             //chest_list.Add(new Chest("Fairy Sword Exchange [Butter Sword]", 0, 14, 0x180028,52)); //NEED IMAGE
 
 
-        }
+        }//*/
     }
 }
