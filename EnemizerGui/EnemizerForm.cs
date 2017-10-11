@@ -17,7 +17,7 @@ namespace Enemizer
     {
         readonly string configFilename = "setting.cfg";
         EnemizerConfig config = new EnemizerConfig();
-        OptionFlags optionFlags = new OptionFlags();
+        //OptionFlags optionFlags = new OptionFlags();
         Random rand = new Random();
 
         public EnemizerForm()
@@ -73,7 +73,7 @@ namespace Enemizer
 
         private void LoadSpriteDropdown()
         {
-            linkSpriteCombobox.Items.Add(new files_names("Default", "Default"));
+            linkSpriteCombobox.Items.Add(new files_names("Unchanged", "Unchanged"));
             linkSpriteCombobox.Items.Add(new files_names("Random", "Random"));
             linkSpriteCombobox.SelectedIndex = 0;
 
@@ -126,18 +126,6 @@ namespace Enemizer
             UpdatePalettesTabUIFromConfig();
 
             UpdateExtrasTabUIFromConfig();
-
-            //int flagsText = 0;
-            //for (int i = 0; i < extraSettingsCheckedList.Items.Count-1; i++)
-            //{
-            //    extraSettingsCheckedList.SetItemCheckState(i, CheckState.Unchecked);
-            //    if ((flagsText & flags_setter[i + 1]) == flags_setter[i + 1])
-            //    {
-            //        extraSettingsCheckedList.SetItemCheckState(i, CheckState.Checked);
-
-            //    }
-            //}
-            //flags = flagsText;
         }
 
         private void UpdateMainFormUIFromConfig()
@@ -152,7 +140,9 @@ namespace Enemizer
         private void UpdateEnemiesTabUIFromConfig()
         {
             randomizeEnemiesCheckbox.Checked = config.OptionFlags.RandomizeEnemies;
-            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            //randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            randomizationTypeLabel.Enabled = randomizationTypeTrackbar.Enabled;
+            lblTypeOfRandomization.Enabled = randomizationTypeTrackbar.Enabled;
             chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
 
             randomizationTypeTrackbar.Value = (int)config.OptionFlags.RandomizeEnemiesType;
@@ -174,8 +164,11 @@ namespace Enemizer
             easyModeEscapeCheckbox.Checked = config.OptionFlags.EasyModeEscape;
 
             allowAbsorbableItemsCheckbox.Checked = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            // TODO: hook these up in the randomizer
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable; 
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
+            spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
 
             absorbableItemsSpawnrateTrackbar.Value = config.OptionFlags.AbsorbableSpawnRate / 5; // TODO: don't hardcode magic numbers
             spawnrateLabel.Text = $"{config.OptionFlags.AbsorbableSpawnRate}%";
@@ -219,11 +212,23 @@ namespace Enemizer
             randomizeSpritePalettesAdvancedCheckbox.Enabled = config.OptionFlags.RandomizeSpritePalettes;
 
             randomizeSpritePalettesAdvancedCheckbox.Checked = config.OptionFlags.SetAdvancedSpritePalettes;
+
+            pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
+            randomizeDungeonPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            setBlackoutModeCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeOverworldPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesBasicCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesAdvancedCheckbox.Enabled = !pukeModeCheckbox.Checked;
         }
 
         private void UpdateExtrasTabUIFromConfig()
         {
-            chkBootlegMagic.Checked = config.OptionFlags.BootlegMagic;
+            bootlegMagicCheckbox.Checked = config.OptionFlags.BootlegMagic;
+            debugModeCheckbox.Checked = config.OptionFlags.DebugMode;
+            shuffleMusicCheckBox.Checked = config.OptionFlags.ShuffleMusic;
+            shufflePotContentsCheckbox.Checked = config.OptionFlags.RandomizePots;
+            customBossesCheckbox.Checked = config.OptionFlags.CustomBosses;
+            andyModeCheckbox.Checked = config.OptionFlags.AndyMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -316,37 +321,46 @@ namespace Enemizer
                 }
             }
 
-            //try
-            //{
-                OpenFileDialog ofd = new OpenFileDialog();
+#if !DEBUG
+            try // make sure we don't crash in release build
+            {
+#endif
+            OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
                 ofd.Title = "Select a Randomizer Rom File";
-                if (ofd.ShowDialog() == DialogResult.OK)
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                byte[] rom_data = new byte[fs.Length];
+                fs.Read(rom_data, 0, (int)fs.Length);
+                fs.Close();
+
+                SaveConfig();
+
+                var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
+                Randomization randomize = new Randomization();
+                RomData romData = new RomData(rom_data);
+                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
+
+                if(config.OptionFlags.GenerateSpoilers)
                 {
-                    FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
-                    byte[] rom_data = new byte[fs.Length];
-                    fs.Read(rom_data, 0, (int)fs.Length);
-                    fs.Close();
-
-                    SaveConfig();
-
-                    var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
-                    Randomization randomize = new Randomization();
-                    RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, linkSpriteFilename);
-
-                    string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
-                    fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-                    randomizedRom.WriteRom(fs);
-                    fs.Close();
-
-                    MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
-
+                    File.WriteAllText($"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} ({randomizedRom.EnemizerSeed}) Spoiler.txt", randomizedRom.Spoiler.ToString());
                 }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
+                fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                randomizedRom.WriteRom(fs);
+                fs.Close();
+
+                MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
+            }
+#if !DEBUG
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+#endif
         }
 
         private void generateSpoilerCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -360,7 +374,10 @@ namespace Enemizer
         private void randomizeEnemiesCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.RandomizeEnemies = randomizeEnemiesCheckbox.Checked;
-            randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            //randomizationTypeTrackbar.Enabled = config.OptionFlags.RandomizeEnemies;
+            randomizationTypeLabel.Enabled = randomizationTypeTrackbar.Enabled;
+            lblTypeOfRandomization.Enabled = randomizationTypeTrackbar.Enabled;
+            chkRandomizeBushEnemyChance.Enabled = config.OptionFlags.RandomizeEnemies;
         }
 
         private void randomizationTypeTrackbar_ValueChanged(object sender, EventArgs e)
@@ -407,8 +424,10 @@ namespace Enemizer
         private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
-            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
+            spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
         }
 
         private void absorbableItemsSpawnrateTrackbar_ValueChanged(object sender, EventArgs e)
@@ -511,15 +530,19 @@ namespace Enemizer
             config.OptionFlags.SetAdvancedSpritePalettes = randomizeSpritePalettesAdvancedCheckbox.Checked;
         }
 
+        private void pukeModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.PukeMode = pukeModeCheckbox.Checked;
+            randomizeDungeonPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            setBlackoutModeCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeOverworldPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesBasicCheckbox.Enabled = !pukeModeCheckbox.Checked;
+            //randomizeSpritePalettesAdvancedCheckbox.Enabled = !pukeModeCheckbox.Checked;
+        }
 
         /*
          * Extras tab
          */
-        private void extraSettingsCheckedList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            // TODO: add extra flags
-        }
-
 
         // TODO: replace this with resource file and tooltips
         public string[] description = 
@@ -543,14 +566,35 @@ namespace Enemizer
         };
         // "Randomize All bosses, no unique\nbosses every bosses can be anywhere\nyou can have trinexx everywhere\nthis box overwrite shuffle bosses",
 
-        private void extraSettingsCheckedList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            descriptionLabel.Text = description[extraSettingsCheckedList.SelectedIndex];
-        }
 
         private void chkBootlegMagic_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.BootlegMagic = chkBootlegMagic.Checked;
+            config.OptionFlags.BootlegMagic = bootlegMagicCheckbox.Checked;
+        }
+
+        private void debugModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugMode = debugModeCheckbox.Checked;
+        }
+
+        private void shuffleMusicCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.ShuffleMusic = shuffleMusicCheckBox.Checked;
+        }
+
+        private void shufflePotContentsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizePots = shufflePotContentsCheckbox.Checked;
+        }
+
+        private void customBossesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.CustomBosses = customBossesCheckbox.Checked;
+        }
+
+        private void andyModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AndyMode = andyModeCheckbox.Checked;
         }
     }
 

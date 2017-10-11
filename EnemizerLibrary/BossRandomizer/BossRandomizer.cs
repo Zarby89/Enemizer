@@ -9,23 +9,25 @@ namespace EnemizerLibrary
 {
     public class BossRandomizer
     {
-        public List<Boss> PossibleBossesPool { get; set; } = new List<Boss>();
-
         public List<Dungeon> DungeonPool { get; set; } = new List<Dungeon>();
 
         protected OptionFlags optionFlags { get; set; }
-        protected StreamWriter spoilerFile { get; set; }
+        protected StringBuilder spoilerFile { get; set; }
 
         protected Random rand;
+        protected BossPool bossPool;
+        protected Graph graph;
 
-        public BossRandomizer(Random rand, OptionFlags optionFlags, StreamWriter spoilerFile)
+        public BossRandomizer(Random rand, OptionFlags optionFlags, StringBuilder spoilerFile, Graph graph)
         {
             this.rand = rand;
             this.optionFlags = optionFlags;
             this.spoilerFile = spoilerFile;
+            this.graph = graph;
+            this.bossPool = new BossPool(rand);
         }
 
-        public BossRandomizer(Random rand) : this(rand, new OptionFlags(), null) { }
+        public BossRandomizer(Random rand, Graph graph) : this(rand, new OptionFlags(), null, graph) { }
 
         void FillDungeonPool()
         {
@@ -46,29 +48,7 @@ namespace EnemizerLibrary
 
         protected void FillBossPool()
         {
-            FillBasePool();
-            FillGTPool();
-        }
-
-        protected virtual void FillBasePool()
-        {
-            PossibleBossesPool.Add(new ArmosBoss());
-            PossibleBossesPool.Add(new LanmolaBoss());
-            PossibleBossesPool.Add(new MoldormBoss());
-            PossibleBossesPool.Add(new HelmasaurBoss());
-            PossibleBossesPool.Add(new ArrghusBoss());
-            PossibleBossesPool.Add(new MothulaBoss());
-            PossibleBossesPool.Add(new BlindBoss());
-            PossibleBossesPool.Add(new KholdstareBoss());
-            PossibleBossesPool.Add(new VitreousBoss());
-            PossibleBossesPool.Add(new TrinexxBoss());
-        }
-
-        protected virtual void FillGTPool()
-        {
-            PossibleBossesPool.Add(new ArmosBoss()); // GT1
-            PossibleBossesPool.Add(new LanmolaBoss()); // GT2
-            PossibleBossesPool.Add(new MoldormBoss()); // GT3
+            bossPool.FillPool();
         }
 
         public void RandomizeRom(RomData romData)
@@ -76,46 +56,75 @@ namespace EnemizerLibrary
             FillDungeonPool();
             FillBossPool();
 
-            GenerateRandomizedBosses(romData);
+            GenerateRandomizedBosses();
             WriteRom(romData);
         }
 
-        public void GenerateRandomizedBosses(RomData romData)
+        protected virtual void GenerateRandomizedBosses()
         {
-            foreach(var dungeon in this.DungeonPool.OrderBy(x => x.Priority))
+            var dungeonQueue = new Queue<Dungeon>(this.DungeonPool);
+
+            while(dungeonQueue.Count > 0)
             {
-                var possibleBosses = this.PossibleBossesPool.Where(x => dungeon.DisallowedBosses.Contains(x.BossType) == false);
-                if(possibleBosses.Any() == false)
+                var dungeon = dungeonQueue.Dequeue();
+
+                if (optionFlags.DebugMode)
                 {
-                    throw new Exception($"Couldn't find any possible bosses not disallowed for dungeon: {dungeon.Name}");
+                    dungeon.SelectedBoss = new KholdstareBoss();
+                    //dungeon.SelectedBoss = new TrinexxBoss();
+                    continue;
                 }
 
-                possibleBosses = possibleBosses.Where(x => x.CheckRules(dungeon, romData) == false);
-                if (possibleBosses.Any() == false)
-                {
-                    throw new Exception($"Couldn't find any possible bosses meeting item checks for dungeon: {dungeon.Name}");
-                }
+                var boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
 
-                Boss boss = possibleBosses.ElementAt(rand.Next(possibleBosses.Count()));
+                //var result = graph.FindPath("cave-links-house", "triforce-room");
 
                 dungeon.SelectedBoss = boss;
 
-                this.PossibleBossesPool.Remove(boss);
+                if(dungeon.SelectedBoss == null)
+                {
+                    var readdDungeon = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).FirstOrDefault();
+                    if(readdDungeon != null)
+                    {
+                        boss = readdDungeon.SelectedBoss;
+                        dungeon.SelectedBoss = readdDungeon.SelectedBoss;
+
+                        dungeonQueue.Enqueue(readdDungeon);
+                        readdDungeon.SelectedBoss = null;
+
+                        // update the graph
+                        graph.UpdateDungeonBoss(readdDungeon);
+                    }
+                }
+
+                if(dungeon.SelectedBoss != null)
+                {
+                    // update the graph
+                    graph.UpdateDungeonBoss(dungeon);
+
+                    bossPool.RemoveBoss(boss);
+                }
             }
         }
 
         private void WriteRom(RomData romData)
         {
-            DungeonShells shells = new DungeonShells();
-            shells.FillShells();
-            shells.WriteShellsToRom(romData);
+            //DungeonShells shells = new DungeonShells();
+            //shells.FillShells();
 
-            foreach(var dungeon in DungeonPool)
+            if (optionFlags.GenerateSpoilers && spoilerFile != null)
+            {
+                spoilerFile.AppendLine("Bosses:");
+            }
+
+            DungeonObjectDataPointerCollection roomObjects = new DungeonObjectDataPointerCollection(romData);
+            
+            foreach (var dungeon in DungeonPool)
             {
                 // spoilers
                 if(optionFlags.GenerateSpoilers && spoilerFile != null)
                 {
-                    spoilerFile.WriteLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType} - drop: boss drop item");
+                    spoilerFile.AppendLine($"{dungeon.Name} : {dungeon.SelectedBoss.BossType}");
                     //spoilerfile.WriteLine(d.name + " : " + BossConstants.BossNames[d.boss].ToString() + "  Drop : " + ROM_DATA[BossConstants.BossDropItemAddresses[did]]);
                 }
 
@@ -127,57 +136,33 @@ namespace EnemizerLibrary
                 romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
 
                 // update trinexx shell
-                if(dungeon.SelectedBoss.BossType == BossType.Trixnexx)
+                if(dungeon.SelectedBoss.BossType == BossType.Trinexx && dungeon.BossRoomId != RoomIdConstants.R164_TurtleRock_Trinexx)
                 {
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2
+                    // TODO: figure out the X/Y coord
+                    roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY-2, dungeon.ClearLayer2, 0xFF2);
 
-                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
-
-                    byte[] Pointer = new byte[4];
-                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    romData[floors_address] = 0xF0;
+                    // see "Header contents:" section of rom log
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
+                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
                 }
 
                 // update kholdstare shell
-                if (dungeon.SelectedBoss.BossType == BossType.Kholdstare)
+                if (dungeon.SelectedBoss.BossType == BossType.Kholdstare && dungeon.BossRoomId != RoomIdConstants.R222_IcePalace_Kholdstare)
                 {
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01;
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11;
+                    roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY, dungeon.ClearLayer2, 0xF95);
+
+                    // TODO: fix this. "debug" flag is set on one of these bytes
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
-
-                    byte[] shellpointer = shells.Shells.Where(x => x.DungeonType == dungeon.DungeonType).Select(x => x.Pointer).First();
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 0)] = shellpointer[2];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 1)] = shellpointer[1];
-                    romData[0xF8000 + ((dungeon.BossRoomId * 3) + 2)] = shellpointer[0];
-
-                    byte[] Pointer = new byte[4];
-                    Pointer[0] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 0];
-                    Pointer[1] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 1];
-                    Pointer[2] = romData[(0xF8000 + (dungeon.BossRoomId * 3)) + 2];
-                    int floors_address = Utilities.SnesToPCAddress(BitConverter.ToInt32(Pointer, 0));
-                    romData[floors_address] = 0xF0;
+                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
+                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
                 }
             }
 
+            roomObjects.WriteChangesToRom(0x122000);
+            //shells.WriteShellsToRom(romData);
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);
-
-            if(optionFlags.GenerateSpoilers)
-            {
-                spoilerFile.WriteLine("Bosses:");
-                foreach(var d in DungeonPool)
-                {
-
-                }
-            }
         }
 
         private void RemoveBlindSpawnCode(RomData romData)

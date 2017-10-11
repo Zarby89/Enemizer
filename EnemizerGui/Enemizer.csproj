@@ -96,16 +96,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="sprites\boo.spr">
+    <None Include="sprites\4slink-armors.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\Boxes.spr">
+    <None Include="sprites\4slink-split.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\Catboo.spr">
+    <None Include="sprites\boy.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\darkgirl.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\darklink.1.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Darklink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\darkswatchy.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\darkzelda.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Decidueye.spr">
@@ -114,7 +126,7 @@
     <None Include="sprites\Demon link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\Derpy Little Pony.spr">
+    <None Include="sprites\demonlink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Frog Link.spr">
@@ -123,7 +135,16 @@
     <None Include="sprites\girl.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\Invisibleman.spr">
+    <None Include="sprites\kirby-gooey.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\link.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\maiden.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\maplequeen.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Mike Jones.spr">
@@ -141,13 +162,13 @@
     <None Include="sprites\Orb.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\pug.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\Roy Koopa.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Rumia.spr">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Samus by fisher.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\samus.spr">
@@ -165,7 +186,7 @@
     <None Include="sprites\wizzrobe.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\zelda.spr">
+    <None Include="sprites\zelda-update.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Zora.spr">

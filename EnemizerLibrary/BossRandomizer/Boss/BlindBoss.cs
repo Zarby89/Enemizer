@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x54, 0xE6 };
             BossGraphics = 32;
+            BossNode = "thieves-blind";
         }
     }
 }

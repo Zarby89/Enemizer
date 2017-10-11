@@ -102,30 +102,33 @@ namespace EnemizerLibrary
             }
         }
 
-        public void RandomizeSprites(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        public void RandomizeSprites(Random rand, OptionFlags optionFlags, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
 
-            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this).Select(x => x.SpriteId).ToArray();
+            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this, optionFlags).Select(x => x.SpriteId).ToArray();
 
             if (possibleSprites.Length > 0)
             {
                 var spritesToUpdate = this.Sprites.Where(x => spriteRequirementCollection.RandomizableSprites.Select(y => y.SpriteId).Contains(x.SpriteId))
                     .ToList();
 
-                spritesToUpdate.Where(x => x.SpriteId != SpriteConstants.RavenSprite).ToList()
+                spritesToUpdate/*.Where(x => x.SpriteId != SpriteConstants.RavenSprite)*/.ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
 
+                // Kodongo are not allowed in overworld for now, until ASM can be fixed, then this won't be needed at all.
+                /*
                 // Kodongo in Raven place will crash the game
                 possibleSprites = possibleSprites.Where(x => x != SpriteConstants.KodongosSprite).ToArray();
 
-                if(possibleSprites.Length == 0)
+                if (possibleSprites.Length == 0)
                 {
                     // TODO: should throw an error but let's just leave it for now
                     return;
                 }
                 spritesToUpdate.Where(x => x.SpriteId == SpriteConstants.RavenSprite).ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+                //*/
             }
         }
 

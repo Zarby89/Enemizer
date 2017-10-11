@@ -11,11 +11,30 @@ namespace EnemizerLibrary
     public class RomData
     {
         // 0x20 flags total
-        public const int EnemizerOptionFlagsBaseAddress = 0x200000;
+        public const int EnemizerOptionFlagsBaseAddress = 0x200000; // snes 408000
         public const int RandomizeHiddenEnemiesFlag = 0x00;
         public const int CloseBlindDoorFlag = 0x01;
+        public const int MoldormEyesFlag = 0x02;
+        public const int RandomSpriteFlag = 0x03;
 
-        private byte[] romData;
+        public StringBuilder Spoiler { get; private set; } = new StringBuilder();
+
+        int seed;
+        public int EnemizerSeed
+        {
+            get { return seed; }
+            set
+            {
+                // write to rom somewhere too
+                seed = value;
+            }
+        }
+
+        /// <summary>
+        /// Try to avoid using this because we can't set break points to find bad writes to ROM.
+        /// </summary>
+        public byte[] romData;
+
         public RomData(byte[] romData)
         {
             this.romData = romData;
@@ -47,6 +66,18 @@ namespace EnemizerLibrary
             set { SetFlag(CloseBlindDoorFlag, value); }
         }
 
+        public bool MoldormEyes
+        {
+            get { return GetFlag(MoldormEyesFlag); }
+            set { SetFlag(MoldormEyesFlag, value); }
+        }
+
+        public bool RandomizeSprites
+        {
+            get { return GetFlag(RandomSpriteFlag); }
+            set { SetFlag(RandomSpriteFlag, value); }
+        }
+
         internal bool GetFlag(int offset)
         {
             return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
@@ -63,7 +94,7 @@ namespace EnemizerLibrary
              * 10 01 01 01 11 01 01 03 
              */
             byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
-            Array.Copy(vanilla, romData, 16);
+            Array.Copy(vanilla, 0, romData, 0xD7BBB, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()
@@ -92,6 +123,21 @@ namespace EnemizerLibrary
             romData[0xD7BBB + 13] = 0x0F;
             romData[0xD7BBB + 14] = 0x0F;
             romData[0xD7BBB + 15] = 0x03;
+        }
+
+        public void SetCharacterSelectScreenVersion()
+        {
+            byte versionMajor = Version.MajorVersion;
+            byte versionMinor = Version.MinorVersion;
+
+            var text = new byte[] 
+            {
+                0x63, 0x25, 0x00, 0x19, 0x64, 0x1D, 0x88, 0x01, 0x62, 0x1D, 0x88, 0x01, 0x65, 0x1D, 0x88, 0x01,
+                0x65, 0x1D, 0x88, 0x01, 0x4E, 0x15, 0x67, 0x15, (byte)(0x40 | versionMajor), 0x15, 0x88, 0x01, (byte)(0x40 | versionMinor), 0x15, 0x63, 0x45,
+                0x00, 0x19, 0x74, 0x1D, 0x88, 0x01, 0x72, 0x1D, 0x88, 0x01, 0x75, 0x1D, 0x88, 0x01, 0x75, 0x1D,
+                0x88, 0x01, 0x5E, 0x15, 0x77, 0x15, (byte)(0x50 | versionMajor), 0x15, 0x9D, 0x15, (byte)(0x50 | versionMinor), 0x15
+            };
+            Array.Copy(text, 0, romData, 0x65E94, text.Length);
         }
 
         public bool IsRandomizerRom
@@ -161,8 +207,8 @@ namespace EnemizerLibrary
 
         public void ExpandRom()
         {
-            Array.Resize(ref this.romData, 3145728);
-            this.romData[0xFFD7] = 0x0C; // update header length
+            Array.Resize(ref this.romData, 0x400000); // 4MB
+            this.romData[0x7FD7] = 0x0C; // update header length
         }
 
         /*
@@ -219,6 +265,22 @@ namespace EnemizerLibrary
                 }
                 romData[i] = value;
             }
+        }
+
+        public byte[] GetDataChunk(int startingAddress, int length)
+        {
+            var output = new byte[length];
+            Array.Copy(this.romData, startingAddress, output, 0, length);
+            return output;
+        }
+
+        public void WriteDataChunk(int startingAddress, byte[] data, int length = -1)
+        {
+            if(length < 0)
+            {
+                length = data.Length;
+            }
+            Array.Copy(data, 0, this.romData, startingAddress, length);
         }
 
         public void WriteRom(FileStream fs)

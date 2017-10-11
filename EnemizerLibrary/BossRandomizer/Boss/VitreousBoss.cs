@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x57, 0xE4 };
             BossGraphics = 22; // TODO: really?
+            BossNode = "mire-vitreous";
         }
     }
 }

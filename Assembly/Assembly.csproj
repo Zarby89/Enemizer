@@ -53,7 +53,7 @@
 copy patchData.json $(SolutionDir)
 copy patchData.json $(SolutionDir)\EnemizerGui\bin\Debug
 copy patchData.json $(SolutionDir)\EnemizerTests\bin\Debug
-copy patchData.json $(SolutionDir)\RomViewer\bin\Debug
+
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

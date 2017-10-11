@@ -26,7 +26,7 @@ macro DMA_VRAM(VRAM_HIGH,VRAM_LOW,SRC_BANK,SRC_HIGH,SRC_LOW,LENGTH_HIGH,LENGTH_L
         LDA !DMA0_SIZE_HIGH_REG : PHA
 		; -------------------------------------------------------------------------------
 
-		LDA.b #$80 : STA !DISP_REG
+		;LDA.b #$80 : STA !DISP_REG ; force vblank
 		LDA #$80   : STA !VMAIN_REG
 
         ; write to vram at $<VRAM_HIGH><VRAM_LOW>

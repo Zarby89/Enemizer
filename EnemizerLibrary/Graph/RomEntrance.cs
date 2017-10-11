@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
-    public class Entrance
+    public class RomEntrance
     {
         RomData romData;
         public int EntranceIndex { get; set; }
@@ -45,15 +45,15 @@ namespace EnemizerLibrary
             }
         }
 
-        public Entrance(RomData romData)
+        public RomEntrance(RomData romData)
         {
             this.romData = romData;
         }
     }
 
-    public class NormalEntrance : Entrance
+    public class RomNormalEntrance : RomEntrance
     {
-        public NormalEntrance(RomData romData, int entranceIndex)
+        public RomNormalEntrance(RomData romData, int entranceIndex)
             :base(romData)
         {
             this.EntranceIndex = entranceIndex;
@@ -65,9 +65,9 @@ namespace EnemizerLibrary
             this.ConnectToRoomId = (romData[0x14577 + (this.EntranceNumber * 2) + 1] << 8) + romData[0x14577 + (this.EntranceNumber * 2)];
         }
     }
-    public class DropEntrance : Entrance
+    public class RomDropEntrance : RomEntrance
     {
-        public DropEntrance(RomData romData, int entranceIndex)
+        public RomDropEntrance(RomData romData, int entranceIndex)
             :base(romData)
         {
             this.EntranceIndex = entranceIndex;
@@ -81,26 +81,27 @@ namespace EnemizerLibrary
         }
     }
 
-    public class EntranceCollection
+    public class RomEntranceCollection
     {
         RomData romData;
-        public List<Entrance> Entrances { get; set; } = new List<Entrance>();
+        public List<RomEntrance> Entrances { get; set; } = new List<RomEntrance>();
 
-        public EntranceCollection(RomData romData)
+        public RomEntranceCollection(RomData romData)
         {
             this.romData = romData;
+            LoadEntrances();
         }
 
         public void LoadEntrances()
         {
             for (int i = 0; i < 0x13; i++)
             {
-                Entrances.Add(new DropEntrance(romData, i));
+                Entrances.Add(new RomDropEntrance(romData, i));
             }
 
             for (int i=0; i<0x81; i++)
             {
-                Entrances.Add(new NormalEntrance(romData, i));
+                Entrances.Add(new RomNormalEntrance(romData, i));
             }
         }
     }

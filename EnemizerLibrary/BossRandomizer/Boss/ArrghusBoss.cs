@@ -12,10 +12,12 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x97, 0xD9 };
             BossGraphics = 20;
+            BossNode = "swamp-arrghus";
         }
 
         protected new void FillRules()
         {
+            Requirements = "Hookshot";
             Rules.Add(this.CheckGTowerAndPedestalForItems);
             Rules.Add(this.CheckShabadooHasItem);
             Rules.Add(this.CheckFatFairyHasItem);

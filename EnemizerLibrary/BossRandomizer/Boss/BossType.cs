@@ -17,7 +17,7 @@ namespace EnemizerLibrary
         Lanmola = 6,
         Blind = 7,
         Arrghus = 8,
-        Trixnexx = 9,
+        Trinexx = 9,
         NoBoss = 255
     }
 }

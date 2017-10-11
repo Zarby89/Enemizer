@@ -21,6 +21,9 @@ namespace EnemizerLibrary
 
             // TODO: stop blind from spawning in GT2?
             //DisallowedBosses.Add(BossType.Blind);
+
+            ShellX = 0x0B;
+            ShellY = 0x28;
         }
     }
 }

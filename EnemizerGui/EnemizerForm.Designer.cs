@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnemizerForm));
             this.generateRomButton = new System.Windows.Forms.Button();
-            this.extraSettingsCheckedList = new System.Windows.Forms.CheckedListBox();
-            this.descriptionLabel = new System.Windows.Forms.Label();
             this.linkSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,10 +45,11 @@
             this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
             this.allowZeroDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.absorbableItemsChecklist = new System.Windows.Forms.CheckedListBox();
             this.spawnrateLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblAbsorbSpawnRate = new System.Windows.Forms.Label();
             this.absorbableItemsSpawnrateTrackbar = new System.Windows.Forms.TrackBar();
             this.allowAbsorbableItemsCheckbox = new System.Windows.Forms.CheckBox();
             this.easyModeEscapeCheckbox = new System.Windows.Forms.CheckBox();
@@ -59,7 +58,7 @@
             this.randomizeEnemiesHealthTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesHealthCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizationTypeLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTypeOfRandomization = new System.Windows.Forms.Label();
             this.randomizationTypeTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -81,11 +80,16 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
+            this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
+            this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.bootlegMagicCheckbox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
-            this.chkBootlegMagic = new System.Windows.Forms.CheckBox();
+            this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -109,42 +113,6 @@
             this.generateRomButton.Text = "Generate!";
             this.generateRomButton.UseVisualStyleBackColor = true;
             this.generateRomButton.Click += new System.EventHandler(this.generateRomButton_Click);
-            // 
-            // extraSettingsCheckedList
-            // 
-            this.extraSettingsCheckedList.FormattingEnabled = true;
-            this.extraSettingsCheckedList.Items.AddRange(new object[] {
-            "Dungeon Enemies",
-            "Overworld Enemies",
-            "Dungeon Palettes",
-            "Enemy Palettes",
-            "Overworld Palettes",
-            "Enemy Hit Points",
-            "Enemy DMG Output",
-            "Enemy HP to 0",
-            "Shuffle Bosses",
-            "Absorbables in Pool",
-            "Boss Madness",
-            "Blackout Mode",
-            "Shuffle Music",
-            "Custom Bosses (WIP)",
-            "Shuffle Pot Contents"});
-            this.extraSettingsCheckedList.Location = new System.Drawing.Point(19, 67);
-            this.extraSettingsCheckedList.MultiColumn = true;
-            this.extraSettingsCheckedList.Name = "extraSettingsCheckedList";
-            this.extraSettingsCheckedList.Size = new System.Drawing.Size(263, 184);
-            this.extraSettingsCheckedList.TabIndex = 5;
-            this.extraSettingsCheckedList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.extraSettingsCheckedList_ItemCheck);
-            this.extraSettingsCheckedList.SelectedIndexChanged += new System.EventHandler(this.extraSettingsCheckedList_SelectedIndexChanged);
-            // 
-            // descriptionLabel
-            // 
-            this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(122, 254);
-            this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
-            this.descriptionLabel.TabIndex = 6;
-            this.descriptionLabel.Text = "Descritpion";
             // 
             // linkSpriteCombobox
             // 
@@ -287,7 +255,7 @@
             this.tabPage1.Controls.Add(this.allowZeroDamageCheckbox);
             this.tabPage1.Controls.Add(this.absorbableItemsChecklist);
             this.tabPage1.Controls.Add(this.spawnrateLabel);
-            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.lblAbsorbSpawnRate);
             this.tabPage1.Controls.Add(this.absorbableItemsSpawnrateTrackbar);
             this.tabPage1.Controls.Add(this.allowAbsorbableItemsCheckbox);
             this.tabPage1.Controls.Add(this.easyModeEscapeCheckbox);
@@ -296,7 +264,7 @@
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesHealthCheckbox);
             this.tabPage1.Controls.Add(this.randomizationTypeLabel);
-            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lblTypeOfRandomization);
             this.tabPage1.Controls.Add(this.randomizationTypeTrackbar);
             this.tabPage1.Controls.Add(this.randomizeEnemiesCheckbox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -306,6 +274,20 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Enemies";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chkRandomizeBushEnemyChance
+            // 
+            this.chkRandomizeBushEnemyChance.AutoSize = true;
+            this.chkRandomizeBushEnemyChance.Checked = true;
+            this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRandomizeBushEnemyChance.Enabled = false;
+            this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
+            this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
+            this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
+            this.chkRandomizeBushEnemyChance.TabIndex = 17;
+            this.chkRandomizeBushEnemyChance.Text = "Randomize Bush/Grass Enemy Chance";
+            this.chkRandomizeBushEnemyChance.UseVisualStyleBackColor = true;
+            this.chkRandomizeBushEnemyChance.CheckedChanged += new System.EventHandler(this.chkRandomizeBushEnemyChance_CheckedChanged);
             // 
             // allowZeroDamageCheckbox
             // 
@@ -356,12 +338,12 @@
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(253, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Spawn Rate";
+            this.lblAbsorbSpawnRate.AutoSize = true;
+            this.lblAbsorbSpawnRate.Location = new System.Drawing.Point(253, 26);
+            this.lblAbsorbSpawnRate.Name = "label8";
+            this.lblAbsorbSpawnRate.Size = new System.Drawing.Size(66, 13);
+            this.lblAbsorbSpawnRate.TabIndex = 14;
+            this.lblAbsorbSpawnRate.Text = "Spawn Rate";
             // 
             // absorbableItemsSpawnrateTrackbar
             // 
@@ -447,29 +429,31 @@
             this.randomizationTypeLabel.AutoSize = true;
             this.randomizationTypeLabel.Location = new System.Drawing.Point(146, 46);
             this.randomizationTypeLabel.Name = "randomizationTypeLabel";
-            this.randomizationTypeLabel.Size = new System.Drawing.Size(33, 13);
+            this.randomizationTypeLabel.Size = new System.Drawing.Size(37, 13);
             this.randomizationTypeLabel.TabIndex = 3;
-            this.randomizationTypeLabel.Text = "Basic";
+            this.randomizationTypeLabel.Text = "Chaos";
             // 
-            // label1
+            // lblTypeOfRandomization
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Type of Randomization";
+            this.lblTypeOfRandomization.AutoSize = true;
+            this.lblTypeOfRandomization.Location = new System.Drawing.Point(24, 30);
+            this.lblTypeOfRandomization.Name = "lblTypeOfRandomization";
+            this.lblTypeOfRandomization.Size = new System.Drawing.Size(116, 13);
+            this.lblTypeOfRandomization.TabIndex = 2;
+            this.lblTypeOfRandomization.Text = "Type of Randomization";
             // 
             // randomizationTypeTrackbar
             // 
             this.randomizationTypeTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.randomizationTypeTrackbar.Enabled = false;
+            this.randomizationTypeTrackbar.LargeChange = 1;
             this.randomizationTypeTrackbar.Location = new System.Drawing.Point(27, 46);
             this.randomizationTypeTrackbar.Maximum = 4;
             this.randomizationTypeTrackbar.Name = "randomizationTypeTrackbar";
             this.randomizationTypeTrackbar.Size = new System.Drawing.Size(113, 45);
             this.randomizationTypeTrackbar.TabIndex = 1;
             this.toolTip1.SetToolTip(this.randomizationTypeTrackbar, resources.GetString("randomizationTypeTrackbar.ToolTip"));
+            this.randomizationTypeTrackbar.Value = 3;
             this.randomizationTypeTrackbar.ValueChanged += new System.EventHandler(this.randomizationTypeTrackbar_ValueChanged);
             // 
             // randomizeEnemiesCheckbox
@@ -477,9 +461,9 @@
             this.randomizeEnemiesCheckbox.AutoSize = true;
             this.randomizeEnemiesCheckbox.Location = new System.Drawing.Point(6, 6);
             this.randomizeEnemiesCheckbox.Name = "randomizeEnemiesCheckbox";
-            this.randomizeEnemiesCheckbox.Size = new System.Drawing.Size(226, 17);
+            this.randomizeEnemiesCheckbox.Size = new System.Drawing.Size(152, 17);
             this.randomizeEnemiesCheckbox.TabIndex = 0;
-            this.randomizeEnemiesCheckbox.Text = "Randomize Enemies (WIP) - default Chaos";
+            this.randomizeEnemiesCheckbox.Text = "Randomize Enemies (WIP)";
             this.randomizeEnemiesCheckbox.UseVisualStyleBackColor = true;
             this.randomizeEnemiesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeEnemiesCheckbox_CheckedChanged);
             // 
@@ -601,6 +585,7 @@
             // 
             this.bossRandomizationTypesTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bossRandomizationTypesTrackbar.Enabled = false;
+            this.bossRandomizationTypesTrackbar.LargeChange = 1;
             this.bossRandomizationTypesTrackbar.Location = new System.Drawing.Point(27, 46);
             this.bossRandomizationTypesTrackbar.Maximum = 2;
             this.bossRandomizationTypesTrackbar.Name = "bossRandomizationTypesTrackbar";
@@ -622,6 +607,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pukeModeCheckbox);
             this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesBasicCheckbox);
@@ -693,15 +679,76 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.chkBootlegMagic);
-            this.tabPage4.Controls.Add(this.extraSettingsCheckedList);
-            this.tabPage4.Controls.Add(this.descriptionLabel);
+            this.tabPage4.Controls.Add(this.andyModeCheckbox);
+            this.tabPage4.Controls.Add(this.customBossesCheckbox);
+            this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
+            this.tabPage4.Controls.Add(this.shuffleMusicCheckBox);
+            this.tabPage4.Controls.Add(this.debugModeCheckbox);
+            this.tabPage4.Controls.Add(this.bootlegMagicCheckbox);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(458, 292);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // customBossesCheckbox
+            // 
+            this.customBossesCheckbox.AutoSize = true;
+            this.customBossesCheckbox.Enabled = false;
+            this.customBossesCheckbox.Location = new System.Drawing.Point(318, 7);
+            this.customBossesCheckbox.Name = "customBossesCheckbox";
+            this.customBossesCheckbox.Size = new System.Drawing.Size(98, 17);
+            this.customBossesCheckbox.TabIndex = 11;
+            this.customBossesCheckbox.Text = "Custom Bosses";
+            this.customBossesCheckbox.UseVisualStyleBackColor = true;
+            this.customBossesCheckbox.CheckedChanged += new System.EventHandler(this.customBossesCheckbox_CheckedChanged);
+            // 
+            // shufflePotContentsCheckbox
+            // 
+            this.shufflePotContentsCheckbox.AutoSize = true;
+            this.shufflePotContentsCheckbox.Location = new System.Drawing.Point(158, 7);
+            this.shufflePotContentsCheckbox.Name = "shufflePotContentsCheckbox";
+            this.shufflePotContentsCheckbox.Size = new System.Drawing.Size(123, 17);
+            this.shufflePotContentsCheckbox.TabIndex = 10;
+            this.shufflePotContentsCheckbox.Text = "Shuffle Pot Contents";
+            this.shufflePotContentsCheckbox.UseVisualStyleBackColor = true;
+            this.shufflePotContentsCheckbox.CheckedChanged += new System.EventHandler(this.shufflePotContentsCheckbox_CheckedChanged);
+            // 
+            // shuffleMusicCheckBox
+            // 
+            this.shuffleMusicCheckBox.AutoSize = true;
+            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 148);
+            this.shuffleMusicCheckBox.Name = "shuffleMusicCheckBox";
+            this.shuffleMusicCheckBox.Size = new System.Drawing.Size(177, 17);
+            this.shuffleMusicCheckBox.TabIndex = 9;
+            this.shuffleMusicCheckBox.Text = "Shuffle Music (May crash game)";
+            this.shuffleMusicCheckBox.UseVisualStyleBackColor = true;
+            this.shuffleMusicCheckBox.CheckedChanged += new System.EventHandler(this.shuffleMusicCheckBox_CheckedChanged);
+            // 
+            // debugModeCheckbox
+            // 
+            this.debugModeCheckbox.AutoSize = true;
+            this.debugModeCheckbox.Location = new System.Drawing.Point(7, 272);
+            this.debugModeCheckbox.Name = "debugModeCheckbox";
+            this.debugModeCheckbox.Size = new System.Drawing.Size(88, 17);
+            this.debugModeCheckbox.TabIndex = 8;
+            this.debugModeCheckbox.Text = "Debug Mode";
+            this.debugModeCheckbox.UseVisualStyleBackColor = true;
+            this.debugModeCheckbox.CheckedChanged += new System.EventHandler(this.debugModeCheckbox_CheckedChanged);
+            // 
+            // bootlegMagicCheckbox
+            // 
+            this.bootlegMagicCheckbox.AutoSize = true;
+            this.bootlegMagicCheckbox.Checked = true;
+            this.bootlegMagicCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bootlegMagicCheckbox.Location = new System.Drawing.Point(7, 7);
+            this.bootlegMagicCheckbox.Name = "bootlegMagicCheckbox";
+            this.bootlegMagicCheckbox.Size = new System.Drawing.Size(94, 17);
+            this.bootlegMagicCheckbox.TabIndex = 7;
+            this.bootlegMagicCheckbox.Text = "Bootleg Magic";
+            this.bootlegMagicCheckbox.UseVisualStyleBackColor = true;
+            this.bootlegMagicCheckbox.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
             // label2
             // 
@@ -719,31 +766,27 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
-            // chkRandomizeBushEnemyChance
+            // pukeModeCheckbox
             // 
-            this.chkRandomizeBushEnemyChance.AutoSize = true;
-            this.chkRandomizeBushEnemyChance.Checked = true;
-            this.chkRandomizeBushEnemyChance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRandomizeBushEnemyChance.Location = new System.Drawing.Point(21, 80);
-            this.chkRandomizeBushEnemyChance.Name = "chkRandomizeBushEnemyChance";
-            this.chkRandomizeBushEnemyChance.Size = new System.Drawing.Size(213, 17);
-            this.chkRandomizeBushEnemyChance.TabIndex = 17;
-            this.chkRandomizeBushEnemyChance.Text = "Randomize Bush/Grass Enemy Chance";
-            this.chkRandomizeBushEnemyChance.UseVisualStyleBackColor = true;
-            this.chkRandomizeBushEnemyChance.CheckedChanged += new System.EventHandler(this.chkRandomizeBushEnemyChance_CheckedChanged);
+            this.pukeModeCheckbox.AutoSize = true;
+            this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
+            this.pukeModeCheckbox.Name = "pukeModeCheckbox";
+            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
+            this.pukeModeCheckbox.TabIndex = 5;
+            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
+            this.pukeModeCheckbox.UseVisualStyleBackColor = true;
+            this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
             // 
-            // chkBootlegMagic
+            // andyModeCheckbox
             // 
-            this.chkBootlegMagic.AutoSize = true;
-            this.chkBootlegMagic.Checked = true;
-            this.chkBootlegMagic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBootlegMagic.Location = new System.Drawing.Point(7, 7);
-            this.chkBootlegMagic.Name = "chkBootlegMagic";
-            this.chkBootlegMagic.Size = new System.Drawing.Size(94, 17);
-            this.chkBootlegMagic.TabIndex = 7;
-            this.chkBootlegMagic.Text = "Bootleg Magic";
-            this.chkBootlegMagic.UseVisualStyleBackColor = true;
-            this.chkBootlegMagic.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
+            this.andyModeCheckbox.AutoSize = true;
+            this.andyModeCheckbox.Location = new System.Drawing.Point(7, 30);
+            this.andyModeCheckbox.Name = "andyModeCheckbox";
+            this.andyModeCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.andyModeCheckbox.TabIndex = 12;
+            this.andyModeCheckbox.Text = "Andy Mode";
+            this.andyModeCheckbox.UseVisualStyleBackColor = true;
+            this.andyModeCheckbox.CheckedChanged += new System.EventHandler(this.andyModeCheckbox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -794,8 +837,6 @@
         #endregion
 
         private System.Windows.Forms.Button generateRomButton;
-        private System.Windows.Forms.CheckedListBox extraSettingsCheckedList;
-        private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.ComboBox linkSpriteCombobox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -816,7 +857,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTypeOfRandomization;
         private System.Windows.Forms.Label randomizationTypeLabel;
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.TrackBar randomizeEnemiesHealthTrackbar;
@@ -825,7 +866,7 @@
         private System.Windows.Forms.CheckBox randomizeEnemiesDamageCheckbox;
         private System.Windows.Forms.CheckBox allowAbsorbableItemsCheckbox;
         private System.Windows.Forms.Label spawnrateLabel;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblAbsorbSpawnRate;
         private System.Windows.Forms.TrackBar absorbableItemsSpawnrateTrackbar;
         private System.Windows.Forms.CheckedListBox absorbableItemsChecklist;
         private System.Windows.Forms.CheckBox allowZeroDamageCheckbox;
@@ -848,7 +889,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox seedNumberTextbox;
         private System.Windows.Forms.CheckBox chkRandomizeBushEnemyChance;
-        private System.Windows.Forms.CheckBox chkBootlegMagic;
+        private System.Windows.Forms.CheckBox bootlegMagicCheckbox;
+        private System.Windows.Forms.CheckBox debugModeCheckbox;
+        private System.Windows.Forms.CheckBox customBossesCheckbox;
+        private System.Windows.Forms.CheckBox shufflePotContentsCheckbox;
+        private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
+        private System.Windows.Forms.CheckBox pukeModeCheckbox;
+        private System.Windows.Forms.CheckBox andyModeCheckbox;
     }
 }
 
