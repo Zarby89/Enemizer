@@ -282,9 +282,9 @@ namespace EnemizerLibrary
         {
             SpriteRequirements = new List<SpriteRequirement>();
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RavenSprite).SetKillable().AddSubgroup3(17, 25));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RavenSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17, 25));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VultureSprite).SetKillable().AddSubgroup2(18));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VultureSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(18));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlyingStalfosHeadSprite));
 
@@ -304,11 +304,11 @@ namespace EnemizerLibrary
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Octorok_MaybeSprite));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BuzzblobSprite).SetKillable().AddSubgroup3(17));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BuzzblobSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SnapdragonSprite).SetKillable().AddSubgroup0(22).AddSubgroup2(23));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonSprite).SetKillable().AddSubgroup2(12));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(12));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonHatchlingsSprite).SetNeverUse().AddSubgroup2(12));
 
@@ -329,7 +329,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MiniMoldormSprite).SetKillable().AddSubgroup1(30));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PoeSprite).SetKillable().AddSubgroup3(14, 21));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PoeSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(14, 21));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DwarvesSprite).SetNPC().SetDoNotRandomize().AddSubgroup1(77).AddSubgroup3(21));
 
@@ -425,7 +425,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBombSoldiersSprite).SetKillable().AddSubgroup0(70).AddSubgroup1(73));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite).SetKillable().AddSubgroup1(73).AddSubgroup2(19));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GeldmanSprite).SetKillable().AddSubgroup2(18));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GeldmanSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(18));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RabbitSprite).AddSubgroup3(17));
 
@@ -444,7 +444,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FireballZoraSprite).SetWaterSprite().AddSubgroup2(12, 24));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WalkingZoraSprite).SetWaterSprite().SetKillable().AddSubgroup2(12).AddSubgroup3(68));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WalkingZoraSprite).SetWaterSprite().SetCannotHaveKey().SetKillable().AddSubgroup2(12).AddSubgroup3(68));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DesertPalaceBarriersSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup2(18));
 
@@ -559,7 +559,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SlimeSprite_JumpsOutOfTheFloor).AddSubgroup1(32));
 
             // these will never work right in the overworld
-            // and only work in room 0-255
+            // and only work in rooms with an exit (0-255), technically in 260 (link's house) as well
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().AddSubgroup2(35));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).AddSubgroup1(32));
@@ -568,7 +568,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BumperSprite).SetNeverUse().SetIsObject().SetDoNotRandomize().AddSubgroup3(82, 83));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwimmersSprite).SetNeverUse().SetDoNotRandomize()); // TODO: add? what is this?
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwimmersSprite).SetWaterSprite().SetNeverUse().SetDoNotRandomize()); // TODO: add? what is this? 
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.EyeLaser_RightSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup3(82, 83));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.EyeLaser_LeftSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup3(82, 83));
@@ -600,10 +600,10 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosSprite).SetKillable().AddSubgroup0(31));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite).SetKillable().AddSubgroup3(27));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite).SetKillable().AddSubgroup3(27));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PikitSprite).SetKillable().AddSubgroup3(27));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PikitSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MaidenSprite).SetNPC().SetDoNotRandomize()); // TODO: where is this?
 
@@ -682,13 +682,13 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BouldersSprite).SetNeverUse().AddSubgroup3(16));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GiboSprite).SetKillable().AddSubgroup2(40));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Gibo_FloatingBlobSprite).SetKillable().AddSubgroup2(40));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ThiefSprite).SetCannotHaveKey().AddSubgroup0(14, 21));
 
             // These are loaded into BG as objects
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedusaSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FourWayFireballSpittersSprite).SetIsObject().SetNeverUse());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FourWayFireballSpittersSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HokkuBokkuSprite).AddSubgroup2(39));
 
@@ -704,14 +704,14 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlindTheThiefSprite).SetBoss().AddSubgroup1(44).AddSubgroup2(59));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwamolaSprite).SetWaterSprite().SetKillable().AddSubgroup3(25));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SwamolaSprite).SetWaterSprite().SetCannotHaveKey().SetKillable().AddSubgroup3(25));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LynelSprite).AddSubgroup3(20));
 
             // TODO: add never use LW and DW
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite)/*.SetNeverUseOverworld()*/.SetNeverUse().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetNeverUseDungeon().SetDoNotRandomize()); // TODO: find
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: find
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: why do these spawn so frequently in dungeons?
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()
                 .SetNeverUse() // TODO: maybe this is a good idea? can't get the right gfx to load because it's automatic and uses OW grahics in OAM0(1)
                 .AddExcludedRooms(DontUseImmovableSpritesRooms)); // TODO: find
@@ -736,7 +736,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeySprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetNeverUse().SetDoNotRandomize());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShieldSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(27)); // TODO: check this is for pikit
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ShieldEaterSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(27)); // TODO: check this is for pikit
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MushroomSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(17));
 
@@ -746,7 +746,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartContainerSprite).SetNeverUse().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartPieceSprite).SetNeverUse().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushesSprite).SetNeverUse().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushesSprite).SetNeverUse().SetDoNotRandomize()); // bush thrown sprite
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CaneOfSomariaPlatformSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(39)); // TODO: verify
 
