@@ -77,6 +77,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="RandomizerTests.cs" />
     <Compile Include="DungeonEnemyRandomizerTests.cs" />
     <Compile Include="BossRandomizerTests.cs" />
     <Compile Include="Experiments.cs" />

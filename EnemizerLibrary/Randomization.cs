@@ -19,9 +19,9 @@ namespace EnemizerLibrary
 
         OptionFlags optionFlags;
 
-        public RomData MakeRandomization(int seed, OptionFlags optionflags, byte[] ROM_DATA, string skin = "") //Initialization of the randomization
+        public RomData MakeRandomization(int seed, OptionFlags optionflags, RomData romData, string skin = "") //Initialization of the randomization
         {
-            this.ROM_DATA = new RomData(ROM_DATA);
+            this.ROM_DATA = romData;
             this.ROM_DATA.ExpandRom();
             this.ROM_DATA.SetCharacterSelectScreenVersion();
             this.ROM_DATA.EnemizerSeed = seed;

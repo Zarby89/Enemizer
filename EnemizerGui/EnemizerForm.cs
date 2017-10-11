@@ -164,8 +164,11 @@ namespace Enemizer
             easyModeEscapeCheckbox.Checked = config.OptionFlags.EasyModeEscape;
 
             allowAbsorbableItemsCheckbox.Checked = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            // TODO: hook these up in the randomizer
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable; 
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
+            spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
 
             absorbableItemsSpawnrateTrackbar.Value = config.OptionFlags.AbsorbableSpawnRate / 5; // TODO: don't hardcode magic numbers
             spawnrateLabel.Text = $"{config.OptionFlags.AbsorbableSpawnRate}%";
@@ -337,7 +340,8 @@ namespace Enemizer
 
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
                 Randomization randomize = new Randomization();
-                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, rom_data, linkSpriteFilename);
+                RomData romData = new RomData(rom_data);
+                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
                 if(config.OptionFlags.GenerateSpoilers)
                 {
@@ -420,8 +424,10 @@ namespace Enemizer
         private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
-            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
+            spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
         }
 
         private void absorbableItemsSpawnrateTrackbar_ValueChanged(object sender, EventArgs e)

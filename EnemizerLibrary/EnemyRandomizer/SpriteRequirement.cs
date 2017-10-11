@@ -721,18 +721,18 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GanonSprite).SetNeverUse().SetBoss().AddSubgroup0(33).AddSubgroup1(65).AddSubgroup2(69).AddSubgroup3(51));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CopyOfGanon_ExceptInvincibleSprite).SetNeverUse().SetDoNotRandomize());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenRupeeSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueRupeeSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedRupeeSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill1Sprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill4Sprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill8Sprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SmallMagicRefillSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FullMagicRefillSprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill5Sprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill10Sprite).SetAbsorbable().SetDoNotRandomize());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FairySprite).SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HeartSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenRupeeSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueRupeeSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedRupeeSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill1Sprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill4Sprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BombRefill8Sprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SmallMagicRefillSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FullMagicRefillSprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill5Sprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrowRefill10Sprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FairySprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeySprite).SetNeverUseOverworld().SetAbsorbable().SetDoNotRandomize());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigKeySprite).SetNeverUse().SetDoNotRandomize());
 

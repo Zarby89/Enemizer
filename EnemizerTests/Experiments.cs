@@ -81,7 +81,8 @@ namespace EnemizerTests
             fs.Read(rom_data, 0, (int)fs.Length);
             fs.Close();
 
-            RomData romData = r.MakeRandomization(0, o, rom_data, "");
+            RomData romData = new RomData(rom_data);
+            romData = r.MakeRandomization(0, o, romData, "");
 
             //var romData = Utilities.LoadRom("rando.sfc");
 

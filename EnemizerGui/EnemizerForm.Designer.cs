@@ -49,7 +49,7 @@
             this.allowZeroDamageCheckbox = new System.Windows.Forms.CheckBox();
             this.absorbableItemsChecklist = new System.Windows.Forms.CheckedListBox();
             this.spawnrateLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblAbsorbSpawnRate = new System.Windows.Forms.Label();
             this.absorbableItemsSpawnrateTrackbar = new System.Windows.Forms.TrackBar();
             this.allowAbsorbableItemsCheckbox = new System.Windows.Forms.CheckBox();
             this.easyModeEscapeCheckbox = new System.Windows.Forms.CheckBox();
@@ -255,7 +255,7 @@
             this.tabPage1.Controls.Add(this.allowZeroDamageCheckbox);
             this.tabPage1.Controls.Add(this.absorbableItemsChecklist);
             this.tabPage1.Controls.Add(this.spawnrateLabel);
-            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.lblAbsorbSpawnRate);
             this.tabPage1.Controls.Add(this.absorbableItemsSpawnrateTrackbar);
             this.tabPage1.Controls.Add(this.allowAbsorbableItemsCheckbox);
             this.tabPage1.Controls.Add(this.easyModeEscapeCheckbox);
@@ -338,12 +338,12 @@
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(253, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Spawn Rate";
+            this.lblAbsorbSpawnRate.AutoSize = true;
+            this.lblAbsorbSpawnRate.Location = new System.Drawing.Point(253, 26);
+            this.lblAbsorbSpawnRate.Name = "label8";
+            this.lblAbsorbSpawnRate.Size = new System.Drawing.Size(66, 13);
+            this.lblAbsorbSpawnRate.TabIndex = 14;
+            this.lblAbsorbSpawnRate.Text = "Spawn Rate";
             // 
             // absorbableItemsSpawnrateTrackbar
             // 
@@ -866,7 +866,7 @@
         private System.Windows.Forms.CheckBox randomizeEnemiesDamageCheckbox;
         private System.Windows.Forms.CheckBox allowAbsorbableItemsCheckbox;
         private System.Windows.Forms.Label spawnrateLabel;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblAbsorbSpawnRate;
         private System.Windows.Forms.TrackBar absorbableItemsSpawnrateTrackbar;
         private System.Windows.Forms.CheckedListBox absorbableItemsChecklist;
         private System.Windows.Forms.CheckBox allowZeroDamageCheckbox;
