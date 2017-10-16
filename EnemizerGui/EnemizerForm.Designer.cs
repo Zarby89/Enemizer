@@ -74,12 +74,16 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.setBlackoutModeCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeSpritePalettesAdvancedCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeSpritePalettesBasicCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.heartBeepSpeedTrackbar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
             this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
             this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
@@ -88,8 +92,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
-            this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -102,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // generateRomButton
@@ -336,11 +340,11 @@
             this.spawnrateLabel.TabIndex = 15;
             this.spawnrateLabel.Text = "00%";
             // 
-            // label8
+            // lblAbsorbSpawnRate
             // 
             this.lblAbsorbSpawnRate.AutoSize = true;
             this.lblAbsorbSpawnRate.Location = new System.Drawing.Point(253, 26);
-            this.lblAbsorbSpawnRate.Name = "label8";
+            this.lblAbsorbSpawnRate.Name = "lblAbsorbSpawnRate";
             this.lblAbsorbSpawnRate.Size = new System.Drawing.Size(66, 13);
             this.lblAbsorbSpawnRate.TabIndex = 14;
             this.lblAbsorbSpawnRate.Text = "Spawn Rate";
@@ -620,6 +624,17 @@
             this.tabPage3.Text = "Palettes";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // pukeModeCheckbox
+            // 
+            this.pukeModeCheckbox.AutoSize = true;
+            this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
+            this.pukeModeCheckbox.Name = "pukeModeCheckbox";
+            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
+            this.pukeModeCheckbox.TabIndex = 5;
+            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
+            this.pukeModeCheckbox.UseVisualStyleBackColor = true;
+            this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
+            // 
             // setBlackoutModeCheckbox
             // 
             this.setBlackoutModeCheckbox.AutoSize = true;
@@ -679,6 +694,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
+            this.tabPage4.Controls.Add(this.heartBeepSpeedTrackbar);
+            this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Controls.Add(this.andyModeCheckbox);
             this.tabPage4.Controls.Add(this.customBossesCheckbox);
             this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
@@ -691,6 +709,38 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // heartBeepSpeedTrackbar
+            // 
+            this.heartBeepSpeedTrackbar.BackColor = System.Drawing.SystemColors.Window;
+            this.heartBeepSpeedTrackbar.LargeChange = 1;
+            this.heartBeepSpeedTrackbar.Location = new System.Drawing.Point(219, 164);
+            this.heartBeepSpeedTrackbar.Maximum = 3;
+            this.heartBeepSpeedTrackbar.Name = "heartBeepSpeedTrackbar";
+            this.heartBeepSpeedTrackbar.Size = new System.Drawing.Size(156, 45);
+            this.heartBeepSpeedTrackbar.TabIndex = 14;
+            this.heartBeepSpeedTrackbar.Value = 1;
+            this.heartBeepSpeedTrackbar.Scroll += new System.EventHandler(this.heartBeepSpeedTrackbar_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(216, 148);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Heart Beep Speed";
+            // 
+            // andyModeCheckbox
+            // 
+            this.andyModeCheckbox.AutoSize = true;
+            this.andyModeCheckbox.Location = new System.Drawing.Point(7, 30);
+            this.andyModeCheckbox.Name = "andyModeCheckbox";
+            this.andyModeCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.andyModeCheckbox.TabIndex = 12;
+            this.andyModeCheckbox.Text = "Andy Mode";
+            this.andyModeCheckbox.UseVisualStyleBackColor = true;
+            this.andyModeCheckbox.CheckedChanged += new System.EventHandler(this.andyModeCheckbox_CheckedChanged);
             // 
             // customBossesCheckbox
             // 
@@ -766,27 +816,14 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
-            // pukeModeCheckbox
+            // heartBeepSpeedLabel
             // 
-            this.pukeModeCheckbox.AutoSize = true;
-            this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
-            this.pukeModeCheckbox.Name = "pukeModeCheckbox";
-            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
-            this.pukeModeCheckbox.TabIndex = 5;
-            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
-            this.pukeModeCheckbox.UseVisualStyleBackColor = true;
-            this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
-            // 
-            // andyModeCheckbox
-            // 
-            this.andyModeCheckbox.AutoSize = true;
-            this.andyModeCheckbox.Location = new System.Drawing.Point(7, 30);
-            this.andyModeCheckbox.Name = "andyModeCheckbox";
-            this.andyModeCheckbox.Size = new System.Drawing.Size(80, 17);
-            this.andyModeCheckbox.TabIndex = 12;
-            this.andyModeCheckbox.Text = "Andy Mode";
-            this.andyModeCheckbox.UseVisualStyleBackColor = true;
-            this.andyModeCheckbox.CheckedChanged += new System.EventHandler(this.andyModeCheckbox_CheckedChanged);
+            this.heartBeepSpeedLabel.AutoSize = true;
+            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 164);
+            this.heartBeepSpeedLabel.Name = "heartBeepSpeedLabel";
+            this.heartBeepSpeedLabel.Size = new System.Drawing.Size(26, 13);
+            this.heartBeepSpeedLabel.TabIndex = 15;
+            this.heartBeepSpeedLabel.Text = "Half";
             // 
             // EnemizerForm
             // 
@@ -829,6 +866,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -896,6 +934,9 @@
         private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
         private System.Windows.Forms.CheckBox pukeModeCheckbox;
         private System.Windows.Forms.CheckBox andyModeCheckbox;
+        private System.Windows.Forms.TrackBar heartBeepSpeedTrackbar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label heartBeepSpeedLabel;
     }
 }
 

@@ -235,6 +235,8 @@ namespace EnemizerLibrary
             //    spoilerfile.Close();
             //}
 
+            SetHeartBeepSpeed(optionflags.HeartBeepSpeed);
+            
             if(optionFlags.AndyMode)
             {
                 SetAndyMode();
@@ -259,6 +261,11 @@ namespace EnemizerLibrary
 
             byte[] newSoundInstrument = { 0xE0, 0x19, 0x7F, 0x97, 0x00 }; // set instrument 19, length 7F, play note 97 (B oct2), end
             this.ROM_DATA.WriteDataChunk(0xD1869, newSoundInstrument); // set soundfx3 background note 00
+        }
+
+        void SetHeartBeepSpeed(HeartBeepSpeed beepSpeed)
+        {
+            this.ROM_DATA.HeartBeep = beepSpeed;
         }
 
         private void MakeRandomLinkSpritePalette()

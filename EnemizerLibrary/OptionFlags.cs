@@ -57,6 +57,7 @@ namespace EnemizerLibrary
         public bool DebugMode { get; set; }
         public bool CustomBosses { get; set; }
         public bool AndyMode { get; set; }
+        public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
     }
 
     public enum RandomizeEnemiesType
@@ -105,5 +106,13 @@ namespace EnemizerLibrary
         Key,
         [Description("Big Key(Test)")]
         BigKey
+    }
+
+    public enum HeartBeepSpeed
+    {
+        Default,
+        Half,
+        Quarter,
+        Off
     }
 }
