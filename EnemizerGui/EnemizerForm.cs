@@ -229,6 +229,7 @@ namespace Enemizer
             shufflePotContentsCheckbox.Checked = config.OptionFlags.RandomizePots;
             customBossesCheckbox.Checked = config.OptionFlags.CustomBosses;
             andyModeCheckbox.Checked = config.OptionFlags.AndyMode;
+            alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -595,6 +596,11 @@ namespace Enemizer
         private void andyModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AndyMode = andyModeCheckbox.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AlternateGfx = alternateGfxCheckbox.Checked;
         }
     }
 

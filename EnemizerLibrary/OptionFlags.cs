@@ -57,6 +57,8 @@ namespace EnemizerLibrary
         public bool DebugMode { get; set; }
         public bool CustomBosses { get; set; }
         public bool AndyMode { get; set; }
+        public bool AlternateGfx { get; set; }
+
     }
 
     public enum RandomizeEnemiesType
