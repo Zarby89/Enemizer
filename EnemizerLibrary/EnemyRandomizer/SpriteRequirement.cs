@@ -769,7 +769,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_StalfosHeadTrap).SetOverlord().AddSubgroup0(31));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_RopeTrap).SetOverlord().AddSubgroup2(28, 36));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_MovingFloor).SetOverlord());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_Transformer_BunnyBeam).SetOverlord());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_SlimeDropper).SetOverlord().AddSubgroup1(32));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_Wallmaster).SetOverlord().AddSubgroup2(35));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Square).SetOverlord().AddSubgroup3(82));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Path).SetOverlord().AddSubgroup3(82));

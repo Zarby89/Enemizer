@@ -241,6 +241,8 @@ namespace EnemizerLibrary
                 SetBossGfx();
             }
 
+            SetHeartBeepSpeed(optionflags.HeartBeepSpeed);
+
             if (optionFlags.AndyMode)
             {
                 SetAndyMode();
@@ -289,6 +291,11 @@ namespace EnemizerLibrary
 
             byte[] newSoundInstrument = { 0xE0, 0x19, 0x7F, 0x97, 0x00 }; // set instrument 19, length 7F, play note 97 (B oct2), end
             this.ROM_DATA.WriteDataChunk(0xD1869, newSoundInstrument); // set soundfx3 background note 00
+        }
+
+        void SetHeartBeepSpeed(HeartBeepSpeed beepSpeed)
+        {
+            this.ROM_DATA.HeartBeep = beepSpeed;
         }
 
         private void MakeRandomLinkSpritePalette()
@@ -965,12 +972,21 @@ namespace EnemizerLibrary
                     && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
                     && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                 {
-
-                    ROM_DATA[0x6B266 + j] = (byte)((ROM_DATA[0x6B266 + j] & 0xF8) + (byte)(rand.Next(8)));
+                    //New DMG CODE NOT WORKING
+                    //ROM_DATA[0x6B266 + j] = (byte)((ROM_DATA[0x6B266 + j] & 0xF8) + (byte)(rand.Next(8)));
+                    byte newDmg = (byte)(rand.Next(8));
+                    if (allowZeroDamage == false)
+                    {
+                        if (newDmg == 2)
+                        {
+                            continue;
+                        }
+                    }
+                    ROM_DATA[0x6B266 + j] = newDmg;
                 }
             }
         }
-    
+
         public void Set_Sprites_ZeroHP()
         {
             for (int j = 0; j < 0xF3; j++)
