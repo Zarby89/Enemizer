@@ -153,6 +153,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="shield_gfx\skullshield.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="shield_gfx\squareshield.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\4slink-armors.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
