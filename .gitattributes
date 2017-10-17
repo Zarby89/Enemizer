@@ -35,7 +35,7 @@
 *.filters    text eol=crlf
 *.vcxitems   text eol=crlf
 
-*.cs		 text eol=crlf
+*.cs		 text eol=crlf diff=csharp
 *.rex		 text eol=crlf
 *.config	 text eol=crlf
 
