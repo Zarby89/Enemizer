@@ -202,7 +202,7 @@ namespace EnemizerLibrary
                 grayscale_all_dungeons();
             }
 
-            setShieldGfx((int)optionFlags.shieldGfx);
+            SetShieldGfx(optionFlags.ShieldGraphics);
 
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
@@ -273,12 +273,12 @@ namespace EnemizerLibrary
         }
 
 
-        void setShieldGfx(int index)
+        void SetShieldGfx(ShieldTypes shieldType)
         {
-            if (index > 0)
+            if (shieldType != ShieldTypes.Normal)
             {
-                string[] shield_files = new string[] {"skullshield.bin","squareshield.bin" }; 
-                FileStream f = new FileStream("shield_gfx\\" + shield_files[index-1], FileMode.Open, FileAccess.Read);
+                string filename = shieldType.ToString().Replace(" ", "").Trim() + ".bin";
+                FileStream f = new FileStream("shield_gfx\\" + filename, FileMode.Open, FileAccess.Read);
                 f.Read(this.ROM_DATA.romData, 0x0C065E, (int)f.Length);
                 f.Close();
             }
