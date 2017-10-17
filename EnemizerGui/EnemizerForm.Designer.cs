@@ -34,7 +34,7 @@
             this.linkSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.weaponSpriteCombobox = new System.Windows.Forms.ComboBox();
+            this.shieldSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.generateSpoilerCheckbox = new System.Windows.Forms.CheckBox();
@@ -74,6 +74,8 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.negativeModecheckBox = new System.Windows.Forms.CheckBox();
+            this.grayscaleModecheckBox = new System.Windows.Forms.CheckBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.setBlackoutModeCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeSpritePalettesAdvancedCheckbox = new System.Windows.Forms.CheckBox();
@@ -81,6 +83,10 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
+            this.heartBeepSpeedTrackbar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.alternateGfxCheckbox = new System.Windows.Forms.CheckBox();
             this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
             this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
@@ -90,7 +96,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.alternateGfxCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -103,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // generateRomButton
@@ -138,22 +144,22 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(484, 161);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
+            this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Weapon Gfx - WIP :";
+            this.label4.Text = "Shield Gfx :";
             // 
-            // weaponSpriteCombobox
+            // shieldSpriteCombobox
             // 
-            this.weaponSpriteCombobox.Enabled = false;
-            this.weaponSpriteCombobox.FormattingEnabled = true;
-            this.weaponSpriteCombobox.Items.AddRange(new object[] {
-            "Normal Sword",
-            "Mace"});
-            this.weaponSpriteCombobox.Location = new System.Drawing.Point(487, 178);
-            this.weaponSpriteCombobox.Name = "weaponSpriteCombobox";
-            this.weaponSpriteCombobox.Size = new System.Drawing.Size(121, 21);
-            this.weaponSpriteCombobox.TabIndex = 11;
-            this.weaponSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.weaponSpriteCombobox_SelectedIndexChanged);
+            this.shieldSpriteCombobox.FormattingEnabled = true;
+            this.shieldSpriteCombobox.Items.AddRange(new object[] {
+            "Normal Shield",
+            "Skull Shield",
+            "Square Shield"});
+            this.shieldSpriteCombobox.Location = new System.Drawing.Point(487, 178);
+            this.shieldSpriteCombobox.Name = "shieldSpriteCombobox";
+            this.shieldSpriteCombobox.Size = new System.Drawing.Size(121, 21);
+            this.shieldSpriteCombobox.TabIndex = 11;
+            this.shieldSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.shieldSpriteCombobox_SelectedIndexChanged);
             // 
             // richTextBox1
             // 
@@ -524,6 +530,7 @@
             // randomizeBossDamageCheckbox
             // 
             this.randomizeBossDamageCheckbox.AutoSize = true;
+            this.randomizeBossDamageCheckbox.Enabled = false;
             this.randomizeBossDamageCheckbox.Location = new System.Drawing.Point(6, 125);
             this.randomizeBossDamageCheckbox.Name = "randomizeBossDamageCheckbox";
             this.randomizeBossDamageCheckbox.Size = new System.Drawing.Size(159, 17);
@@ -556,6 +563,7 @@
             // randomizeBossHealthCheckbox
             // 
             this.randomizeBossHealthCheckbox.AutoSize = true;
+            this.randomizeBossHealthCheckbox.Enabled = false;
             this.randomizeBossHealthCheckbox.Location = new System.Drawing.Point(6, 74);
             this.randomizeBossHealthCheckbox.Name = "randomizeBossHealthCheckbox";
             this.randomizeBossHealthCheckbox.Size = new System.Drawing.Size(150, 17);
@@ -608,6 +616,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.negativeModecheckBox);
+            this.tabPage3.Controls.Add(this.grayscaleModecheckBox);
             this.tabPage3.Controls.Add(this.pukeModeCheckbox);
             this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
@@ -621,14 +631,36 @@
             this.tabPage3.Text = "Palettes";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // negativeModecheckBox
+            // 
+            this.negativeModecheckBox.AutoSize = true;
+            this.negativeModecheckBox.Location = new System.Drawing.Point(3, 164);
+            this.negativeModecheckBox.Name = "negativeModecheckBox";
+            this.negativeModecheckBox.Size = new System.Drawing.Size(99, 17);
+            this.negativeModecheckBox.TabIndex = 7;
+            this.negativeModecheckBox.Text = "Negative Mode";
+            this.negativeModecheckBox.UseVisualStyleBackColor = true;
+            this.negativeModecheckBox.CheckedChanged += new System.EventHandler(this.negativeModecheckBox_CheckedChanged);
+            // 
+            // grayscaleModecheckBox
+            // 
+            this.grayscaleModecheckBox.AutoSize = true;
+            this.grayscaleModecheckBox.Location = new System.Drawing.Point(3, 141);
+            this.grayscaleModecheckBox.Name = "grayscaleModecheckBox";
+            this.grayscaleModecheckBox.Size = new System.Drawing.Size(166, 17);
+            this.grayscaleModecheckBox.TabIndex = 6;
+            this.grayscaleModecheckBox.Text = "Grayscale Mode (Indoor Only)";
+            this.grayscaleModecheckBox.UseVisualStyleBackColor = true;
+            this.grayscaleModecheckBox.CheckedChanged += new System.EventHandler(this.grayscaleModecheckBox_CheckedChanged);
+            // 
             // pukeModeCheckbox
             // 
             this.pukeModeCheckbox.AutoSize = true;
             this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
             this.pukeModeCheckbox.Name = "pukeModeCheckbox";
-            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
+            this.pukeModeCheckbox.Size = new System.Drawing.Size(81, 17);
             this.pukeModeCheckbox.TabIndex = 5;
-            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
+            this.pukeModeCheckbox.Text = "Puke Mode";
             this.pukeModeCheckbox.UseVisualStyleBackColor = true;
             this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
             // 
@@ -691,6 +723,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
+            this.tabPage4.Controls.Add(this.heartBeepSpeedTrackbar);
+            this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Controls.Add(this.alternateGfxCheckbox);
             this.tabPage4.Controls.Add(this.andyModeCheckbox);
             this.tabPage4.Controls.Add(this.customBossesCheckbox);
@@ -704,6 +739,49 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // heartBeepSpeedLabel
+            // 
+            this.heartBeepSpeedLabel.AutoSize = true;
+            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 164);
+            this.heartBeepSpeedLabel.Name = "heartBeepSpeedLabel";
+            this.heartBeepSpeedLabel.Size = new System.Drawing.Size(26, 13);
+            this.heartBeepSpeedLabel.TabIndex = 15;
+            this.heartBeepSpeedLabel.Text = "Half";
+            // 
+            // heartBeepSpeedTrackbar
+            // 
+            this.heartBeepSpeedTrackbar.BackColor = System.Drawing.SystemColors.Window;
+            this.heartBeepSpeedTrackbar.LargeChange = 1;
+            this.heartBeepSpeedTrackbar.Location = new System.Drawing.Point(219, 164);
+            this.heartBeepSpeedTrackbar.Maximum = 3;
+            this.heartBeepSpeedTrackbar.Name = "heartBeepSpeedTrackbar";
+            this.heartBeepSpeedTrackbar.Size = new System.Drawing.Size(156, 45);
+            this.heartBeepSpeedTrackbar.TabIndex = 14;
+            this.heartBeepSpeedTrackbar.Value = 1;
+            this.heartBeepSpeedTrackbar.Scroll += new System.EventHandler(this.heartBeepSpeedTrackbar_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(216, 148);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Heart Beep Speed";
+            // 
+            // alternateGfxCheckbox
+            // 
+            this.alternateGfxCheckbox.AutoSize = true;
+            this.alternateGfxCheckbox.Checked = true;
+            this.alternateGfxCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alternateGfxCheckbox.Location = new System.Drawing.Point(158, 30);
+            this.alternateGfxCheckbox.Name = "alternateGfxCheckbox";
+            this.alternateGfxCheckbox.Size = new System.Drawing.Size(87, 17);
+            this.alternateGfxCheckbox.TabIndex = 13;
+            this.alternateGfxCheckbox.Text = "Alternate Gfx";
+            this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
+            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // andyModeCheckbox
             // 
@@ -790,19 +868,6 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
-            // alternateGfxCheckbox
-            // 
-            this.alternateGfxCheckbox.AutoSize = true;
-            this.alternateGfxCheckbox.Checked = true;
-            this.alternateGfxCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alternateGfxCheckbox.Location = new System.Drawing.Point(158, 30);
-            this.alternateGfxCheckbox.Name = "alternateGfxCheckbox";
-            this.alternateGfxCheckbox.Size = new System.Drawing.Size(87, 17);
-            this.alternateGfxCheckbox.TabIndex = 13;
-            this.alternateGfxCheckbox.Text = "Alternate Gfx";
-            this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
-            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -819,13 +884,13 @@
             this.Controls.Add(this.generateSpoilerCheckbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.weaponSpriteCombobox);
+            this.Controls.Add(this.shieldSpriteCombobox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.linkSpriteCombobox);
             this.Controls.Add(this.generateRomButton);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 6.0";
+            this.Text = "Enemizer 6.0 Beta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EnemizerForm_FormClosing);
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).EndInit();
@@ -844,6 +909,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,7 +921,7 @@
         private System.Windows.Forms.ComboBox linkSpriteCombobox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox weaponSpriteCombobox;
+        private System.Windows.Forms.ComboBox shieldSpriteCombobox;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.CheckBox generateSpoilerCheckbox;
@@ -911,7 +977,12 @@
         private System.Windows.Forms.CheckBox shuffleMusicCheckBox;
         private System.Windows.Forms.CheckBox pukeModeCheckbox;
         private System.Windows.Forms.CheckBox andyModeCheckbox;
+        private System.Windows.Forms.TrackBar heartBeepSpeedTrackbar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label heartBeepSpeedLabel;
         private System.Windows.Forms.CheckBox alternateGfxCheckbox;
+        private System.Windows.Forms.CheckBox negativeModecheckBox;
+        private System.Windows.Forms.CheckBox grayscaleModecheckBox;
     }
 }
 

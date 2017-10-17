@@ -48,6 +48,8 @@ namespace EnemizerLibrary
         public bool RandomizeSpritePalettes { get; set; }
         public bool SetAdvancedSpritePalettes { get; set; }
         public bool PukeMode { get; set; }
+        public bool NegativeMode { get; set; }
+        public bool GrayscaleMode { get; set; }
 
         public bool GenerateSpoilers { get; set; }
         public bool RandomizeLinkSpritePalette { get; set; }
@@ -57,7 +59,9 @@ namespace EnemizerLibrary
         public bool DebugMode { get; set; }
         public bool CustomBosses { get; set; }
         public bool AndyMode { get; set; }
+        public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
+        public ShieldTypes shieldGfx { get; set; }
 
     }
 
@@ -75,6 +79,13 @@ namespace EnemizerLibrary
         Basic,
         Normal,
         Chaos
+    }
+
+    public enum ShieldTypes
+    {
+        Normal,
+        SkullShield,
+        SquareShield
     }
 
     public enum AbsorbableTypes
@@ -107,5 +118,13 @@ namespace EnemizerLibrary
         Key,
         [Description("Big Key(Test)")]
         BigKey
+    }
+
+    public enum HeartBeepSpeed
+    {
+        Default,
+        Half,
+        Quarter,
+        Off
     }
 }

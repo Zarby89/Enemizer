@@ -38,6 +38,19 @@ namespace EnemizerLibrary
             }
         }
 
+        public void RemoveShellAndMoveObjectData(int roomId, int shellId)
+        {
+            DungeonObjectDataPointer roomData;
+            if (RoomDungeonObjectDataPointers.TryGetValue(roomId, out roomData))
+            {
+                roomData.RemoveShell(shellId);
+            }
+            else
+            {
+                throw new Exception($"Invalid room {roomId}");
+            }
+        }
+
         public void WriteChangesToRom(int startingAddress)
         {
             foreach(var d in this.RoomDungeonObjectDataPointers.Values.Where(x => x.IsModified))
@@ -91,6 +104,19 @@ namespace EnemizerLibrary
                 Data.Layer2Objects.Clear(); // need for blind's room, and probably mothula if we ever make kholdstare work there
             }
             Data.Layer2Objects.Add(new SubType3Object(x, y, shellId));
+        }
+
+        public void RemoveShell(int shellId)
+        {
+            IsModified = true;
+
+            foreach(var l2 in Data.Layer2Objects.ToList())
+            {
+                if(l2.OID == shellId)
+                {
+                    Data.Layer2Objects.Remove(l2);
+                }
+            }
         }
 
         public int WriteRom(RomData romData, int newAddess)
