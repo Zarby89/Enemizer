@@ -136,7 +136,7 @@ namespace EnemizerLibrary
                 oer.RandomizeOverworldEnemies(optionFlags);
             }
 
-
+            
             spriteGroupCollection.UpdateRom();
 
 
@@ -151,7 +151,7 @@ namespace EnemizerLibrary
             }
 
             
-            if(optionFlags.RandomizePots)
+            if (optionFlags.RandomizePots)
             {
                 randomizePots(); //default on for now
             }
@@ -399,6 +399,7 @@ namespace EnemizerLibrary
                     setColor(0xDD734 + i, Color.FromArgb(sum, sum, sum), 0);
                 }
             }
+            
 
             //Remove Dark Room
             /*int[] dark_rooms = new int[] { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
@@ -407,6 +408,21 @@ namespace EnemizerLibrary
                 ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] & 0xFE));
             }*/
 
+        }
+
+        public void set_weird_color()
+        {
+            byte[] ppp = new byte[] { 0x00, 0x00, 0x0E, 0xFA, 0x7D, 0xD1, 0x00, 0x00, 0x7F, 0x1A, 0x00, 0x00, 0x7F, 0x1A, 0x71, 0x6E, 0x7D, 0xD1, 0x40, 0xA7, 0x7D, 0xD1, 0x40, 0xA7, 0x48, 0xE9, 0x50, 0xCF, 0x7F, 0xFF };
+            int posppp = 0;
+            for (int i = 0; i < 3600; i += 1)
+            {
+                ROM_DATA[0xDD734 + i] = ppp[posppp];
+                posppp++;
+                if (posppp >= ppp.Length)
+                {
+                    posppp = 0;
+                }
+            }
         }
 
         public void randomize_wall(int dungeon)
