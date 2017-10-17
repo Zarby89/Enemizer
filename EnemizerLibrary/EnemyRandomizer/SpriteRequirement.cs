@@ -711,7 +711,7 @@ namespace EnemizerLibrary
             // TODO: add never use LW and DW
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BunnyBeamSprite)/*.SetNeverUseOverworld()*/.SetNeverUse().SetDoNotRandomize()); // TODO: find
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloppingFishSprite).SetNeverUseDungeon().SetDoNotRandomize()); // TODO: find
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetDoNotRandomize()); // TODO: why do these spawn so frequently in dungeons?
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalSprite).SetNeverUse().SetDoNotRandomize()); // TODO: why do these spawn so frequently in dungeons?
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LandmineSprite).SetDoNotRandomize()
                 .SetNeverUse() // TODO: maybe this is a good idea? can't get the right gfx to load because it's automatic and uses OW grahics in OAM0(1)
                 .AddExcludedRooms(DontUseImmovableSpritesRooms)); // TODO: find

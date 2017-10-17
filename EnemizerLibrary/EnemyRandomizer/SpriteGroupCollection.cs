@@ -60,21 +60,31 @@ namespace EnemizerLibrary
                 && req.GroupId.Count == 0
                 && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
+                //var excludeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.GroupId).ToList();
+                //var excludeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup0).ToList();
+                //var excludeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup1).ToList();
+                //var excludeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup2).ToList();
+                //var excludeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup3).ToList();
                 return UsableDungeonSpriteGroups;
+                    //.Where(x => excludeGroupId.Count == 0 || !excludeGroupId.Contains((byte)x.GroupId) 
+                    //    || excludeSubGroup0Id.Count == 0 || !excludeSubGroup0Id.Contains((byte)x.SubGroup0)
+                    //    || excludeSubGroup1Id.Count == 0 || !excludeSubGroup1Id.Contains((byte)x.SubGroup1)
+                    //    || excludeSubGroup2Id.Count == 0 || !excludeSubGroup2Id.Contains((byte)x.SubGroup2)
+                    //    || excludeSubGroup3Id.Count == 0 || !excludeSubGroup3Id.Contains((byte)x.SubGroup3));
             }
 
             //var usableGroups = spriteRequirementsCollection.SpriteRequirements.Where(x => x.GroupId)
-            var killableGroupIds = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.GroupId).ToList();
-            var killableSub0Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup0).ToList();
-            var killableSub1Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup1).ToList();
-            var killableSub2Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup2).ToList();
-            var killableSub3Ids = spriteRequirementsCollection.KillableSprites.SelectMany(x => x.SubGroup3).ToList();
+            var killableGroupIds = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).SelectMany(x => x.GroupId).ToList();
+            var killableSub0Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).SelectMany(x => x.SubGroup0).ToList();
+            var killableSub1Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).SelectMany(x => x.SubGroup1).ToList();
+            var killableSub2Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).SelectMany(x => x.SubGroup2).ToList();
+            var killableSub3Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).SelectMany(x => x.SubGroup3).ToList();
 
-            var keysGroupIds = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.GroupId).ToList();
-            var keysSub0Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup0).ToList();
-            var keysSub1Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup1).ToList();
-            var keysSub2Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup2).ToList();
-            var keysSub3Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup3).ToList();
+            var keysGroupIds = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.GroupId).ToList();
+            var keysSub0Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup0).ToList();
+            var keysSub1Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup1).ToList();
+            var keysSub2Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup2).ToList();
+            var keysSub3Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup3).ToList();
 
             // TODO: gotta be a better way to do this
             var doNotUpdateGroupIds = doNotUpdateSprites.SelectMany(x => x.GroupId).ToList();

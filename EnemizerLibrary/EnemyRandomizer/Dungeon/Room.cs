@@ -152,25 +152,42 @@ namespace EnemizerLibrary
                 Debug.Assert(killableKeySprites.Contains(SpriteConstants.EmptySprite) == false);
 
 
+                int[] possibleAbsorbableSprites = GetAbsorbableSprites(spriteRequirementCollection, optionFlags);
+                int stalCount = 0;
 
-                if (optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
+                foreach (var s in spritesToUpdate.Where(x => x.HasAKey == false).ToList())
                 {
-                    if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
+                    int spriteId = -1;
+
+                    if (optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
                     {
-                        int[] possibleAbsorbableSprites = GetAbsorbableSprites(spriteRequirementCollection, optionFlags);
-                        spritesToUpdate.Where(x => x.HasAKey == false).ToList()
-                        .ForEach(x => x.SpriteId = possibleAbsorbableSprites[rand.Next(possibleAbsorbableSprites.Length)]);
+                        if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
+                        {
+                            spriteId = possibleAbsorbableSprites[rand.Next(possibleAbsorbableSprites.Length)];
+                        }
+                        else
+                        {
+                            spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                        }
                     }
                     else
                     {
-                        spritesToUpdate.Where(x => x.HasAKey == false).ToList()
-                        .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+                        spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
                     }
-                }
-                else
-                {
-                    spritesToUpdate.Where(x => x.HasAKey == false).ToList()
-                    .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+
+                    s.SpriteId = spriteId;
+
+                    // leave this out for now
+                    
+                    if(spriteId == SpriteConstants.StalSprite)
+                    {
+                        stalCount++;
+                        if (stalCount > 2)// && possibleSprites.Count() > 1) // max 2 in a room
+                        {
+                            possibleSprites = possibleSprites.Where(x => x != SpriteConstants.StalSprite).ToArray();
+                        }
+                    }
+                    //*/
                 }
 
                 spritesToUpdate.Where(x => x.HasAKey).ToList()
