@@ -328,6 +328,46 @@ namespace EnemizerLibrary
 }
          */
 
+        public HeartBeepSpeed HeartBeep
+        {
+            get
+            {
+                switch(this.romData[0x180033])
+                {
+                    case 0x00:
+                        return HeartBeepSpeed.Off;
+                    case 0x40:
+                        return HeartBeepSpeed.Half;
+                    case 0x80:
+                        return HeartBeepSpeed.Quarter;
+                    case 0x20:
+                    default:
+                        return HeartBeepSpeed.Default;
+                }
+            }
+            set
+            {
+                byte beepSpeed = 0x20;
+
+                switch(value)
+                {
+                    case HeartBeepSpeed.Off:
+                        beepSpeed = 0x00;
+                        break;
+                    case HeartBeepSpeed.Half:
+                        beepSpeed = 0x40;
+                        break;
+                    case HeartBeepSpeed.Quarter:
+                        beepSpeed = 0x80;
+                        break;
+                    case HeartBeepSpeed.Default:
+                    default:
+                        beepSpeed = 0x20;
+                        break;
+                }
+                romData[0x180033] = beepSpeed;
+            }
+        }
         /*
 	public function setHeartBeepSpeed(string $setting) : self {
 		switch ($setting) {
@@ -919,4 +959,5 @@ namespace EnemizerLibrary
 
          */
     }
+
 }

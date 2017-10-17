@@ -157,6 +157,20 @@ namespace EnemizerLibrary
                     //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
                     romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
                 }
+
+                // remove trinexx shell
+                if (dungeon.SelectedBoss.BossType != BossType.Trinexx && dungeon.BossRoomId == RoomIdConstants.R164_TurtleRock_Trinexx)
+                {
+                    // TODO: figure out the X/Y coord
+                    roomObjects.RemoveShellAndMoveObjectData(dungeon.BossRoomId, 0xFF2);
+                }
+
+                // remove kholdstare shell
+                if (dungeon.SelectedBoss.BossType != BossType.Kholdstare && dungeon.BossRoomId == RoomIdConstants.R222_IcePalace_Kholdstare)
+                {
+                    // TODO: figure out the X/Y coord
+                    roomObjects.RemoveShellAndMoveObjectData(dungeon.BossRoomId, 0xF95);
+                }
             }
 
             roomObjects.WriteChangesToRom(0x122000);

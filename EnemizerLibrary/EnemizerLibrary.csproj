@@ -68,7 +68,6 @@
     <Compile Include="BossRandomizer\Boss\ArmosBoss.cs" />
     <Compile Include="BossRandomizer\Boss\Boss.cs" />
     <Compile Include="BossRandomizer\BossRandomizer.cs" />
-    <Compile Include="BossRandomizer\BossShells.cs" />
     <Compile Include="BossRandomizer\ChaosBossRandomizer.cs" />
     <Compile Include="BossRandomizer\NormalBossRandomizer.cs" />
     <Compile Include="BossRandomizer\Pool\ChaosBossPool.cs" />

@@ -581,7 +581,7 @@ namespace EnemizerLibrary
             OL_StalfosHeadTrap = 0x105,
             OL_BombDrop_RopeTrap = 0x106,
             OL_MovingFloor = 0x107,
-            OL_Transformer_BunnyBeam = 0x108,
+            OL_SlimeDropper = 0x108,
             OL_Wallmaster = 0x109,
             OL_FloorDrop_Square = 0x10A,
             OL_FloorDrop_Path = 0x10B,

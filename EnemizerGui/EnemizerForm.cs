@@ -229,6 +229,8 @@ namespace Enemizer
             shufflePotContentsCheckbox.Checked = config.OptionFlags.RandomizePots;
             customBossesCheckbox.Checked = config.OptionFlags.CustomBosses;
             andyModeCheckbox.Checked = config.OptionFlags.AndyMode;
+            heartBeepSpeedTrackbar.Value = (int)config.OptionFlags.HeartBeepSpeed;
+            SetHeartBeepSpeedText(config.OptionFlags.HeartBeepSpeed);
             alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
         }
 
@@ -596,6 +598,17 @@ namespace Enemizer
         private void andyModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AndyMode = andyModeCheckbox.Checked;
+        }
+        private void heartBeepSpeedTrackbar_Scroll(object sender, EventArgs e)
+        {
+            var beepSpeed = (HeartBeepSpeed)heartBeepSpeedTrackbar.Value;
+            config.OptionFlags.HeartBeepSpeed = beepSpeed;
+            SetHeartBeepSpeedText(beepSpeed);
+        }
+
+        void SetHeartBeepSpeedText(HeartBeepSpeed heartBeepSpeed)
+        {
+            heartBeepSpeedLabel.Text = heartBeepSpeed.ToString();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
