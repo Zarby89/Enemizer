@@ -58,6 +58,7 @@ namespace EnemizerLibrary
         public bool CustomBosses { get; set; }
         public bool AndyMode { get; set; }
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
+        public bool AlternateGfx { get; set; }
     }
 
     public enum RandomizeEnemiesType

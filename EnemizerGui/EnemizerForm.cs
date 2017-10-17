@@ -231,6 +231,7 @@ namespace Enemizer
             andyModeCheckbox.Checked = config.OptionFlags.AndyMode;
             heartBeepSpeedTrackbar.Value = (int)config.OptionFlags.HeartBeepSpeed;
             SetHeartBeepSpeedText(config.OptionFlags.HeartBeepSpeed);
+            alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -598,7 +599,6 @@ namespace Enemizer
         {
             config.OptionFlags.AndyMode = andyModeCheckbox.Checked;
         }
-
         private void heartBeepSpeedTrackbar_Scroll(object sender, EventArgs e)
         {
             var beepSpeed = (HeartBeepSpeed)heartBeepSpeedTrackbar.Value;
@@ -609,6 +609,11 @@ namespace Enemizer
         void SetHeartBeepSpeedText(HeartBeepSpeed heartBeepSpeed)
         {
             heartBeepSpeedLabel.Text = heartBeepSpeed.ToString();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AlternateGfx = alternateGfxCheckbox.Checked;
         }
     }
 

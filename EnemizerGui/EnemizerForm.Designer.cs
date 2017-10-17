@@ -92,6 +92,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.alternateGfxCheckbox = new System.Windows.Forms.CheckBox();
             this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -697,6 +698,7 @@
             this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
             this.tabPage4.Controls.Add(this.heartBeepSpeedTrackbar);
             this.tabPage4.Controls.Add(this.label1);
+            this.tabPage4.Controls.Add(this.alternateGfxCheckbox);
             this.tabPage4.Controls.Add(this.andyModeCheckbox);
             this.tabPage4.Controls.Add(this.customBossesCheckbox);
             this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
@@ -815,6 +817,19 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
+            // 
+            // alternateGfxCheckbox
+            // 
+            this.alternateGfxCheckbox.AutoSize = true;
+            this.alternateGfxCheckbox.Checked = true;
+            this.alternateGfxCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alternateGfxCheckbox.Location = new System.Drawing.Point(158, 30);
+            this.alternateGfxCheckbox.Name = "alternateGfxCheckbox";
+            this.alternateGfxCheckbox.Size = new System.Drawing.Size(87, 17);
+            this.alternateGfxCheckbox.TabIndex = 13;
+            this.alternateGfxCheckbox.Text = "Alternate Gfx";
+            this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
+            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // heartBeepSpeedLabel
             // 
@@ -937,6 +952,7 @@
         private System.Windows.Forms.TrackBar heartBeepSpeedTrackbar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label heartBeepSpeedLabel;
+        private System.Windows.Forms.CheckBox alternateGfxCheckbox;
     }
 }
 
