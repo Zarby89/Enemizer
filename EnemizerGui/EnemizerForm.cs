@@ -443,8 +443,8 @@ namespace Enemizer
         private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
-            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
-            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
             lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
             spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
         }
