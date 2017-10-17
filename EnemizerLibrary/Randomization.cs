@@ -136,6 +136,7 @@ namespace EnemizerLibrary
                 oer.RandomizeOverworldEnemies(optionFlags);
             }
 
+
             spriteGroupCollection.UpdateRom();
 
 
@@ -235,7 +236,12 @@ namespace EnemizerLibrary
             //    spoilerfile.Close();
             //}
 
-            if(optionFlags.AndyMode)
+            if (optionFlags.AlternateGfx)
+            {
+                SetBossGfx();
+            }
+
+            if (optionFlags.AndyMode)
             {
                 SetAndyMode();
             }
@@ -251,6 +257,30 @@ namespace EnemizerLibrary
             return this.ROM_DATA;
 
         }
+
+
+        void SetBossGfx()
+        {
+            //they all must need to be at the same place since they generate new addresses/pointers
+            int newGfxPosition = 0x2F8000;
+            byte[] bossgfxindex = new byte[19] {0x8D,0x90,0x95,0xA3,0xA4,0xA6,0xAB,0xAC,0xAD,0xAE,0xAF,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB8 };
+            string[] bossgfxfiles = new string[19] {"agahnim1.bin", "armosknight.bin", "ganon1.bin", "moldorm.bin", "lanmola.bin", "ganon2.bin", "mothula.bin",
+                "arrghus.bin","helmasaure1.bin","blind.bin","kholdstare.bin","vitreous.bin","helmasaure2.bin","trinexx1.bin","trinexx2.bin","ganon3.bin","agahnim2.bin","agahnim3.bin","ganon4.bin"};
+
+            for(int i = 0;i<19;i++)
+            {
+                FileStream f = new FileStream("bosses_gfx\\"+bossgfxfiles[i], FileMode.Open, FileAccess.Read);
+                f.Read(this.ROM_DATA.romData, newGfxPosition, (int)f.Length);
+                byte[] address = Utilities.PCAddressToSnesByteArray(newGfxPosition);
+                this.ROM_DATA[0x4FC0 + bossgfxindex[i]] = address[0]; //bank
+                this.ROM_DATA[0x509F + bossgfxindex[i]] = address[1];  //highbyte
+                this.ROM_DATA[0x517E + bossgfxindex[i]] = address[2];  //lowbyte
+                newGfxPosition += (int)f.Length;
+            }
+
+        }
+
+    
 
         void SetAndyMode()
         {
@@ -517,7 +547,7 @@ namespace EnemizerLibrary
 
 
         }
-
+        
         public void Randomize_Sprites_Palettes()
         {
             //Do not change color of collectible items
@@ -525,7 +555,17 @@ namespace EnemizerLibrary
             {
                 if (j <= 0xD7 || j >= 0xE7)
                 {
-                    ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
+                    if (optionFlags.AlternateGfx == true)
+                    {
+                        if (j != 0x53 || j != 0x54 || j != 0x92 || j != 0x88 || j != 0x8C || j != 0x7A || j != 0xA2 || j != 0xBD || j != 0xBE || j != 0xCB)
+                        {
+                            ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
+                        }
+                    }
+                    else
+                    {
+                        ROM_DATA[0x6B359 + j] = (byte)((ROM_DATA[0x6B359 + j] & 0xF1) + (rand.Next(15) & 0x0E));
+                    }
                 }
             }
             //sprite_palette_new();
