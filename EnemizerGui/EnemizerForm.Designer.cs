@@ -34,7 +34,7 @@
             this.linkSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.weaponSpriteCombobox = new System.Windows.Forms.ComboBox();
+            this.shieldSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.generateSpoilerCheckbox = new System.Windows.Forms.CheckBox();
@@ -74,6 +74,8 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.negativeModecheckBox = new System.Windows.Forms.CheckBox();
+            this.grayscaleModecheckBox = new System.Windows.Forms.CheckBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.setBlackoutModeCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeSpritePalettesAdvancedCheckbox = new System.Windows.Forms.CheckBox();
@@ -94,8 +96,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.grayscaleModecheckBox = new System.Windows.Forms.CheckBox();
-            this.negativeModecheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -144,22 +144,22 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(484, 161);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
+            this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Weapon Gfx - WIP :";
+            this.label4.Text = "Shield Gfx :";
             // 
-            // weaponSpriteCombobox
+            // shieldSpriteCombobox
             // 
-            this.weaponSpriteCombobox.Enabled = false;
-            this.weaponSpriteCombobox.FormattingEnabled = true;
-            this.weaponSpriteCombobox.Items.AddRange(new object[] {
-            "Normal Sword",
-            "Mace"});
-            this.weaponSpriteCombobox.Location = new System.Drawing.Point(487, 178);
-            this.weaponSpriteCombobox.Name = "weaponSpriteCombobox";
-            this.weaponSpriteCombobox.Size = new System.Drawing.Size(121, 21);
-            this.weaponSpriteCombobox.TabIndex = 11;
-            this.weaponSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.weaponSpriteCombobox_SelectedIndexChanged);
+            this.shieldSpriteCombobox.FormattingEnabled = true;
+            this.shieldSpriteCombobox.Items.AddRange(new object[] {
+            "Normal Shield",
+            "Skull Shield",
+            "Square Shield"});
+            this.shieldSpriteCombobox.Location = new System.Drawing.Point(487, 178);
+            this.shieldSpriteCombobox.Name = "shieldSpriteCombobox";
+            this.shieldSpriteCombobox.Size = new System.Drawing.Size(121, 21);
+            this.shieldSpriteCombobox.TabIndex = 11;
+            this.shieldSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.shieldSpriteCombobox_SelectedIndexChanged);
             // 
             // richTextBox1
             // 
@@ -631,6 +631,28 @@
             this.tabPage3.Text = "Palettes";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // negativeModecheckBox
+            // 
+            this.negativeModecheckBox.AutoSize = true;
+            this.negativeModecheckBox.Location = new System.Drawing.Point(3, 164);
+            this.negativeModecheckBox.Name = "negativeModecheckBox";
+            this.negativeModecheckBox.Size = new System.Drawing.Size(99, 17);
+            this.negativeModecheckBox.TabIndex = 7;
+            this.negativeModecheckBox.Text = "Negative Mode";
+            this.negativeModecheckBox.UseVisualStyleBackColor = true;
+            this.negativeModecheckBox.CheckedChanged += new System.EventHandler(this.negativeModecheckBox_CheckedChanged);
+            // 
+            // grayscaleModecheckBox
+            // 
+            this.grayscaleModecheckBox.AutoSize = true;
+            this.grayscaleModecheckBox.Location = new System.Drawing.Point(3, 141);
+            this.grayscaleModecheckBox.Name = "grayscaleModecheckBox";
+            this.grayscaleModecheckBox.Size = new System.Drawing.Size(166, 17);
+            this.grayscaleModecheckBox.TabIndex = 6;
+            this.grayscaleModecheckBox.Text = "Grayscale Mode (Indoor Only)";
+            this.grayscaleModecheckBox.UseVisualStyleBackColor = true;
+            this.grayscaleModecheckBox.CheckedChanged += new System.EventHandler(this.grayscaleModecheckBox_CheckedChanged);
+            // 
             // pukeModeCheckbox
             // 
             this.pukeModeCheckbox.AutoSize = true;
@@ -846,28 +868,6 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
-            // grayscaleModecheckBox
-            // 
-            this.grayscaleModecheckBox.AutoSize = true;
-            this.grayscaleModecheckBox.Location = new System.Drawing.Point(3, 141);
-            this.grayscaleModecheckBox.Name = "grayscaleModecheckBox";
-            this.grayscaleModecheckBox.Size = new System.Drawing.Size(166, 17);
-            this.grayscaleModecheckBox.TabIndex = 6;
-            this.grayscaleModecheckBox.Text = "Grayscale Mode (Indoor Only)";
-            this.grayscaleModecheckBox.UseVisualStyleBackColor = true;
-            this.grayscaleModecheckBox.CheckedChanged += new System.EventHandler(this.grayscaleModecheckBox_CheckedChanged);
-            // 
-            // negativeModecheckBox
-            // 
-            this.negativeModecheckBox.AutoSize = true;
-            this.negativeModecheckBox.Location = new System.Drawing.Point(3, 164);
-            this.negativeModecheckBox.Name = "negativeModecheckBox";
-            this.negativeModecheckBox.Size = new System.Drawing.Size(99, 17);
-            this.negativeModecheckBox.TabIndex = 7;
-            this.negativeModecheckBox.Text = "Negative Mode";
-            this.negativeModecheckBox.UseVisualStyleBackColor = true;
-            this.negativeModecheckBox.CheckedChanged += new System.EventHandler(this.negativeModecheckBox_CheckedChanged);
-            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -884,13 +884,13 @@
             this.Controls.Add(this.generateSpoilerCheckbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.weaponSpriteCombobox);
+            this.Controls.Add(this.shieldSpriteCombobox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.linkSpriteCombobox);
             this.Controls.Add(this.generateRomButton);
             this.Name = "EnemizerForm";
-            this.Text = "Enemizer 6.0";
+            this.Text = "Enemizer 6.0 Beta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EnemizerForm_FormClosing);
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).EndInit();
@@ -921,7 +921,7 @@
         private System.Windows.Forms.ComboBox linkSpriteCombobox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox weaponSpriteCombobox;
+        private System.Windows.Forms.ComboBox shieldSpriteCombobox;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.CheckBox generateSpoilerCheckbox;
