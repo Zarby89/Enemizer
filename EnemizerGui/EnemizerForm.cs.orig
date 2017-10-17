@@ -176,8 +176,8 @@ namespace Enemizer
 
             allowAbsorbableItemsCheckbox.Checked = config.OptionFlags.EnemiesAbsorbable;
             // TODO: hook these up in the randomizer
-            absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable; 
-            absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable; 
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
             lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
             spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
 
@@ -443,8 +443,13 @@ namespace Enemizer
         private void allowAbsorbableItemsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.EnemiesAbsorbable = allowAbsorbableItemsCheckbox.Checked;
+<<<<<<< HEAD
+            absorbableItemsChecklist.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+            absorbableItemsSpawnrateTrackbar.Enabled = false; // config.OptionFlags.EnemiesAbsorbable;
+=======
             absorbableItemsChecklist.Enabled = config.OptionFlags.EnemiesAbsorbable;
             absorbableItemsSpawnrateTrackbar.Enabled = config.OptionFlags.EnemiesAbsorbable;
+>>>>>>> upstream/master
             lblAbsorbSpawnRate.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
             spawnrateLabel.Enabled = absorbableItemsSpawnrateTrackbar.Enabled;
         }
