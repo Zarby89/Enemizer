@@ -361,7 +361,6 @@
             this.absorbableItemsSpawnrateTrackbar.Name = "absorbableItemsSpawnrateTrackbar";
             this.absorbableItemsSpawnrateTrackbar.Size = new System.Drawing.Size(140, 45);
             this.absorbableItemsSpawnrateTrackbar.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.absorbableItemsSpawnrateTrackbar, resources.GetString("absorbableItemsSpawnrateTrackbar.ToolTip"));
             this.absorbableItemsSpawnrateTrackbar.ValueChanged += new System.EventHandler(this.absorbableItemsSpawnrateTrackbar_ValueChanged);
             // 
             // allowAbsorbableItemsCheckbox

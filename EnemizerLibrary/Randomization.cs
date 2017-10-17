@@ -621,9 +621,9 @@ namespace EnemizerLibrary
 
         public void Randomize_Overworld_Palettes()
         {
-            Color grass = Color.FromArgb(60 + (rand.Next(155)/2), 60 + rand.Next(155), 60 + rand.Next(155));
-            Color grass2 = Color.FromArgb(60 + (rand.Next(155) / 2), 60 + rand.Next(155), 60 + rand.Next(155));
-            Color grass3 = Color.FromArgb(60 + (rand.Next(155) / 2), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass = Color.FromArgb(60 + (rand.Next(155)), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass2 = Color.FromArgb(60 + (rand.Next(155)), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color grass3 = Color.FromArgb(60 + (rand.Next(155) ), 60 + rand.Next(155), 60 + rand.Next(155));
             Color dirt = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
             Color dirt2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
             //Color grass = Color.FromArgb(230, 230, 230);
@@ -648,7 +648,7 @@ namespace EnemizerLibrary
             Color bridge = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
 
 
-            setColor(0x05FEA9, grass, 0);
+            setColor(0x05FEA9, grass, 0);//hardcoded grass palette LW
 
             setColor(0x0DD4AC, grass, 2); //desert shadow
             setColor(0x0DE6DE, grass2, 2);
@@ -724,31 +724,6 @@ namespace EnemizerLibrary
                 setColor(0x0DE6EE + (i * 70), dirt, 2);
                 setColor(0x0DE6F0 + (i * 70), dirt, 2);
 
-            i = 1;
-            //Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
-            setColor(0x0DE6D4 + (i * 70), dirt, 2);
-
-            setColor(0x0DE6CA + (i * 70), dirt, 5);
-            setColor(0x0DE6CC + (i * 70), dirt, 4);
-            setColor(0x0DE6CE + (i * 70), dirt, 3);
-            setColor(0x0DE6E2 + (i * 70), dirt, 2);
-
-            setColor(0x0DE6D8 + (i * 70), dirt, 5);
-            setColor(0x0DE6DA + (i * 70), dirt, 4);
-            setColor(0x0DE6DC + (i * 70), dirt, 3);
-            setColor(0x0DE6F0 + (i * 70), dirt, 2);
-
-            setColor(0x0DE6E6 + (i * 70), dirt, 5);
-            setColor(0x0DE6E8 + (i * 70), dirt, 4);
-            setColor(0x0DE6EA + (i * 70), dirt, 3);
-            setColor(0x0DE6EC + (i * 70), dirt, 3);
-            setColor(0x0DE6EE + (i * 70), dirt, 2);
-            setColor(0x0DE6F0 + (i * 70), dirt, 1);
-            
-
-
-
-
 
             //lake borders
             setColor(0x0DE91E, grass, 0);
@@ -815,7 +790,7 @@ namespace EnemizerLibrary
             setColor(0x0DE918, water, 1);// water light
             setColor(0x0DE66C, water, 0); //water lighter
             setColor(0x0DE91A, water, 0); //water lighter
-            setColor(0x0DE92E, water, 2);// water light
+            setColor(0x0DE92E, water, 1);// water light
 
             setColor(0x0DE66E, dirt, 3); //ground dark
 
@@ -880,6 +855,176 @@ namespace EnemizerLibrary
             setColor(0x0DE8DA, clouds,0);
             setColor(0x0DE8D8, clouds,0);
             setColor(0x0DE8D0, clouds,0);
+
+            setColor(0x0DE98C, clouds, 2);
+            setColor(0x0DE990, clouds, 0);
+
+
+
+            //DW
+            Color dwdirt = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dwgrass = Color.FromArgb(60 + (rand.Next(155)), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dwwater = Color.FromArgb(60 + (rand.Next(155)), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dwtree = Color.FromArgb(dwgrass.R - 20 + rand.Next(30), dwgrass.G - 20 + rand.Next(30), dwgrass.B - 20 + rand.Next(30));
+
+
+            setColor(0x05FEB3, dwgrass, 1);//hardcoded grass color in dw
+
+
+            setColor(0x0DEB34, dwtree, 4);
+            setColor(0x0DEB30, dwtree, 3);
+            setColor(0x0DEB32, dwtree, 1);
+
+            //dwdirt - dark to light
+            setColor(0x0DE710, dwdirt, 5);
+            setColor(0x0DE71E, dwdirt, 5);
+            setColor(0x0DE72C, dwdirt, 5);
+            setColor(0x0DEAD6, dwdirt, 5);
+
+            setColor(0x0DE712, dwdirt, 4);
+            setColor(0x0DE720, dwdirt, 4);
+            setColor(0x0DE72E, dwdirt, 4);
+            setColor(0x0DE660, dwdirt, 4);
+            setColor(0x0DEAD8, dwdirt, 4);
+
+            setColor(0x0DEADA, dwdirt, 3);
+            setColor(0x0DE714, dwdirt, 3);
+            setColor(0x0DE722, dwdirt, 3);
+            setColor(0x0DE730, dwdirt, 3);
+            setColor(0x0DE732, dwdirt, 3);
+
+            setColor(0x0DE734, dwdirt, 2);
+            setColor(0x0DE736, dwdirt, 2);
+            setColor(0x0DE728, dwdirt, 2);
+            setColor(0x0DE71A, dwdirt, 2);
+            setColor(0x0DE664, dwdirt, 2);
+            setColor(0x0DEAE0, dwdirt, 2);
+
+
+            //grass
+            setColor(0x0DE716, dwgrass, 3);
+            setColor(0x0DE740, dwgrass, 3);
+            setColor(0x0DE74E, dwgrass, 3);
+            setColor(0x0DEAC0, dwgrass, 3);
+            setColor(0x0DEACE, dwgrass, 3);
+            setColor(0x0DEADC, dwgrass, 3);
+            setColor(0x0DEB24, dwgrass, 3);
+
+            setColor(0x0DE752, dwgrass, 2);
+
+            setColor(0x0DE718, dwgrass, 1);
+            setColor(0x0DE742, dwgrass, 1);
+            setColor(0x0DE750, dwgrass, 1);
+            setColor(0x0DEB26, dwgrass, 1);
+            setColor(0x0DEAC2, dwgrass, 1);
+            setColor(0x0DEAD0, dwgrass, 1);
+            setColor(0x0DEADE, dwgrass, 1);
+
+
+
+            //water
+
+            setColor(0x0DE65A, dwwater, 5); //very dark water
+
+            setColor(0x0DE65C, dwwater, 3); //main water color
+            setColor(0x0DEAC8, dwwater, 3); //main water color
+            setColor(0x0DEAD2, dwwater, 2); //main water color
+            setColor(0x0DEABC, dwwater, 2);//light
+            setColor(0x0DE662, dwwater, 2); //light
+            setColor(0x0DE65E, dwwater, 1); //lighter
+            setColor(0x0DEABE, dwwater, 1);//lighter
+
+
+            //Death Mountain
+
+
+
+            //dw dm
+            //dirt
+            Color dwdmdirt = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dwdmgrass = Color.FromArgb(60 + (rand.Next(155)), 60 + rand.Next(155), 60 + rand.Next(155));
+            setColor(0x0DE79A, dwdmdirt, 6); //super dark (6)
+            setColor(0x0DE7A8, dwdmdirt, 6);
+            setColor(0x0DE7B6, dwdmdirt, 6);
+            setColor(0x0DEB60, dwdmdirt, 6);
+            setColor(0x0DEB6E, dwdmdirt, 6);
+            setColor(0x0DE93E, dwdmdirt, 6);
+            setColor(0x0DE94C, dwdmdirt, 6);
+            setColor(0x0DEBA6, dwdmdirt, 6);
+
+            setColor(0x0DE79C, dwdmdirt, 4); //dark (4)
+            setColor(0x0DE7AA, dwdmdirt, 4);
+            setColor(0x0DE7B8, dwdmdirt, 4);
+            setColor(0x0DE7BE, dwdmdirt, 4);
+            setColor(0x0DE7CC, dwdmdirt, 4);
+            setColor(0x0DE7DA, dwdmdirt, 4);
+            setColor(0x0DEB70, dwdmdirt, 4);
+            setColor(0x0DEBA8, dwdmdirt, 4);
+            setColor(0x0DEB72, dwdmdirt, 3);
+            setColor(0x0DEB74, dwdmdirt, 3);
+            //light (3)
+            setColor(0x0DE79E, dwdmdirt, 3);
+            setColor(0x0DE7AC, dwdmdirt, 3);
+            setColor(0x0DEB6A, dwdmdirt, 3);
+            setColor(0x0DE948, dwdmdirt, 3);
+            setColor(0x0DE956, dwdmdirt, 3);
+            setColor(0x0DE964, dwdmdirt, 3);
+            setColor(0x0DEBAA, dwdmdirt, 3);
+            setColor(0x0DE7A0, dwdmdirt, 3);
+            setColor(0x0DE7BC, dwdmgrass, 3);
+
+            //lighter (2)
+            setColor(0x0DEBAC, dwdmdirt, 2);
+            
+            setColor(0x0DE7AE, dwdmdirt, 2);
+            setColor(0x0DE7C2, dwdmdirt, 2);
+            setColor(0x0DE7A6, dwdmdirt, 2);
+            setColor(0x0DEB7A, dwdmdirt, 2);
+            setColor(0x0DEB6C, dwdmdirt, 2);
+            setColor(0x0DE7C0, dwdmdirt, 2);
+
+            //grass
+            setColor(0x0DE7A2, dwdmgrass, 3);
+            setColor(0x0DE7BE, dwdmgrass, 3);
+            setColor(0x0DE7CC, dwdmgrass, 3);
+            setColor(0x0DE7DA, dwdmgrass, 3);
+            setColor(0x0DEB6A, dwdmgrass, 3);
+            setColor(0x0DE948, dwdmgrass, 3);
+            setColor(0x0DE956, dwdmgrass, 3);
+            setColor(0x0DE964, dwdmgrass, 3);
+
+            
+            setColor(0x0DE7CE, dwdmgrass, 1);
+            setColor(0x0DE7A4, dwdmgrass, 1);
+            setColor(0x0DEBA2, dwdmgrass, 1);
+            setColor(0x0DEBB0, dwdmgrass, 1);
+
+            Color dwdmclouds1 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            Color dwdmclouds2 = Color.FromArgb(60 + rand.Next(155), 60 + rand.Next(155), 60 + rand.Next(155));
+            //clouds 1
+            setColor(0x0DE644, dwdmclouds1, 2); //dark
+            setColor(0x0DEB84, dwdmclouds1, 2);
+
+             setColor(0x0DE648, dwdmclouds1, 1); //light dark
+             setColor(0x0DEB88, dwdmclouds1, 1);
+
+            //clouds2
+            setColor(0x0DEBAE,dwdmclouds2, 2); //dark
+            setColor(0x0DE7B0, dwdmclouds2, 2);
+
+
+            setColor(0x0DE7B4, dwdmclouds2, 0);//light dark
+            setColor(0x0DEB78, dwdmclouds2, 0);
+            setColor(0x0DEBB2, dwdmclouds2, 0);
+
+
+
+
+
+
+
+
+
 
 
 

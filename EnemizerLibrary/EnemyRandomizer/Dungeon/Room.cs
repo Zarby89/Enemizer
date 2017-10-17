@@ -145,12 +145,33 @@ namespace EnemizerLibrary
                     throw new Exception("Shutter room without any killable enemies");
                 }
 
+
+
                 Debug.Assert(possibleSprites.Contains(SpriteConstants.EmptySprite) == false);
                 Debug.Assert(killableSprites.Contains(SpriteConstants.EmptySprite) == false);
                 Debug.Assert(killableKeySprites.Contains(SpriteConstants.EmptySprite) == false);
 
-                spritesToUpdate.Where(x => x.HasAKey == false).ToList()
+
+
+                if (optionFlags.AbsorbableSpawnRate > 0)
+                {
+                    if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
+                    {
+                        int[] possibleAbsorbableSprites = getAbsorbableSprites(optionFlags);
+                        spritesToUpdate.Where(x => x.HasAKey == false).ToList()
+                        .ForEach(x => x.SpriteId = possibleAbsorbableSprites[rand.Next(possibleAbsorbableSprites.Length)]);
+                    }
+                    else
+                    {
+                        spritesToUpdate.Where(x => x.HasAKey == false).ToList()
+                        .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+                    }
+                }
+                else
+                {
+                    spritesToUpdate.Where(x => x.HasAKey == false).ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
+                }
 
                 spritesToUpdate.Where(x => x.HasAKey).ToList()
                     .ForEach(x => x.SpriteId = killableKeySprites[rand.Next(killableKeySprites.Count)]);
@@ -171,6 +192,19 @@ namespace EnemizerLibrary
             {
                 romData[SpriteConstants.RandomizedPotEnemyTableBaseAddress + this.RoomId] = (byte)possibleSprites[rand.Next(possibleSprites.Length)];
             }
+        }
+
+        public int[] getAbsorbableSprites(OptionFlags optionFlags)
+        {
+            List<int> rlist = new List<int>();
+            for (int i = 0; i < 14; i++)
+            {
+                if (optionFlags.AbsorbableTypes[(AbsorbableTypes)i] == true)
+                {
+                    rlist.Add(0xD8+i);
+                }
+            }
+            return rlist.ToArray();
         }
     }
 }
