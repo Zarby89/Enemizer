@@ -81,8 +81,10 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
             this.heartBeepSpeedTrackbar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.alternateGfxCheckbox = new System.Windows.Forms.CheckBox();
             this.andyModeCheckbox = new System.Windows.Forms.CheckBox();
             this.customBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.shufflePotContentsCheckbox = new System.Windows.Forms.CheckBox();
@@ -92,8 +94,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.alternateGfxCheckbox = new System.Windows.Forms.CheckBox();
-            this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -712,6 +712,15 @@
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // heartBeepSpeedLabel
+            // 
+            this.heartBeepSpeedLabel.AutoSize = true;
+            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 164);
+            this.heartBeepSpeedLabel.Name = "heartBeepSpeedLabel";
+            this.heartBeepSpeedLabel.Size = new System.Drawing.Size(26, 13);
+            this.heartBeepSpeedLabel.TabIndex = 15;
+            this.heartBeepSpeedLabel.Text = "Half";
+            // 
             // heartBeepSpeedTrackbar
             // 
             this.heartBeepSpeedTrackbar.BackColor = System.Drawing.SystemColors.Window;
@@ -732,6 +741,19 @@
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Heart Beep Speed";
+            // 
+            // alternateGfxCheckbox
+            // 
+            this.alternateGfxCheckbox.AutoSize = true;
+            this.alternateGfxCheckbox.Checked = true;
+            this.alternateGfxCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alternateGfxCheckbox.Location = new System.Drawing.Point(158, 30);
+            this.alternateGfxCheckbox.Name = "alternateGfxCheckbox";
+            this.alternateGfxCheckbox.Size = new System.Drawing.Size(87, 17);
+            this.alternateGfxCheckbox.TabIndex = 13;
+            this.alternateGfxCheckbox.Text = "Alternate Gfx";
+            this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
+            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // andyModeCheckbox
             // 
@@ -817,28 +839,6 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
-            // 
-            // alternateGfxCheckbox
-            // 
-            this.alternateGfxCheckbox.AutoSize = true;
-            this.alternateGfxCheckbox.Checked = true;
-            this.alternateGfxCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alternateGfxCheckbox.Location = new System.Drawing.Point(158, 30);
-            this.alternateGfxCheckbox.Name = "alternateGfxCheckbox";
-            this.alternateGfxCheckbox.Size = new System.Drawing.Size(87, 17);
-            this.alternateGfxCheckbox.TabIndex = 13;
-            this.alternateGfxCheckbox.Text = "Alternate Gfx";
-            this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
-            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // heartBeepSpeedLabel
-            // 
-            this.heartBeepSpeedLabel.AutoSize = true;
-            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 164);
-            this.heartBeepSpeedLabel.Name = "heartBeepSpeedLabel";
-            this.heartBeepSpeedLabel.Size = new System.Drawing.Size(26, 13);
-            this.heartBeepSpeedLabel.TabIndex = 15;
-            this.heartBeepSpeedLabel.Text = "Half";
             // 
             // EnemizerForm
             // 
