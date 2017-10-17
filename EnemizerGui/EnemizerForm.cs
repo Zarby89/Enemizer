@@ -232,6 +232,9 @@ namespace Enemizer
             heartBeepSpeedTrackbar.Value = (int)config.OptionFlags.HeartBeepSpeed;
             SetHeartBeepSpeedText(config.OptionFlags.HeartBeepSpeed);
             alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
+            pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
+            grayscaleModecheckBox.Checked = config.OptionFlags.GrayscaleMode;
+            negativeModecheckBox.Checked = config.OptionFlags.NegativeMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -614,6 +617,16 @@ namespace Enemizer
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AlternateGfx = alternateGfxCheckbox.Checked;
+        }
+
+        private void grayscaleModecheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.GrayscaleMode = grayscaleModecheckBox.Checked;
+        }
+
+        private void negativeModecheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.NegativeMode = negativeModecheckBox.Checked;
         }
     }
 

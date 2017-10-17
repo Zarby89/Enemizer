@@ -28,7 +28,7 @@ namespace EnemizerLibrary
             this.optionFlags = optionflags;
 
             // make sure we have a randomizer rom
-            if(this.ROM_DATA.IsRandomizerRom == false)
+            if (this.ROM_DATA.IsRandomizerRom == false)
             {
                 throw new Exception("Enemizer only supports randomizer roms for input.");
             }
@@ -190,6 +190,16 @@ namespace EnemizerLibrary
             if(optionFlags.PukeMode)
             {
                 GeneratePukeModePalettes(new Random(seed));
+            }
+
+            if (optionFlags.NegativeMode)
+            {
+                GenerateNegativeModePalettes();
+            }
+
+            if (optionFlags.GrayscaleMode)
+            {
+                grayscale_all_dungeons();
             }
 
             rand = new Random(seed);
@@ -386,7 +396,7 @@ namespace EnemizerLibrary
 
         public Color getColor(short c)
         {
-            return Color.FromArgb(((c & 0x1F) * 8), ((c & 0x3E0) >> 5) * 8, ((c & 0x7C00) >> 10) * 8);
+            return Color.FromArgb(((c & 0x1F) * 8), (((c & 0x3E0) >> 5) * 8), (((c & 0x7C00) >> 10) * 8));
         }
 
         public void grayscale_all_dungeons()
@@ -397,7 +407,8 @@ namespace EnemizerLibrary
                 Color c = getColor((byte)((ROM_DATA[0xDD734 + i+1] << 8) + ROM_DATA[0xDD734 + i]));
                 if (c.R == 40 && c.G == 40 && c.B == 40)
                 {
-
+                    //6,6,3
+                    //48,48,24
                 }
                 else
                 {
@@ -566,8 +577,8 @@ namespace EnemizerLibrary
             short s = (short)(((b) << 10) | ((g) << 5) | ((r) << 0));
 
             ROM_DATA[address] = (byte)(s & 0x00FF);
-            ROM_DATA[address + 1] = (byte)((s >> 8) & 0x00FF);
-
+            ROM_DATA[address+1] = (byte)((s >> 8) & 0x00FF);
+           
 
         }
         
@@ -926,13 +937,58 @@ namespace EnemizerLibrary
 
         public void GeneratePukeModePalettes(Random random)
         {
-            // TODO: overworld
+            //overworld
+            for (int i = 0; i < 1456; i += 2)
+            {
+                setColor(0xDE604 + i, Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)), 0);
+            }
+
 
             // indoors
             for (int i = 0; i < 3600; i += 2)
             {
                 setColor(0xDD734 + i, Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)), 0);
             }
+
+
+        }
+
+        public void GenerateNegativeModePalettes()
+        {
+            //overworld
+
+            Color c = getColor((short)((ROM_DATA[0x05FEA9 + 1] << 8) + ROM_DATA[0x05FEA9]));
+            Color c2 = Color.FromArgb((c.R ^ 0xFF), (c.G ^ 0xFF), (c.B ^ 0xFF));
+            setColor(0x05FEA9, c2, 0);
+
+            for (int i = 0; i < 1456; i += 2)
+            {
+                c = getColor((short)((ROM_DATA[0xDE604 + i + 1] << 8) + ROM_DATA[0xDE604 + i]));
+                c2 = Color.FromArgb((c.R ^ 0xFF), (c.G ^ 0xFF), (c.B ^ 0xFF));
+                setColor(0xDE604 + i, c2, 0);
+            }
+
+
+
+            // indoors
+            for (int i = 0; i < 3600; i += 2)
+            {
+                c = getColor((short)((ROM_DATA[0xDD734 + i + 1] << 8) + ROM_DATA[0xDD734 + i]));
+                c2 = Color.FromArgb((c.R ^ 0xFF), (c.G ^ 0xFF), (c.B ^ 0xFF));
+                setColor(0xDD734 + i, c2, 0);
+            }
+
+
+            //misc
+            /*for (int i = 0; i < 1308; i += 2)
+            {
+                c = getColor((short)((ROM_DATA[0xDD218 + i + 1] << 8) + ROM_DATA[0xDD218 + i]));
+                c2 = Color.FromArgb((c.R ^ 0xFF), (c.G ^ 0xFF), (c.B ^ 0xFF));
+                setColor(0xDD218 + i, c2, 0);
+            }
+            */
+
+
         }
 
         public void Randomize_Sprites_HP(int rangeValue)

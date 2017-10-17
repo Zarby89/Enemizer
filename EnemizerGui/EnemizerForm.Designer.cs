@@ -94,6 +94,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.grayscaleModecheckBox = new System.Windows.Forms.CheckBox();
+            this.negativeModecheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -528,6 +530,7 @@
             // randomizeBossDamageCheckbox
             // 
             this.randomizeBossDamageCheckbox.AutoSize = true;
+            this.randomizeBossDamageCheckbox.Enabled = false;
             this.randomizeBossDamageCheckbox.Location = new System.Drawing.Point(6, 125);
             this.randomizeBossDamageCheckbox.Name = "randomizeBossDamageCheckbox";
             this.randomizeBossDamageCheckbox.Size = new System.Drawing.Size(159, 17);
@@ -560,6 +563,7 @@
             // randomizeBossHealthCheckbox
             // 
             this.randomizeBossHealthCheckbox.AutoSize = true;
+            this.randomizeBossHealthCheckbox.Enabled = false;
             this.randomizeBossHealthCheckbox.Location = new System.Drawing.Point(6, 74);
             this.randomizeBossHealthCheckbox.Name = "randomizeBossHealthCheckbox";
             this.randomizeBossHealthCheckbox.Size = new System.Drawing.Size(150, 17);
@@ -612,6 +616,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.negativeModecheckBox);
+            this.tabPage3.Controls.Add(this.grayscaleModecheckBox);
             this.tabPage3.Controls.Add(this.pukeModeCheckbox);
             this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
@@ -630,9 +636,9 @@
             this.pukeModeCheckbox.AutoSize = true;
             this.pukeModeCheckbox.Location = new System.Drawing.Point(3, 118);
             this.pukeModeCheckbox.Name = "pukeModeCheckbox";
-            this.pukeModeCheckbox.Size = new System.Drawing.Size(144, 17);
+            this.pukeModeCheckbox.Size = new System.Drawing.Size(81, 17);
             this.pukeModeCheckbox.TabIndex = 5;
-            this.pukeModeCheckbox.Text = "Puke Mode (Indoor Only)";
+            this.pukeModeCheckbox.Text = "Puke Mode";
             this.pukeModeCheckbox.UseVisualStyleBackColor = true;
             this.pukeModeCheckbox.CheckedChanged += new System.EventHandler(this.pukeModeCheckbox_CheckedChanged);
             // 
@@ -840,6 +846,28 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
+            // grayscaleModecheckBox
+            // 
+            this.grayscaleModecheckBox.AutoSize = true;
+            this.grayscaleModecheckBox.Location = new System.Drawing.Point(3, 141);
+            this.grayscaleModecheckBox.Name = "grayscaleModecheckBox";
+            this.grayscaleModecheckBox.Size = new System.Drawing.Size(166, 17);
+            this.grayscaleModecheckBox.TabIndex = 6;
+            this.grayscaleModecheckBox.Text = "Grayscale Mode (Indoor Only)";
+            this.grayscaleModecheckBox.UseVisualStyleBackColor = true;
+            this.grayscaleModecheckBox.CheckedChanged += new System.EventHandler(this.grayscaleModecheckBox_CheckedChanged);
+            // 
+            // negativeModecheckBox
+            // 
+            this.negativeModecheckBox.AutoSize = true;
+            this.negativeModecheckBox.Location = new System.Drawing.Point(3, 164);
+            this.negativeModecheckBox.Name = "negativeModecheckBox";
+            this.negativeModecheckBox.Size = new System.Drawing.Size(99, 17);
+            this.negativeModecheckBox.TabIndex = 7;
+            this.negativeModecheckBox.Text = "Negative Mode";
+            this.negativeModecheckBox.UseVisualStyleBackColor = true;
+            this.negativeModecheckBox.CheckedChanged += new System.EventHandler(this.negativeModecheckBox_CheckedChanged);
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -953,6 +981,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label heartBeepSpeedLabel;
         private System.Windows.Forms.CheckBox alternateGfxCheckbox;
+        private System.Windows.Forms.CheckBox negativeModecheckBox;
+        private System.Windows.Forms.CheckBox grayscaleModecheckBox;
     }
 }
 
