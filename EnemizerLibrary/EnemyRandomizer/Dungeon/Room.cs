@@ -153,11 +153,11 @@ namespace EnemizerLibrary
 
 
 
-                if (optionFlags.AbsorbableSpawnRate > 0)
+                if (optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
                 {
                     if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
                     {
-                        int[] possibleAbsorbableSprites = getAbsorbableSprites(optionFlags);
+                        int[] possibleAbsorbableSprites = GetAbsorbableSprites(spriteRequirementCollection, optionFlags);
                         spritesToUpdate.Where(x => x.HasAKey == false).ToList()
                         .ForEach(x => x.SpriteId = possibleAbsorbableSprites[rand.Next(possibleAbsorbableSprites.Length)]);
                     }
@@ -194,17 +194,19 @@ namespace EnemizerLibrary
             }
         }
 
-        public int[] getAbsorbableSprites(OptionFlags optionFlags)
+        public int[] GetAbsorbableSprites(SpriteRequirementCollection spriteRequirementCollection, OptionFlags optionFlags)
         {
-            List<int> rlist = new List<int>();
-            for (int i = 0; i < 14; i++)
-            {
-                if (optionFlags.AbsorbableTypes[(AbsorbableTypes)i] == true)
-                {
-                    rlist.Add(0xD8+i);
-                }
-            }
-            return rlist.ToArray();
+            var absorbables = spriteRequirementCollection.SpriteRequirements
+                                    .Where(x => x.Absorbable == true)
+                                    .Where(x => optionFlags.AbsorbableTypes
+                                                            .Where(y => y.Value)
+                                                            .Select(y => (int)y.Key + 0xD8)
+                                                            .Contains(x.SpriteId)
+                                            )
+                                    .Select(x => x.SpriteId)
+                                    .ToArray();
+
+            return absorbables;
         }
     }
 }
