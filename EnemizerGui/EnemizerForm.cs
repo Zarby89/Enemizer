@@ -31,6 +31,7 @@ namespace Enemizer
             this.Text = "Enemizer " + EnemizerLibrary.Version.CurrentVersion;
 
             LoadSpriteDropdown();
+            LoadShieldDropdown();
 
             if (LoadConfig())
             {
@@ -82,6 +83,16 @@ namespace Enemizer
                 files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
                 linkSpriteCombobox.Items.Add(item);
             }
+        }
+
+        void LoadShieldDropdown()
+        {
+            shieldSpriteCombobox.Items.Clear();
+            foreach(var e in Enum.GetValues(typeof(ShieldTypes)))
+            {
+                shieldSpriteCombobox.Items.Add(((ShieldTypes)e).GetDescription());
+            }
+            //shieldSpriteCombobox.DataSource = Enum.GetValues(typeof(ShieldTypes));
         }
 
         private bool LoadConfig()
@@ -235,7 +246,7 @@ namespace Enemizer
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
             grayscaleModecheckBox.Checked = config.OptionFlags.GrayscaleMode;
             negativeModecheckBox.Checked = config.OptionFlags.NegativeMode;
-            config.OptionFlags.shieldGfx = ShieldTypes.Normal;
+            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -304,7 +315,7 @@ namespace Enemizer
         private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //TODO: wire this up
-            config.OptionFlags.shieldGfx = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
+            config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
         }
 
         private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)

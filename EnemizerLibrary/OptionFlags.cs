@@ -61,7 +61,7 @@ namespace EnemizerLibrary
         public bool AndyMode { get; set; }
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
-        public ShieldTypes shieldGfx { get; set; }
+        public ShieldTypes ShieldGraphics { get; set; } = ShieldTypes.Normal;
 
     }
 
@@ -83,8 +83,11 @@ namespace EnemizerLibrary
 
     public enum ShieldTypes
     {
+        [Description("Normal Shield")]
         Normal,
+        [Description("Skull Shield")]
         SkullShield,
+        [Description("Square Shield")]
         SquareShield
     }
 
