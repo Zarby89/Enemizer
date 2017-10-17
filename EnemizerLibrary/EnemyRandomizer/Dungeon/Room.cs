@@ -178,11 +178,11 @@ namespace EnemizerLibrary
                     s.SpriteId = spriteId;
 
                     // leave this out for now
-                    /*
+                    
                     if(spriteId == SpriteConstants.StalSprite)
                     {
                         stalCount++;
-                        if (stalCount > 2) // max 2 in a room
+                        if (stalCount > 2)// && possibleSprites.Count() > 1) // max 2 in a room
                         {
                             possibleSprites = possibleSprites.Where(x => x != SpriteConstants.StalSprite).ToArray();
                         }
