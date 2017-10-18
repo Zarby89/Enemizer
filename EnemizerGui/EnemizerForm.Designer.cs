@@ -497,6 +497,7 @@
             // randomizeBossBehaviorCheckbox
             // 
             this.randomizeBossBehaviorCheckbox.AutoSize = true;
+            this.randomizeBossBehaviorCheckbox.Enabled = false;
             this.randomizeBossBehaviorCheckbox.Location = new System.Drawing.Point(6, 269);
             this.randomizeBossBehaviorCheckbox.Name = "randomizeBossBehaviorCheckbox";
             this.randomizeBossBehaviorCheckbox.Size = new System.Drawing.Size(180, 17);
