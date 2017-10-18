@@ -179,7 +179,7 @@ namespace EnemizerLibrary
             if(optionFlags.ShuffleMusic)
             {
                 // TODO: disable this for now because it crashes stuff sometimes
-                //shuffle_music();
+                shuffle_music();
             }
 
             if(optionFlags.SetBlackoutMode)
@@ -851,7 +851,7 @@ namespace EnemizerLibrary
 
             setColor(0x0DE76E, clouds,0);
             setColor(0x0DE9AA, clouds,0);
-            setColor(0x0DE8E8, clouds,0);
+            //setColor(0x0DE8E8, clouds,0);
             setColor(0x0DE8DA, clouds,0);
             setColor(0x0DE8D8, clouds,0);
             setColor(0x0DE8D0, clouds,0);
