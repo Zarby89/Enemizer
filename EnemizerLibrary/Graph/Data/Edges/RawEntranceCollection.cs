@@ -226,7 +226,7 @@ namespace EnemizerLibrary.Data
             { new RawEntrance("0x45", 0x45, "Sahasrahlas Hut", 0x105, "Sahasrahla's House", "cave-shabadoo-house") },
             { new RawEntrance("0x46", 0x46, "Kakariko Shop", 0x11F, "Shop 0x11F", "cave-lumberjack-house") },
             { new RawEntrance("0x47", 0x47, "Chest Game (DW)", 0x106, "Chest Game / Outcast Village Bomb House", "cave-dw-chest-game") },
-            { new RawEntrance("0x48", 0x48, "Doorless Hut (DW)", 0x106, "Chest Game / Outcast Village Bomb House", "cave-dw-chest-game") },
+            { new RawEntrance("0x48", 0x48, "Doorless Hut (DW)", 0x106, "Chest Game / Outcast Village Bomb House", "cave-dw-bomb-house") },
             { new RawEntrance("0x49", 0x49, "Library", 0x107, "Library / Bomb Farm Room", "cave-library") },
             { new RawEntrance("0x4A", 0x4A, "Light World Bomb Hut (Doorless Bomb House)", 0x107, "Library / Bomb Farm Room", "cave-library") },
             { new RawEntrance("0x4B", 0x4B, "Chicken House", 0x108, "Chicken House", "cave-chicken-hut") },
@@ -310,6 +310,7 @@ namespace EnemizerLibrary.Data
         public string LogicalAreaId { get; set; }
         public string LogicalEntranceId { get; set; }
         public string Requirements { get; set; }
+
         public RawOverworldEntrance(int entranceAddress, string entranceName, int areaId, string logicalAreaId, string logicalEntranceId, string requirements)
         {
             this.EntranceAddress = entranceAddress;
@@ -329,6 +330,7 @@ namespace EnemizerLibrary.Data
         public int RoomId { get; set; }
         public string RoomName { get; set; }
         public string LogicalRoomId { get; set; }
+
         public RawEntrance(string logicalEntranceId, int entranceId, string entranceName, int roomId, string roomName, string logicalRoomId)
         {
             this.LogicalEntranceId = logicalEntranceId;

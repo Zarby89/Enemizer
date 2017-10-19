@@ -21,7 +21,22 @@ namespace EnemizerLibrary
             {
                 dungeon.SelectedBoss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
                 graph.UpdateDungeonBoss(dungeon);
+                /*
+                var result = graph.FindPath("cave-links-house", "triforce-room");
+                if (result.Success == false)
+                {
+                    // later placed boss must have made earlier placed boss unbeatable
+                    foreach(var d in this.DungeonPool.Where(x => x.SelectedBoss != null).ToList())
+                    {
+                        if(!CanGetBossRoomAndDefeat(d, result))
+                        {
+                            d.SelectedBoss = null;
+                            graph.UpdateDungeonBoss(d);
+                        }
+                    }
+                }//*/
             }
         }
+
     }
 }

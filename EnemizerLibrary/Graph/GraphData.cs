@@ -26,17 +26,19 @@ namespace EnemizerLibrary
             RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
             RawExitCollection rawExitCollection = new RawExitCollection();
             RawItemLocationCollection rawItemLocationCollection = new RawItemLocationCollection();
+            RawItemEdgeCollection rawItemEdgeCollection = new RawItemEdgeCollection();
+            RawRoomEdgeCollection rawRoomEdgeCollection = new RawRoomEdgeCollection();
 
-            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection, rawItemEdgeCollection, rawRoomEdgeCollection);
         }
 
-        public GraphData(RomData romData)
-            :this(romData, new RomEntranceCollection(romData), new RomExitCollection(romData), new RomChestCollection(romData))
+        public GraphData(RomData romData, OptionFlags optionFlags)
+            :this(romData, optionFlags, new RomEntranceCollection(romData), new RomExitCollection(romData), new RomChestCollection(romData))
         {
 
         }
 
-        public GraphData(RomData romData, RomEntranceCollection romEntrances, RomExitCollection romExits, RomChestCollection romChests)
+        public GraphData(RomData romData, OptionFlags optionFlags, RomEntranceCollection romEntrances, RomExitCollection romExits, RomChestCollection romChests)
         {
             this.romData = romData;
             this.romEntrances = romEntrances;
@@ -46,20 +48,40 @@ namespace EnemizerLibrary
             RawEntranceCollection rawEntranceCollection = new RawEntranceCollection();
             RawExitCollection rawExitCollection = new RawExitCollection();
             RawItemLocationCollection rawItemLocationCollection = new RawItemLocationCollection();
+            RawItemEdgeCollection rawItemEdgeCollection = new RawItemEdgeCollection();
+            RawRoomEdgeCollection rawRoomEdgeCollection = new RawRoomEdgeCollection();
 
             romChests.LoadChests(rawItemLocationCollection);
 
-            UpdateFromRom(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
-            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection);
+            UpdateFromRom(rawEntranceCollection, rawExitCollection, rawItemLocationCollection, rawItemEdgeCollection);
+            UpdateFromOptions(optionFlags, rawRoomEdgeCollection);
+            FillNodesAndEdges(rawEntranceCollection, rawExitCollection, rawItemLocationCollection, rawItemEdgeCollection, rawRoomEdgeCollection);
 
             _rawItemLocationCollection = rawItemLocationCollection;
         }
 
-        void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection)
+        void UpdateFromOptions(OptionFlags optionFlags, RawRoomEdgeCollection rawRoomEdgeCollection)
+        {
+            if (optionFlags.RandomizeEnemies && 
+                (optionFlags.RandomizeEnemiesType == RandomizeEnemiesType.Chaos
+                || optionFlags.RandomizeEnemiesType == RandomizeEnemiesType.Insanity)) // TODO: what else?
+            {
+                foreach (var r in rawRoomEdgeCollection.RawRoomEdges.Where(x => x.requirements.Contains("Bow")))
+                {
+                    r.requirements = r.requirements.Replace(",Bow,", "");
+                    r.requirements = r.requirements.Replace("Bow,", "");
+                    r.requirements = r.requirements.Replace(",Bow", "");
+                    r.requirements = r.requirements.Replace("Bow", "");
+                }
+            }
+        }
+
+        void UpdateFromRom(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection, RawItemEdgeCollection rawItemEdgeCollection)
         {
             UpdateEntrances(rawEntranceCollection);
             UpdateExits(rawExitCollection);
             UpdateItems(rawItemLocationCollection);
+            UpdateMedallions(rawItemEdgeCollection);
         }
 
         void UpdateEntrances(RawEntranceCollection rawEntranceCollection)
@@ -105,6 +127,20 @@ namespace EnemizerLibrary
                 itemLocation.ItemId = l.ItemId;
                 itemLocation.ItemName = GameItems.Values.Where(x => x.Id == l.ItemId).Select(x => x.LogicalId).FirstOrDefault();
             }
+        }
+
+        void UpdateMedallions(RawItemEdgeCollection rawItemEdges)
+        {
+            var mireEdge = rawItemEdges.RawItemEdges.Where(x => x.DestId == "ow-mire-medallion").FirstOrDefault();
+            var turtleEdge = rawItemEdges.RawItemEdges.Where(x => x.DestId == "ow-turtle-rock-medallion").FirstOrDefault();
+
+            var newMire = RomItemConstants.GetEntranceMedallion(romData[RomChest.MiseryMireMedallionAddress]); // romChests.Chests.Where(x => x.LogicalId == "ow-mire-medallion").Select(x => x.LogicalId).FirstOrDefault();
+            var newTurtle = RomItemConstants.GetEntranceMedallion(romData[RomChest.TurtleRockMedallionAddress]); // romChests.Chests.Where(x => x.LogicalId == "ow-turtle-rock-medallion-symbol").Select(x => x.LogicalId).FirstOrDefault();
+            //{ new RawItemEdge("47-turtle-rock", "ow-turtle-rock-medallion", "Quake,L1 Sword,Moon Pearl") },
+            //{ new RawItemEdge("70-mire", "ow-mire-medallion", "Ether,L1 Sword,Moon Pearl") },
+
+            mireEdge.Requirements = mireEdge.Requirements.Replace("Ether", newMire);
+            turtleEdge.Requirements = turtleEdge.Requirements.Replace("Quake", newTurtle);
         }
 
         public List<string> DumpData()
@@ -170,7 +206,7 @@ namespace EnemizerLibrary
         public List<Edge> ItemEdges { get { return _itemEdges.Edges; } }
 
 
-        void FillNodesAndEdges(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection)
+        void FillNodesAndEdges(RawEntranceCollection rawEntranceCollection, RawExitCollection rawExitCollection, RawItemLocationCollection rawItemLocationCollection, RawItemEdgeCollection rawItemEdges, RawRoomEdgeCollection rawRoomEdges)
         {
             _overworldNodes = new Data.OverworldNodes();
             _roomNodes = new Data.RoomNodes();
@@ -179,8 +215,8 @@ namespace EnemizerLibrary
             FillAllNodes();
 
             _areaEdges = new Data.AreaEdges(_overworldNodes);
-            _roomEdges = new Data.RoomEdges(_roomNodes, _overworldNodes, _bossNodes);
-            _itemEdges = new ItemEdges(this);
+            _roomEdges = new Data.RoomEdges(_roomNodes, _overworldNodes, _bossNodes, rawRoomEdges);
+            _itemEdges = new ItemEdges(this, rawItemEdges);
 
             _entranceEdges = new EntranceEdges(_overworldNodes, _roomNodes, rawEntranceCollection, rawItemLocationCollection);
             _exitEdges = new ExitEdges(_overworldNodes, _roomNodes, rawExitCollection);

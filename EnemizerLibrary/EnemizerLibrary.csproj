@@ -121,6 +121,8 @@
     <Compile Include="Graph\Data\Edges\ItemEdges.cs" />
     <Compile Include="Graph\Data\Edges\RawEntranceCollection.cs" />
     <Compile Include="Graph\Data\Edges\RawExitCollection.cs" />
+    <Compile Include="Graph\Data\Edges\RawItemEdge.cs" />
+    <Compile Include="Graph\Data\Edges\RawRoomEdge.cs" />
     <Compile Include="Graph\Data\Edges\RoomEdges.cs" />
     <Compile Include="Graph\Data\GameItems.cs" />
     <Compile Include="Graph\Data\Nodes\BossNodes.cs" />

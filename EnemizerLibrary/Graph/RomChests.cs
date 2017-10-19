@@ -364,9 +364,9 @@ namespace EnemizerLibrary
         }
         public readonly static Dictionary<int, string> entranceMedallion = new Dictionary<int, string>()
         {
-            { 0, "<Bombos>" },
-            { 1, "<Ether>" },
-            { 2, "<Quake>" }
+            { 0, "Bombos" },
+            { 1, "Ether" },
+            { 2, "Quake" }
         };
     }
 }

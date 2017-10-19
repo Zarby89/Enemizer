@@ -165,8 +165,10 @@ namespace EnemizerLibrary.Data
             { new RawAreaEdge("54-dw-graveyard", "14-graveyard-ledge", false, "Mirror") },
             { new RawAreaEdge("54-dw-graveyard", "14-graveyard-kings-tomb", false, "Mirror") },
             { new RawAreaEdge("70-mire", "30-desert-checkerboard-ledge", false, "Mirror") },
+            { new RawAreaEdge("70-mire", "30-desert-ledge", false, "Mirror") },
             { new RawAreaEdge("30-desert-checkerboard-ledge", "30-desert", false, "") },
             { new RawAreaEdge("75-dw-lake-hylia-upper", "75-dw-lake-hylia-lower", false, "Flippers") },
+            { new RawAreaEdge("2C-link-house", "03-west-death-mountain-upper", false, "Flute") },
         };
 
         public List<Edge> Edges { get; private set; }

@@ -71,6 +71,39 @@ namespace EnemizerTests
             }
         }
 
+        [Theory]
+        [InlineData("rando.sfc")]
+        [InlineData("alttp - VT_no-glitches-26_normal_open_none_830270265.sfc")]
+        [InlineData("ALttP - VT_no-glitches-26_normal-open-ganon_371733917.sfc")]
+        [InlineData("ALttP - VT_no-glitches-26_normal-open-triforce-hunt_triforce-hunt_750028925.sfc")]
+        //[InlineData("")]
+        //[InlineData("")]
+        //[InlineData("")]
+        public void randomize_test_roms_10_times_each_chaos(string filename)
+        {
+            if(false == File.Exists(filename))
+            {
+                output.WriteLine($"File {filename} not found. Skipping test.");
+                return;
+            }
+
+            byte[] rom_data = LoadRom(filename);
+
+            Random rand = new Random(0);
+
+            OptionFlags options = MakeOptions();
+            options.EnemiesAbsorbable = true;
+            options.RandomizeBosses = true;
+            options.RandomizeBossesType = RandomizeBossesType.Chaos;
+
+            Randomization randomizer = new Randomization();
+
+            for (int i = 0; i < 10; i++)
+            {
+                RomData romData = new RomData(rom_data);
+                randomizer.MakeRandomization(rand.Next(), options, romData);
+            }
+        }
 
         byte[] LoadRom(string filename)
         {

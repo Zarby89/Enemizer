@@ -236,8 +236,10 @@ namespace EnemizerLibrary.Data
             { "turtle-spike-chest-chest", new RawItemLocation("turtle-spike-chest-chest", 0x00EA22, "[dungeon-D7-1F] Turtle Rock - compass room", 0x00D6, "Turtle Rock (Entrance Room)", 0x83, "<Turtle Compass>", 1) },
             { "turtle-boss-crystal", new RawItemLocation("turtle-boss-crystal", 0x00C708, "Turtle Rock Crystal6", 0x00A4, "Turtle Rock (Trinexx[Boss])", 0x06, "<Crystal 7>", 0) },
             { "turtle-boss-item", new RawItemLocation("turtle-boss-item", 0x180159, "Heart Container - Trinexx", 0x00A4, "Turtle Rock (Trinexx[Boss])", 0x3E, "Heart Container", 0) },
-            { "ow-turtle-rock-medallion", new RawItemLocation("ow-turtle-rock-medallion", 0x180023, "Turtle Rock Medallion", 0x8047, "Turtle Rock", GameItems._Turtle_Rock_Token_, "<Turtle Rock Token>", 0) },
-            { "ow-mire-medallion", new RawItemLocation("ow-mire-medallion", 0x180022, "Misery Mire Medallion", 0x8070, "Misery Mire (DW)", GameItems._Misery_Mire_Token_, "<Misery Mire Token>", 0) },
+            { "ow-turtle-rock-medallion", new RawItemLocation("ow-turtle-rock-medallion", 0, "Turtle Rock Medallion", 0x8047, "Turtle Rock", GameItems._Turtle_Rock_Token_, "<Turtle Rock Token>", 0) },
+            { "ow-mire-medallion", new RawItemLocation("ow-mire-medallion", 0, "Misery Mire Medallion", 0x8070, "Misery Mire (DW)", GameItems._Misery_Mire_Token_, "<Misery Mire Token>", 0) },
+            { "ow-turtle-rock-medallion-symbol", new RawItemLocation("ow-turtle-rock-medallion-symbol", RomChest.TurtleRockMedallionAddress, "Turtle Rock Medallion Symbol", 0x8047, "Turtle Rock", GameItems.Quake, "Quake", 0) },
+            { "ow-mire-medallion-symbol", new RawItemLocation("ow-mire-medallion-symbol", RomChest.MiseryMireMedallionAddress, "Misery Mire Medallion Symbol", 0x8070, "Misery Mire (DW)", GameItems.Ether, "Ether", 0) },
             { "ow-frog-smith", new RawItemLocation("ow-frog-smith", 0, "Frog Smith", 0x8069, "Village of Outcasts Frog Smith (DW)", GameItems._Smith_, "<Smith>", 0) },
             { "ow-purple-chest", new RawItemLocation("ow-purple-chest", 0, "Purple Chest", 0x8062, "Smithy (DW)", GameItems._Purple_Chest_, "<Purple Chest>", 0) },
         };
