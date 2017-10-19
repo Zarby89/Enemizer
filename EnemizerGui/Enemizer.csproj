@@ -162,10 +162,31 @@
     <None Include="sprites\4slink-armors.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="sprites\4slink-split.spr">
+    <None Include="sprites\4SLinkSplit.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\boy.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\BreastCancer.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\CaplessBlondeLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\CaplessPinkLink.spr.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Cat.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\ChampionLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\CheerLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Cucco.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\darkgirl.spr">
@@ -195,10 +216,22 @@
     <None Include="sprites\Frog Link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\Ganondorf.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\girl.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\Karkat.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\kirby-gooey.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\KirbyGooey.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Kore8.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\link.spr">
@@ -210,19 +243,37 @@
     <None Include="sprites\maplequeen.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\MarioClassic.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\Mike Jones.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Minish Cap Link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\ModernLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\Mog.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Mouse.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\NatureLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\NegativeLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\oldman.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Orb.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Popoi.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\pug.spr">
@@ -237,13 +288,28 @@
     <None Include="sprites\samus.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\StaticLink.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\Super Bunny.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\Swatchy.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="sprites\TileroomTile.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Tingle.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="sprites\Toad.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Valeera.spr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="sprites\Will.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="sprites\wizzrobe.spr">

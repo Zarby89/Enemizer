@@ -167,12 +167,28 @@ namespace EnemizerLibrary
                         }
                         else
                         {
-                            spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                            if (rand.Next(0, 100) <= 5)
+                            {
+                                //spawn a stal
+                                spriteId = SpriteConstants.StalSprite;
+                            }
+                            else
+                            {
+                                spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                            }
                         }
                     }
                     else
                     {
-                        spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                        if (rand.Next(0, 100) <= 5)
+                        {
+                            //spawn a stal
+                            spriteId = SpriteConstants.StalSprite;
+                        }
+                        else
+                        {
+                            spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                        }
                     }
 
                     s.SpriteId = spriteId;

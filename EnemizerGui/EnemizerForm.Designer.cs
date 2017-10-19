@@ -368,9 +368,9 @@
             this.allowAbsorbableItemsCheckbox.AutoSize = true;
             this.allowAbsorbableItemsCheckbox.Location = new System.Drawing.Point(240, 6);
             this.allowAbsorbableItemsCheckbox.Name = "allowAbsorbableItemsCheckbox";
-            this.allowAbsorbableItemsCheckbox.Size = new System.Drawing.Size(140, 17);
+            this.allowAbsorbableItemsCheckbox.Size = new System.Drawing.Size(191, 17);
             this.allowAbsorbableItemsCheckbox.TabIndex = 11;
-            this.allowAbsorbableItemsCheckbox.Text = "Allow Absorbables Items";
+            this.allowAbsorbableItemsCheckbox.Text = "Allow Absorbables Items (dungeon)";
             this.allowAbsorbableItemsCheckbox.UseVisualStyleBackColor = true;
             this.allowAbsorbableItemsCheckbox.CheckedChanged += new System.EventHandler(this.allowAbsorbableItemsCheckbox_CheckedChanged);
             // 
@@ -497,6 +497,7 @@
             // randomizeBossBehaviorCheckbox
             // 
             this.randomizeBossBehaviorCheckbox.AutoSize = true;
+            this.randomizeBossBehaviorCheckbox.Enabled = false;
             this.randomizeBossBehaviorCheckbox.Location = new System.Drawing.Point(6, 269);
             this.randomizeBossBehaviorCheckbox.Name = "randomizeBossBehaviorCheckbox";
             this.randomizeBossBehaviorCheckbox.Size = new System.Drawing.Size(180, 17);
