@@ -162,7 +162,7 @@ namespace EnemizerLibrary
                 {
                     int spriteId = -1;
 
-                    if (optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
+                    if (optionFlags.EnemiesAbsorbable && optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
                     {
                         if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
                         {
