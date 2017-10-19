@@ -95,8 +95,6 @@
     <Compile Include="DungeonObject\DungeonObjectPointerCollection.cs" />
     <Compile Include="DungeonObject\SubType3Object.cs" />
     <Compile Include="EnemyRandomizer\Dungeon\DungeonEnemyRandomizer.cs" />
-    <Compile Include="EnemyRandomizer\GroupSubsetPossibleSprite.cs" />
-    <Compile Include="EnemyRandomizer\GroupSubsetPossibleSpriteCollection.cs" />
     <Compile Include="EnemyRandomizer\Overworld\OverworldArea.cs" />
     <Compile Include="EnemyRandomizer\Overworld\OverworldAreaConstants.cs" />
     <Compile Include="EnemyRandomizer\Overworld\OverworldEnemyRandomizer.cs" />
