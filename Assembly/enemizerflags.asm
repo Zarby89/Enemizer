@@ -2,7 +2,7 @@
 db #$00 ;408000 : 200000 ; Enable random enemy under bushes
 db #$00 ;408001 : 200001 ; Enable blind's door closing for other bosses
 db #$01 ;408002 : 200002 ; Moldorm eye count, default to 2 eyes (1)
-db #$00 ;408003 : 200003
+db #$00 ;408003 : 200003 ; Randomize Sprites.
 db #$00 ;408004 : 200004
 db #$00 ;408005 : 200005
 db #$00 ;408006 : 200006

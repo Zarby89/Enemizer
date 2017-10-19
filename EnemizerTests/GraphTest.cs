@@ -27,7 +27,7 @@ namespace EnemizerTests
             RomExitCollection romExits = new RomExitCollection(romData);
             RomChestCollection romChests = new RomChestCollection(romData);
 
-            GraphData graphData = new GraphData(romData, romEntrances, romExits, romChests);
+            GraphData graphData = new GraphData(romData, new OptionFlags(), romEntrances, romExits, romChests);
             //foreach(var e in graphData.AllEdges)
             //{
             //    output.WriteLine(e.ToString());

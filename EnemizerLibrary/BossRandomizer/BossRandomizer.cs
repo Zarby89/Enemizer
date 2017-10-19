@@ -77,17 +77,28 @@ namespace EnemizerLibrary
 
                 var boss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
 
-                //var result = graph.FindPath("cave-links-house", "triforce-room");
+                var result = graph.FindPath("cave-links-house", "triforce-room");
 
                 dungeon.SelectedBoss = boss;
 
                 if(dungeon.SelectedBoss == null)
                 {
-                    var readdDungeon = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).FirstOrDefault();
-                    if(readdDungeon != null)
+                    //if(false && CanGetBossRoomAndDefeat(dungeon, result))
+                    //{
+                    //    boss = bossPool.GetNextBoss();
+                    //    dungeon.SelectedBoss = boss;
+                    //}
+                    //else
+                    //{
+
+                    var readdPool = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).ToList();
+                    //var readdDungeon = this.DungeonPool.Where(x => x.SelectedBoss != null && dungeon.DisallowedBosses.Contains(x.SelectedBoss.BossType) == false).FirstOrDefault();
+                    if(readdPool.Count > 0)
                     {
+                        var readdDungeon = readdPool[rand.Next(0, readdPool.Count)];
                         boss = readdDungeon.SelectedBoss;
                         dungeon.SelectedBoss = readdDungeon.SelectedBoss;
+                        bossPool.ReaddBoss(boss);
 
                         dungeonQueue.Enqueue(readdDungeon);
                         readdDungeon.SelectedBoss = null;
@@ -95,9 +106,11 @@ namespace EnemizerLibrary
                         // update the graph
                         graph.UpdateDungeonBoss(readdDungeon);
                     }
+
+                    //}
                 }
 
-                if(dungeon.SelectedBoss != null)
+                if (dungeon.SelectedBoss != null)
                 {
                     // update the graph
                     graph.UpdateDungeonBoss(dungeon);
@@ -193,5 +206,67 @@ namespace EnemizerLibrary
             romData[0x04DE81] = 0x00;
         }
 
+        protected bool CanGetBossRoomAndDefeat(Dungeon dungeon, GraphResult result)
+        {
+            bool bossRoom = false;
+            bool bossWin = false;
+            switch (dungeon.BossRoomId)
+            {
+                case RoomIdConstants.R200_EasternPalace_ArmosKnights:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "eastern-armos");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Eastern Boss]");
+                    break;
+                case RoomIdConstants.R51_DesertPalace_Lanmolas:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "desert-lanmolas");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Desert Boss]");
+                    break;
+                case RoomIdConstants.R7_TowerofHera_Moldorm:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "hera-moldorm");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Hera Boss]");
+                    break;
+                case RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "pod-helmasaur");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[PoD Boss]");
+                    break;
+                case RoomIdConstants.R6_SwampPalace_Arrghus:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "swamp-arrghus");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Swamp Boss]");
+                    break;
+                case RoomIdConstants.R41_SkullWoods_Mothula:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "skull-mothula");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Skull Boss]");
+                    break;
+                case RoomIdConstants.R172_ThievesTown_BlindTheThief:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "thieves-blind");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Thieves Boss]");
+                    break;
+                case RoomIdConstants.R222_IcePalace_Kholdstare:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "ice-kholdstare");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Ice Boss]");
+                    break;
+                case RoomIdConstants.R144_MiseryMire_Vitreous:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "mire-vitreous");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Mire Boss]");
+                    break;
+                case RoomIdConstants.R164_TurtleRock_Trinexx:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "turtle-trinexx");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[Turtle Boss]");
+                    break;
+                case RoomIdConstants.R28_GanonsTower_IceArmos:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "gt-armos");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[GT Armos Boss]");
+                    break;
+                case RoomIdConstants.R108_GanonsTower_LanmolasRoom:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "gt-lanmolas");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[GT Lanmolas Boss]");
+                    break;
+                case RoomIdConstants.R77_GanonsTower_MoldormRoom:
+                    bossRoom = result.NodesVisited.Any(x => x.LogicalId == "gt-moldorm");
+                    bossWin = result.ItemsObtained.Any(x => x.LogicalId == "[GT Moldorm Boss]");
+                    break;
+            }
+            // if we can't even get to the room no need to switch it, because something else is blocking the seed
+            return !bossRoom || bossWin;
+        }
     }
 }

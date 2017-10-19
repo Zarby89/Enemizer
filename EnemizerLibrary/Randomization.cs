@@ -49,7 +49,7 @@ namespace EnemizerLibrary
 
             rand = new Random(seed);
 
-            Graph graph = new Graph(new GraphData(this.ROM_DATA));
+            Graph graph = new Graph(new GraphData(this.ROM_DATA, this.optionFlags));
 
             if (skin != "Unchanged" && skin != "")
             {

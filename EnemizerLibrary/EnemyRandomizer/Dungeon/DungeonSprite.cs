@@ -89,8 +89,8 @@ namespace EnemizerLibrary
                 //romData[0x5FFB8] = 15; // this will make you warp outside
 
                 spriteId = 9;
-                byte1 |= SpriteConstants.OverlordMask;
-                IsOverlord = false;
+                byte1 |= SpriteConstants.OverlordMask; // make it an overlord
+                IsOverlord = false; // but pretend it's not
             }
 
             if (IsOverlord == false)
