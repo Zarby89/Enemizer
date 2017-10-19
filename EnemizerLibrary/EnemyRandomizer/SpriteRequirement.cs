@@ -27,6 +27,7 @@ namespace EnemizerLibrary
         public bool IsObject { get; set; }
         public bool Absorbable { get; set; }
         public bool IsWaterSprite { get; set; }
+        public bool IsEnemySprite { get; set; }
         public List<byte> GroupId { get; set; } = new List<byte>();
         public List<byte> SubGroup0 { get; set; } = new List<byte>();
         public List<byte> SubGroup1 { get; set; } = new List<byte>();
@@ -43,6 +44,7 @@ namespace EnemizerLibrary
         public SpriteRequirement(int SpriteId)
         {
             this.SpriteId = SpriteId;
+            this.IsEnemySprite = true;
         }
 
         public static SpriteRequirement New(int spriteId)
@@ -61,6 +63,7 @@ namespace EnemizerLibrary
         {
             NPC = true;
             DoNotRandomize = true;
+            IsEnemySprite = false;
             return this;
         }
 
@@ -87,6 +90,18 @@ namespace EnemizerLibrary
         public SpriteRequirement SetDoNotRandomize()
         {
             DoNotRandomize = true;
+            return this;
+        }
+
+        public SpriteRequirement SetIsEnemySprite()
+        {
+            IsEnemySprite = true;
+            return this;
+        }
+
+        public SpriteRequirement SetNotEnemySprite()
+        {
+            IsEnemySprite = false;
             return this;
         }
 
@@ -120,6 +135,7 @@ namespace EnemizerLibrary
         public SpriteRequirement SetIsObject()
         {
             IsObject = true;
+            IsEnemySprite = false;
             return this;
         }
 
@@ -253,6 +269,7 @@ namespace EnemizerLibrary
             get
             {
                 return SpriteRequirements.Where(x => x.NPC == false 
+                                                    && x.IsEnemySprite == true
                                                     && x.Boss == false
                                                     && x.Overlord == false
                                                     && x.IsObject == false);
@@ -351,9 +368,11 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RopaSprite).SetKillable().AddSubgroup0(22));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().SetCannotHaveKey().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().SetCannotHaveKey().AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TalkingTreeSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(21));
 
