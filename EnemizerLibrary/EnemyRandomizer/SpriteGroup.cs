@@ -74,7 +74,7 @@ namespace EnemizerLibrary
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
 
-            return spriteRequirementsCollection.GetUsableDungeonEnemySprites(optionFlags?.EnemiesAbsorbable == true).Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
+            return spriteRequirementsCollection.GetUsableDungeonEnemySprites().Where(x => x.SpriteInGroup(this) && x.CanSpawnInRoom(room));
         }
 
         public IEnumerable<SpriteRequirement> GetPossibleEnemySprites(OverworldArea area, OptionFlags optionFlags = null)
@@ -82,7 +82,7 @@ namespace EnemizerLibrary
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
             
-            return spriteRequirementsCollection.GetUsableOverworldEnemySprites(optionFlags?.EnemiesAbsorbable == true).Where(x => x.SpriteInGroup(this));
+            return spriteRequirementsCollection.GetUsableOverworldEnemySprites().Where(x => x.SpriteInGroup(this));
         }
     }
 }
