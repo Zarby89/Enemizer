@@ -64,6 +64,11 @@ namespace EnemizerLibrary
             return boss;
         }
 
+        public virtual Boss GetNextBoss()
+        {
+            return this.pool.FirstOrDefault();
+        }
+
         public virtual void RemoveBoss(Boss boss)
         {
             pool.Remove(boss);

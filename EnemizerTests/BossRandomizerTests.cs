@@ -98,7 +98,7 @@ namespace EnemizerTests
             for (int i = 0; i < 10; i++)
             {
                 int seedNumber = 0;  seedRandom.Next(999999999);
-                BossRandomizer br = new BossRandomizer(new Random(seedNumber), new Graph(new GraphData(romData)));
+                BossRandomizer br = new BossRandomizer(new Random(seedNumber), new Graph(new GraphData(romData, new OptionFlags())));
 
                 br.RandomizeRom(romData);
 

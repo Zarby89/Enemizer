@@ -539,7 +539,7 @@ namespace EnemizerLibrary
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YellowStalfosSprite)); // TODO: add
 
             // just don't use them until we fix the asm
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetKillable().AddSubgroup2(42));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KodongosSprite).SetNeverUse().SetDoNotRandomize());
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlamesSprite)); // TODO: add
 

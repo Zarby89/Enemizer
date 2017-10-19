@@ -81,7 +81,7 @@ namespace EnemizerLibrary
         {
             // TODO: add more logic to this?
             // needs to check for two subgroups, etc.
-
+            
             return spriteRequirementsCollection.GetUsableOverworldEnemySprites(optionFlags?.EnemiesAbsorbable == false).Where(x => x.SpriteInGroup(this));
         }
     }

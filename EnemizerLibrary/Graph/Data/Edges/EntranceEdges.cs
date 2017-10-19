@@ -55,14 +55,14 @@ namespace EnemizerLibrary.Data
                 {
                     throw new Exception($"FillEntranceEdges - Invalid entranceId {r.LogicalEntranceId}");
                 }
-                if(r.Requirements == GameItems.GetLogicalId(GameItems._Misery_Mire_Token_))
-                {
-                    r.Requirements = _itemLocations.RawItemLocations.Values.Where(x => x.LocationAddress == RomChest.MiseryMireMedallionAddress).Select(x => x.ItemName).FirstOrDefault();
-                }
-                if (r.Requirements == GameItems.GetLogicalId(GameItems._Turtle_Rock_Token_))
-                {
-                    r.Requirements = _itemLocations.RawItemLocations.Values.Where(x => x.LocationAddress == RomChest.TurtleRockMedallionAddress).Select(x => x.ItemName).FirstOrDefault();
-                }
+                //if(r.Requirements.Contains(GameItems.GetLogicalId(GameItems._Misery_Mire_Token_)))
+                //{
+                //    r.Requirements.Replace(GameItems.GetLogicalId(GameItems._Misery_Mire_Token_), _itemLocations.RawItemLocations.Values.Where(x => x.LocationAddress == RomChest.MiseryMireMedallionAddress).Select(x => x.ItemName).FirstOrDefault());
+                //}
+                //if (r.Requirements.Contains(GameItems.GetLogicalId(GameItems._Turtle_Rock_Token_)))
+                //{
+                //    r.Requirements.Replace(GameItems.GetLogicalId(GameItems._Turtle_Rock_Token_), _itemLocations.RawItemLocations.Values.Where(x => x.LocationAddress == RomChest.TurtleRockMedallionAddress).Select(x => x.ItemName).FirstOrDefault());
+                //}
                 _overworldEntrances.Add(r.EntranceAddress, new OverworldEntrance(r.EntranceAddress, r.EntranceName, area, entrance, r.Requirements));
             }
 
