@@ -75,6 +75,11 @@ namespace EnemizerLibrary
         {
             get
             {
+                if(!IsEnemizerRom)
+                {
+                    return "Not Enemizer Rom";
+                }
+
                 var versionBytes = new byte[EnemizerInfoVersionLength];
                 Array.Copy(this.romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, versionBytes, 0, EnemizerInfoVersionLength);
                 return System.Text.Encoding.ASCII.GetString(versionBytes).TrimEnd('\0');
@@ -105,6 +110,11 @@ namespace EnemizerLibrary
 
         public OptionFlags GetOptionFlagsFromRom()
         {
+            if(!IsEnemizerRom)
+            {
+                return null;
+            }
+
             byte[] optionByteArray = new byte[EnemizerInfoFlagsLength];
             Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray, 0, EnemizerInfoFlagsLength);
             return new OptionFlags(optionByteArray);
@@ -260,6 +270,34 @@ namespace EnemizerLibrary
                 {
                     return true;
                 }
+                // entrance randomizer
+                if (romData[0x7FC0] == 0x45 && romData[0x7FC1] == 0x52)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsItemRandomizerRom
+        {
+            get
+            {
+                // item randomizer
+                if (romData[0x7FC0] == 0x56 && romData[0x7FC1] == 0x54)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsEntranceRandomizerRom
+        {
+            get
+            {
                 // entrance randomizer
                 if (romData[0x7FC0] == 0x45 && romData[0x7FC1] == 0x52)
                 {
