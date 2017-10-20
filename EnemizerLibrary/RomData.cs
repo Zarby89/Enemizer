@@ -10,8 +10,21 @@ namespace EnemizerLibrary
 {
     public class RomData
     {
+        // 0x100 bytes to use for rom info
+        public const int EnemizerInfoTableBaseAddress = 0x200000;
+
+        public const int EnemizerInfoSeedOffset = 0x0;
+        public const int EnemizerInfoSeedStringLength = 12;
+
+        public const int EnemizerInfoVersionOffset = EnemizerInfoSeedOffset + EnemizerInfoSeedStringLength;
+        public const int EnemizerInfoVersionLength = 8;
+
+        // reserve 0x50 bytes for flags/options
+        public const int EnemizerInfoFlagsOffset = EnemizerInfoVersionOffset + EnemizerInfoVersionLength;
+        public const int EnemizerInfoFlagsLength = 0x50;
+
         // 0x20 flags total
-        public const int EnemizerOptionFlagsBaseAddress = 0x200000; // snes 408000
+        public const int EnemizerOptionFlagsBaseAddress = 0x200100; // snes 408000
         public const int RandomizeHiddenEnemiesFlag = 0x00;
         public const int CloseBlindDoorFlag = 0x01;
         public const int MoldormEyesFlag = 0x02;
@@ -19,15 +32,75 @@ namespace EnemizerLibrary
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
-        int seed;
+        public bool IsEnemizerRom
+        {
+            get
+            {
+                return romData.Length == 0x400000
+                    && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset] == 'E' 
+                    && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset + 1] == 'N';
+            }
+        }
+
+        int seed = -1;
         public int EnemizerSeed
         {
-            get { return seed; }
+            get
+            {
+                if (seed < 0 && IsEnemizerRom)
+                {
+                    var seedBytes = new byte[EnemizerInfoSeedStringLength];
+                    Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, seedBytes, 0, EnemizerInfoSeedStringLength);
+                    var seedString = System.Text.Encoding.ASCII.GetString(seedBytes).Substring(2);
+                    seed = Convert.ToInt32(seedString);
+                }
+                return seed;
+            }
             set
             {
+                if(romData.Length < 0x400000)
+                {
+                    throw new Exception("You need to expand the rom before you can use Enemizer features.");
+                }
+
                 // write to rom somewhere too
+                var seedString = ASCIIEncoding.ASCII.GetBytes($"EN{value.ToString()}");
+                Array.Resize(ref seedString, EnemizerInfoSeedStringLength); // make sure it's long enough
+                Array.Copy(seedString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, EnemizerInfoSeedStringLength);
                 seed = value;
             }
+        }
+
+        public string EnemizerVersion
+        {
+            get
+            {
+                var versionBytes = new byte[EnemizerInfoVersionLength];
+                Array.Copy(this.romData, EnemizerInfoVersionOffset, versionBytes, 0, EnemizerInfoVersionLength);
+                return System.Text.Encoding.ASCII.GetString(versionBytes);
+            }
+            set
+            {
+                if (romData.Length < 0x400000)
+                {
+                    throw new Exception("You need to expand the rom before you can use Enemizer features.");
+                }
+
+                // write to rom somewhere too
+                var versionString = ASCIIEncoding.ASCII.GetBytes(value);
+                Array.Resize(ref versionString, EnemizerInfoVersionLength); // make sure it's long enough
+                Array.Copy(versionString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, EnemizerInfoVersionLength);
+            }
+        }
+
+        public void SetRomInfoOptionFlags(OptionFlags optionFlags)
+        {
+            var optionByteArray = optionFlags.ToByteArray();
+            if(optionByteArray.Length > 0x100 - EnemizerInfoFlagsOffset)
+            {
+                throw new Exception("Option flags is too long to fit in the space allocated. Need to move data/code in asm file.");
+            }
+            Array.Copy(optionByteArray, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray.Length);
         }
 
         /// <summary>
@@ -240,6 +313,8 @@ namespace EnemizerLibrary
         {
             Array.Resize(ref this.romData, 0x400000); // 4MB
             this.romData[0x7FD7] = 0x0C; // update header length
+
+            this.EnemizerVersion = EnemizerLibrary.Version.CurrentVersion;
         }
 
         /*

@@ -18,10 +18,10 @@ db #$00
 
 ;=Constants======================================================================
 
-!BUSHES_FLAG = "$408000"
-!BLIND_DOOR_FLAG = "$408001"
-!MOLDORM_EYES_FLAG = "$408002"
-!RANDOM_SPRITE_FLAG = "$408003"
+!BUSHES_FLAG = "$408100"
+!BLIND_DOOR_FLAG = "$408101"
+!MOLDORM_EYES_FLAG = "$408102"
+!RANDOM_SPRITE_FLAG = "$408103"
 
 !SHELL_DMA_FLAG = "$7F50B0"
 ;================================================================================
@@ -32,6 +32,7 @@ incsrc DMA.asm
 
 ;================================================================================
 org $408000
+skip #$100 ; reserved for enemizer info
 incsrc enemizerflags.asm
 incsrc bushes.asm
 incsrc NMI.asm

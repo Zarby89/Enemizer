@@ -328,7 +328,7 @@ namespace Enemizer
             int seed = 0;
             if (String.IsNullOrEmpty(seedNumberTextbox.Text))
             {
-                seed = rand.Next();
+                seed = rand.Next(0, 999999999);
             }
             else
             {
@@ -336,6 +336,11 @@ namespace Enemizer
                 if (!int.TryParse(seedNumberTextbox.Text, out seed))
                 {
                     MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.");
+                    return;
+                }
+                if(seed < 0)
+                {
+                    MessageBox.Show("Please enter a positive Seed Number.");
                     return;
                 }
             }
@@ -362,16 +367,18 @@ namespace Enemizer
                 RomData romData = new RomData(rom_data);
                 RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
-                if(config.OptionFlags.GenerateSpoilers)
+                string fileNameNoExtension = $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} (EN{randomizedRom.EnemizerSeed})";
+
+                if (config.OptionFlags.GenerateSpoilers)
                 {
-                    File.WriteAllText($"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} ({randomizedRom.EnemizerSeed}) Spoiler.txt", randomizedRom.Spoiler.ToString());
+                    File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
                 }
-                string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
+                string fileName = $"{fileNameNoExtension}.sfc";
                 fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
                 randomizedRom.WriteRom(fs);
                 fs.Close();
 
-                MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
+                MessageBox.Show($"{fileName} Has been created in the enemizer folder !");
             }
 #if !DEBUG
             }

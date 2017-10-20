@@ -864,6 +864,7 @@
             // seedNumberTextbox
             // 
             this.seedNumberTextbox.Location = new System.Drawing.Point(487, 254);
+            this.seedNumberTextbox.MaxLength = 9;
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;

@@ -21,11 +21,13 @@ namespace EnemizerLibrary
 
         public RomData MakeRandomization(int seed, OptionFlags optionflags, RomData romData, string skin = "") //Initialization of the randomization
         {
+            this.optionFlags = optionflags;
+
             this.ROM_DATA = romData;
             this.ROM_DATA.ExpandRom();
             this.ROM_DATA.SetCharacterSelectScreenVersion();
             this.ROM_DATA.EnemizerSeed = seed;
-            this.optionFlags = optionflags;
+            this.ROM_DATA.SetRomInfoOptionFlags(this.optionFlags);
 
             // make sure we have a randomizer rom
             if (this.ROM_DATA.IsRandomizerRom == false)
@@ -60,7 +62,7 @@ namespace EnemizerLibrary
             {
                 this.ROM_DATA.RandomizeSprites = true;
                 // TODO: check for random option and set flags too
-                //this.ROM_DATA[0x200003] = 0x01;
+                //this.ROM_DATA[0x200103] = 0x01;
                 BuildRandomLinkSpriteTable(new Random(seed));
             }
             else
@@ -210,7 +212,7 @@ namespace EnemizerLibrary
                 // TODO: move this to its own class
                 byte numberOfMoldormEyes = (byte)rand.Next(0, 8);
                 this.ROM_DATA[0x0EDBB3] = numberOfMoldormEyes;
-                this.ROM_DATA[0x200002] = numberOfMoldormEyes;
+                this.ROM_DATA[0x200102] = numberOfMoldormEyes;
 
                 if(rand.Next(0, 100) == 1)
                 {
