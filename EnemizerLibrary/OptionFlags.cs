@@ -63,10 +63,116 @@ namespace EnemizerLibrary
         public bool AlternateGfx { get; set; }
         public ShieldTypes ShieldGraphics { get; set; } = ShieldTypes.Normal;
 
+        public OptionFlags()
+        {
+
+        }
+
+        public OptionFlags(byte[] optionBytes)
+        {
+            int i = 0;
+            this.RandomizeEnemies = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeEnemiesType = (RandomizeEnemiesType)optionBytes[i++];
+            this.RandomizeBushEnemyChance = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeEnemyHealthRange = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeEnemyHealthRangeAmount = optionBytes[i++];
+            this.RandomizeEnemyDamage = Convert.ToBoolean(optionBytes[i++]);
+            this.AllowEnemyZeroDamage = Convert.ToBoolean(optionBytes[i++]);
+            this.EasyModeEscape = Convert.ToBoolean(optionBytes[i++]);
+            this.EnemiesAbsorbable = Convert.ToBoolean(optionBytes[i++]);
+            this.AbsorbableSpawnRate = optionBytes[i++];
+
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Heart] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.GreenRupee] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.BlueRupee] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.RedRupee] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Bomb_1] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Bomb_4] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Bomb_8] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.SmallMagic] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.FullMagic] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Arrow_5] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Arrow_10] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Fairy] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Key] = true;
+            }
+            if (optionBytes[i++] != 0)
+            {
+                AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.BigKey] = true;
+            }
+
+            this.BossMadness = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeBosses = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeBossesType = (EnemizerLibrary.RandomizeBossesType)optionBytes[i++];
+            this.RandomizeBossHealth = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeBossHealthMinAmount = optionBytes[i++];
+            this.RandomizeBossHealthMaxAmount = optionBytes[i++];
+            this.RandomizeBossDamage = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeBossDamageMinAmount = optionBytes[i++];
+            this.RandomizeBossDamageMaxAmount = optionBytes[i++];
+            this.RandomizeBossBehavior = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeDungeonPalettes = Convert.ToBoolean(optionBytes[i++]);
+            this.SetBlackoutMode = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeOverworldPalettes = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeSpritePalettes = Convert.ToBoolean(optionBytes[i++]);
+            this.SetAdvancedSpritePalettes = Convert.ToBoolean(optionBytes[i++]);
+            this.PukeMode = Convert.ToBoolean(optionBytes[i++]);
+            this.NegativeMode = Convert.ToBoolean(optionBytes[i++]);
+            this.GrayscaleMode = Convert.ToBoolean(optionBytes[i++]);
+            this.GenerateSpoilers = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeLinkSpritePalette = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizePots = Convert.ToBoolean(optionBytes[i++]);
+            this.ShuffleMusic = Convert.ToBoolean(optionBytes[i++]);
+            this.BootlegMagic = Convert.ToBoolean(optionBytes[i++]);
+            this.DebugMode = Convert.ToBoolean(optionBytes[i++]);
+            this.CustomBosses = Convert.ToBoolean(optionBytes[i++]);
+            this.AndyMode = Convert.ToBoolean(optionBytes[i++]);
+            this.HeartBeepSpeed = (EnemizerLibrary.HeartBeepSpeed)optionBytes[i++];
+            this.AlternateGfx = Convert.ToBoolean(optionBytes[i++]);
+            this.ShieldGraphics = (EnemizerLibrary.ShieldTypes)optionBytes[i++];
+        }
 
         public byte[] ToByteArray()
         {
-            var ret = new byte[0x50];
+            var ret = new byte[RomData.EnemizerInfoFlagsLength];
             int i = 0;
             ret[i++] = Convert.ToByte(this.RandomizeEnemies);
             ret[i++] = (byte)this.RandomizeEnemiesType;
@@ -80,62 +186,47 @@ namespace EnemizerLibrary
             ret[i++] = (byte)this.AbsorbableSpawnRate;
 
             var absorbableType = false;
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Heart, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.GreenRupee, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.BlueRupee, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.RedRupee, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_1, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_4, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_8, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.SmallMagic, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.FullMagic, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Arrow_5, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Arrow_10, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Fairy, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Key, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
-            if (AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.BigKey, out absorbableType))
-            {
-                ret[i++] = Convert.ToByte(absorbableType);
-            }
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Heart, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.GreenRupee, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.BlueRupee, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.RedRupee, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_1, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_4, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Bomb_8, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.SmallMagic, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.FullMagic, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Arrow_5, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Arrow_10, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Fairy, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.Key, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
+
+            AbsorbableTypes.TryGetValue(EnemizerLibrary.AbsorbableTypes.BigKey, out absorbableType);
+            ret[i++] = Convert.ToByte(absorbableType);
 
             ret[i++] = Convert.ToByte(this.BossMadness);
             ret[i++] = Convert.ToByte(this.RandomizeBosses);

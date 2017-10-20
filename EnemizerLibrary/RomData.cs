@@ -51,7 +51,7 @@ namespace EnemizerLibrary
                 {
                     var seedBytes = new byte[EnemizerInfoSeedStringLength];
                     Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, seedBytes, 0, EnemizerInfoSeedStringLength);
-                    var seedString = System.Text.Encoding.ASCII.GetString(seedBytes).Substring(2);
+                    var seedString = System.Text.Encoding.ASCII.GetString(seedBytes).TrimEnd('\0').Substring(2);
                     seed = Convert.ToInt32(seedString);
                 }
                 return seed;
@@ -76,8 +76,8 @@ namespace EnemizerLibrary
             get
             {
                 var versionBytes = new byte[EnemizerInfoVersionLength];
-                Array.Copy(this.romData, EnemizerInfoVersionOffset, versionBytes, 0, EnemizerInfoVersionLength);
-                return System.Text.Encoding.ASCII.GetString(versionBytes);
+                Array.Copy(this.romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, versionBytes, 0, EnemizerInfoVersionLength);
+                return System.Text.Encoding.ASCII.GetString(versionBytes).TrimEnd('\0');
             }
             set
             {
@@ -101,6 +101,13 @@ namespace EnemizerLibrary
                 throw new Exception("Option flags is too long to fit in the space allocated. Need to move data/code in asm file.");
             }
             Array.Copy(optionByteArray, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray.Length);
+        }
+
+        public OptionFlags GetOptionFlagsFromRom()
+        {
+            byte[] optionByteArray = new byte[EnemizerInfoFlagsLength];
+            Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray, 0, EnemizerInfoFlagsLength);
+            return new OptionFlags(optionByteArray);
         }
 
         /// <summary>
@@ -305,7 +312,7 @@ namespace EnemizerLibrary
                  */
                 byte[] seed = new byte[21];
                 Array.Copy(romData, 0x7FC0, seed, 0, 21);
-                return System.Text.Encoding.ASCII.GetString(seed);
+                return System.Text.Encoding.ASCII.GetString(seed).TrimEnd('\0');
             }
         }
 
