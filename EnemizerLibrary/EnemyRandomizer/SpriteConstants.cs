@@ -221,7 +221,7 @@ namespace EnemizerLibrary
             { 0xB5, "Bomb Salesman" },
             { 0xB6, "Kiki" },
             { 0xB7, "Maiden following you in Blind Dungeon" },
-            { 0xB8, "Monologue Testing Sprite" },
+            { 0xB8, "Mimic" },
             { 0xB9, "Feuding Friends on Death Mountain" },
             { 0xBA, "Whirlpool" },
             { 0xBB, "Salesman / chestgame guy / 300 rupee giver guy / Chest game thief" },

@@ -82,6 +82,10 @@ namespace EnemizerLibrary
             this.EnemiesAbsorbable = Convert.ToBoolean(optionBytes[i++]);
             this.AbsorbableSpawnRate = optionBytes[i++];
 
+            foreach(var e in Enum.GetValues(typeof(AbsorbableTypes)))
+            {
+                AbsorbableTypes[(AbsorbableTypes)e] = false;
+            }
             if (optionBytes[i++] != 0)
             {
                 AbsorbableTypes[EnemizerLibrary.AbsorbableTypes.Heart] = true;
