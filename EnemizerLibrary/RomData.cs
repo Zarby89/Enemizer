@@ -128,6 +128,7 @@ namespace EnemizerLibrary
         public RomData(byte[] romData)
         {
             this.romData = romData;
+            this.OriginalLength = romData.Length;
         }
 
         /// <summary>
@@ -401,6 +402,8 @@ namespace EnemizerLibrary
                 return romData.Length;
             }
         }
+
+        public int OriginalLength { get; set; }
 
         public byte this[int i]
         {
