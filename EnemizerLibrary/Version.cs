@@ -10,7 +10,8 @@ namespace EnemizerLibrary
     {
         public const int MajorVersion = 6;
         public const int MinorVersion = 0;
-        public static string CurrentVersion = $"{MajorVersion}.{MinorVersion}";
+        public const int BuildNumber = 3; // max 99 to show up in rom
+        public static string CurrentVersion = $"{MajorVersion}.{MinorVersion}.{BuildNumber.ToString("D2")}";
         public static bool CheckUpdate()
         {
             
