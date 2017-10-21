@@ -11,7 +11,7 @@ namespace EnemizerLibrary
     public class RomData
     {
         // 0x100 bytes to use for rom info
-        public int EnemizerInfoTableBaseAddress = XkasSymbols.Instance.Symbols["EnemizerInfoTable"];
+        public int EnemizerInfoTableBaseAddress = XkasSymbols.Instance.Symbols["enemizer_info_table"];
 
         public const int EnemizerInfoSeedOffset = 0x0;
         public const int EnemizerInfoSeedStringLength = 12;
@@ -36,7 +36,7 @@ namespace EnemizerLibrary
         {
             get
             {
-                return romData.Length == 0x400000
+                return romData.Length == AddressConstants.EnemizerFileLength
                     && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset] == 'E' 
                     && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset + 1] == 'N';
             }
@@ -58,7 +58,7 @@ namespace EnemizerLibrary
             }
             set
             {
-                if(romData.Length < 0x400000)
+                if(romData.Length < AddressConstants.EnemizerFileLength)
                 {
                     throw new Exception("You need to expand the rom before you can use Enemizer features.");
                 }
@@ -86,7 +86,7 @@ namespace EnemizerLibrary
             }
             set
             {
-                if (romData.Length < 0x400000)
+                if (romData.Length < AddressConstants.EnemizerFileLength)
                 {
                     throw new Exception("You need to expand the rom before you can use Enemizer features.");
                 }
@@ -185,7 +185,7 @@ namespace EnemizerLibrary
              * 10 01 01 01 11 01 01 03 
              */
             byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
-            Array.Copy(vanilla, 0, romData, 0xD7BBB, 16);
+            Array.Copy(vanilla, 0, romData, AddressConstants.HiddenEnemyChancePoolBaseAddress, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()
@@ -198,22 +198,23 @@ namespace EnemizerLibrary
             db $01, $0F, $0F, $0F, $0F, $0F, $0F, $12 
             db $0F, $01, $0F, $0F, $11, $0F, $0F, $03
             */
-            romData[0xD7BBB + 0] = 0x01;
-            romData[0xD7BBB + 1] = 0x0F;
-            romData[0xD7BBB + 2] = 0x0F;
-            romData[0xD7BBB + 3] = 0x0F;
-            romData[0xD7BBB + 4] = 0x0F;
-            romData[0xD7BBB + 5] = 0x0F;
-            romData[0xD7BBB + 6] = 0x0F;
-            romData[0xD7BBB + 7] = 0x12;
-            romData[0xD7BBB + 8] = 0x0F;
-            romData[0xD7BBB + 9] = 0x01;
-            romData[0xD7BBB + 10] = 0x0F;
-            romData[0xD7BBB + 11] = 0x0F;
-            romData[0xD7BBB + 12] = 0x11;
-            romData[0xD7BBB + 13] = 0x0F;
-            romData[0xD7BBB + 14] = 0x0F;
-            romData[0xD7BBB + 15] = 0x03;
+            int i = AddressConstants.HiddenEnemyChancePoolBaseAddress;
+            romData[i++] = 0x01;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x12;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x01;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x11;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x03;
         }
 
         public void SetCharacterSelectScreenVersion()

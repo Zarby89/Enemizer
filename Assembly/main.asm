@@ -13,9 +13,6 @@ db #$0C
 org $5FFFFF ; write at the last position to expand on 2mb
 db #$00
 
-; Enemizer reserved memory
-; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
-
 ;=Constants======================================================================
 
 !BUSHES_FLAG = "$408100"
@@ -23,6 +20,8 @@ db #$00
 !MOLDORM_EYES_FLAG = "$408102"
 !RANDOM_SPRITE_FLAG = "$408103"
 
+; Enemizer reserved memory
+; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
 !SHELL_DMA_FLAG = "$7F50B0"
 ;================================================================================
 
@@ -32,9 +31,14 @@ incsrc DMA.asm
 
 ;================================================================================
 org $408000
-EnemizerInfoTable:
-skip #$100 ; reserved for enemizer info
+EnemizerTablesStart:
+incsrc enemizer_info_table.asm
 incsrc enemizerflags.asm
+incsrc bushes_table.asm
+incsrc room_header_table.asm
+
+; code
+EnemizerCodeStart:
 incsrc bushes.asm
 incsrc NMI.asm
 incsrc init.asm
@@ -49,6 +53,10 @@ incsrc kodongo_fixes.asm
 incsrc mimic_fixes.asm
 incsrc soundfx_changes.asm
 
+
+; data
+incsrc room_object_table.asm
+incsrc shell_gfx.asm
 ;================================================================================
 
 incsrc export_symbols.asm
@@ -56,8 +64,8 @@ incsrc export_symbols.asm
 org $0DBA71
 GetRandomInt:
 
-; org $0DBB67
-; Sound_SetSfxPanWithPlayerCoords:
+org $0DBB67
+Sound_SetSfxPanWithPlayerCoords:
 
-; org $0DBB8A
-; Sound_SetSfx3PanLong:
+org $0DBB8A
+Sound_SetSfx3PanLong:

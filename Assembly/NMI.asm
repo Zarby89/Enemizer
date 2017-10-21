@@ -38,15 +38,16 @@ JML.l NMIHookReturn
 
 DMAKholdstare:
 {
-    %DMA_VRAM(#$34,#$00,#$24,#$B0,#$00,#$10,#$00)
+    ;#GFX_Kholdstare_Shell>>16
+    %DMA_VRAM(#$34,#$00,#GFX_Kholdstare_Shell>>16&#$FF,#GFX_Kholdstare_Shell>>8&#$FF,#GFX_Kholdstare_Shell&#$FF,#$10,#$00)
     RTL
 }
 
 DMATrinexx:
 {
     ; TODO: change this to trinexx gfx
-    %DMA_VRAM(#$34,#$00,#$24,#$C0,#$00,#$08,#$00)
-    %DMA_VRAM(#$3A,#$A0,#$24,#$C8,#$00,#$00,#$C0)
+    %DMA_VRAM(#$34,#$00,#GFX_Trinexx_Shell>>16,#GFX_Trinexx_Shell>>8&#$FF,#GFX_Trinexx_Shell&#$FF,#$08,#$00)
+    %DMA_VRAM(#$3A,#$A0,#GFX_Trinexx_Shell2>>16,#GFX_Trinexx_Shell2>>8&#$FF,#GFX_Trinexx_Shell2&#$FF,#$00,#$C0)
 
     RTL
 }

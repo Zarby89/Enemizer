@@ -14,19 +14,5 @@ namespace EnemizerLibrary
             BossGraphics = 20;
             BossNode = "swamp-arrghus";
         }
-
-        protected new void FillRules()
-        {
-            Requirements = "Hookshot";
-            Rules.Add(this.CheckGTowerAndPedestalForItems);
-            Rules.Add(this.CheckShabadooHasItem);
-            Rules.Add(this.CheckFatFairyHasItem);
-            Rules.Add(this.CheckBossDropHasImportantItem);
-        }
-
-        public override bool CheckRules(Dungeon dungeon, RomData romData)
-        {
-            return base.CheckRules(dungeon, romData, ItemConstants.Hookshot);
-        }
     }
 }

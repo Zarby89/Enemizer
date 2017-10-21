@@ -61,8 +61,6 @@ namespace EnemizerLibrary
             if(skin == "Random")
             {
                 this.ROM_DATA.RandomizeSprites = true;
-                // TODO: check for random option and set flags too
-                //this.ROM_DATA[0x200103] = 0x01;
                 BuildRandomLinkSpriteTable(new Random(seed));
             }
             else
@@ -211,8 +209,8 @@ namespace EnemizerLibrary
             {
                 // TODO: move this to its own class
                 byte numberOfMoldormEyes = (byte)rand.Next(0, 8);
-                this.ROM_DATA[0x0EDBB3] = numberOfMoldormEyes;
-                this.ROM_DATA[0x200102] = numberOfMoldormEyes;
+                this.ROM_DATA[AddressConstants.MoldormEyeCountAddressVanilla] = numberOfMoldormEyes;
+                this.ROM_DATA[AddressConstants.MoldormEyeCountAddressEnemizer] = numberOfMoldormEyes;
 
                 if(rand.Next(0, 100) == 1)
                 {
@@ -290,7 +288,7 @@ namespace EnemizerLibrary
         void SetBossGfx()
         {
             //they all must need to be at the same place since they generate new addresses/pointers
-            int newGfxPosition = 0x2F8000;
+            int newGfxPosition = AddressConstants.NewBossGraphicsBaseAddress;
             byte[] bossgfxindex = new byte[19] {0x8D,0x90,0x95,0xA3,0xA4,0xA6,0xAB,0xAC,0xAD,0xAE,0xAF,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB8 };
             string[] bossgfxfiles = new string[19] {"agahnim1.bin", "armosknight.bin", "ganon1.bin", "moldorm.bin", "lanmola.bin", "ganon2.bin", "mothula.bin",
                 "arrghus.bin","helmasaure1.bin","blind.bin","kholdstare.bin","vitreous.bin","helmasaure2.bin","trinexx1.bin","trinexx2.bin","ganon3.bin","agahnim2.bin","agahnim3.bin","ganon4.bin"};
@@ -407,7 +405,7 @@ namespace EnemizerLibrary
             int[] dark_rooms = { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
             for(int i = 0;i<dark_rooms.Length;i++)
             {
-                ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] & 0xFE));
+                ROM_DATA[AddressConstants.dungeonHeaderBaseAddress + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[AddressConstants.dungeonHeaderBaseAddress + ((dark_rooms[i] * 14))] & 0xFE));
             }
 
         }
@@ -435,15 +433,6 @@ namespace EnemizerLibrary
                     setColor(0xDD734 + i, Color.FromArgb(sum, sum, sum), 0);
                 }
             }
-            
-
-            //Remove Dark Room
-            /*int[] dark_rooms = new int[] { 11, 25, 33, 34, 50, 65, 66, 106, 146, 147, 153, 181, 186, 192, 208, 228, 229, 230, 231, 240, 241 };
-            for (int i = 0; i < dark_rooms.Length; i++)
-            {
-                ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] = (byte)((ROM_DATA[0x120090 + ((dark_rooms[i] * 14))] & 0xFE));
-            }*/
-
         }
 
         public void set_weird_color()
@@ -1192,7 +1181,7 @@ namespace EnemizerLibrary
                 // force pug sprite
                 r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
                 fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
-                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Read(this.ROM_DATA.romData, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
                 i++;
@@ -1202,7 +1191,7 @@ namespace EnemizerLibrary
             {
                 r = random.Next(skins.Count);
                 fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
-                fsx.Read(this.ROM_DATA.romData, 0x300000 + (i * 0x8000), 0x7078);
+                fsx.Read(this.ROM_DATA.romData, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
             }

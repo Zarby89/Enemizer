@@ -1,4 +1,5 @@
-EnemizerInfoTable = $408000
+EnemizerTablesStart = $408000
+EnemizerCodeStart = $40944d
 sprite_bush_spawn_table_overworld = $408120
 sprite_bush_spawn_table_dungeons = $4081a0
 sprite_bush_spawn_table_random_sprites = $4082c8
@@ -7,3 +8,8 @@ EnemizerFlags_randomize_bushes = $408100
 EnemizerFlags_close_blind_door = $408101
 EnemizerFlags_moldorm_eye_count = $408102
 EnemizerFlags_randomize_sprites = $408103
+room_header_table = $4082cd
+enemizer_info_table = $408000
+moved_room_header_bank_value_address = $4082cc
+modified_room_object_table = $4099b2
+DMAKholdstare = $4094ed

@@ -146,7 +146,7 @@ namespace EnemizerLibrary
                 romData[dungeon.BossAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
 
                 // update boss graphics
-                romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
+                romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
 
                 // update trinexx shell
                 if(dungeon.SelectedBoss.BossType == BossType.Trinexx && dungeon.BossRoomId != RoomIdConstants.R164_TurtleRock_Trinexx)
@@ -155,9 +155,9 @@ namespace EnemizerLibrary
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY-2, dungeon.ClearLayer2, 0xFF2);
 
                     // see "Header contents:" section of rom log
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
-                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
+                    //romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
                 }
 
                 // update kholdstare shell
@@ -166,9 +166,9 @@ namespace EnemizerLibrary
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY, dungeon.ClearLayer2, 0xF95);
 
                     // TODO: fix this. "debug" flag is set on one of these bytes
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
-                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
+                    //romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 4)] = 01; 
                 }
 
                 // remove trinexx shell
@@ -186,7 +186,7 @@ namespace EnemizerLibrary
                 }
             }
 
-            roomObjects.WriteChangesToRom(0x122000);
+            roomObjects.WriteChangesToRom(AddressConstants.movedRoomObjectBaseAddress);
             //shells.WriteShellsToRom(romData);
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);

@@ -1,21 +1,21 @@
-;================================================================================
-; insert kholdstare & trinexx shell gfx file
-;--------------------------------------------------------------------------------
-; pc file address = 0x123000
-org $24B000
-GFX_Kholdstare_Shell:
-incbin shell.gfx
-warnpc $24C001      ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
+; ;================================================================================
+; ; insert kholdstare & trinexx shell gfx file
+; ;--------------------------------------------------------------------------------
+; ; pc file address = 0x123000
+; org $24B000
+; GFX_Kholdstare_Shell:
+; incbin shell.gfx
+; warnpc $24C001      ; should have written 0x1000 bytes and apparently we need to go 1 past that or it'll yell at us
 
-org $24C000
-GFX_Trinexx_Shell:
-incbin rocks.gfx
-warnpc $24C801
+; org $24C000
+; GFX_Trinexx_Shell:
+; incbin rocks.gfx
+; warnpc $24C801
 
-GFX_Trinexx_Shell2:
-incbin rocks2.gfx
-warnpc $24C8C1
-;--------------------------------------------------------------------------------
+; GFX_Trinexx_Shell2:
+; incbin rocks2.gfx
+; warnpc $24C8C1
+; ;--------------------------------------------------------------------------------
 
 ;================================================================================
 ; fix skull woods gibdo key drop

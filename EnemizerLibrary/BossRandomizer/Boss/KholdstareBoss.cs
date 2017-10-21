@@ -14,19 +14,5 @@ namespace EnemizerLibrary
             BossGraphics = 22;
             BossNode = "ice-kholdstare";
         }
-
-        protected new void FillRules()
-        {
-            Requirements = "Fire Rod;Bombos,L1 Sword";
-            Rules.Add(this.CheckGTowerAndPedestalForItems);
-            Rules.Add(this.CheckShabadooHasItem);
-            Rules.Add(this.CheckFatFairyHasItem);
-            Rules.Add(this.CheckBossDropHasImportantItem);
-        }
-
-        public override bool CheckRules(Dungeon dungeon, RomData romData)
-        {
-            return base.CheckRules(dungeon, romData, ItemConstants.FireRod);
-        }
     }
 }

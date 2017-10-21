@@ -61,9 +61,9 @@ Palette_ArmorAndGloves:
 change_sprite:
 {
     ;JSL $09C114         ; Restore the dungeon_resetsprites
-    ;$0DBA71 = random int
+
     LDA !RANDOM_SPRITE_FLAG : BEQ .continue
-    JSL $0DBA71 : AND #$1F : !ADD #$60 : STA $BC
+    JSL GetRandomInt : AND #$1F : !ADD #$60 : STA $BC
     STA $7EC178
     JSL Palette_ArmorAndGloves
     STZ $0710

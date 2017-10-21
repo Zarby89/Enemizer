@@ -234,8 +234,8 @@ RTL
 	change_sprite:
 	{
 	JSL $09C114         ; Restore the dungeon_resetsprites
-	;$0DBA71 = random int
-	JSL $0DBA71 : AND #$1F : !ADD #$40 : STA $BC
+
+	JSL GetRandomInt : AND #$1F : !ADD #$40 : STA $BC
 	JSL Palette_ArmorAndGloves
 	STZ $0710
 	RTL

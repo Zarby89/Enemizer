@@ -6,8 +6,6 @@ namespace EnemizerLibrary
 {
     public class OverworldArea
     {
-        public const int OverworldAreaGraphicsBlockBaseAddress = 0x007A81;
-        public const int OverworldSpritePointerTableBaseAddress = 0x04C901;
         public int AreaId { get; set; }
         public int SpriteTableBaseAddress { get; set; }
         public int GraphicsBlockAddress { get; set; }
@@ -28,7 +26,9 @@ namespace EnemizerLibrary
             this.romData = romData;
             this.AreaId = AreaId;
 
-            int spriteTableBaseSnesAddress = (09 << 16) + (romData[OverworldSpritePointerTableBaseAddress + (AreaId * 2) + 1] << 8) + (romData[OverworldSpritePointerTableBaseAddress + (AreaId * 2)]);
+            int spriteTableBaseSnesAddress = (09 << 16) // bank 9
+                + (romData[AddressConstants.OverworldSpritePointerTableBaseAddress + (AreaId * 2) + 1] << 8) 
+                + (romData[AddressConstants.OverworldSpritePointerTableBaseAddress + (AreaId * 2)]);
             SpriteTableBaseAddress = Utilities.SnesToPCAddress(spriteTableBaseSnesAddress);
 
             LoadGraphicsBlock();
@@ -61,7 +61,7 @@ namespace EnemizerLibrary
                 return;
             }
 
-            GraphicsBlockAddress = OverworldAreaGraphicsBlockBaseAddress + AreaId;
+            GraphicsBlockAddress = AddressConstants.OverworldAreaGraphicsBlockBaseAddress + AreaId;
 
             if (AreaId >= 0x40 && AreaId < 0x80)
             {
