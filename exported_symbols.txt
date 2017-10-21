@@ -1,0 +1,9 @@
+EnemizerInfoTable = $408000
+sprite_bush_spawn_table_overworld = $408120
+sprite_bush_spawn_table_dungeons = $4081a0
+sprite_bush_spawn_table_random_sprites = $4082c8
+EnemizerFlags = $408100
+EnemizerFlags_randomize_bushes = $408100
+EnemizerFlags_close_blind_door = $408101
+EnemizerFlags_moldorm_eye_count = $408102
+EnemizerFlags_randomize_sprites = $408103

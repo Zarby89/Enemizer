@@ -96,6 +96,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.lblUILanguage = new System.Windows.Forms.Label();
+            this.uiLanguageCombobox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -723,6 +725,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.uiLanguageCombobox);
+            this.tabPage4.Controls.Add(this.lblUILanguage);
             this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
             this.tabPage4.Controls.Add(this.heartBeepSpeedTrackbar);
             this.tabPage4.Controls.Add(this.label1);
@@ -849,6 +853,8 @@
             this.bootlegMagicCheckbox.Size = new System.Drawing.Size(94, 17);
             this.bootlegMagicCheckbox.TabIndex = 7;
             this.bootlegMagicCheckbox.Text = "Bootleg Magic";
+            this.toolTip1.SetToolTip(this.bootlegMagicCheckbox, "We are required by Hyrule Law, section 15.3b, not to disclose the contents of thi" +
+        "s checkbox.");
             this.bootlegMagicCheckbox.UseVisualStyleBackColor = true;
             this.bootlegMagicCheckbox.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
@@ -868,6 +874,26 @@
             this.seedNumberTextbox.Name = "seedNumberTextbox";
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
+            // 
+            // lblUILanguage
+            // 
+            this.lblUILanguage.AutoSize = true;
+            this.lblUILanguage.Location = new System.Drawing.Point(315, 252);
+            this.lblUILanguage.Name = "lblUILanguage";
+            this.lblUILanguage.Size = new System.Drawing.Size(69, 13);
+            this.lblUILanguage.TabIndex = 16;
+            this.lblUILanguage.Text = "UI Language";
+            // 
+            // uiLanguageCombobox
+            // 
+            this.uiLanguageCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.uiLanguageCombobox.FormattingEnabled = true;
+            this.uiLanguageCombobox.Items.AddRange(new object[] {
+            "English"});
+            this.uiLanguageCombobox.Location = new System.Drawing.Point(318, 268);
+            this.uiLanguageCombobox.Name = "uiLanguageCombobox";
+            this.uiLanguageCombobox.Size = new System.Drawing.Size(121, 21);
+            this.uiLanguageCombobox.TabIndex = 17;
             // 
             // EnemizerForm
             // 
@@ -984,6 +1010,8 @@
         private System.Windows.Forms.CheckBox alternateGfxCheckbox;
         private System.Windows.Forms.CheckBox negativeModecheckBox;
         private System.Windows.Forms.CheckBox grayscaleModecheckBox;
+        private System.Windows.Forms.ComboBox uiLanguageCombobox;
+        private System.Windows.Forms.Label lblUILanguage;
     }
 }
 

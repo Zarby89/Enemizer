@@ -33,6 +33,8 @@ namespace Enemizer
             LoadSpriteDropdown();
             LoadShieldDropdown();
 
+            LoadLanguageDropdown();
+
             if (LoadConfig())
             {
                 UpdateUIFromConfig();
@@ -42,6 +44,18 @@ namespace Enemizer
                     CheckForUpdates();
                 }
             }
+        }
+
+        private void LoadLanguageDropdown()
+        {
+            uiLanguageCombobox.Items.Clear();
+            uiLanguageCombobox.Items.Add("English");
+            uiLanguageCombobox.SelectedIndex = 0;
+        }
+
+        private void ChangeUILangauge()
+        {
+
         }
 
         private void EnemizerForm_FormClosing(object sender, FormClosingEventArgs e)

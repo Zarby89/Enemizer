@@ -155,6 +155,7 @@
     <Compile Include="DungeonObject\SubType2Object.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
+    <Compile Include="XkasSymbols.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

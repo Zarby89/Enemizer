@@ -32,6 +32,7 @@ incsrc DMA.asm
 
 ;================================================================================
 org $408000
+EnemizerInfoTable:
 skip #$100 ; reserved for enemizer info
 incsrc enemizerflags.asm
 incsrc bushes.asm
@@ -49,6 +50,8 @@ incsrc mimic_fixes.asm
 incsrc soundfx_changes.asm
 
 ;================================================================================
+
+incsrc export_symbols.asm
 
 org $0DBA71
 GetRandomInt:

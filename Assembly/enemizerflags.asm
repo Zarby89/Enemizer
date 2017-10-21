@@ -1,7 +1,12 @@
 ; ;Enemizer Flags
+EnemizerFlags:
+.randomize_bushes
 db #$00 ;408100 : 200100 ; Enable random enemy under bushes
+.close_blind_door
 db #$00 ;408101 : 200101 ; Enable blind's door closing for other bosses
+.moldorm_eye_count
 db #$01 ;408102 : 200102 ; Moldorm eye count, default to 2 eyes (1)
+.randomize_sprites
 db #$00 ;408103 : 200103 ; Randomize Sprites.
 db #$00 ;408104 : 200104
 db #$00 ;408105 : 200105

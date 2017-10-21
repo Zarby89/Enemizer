@@ -204,5 +204,16 @@ namespace EnemizerTests
 
             Assert.Equal(EnemizerLibrary.Version.CurrentVersion, romData.EnemizerVersion.Trim());
         }
+
+        [Fact]
+        public void xkas_exports_should_load()
+        {
+            var xkas = XkasSymbols.Instance.Symbols;
+
+            foreach(var x in xkas)
+            {
+                output.WriteLine($"{x.Key} {x.Value.ToString("X")}");
+            }
+        }
     }
 }
