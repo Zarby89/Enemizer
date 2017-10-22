@@ -289,9 +289,50 @@ namespace EnemizerLibrary
         {
             //they all must need to be at the same place since they generate new addresses/pointers
             int newGfxPosition = AddressConstants.NewBossGraphicsBaseAddress;
-            byte[] bossgfxindex = new byte[19] {0x8D,0x90,0x95,0xA3,0xA4,0xA6,0xAB,0xAC,0xAD,0xAE,0xAF,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB8 };
-            string[] bossgfxfiles = new string[19] {"agahnim1.bin", "armosknight.bin", "ganon1.bin", "moldorm.bin", "lanmola.bin", "ganon2.bin", "mothula.bin",
-                "arrghus.bin","helmasaure1.bin","blind.bin","kholdstare.bin","vitreous.bin","helmasaure2.bin","trinexx1.bin","trinexx2.bin","ganon3.bin","agahnim2.bin","agahnim3.bin","ganon4.bin"};
+            byte[] bossgfxindex = new byte[19] 
+            {
+                0x8D,
+                0x90,
+                0x94,
+                0xA3,
+                0xA4,
+                0xA6,
+                0xAB,
+                0xAC,
+                0xAD,
+                0xAE,
+                0xAF,
+                0xB0,
+                0xB1,
+                0xB2,
+                0xB3,
+                0xB4,
+                0xB5,
+                0xB6,
+                0xB8
+            };
+            string[] bossgfxfiles = new string[19] 
+            {
+                "agahnim1.bin",
+                "armosknight.bin",
+                "ganon1.bin",
+                "moldorm.bin",
+                "lanmola.bin",
+                "ganon2.bin",
+                "mothula.bin",
+                "arrghus.bin",
+                "helmasaure1.bin",
+                "blind.bin",
+                "kholdstare.bin",
+                "vitreous.bin",
+                "helmasaure2.bin",
+                "trinexx1.bin",
+                "trinexx2.bin",
+                "ganon3.bin",
+                "agahnim2.bin",
+                "agahnim3.bin",
+                "ganon4.bin"
+            };
 
             for(int i = 0;i<19;i++)
             {

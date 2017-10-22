@@ -391,7 +391,10 @@ namespace EnemizerLibrary
 
         public void UpdateRom()
         {
-            SpriteGroups.ForEach(x => x.UpdateRom());
+            foreach(var sg in SpriteGroups)
+            {
+                sg.UpdateRom();
+            }
         }
 
         public void RandomizeDungeonGroups()
