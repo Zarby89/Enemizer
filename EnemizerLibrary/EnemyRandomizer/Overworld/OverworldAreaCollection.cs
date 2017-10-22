@@ -22,7 +22,7 @@ namespace EnemizerLibrary
 
         void LoadAreas()
         {
-            for (int i = 0; i < 0x120; i++)
+            for (int i = 0; i < 0x112; i++) // after 0x111 is special stuff we don't want to touch
             {
                 var owArea = new OverworldArea(romData, i);
                 OverworldAreas.Add(owArea);

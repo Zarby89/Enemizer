@@ -23,11 +23,13 @@ db #$00
 ; Enemizer reserved memory
 ; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
 !SHELL_DMA_FLAG = "$7F50B0"
+!SOUNDFX_LOADED = "$7F50B1"
 ;================================================================================
 
 incsrc hooks.asm
 incsrc DMA.asm
 ;incsrc testing.asm ; make sure to comment this out for release!!!
+incsrc externalhooks.asm ; this is from z3randomizer source. be sure to check for updates
 
 ;================================================================================
 org $408000
@@ -51,8 +53,9 @@ incsrc moldorm.asm
 incsrc sprite_randomizer.asm
 incsrc kodongo_fixes.asm
 incsrc mimic_fixes.asm
+;incsrc location_menu.asm
+incsrc load_file.asm
 incsrc soundfx_changes.asm
-
 
 ; data
 incsrc room_object_table.asm
@@ -69,3 +72,4 @@ Sound_SetSfxPanWithPlayerCoords:
 
 org $0DBB8A
 Sound_SetSfx3PanLong:
+

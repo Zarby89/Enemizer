@@ -11,5 +11,5 @@ EnemizerFlags_randomize_sprites = $408103
 room_header_table = $4082cd
 enemizer_info_table = $408000
 moved_room_header_bank_value_address = $4082cc
-modified_room_object_table = $4099b2
+modified_room_object_table = $4099cc
 DMAKholdstare = $4094ed
