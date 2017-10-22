@@ -35,15 +35,9 @@ namespace Enemizer
 
             LoadLanguageDropdown();
 
-            if (LoadConfig())
-            {
-                UpdateUIFromConfig();
-
-                if (config.CheckForUpdates)
-                {
-                    CheckForUpdates();
-                }
-            }
+            LoadConfig();
+            UpdateUIFromConfig();
+            CheckForUpdates();
         }
 
         private void LoadLanguageDropdown()
@@ -65,7 +59,7 @@ namespace Enemizer
 
         private bool CheckForUpdates()
         {
-            if (EnemizerLibrary.Version.CheckUpdate() == true)
+            if (config.CheckForUpdates && EnemizerLibrary.Version.CheckUpdate() == true)
             {
                 var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
                 if (window == DialogResult.Yes)
@@ -81,7 +75,7 @@ namespace Enemizer
         {
             if (!CheckForUpdates())
             {
-                MessageBox.Show("No update available");
+                MessageBox.Show("No update available", "Enemizer");
                 //noupdate
             }
         }
@@ -111,11 +105,13 @@ namespace Enemizer
 
         private bool LoadConfig()
         {
+            var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
+
             try
             {
-                if (File.Exists(configFilename))
+                if (File.Exists(configFullPath))
                 {
-                    config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFilename));
+                    config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFullPath));
                     if(config != null)
                     {
                         return true;
@@ -125,7 +121,7 @@ namespace Enemizer
             catch
             {
                 // invalid file
-                MessageBox.Show("Invalid setting file. Loading defaults.");
+                MessageBox.Show("Invalid setting file. Loading defaults.", "Enemizer");
             }
 
             config = new EnemizerConfig();
@@ -135,7 +131,13 @@ namespace Enemizer
         private void SaveConfig()
         {
             var configJson = JsonConvert.SerializeObject(config, Formatting.Indented);
-            File.WriteAllText("setting.cfg", configJson);
+            // make sure the folder exists and create it
+            var configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer");
+            Directory.CreateDirectory(configPath);
+
+            // write the config file
+            var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
+            File.WriteAllText(configFullPath, configJson);
         }
 
 
@@ -160,6 +162,8 @@ namespace Enemizer
             randomizeLinksPaletteCheckbox.Checked = config.OptionFlags.RandomizeLinkSpritePalette;
 
             generateSpoilerCheckbox.Checked = config.OptionFlags.GenerateSpoilers;
+
+            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -260,7 +264,6 @@ namespace Enemizer
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
             grayscaleModecheckBox.Checked = config.OptionFlags.GrayscaleMode;
             negativeModecheckBox.Checked = config.OptionFlags.NegativeMode;
-            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -328,7 +331,6 @@ namespace Enemizer
 
         private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO: wire this up
             config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
         }
 
@@ -349,12 +351,12 @@ namespace Enemizer
                 // TODO: add validation to the textbox so it can't be anything but a number
                 if (!int.TryParse(seedNumberTextbox.Text, out seed))
                 {
-                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.");
+                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.", "Enemizer");
                     return;
                 }
                 if(seed < 0)
                 {
-                    MessageBox.Show("Please enter a positive Seed Number.");
+                    MessageBox.Show("Please enter a positive Seed Number.", "Enemizer");
                     return;
                 }
             }
@@ -392,13 +394,13 @@ namespace Enemizer
                 randomizedRom.WriteRom(fs);
                 fs.Close();
 
-                MessageBox.Show($"{fileName} Has been created in the enemizer folder !");
+                MessageBox.Show($"{fileName} Has been created in the enemizer folder !", "Enemizer");
             }
 #if !DEBUG
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Enemizer");
             }
 #endif
         }

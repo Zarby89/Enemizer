@@ -9,9 +9,9 @@ namespace EnemizerLibrary
 {
     public class OptionFlags
     {
-        public bool RandomizeEnemies { get; set; }
+        public bool RandomizeEnemies { get; set; } = true;
         public RandomizeEnemiesType RandomizeEnemiesType { get; set; } = RandomizeEnemiesType.Chaos; // default to Chaos
-        public bool RandomizeBushEnemyChance { get; set; }
+        public bool RandomizeBushEnemyChance { get; set; } = true;
 
         public bool RandomizeEnemyHealthRange { get; set; }
         public int RandomizeEnemyHealthRangeAmount { get; set; }
@@ -27,8 +27,8 @@ namespace EnemizerLibrary
 
         public bool BossMadness { get; set; }
 
-        public bool RandomizeBosses { get; set; }
-        public RandomizeBossesType RandomizeBossesType { get; set; }
+        public bool RandomizeBosses { get; set; } = true;
+        public RandomizeBossesType RandomizeBossesType { get; set; } = RandomizeBossesType.Chaos;
 
         public bool RandomizeBossHealth { get; set; }
         public int RandomizeBossHealthMinAmount { get; set; }
@@ -40,25 +40,25 @@ namespace EnemizerLibrary
 
         public bool RandomizeBossBehavior { get; set; }
 
-        public bool RandomizeDungeonPalettes { get; set; }
+        public bool RandomizeDungeonPalettes { get; set; } = true;
         public bool SetBlackoutMode { get; set; }
 
-        public bool RandomizeOverworldPalettes { get; set; }
+        public bool RandomizeOverworldPalettes { get; set; } = true;
 
-        public bool RandomizeSpritePalettes { get; set; }
+        public bool RandomizeSpritePalettes { get; set; } = true;
         public bool SetAdvancedSpritePalettes { get; set; }
         public bool PukeMode { get; set; }
         public bool NegativeMode { get; set; }
         public bool GrayscaleMode { get; set; }
 
-        public bool GenerateSpoilers { get; set; }
+        public bool GenerateSpoilers { get; set; } = true;
         public bool RandomizeLinkSpritePalette { get; set; }
-        public bool RandomizePots { get; set; }
+        public bool RandomizePots { get; set; } = true;
         public bool ShuffleMusic { get; set; }
-        public bool BootlegMagic { get; set; }
-        public bool DebugMode { get; set; }
+        public bool BootlegMagic { get; set; } = false;
+        public bool DebugMode { get; set; } = false;
         public bool CustomBosses { get; set; }
-        public bool AndyMode { get; set; }
+        public bool AndyMode { get; set; } = false;
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
         public ShieldTypes ShieldGraphics { get; set; } = ShieldTypes.Normal;

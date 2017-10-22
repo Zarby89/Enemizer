@@ -64,7 +64,9 @@ namespace EnemizerLibrary
                 var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
                 var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
                 var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
-                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3).ToList();
+                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
+                    .ToList();
                 return UsableDungeonSpriteGroups
                     .Where(x => includeGroupId.Contains((byte)x.GroupId)
                         || includeSubGroup0Id.Contains((byte)x.SubGroup0)
@@ -93,7 +95,9 @@ namespace EnemizerLibrary
                 var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
                 var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
                 var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
-                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3).ToList();
+                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
+                    .ToList();
                 return UsableDungeonSpriteGroups
                     .Where(x => includeGroupId.Contains((byte)x.GroupId)
                         || includeSubGroup0Id.Contains((byte)x.SubGroup0)

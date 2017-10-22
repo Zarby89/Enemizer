@@ -51,9 +51,11 @@
 
 "..\bincomp\bincomp.exe" main.asm patchData.json
 copy patchData.json $(SolutionDir)
+copy patchData.json $(SolutionDir)EnemizerGui\
 copy patchData.json $(SolutionDir)EnemizerGui\$(OutDir)
 copy patchData.json $(SolutionDir)EnemizerTests\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)
+copy exported_symbols.txt $(SolutionDir)EnemizerGui\
 copy exported_symbols.txt $(SolutionDir)EnemizerGui\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)EnemizerTests\$(OutDir)
 </PreBuildEvent>

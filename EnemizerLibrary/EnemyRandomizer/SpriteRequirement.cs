@@ -832,6 +832,9 @@ namespace EnemizerLibrary
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_DownSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_UpSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
 
+            // make popos into dwarves
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PopoSprite).IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup1(77));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Popo2Sprite).IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup1(77));
         }
 
         //void AddSpriteRequirement(int SpriteId, bool Overlord, int? GroupId, int? SubGroup0, int? SubGroup1, int? SubGroup2, int? SubGroup3, byte? Parameters = null, bool Special = false)

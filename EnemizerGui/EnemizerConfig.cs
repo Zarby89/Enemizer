@@ -9,7 +9,7 @@ namespace Enemizer
 {
     public class EnemizerConfig
     {
-        public bool CheckForUpdates { get; set; }
+        public bool CheckForUpdates { get; set; } = true;
         public OptionFlags OptionFlags { get; set; } = new OptionFlags();
     }
 }

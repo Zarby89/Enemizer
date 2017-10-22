@@ -219,6 +219,7 @@ namespace EnemizerLibrary
             else
             {
                 // TODO: log this
+                Console.WriteLine($"Skipped randomizing sprites in room {this.RoomId}");
             }
         }
 

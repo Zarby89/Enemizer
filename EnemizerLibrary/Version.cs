@@ -20,10 +20,18 @@ namespace EnemizerLibrary
             {
                 checkVersion = wc.DownloadString("https://zarby89.github.io/Enimizer/version.txt");
             }
-            if (!checkVersion.Contains(Version.CurrentVersion))
+            var numbers = checkVersion.Replace("\r", "").Replace("\n", "").Trim().Split('.');
+            if(Int32.Parse(numbers[0]) >= MajorVersion)
             {
-                return true;
+                if(Int32.Parse(numbers[1]) >= MinorVersion)
+                {
+                    if(Int32.Parse(numbers[2]) > BuildNumber)
+                    {
+                        return true;
+                    }
+                }
             }
+
             return false;
         }
 
