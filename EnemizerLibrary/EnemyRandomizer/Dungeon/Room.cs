@@ -109,7 +109,7 @@ namespace EnemizerLibrary
             */
             //byte byte0 = romData[roomSpriteBaseAddress];
 
-            int i = 1;
+            int i = 1; // skip byte0
 
             while(romData[roomSpriteBaseAddress + i] != 0xFF)
             {

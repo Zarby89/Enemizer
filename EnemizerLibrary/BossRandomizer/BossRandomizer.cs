@@ -159,8 +159,8 @@ namespace EnemizerLibrary
                 }
 
                 // update boss pointer
-                romData[dungeon.BossAddress] = dungeon.SelectedBoss.BossPointer[0];
-                romData[dungeon.BossAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
+                romData[dungeon.DungeonRoomSpritePointerAddress] = dungeon.SelectedBoss.BossPointer[0];
+                romData[dungeon.DungeonRoomSpritePointerAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
 
                 // update boss graphics
                 romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;

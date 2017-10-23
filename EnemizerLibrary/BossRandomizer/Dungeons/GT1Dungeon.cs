@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 28;
-            BossAddress = 0x04D666;
+            DungeonRoomSpritePointerAddress = 0x04D666;
             BossDropItemAddress = null;
 
             // TODO: stop kholdstare from spawning in GT1?

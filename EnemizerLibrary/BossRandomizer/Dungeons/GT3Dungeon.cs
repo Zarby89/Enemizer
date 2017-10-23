@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 77;
-            BossAddress = 0x04D6C8;
+            DungeonRoomSpritePointerAddress = 0x04D6C8;
             BossDropItemAddress = null;
 
             DisallowedBosses.Add(BossType.Armos);

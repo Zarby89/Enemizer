@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 108;
-            BossAddress = 0x04D706;
+            DungeonRoomSpritePointerAddress = 0x04D706;
             BossDropItemAddress = null;
 
             // TODO: stop blind from spawning in GT2?

@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.SkullWoodsCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 41;
-            BossAddress = 0x04D680;
+            DungeonRoomSpritePointerAddress = 0x04D680;
             BossDropItemAddress = 0x180155;
 
             // Kholdstare should work now
