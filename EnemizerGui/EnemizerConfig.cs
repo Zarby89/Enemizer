@@ -10,6 +10,7 @@ namespace Enemizer
     public class EnemizerConfig
     {
         public bool CheckForUpdates { get; set; } = true;
+        public string DefaultFolder { get; set; } = String.Empty;
         public OptionFlags OptionFlags { get; set; } = new OptionFlags();
     }
 }

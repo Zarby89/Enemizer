@@ -103,6 +103,15 @@ namespace Enemizer
             //shieldSpriteCombobox.DataSource = Enum.GetValues(typeof(ShieldTypes));
         }
 
+        void LoadAbsorbablesListBox()
+        {
+            absorbableItemsChecklist.Items.Clear();
+            foreach(var e in Enum.GetValues(typeof(AbsorbableTypes)))
+            {
+                absorbableItemsChecklist.Items.Add(((AbsorbableTypes)e).GetDescription());
+            }
+        }
+
         private bool LoadConfig()
         {
             var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
@@ -383,18 +392,37 @@ namespace Enemizer
                 RomData romData = new RomData(rom_data);
                 RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
-                string fileNameNoExtension = $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} (EN{randomizedRom.EnemizerSeed})";
-
-                if (config.OptionFlags.GenerateSpoilers)
+                using (var fbd = new FolderBrowserDialog())
                 {
-                    File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
-                }
-                string fileName = $"{fileNameNoExtension}.sfc";
-                fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-                randomizedRom.WriteRom(fs);
-                fs.Close();
+                    fbd.Description = "Select Enemizer Destination Folder";
+                    if (!String.IsNullOrEmpty(config.DefaultFolder) && Directory.Exists(config.DefaultFolder))
+                    {
+                        fbd.SelectedPath = config.DefaultFolder;
+                    }
+                    else
+                    {
+                        fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    }
+                    
+                    var result = fbd.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        config.DefaultFolder = fbd.SelectedPath;
 
-                MessageBox.Show($"{fileName} Has been created in the enemizer folder !", "Enemizer");
+                        string fileNameNoExtension = Path.Combine(fbd.SelectedPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} (EN{randomizedRom.EnemizerSeed})");
+
+                        if (config.OptionFlags.GenerateSpoilers)
+                        {
+                            File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
+                        }
+                        string fileName = $"{fileNameNoExtension}.sfc";
+                        fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                        randomizedRom.WriteRom(fs);
+                        fs.Close();
+
+                        MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                    }
+                }
             }
 #if !DEBUG
             }

@@ -100,7 +100,7 @@ namespace EnemizerTests
                 int seedNumber = 0;  seedRandom.Next(999999999);
                 BossRandomizer br = new BossRandomizer(new Random(seedNumber), new Graph(new GraphData(romData, new OptionFlags())));
 
-                br.RandomizeRom(romData);
+                br.RandomizeRom(romData, new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());
 
                 output.WriteLine($"Seed: {seedNumber} - {String.Join("\r\n", br.DungeonPool.Select(x => $"{x.Name}: {x.SelectedBoss.BossType.ToString()}"))}");
 

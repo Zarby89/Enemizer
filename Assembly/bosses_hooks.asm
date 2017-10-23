@@ -34,7 +34,7 @@ JSL gibdo_drop_key
 ;================================================================================
 ; Move All Bosses Sprites in Top Left Quadrant
 ;--------------------------------------------------------------------------------
-; TODO: what is this exactly?
+; sprite values for rooms(?)
 ;Trinexx
 org $09E5BA
 db $00, $05, $07, $CB, $05, $07, $CC, $05, $07, $CD

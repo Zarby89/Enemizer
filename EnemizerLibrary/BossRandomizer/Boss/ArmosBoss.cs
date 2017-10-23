@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x87, 0xE8 };
             BossGraphics = 9;
+            BossSpriteId = SpriteConstants.ArmosKnightsSprite;
             BossNode = "eastern-armos";
         }
     }

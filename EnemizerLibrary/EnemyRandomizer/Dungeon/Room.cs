@@ -216,9 +216,9 @@ namespace EnemizerLibrary
                 spritesToUpdate.Where(x => !x.HasAKey && this.IsShutterRoom).ToList()
                     .ForEach(x => x.SpriteId = killableSprites[rand.Next(killableSprites.Count)]);
             }
-            else
+            else if (!RoomIdConstants.BossRooms.Contains(this.RoomId))
             {
-                // TODO: log this
+                // TODO: log this because it's not a boss room
                 Console.WriteLine($"Skipped randomizing sprites in room {this.RoomId}");
             }
         }

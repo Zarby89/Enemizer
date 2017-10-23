@@ -197,13 +197,9 @@ namespace EnemizerLibrary
 
                 SpriteGroups.Add(sg);
             }
-
-            SetupRequiredOverworldGroups();
-
-            SetupRequiredDungeonGroups();
         }
 
-        void SetupRequiredOverworldGroups()
+        public void SetupRequiredOverworldGroups()
         {
             OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
 
@@ -250,7 +246,7 @@ namespace EnemizerLibrary
             }
         }
 
-        void SetupRequiredDungeonGroups()
+        public void SetupRequiredDungeonGroups()
         {
             dungeonReqs = new RoomGroupRequirementCollection();
 

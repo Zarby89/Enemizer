@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         public List<Func<Dungeon, RomData, byte[], bool>> Rules { get; set; } = new List<Func<Dungeon, RomData, byte[], bool>>();
         public byte[] BossPointer { get; internal set; }
         public byte BossGraphics { get; internal set; }
+        public int BossSpriteId { get; internal set; }
 
         public string Requirements { get; protected set; }
         protected string BossNode { get; set; }

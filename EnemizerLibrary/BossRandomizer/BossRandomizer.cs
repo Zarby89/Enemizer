@@ -51,13 +51,30 @@ namespace EnemizerLibrary
             bossPool.FillPool();
         }
 
-        public void RandomizeRom(RomData romData)
+        public void RandomizeRom(RomData romData, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             FillDungeonPool();
             FillBossPool();
 
             GenerateRandomizedBosses();
+            SetBossSpriteGroups(spriteGroupCollection, spriteRequirementCollection);
             WriteRom(romData);
+        }
+
+        void SetBossSpriteGroups(SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        {
+            foreach(var d in this.DungeonPool)
+            {
+                var group = spriteGroupCollection.SpriteGroups.Where(x => x.DungeonGroupId == d.SelectedBoss.BossGraphics).FirstOrDefault();
+                var sprite = spriteRequirementCollection.SpriteRequirements.Where(x => x.SpriteId == d.SelectedBoss.BossSpriteId).FirstOrDefault();
+                if(group != null && sprite != null)
+                {
+                    group.PreserveSubGroup0 = sprite.SubGroup0.Count > 0;
+                    group.PreserveSubGroup1 = sprite.SubGroup1.Count > 0;
+                    group.PreserveSubGroup2 = sprite.SubGroup2.Count > 0;
+                    group.PreserveSubGroup3 = sprite.SubGroup3.Count > 0;
+                }
+            }
         }
 
         protected virtual void GenerateRandomizedBosses()

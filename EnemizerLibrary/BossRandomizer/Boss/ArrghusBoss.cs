@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x97, 0xD9 };
             BossGraphics = 20;
+            BossSpriteId = SpriteConstants.ArrghusSprite;
             BossNode = "swamp-arrghus";
         }
     }

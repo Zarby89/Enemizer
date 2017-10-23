@@ -82,6 +82,10 @@ namespace EnemizerLibrary
             }
 
             //create_subset_gfx();
+            var spriteRequirements = new SpriteRequirementCollection();
+
+            var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
+            spriteGroupCollection.LoadSpriteGroups();
 
             // -----bosses---------------------
             if (optionFlags.RandomizeBosses)
@@ -104,14 +108,10 @@ namespace EnemizerLibrary
                     default:
                         throw new Exception("Unknown Boss Randomization Type");
                 }
-                br.RandomizeRom(this.ROM_DATA);
+                br.RandomizeRom(this.ROM_DATA, spriteGroupCollection, spriteRequirements);
             }
 
             // -----sprites---------------------
-            var spriteRequirements = new SpriteRequirementCollection();
-
-            var spriteGroupCollection = new SpriteGroupCollection(this.ROM_DATA, rand, spriteRequirements);
-            spriteGroupCollection.LoadSpriteGroups();
 
             if(optionFlags.RandomizeEnemies)
             {
@@ -125,6 +125,7 @@ namespace EnemizerLibrary
             //dungeons
             if (optionFlags.RandomizeEnemies) // random sprites dungeons
             {
+                spriteGroupCollection.SetupRequiredDungeonGroups();
                 DungeonEnemyRandomizer der = new DungeonEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
                 der.RandomizeDungeonEnemies(optionFlags);
             }
@@ -132,12 +133,15 @@ namespace EnemizerLibrary
             //random sprite overworld
             if (optionFlags.RandomizeEnemies)
             {
+                spriteGroupCollection.SetupRequiredOverworldGroups();
                 OverworldEnemyRandomizer oer = new OverworldEnemyRandomizer(this.ROM_DATA, this.rand, spriteGroupCollection, spriteRequirements);
                 oer.RandomizeOverworldEnemies(optionFlags);
             }
 
-            
-            spriteGroupCollection.UpdateRom();
+            if (optionflags.RandomizeBosses || optionflags.RandomizeEnemies)
+            {
+                spriteGroupCollection.UpdateRom();
+            }
 
 
             if (optionFlags.RandomizeEnemyHealthRange)

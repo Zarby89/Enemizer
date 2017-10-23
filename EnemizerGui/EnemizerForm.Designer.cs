@@ -324,7 +324,7 @@
             "Bomb (4)",
             "Bomb (8)",
             "Small Magic",
-            "Full Maigc",
+            "Full Magic",
             "Arrow (5)",
             "Arrow (10)",
             "Fairy",

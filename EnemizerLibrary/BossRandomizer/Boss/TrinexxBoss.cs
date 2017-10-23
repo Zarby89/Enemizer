@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0xBA, 0xE5 };
             BossGraphics = 23;
+            BossSpriteId = SpriteConstants.TrinexxSprite;
             BossNode = "turtle-trinexx";
         }
     }

@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x01, 0xEA };
             BossGraphics = 22;
+            BossSpriteId = SpriteConstants.KholdstareSprite;
             BossNode = "ice-kholdstare";
         }
     }

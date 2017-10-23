@@ -828,5 +828,24 @@ namespace EnemizerLibrary
             R144_MiseryMire_Vitreous,
             R164_TurtleRock_Trinexx
         };
+
+        public static readonly int[] BossRooms =
+        {
+            R200_EasternPalace_ArmosKnights,
+            R51_DesertPalace_Lanmolas,
+            R108_GanonsTower_LanmolasRoom,
+            R7_TowerofHera_Moldorm,
+            R77_GanonsTower_MoldormRoom,
+            R90_PalaceofDarkness_HelmasaurKing,
+            R6_SwampPalace_Arrghus,
+            R41_SkullWoods_Mothula,
+            R172_ThievesTown_BlindTheThief,
+            R222_IcePalace_Kholdstare,
+            R144_MiseryMire_Vitreous,
+            R164_TurtleRock_Trinexx,
+            R32_AgahnimsTower_Agahnim,
+            R13_GanonsTower_Agahnim2,
+            R0_Ganon
+        };
     }
 }

@@ -12,6 +12,7 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x31, 0xDC };
             BossGraphics = 26;
+            BossSpriteId = SpriteConstants.MothulaSprite;
             BossNode = "skull-mothula";
         }
     }
