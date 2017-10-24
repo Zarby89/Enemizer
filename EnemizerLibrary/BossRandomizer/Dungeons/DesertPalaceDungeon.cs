@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.DesertPalaceCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 51;
-            BossAddress = 0x04D694;
+            DungeonRoomSpritePointerAddress = 0x04D694;
             BossDropItemAddress = 0x180151;
 
             ShellX = 0x0B;

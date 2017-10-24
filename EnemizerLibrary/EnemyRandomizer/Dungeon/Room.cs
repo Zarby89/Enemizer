@@ -7,16 +7,6 @@ namespace EnemizerLibrary
 {
     public class Room
     {
-        // enemizer header patched rom
-        const int dungeonHeaderOffsetAddress = 0x118000;
-        const int dungeonHeaderBaseAddress = 0x120090;
-
-        // vanilla jp game/normal rando rom
-        //const int dungeonHeaderOffsetAddress = 0x018000;
-        //const int dungeonHeaderBaseAddress = 0x27462;
-
-        const int dungeonHeaderPointerTableBaseAddress = 0x271E2;
-        const int dungeonSpritePointerTableBaseAddress = 0x4D62E;
 
         public string RoomName
         {
@@ -42,7 +32,14 @@ namespace EnemizerLibrary
         {
             get
             {
-                return dungeonHeaderOffsetAddress + romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1] << 8);
+                byte[] snesBytes = new byte[3];
+                snesBytes[0] = romData[AddressConstants.dungeonHeaderPointerTableBaseAddress + (RoomId * 2)];
+                snesBytes[1] = romData[AddressConstants.dungeonHeaderPointerTableBaseAddress + (RoomId * 2) + 1];
+                snesBytes[2] = romData[XkasSymbols.Instance.Symbols["moved_room_header_bank_value_address"]]; // AddressConstants.MovedRoomBank;
+
+                int pcAddress = Utilities.SnesToPCAddress(Utilities.SnesByteArrayTo24bitSnesAddress(snesBytes));
+
+                return pcAddress;
             }
         }
 
@@ -99,7 +96,10 @@ namespace EnemizerLibrary
 
         void LoadSprites()
         {
-            int roomSpriteBaseAddress = 0x40000 + romData[dungeonSpritePointerTableBaseAddress + (RoomId * 2)] + (romData[dungeonSpritePointerTableBaseAddress + (RoomId * 2) + 1] << 8);
+            int spriteTableBaseSnesAddress = (09 << 16) // bank 9
+                + (romData[AddressConstants.dungeonSpritePointerTableBaseAddress + (RoomId * 2) + 1] << 8)
+                + (romData[AddressConstants.dungeonSpritePointerTableBaseAddress + (RoomId * 2)]);
+            int roomSpriteBaseAddress = Utilities.SnesToPCAddress(spriteTableBaseSnesAddress);
 
             /*
             Byte 0: Stored to $0FB3. Corresponds with "Sort Spr" in Hyrule Magic. In a layered room this indicates sprites in the foreground are to be drawn on top of sprites in the background.
@@ -109,7 +109,7 @@ namespace EnemizerLibrary
             */
             //byte byte0 = romData[roomSpriteBaseAddress];
 
-            int i = 1;
+            int i = 1; // skip byte0
 
             while(romData[roomSpriteBaseAddress + i] != 0xFF)
             {
@@ -120,9 +120,12 @@ namespace EnemizerLibrary
 
         public void RandomizeSprites(Random rand, OptionFlags optionFlags, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
-            var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
+            SpriteGroup spriteGroup = null;
+            int[] possibleSprites = new int[0];
 
-            var possibleSprites = spriteGroup.GetPossibleEnemySprites(this, optionFlags).Select(x => x.SpriteId).ToArray();
+            spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.DungeonGroupId == this.GraphicsBlockId);
+
+            possibleSprites = spriteGroup.GetPossibleEnemySprites(this, optionFlags).Select(x => x.SpriteId).ToArray();
 
             if (possibleSprites.Length > 0)
             {
@@ -159,7 +162,7 @@ namespace EnemizerLibrary
                 {
                     int spriteId = -1;
 
-                    if (optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
+                    if (optionFlags.EnemiesAbsorbable && optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
                     {
                         if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
                         {
@@ -212,6 +215,11 @@ namespace EnemizerLibrary
                 // TODO: something less hacky for shutters.
                 spritesToUpdate.Where(x => !x.HasAKey && this.IsShutterRoom).ToList()
                     .ForEach(x => x.SpriteId = killableSprites[rand.Next(killableSprites.Count)]);
+            }
+            else if (!RoomIdConstants.BossRooms.Contains(this.RoomId))
+            {
+                // TODO: log this because it's not a boss room
+                Console.WriteLine($"Skipped randomizing sprites in room {this.RoomId}");
             }
         }
 

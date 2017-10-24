@@ -395,6 +395,10 @@ namespace EnemizerLibrary
             // force water teketite
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 34, null,
                 RoomIdConstants.R40_SwampPalace_EntranceRoom));
+
+            // force wizzrobe
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 37, null,
+                RoomIdConstants.R151_MiseryMire_TorchPuzzle_MovingWallRoom));
         }
     }
 }

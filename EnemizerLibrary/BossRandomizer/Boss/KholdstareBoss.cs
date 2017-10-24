@@ -12,21 +12,15 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x01, 0xEA };
             BossGraphics = 22;
+            BossSpriteId = SpriteConstants.KholdstareSprite;
             BossNode = "ice-kholdstare";
-        }
 
-        protected new void FillRules()
-        {
-            Requirements = "Fire Rod;Bombos,L1 Sword";
-            Rules.Add(this.CheckGTowerAndPedestalForItems);
-            Rules.Add(this.CheckShabadooHasItem);
-            Rules.Add(this.CheckFatFairyHasItem);
-            Rules.Add(this.CheckBossDropHasImportantItem);
-        }
-
-        public override bool CheckRules(Dungeon dungeon, RomData romData)
-        {
-            return base.CheckRules(dungeon, romData, ItemConstants.FireRod);
+            BossSpriteArray = new byte[]
+            {
+                0x05, 0x07, 0xA3, // shell
+                0x05, 0x07, 0xA4, // falling ice
+                0x05, 0x07, 0xA2  // kholdstare
+            };
         }
     }
 }

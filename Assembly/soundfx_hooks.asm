@@ -1,9 +1,3 @@
-org $0DBB67
-Sound_SetSfxPanWithPlayerCoords:
-
-org $0DBB8A
-Sound_SetSfx3PanLong:
-
 org $8888
 Sound_LoadSongBank:
 org $8900 ; change Sound_LoadSongBank to be JSL instead of JSR

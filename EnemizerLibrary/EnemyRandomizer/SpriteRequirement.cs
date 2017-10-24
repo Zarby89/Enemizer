@@ -27,6 +27,7 @@ namespace EnemizerLibrary
         public bool IsObject { get; set; }
         public bool Absorbable { get; set; }
         public bool IsWaterSprite { get; set; }
+        public bool IsEnemySprite { get; set; }
         public List<byte> GroupId { get; set; } = new List<byte>();
         public List<byte> SubGroup0 { get; set; } = new List<byte>();
         public List<byte> SubGroup1 { get; set; } = new List<byte>();
@@ -43,6 +44,7 @@ namespace EnemizerLibrary
         public SpriteRequirement(int SpriteId)
         {
             this.SpriteId = SpriteId;
+            this.IsEnemySprite = true;
         }
 
         public static SpriteRequirement New(int spriteId)
@@ -61,6 +63,7 @@ namespace EnemizerLibrary
         {
             NPC = true;
             DoNotRandomize = true;
+            IsEnemySprite = false;
             return this;
         }
 
@@ -87,6 +90,18 @@ namespace EnemizerLibrary
         public SpriteRequirement SetDoNotRandomize()
         {
             DoNotRandomize = true;
+            return this;
+        }
+
+        public SpriteRequirement SetIsEnemySprite()
+        {
+            IsEnemySprite = true;
+            return this;
+        }
+
+        public SpriteRequirement SetNotEnemySprite()
+        {
+            IsEnemySprite = false;
             return this;
         }
 
@@ -120,6 +135,7 @@ namespace EnemizerLibrary
         public SpriteRequirement SetIsObject()
         {
             IsObject = true;
+            IsEnemySprite = false;
             return this;
         }
 
@@ -253,6 +269,7 @@ namespace EnemizerLibrary
             get
             {
                 return SpriteRequirements.Where(x => x.NPC == false 
+                                                    && x.IsEnemySprite == true
                                                     && x.Boss == false
                                                     && x.Overlord == false
                                                     && x.IsObject == false);
@@ -351,9 +368,11 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RopaSprite).SetKillable().AddSubgroup0(22));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().SetCannotHaveKey().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBariSprite).SetKillable().SetCannotHaveKey().AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueBariSprite).SetKillable().AddSubgroup0(31)
+                .AddDontRandomizeRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TalkingTreeSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(21));
 
@@ -759,31 +778,31 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MedallionTabletSprite).SetIsObject().SetNeverUse().SetDoNotRandomize().AddSubgroup2(18));
 
             // turn these off for now outside DM. they can only spawn in large (1024x1024 areas)
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetOverlord().SetNeverUse().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetOverlord().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetOverlord().SetNeverUseDungeon().AddSubgroup2(35));
 
             // Overlords
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EP4Walls).SetOverlord().AddSubgroup2(46));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EPEntrance).SetOverlord().AddSubgroup2(46));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_StalfosHeadTrap).SetOverlord().AddSubgroup0(31));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_RopeTrap).SetOverlord().AddSubgroup2(28, 36));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_MovingFloor).SetOverlord());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EP4Walls).SetNeverUse().SetOverlord().AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EPEntrance).SetNeverUse().SetOverlord().AddSubgroup2(46));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_StalfosHeadTrap).SetNeverUse().SetOverlord().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_RopeTrap).SetNeverUse().SetOverlord().AddSubgroup2(28, 36));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_MovingFloor).SetNeverUse().SetOverlord());
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_SlimeDropper).SetOverlord().AddSubgroup1(32));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_Wallmaster).SetOverlord().AddSubgroup2(35));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Square).SetOverlord().AddSubgroup3(82));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Path).SetOverlord().AddSubgroup3(82));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_RightEvil_PirogusuSpawner).SetOverlord().AddSubgroup2(34));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_LeftEvil_PirogusuSpawner).SetOverlord().AddSubgroup2(34));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_DownEvil_PirogusuSpawner).SetOverlord().AddSubgroup2(34));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_UpEvil_PirogusuSpawner).SetOverlord().AddSubgroup2(34));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Square).SetNeverUse().SetOverlord().AddSubgroup3(82));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FloorDrop_Path).SetNeverUse().SetOverlord().AddSubgroup3(82));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_RightEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_LeftEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_DownEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_UpEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FlyingFloorTileTrap).SetOverlord()); // TODO: is this special sprites?
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_WizzrobeSpawner).SetOverlord().AddSubgroup2(37, 41));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BlackSpawn_Zoro_BombHole).SetOverlord().AddSubgroup1(32));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_4Skull_Trap_Pot).SetOverlord().AddSubgroup0(31));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_Stalfos_Spawn_Trap_EP).SetOverlord().AddSubgroup0(31));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_ArmosKnight_Trigger).SetOverlord());
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_BombTrap).SetOverlord());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BlackSpawn_Zoro_BombHole).SetNeverUse().SetOverlord().AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_4Skull_Trap_Pot).SetNeverUse().SetOverlord().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_Stalfos_Spawn_Trap_EP).SetNeverUse().SetOverlord().AddSubgroup0(31));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_ArmosKnight_Trigger).SetNeverUse().SetOverlord());
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BombDrop_BombTrap).SetNeverUse().SetOverlord());
 
             //// "Special" sprites
             //// rat-guard = green recruit (0x4B) with sub 1=73, sub 2=28
@@ -813,6 +832,9 @@ namespace EnemizerLibrary
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_DownSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MovingCannonBallShooters_UpSprite).SetIsObject().IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup0(22));
 
+            // make popos into dwarves
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PopoSprite).IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup1(77));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Popo2Sprite).IsSpecialGlitched().SetNeverUse().SetDoNotRandomize().AddSubgroup1(77));
         }
 
         //void AddSpriteRequirement(int SpriteId, bool Overlord, int? GroupId, int? SubGroup0, int? SubGroup1, int? SubGroup2, int? SubGroup3, byte? Parameters = null, bool Special = false)

@@ -15,7 +15,7 @@ namespace EnemizerLibrary
         public BossType BossType { get; set; } // TODO: need?
         public Boss SelectedBoss { get; set; }
         public int BossRoomId { get; set; }
-        public int BossAddress { get; set; }
+        public int DungeonRoomSpritePointerAddress { get; set; }
         public int? BossDropItemAddress { get; set; }
 
         public int ShellX { get; set; }
@@ -25,6 +25,8 @@ namespace EnemizerLibrary
         public List<BossType> DisallowedBosses { get; protected set; } = new List<BossType>();
 
         public DungeonType DungeonType { get; protected set; } = DungeonType.NotSet;
+
+        public byte[] ExtraSprites = new byte[0];
 
         protected Dungeon(int priority)
         {

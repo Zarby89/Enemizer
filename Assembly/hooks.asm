@@ -10,6 +10,7 @@ incsrc sprite_randomizer_hooks.asm
 incsrc kodongo_hooks.asm
 incsrc mimic_hooks.asm
 incsrc soundfx_hooks.asm
-
+;incsrc location_select_hook.asm
+incsrc load_file_hooks.asm
 ; needs to be fixed
 ;incsrc sprite_damage_hooks.asm

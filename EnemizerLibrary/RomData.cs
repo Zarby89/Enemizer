@@ -10,8 +10,21 @@ namespace EnemizerLibrary
 {
     public class RomData
     {
+        // 0x100 bytes to use for rom info
+        public int EnemizerInfoTableBaseAddress = XkasSymbols.Instance.Symbols["enemizer_info_table"];
+
+        public const int EnemizerInfoSeedOffset = 0x0;
+        public const int EnemizerInfoSeedStringLength = 12;
+
+        public const int EnemizerInfoVersionOffset = EnemizerInfoSeedOffset + EnemizerInfoSeedStringLength;
+        public const int EnemizerInfoVersionLength = 8;
+
+        // reserve 0x50 bytes for flags/options
+        public const int EnemizerInfoFlagsOffset = EnemizerInfoVersionOffset + EnemizerInfoVersionLength;
+        public const int EnemizerInfoFlagsLength = 0x50;
+
         // 0x20 flags total
-        public const int EnemizerOptionFlagsBaseAddress = 0x200000; // snes 408000
+        public int EnemizerOptionFlagsBaseAddress = XkasSymbols.Instance.Symbols["EnemizerFlags"];
         public const int RandomizeHiddenEnemiesFlag = 0x00;
         public const int CloseBlindDoorFlag = 0x01;
         public const int MoldormEyesFlag = 0x02;
@@ -19,15 +32,92 @@ namespace EnemizerLibrary
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
-        int seed;
+        public bool IsEnemizerRom
+        {
+            get
+            {
+                return romData.Length == AddressConstants.EnemizerFileLength
+                    && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset] == 'E' 
+                    && romData[EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset + 1] == 'N';
+            }
+        }
+
+        int seed = -1;
         public int EnemizerSeed
         {
-            get { return seed; }
+            get
+            {
+                if (seed < 0 && IsEnemizerRom)
+                {
+                    var seedBytes = new byte[EnemizerInfoSeedStringLength];
+                    Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, seedBytes, 0, EnemizerInfoSeedStringLength);
+                    var seedString = System.Text.Encoding.ASCII.GetString(seedBytes).TrimEnd('\0').Substring(2);
+                    seed = Convert.ToInt32(seedString);
+                }
+                return seed;
+            }
             set
             {
+                if(romData.Length < AddressConstants.EnemizerFileLength)
+                {
+                    throw new Exception("You need to expand the rom before you can use Enemizer features.");
+                }
+
                 // write to rom somewhere too
+                var seedString = ASCIIEncoding.ASCII.GetBytes($"EN{value.ToString()}");
+                Array.Resize(ref seedString, EnemizerInfoSeedStringLength); // make sure it's long enough
+                Array.Copy(seedString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, EnemizerInfoSeedStringLength);
                 seed = value;
             }
+        }
+
+        public string EnemizerVersion
+        {
+            get
+            {
+                if(!IsEnemizerRom)
+                {
+                    return "Not Enemizer Rom";
+                }
+
+                var versionBytes = new byte[EnemizerInfoVersionLength];
+                Array.Copy(this.romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, versionBytes, 0, EnemizerInfoVersionLength);
+                return System.Text.Encoding.ASCII.GetString(versionBytes).TrimEnd('\0');
+            }
+            set
+            {
+                if (romData.Length < AddressConstants.EnemizerFileLength)
+                {
+                    throw new Exception("You need to expand the rom before you can use Enemizer features.");
+                }
+
+                // write to rom somewhere too
+                var versionString = ASCIIEncoding.ASCII.GetBytes(value);
+                Array.Resize(ref versionString, EnemizerInfoVersionLength); // make sure it's long enough
+                Array.Copy(versionString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, EnemizerInfoVersionLength);
+            }
+        }
+
+        public void SetRomInfoOptionFlags(OptionFlags optionFlags)
+        {
+            var optionByteArray = optionFlags.ToByteArray();
+            if(optionByteArray.Length > 0x100 - EnemizerInfoFlagsOffset)
+            {
+                throw new Exception("Option flags is too long to fit in the space allocated. Need to move data/code in asm file.");
+            }
+            Array.Copy(optionByteArray, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray.Length);
+        }
+
+        public OptionFlags GetOptionFlagsFromRom()
+        {
+            if(!IsEnemizerRom)
+            {
+                return null;
+            }
+
+            byte[] optionByteArray = new byte[EnemizerInfoFlagsLength];
+            Array.Copy(romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray, 0, EnemizerInfoFlagsLength);
+            return new OptionFlags(optionByteArray);
         }
 
         /// <summary>
@@ -38,6 +128,7 @@ namespace EnemizerLibrary
         public RomData(byte[] romData)
         {
             this.romData = romData;
+            this.OriginalLength = romData.Length;
         }
 
         /// <summary>
@@ -94,7 +185,7 @@ namespace EnemizerLibrary
              * 10 01 01 01 11 01 01 03 
              */
             byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
-            Array.Copy(vanilla, 0, romData, 0xD7BBB, 16);
+            Array.Copy(vanilla, 0, romData, AddressConstants.HiddenEnemyChancePoolBaseAddress, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()
@@ -107,22 +198,23 @@ namespace EnemizerLibrary
             db $01, $0F, $0F, $0F, $0F, $0F, $0F, $12 
             db $0F, $01, $0F, $0F, $11, $0F, $0F, $03
             */
-            romData[0xD7BBB + 0] = 0x01;
-            romData[0xD7BBB + 1] = 0x0F;
-            romData[0xD7BBB + 2] = 0x0F;
-            romData[0xD7BBB + 3] = 0x0F;
-            romData[0xD7BBB + 4] = 0x0F;
-            romData[0xD7BBB + 5] = 0x0F;
-            romData[0xD7BBB + 6] = 0x0F;
-            romData[0xD7BBB + 7] = 0x12;
-            romData[0xD7BBB + 8] = 0x0F;
-            romData[0xD7BBB + 9] = 0x01;
-            romData[0xD7BBB + 10] = 0x0F;
-            romData[0xD7BBB + 11] = 0x0F;
-            romData[0xD7BBB + 12] = 0x11;
-            romData[0xD7BBB + 13] = 0x0F;
-            romData[0xD7BBB + 14] = 0x0F;
-            romData[0xD7BBB + 15] = 0x03;
+            int i = AddressConstants.HiddenEnemyChancePoolBaseAddress;
+            romData[i++] = 0x01;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x12;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x01;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x11;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x0F;
+            romData[i++] = 0x03;
         }
 
         public void SetCharacterSelectScreenVersion()
@@ -130,13 +222,44 @@ namespace EnemizerLibrary
             byte versionMajor = Version.MajorVersion;
             byte versionMinor = Version.MinorVersion;
 
-            var text = new byte[] 
+            byte buildFirst = Version.BuildNumber / 10;
+            byte buildSecond = Version.BuildNumber % 10;
+
+            var text = new byte[]
             {
-                0x63, 0x25, 0x00, 0x19, 0x64, 0x1D, 0x88, 0x01, 0x62, 0x1D, 0x88, 0x01, 0x65, 0x1D, 0x88, 0x01,
-                0x65, 0x1D, 0x88, 0x01, 0x4E, 0x15, 0x67, 0x15, (byte)(0x40 | versionMajor), 0x15, 0x88, 0x01, (byte)(0x40 | versionMinor), 0x15, 0x63, 0x45,
-                0x00, 0x19, 0x74, 0x1D, 0x88, 0x01, 0x72, 0x1D, 0x88, 0x01, 0x75, 0x1D, 0x88, 0x01, 0x75, 0x1D,
-                0x88, 0x01, 0x5E, 0x15, 0x77, 0x15, (byte)(0x50 | versionMajor), 0x15, 0x9D, 0x15, (byte)(0x50 | versionMinor), 0x15
+                // top
+                0x63, 0x25, 0x00, 0x19,
+                0x64, 0x1D, // K (top)
+                0x62, 0x1D, // I (top)
+                0x65, 0x1D, // L (top)
+                0x65, 0x1D, // L (top)
+                0x88, 0x01, // space
+                0x4E, 0x15, // E (top)
+                0x67, 0x15, // N (top)
+                (byte)(0x40 | versionMajor), 0x15, // number (top)
+                //0x88, 0x01, // space
+                0x88, 0x01, // space
+                (byte)(0x40 | versionMinor), 0x15, // number (top)
+                0x88, 0x01, // space
+                (byte)(0x40 | buildFirst), 0x15, // number (top)
+                (byte)(0x40 | buildSecond), 0x15, // number (top)
+                // bottom
+                0x63, 0x45, 0x00, 0x19,
+                0x74, 0x1D, // K (bottom)
+                0x72, 0x1D, // I (bottom)
+                0x75, 0x1D, // L (bottom)
+                0x75, 0x1D, // L (bottom)
+                0x88, 0x01, // space
+                0x5E, 0x15, // E (bottom)
+                0x77, 0x15, // N (bottom)
+                (byte)(0x50 | versionMajor), 0x15, // number (bottom)
+                0x9D, 0x15, // . (bottom)
+                (byte)(0x50 | versionMinor), 0x15, // number (bottom)
+                0x9D, 0x15, // . (bottom)
+                (byte)(0x50 | buildFirst), 0x15, // number (top)
+                (byte)(0x50 | buildSecond), 0x15, // number (top)
             };
+
             Array.Copy(text, 0, romData, 0x65E94, text.Length);
         }
 
@@ -149,6 +272,34 @@ namespace EnemizerLibrary
                 {
                     return true;
                 }
+                // entrance randomizer
+                if (romData[0x7FC0] == 0x45 && romData[0x7FC1] == 0x52)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsItemRandomizerRom
+        {
+            get
+            {
+                // item randomizer
+                if (romData[0x7FC0] == 0x56 && romData[0x7FC1] == 0x54)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsEntranceRandomizerRom
+        {
+            get
+            {
                 // entrance randomizer
                 if (romData[0x7FC0] == 0x45 && romData[0x7FC1] == 0x52)
                 {
@@ -201,7 +352,7 @@ namespace EnemizerLibrary
                  */
                 byte[] seed = new byte[21];
                 Array.Copy(romData, 0x7FC0, seed, 0, 21);
-                return System.Text.Encoding.ASCII.GetString(seed);
+                return System.Text.Encoding.ASCII.GetString(seed).TrimEnd('\0');
             }
         }
 
@@ -209,6 +360,8 @@ namespace EnemizerLibrary
         {
             Array.Resize(ref this.romData, 0x400000); // 4MB
             this.romData[0x7FD7] = 0x0C; // update header length
+
+            this.EnemizerVersion = EnemizerLibrary.Version.CurrentVersion;
         }
 
         /*
@@ -251,6 +404,8 @@ namespace EnemizerLibrary
             }
         }
 
+        public int OriginalLength { get; set; }
+
         public byte this[int i]
         {
             get
@@ -259,7 +414,7 @@ namespace EnemizerLibrary
             }
             set
             {
-                if(i == 0)
+                if(i >= 0x7B41 && i < 0x7C41)
                 {
                     Debugger.Break();
                 }

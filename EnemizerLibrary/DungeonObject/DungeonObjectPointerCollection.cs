@@ -8,7 +8,6 @@ namespace EnemizerLibrary
 {
     public class DungeonObjectDataPointerCollection
     {
-        public const int ObjectDataPointerTableAddress = 0xF8000;
         public const int TotalRooms = 320;
 
         public Dictionary<int, DungeonObjectDataPointer> RoomDungeonObjectDataPointers { get; private set; } = new Dictionary<int, DungeonObjectDataPointer>();
@@ -20,7 +19,7 @@ namespace EnemizerLibrary
             this.romData = romData;
             for (int i=0; i<TotalRooms; i++)
             {
-                var pointerAddress = ObjectDataPointerTableAddress + (i * 3);
+                var pointerAddress = AddressConstants.ObjectDataPointerTableAddress + (i * 3);
                 RoomDungeonObjectDataPointers.Add(i, new DungeonObjectDataPointer(romData, i, pointerAddress, romData.GetDataChunk(pointerAddress, 3)));
             }
         }

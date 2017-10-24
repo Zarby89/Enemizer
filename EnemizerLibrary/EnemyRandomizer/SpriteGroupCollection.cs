@@ -60,17 +60,50 @@ namespace EnemizerLibrary
                 && req.GroupId.Count == 0
                 && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
-                //var excludeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.GroupId).ToList();
-                //var excludeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup0).ToList();
-                //var excludeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup1).ToList();
-                //var excludeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup2).ToList();
-                //var excludeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.Boss || x.IsObject || x.NeverUseDungeon || x.NPC || x.Overlord).SelectMany(x => x.SubGroup3).ToList();
-                return UsableDungeonSpriteGroups;
-                    //.Where(x => excludeGroupId.Count == 0 || !excludeGroupId.Contains((byte)x.GroupId) 
-                    //    || excludeSubGroup0Id.Count == 0 || !excludeSubGroup0Id.Contains((byte)x.SubGroup0)
-                    //    || excludeSubGroup1Id.Count == 0 || !excludeSubGroup1Id.Contains((byte)x.SubGroup1)
-                    //    || excludeSubGroup2Id.Count == 0 || !excludeSubGroup2Id.Contains((byte)x.SubGroup2)
-                    //    || excludeSubGroup3Id.Count == 0 || !excludeSubGroup3Id.Contains((byte)x.SubGroup3));
+                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId).ToList();
+                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
+                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
+                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
+                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
+                    .ToList();
+                return UsableDungeonSpriteGroups
+                    .Where(x => includeGroupId.Contains((byte)x.GroupId)
+                        || includeSubGroup0Id.Contains((byte)x.SubGroup0)
+                        || includeSubGroup1Id.Contains((byte)x.SubGroup1)
+                        || includeSubGroup2Id.Contains((byte)x.SubGroup2)
+                        || includeSubGroup3Id.Contains((byte)x.SubGroup3));
+            }
+
+            // TODO: gotta be a better way to do this
+            var doNotUpdateGroupIds = doNotUpdateSprites.SelectMany(x => x.GroupId).ToList();
+            var doNotUpdateSub0Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup0).ToList();
+            var doNotUpdateSub1Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup1).ToList();
+            var doNotUpdateSub2Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup2).ToList();
+            var doNotUpdateSub3Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup3).ToList();
+            if(needsKey == false && needsKillable == false 
+                && doNotUpdateGroupIds.Count == 0 
+                && doNotUpdateSub0Ids.Count == 0 
+                && doNotUpdateSub1Ids.Count == 0 
+                && doNotUpdateSub2Ids.Count == 0 
+                && doNotUpdateSub3Ids.Count == 0
+                && req.GroupId.Count == 0
+                && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
+            {
+                // probably a bunny beam or something else that doesn't have a required group
+                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId).ToList();
+                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
+                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
+                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
+                var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
+                    .ToList();
+                return UsableDungeonSpriteGroups
+                    .Where(x => includeGroupId.Contains((byte)x.GroupId)
+                        || includeSubGroup0Id.Contains((byte)x.SubGroup0)
+                        || includeSubGroup1Id.Contains((byte)x.SubGroup1)
+                        || includeSubGroup2Id.Contains((byte)x.SubGroup2)
+                        || includeSubGroup3Id.Contains((byte)x.SubGroup3));
             }
 
             //var usableGroups = spriteRequirementsCollection.SpriteRequirements.Where(x => x.GroupId)
@@ -85,13 +118,6 @@ namespace EnemizerLibrary
             var keysSub1Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup1).ToList();
             var keysSub2Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup2).ToList();
             var keysSub3Ids = spriteRequirementsCollection.KillableSprites.Where(x => x.SpriteId != SpriteConstants.StalSprite).Where(x => x.CannotHaveKey == false).SelectMany(x => x.SubGroup3).ToList();
-
-            // TODO: gotta be a better way to do this
-            var doNotUpdateGroupIds = doNotUpdateSprites.SelectMany(x => x.GroupId).ToList();
-            var doNotUpdateSub0Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup0).ToList();
-            var doNotUpdateSub1Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup1).ToList();
-            var doNotUpdateSub2Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup2).ToList();
-            var doNotUpdateSub3Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup3).ToList();
 
             return UsableDungeonSpriteGroups
                 .Where(x => doNotUpdateGroupIds.Count == 0 || doNotUpdateGroupIds.Contains((byte)x.GroupId))
@@ -171,13 +197,9 @@ namespace EnemizerLibrary
 
                 SpriteGroups.Add(sg);
             }
-
-            SetupRequiredOverworldGroups();
-
-            SetupRequiredDungeonGroups();
         }
 
-        void SetupRequiredOverworldGroups()
+        public void SetupRequiredOverworldGroups()
         {
             OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
 
@@ -224,7 +246,7 @@ namespace EnemizerLibrary
             }
         }
 
-        void SetupRequiredDungeonGroups()
+        public void SetupRequiredDungeonGroups()
         {
             dungeonReqs = new RoomGroupRequirementCollection();
 
@@ -369,7 +391,10 @@ namespace EnemizerLibrary
 
         public void UpdateRom()
         {
-            SpriteGroups.ForEach(x => x.UpdateRom());
+            foreach(var sg in SpriteGroups)
+            {
+                sg.UpdateRom();
+            }
         }
 
         public void RandomizeDungeonGroups()
