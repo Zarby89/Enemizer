@@ -44,11 +44,11 @@ macro DMA_VRAM(VRAM_HIGH,VRAM_LOW,SRC_BANK,SRC_HIGH,SRC_LOW,LENGTH_HIGH,LENGTH_L
 		STA !DMA0_DEST_REG
 		
 		; Read from $<SRC_BANK>:<SRC_HIGH><SRC_LOW>.
-		LDA <SRC_LOW>
+		LDA.b <SRC_LOW>
 		STA !DMA0_SRC_LOW_REG           ; set src address low byte
-		LDA <SRC_HIGH>
+		LDA.b <SRC_HIGH>
 		STA !DMA0_SRC_HIGH_REG          ; set src address high byte
-		LDA <SRC_BANK>
+		LDA.b <SRC_BANK>
 		STA !DMA0_SRC_BANK_REG          ; set src address bank byte
 
 		; total bytes to copy: #$1000 bytes.

@@ -12,6 +12,11 @@ RTL
 
 LoadNewSoundFx:
 {
+    LDA !SOUNDFX_LOADED : BEQ +
+        RTL
+    +
+    LDA #$01 : STA !SOUNDFX_LOADED
+
     SEI
     ; Shut down NMI until music loads
     STZ $4200

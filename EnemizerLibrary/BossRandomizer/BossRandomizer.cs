@@ -51,13 +51,30 @@ namespace EnemizerLibrary
             bossPool.FillPool();
         }
 
-        public void RandomizeRom(RomData romData)
+        public void RandomizeRom(RomData romData, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             FillDungeonPool();
             FillBossPool();
 
             GenerateRandomizedBosses();
+            SetBossSpriteGroups(spriteGroupCollection, spriteRequirementCollection);
             WriteRom(romData);
+        }
+
+        void SetBossSpriteGroups(SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        {
+            foreach(var d in this.DungeonPool)
+            {
+                var group = spriteGroupCollection.SpriteGroups.Where(x => x.DungeonGroupId == d.SelectedBoss.BossGraphics).FirstOrDefault();
+                var sprite = spriteRequirementCollection.SpriteRequirements.Where(x => x.SpriteId == d.SelectedBoss.BossSpriteId).FirstOrDefault();
+                if(group != null && sprite != null)
+                {
+                    group.PreserveSubGroup0 = sprite.SubGroup0.Count > 0;
+                    group.PreserveSubGroup1 = sprite.SubGroup1.Count > 0;
+                    group.PreserveSubGroup2 = sprite.SubGroup2.Count > 0;
+                    group.PreserveSubGroup3 = sprite.SubGroup3.Count > 0;
+                }
+            }
         }
 
         protected virtual void GenerateRandomizedBosses()
@@ -142,11 +159,11 @@ namespace EnemizerLibrary
                 }
 
                 // update boss pointer
-                romData[dungeon.BossAddress] = dungeon.SelectedBoss.BossPointer[0];
-                romData[dungeon.BossAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
+                romData[dungeon.DungeonRoomSpritePointerAddress] = dungeon.SelectedBoss.BossPointer[0];
+                romData[dungeon.DungeonRoomSpritePointerAddress + 1] = dungeon.SelectedBoss.BossPointer[1];
 
                 // update boss graphics
-                romData[0x120090 + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
+                romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 3)] = dungeon.SelectedBoss.BossGraphics;
 
                 // update trinexx shell
                 if(dungeon.SelectedBoss.BossType == BossType.Trinexx && dungeon.BossRoomId != RoomIdConstants.R164_TurtleRock_Trinexx)
@@ -155,9 +172,9 @@ namespace EnemizerLibrary
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY-2, dungeon.ClearLayer2, 0xFF2);
 
                     // see "Header contents:" section of rom log
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
-                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 0)] = 0x60; // BG2 (upper 3 bits are "BG2")
+                    //romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 2)] = 13; // byte 2: gets stored to $0AA2 (blockset (tileset) in Hyrule Magic)
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 4)] = 04; // byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
                 }
 
                 // update kholdstare shell
@@ -166,9 +183,9 @@ namespace EnemizerLibrary
                     roomObjects.AddShellAndMoveObjectData(dungeon.BossRoomId, dungeon.ShellX, dungeon.ShellY, dungeon.ClearLayer2, 0xF95);
 
                     // TODO: fix this. "debug" flag is set on one of these bytes
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
-                    //romData[0x120090 + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
-                    romData[0x120090 + ((dungeon.BossRoomId * 14) + 4)] = 01; 
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 0)] = 0xE0; // BG2
+                    //romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 2)] = 11; // I suspect this
+                    romData[AddressConstants.dungeonHeaderBaseAddress + ((dungeon.BossRoomId * 14) + 4)] = 01; 
                 }
 
                 // remove trinexx shell
@@ -184,9 +201,35 @@ namespace EnemizerLibrary
                     // TODO: figure out the X/Y coord
                     roomObjects.RemoveShellAndMoveObjectData(dungeon.BossRoomId, 0xF95);
                 }
+
+                if(dungeon.DungeonType == DungeonType.GanonsTower1 || dungeon.DungeonType == DungeonType.GanonsTower2)
+                {
+                    // TODO: clean this up and move it
+                    // override the sprites pointer and make some new ones in an "unused" spot in rom 
+                    // (in the room sprite pointer table, it has way more room than is used)
+                    int startingAddress = 0x0;
+                    if(dungeon.DungeonType == DungeonType.GanonsTower1)
+                    {
+                        startingAddress = 0x4D87E;
+                    }
+                    else
+                    {
+                        startingAddress = 0x4D8B6;
+                    }
+
+                    romData[dungeon.DungeonRoomSpritePointerAddress] = (byte)(startingAddress & 0xFF);
+                    romData[dungeon.DungeonRoomSpritePointerAddress + 1] = (byte)((startingAddress >> 8) & 0xFF);
+
+                    romData[startingAddress++] = 0x00;
+                    romData.WriteDataChunk(startingAddress, dungeon.SelectedBoss.BossSpriteArray);
+                    startingAddress += dungeon.SelectedBoss.BossSpriteArray.Length;
+                    romData.WriteDataChunk(startingAddress, dungeon.ExtraSprites);
+                    startingAddress += dungeon.ExtraSprites.Length;
+                    romData[startingAddress] = 0xFF;
+                }
             }
 
-            roomObjects.WriteChangesToRom(0x122000);
+            roomObjects.WriteChangesToRom(AddressConstants.movedRoomObjectBaseAddress);
             //shells.WriteShellsToRom(romData);
             RemoveBlindSpawnCode(romData);
             RemoveMaidenFromThievesTown(romData);

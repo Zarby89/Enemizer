@@ -86,64 +86,67 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="bosses_gfx\agahnim1.bin">
+    <Content Include="bosses_gfx\agahnim1.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\agahnim2.bin">
+    </Content>
+    <Content Include="bosses_gfx\agahnim2.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\agahnim3.bin">
+    </Content>
+    <Content Include="bosses_gfx\agahnim3.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\armosknight.bin">
+    </Content>
+    <Content Include="bosses_gfx\armosknight.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\arrghus.bin">
+    </Content>
+    <Content Include="bosses_gfx\arrghus.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\blind.bin">
+    </Content>
+    <Content Include="bosses_gfx\blind.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\ganon1.bin">
+    </Content>
+    <Content Include="bosses_gfx\ganon1.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\ganon2.bin">
+    </Content>
+    <Content Include="bosses_gfx\ganon2.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\ganon3.bin">
+    </Content>
+    <Content Include="bosses_gfx\ganon3.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\ganon4.bin">
+    </Content>
+    <Content Include="bosses_gfx\ganon4.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\helmasaure1.bin">
+    </Content>
+    <Content Include="bosses_gfx\helmasaure1.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\helmasaure2.bin">
+    </Content>
+    <Content Include="bosses_gfx\helmasaure2.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\kholdstare.bin">
+    </Content>
+    <Content Include="bosses_gfx\kholdstare.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\lanmola.bin">
+    </Content>
+    <Content Include="bosses_gfx\lanmola.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\moldorm.bin">
+    </Content>
+    <Content Include="bosses_gfx\moldorm.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\mothula.bin">
+    </Content>
+    <Content Include="bosses_gfx\mothula.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\trinexx1.bin">
+    </Content>
+    <Content Include="bosses_gfx\trinexx1.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\trinexx2.bin">
+    </Content>
+    <Content Include="bosses_gfx\trinexx2.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\vitreous.bin">
+    </Content>
+    <Content Include="bosses_gfx\vitreous.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="patchData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -153,177 +156,180 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="shield_gfx\skullshield.bin">
+    <Content Include="exported_symbols.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="shield_gfx\squareshield.bin">
+    </Content>
+    <Content Include="shield_gfx\skullshield.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\4slink-armors.spr">
+    </Content>
+    <Content Include="shield_gfx\squareshield.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\4SLinkSplit.spr">
+    </Content>
+    <Content Include="sprites\4slink-armors.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\boy.spr">
+    </Content>
+    <Content Include="sprites\4SLinkSplit.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\BreastCancer.spr">
+    </Content>
+    <Content Include="sprites\boy.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\CaplessBlondeLink.spr">
+    </Content>
+    <Content Include="sprites\BreastCancer.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\CaplessPinkLink.spr.spr">
+    </Content>
+    <Content Include="sprites\CaplessBlondeLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Cat.spr">
+    </Content>
+    <Content Include="sprites\CaplessPinkLink.spr.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\ChampionLink.spr">
+    </Content>
+    <Content Include="sprites\Cat.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\CheerLink.spr">
+    </Content>
+    <Content Include="sprites\ChampionLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Cucco.spr">
+    </Content>
+    <Content Include="sprites\CheerLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\darkgirl.spr">
+    </Content>
+    <Content Include="sprites\Cucco.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\darklink.1.spr">
+    </Content>
+    <Content Include="sprites\darkgirl.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Darklink.spr">
+    </Content>
+    <Content Include="sprites\darklink.1.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\darkswatchy.spr">
+    </Content>
+    <Content Include="sprites\Darklink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\darkzelda.spr">
+    </Content>
+    <Content Include="sprites\darkswatchy.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Decidueye.spr">
+    </Content>
+    <Content Include="sprites\darkzelda.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Demon link.spr">
+    </Content>
+    <Content Include="sprites\Decidueye.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\demonlink.spr">
+    </Content>
+    <Content Include="sprites\Demon link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Frog Link.spr">
+    </Content>
+    <Content Include="sprites\demonlink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Ganondorf.spr">
+    </Content>
+    <Content Include="sprites\Frog Link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\girl.spr">
+    </Content>
+    <Content Include="sprites\Ganondorf.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Karkat.spr">
+    </Content>
+    <Content Include="sprites\girl.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\kirby-gooey.spr">
+    </Content>
+    <Content Include="sprites\Karkat.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\KirbyGooey.spr">
+    </Content>
+    <Content Include="sprites\kirby-gooey.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Kore8.spr">
+    </Content>
+    <Content Include="sprites\KirbyGooey.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\link.spr">
+    </Content>
+    <Content Include="sprites\Kore8.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\maiden.spr">
+    </Content>
+    <Content Include="sprites\link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\maplequeen.spr">
+    </Content>
+    <Content Include="sprites\maiden.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\MarioClassic.spr">
+    </Content>
+    <Content Include="sprites\maplequeen.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Mike Jones.spr">
+    </Content>
+    <Content Include="sprites\MarioClassic.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Minish Cap Link.spr">
+    </Content>
+    <Content Include="sprites\Mike Jones.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\ModernLink.spr">
+    </Content>
+    <Content Include="sprites\Minish Cap Link.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Mog.spr">
+    </Content>
+    <Content Include="sprites\ModernLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Mouse.spr">
+    </Content>
+    <Content Include="sprites\Mog.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\NatureLink.spr">
+    </Content>
+    <Content Include="sprites\Mouse.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\NegativeLink.spr">
+    </Content>
+    <Content Include="sprites\NatureLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\oldman.spr">
+    </Content>
+    <Content Include="sprites\NegativeLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Orb.spr">
+    </Content>
+    <Content Include="sprites\oldman.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Popoi.spr">
+    </Content>
+    <Content Include="sprites\Orb.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\pug.spr">
+    </Content>
+    <Content Include="sprites\Popoi.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Roy Koopa.spr">
+    </Content>
+    <Content Include="sprites\pug.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Rumia.spr">
+    </Content>
+    <Content Include="sprites\Roy Koopa.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\samus.spr">
+    </Content>
+    <Content Include="sprites\Rumia.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\StaticLink.spr">
+    </Content>
+    <Content Include="sprites\samus.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Super Bunny.spr">
+    </Content>
+    <Content Include="sprites\StaticLink.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Swatchy.spr">
+    </Content>
+    <Content Include="sprites\Super Bunny.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\TileroomTile.spr">
+    </Content>
+    <Content Include="sprites\Swatchy.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Tingle.spr">
+    </Content>
+    <Content Include="sprites\TileroomTile.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Toad.spr">
+    </Content>
+    <Content Include="sprites\Tingle.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Valeera.spr">
+    </Content>
+    <Content Include="sprites\Toad.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Will.spr">
+    </Content>
+    <Content Include="sprites\Valeera.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\wizzrobe.spr">
+    </Content>
+    <Content Include="sprites\Will.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\zelda-update.spr">
+    </Content>
+    <Content Include="sprites\wizzrobe.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="sprites\Zora.spr">
+    </Content>
+    <Content Include="sprites\zelda-update.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="weapons\mace.bin">
+    </Content>
+    <Content Include="sprites\Zora.spr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="weapons\mace.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

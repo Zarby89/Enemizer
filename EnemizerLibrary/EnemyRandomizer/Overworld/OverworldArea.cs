@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
     public class OverworldArea
     {
-        public const int OverworldAreaGraphicsBlockBaseAddress = 0x007A81;
-        public const int OverworldSpritePointerTableBaseAddress = 0x04C901;
         public int AreaId { get; set; }
         public int SpriteTableBaseAddress { get; set; }
         public int GraphicsBlockAddress { get; set; }
@@ -30,7 +26,9 @@ namespace EnemizerLibrary
             this.romData = romData;
             this.AreaId = AreaId;
 
-            int spriteTableBaseSnesAddress = (09 << 16) + (romData[OverworldSpritePointerTableBaseAddress + (AreaId * 2) + 1] << 8) + (romData[OverworldSpritePointerTableBaseAddress + (AreaId * 2)]);
+            int spriteTableBaseSnesAddress = (09 << 16) // bank 9
+                + (romData[AddressConstants.OverworldSpritePointerTableBaseAddress + (AreaId * 2) + 1] << 8) 
+                + (romData[AddressConstants.OverworldSpritePointerTableBaseAddress + (AreaId * 2)]);
             SpriteTableBaseAddress = Utilities.SnesToPCAddress(spriteTableBaseSnesAddress);
 
             LoadGraphicsBlock();
@@ -63,7 +61,7 @@ namespace EnemizerLibrary
                 return;
             }
 
-            GraphicsBlockAddress = OverworldAreaGraphicsBlockBaseAddress + AreaId;
+            GraphicsBlockAddress = AddressConstants.OverworldAreaGraphicsBlockBaseAddress + AreaId;
 
             if (AreaId >= 0x40 && AreaId < 0x80)
             {
@@ -142,71 +140,5 @@ namespace EnemizerLibrary
                 romData[SpriteConstants.RandomizedBushEnemyTableBaseAddress + this.AreaId] = (byte)possibleSprites[rand.Next(possibleSprites.Length)];
             }
         }
-    }
-
-    public class OverworldAreaCollection
-    {
-        public List<OverworldArea> OverworldAreas { get; set; } = new List<OverworldArea>();
-        RomData romData;
-        Random rand;
-        SpriteRequirementCollection spriteRequirementCollection;
-
-        public OverworldAreaCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementCollection)
-        {
-            this.romData = romData;
-            this.rand = rand;
-            this.spriteRequirementCollection = spriteRequirementCollection;
-
-            LoadAreas();
-        }
-
-        void LoadAreas()
-        {
-            for (int i = 0; i < 0x120; i++)
-            {
-                var owArea = new OverworldArea(romData, i);
-                OverworldAreas.Add(owArea);
-            }
-        }
-
-        public void UpdateRom()
-        {
-            foreach(var a in OverworldAreas)
-            {
-                a.UpdateRom();
-            }
-        }
-
-        public void RandomizeAreaSpriteGroups(SpriteGroupCollection spriteGroups)
-        {
-            // TODO: this needs to be updated???
-
-            foreach (var a in OverworldAreas.Where(x => OverworldAreaConstants.DoNotRandomizeAreas.Contains(x.AreaId) == false))
-            {
-                List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection
-                                                            .DoNotRandomizeSprites
-                                                            .Where(x => //x.CanSpawnInRoom(a)
-                                                                        //&& 
-                                                                        a.Sprites.Select(y => y.SpriteId).ToList().Contains(x.SpriteId)
-                                                                )
-                                                            .ToList();
-
-                var possibleSpriteGroups = spriteGroups.GetPossibleOverworldSpriteGroups(doNotUpdateSprites).ToList();
-
-                //Debug.Assert(possibleSpriteGroups.Count > 0);
-
-                a.GraphicsBlockId = (byte)possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].GroupId;
-            }
-
-            //// force any rooms we need to
-            //foreach (var sg in spriteGroups.SpriteGroups.Where(x => x.ForceRoomsToGroup != null && x.ForceRoomsToGroup.Count > 0))
-            //{
-            //    foreach (var forcedR in OverworldAreas.Where(x => sg.ForceRoomsToGroup.Contains(x.AreaId)))
-            //    {
-            //        forcedR.GraphicsBlockId = (byte)sg.GroupId;
-            //    }
-            //}
-        }
-
     }
 }

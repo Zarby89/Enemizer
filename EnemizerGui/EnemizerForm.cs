@@ -33,15 +33,23 @@ namespace Enemizer
             LoadSpriteDropdown();
             LoadShieldDropdown();
 
-            if (LoadConfig())
-            {
-                UpdateUIFromConfig();
+            LoadLanguageDropdown();
 
-                if (config.CheckForUpdates)
-                {
-                    CheckForUpdates();
-                }
-            }
+            LoadConfig();
+            UpdateUIFromConfig();
+            CheckForUpdates();
+        }
+
+        private void LoadLanguageDropdown()
+        {
+            uiLanguageCombobox.Items.Clear();
+            uiLanguageCombobox.Items.Add("English");
+            uiLanguageCombobox.SelectedIndex = 0;
+        }
+
+        private void ChangeUILangauge()
+        {
+
         }
 
         private void EnemizerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,7 +59,7 @@ namespace Enemizer
 
         private bool CheckForUpdates()
         {
-            if (EnemizerLibrary.Version.CheckUpdate() == true)
+            if (config.CheckForUpdates && EnemizerLibrary.Version.CheckUpdate() == true)
             {
                 var window = MessageBox.Show("There is a new version available, do you want to download the update?", "Update Available", MessageBoxButtons.YesNo);
                 if (window == DialogResult.Yes)
@@ -67,7 +75,7 @@ namespace Enemizer
         {
             if (!CheckForUpdates())
             {
-                MessageBox.Show("No update available");
+                MessageBox.Show("No update available", "Enemizer");
                 //noupdate
             }
         }
@@ -95,13 +103,24 @@ namespace Enemizer
             //shieldSpriteCombobox.DataSource = Enum.GetValues(typeof(ShieldTypes));
         }
 
+        void LoadAbsorbablesListBox()
+        {
+            absorbableItemsChecklist.Items.Clear();
+            foreach(var e in Enum.GetValues(typeof(AbsorbableTypes)))
+            {
+                absorbableItemsChecklist.Items.Add(((AbsorbableTypes)e).GetDescription());
+            }
+        }
+
         private bool LoadConfig()
         {
+            var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
+
             try
             {
-                if (File.Exists(configFilename))
+                if (File.Exists(configFullPath))
                 {
-                    config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFilename));
+                    config = JsonConvert.DeserializeObject<EnemizerConfig>(File.ReadAllText(configFullPath));
                     if(config != null)
                     {
                         return true;
@@ -111,7 +130,7 @@ namespace Enemizer
             catch
             {
                 // invalid file
-                MessageBox.Show("Invalid setting file. Loading defaults.");
+                MessageBox.Show("Invalid setting file. Loading defaults.", "Enemizer");
             }
 
             config = new EnemizerConfig();
@@ -121,7 +140,13 @@ namespace Enemizer
         private void SaveConfig()
         {
             var configJson = JsonConvert.SerializeObject(config, Formatting.Indented);
-            File.WriteAllText("setting.cfg", configJson);
+            // make sure the folder exists and create it
+            var configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer");
+            Directory.CreateDirectory(configPath);
+
+            // write the config file
+            var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
+            File.WriteAllText(configFullPath, configJson);
         }
 
 
@@ -146,6 +171,8 @@ namespace Enemizer
             randomizeLinksPaletteCheckbox.Checked = config.OptionFlags.RandomizeLinkSpritePalette;
 
             generateSpoilerCheckbox.Checked = config.OptionFlags.GenerateSpoilers;
+
+            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -169,8 +196,14 @@ namespace Enemizer
 
             randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
 
             allowZeroDamageCheckbox.Checked = config.OptionFlags.AllowEnemyZeroDamage;
+
+            shuffleEnemyDamageGroupsCheckbox.Checked = config.OptionFlags.ShuffleEnemyDamageGroups;
+
+            enemyDamageChaosModeCheckbox.Checked = config.OptionFlags.EnemyDamageChaosMode;
 
             easyModeEscapeCheckbox.Checked = config.OptionFlags.EasyModeEscape;
 
@@ -244,9 +277,8 @@ namespace Enemizer
             SetHeartBeepSpeedText(config.OptionFlags.HeartBeepSpeed);
             alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
-            grayscaleModecheckBox.Checked = config.OptionFlags.GrayscaleMode;
-            negativeModecheckBox.Checked = config.OptionFlags.NegativeMode;
-            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
+            grayscaleModeCheckbox.Checked = config.OptionFlags.GrayscaleMode;
+            negativeModeCheckbox.Checked = config.OptionFlags.NegativeMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -314,7 +346,6 @@ namespace Enemizer
 
         private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO: wire this up
             config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
         }
 
@@ -328,14 +359,19 @@ namespace Enemizer
             int seed = 0;
             if (String.IsNullOrEmpty(seedNumberTextbox.Text))
             {
-                seed = rand.Next();
+                seed = rand.Next(0, 999999999);
             }
             else
             {
                 // TODO: add validation to the textbox so it can't be anything but a number
                 if (!int.TryParse(seedNumberTextbox.Text, out seed))
                 {
-                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.");
+                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.", "Enemizer");
+                    return;
+                }
+                if(seed < 0)
+                {
+                    MessageBox.Show("Please enter a positive Seed Number.", "Enemizer");
                     return;
                 }
             }
@@ -362,22 +398,43 @@ namespace Enemizer
                 RomData romData = new RomData(rom_data);
                 RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
-                if(config.OptionFlags.GenerateSpoilers)
+                using (var fbd = new FolderBrowserDialog())
                 {
-                    File.WriteAllText($"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} ({randomizedRom.EnemizerSeed}) Spoiler.txt", randomizedRom.Spoiler.ToString());
-                }
-                string fileName = "Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName);
-                fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-                randomizedRom.WriteRom(fs);
-                fs.Close();
+                    fbd.Description = "Select Enemizer Destination Folder";
+                    if (!String.IsNullOrEmpty(config.DefaultFolder) && Directory.Exists(config.DefaultFolder))
+                    {
+                        fbd.SelectedPath = config.DefaultFolder;
+                    }
+                    else
+                    {
+                        fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    }
+                    
+                    var result = fbd.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        config.DefaultFolder = fbd.SelectedPath;
 
-                MessageBox.Show("Enemizer " + EnemizerLibrary.Version.CurrentVersion + " - " + Path.GetFileName(ofd.FileName) + " Has been created in the enemizer folder !");
+                        string fileNameNoExtension = Path.Combine(fbd.SelectedPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} (EN{randomizedRom.EnemizerSeed})");
+
+                        if (config.OptionFlags.GenerateSpoilers)
+                        {
+                            File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
+                        }
+                        string fileName = $"{fileNameNoExtension}.sfc";
+                        fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                        randomizedRom.WriteRom(fs);
+                        fs.Close();
+
+                        MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                    }
+                }
             }
 #if !DEBUG
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Enemizer");
             }
 #endif
         }
@@ -428,11 +485,23 @@ namespace Enemizer
         {
             config.OptionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
         }
 
         private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AllowEnemyZeroDamage = allowZeroDamageCheckbox.Checked;
+        }
+
+        private void shuffleEnemyDamageGroupsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.ShuffleEnemyDamageGroups = shuffleEnemyDamageGroupsCheckbox.Checked;
+        }
+
+        private void enemyDamageChaosModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.EnemyDamageChaosMode = enemyDamageChaosModeCheckbox.Checked;
         }
 
         private void easyModeEscapeCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -627,20 +696,21 @@ namespace Enemizer
             heartBeepSpeedLabel.Text = heartBeepSpeed.ToString();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void alternateGfxCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AlternateGfx = alternateGfxCheckbox.Checked;
         }
 
-        private void grayscaleModecheckBox_CheckedChanged(object sender, EventArgs e)
+        private void grayscaleModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.GrayscaleMode = grayscaleModecheckBox.Checked;
+            config.OptionFlags.GrayscaleMode = grayscaleModeCheckbox.Checked;
         }
 
-        private void negativeModecheckBox_CheckedChanged(object sender, EventArgs e)
+        private void negativeModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.NegativeMode = negativeModecheckBox.Checked;
+            config.OptionFlags.NegativeMode = negativeModeCheckbox.Checked;
         }
+
     }
 
 
