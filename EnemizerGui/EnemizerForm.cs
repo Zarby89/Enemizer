@@ -197,7 +197,7 @@ namespace Enemizer
             randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
             shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
-            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked;
 
             allowZeroDamageCheckbox.Checked = config.OptionFlags.AllowEnemyZeroDamage;
 
@@ -486,7 +486,7 @@ namespace Enemizer
             config.OptionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
             shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
-            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked;
         }
 
         private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -497,6 +497,7 @@ namespace Enemizer
         private void shuffleEnemyDamageGroupsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.ShuffleEnemyDamageGroups = shuffleEnemyDamageGroupsCheckbox.Checked;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked;
         }
 
         private void enemyDamageChaosModeCheckbox_CheckedChanged(object sender, EventArgs e)

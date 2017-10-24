@@ -301,7 +301,7 @@ namespace EnemizerLibrary
             for(int i = 0;i<9;i++)
             {
                 int maxRand = 64;
-                if (!chaos)
+                if (chaos)
                 {
                     maxRand = 128;
                 }
