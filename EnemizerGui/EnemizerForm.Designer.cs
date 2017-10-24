@@ -74,8 +74,8 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.negativeModecheckBox = new System.Windows.Forms.CheckBox();
-            this.grayscaleModecheckBox = new System.Windows.Forms.CheckBox();
+            this.negativeModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.grayscaleModeCheckbox = new System.Windows.Forms.CheckBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.setBlackoutModeCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeSpritePalettesAdvancedCheckbox = new System.Windows.Forms.CheckBox();
@@ -83,6 +83,8 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.uiLanguageCombobox = new System.Windows.Forms.ComboBox();
+            this.lblUILanguage = new System.Windows.Forms.Label();
             this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
             this.heartBeepSpeedTrackbar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -96,8 +98,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
-            this.lblUILanguage = new System.Windows.Forms.Label();
-            this.uiLanguageCombobox = new System.Windows.Forms.ComboBox();
+            this.shuffleEnemyDamageGroupsCheckbox = new System.Windows.Forms.CheckBox();
+            this.enemyDamageChaosModeCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -260,6 +262,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.enemyDamageChaosModeCheckbox);
+            this.tabPage1.Controls.Add(this.shuffleEnemyDamageGroupsCheckbox);
             this.tabPage1.Controls.Add(this.chkRandomizeBushEnemyChance);
             this.tabPage1.Controls.Add(this.allowZeroDamageCheckbox);
             this.tabPage1.Controls.Add(this.absorbableItemsChecklist);
@@ -618,8 +622,8 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.negativeModecheckBox);
-            this.tabPage3.Controls.Add(this.grayscaleModecheckBox);
+            this.tabPage3.Controls.Add(this.negativeModeCheckbox);
+            this.tabPage3.Controls.Add(this.grayscaleModeCheckbox);
             this.tabPage3.Controls.Add(this.pukeModeCheckbox);
             this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
             this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
@@ -635,25 +639,25 @@
             // 
             // negativeModecheckBox
             // 
-            this.negativeModecheckBox.AutoSize = true;
-            this.negativeModecheckBox.Location = new System.Drawing.Point(3, 164);
-            this.negativeModecheckBox.Name = "negativeModecheckBox";
-            this.negativeModecheckBox.Size = new System.Drawing.Size(99, 17);
-            this.negativeModecheckBox.TabIndex = 7;
-            this.negativeModecheckBox.Text = "Negative Mode";
-            this.negativeModecheckBox.UseVisualStyleBackColor = true;
-            this.negativeModecheckBox.CheckedChanged += new System.EventHandler(this.negativeModecheckBox_CheckedChanged);
+            this.negativeModeCheckbox.AutoSize = true;
+            this.negativeModeCheckbox.Location = new System.Drawing.Point(3, 164);
+            this.negativeModeCheckbox.Name = "negativeModecheckBox";
+            this.negativeModeCheckbox.Size = new System.Drawing.Size(99, 17);
+            this.negativeModeCheckbox.TabIndex = 7;
+            this.negativeModeCheckbox.Text = "Negative Mode";
+            this.negativeModeCheckbox.UseVisualStyleBackColor = true;
+            this.negativeModeCheckbox.CheckedChanged += new System.EventHandler(this.negativeModeCheckbox_CheckedChanged);
             // 
             // grayscaleModecheckBox
             // 
-            this.grayscaleModecheckBox.AutoSize = true;
-            this.grayscaleModecheckBox.Location = new System.Drawing.Point(3, 141);
-            this.grayscaleModecheckBox.Name = "grayscaleModecheckBox";
-            this.grayscaleModecheckBox.Size = new System.Drawing.Size(166, 17);
-            this.grayscaleModecheckBox.TabIndex = 6;
-            this.grayscaleModecheckBox.Text = "Grayscale Mode (Indoor Only)";
-            this.grayscaleModecheckBox.UseVisualStyleBackColor = true;
-            this.grayscaleModecheckBox.CheckedChanged += new System.EventHandler(this.grayscaleModecheckBox_CheckedChanged);
+            this.grayscaleModeCheckbox.AutoSize = true;
+            this.grayscaleModeCheckbox.Location = new System.Drawing.Point(3, 141);
+            this.grayscaleModeCheckbox.Name = "grayscaleModecheckBox";
+            this.grayscaleModeCheckbox.Size = new System.Drawing.Size(166, 17);
+            this.grayscaleModeCheckbox.TabIndex = 6;
+            this.grayscaleModeCheckbox.Text = "Grayscale Mode (Indoor Only)";
+            this.grayscaleModeCheckbox.UseVisualStyleBackColor = true;
+            this.grayscaleModeCheckbox.CheckedChanged += new System.EventHandler(this.grayscaleModeCheckbox_CheckedChanged);
             // 
             // pukeModeCheckbox
             // 
@@ -744,6 +748,26 @@
             this.tabPage4.Text = "Extra";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // uiLanguageCombobox
+            // 
+            this.uiLanguageCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.uiLanguageCombobox.FormattingEnabled = true;
+            this.uiLanguageCombobox.Items.AddRange(new object[] {
+            "English"});
+            this.uiLanguageCombobox.Location = new System.Drawing.Point(318, 268);
+            this.uiLanguageCombobox.Name = "uiLanguageCombobox";
+            this.uiLanguageCombobox.Size = new System.Drawing.Size(121, 21);
+            this.uiLanguageCombobox.TabIndex = 17;
+            // 
+            // lblUILanguage
+            // 
+            this.lblUILanguage.AutoSize = true;
+            this.lblUILanguage.Location = new System.Drawing.Point(315, 252);
+            this.lblUILanguage.Name = "lblUILanguage";
+            this.lblUILanguage.Size = new System.Drawing.Size(69, 13);
+            this.lblUILanguage.TabIndex = 16;
+            this.lblUILanguage.Text = "UI Language";
+            // 
             // heartBeepSpeedLabel
             // 
             this.heartBeepSpeedLabel.AutoSize = true;
@@ -785,7 +809,7 @@
             this.alternateGfxCheckbox.TabIndex = 13;
             this.alternateGfxCheckbox.Text = "Alternate Gfx";
             this.alternateGfxCheckbox.UseVisualStyleBackColor = true;
-            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.alternateGfxCheckbox.CheckedChanged += new System.EventHandler(this.alternateGfxCheckbox_CheckedChanged);
             // 
             // andyModeCheckbox
             // 
@@ -875,25 +899,27 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
-            // lblUILanguage
+            // shuffleEnemyDamageGroupsCheckbox
             // 
-            this.lblUILanguage.AutoSize = true;
-            this.lblUILanguage.Location = new System.Drawing.Point(315, 252);
-            this.lblUILanguage.Name = "lblUILanguage";
-            this.lblUILanguage.Size = new System.Drawing.Size(69, 13);
-            this.lblUILanguage.TabIndex = 16;
-            this.lblUILanguage.Text = "UI Language";
+            this.shuffleEnemyDamageGroupsCheckbox.AutoSize = true;
+            this.shuffleEnemyDamageGroupsCheckbox.Location = new System.Drawing.Point(21, 222);
+            this.shuffleEnemyDamageGroupsCheckbox.Name = "shuffleEnemyDamageGroupsCheckbox";
+            this.shuffleEnemyDamageGroupsCheckbox.Size = new System.Drawing.Size(139, 17);
+            this.shuffleEnemyDamageGroupsCheckbox.TabIndex = 18;
+            this.shuffleEnemyDamageGroupsCheckbox.Text = "Shuffle Damage Groups";
+            this.shuffleEnemyDamageGroupsCheckbox.UseVisualStyleBackColor = true;
+            this.shuffleEnemyDamageGroupsCheckbox.CheckedChanged += new System.EventHandler(this.shuffleEnemyDamageGroupsCheckbox_CheckedChanged);
             // 
-            // uiLanguageCombobox
+            // enemyDamageChaosModeCheckbox
             // 
-            this.uiLanguageCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.uiLanguageCombobox.FormattingEnabled = true;
-            this.uiLanguageCombobox.Items.AddRange(new object[] {
-            "English"});
-            this.uiLanguageCombobox.Location = new System.Drawing.Point(318, 268);
-            this.uiLanguageCombobox.Name = "uiLanguageCombobox";
-            this.uiLanguageCombobox.Size = new System.Drawing.Size(121, 21);
-            this.uiLanguageCombobox.TabIndex = 17;
+            this.enemyDamageChaosModeCheckbox.AutoSize = true;
+            this.enemyDamageChaosModeCheckbox.Location = new System.Drawing.Point(21, 245);
+            this.enemyDamageChaosModeCheckbox.Name = "enemyDamageChaosModeCheckbox";
+            this.enemyDamageChaosModeCheckbox.Size = new System.Drawing.Size(86, 17);
+            this.enemyDamageChaosModeCheckbox.TabIndex = 19;
+            this.enemyDamageChaosModeCheckbox.Text = "Chaos Mode";
+            this.enemyDamageChaosModeCheckbox.UseVisualStyleBackColor = true;
+            this.enemyDamageChaosModeCheckbox.CheckedChanged += new System.EventHandler(this.enemyDamageChaosModeCheckbox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1008,10 +1034,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label heartBeepSpeedLabel;
         private System.Windows.Forms.CheckBox alternateGfxCheckbox;
-        private System.Windows.Forms.CheckBox negativeModecheckBox;
-        private System.Windows.Forms.CheckBox grayscaleModecheckBox;
+        private System.Windows.Forms.CheckBox negativeModeCheckbox;
+        private System.Windows.Forms.CheckBox grayscaleModeCheckbox;
         private System.Windows.Forms.ComboBox uiLanguageCombobox;
         private System.Windows.Forms.Label lblUILanguage;
+        private System.Windows.Forms.CheckBox enemyDamageChaosModeCheckbox;
+        private System.Windows.Forms.CheckBox shuffleEnemyDamageGroupsCheckbox;
     }
 }
 

@@ -26,6 +26,8 @@ namespace EnemizerLibrary
 
         public DungeonType DungeonType { get; protected set; } = DungeonType.NotSet;
 
+        public byte[] ExtraSprites = new byte[0];
+
         protected Dungeon(int priority)
         {
             Priority = priority;

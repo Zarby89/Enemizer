@@ -641,6 +641,7 @@ namespace EnemizerLibrary
             R135_TowerofHera_TileRoom,
 
             R68_ThievesTown_BigChestRoom,
+            R69_ThievesTown_JailCellsRoom,
 
             R83_DesertPalace_Popos2_BeamosHellwayRoom,
             R117_DesertPalace_BigKeyChestRoom,

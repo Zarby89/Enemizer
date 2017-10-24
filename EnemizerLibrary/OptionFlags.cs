@@ -18,6 +18,8 @@ namespace EnemizerLibrary
 
         public bool RandomizeEnemyDamage { get; set; }
         public bool AllowEnemyZeroDamage { get; set; }
+        public bool ShuffleEnemyDamageGroups { get; set; }
+        public bool EnemyDamageChaosMode { get; set; }
 
         public bool EasyModeEscape { get; set; }
 

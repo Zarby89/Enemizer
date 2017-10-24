@@ -22,6 +22,7 @@ namespace EnemizerLibrary
             // Kholdstare should work now
             //DisallowedBosses.Add(BossType.Kholdstare); // the moth room does really strange stuff
             DisallowedBosses.Add(BossType.Trinexx);
+            DisallowedBosses.Add(BossType.Vitreous); // key drop in room above is busted with vitreous
 
             ShellX = 0x2B;
             ShellY = 0x28;

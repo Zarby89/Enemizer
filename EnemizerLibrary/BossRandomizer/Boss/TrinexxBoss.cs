@@ -14,6 +14,13 @@ namespace EnemizerLibrary
             BossGraphics = 23;
             BossSpriteId = SpriteConstants.TrinexxSprite;
             BossNode = "turtle-trinexx";
+
+            BossSpriteArray = new byte[]
+            {
+                0x05, 0x07, 0xCB, // trinexx body?
+                0x05, 0x07, 0xCC, // trinexx ice head?
+                0x05, 0x07, 0xCD, // trinexx fire head?
+            };
         }
     }
 }

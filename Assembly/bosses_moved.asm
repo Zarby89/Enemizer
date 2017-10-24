@@ -93,18 +93,44 @@ boss_move:
 
 	BRL .return
 
+; $0D00[0x10] -   The lower byte of a sprite's Y - coordinate.
+; $0D10[0x10] -   The lower byte of a sprite's X - coordinate.
 
+; $0D20[0x10] -   The high byte of a sprite's Y - coordinate.
+; $0D30[0x10] -   The high byte of a sprite's X - coordinate.
+
+; $0B08[0x08] -   (Overlord) X coordinate low byte.
+; $0B18[0x08] -   (Overlord) Y coordinate low byte.
+
+; $0B10[0x08] -   (Overlord) X coordinate high byte.
+; $0B20[0x08] -   (Overlord) Y coordinate high byte.
 	.move_to_middle
         ;load all sprite of that room and overlord
         LDX #$00
         .loop_middle
+        LDA $0E20, X
+        CMP #$E3 : BNE + ;is it a fairy?? if not check next
+        BRA .no_change
+        +
+        CMP #$D1 : BNE + ;is it a bunny changer
+        BRA .no_change
+        +
+        CMP #$C5 : BNE + ;is it a medusa head
+        BRA .no_change
+        +
         LDA $0D10, X : !ADD #$68 : STA $0D10, X
         LDA $0D00, X : !ADD #$68 : STA $0D00, X
+        .no_change
         INX : CPX #$10 : BNE .loop_middle
         LDX #$00
         .loop_middle2
+        LDA $0B00, X 
+        CMP #$E3 : BNE + ;is it moving floor?
+        BRA .no_change_ov
+        +
         LDA $0B08, X : !ADD #$68 : STA $0B08, X
         LDA $0B18, X : !ADD #$68 : STA $0B18, X
+        .no_change_ov
         INX : CPX #$08 : BNE .loop_middle2
         BRL .return
 
@@ -112,13 +138,29 @@ boss_move:
 	.move_to_top_right
         LDX #$00
         .loop_top_right
+        LDA $0E20, X
+        CMP #$E3 : BNE + ;is it a fairy?? if not check next
+        BRA .no_change2
+        +
+        CMP #$D1 : BNE + ;is it a bunny changer
+        BRA .no_change2
+        +
+        CMP #$C5 : BNE + ;is it a medusa head
+        BRA .no_change2
+        +
         LDA $0D20, X : !ADD #$00 : STA $0D20, X
         LDA $0D30, X : !ADD #$01 : STA $0D30, X
+        .no_change2
         INX : CPX #$10 : BNE .loop_top_right
         LDX #$00
         .loop_top_right2
+        LDA $0B00, X 
+        CMP #$E3 : BNE + ;is it moving floor?
+        BRA .no_change_ov2
+        +
         LDA $0B10, X : !ADD #$01 : STA $0B10, X
         LDA $0B20, X : !ADD #$00 : STA $0B20, X
+        .no_change_ov2
         INX : CPX #$08 : BNE .loop_top_right2
         BRL .return
 
@@ -126,13 +168,29 @@ boss_move:
 	.move_to_bottom_right
         LDX #$00
         .loop_bottom_right
+        LDA $0E20, X
+        CMP #$E3 : BNE + ;is it a fairy?? if not check next
+        BRA .no_change3
+        +
+        CMP #$D1 : BNE + ;is it a bunny changer
+        BRA .no_change3
+        +
+        CMP #$C5 : BNE + ;is it a medusa head
+        BRA .no_change3
+        +
         LDA $0D20, X : !ADD #$01 : STA $0D20, X
         LDA $0D30, X : !ADD #$01 : STA $0D30, X
         INX : CPX #$10 : BNE .loop_bottom_right
+        .no_change3
         LDX #$00
         .loop_bottom_right2
+        LDA $0B00, X 
+        CMP #$E3 : BNE + ;is it moving floor?
+        BRA .no_change_ov3
+        +
         LDA $0B10, X : !ADD #$01 : STA $0B10, X
         LDA $0B20, X : !ADD #$01 : STA $0B20, X
+        .no_change_ov3
         INX : CPX #$08 : BNE .loop_bottom_right2
         BRL .return
 
@@ -140,13 +198,29 @@ boss_move:
 	.move_to_bottom_left
         LDX #$00
         .loop_bottom_left
+        LDA $0E20, X
+        CMP #$E3 : BNE + ;is it a fairy?? if not check next
+        BRA .no_change4
+        +
+        CMP #$D1 : BNE + ;is it a bunny changer
+        BRA .no_change4
+        +
+        CMP #$C5 : BNE + ;is it a medusa head
+        BRA .no_change4
+        +
         LDA $0D20, X : !ADD #$01 : STA $0D20, X
         LDA $0D30, X : !ADD #$00 : STA $0D30, X
+        .no_change4
         INX : CPX #$10 : BNE .loop_bottom_left
         LDX #$00
         .loop_bottom_left2
+        LDA $0B00, X 
+        CMP #$E3 : BNE + ;is it moving floor?
+        BRA .no_change_ov4
+        +
         LDA $0B10, X : !ADD #$00 : STA $0B10, X
         LDA $0B20, X : !ADD #$01 : STA $0B20, X
+        .no_change_ov4
         INX : CPX #$08 : BNE .loop_bottom_left2
         BRL .return
 
@@ -156,16 +230,16 @@ boss_move:
 }
 
 ;================================================================================
-; Fix the gibdo key drop in skull woods before the boss room
+; Fix the gibdo key drop in skull woods before the boss room - USELESS CODE
 ;--------------------------------------------------------------------------------
-gibdo_drop_key:
-    LDA $A0 : CMP #$39 : BNE .no_key_drop       ; Check if the room id is skullwoods before boss
-    LDA $0DD0, X : CMP #$09 : BNE .no_key_drop  ; Check if the sprite is alive
-    LDA #$01 : STA $0CBA, X;set key
-
-.no_key_drop
-    JSL $06DC5C ;Restore draw shadow
-    RTL
+;gibdo_drop_key:
+;    LDA $A0 : CMP #$39 : BNE .no_key_drop       ; Check if the room id is skullwoods before boss
+;    LDA $0DD0, X : CMP #$09 : BNE .no_key_drop  ; Check if the sprite is alive
+;    LDA #$01 : STA $0CBA, X;set key
+;
+;.no_key_drop
+;    JSL $06DC5C ;Restore draw shadow
+;    RTL
 ;--------------------------------------------------------------------------------
 
 ;================================================================================

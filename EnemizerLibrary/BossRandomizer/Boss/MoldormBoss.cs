@@ -14,6 +14,11 @@ namespace EnemizerLibrary
             BossGraphics = 12;
             BossSpriteId = SpriteConstants.MoldormSprite;
             BossNode = "hera-moldorm";
+
+            BossSpriteArray = new byte[]
+            {
+                0x09, 0x09, 0x09 // moldorm
+            };
         }
     }
 }

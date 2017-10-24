@@ -17,6 +17,8 @@ namespace EnemizerLibrary
         public string Requirements { get; protected set; }
         protected string BossNode { get; set; }
 
+        public byte[] BossSpriteArray { get; protected set; }
+
         public Boss(BossType bossType)
         {
             BossType = bossType;

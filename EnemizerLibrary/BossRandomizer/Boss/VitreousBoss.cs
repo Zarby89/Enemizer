@@ -14,6 +14,11 @@ namespace EnemizerLibrary
             BossGraphics = 22; // TODO: really?
             BossSpriteId = SpriteConstants.Vitreous_LargeEyeballSprite;
             BossNode = "mire-vitreous";
+
+            BossSpriteArray = new byte[]
+            {
+                0x05, 0x07, 0xBD // vitreous
+            };
         }
     }
 }

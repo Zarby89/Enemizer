@@ -14,6 +14,11 @@ namespace EnemizerLibrary
             BossGraphics = 32;
             BossSpriteId = SpriteConstants.BlindTheThiefSprite;
             BossNode = "thieves-blind";
+
+            BossSpriteArray = new byte[]
+            {
+                0x05, 0x09, 0xCE // blind
+            };
         }
     }
 }

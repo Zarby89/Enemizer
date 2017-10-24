@@ -201,6 +201,32 @@ namespace EnemizerLibrary
                     // TODO: figure out the X/Y coord
                     roomObjects.RemoveShellAndMoveObjectData(dungeon.BossRoomId, 0xF95);
                 }
+
+                if(dungeon.DungeonType == DungeonType.GanonsTower1 || dungeon.DungeonType == DungeonType.GanonsTower2)
+                {
+                    // TODO: clean this up and move it
+                    // override the sprites pointer and make some new ones in an "unused" spot in rom 
+                    // (in the room sprite pointer table, it has way more room than is used)
+                    int startingAddress = 0x0;
+                    if(dungeon.DungeonType == DungeonType.GanonsTower1)
+                    {
+                        startingAddress = 0x4D87E;
+                    }
+                    else
+                    {
+                        startingAddress = 0x4D8B6;
+                    }
+
+                    romData[dungeon.DungeonRoomSpritePointerAddress] = (byte)(startingAddress & 0xFF);
+                    romData[dungeon.DungeonRoomSpritePointerAddress + 1] = (byte)((startingAddress >> 8) & 0xFF);
+
+                    romData[startingAddress++] = 0x00;
+                    romData.WriteDataChunk(startingAddress, dungeon.SelectedBoss.BossSpriteArray);
+                    startingAddress += dungeon.SelectedBoss.BossSpriteArray.Length;
+                    romData.WriteDataChunk(startingAddress, dungeon.ExtraSprites);
+                    startingAddress += dungeon.ExtraSprites.Length;
+                    romData[startingAddress] = 0xFF;
+                }
             }
 
             roomObjects.WriteChangesToRom(AddressConstants.movedRoomObjectBaseAddress);

@@ -14,6 +14,11 @@ namespace EnemizerLibrary
             BossGraphics = 21;
             BossSpriteId = SpriteConstants.HelmasaurKingSprite;
             BossNode = "pod-helmasaur";
+
+            BossSpriteArray = new byte[]
+            {
+                0x06, 0x07, 0x92 // helmasaur
+            };
         }
     }
 }

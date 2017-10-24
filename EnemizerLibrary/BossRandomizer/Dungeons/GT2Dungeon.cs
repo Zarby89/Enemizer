@@ -24,6 +24,12 @@ namespace EnemizerLibrary
 
             ShellX = 0x0B;
             ShellY = 0x28;
+
+            ExtraSprites = new byte[]
+            {
+                0x18, 0x17, 0xD1, // bunny beam
+                0x1C, 0x03, 0xC5  // medusa
+            };
         }
     }
 }

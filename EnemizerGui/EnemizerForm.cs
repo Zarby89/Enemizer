@@ -196,8 +196,14 @@ namespace Enemizer
 
             randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
 
             allowZeroDamageCheckbox.Checked = config.OptionFlags.AllowEnemyZeroDamage;
+
+            shuffleEnemyDamageGroupsCheckbox.Checked = config.OptionFlags.ShuffleEnemyDamageGroups;
+
+            enemyDamageChaosModeCheckbox.Checked = config.OptionFlags.EnemyDamageChaosMode;
 
             easyModeEscapeCheckbox.Checked = config.OptionFlags.EasyModeEscape;
 
@@ -271,8 +277,8 @@ namespace Enemizer
             SetHeartBeepSpeedText(config.OptionFlags.HeartBeepSpeed);
             alternateGfxCheckbox.Checked = config.OptionFlags.AlternateGfx;
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
-            grayscaleModecheckBox.Checked = config.OptionFlags.GrayscaleMode;
-            negativeModecheckBox.Checked = config.OptionFlags.NegativeMode;
+            grayscaleModeCheckbox.Checked = config.OptionFlags.GrayscaleMode;
+            negativeModeCheckbox.Checked = config.OptionFlags.NegativeMode;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -479,11 +485,23 @@ namespace Enemizer
         {
             config.OptionFlags.RandomizeEnemyDamage = randomizeEnemiesDamageCheckbox.Checked;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
         }
 
         private void allowZeroDamageCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AllowEnemyZeroDamage = allowZeroDamageCheckbox.Checked;
+        }
+
+        private void shuffleEnemyDamageGroupsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.ShuffleEnemyDamageGroups = shuffleEnemyDamageGroupsCheckbox.Checked;
+        }
+
+        private void enemyDamageChaosModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.EnemyDamageChaosMode = enemyDamageChaosModeCheckbox.Checked;
         }
 
         private void easyModeEscapeCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -678,20 +696,21 @@ namespace Enemizer
             heartBeepSpeedLabel.Text = heartBeepSpeed.ToString();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void alternateGfxCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AlternateGfx = alternateGfxCheckbox.Checked;
         }
 
-        private void grayscaleModecheckBox_CheckedChanged(object sender, EventArgs e)
+        private void grayscaleModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.GrayscaleMode = grayscaleModecheckBox.Checked;
+            config.OptionFlags.GrayscaleMode = grayscaleModeCheckbox.Checked;
         }
 
-        private void negativeModecheckBox_CheckedChanged(object sender, EventArgs e)
+        private void negativeModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.NegativeMode = negativeModecheckBox.Checked;
+            config.OptionFlags.NegativeMode = negativeModeCheckbox.Checked;
         }
+
     }
 
 

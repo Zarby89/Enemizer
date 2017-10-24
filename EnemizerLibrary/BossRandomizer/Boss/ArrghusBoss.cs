@@ -14,6 +14,24 @@ namespace EnemizerLibrary
             BossGraphics = 20;
             BossSpriteId = SpriteConstants.ArrghusSprite;
             BossNode = "swamp-arrghus";
+
+            BossSpriteArray = new byte[]
+            {
+                0x07, 0x07, 0x8C, // arrghus
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+            };
         }
     }
 }
