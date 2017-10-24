@@ -12,21 +12,15 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0xBA, 0xE5 };
             BossGraphics = 23;
+            BossSpriteId = SpriteConstants.TrinexxSprite;
             BossNode = "turtle-trinexx";
-        }
 
-        protected new void FillRules()
-        {
-            Requirements = "Fire Rod,Ice Rod";
-            Rules.Add(this.CheckGTowerAndPedestalForItems);
-            Rules.Add(this.CheckShabadooHasItem);
-            Rules.Add(this.CheckFatFairyHasItem);
-            Rules.Add(this.CheckBossDropHasImportantItem);
-        }
-
-        public override bool CheckRules(Dungeon dungeon, RomData romData)
-        {
-            return base.CheckRules(dungeon, romData, ItemConstants.FireRod, ItemConstants.IceRod);
+            BossSpriteArray = new byte[]
+            {
+                0x05, 0x07, 0xCB, // trinexx body?
+                0x05, 0x07, 0xCC, // trinexx ice head?
+                0x05, 0x07, 0xCD, // trinexx fire head?
+            };
         }
     }
 }

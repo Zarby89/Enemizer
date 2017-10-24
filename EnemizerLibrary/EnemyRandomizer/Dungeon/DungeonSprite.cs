@@ -37,6 +37,11 @@ namespace EnemizerLibrary
                 return SpriteConstants.GetSpriteName(SpriteId);
             }
         }
+        public bool IsOnBG2 { get { return (byte0 & 0x80) != 0; } }
+        public int HMParam { get { return ((byte0 & 0x60) >> 2) | ((byte1 & 0xE0) >> 5); } }
+        public int YCoordPixels { get { return (byte0 & 0x1F) * 16; } }
+        public int XCoordPixels { get { return (byte1 & 0x1F) * 16; } }
+
 
         RomData romData;
 

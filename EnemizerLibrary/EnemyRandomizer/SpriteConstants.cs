@@ -21,8 +21,8 @@ namespace EnemizerLibrary
         public static readonly byte SpriteSubtypeByte0Mask = 0x60; // 0110 0000
         public static readonly byte SpriteSubtypeByte0RemoveMask = 0x9F; // 1001 1111
 
-        public const int RandomizedBushEnemyTableBaseAddress = 0x200020;
-        public const int RandomizedPotEnemyTableBaseAddress = RandomizedBushEnemyTableBaseAddress + 0x80;
+        public static int RandomizedBushEnemyTableBaseAddress = XkasSymbols.Instance.Symbols["sprite_bush_spawn_table_overworld"];
+        public static int RandomizedPotEnemyTableBaseAddress = XkasSymbols.Instance.Symbols["sprite_bush_spawn_table_dungeons"];
 
         public static string GetSpriteName(int spriteId)
         {
@@ -221,7 +221,7 @@ namespace EnemizerLibrary
             { 0xB5, "Bomb Salesman" },
             { 0xB6, "Kiki" },
             { 0xB7, "Maiden following you in Blind Dungeon" },
-            { 0xB8, "Monologue Testing Sprite" },
+            { 0xB8, "Mimic" },
             { 0xB9, "Feuding Friends on Death Mountain" },
             { 0xBA, "Whirlpool" },
             { 0xBB, "Salesman / chestgame guy / 300 rupee giver guy / Chest game thief" },

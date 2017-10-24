@@ -24,7 +24,7 @@ namespace EnemizerLibrary
         {
             int currentRoomId = 0;
 
-            for (int i=0; i<638; i+=2)
+            for (int i=0; i<0x250; i+=2) // 0x128 = 296 rooms
             {
                 Room r = new Room(currentRoomId, romData);
                 r.LoadRoom();

@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 28;
-            BossAddress = 0x04D666;
+            DungeonRoomSpritePointerAddress = 0x04D666;
             BossDropItemAddress = null;
 
             // TODO: stop kholdstare from spawning in GT1?
@@ -24,6 +24,14 @@ namespace EnemizerLibrary
 
             ShellX = 0x2B;
             ShellY = 0x28;
+
+            ExtraSprites = new byte[]
+            {
+                0x07, 0x07, 0xE3, // fairy
+                0x07, 0x08, 0xE3, // fairy
+                0x08, 0x07, 0xE3, // fairy
+                0x08, 0x08, 0xE3  // fairy
+            };
         }
     }
 }

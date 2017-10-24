@@ -12,21 +12,26 @@ namespace EnemizerLibrary
         {
             BossPointer = new byte[] { 0x97, 0xD9 };
             BossGraphics = 20;
+            BossSpriteId = SpriteConstants.ArrghusSprite;
             BossNode = "swamp-arrghus";
-        }
 
-        protected new void FillRules()
-        {
-            Requirements = "Hookshot";
-            Rules.Add(this.CheckGTowerAndPedestalForItems);
-            Rules.Add(this.CheckShabadooHasItem);
-            Rules.Add(this.CheckFatFairyHasItem);
-            Rules.Add(this.CheckBossDropHasImportantItem);
-        }
-
-        public override bool CheckRules(Dungeon dungeon, RomData romData)
-        {
-            return base.CheckRules(dungeon, romData, ItemConstants.Hookshot);
+            BossSpriteArray = new byte[]
+            {
+                0x07, 0x07, 0x8C, // arrghus
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+                0x07, 0x07, 0x8D, // arrghus spawn
+            };
         }
     }
 }

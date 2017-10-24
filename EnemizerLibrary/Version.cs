@@ -10,7 +10,7 @@ namespace EnemizerLibrary
     {
         public const int MajorVersion = 6;
         public const int MinorVersion = 0;
-        public const int BuildNumber = 3; // max 99 to show up in rom
+        public const int BuildNumber = 5; // max 99 to show up in rom
         public static string CurrentVersion = $"{MajorVersion}.{MinorVersion}.{BuildNumber.ToString("D2")}";
         public static bool CheckUpdate()
         {
@@ -20,10 +20,18 @@ namespace EnemizerLibrary
             {
                 checkVersion = wc.DownloadString("https://zarby89.github.io/Enimizer/version.txt");
             }
-            if (!checkVersion.Contains(Version.CurrentVersion))
+            var numbers = checkVersion.Replace("\r", "").Replace("\n", "").Trim().Split('.');
+            if(Int32.Parse(numbers[0]) >= MajorVersion)
             {
-                return true;
+                if(Int32.Parse(numbers[1]) >= MinorVersion)
+                {
+                    if(Int32.Parse(numbers[2]) > BuildNumber)
+                    {
+                        return true;
+                    }
+                }
             }
+
             return false;
         }
 

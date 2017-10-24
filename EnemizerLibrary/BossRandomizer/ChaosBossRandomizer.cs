@@ -19,6 +19,13 @@ namespace EnemizerLibrary
         {
             foreach(var dungeon in this.DungeonPool)
             {
+                if (optionFlags.DebugMode)
+                {
+                    dungeon.SelectedBoss = new KholdstareBoss();
+                    //dungeon.SelectedBoss = new TrinexxBoss();
+                    continue;
+                }
+
                 dungeon.SelectedBoss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
                 graph.UpdateDungeonBoss(dungeon);
                 /*

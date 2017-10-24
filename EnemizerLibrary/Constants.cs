@@ -7,6 +7,35 @@ using System.Threading.Tasks;
 namespace EnemizerLibrary
 {
     // TODO: replace with enums that which can be replaced with enums
+    public class AddressConstants
+    {
+        // enemizer header patched rom
+        public static int dungeonHeaderBaseAddress = XkasSymbols.Instance.Symbols["room_header_table"]; //0x120090;
+
+        public const int RoomHeaderBankLocation = 0x0B5E7;
+
+        public const int dungeonHeaderPointerTableBaseAddress = 0x271E2;
+        public const int dungeonSpritePointerTableBaseAddress = 0x4D62E;
+
+        public static int movedRoomObjectBaseAddress = XkasSymbols.Instance.Symbols["modified_room_object_table"]; // 0x122000;
+        public const int ObjectDataPointerTableAddress = 0xF8000;
+
+        public const int OverworldAreaGraphicsBlockBaseAddress = 0x007A81;
+        public const int OverworldSpritePointerTableBaseAddress = 0x04C901;
+
+        public const int MoldormEyeCountAddressVanilla = 0x0EDBB3;
+        public const int MoldormEyeCountAddressEnemizer = 0x200102;
+
+        public const int NewBossGraphicsBaseAddress = 0x2F8000;
+
+        public const int RandomSpriteGraphicsBaseAddress = 0x300000;
+
+        public const int EnemizerFileLength = 0x400000;
+
+        public const int HiddenEnemyChancePoolBaseAddress = 0xD7BBB;
+
+        //public const byte MovedRoomBank = 0x24;
+    }
 
     public class ItemConstants
     {

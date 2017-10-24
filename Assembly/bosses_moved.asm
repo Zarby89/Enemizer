@@ -93,6 +93,17 @@ boss_move:
 
 	BRL .return
 
+; $0D00[0x10] -   The lower byte of a sprite's Y - coordinate.
+; $0D10[0x10] -   The lower byte of a sprite's X - coordinate.
+
+; $0D20[0x10] -   The high byte of a sprite's Y - coordinate.
+; $0D30[0x10] -   The high byte of a sprite's X - coordinate.
+
+; $0B08[0x08] -   (Overlord) X coordinate low byte.
+; $0B18[0x08] -   (Overlord) Y coordinate low byte.
+
+; $0B10[0x08] -   (Overlord) X coordinate high byte.
+; $0B20[0x08] -   (Overlord) Y coordinate high byte.
 	.move_to_middle
         ;load all sprite of that room and overlord
         LDX #$00

@@ -196,5 +196,24 @@ namespace EnemizerTests
                 output.WriteLine($"{EnemizerLibrary.Utilities.PCToSnesAddress(i).ToString("X")}");
             }
         }
+
+        [Fact]
+        public void get_enemizer_version_from_rom()
+        {
+            var romData = Utilities.LoadRom("..\\..\\..\\EnemizerGui\\bin\\Debug\\Enemizer 6.0.03 - ALttP - VT_no-glitches-26_normal-open-triforce-hunt_triforce-hunt_872136068 (EN350803105).sfc");
+
+            Assert.Equal(EnemizerLibrary.Version.CurrentVersion, romData.EnemizerVersion.Trim());
+        }
+
+        [Fact]
+        public void xkas_exports_should_load()
+        {
+            var xkas = XkasSymbols.Instance.Symbols;
+
+            foreach(var x in xkas)
+            {
+                output.WriteLine($"{x.Key} {x.Value.ToString("X")}");
+            }
+        }
     }
 }

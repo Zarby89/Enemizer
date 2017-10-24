@@ -16,7 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.TowerOfHeraCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 7;
-            BossAddress = 0x04D63C;
+            DungeonRoomSpritePointerAddress = 0x04D63C;
             BossDropItemAddress = 0x180152;
 
             DisallowedBosses.Add(BossType.Armos);
