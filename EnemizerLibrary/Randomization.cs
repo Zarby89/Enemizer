@@ -160,6 +160,11 @@ namespace EnemizerLibrary
                 randomizePots(); //default on for now
             }
 
+            if (optionFlags.ShuffleEnemyDamageGroups)
+            {
+                ShuffleDamageGroups(optionFlags.EnemyDamageChaosMode);
+            }
+
             //reset seed for all these values so they can be optional
             rand = new Random(seed);
             if (optionFlags.RandomizeDungeonPalettes)
@@ -287,6 +292,27 @@ namespace EnemizerLibrary
                 f.Close();
             }
 
+        }
+
+        void ShuffleDamageGroups(bool chaos = false)
+        {
+            //for 9 groups, 3 damage by groups, green mail, blue mail, red mail
+            //example vanilla group will do 4,2,1, 8 = 1 heart
+            for(int i = 0;i<9;i++)
+            {
+                byte redmail = (byte)rand.Next(0, 128);
+                byte bluemail = (byte)rand.Next(0, 128);
+                byte greenmail = (byte)rand.Next(0, 128);
+                if (!chaos)
+                {
+                    bluemail = (byte)(redmail / 2);
+                    greenmail = (byte)(redmail / 3);
+                }
+                this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0; //green mail
+                this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0; //blue mail
+                this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0; //red mail
+            }
+            
         }
 
         void SetBossGfx()
