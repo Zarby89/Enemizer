@@ -52,19 +52,39 @@ namespace EnemizerLibrary
             }
         }
 
-        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, bool needsKey = false, bool needsKillable = false, List<SpriteRequirement> doNotUpdateSprites = null)
+        public IEnumerable<SpriteGroup> GetPossibleDungeonSpriteGroups(Room room, List<SpriteRequirement> doNotUpdateSprites = null)
         {
+            var needsKey = room.Sprites.Any(x => x.HasAKey);
+            var needsKillable = room.IsShutterRoom;
+            var needsWater = room.IsWaterRoom;
+
             var req = dungeonReqs.GetGroupRequirementForRoom(room);
 
-            if (needsKey == false && needsKillable == false && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0)
+            var waterGroupIds = spriteRequirementsCollection.WaterSprites.SelectMany(x => x.GroupId).ToList();
+            var waterSub0Ids = spriteRequirementsCollection.WaterSprites.SelectMany(x => x.SubGroup0).ToList();
+            var waterSub1Ids = spriteRequirementsCollection.WaterSprites.SelectMany(x => x.SubGroup1).ToList();
+            var waterSub2Ids = spriteRequirementsCollection.WaterSprites.SelectMany(x => x.SubGroup2).ToList();
+            var waterSub3Ids = spriteRequirementsCollection.WaterSprites.SelectMany(x => x.SubGroup3).ToList();
+
+            if (needsKey == false && needsKillable == false && needsWater == false 
+                && (doNotUpdateSprites == null || doNotUpdateSprites.Count == 0)
                 && req.GroupId.Count == 0
                 && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
-                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId).ToList();
-                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
-                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
-                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
+                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId)
+                    .Where(x => waterGroupIds.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0)
+                    .Where(x => waterSub0Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1)
+                    .Where(x => waterSub1Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2)
+                    .Where(x => waterSub2Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
                 var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => waterSub3Ids.Contains(x) == false) // exclude water sprites
                     .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
                     .ToList();
                 return UsableDungeonSpriteGroups
@@ -81,7 +101,7 @@ namespace EnemizerLibrary
             var doNotUpdateSub1Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup1).ToList();
             var doNotUpdateSub2Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup2).ToList();
             var doNotUpdateSub3Ids = doNotUpdateSprites.SelectMany(x => x.SubGroup3).ToList();
-            if(needsKey == false && needsKillable == false 
+            if(needsKey == false && needsKillable == false && needsWater == false
                 && doNotUpdateGroupIds.Count == 0 
                 && doNotUpdateSub0Ids.Count == 0 
                 && doNotUpdateSub1Ids.Count == 0 
@@ -91,11 +111,20 @@ namespace EnemizerLibrary
                 && req.SubGroup0.Count == 0 && req.SubGroup1.Count == 0 && req.SubGroup2.Count == 0 && req.SubGroup3.Count == 0)
             {
                 // probably a bunny beam or something else that doesn't have a required group
-                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId).ToList();
-                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0).ToList();
-                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1).ToList();
-                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2).ToList();
+                var includeGroupId = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.GroupId)
+                    .Where(x => waterGroupIds.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup0Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup0)
+                    .Where(x => waterSub0Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup1Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup1)
+                    .Where(x => waterSub1Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
+                var includeSubGroup2Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup2)
+                    .Where(x => waterSub2Ids.Contains(x) == false) // exclude water sprites
+                    .ToList();
                 var includeSubGroup3Id = spriteRequirementsCollection.SpriteRequirements.Where(x => x.IsEnemySprite && x.Boss == false).SelectMany(x => x.SubGroup3)
+                    .Where(x => waterSub3Ids.Contains(x) == false) // exclude water sprites
                     .Where(x => x != 54 && x != 80) // exclude squirrels and chickens
                     .ToList();
                 return UsableDungeonSpriteGroups
@@ -143,6 +172,13 @@ namespace EnemizerLibrary
                             || keysSub1Ids.Contains((byte)x.SubGroup1)
                             || keysSub2Ids.Contains((byte)x.SubGroup2)
                             || keysSub3Ids.Contains((byte)x.SubGroup3)
+                            )
+                .Where(x => needsWater == false
+                            || waterGroupIds.Contains((byte)x.GroupId)
+                            || waterSub0Ids.Contains((byte)x.SubGroup0)
+                            || waterSub1Ids.Contains((byte)x.SubGroup1)
+                            || waterSub2Ids.Contains((byte)x.SubGroup2)
+                            || waterSub3Ids.Contains((byte)x.SubGroup3)
                             )
                 ;
         }

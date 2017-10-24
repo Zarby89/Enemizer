@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5C1A005C8159178B30CB1B7DBA610017"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,13 +70,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
+        "OwnerKey" = "8:_5C1A005C8159178B30CB1B7DBA610017"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -166,7 +166,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.6.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -178,7 +178,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6506.20366, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2896B7332445E328168218B8E8DDA736"
@@ -365,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{770229BF-A957-4785-91AA-D9BF2987069A}"
-        "PackageCode" = "8:{3E06914D-9B0C-4158-BC87-B0A7E2B52816}"
+        "ProductCode" = "8:{C00D46E4-B219-4CB7-97B3-FB9B961390E7}"
+        "PackageCode" = "8:{3E3A7B17-1F46-42AF-AEA0-FB50EC00ED58}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.5"
+        "ProductVersion" = "8:6.0.6"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
