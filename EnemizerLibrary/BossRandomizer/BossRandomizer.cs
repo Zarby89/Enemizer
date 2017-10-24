@@ -223,8 +223,18 @@ namespace EnemizerLibrary
                     romData[startingAddress++] = 0x00;
                     romData.WriteDataChunk(startingAddress, dungeon.SelectedBoss.BossSpriteArray);
                     startingAddress += dungeon.SelectedBoss.BossSpriteArray.Length;
-                    romData.WriteDataChunk(startingAddress, dungeon.ExtraSprites);
-                    startingAddress += dungeon.ExtraSprites.Length;
+                    // hack for arrghus
+                    if(dungeon.DungeonType == DungeonType.GanonsTower1 && dungeon.SelectedBoss.BossType == BossType.Arrghus)
+                    {
+                        // only write 2 sprites (should be 2x fairy)
+                        romData.WriteDataChunk(startingAddress, dungeon.ExtraSprites, 6);
+                        startingAddress += 6;
+                    }
+                    else
+                    {
+                        romData.WriteDataChunk(startingAddress, dungeon.ExtraSprites);
+                        startingAddress += dungeon.ExtraSprites.Length;
+                    }
                     romData[startingAddress] = 0xFF;
                 }
             }
