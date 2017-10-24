@@ -1,9 +1,0 @@
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\bin\Debug\MoveHeaderASM.exe.config
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\bin\Debug\MoveHeaderASM.exe
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\bin\Debug\MoveHeaderASM.pdb
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.csprojResolveAssemblyReference.cache
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.Form1.resources
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.Properties.Resources.resources
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.csproj.GenerateResource.Cache
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.exe
-c:\users\adamo\documents\visual studio 2015\Projects\MoveHeaderASM\MoveHeaderASM\obj\Debug\MoveHeaderASM.pdb
