@@ -300,10 +300,10 @@ namespace EnemizerLibrary
             //example vanilla group will do 4,2,1, 8 = 1 heart
             for(int i = 0;i<9;i++)
             {
-                int maxRand = 128;
-                if (!chaos)
+                int maxRand = 64;
+                if (chaos)
                 {
-                    maxRand = 64;
+                    maxRand = 128;
                 }
                 byte redmail = (byte)rand.Next(0, maxRand);
                 byte bluemail = (byte)rand.Next(0, 128);

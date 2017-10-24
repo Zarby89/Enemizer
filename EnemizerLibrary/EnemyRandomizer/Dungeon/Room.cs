@@ -24,6 +24,13 @@ namespace EnemizerLibrary
                 return RoomIdConstants.NeedKillable_doors.Contains(RoomId);
             }
         }
+        public bool IsWaterRoom
+        {
+            get
+            {
+                return RoomIdConstants.WaterRoom.Contains(RoomId);
+            }
+        }
 
         public List<DungeonSprite> Sprites { get; set; } = new List<DungeonSprite>();
         //public List<RoomRequirement> Requirements { get; set; }
@@ -138,6 +145,7 @@ namespace EnemizerLibrary
 
                 var killableSprites = spriteRequirementCollection.KillableSprites.Where(x => possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
                 var killableKeySprites = spriteRequirementCollection.KillableSprites.Where(x => x.CannotHaveKey == false && possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
+                var waterSprites = spriteRequirementCollection.WaterSprites.Where(x => possibleSprites.Contains(x.SpriteId)).Select(x => x.SpriteId).ToList();
 
                 if (keySprites.Count > 0 && killableKeySprites.Count == 0)
                 {
@@ -147,16 +155,31 @@ namespace EnemizerLibrary
                 {
                     throw new Exception("Shutter room without any killable enemies");
                 }
-
-
+                if(this.IsWaterRoom && waterSprites.Count == 0)
+                {
+                    throw new Exception("Water room without any water sprites");
+                }
 
                 Debug.Assert(possibleSprites.Contains(SpriteConstants.EmptySprite) == false);
                 Debug.Assert(killableSprites.Contains(SpriteConstants.EmptySprite) == false);
                 Debug.Assert(killableKeySprites.Contains(SpriteConstants.EmptySprite) == false);
-
+                Debug.Assert(waterSprites.Contains(SpriteConstants.EmptySprite) == false);
 
                 int[] possibleAbsorbableSprites = GetAbsorbableSprites(spriteRequirementCollection, optionFlags);
                 int stalCount = 0;
+
+                if (this.IsWaterRoom)
+                {
+                    spritesToUpdate.ToList()
+                        .ForEach(x => x.SpriteId = waterSprites[rand.Next(waterSprites.Count)]);
+
+                    return;
+                }
+                else
+                {
+                    // remove water sprites
+                    possibleSprites = possibleSprites.Where(x => waterSprites.Contains(x) == false).ToArray();
+                }
 
                 foreach (var s in spritesToUpdate.Where(x => x.HasAKey == false).ToList())
                 {
