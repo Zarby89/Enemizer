@@ -143,6 +143,9 @@
     <Content Include="bosses_gfx\vitreous.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="bosses_gfx\agahnim4.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="patchData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

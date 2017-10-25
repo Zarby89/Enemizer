@@ -345,7 +345,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GargoylesDomainGateSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83)
+                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom)); // can make it almost impossible to advance without powder
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SahasrahlaAginahSprite).SetNPC().AddSubgroup2(76));
 
@@ -862,6 +863,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R54_SwampPalace_BigChestRoom, // TODO: check bottom left waterbug
             RoomIdConstants.R63_IcePalace_MapChestRoom, // spikes block stuff
             RoomIdConstants.R66_HyruleCastle_6RopesRoom, // only if two stack, but why push it
+            RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom, // spikes are bad in here
             RoomIdConstants.R70_SwampPalace_CompassChestRoom,
             RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom, // TODO: test
             RoomIdConstants.R78_IcePalace_Bomb_JumpRoom,
