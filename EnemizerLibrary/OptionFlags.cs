@@ -174,9 +174,12 @@ namespace EnemizerLibrary
             this.HeartBeepSpeed = (EnemizerLibrary.HeartBeepSpeed)optionBytes[i++];
             this.AlternateGfx = Convert.ToBoolean(optionBytes[i++]);
             this.ShieldGraphics = (EnemizerLibrary.ShieldTypes)optionBytes[i++];
+            this.ShuffleEnemyDamageGroups = Convert.ToBoolean(optionBytes[i++]);
+            this.EnemyDamageChaosMode = Convert.ToBoolean(optionBytes[i++]);
+
         }
 
-        public byte[] ToByteArray()
+    public byte[] ToByteArray()
         {
             var ret = new byte[RomData.EnemizerInfoFlagsLength];
             int i = 0;
@@ -263,6 +266,8 @@ namespace EnemizerLibrary
             ret[i++] = (byte)this.HeartBeepSpeed;
             ret[i++] = Convert.ToByte(this.AlternateGfx);
             ret[i++] = (byte)this.ShieldGraphics;
+            ret[i++] = Convert.ToByte(this.ShuffleEnemyDamageGroups);
+            ret[i++] = Convert.ToByte(this.EnemyDamageChaosMode);
 
             return ret;
         }

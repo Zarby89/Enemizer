@@ -296,9 +296,9 @@ namespace EnemizerLibrary
 
         void ShuffleDamageGroups(bool chaos = false)
         {
-            //for 9 groups, 3 damage by groups, green mail, blue mail, red mail
+            //for 10 groups, 3 damage by groups, green mail, blue mail, red mail
             //example vanilla group will do 4,2,1, 8 = 1 heart
-            for(int i = 0;i<9;i++)
+            for(int i = 0; i < 10; i++)
             {
                 int maxRand = 64;
                 if (chaos)

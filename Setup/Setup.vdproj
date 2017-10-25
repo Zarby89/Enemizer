@@ -64,13 +64,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
+        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
+        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -317,7 +317,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_619B23E8A775467D9D841EEA3F1DB28B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder][ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -929,7 +929,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
