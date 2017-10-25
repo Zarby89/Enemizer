@@ -300,7 +300,12 @@ namespace EnemizerLibrary
             //example vanilla group will do 4,2,1, 8 = 1 heart
             for(int i = 0;i<9;i++)
             {
-                byte redmail = (byte)rand.Next(0, 128);
+                int maxRand = 64;
+                if (chaos)
+                {
+                    maxRand = 128;
+                }
+                byte redmail = (byte)rand.Next(0, maxRand);
                 byte bluemail = (byte)rand.Next(0, 128);
                 byte greenmail = (byte)rand.Next(0, 128);
                 if (!chaos)
@@ -308,9 +313,9 @@ namespace EnemizerLibrary
                     bluemail = (byte)(redmail / 2);
                     greenmail = (byte)(redmail / 3);
                 }
-                this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0; //green mail
-                this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0; //blue mail
-                this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0; //red mail
+                this.ROM_DATA[0x3742D + 0 + (i * 3)] = greenmail; //green mail
+                this.ROM_DATA[0x3742D + 1 + (i * 3)] = bluemail; //blue mail
+                this.ROM_DATA[0x3742D + 2 + (i * 3)] = redmail; //red mail
             }
             
         }
