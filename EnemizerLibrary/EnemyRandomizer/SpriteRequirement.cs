@@ -387,7 +387,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).AddSubgroup1(30));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16)
+                .AddExcludedRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StorytellersSprite).SetNPC().SetDoNotRandomize()); // TODO: add
 
@@ -890,6 +891,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R158_IcePalace_BigChestRoom, // big spikes will block
             RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom, // TODO: test
             RoomIdConstants.R170_EasternPalace_MapChestRoom, // TODO: test
+            RoomIdConstants.R175_IcePalace_IceBridgeRoom,
             RoomIdConstants.R179_MiseryMire_SpikeKeyChestRoom, // TODO: test lower stalfos blocking door
             RoomIdConstants.R186_EasternPalace_DarkAntifairy_KeyPotRoom,
             RoomIdConstants.R187_ThievesTown_Hellway, // TODO: test, should be ok but double check
