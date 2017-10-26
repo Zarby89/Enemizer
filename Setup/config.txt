@@ -1,0 +1,5 @@
+;!@Install@!UTF-8!
+Title="Enemizer Setup"
+BeginPrompt="Do you want to install Enemizer?"
+RunProgram="release\setup.exe"
+;!@InstallEnd@!
