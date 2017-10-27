@@ -1,1 +1,1 @@
-iexpress /N Setup.sed
+c:\windows\syswow64\iexpress /N Setup.sed

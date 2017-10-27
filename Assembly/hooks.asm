@@ -14,3 +14,4 @@ incsrc soundfx_hooks.asm
 incsrc load_file_hooks.asm
 ; needs to be fixed
 ;incsrc sprite_damage_hooks.asm
+incsrc damage_hooks.asm

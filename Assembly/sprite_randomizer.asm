@@ -69,7 +69,7 @@ change_sprite:
     STZ $0710
 
     .continue
-    LDA $0E20, X : CMP.b #$61;Restored Code
+    LDA $0E20, X : CMP.b #$61 ; Restored Code Bank06.asm(5967) ; LDA $0E20, X : CMP.b #$61 : BNE .not_beamos_laser
 
     RTL
 }

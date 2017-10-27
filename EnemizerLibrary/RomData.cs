@@ -29,6 +29,8 @@ namespace EnemizerLibrary
         public const int CloseBlindDoorFlag = 0x01;
         public const int MoldormEyesFlag = 0x02;
         public const int RandomSpriteFlag = 0x03;
+        private const int ChecksumComplimentAddress = 0x7FDC;
+        private const int ChecksumAddress = 0x7FDE;
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
@@ -440,6 +442,8 @@ namespace EnemizerLibrary
 
         public void WriteRom(FileStream fs)
         {
+            UpdateChecksum();
+
             fs.Write(this.romData, 0, this.romData.Length);
         }
 
@@ -453,6 +457,29 @@ namespace EnemizerLibrary
             Array.Copy(patch.patchData.ToArray(), 0, romData, patch.address, patch.patchData.ToArray().Length);
         }
 
+        public void UpdateChecksum()
+        {
+            int checksum = 0;
+
+            // remove old checksum
+            romData[ChecksumComplimentAddress] = 0xFF; // compliment
+            romData[ChecksumComplimentAddress+1] = 0xFF; // compliment
+            romData[ChecksumAddress] = 0x00; // checksum
+            romData[ChecksumAddress+1] = 0x00; // checksum
+
+            foreach(byte b in romData)
+            {
+                checksum += b;
+            }
+
+            checksum &= 0xFFFF;
+            romData[ChecksumAddress] = (byte)(checksum & 0xFF);
+            romData[ChecksumAddress + 1] = (byte)((checksum >> 8) & 0xFF);
+
+            int compliment = checksum ^ 0xFFFF; // compliment
+            romData[ChecksumComplimentAddress] = (byte)(compliment & 0xFF);
+            romData[ChecksumComplimentAddress+1] = (byte)((compliment >> 8) & 0xFF);
+        }
         /*
 	//*
 	//* Update the ROM's checksum to be proper

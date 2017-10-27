@@ -48,6 +48,7 @@ incsrc terrorpin.asm
 incsrc special_action.asm
 incsrc bosses_moved.asm
 ;incsrc sprite_damage.asm
+incsrc damage.asm
 incsrc bossdrop.asm
 incsrc moldorm.asm
 incsrc sprite_randomizer.asm

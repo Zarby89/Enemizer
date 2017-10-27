@@ -296,9 +296,9 @@ namespace EnemizerLibrary
 
         void ShuffleDamageGroups(bool chaos = false)
         {
-            //for 9 groups, 3 damage by groups, green mail, blue mail, red mail
+            //for 10 groups, 3 damage by groups, green mail, blue mail, red mail
             //example vanilla group will do 4,2,1, 8 = 1 heart
-            for(int i = 0;i<9;i++)
+            for(int i = 0; i < 10; i++)
             {
                 int maxRand = 64;
                 if (chaos)
@@ -324,9 +324,12 @@ namespace EnemizerLibrary
         {
             //they all must need to be at the same place since they generate new addresses/pointers
             int newGfxPosition = AddressConstants.NewBossGraphicsBaseAddress;
-            byte[] bossgfxindex = new byte[19] 
+            byte[] bossgfxindex =
             {
                 0x8D,
+                0xB5,
+                0xC8,
+                0xB6,
                 0x90,
                 0x94,
                 0xA3,
@@ -342,13 +345,14 @@ namespace EnemizerLibrary
                 0xB2,
                 0xB3,
                 0xB4,
-                0xB5,
-                0xB6,
                 0xB8
             };
-            string[] bossgfxfiles = new string[19] 
+            string[] bossgfxfiles =
             {
                 "agahnim1.bin",
+                "agahnim2.bin",
+                "agahnim3.bin",
+                "agahnim4.bin",
                 "armosknight.bin",
                 "ganon1.bin",
                 "moldorm.bin",
@@ -364,12 +368,10 @@ namespace EnemizerLibrary
                 "trinexx1.bin",
                 "trinexx2.bin",
                 "ganon3.bin",
-                "agahnim2.bin",
-                "agahnim3.bin",
                 "ganon4.bin"
             };
 
-            for(int i = 0;i<19;i++)
+            for(int i = 0; i < bossgfxindex.Length; i++)
             {
                 FileStream f = new FileStream("bosses_gfx\\"+bossgfxfiles[i], FileMode.Open, FileAccess.Read);
                 f.Read(this.ROM_DATA.romData, newGfxPosition, (int)f.Length);

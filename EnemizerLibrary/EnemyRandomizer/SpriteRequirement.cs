@@ -345,7 +345,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GargoylesDomainGateSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83)
+                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom)); // can make it almost impossible to advance without powder
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SahasrahlaAginahSprite).SetNPC().AddSubgroup2(76));
 
@@ -386,7 +387,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).AddSubgroup1(30));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16)
+                .AddExcludedRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StorytellersSprite).SetNPC().SetDoNotRandomize()); // TODO: add
 
@@ -862,6 +864,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R54_SwampPalace_BigChestRoom, // TODO: check bottom left waterbug
             RoomIdConstants.R63_IcePalace_MapChestRoom, // spikes block stuff
             RoomIdConstants.R66_HyruleCastle_6RopesRoom, // only if two stack, but why push it
+            RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom, // spikes are bad in here
             RoomIdConstants.R70_SwampPalace_CompassChestRoom,
             RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom, // TODO: test
             RoomIdConstants.R78_IcePalace_Bomb_JumpRoom,
@@ -888,6 +891,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R158_IcePalace_BigChestRoom, // big spikes will block
             RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom, // TODO: test
             RoomIdConstants.R170_EasternPalace_MapChestRoom, // TODO: test
+            RoomIdConstants.R175_IcePalace_IceBridgeRoom,
             RoomIdConstants.R179_MiseryMire_SpikeKeyChestRoom, // TODO: test lower stalfos blocking door
             RoomIdConstants.R186_EasternPalace_DarkAntifairy_KeyPotRoom,
             RoomIdConstants.R187_ThievesTown_Hellway, // TODO: test, should be ok but double check

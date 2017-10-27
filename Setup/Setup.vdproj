@@ -64,13 +64,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
+        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
+        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -178,7 +178,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6506.20366, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6506.41103, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2896B7332445E328168218B8E8DDA736"
@@ -317,7 +317,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_619B23E8A775467D9D841EEA3F1DB28B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder][ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -365,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{C00D46E4-B219-4CB7-97B3-FB9B961390E7}"
-        "PackageCode" = "8:{3E3A7B17-1F46-42AF-AEA0-FB50EC00ED58}"
+        "ProductCode" = "8:{2461EDA0-F996-48C8-9678-6524A3DE7F7B}"
+        "PackageCode" = "8:{F59432E5-A227-4425-8874-0090090E46F5}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.6"
+        "ProductVersion" = "8:6.0.8"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -929,7 +929,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
