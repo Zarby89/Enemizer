@@ -5,89 +5,89 @@ boss_move:
 {
     ; TODO: should probably double check that we don't need to preserve registers (A,X)...
 
-	JSL $09C114         ; Restore the dungeon_resetsprites
-	LDA $A0             ; load room index (low byte)
-	LDX $A1             ; 				  (high byte)
+	JSL Dungeon_ResetSprites            ; Restore the dungeon_resetsprites
+	LDA $A0                             ; load room index (low byte)
+	LDX $A1                             ; 				  (high byte)
 
-	CMP #7   : BNE +    ; Is is Hera Tower Boss Room
+	CMP #7   : BNE +                    ; Is is Hera Tower Boss Room
 	CPX #$00 : BNE +
 		BRL .move_to_middle
 	+
 
-	CMP #200 : BNE +    ; Is is Eastern Palace Boss Room
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #200 : BNE +                    ; Is is Eastern Palace Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_right
 	+
 
-	CMP #41 : BNE +     ; Is is Skull Woods Boss Room
+	CMP #41 : BNE +                     ; Is is Skull Woods Boss Room
         ; TODO: Add moving floor sprite
         BRL .move_to_bottom_right
 	+
 
-	CMP #51 : BNE +     ; Is is Desert Palace Boss Room 
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #51 : BNE +                     ; Is is Desert Palace Boss Room 
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_left
 	+
 
-	CMP #90 : BNE +     ; Is is Palace of darkness Boss Room
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #90 : BNE +                     ; Is is Palace of darkness Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_right
 	+
 
-	CMP #144 : BNE +    ; Is is Misery Mire Boss Room
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #144 : BNE +                    ; Is is Misery Mire Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_left
 	+
 
-	CMP #172 : BNE +    ; Is is Thieve Town Boss Room
-                        ; IF MAIDEN IS NOT RESCUED -> DO NOTHING
-                        ; IF MAIDEN IS ALREADY RESCUED -> spawn sprites normally
-        JSL $09C44E     ; removes sprites in thieve town boss room
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #172 : BNE +                    ; Is is Thieve Town Boss Room
+                                        ; IF MAIDEN IS NOT RESCUED -> DO NOTHING
+                                        ; IF MAIDEN IS ALREADY RESCUED -> spawn sprites normally
+        JSL Sprite_ResetAll             ; removes sprites in thieve town boss room
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         ;Close the door if !BLIND_DOOR_FLAG == 1
         LDA !BLIND_DOOR_FLAG : BEQ .no_blind_door
-        INC $0468
-        STZ $068E
-        STZ $0690
-        INC $7E0CF3 
+        INC $0468                       ; $0468[0x02] - Flag that is set when trap doors are down.
+        STZ $068E                       ; $068E[0x02] - (Dungeon) ???? related to trap doors and if they are open ; possibly bomb doors too? Update: module 0x07.0x4 probably uses this to know whether it's a key door or big key door to open.
+        STZ $0690                       ; $0690[0x02] - (Overworld) Generally is used as an animation step indicator, only for doors that animate when they open, such as the Santuary and Hyrule Castle doors. This variable is incremented up to a value of 3, at which point a logic check kicks in and stops animating the opening of a door.
+        INC $7E0CF3                     ; $0CF3[0x01] - free ram
          ; ;That must be called after the room load!
     .no_blind_door
         BRL .move_to_bottom_right
 	+
 
-	CMP #6   : BNE +    ; Is is Swamp Palace Boss Room
+	CMP #6   : BNE +                    ; Is is Swamp Palace Boss Room
 	CPX #$00 : BNE +
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_left
 	+
 
-	CMP #222 : BNE +    ; Is is Ice Palace Boss Room
+	CMP #222 : BNE +                    ; Is is Ice Palace Boss Room
     	BRL .move_to_top_right
 	+
 
-	CMP #164 : BNE +    ; Is is Turtle Rock Boss Room
+	CMP #164 : BNE +                    ; Is is Turtle Rock Boss Room
     	BRL .move_to_bottom_left
 	+
 
-	CMP #28 : BNE +     ; Is is Gtower (Armos2) Boss Room
+	CMP #28 : BNE +                     ; Is is Gtower (Armos2) Boss Room
 	CPX #$00 : BNE +
     	BRL .move_to_bottom_right
 	+
 
-	CMP #108 : BNE +    ; Is is Gtower (Lanmo2) Boss Room
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #108 : BNE +                    ; Is is Gtower (Lanmo2) Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_left
 	+
 
-	CMP #77 : BNE +     ; Is is Gtower (Moldorm2) Boss Room
-        JSL $09C44E     ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
-        JSL $09C114     ; Restore the dungeon_resetsprites
+	CMP #77 : BNE +                     ; Is is Gtower (Moldorm2) Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_middle
 	+
 
@@ -104,32 +104,37 @@ boss_move:
 
 ; $0B10[0x08] -   (Overlord) X coordinate high byte.
 ; $0B20[0x08] -   (Overlord) Y coordinate high byte.
+
 	.move_to_middle
         ;load all sprite of that room and overlord
         LDX #$00
-        .loop_middle
+
+        .loop_middle ; move sprites
         LDA $0E20, X
         CMP #$E3 : BNE + ;is it a fairy?? if not check next
-        BRA .no_change
+            BRA .no_change
         +
         CMP #$D1 : BNE + ;is it a bunny changer
-        BRA .no_change
+            BRA .no_change
         +
         CMP #$C5 : BNE + ;is it a medusa head
-        BRA .no_change
+            BRA .no_change
         +
         LDA $0D10, X : !ADD #$68 : STA $0D10, X
         LDA $0D00, X : !ADD #$68 : STA $0D00, X
+
         .no_change
         INX : CPX #$10 : BNE .loop_middle
         LDX #$00
-        .loop_middle2
+
+        .loop_middle2 ; move overlords
         LDA $0B00, X 
         CMP #$E3 : BNE + ;is it moving floor?
-        BRA .no_change_ov
+            BRA .no_change_ov
         +
         LDA $0B08, X : !ADD #$68 : STA $0B08, X
         LDA $0B18, X : !ADD #$68 : STA $0B18, X
+
         .no_change_ov
         INX : CPX #$08 : BNE .loop_middle2
         BRL .return
@@ -137,29 +142,33 @@ boss_move:
 
 	.move_to_top_right
         LDX #$00
-        .loop_top_right
+
+        .loop_top_right ; move sprites
         LDA $0E20, X
         CMP #$E3 : BNE + ;is it a fairy?? if not check next
-        BRA .no_change2
+            BRA .no_change2
         +
         CMP #$D1 : BNE + ;is it a bunny changer
-        BRA .no_change2
+            BRA .no_change2
         +
         CMP #$C5 : BNE + ;is it a medusa head
-        BRA .no_change2
+            BRA .no_change2
         +
         LDA $0D20, X : !ADD #$00 : STA $0D20, X
         LDA $0D30, X : !ADD #$01 : STA $0D30, X
+
         .no_change2
         INX : CPX #$10 : BNE .loop_top_right
         LDX #$00
-        .loop_top_right2
+
+        .loop_top_right2 ; move overlords
         LDA $0B00, X 
         CMP #$E3 : BNE + ;is it moving floor?
-        BRA .no_change_ov2
+            BRA .no_change_ov2
         +
         LDA $0B10, X : !ADD #$01 : STA $0B10, X
         LDA $0B20, X : !ADD #$00 : STA $0B20, X
+
         .no_change_ov2
         INX : CPX #$08 : BNE .loop_top_right2
         BRL .return
@@ -167,29 +176,33 @@ boss_move:
 
 	.move_to_bottom_right
         LDX #$00
-        .loop_bottom_right
+
+        .loop_bottom_right ; move sprites
         LDA $0E20, X
         CMP #$E3 : BNE + ;is it a fairy?? if not check next
-        BRA .no_change3
+            BRA .no_change3
         +
         CMP #$D1 : BNE + ;is it a bunny changer
-        BRA .no_change3
+            BRA .no_change3
         +
         CMP #$C5 : BNE + ;is it a medusa head
-        BRA .no_change3
+            BRA .no_change3
         +
         LDA $0D20, X : !ADD #$01 : STA $0D20, X
         LDA $0D30, X : !ADD #$01 : STA $0D30, X
-        INX : CPX #$10 : BNE .loop_bottom_right
+
         .no_change3
+        INX : CPX #$10 : BNE .loop_bottom_right
         LDX #$00
-        .loop_bottom_right2
+
+        .loop_bottom_right2 ; move overlords
         LDA $0B00, X 
         CMP #$E3 : BNE + ;is it moving floor?
-        BRA .no_change_ov3
+            BRA .no_change_ov3
         +
         LDA $0B10, X : !ADD #$01 : STA $0B10, X
         LDA $0B20, X : !ADD #$01 : STA $0B20, X
+
         .no_change_ov3
         INX : CPX #$08 : BNE .loop_bottom_right2
         BRL .return
@@ -197,29 +210,33 @@ boss_move:
 
 	.move_to_bottom_left
         LDX #$00
-        .loop_bottom_left
+
+        .loop_bottom_left ; move sprites
         LDA $0E20, X
         CMP #$E3 : BNE + ;is it a fairy?? if not check next
-        BRA .no_change4
+            BRA .no_change4
         +
         CMP #$D1 : BNE + ;is it a bunny changer
-        BRA .no_change4
+            BRA .no_change4
         +
         CMP #$C5 : BNE + ;is it a medusa head
-        BRA .no_change4
+            BRA .no_change4
         +
         LDA $0D20, X : !ADD #$01 : STA $0D20, X
         LDA $0D30, X : !ADD #$00 : STA $0D30, X
+
         .no_change4
         INX : CPX #$10 : BNE .loop_bottom_left
         LDX #$00
-        .loop_bottom_left2
+
+        .loop_bottom_left2 ; move overlords
         LDA $0B00, X 
         CMP #$E3 : BNE + ;is it moving floor?
-        BRA .no_change_ov4
+            BRA .no_change_ov4
         +
         LDA $0B10, X : !ADD #$00 : STA $0B10, X
         LDA $0B20, X : !ADD #$01 : STA $0B20, X
+        
         .no_change_ov4
         INX : CPX #$08 : BNE .loop_bottom_left2
         BRL .return

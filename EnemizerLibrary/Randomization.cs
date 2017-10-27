@@ -211,7 +211,8 @@ namespace EnemizerLibrary
                 grayscale_all_dungeons();
             }
 
-            SetShieldGfx(optionFlags.ShieldGraphics);
+            //SetSwordGfx(optionFlags.SwordGraphics);
+            //SetShieldGfx(optionFlags.ShieldGraphics);
 
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
@@ -281,17 +282,20 @@ namespace EnemizerLibrary
 
         }
 
+        void SetSwordGfx(SwordTypes swordType)
+        {
+            string filename = swordType.ToString().Replace(" ", "").Trim() + ".gfx";
+            FileStream f = new FileStream("sword_gfx\\" + filename, FileMode.Open, FileAccess.Read);
+            f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
+            f.Close();
+        }
 
         void SetShieldGfx(ShieldTypes shieldType)
         {
-            if (shieldType != ShieldTypes.Normal)
-            {
-                string filename = shieldType.ToString().Replace(" ", "").Trim() + ".bin";
-                FileStream f = new FileStream("shield_gfx\\" + filename, FileMode.Open, FileAccess.Read);
-                f.Read(this.ROM_DATA.romData, 0x0C065E, (int)f.Length);
-                f.Close();
-            }
-
+            string filename = shieldType.ToString().Replace(" ", "").Trim() + ".gfx";
+            FileStream f = new FileStream("shield_gfx\\" + filename, FileMode.Open, FileAccess.Read);
+            f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
+            f.Close();
         }
 
         void ShuffleDamageGroups(bool chaos = false)

@@ -29,8 +29,8 @@ namespace EnemizerLibrary
         public const int CloseBlindDoorFlag = 0x01;
         public const int MoldormEyesFlag = 0x02;
         public const int RandomSpriteFlag = 0x03;
-        private const int ChecksumComplimentAddress = 0x7FDC;
-        private const int ChecksumAddress = 0x7FDE;
+        public const int ChecksumComplimentAddress = 0x7FDC;
+        public const int ChecksumAddress = 0x7FDE;
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
@@ -480,35 +480,6 @@ namespace EnemizerLibrary
             romData[ChecksumComplimentAddress] = (byte)(compliment & 0xFF);
             romData[ChecksumComplimentAddress+1] = (byte)((compliment >> 8) & 0xFF);
         }
-        /*
-	//*
-	//* Update the ROM's checksum to be proper
-	//*
-	//* @return $this
-	//*
-        public function updateChecksum() : self {
-
-        fseek($this->rom, 0x0);
-		$sum = 0;
-		for ($i = 0; $i< static::SIZE; $i += 1024) {
-			$bytes = array_values(unpack('C*', fread($this->rom, 1024)));
-			for ($j = 0; $j< 1024; ++$j) {
-				if ($j + $i >= 0x7FB0 && $j + $i <= 0x7FE0) {
-					// this skip is true for LoROM, HiROM skips: 0xFFB0 - 0xFFB0
-					continue;
-				}
-				$sum += $bytes[$j];
-			}
-}
-
-		$checksum = $sum & 0xFFFF;
-		$inverse = $checksum ^ 0xFFFF;
-
-		$this->write(0x7FDC, pack('S*', $inverse, $checksum));
-
-		return $this;
-}
-         */
 
         public HeartBeepSpeed HeartBeep
         {

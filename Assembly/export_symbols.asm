@@ -14,8 +14,8 @@ export.label enemizer_info_table
 export.label moved_room_header_bank_value_address
 export.label modified_room_object_table
 export.label DMAKholdstare
-;export.label 
-;export.label 
+export.label swordgfx
+export.label shieldgfx
 ;export.label 
 ;export.label 
 export.close
