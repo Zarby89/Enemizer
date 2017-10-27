@@ -31,6 +31,7 @@ namespace Enemizer
             this.Text = "Enemizer " + EnemizerLibrary.Version.CurrentVersion;
 
             LoadSpriteDropdown();
+            LoadSwordDropdown();
             LoadShieldDropdown();
 
             LoadLanguageDropdown();
@@ -93,6 +94,15 @@ namespace Enemizer
             }
         }
 
+        void LoadSwordDropdown()
+        {
+            swordGraphicsCombobox.Items.Clear();
+            foreach (var e in Enum.GetValues(typeof(SwordTypes)))
+            {
+                swordGraphicsCombobox.Items.Add(((SwordTypes)e).GetDescription());
+            }
+        }
+
         void LoadShieldDropdown()
         {
             shieldSpriteCombobox.Items.Clear();
@@ -100,7 +110,6 @@ namespace Enemizer
             {
                 shieldSpriteCombobox.Items.Add(((ShieldTypes)e).GetDescription());
             }
-            //shieldSpriteCombobox.DataSource = Enum.GetValues(typeof(ShieldTypes));
         }
 
         void LoadAbsorbablesListBox()
@@ -162,6 +171,8 @@ namespace Enemizer
             UpdatePalettesTabUIFromConfig();
 
             UpdateExtrasTabUIFromConfig();
+
+            UpdateGraphicsTabUIFromConfig();
         }
 
         private void UpdateMainFormUIFromConfig()
@@ -171,8 +182,6 @@ namespace Enemizer
             randomizeLinksPaletteCheckbox.Checked = config.OptionFlags.RandomizeLinkSpritePalette;
 
             generateSpoilerCheckbox.Checked = config.OptionFlags.GenerateSpoilers;
-
-            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -281,6 +290,12 @@ namespace Enemizer
             negativeModeCheckbox.Checked = config.OptionFlags.NegativeMode;
         }
 
+        private void UpdateGraphicsTabUIFromConfig()
+        {
+            swordGraphicsCombobox.SelectedIndex = (int)config.OptionFlags.SwordGraphics;
+            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
+        }
+
         private void LoadAbsorbableItemsChecklistFromConfig()
         {
             for (int i = 0; i < absorbableItemsChecklist.Items.Count; i++)
@@ -342,16 +357,6 @@ namespace Enemizer
             {
                 config.OptionFlags.RandomizeLinkSpritePalette = randomizeLinksPaletteCheckbox.Checked;
             }
-        }
-
-        private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
-        }
-
-        private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //TODO: wire this up
         }
 
         private void generateRomButton_Click(object sender, EventArgs e)
@@ -712,6 +717,24 @@ namespace Enemizer
             config.OptionFlags.NegativeMode = negativeModeCheckbox.Checked;
         }
 
+        /*
+         * Graphics tab
+         */
+
+        private void swordGraphicsCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.SwordGraphics = (SwordTypes)swordGraphicsCombobox.SelectedIndex;
+        }
+
+        private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
+        }
+
+        private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //TODO: wire this up
+        }
     }
 
 
