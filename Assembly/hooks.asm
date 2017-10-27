@@ -15,5 +15,5 @@ incsrc load_file_hooks.asm
 ; needs to be fixed
 ;incsrc sprite_damage_hooks.asm
 incsrc damage_hooks.asm
-;incsrc msu1_hooks.asm
+incsrc msu1_hooks.asm
 incsrc sword_and_shield_hooks.asm
