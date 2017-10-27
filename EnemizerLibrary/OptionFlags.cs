@@ -64,6 +64,7 @@ namespace EnemizerLibrary
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
         public ShieldTypes ShieldGraphics { get; set; } = ShieldTypes.Normal;
+        public SwordTypes SwordGraphics { get; set; } = SwordTypes.Normal;
 
         public OptionFlags()
         {
@@ -176,10 +177,11 @@ namespace EnemizerLibrary
             this.ShieldGraphics = (EnemizerLibrary.ShieldTypes)optionBytes[i++];
             this.ShuffleEnemyDamageGroups = Convert.ToBoolean(optionBytes[i++]);
             this.EnemyDamageChaosMode = Convert.ToBoolean(optionBytes[i++]);
+            this.SwordGraphics = (EnemizerLibrary.SwordTypes)optionBytes[i++];
 
         }
 
-    public byte[] ToByteArray()
+        public byte[] ToByteArray()
         {
             var ret = new byte[RomData.EnemizerInfoFlagsLength];
             int i = 0;
@@ -268,6 +270,7 @@ namespace EnemizerLibrary
             ret[i++] = (byte)this.ShieldGraphics;
             ret[i++] = Convert.ToByte(this.ShuffleEnemyDamageGroups);
             ret[i++] = Convert.ToByte(this.EnemyDamageChaosMode);
+            ret[i++] = (byte)this.SwordGraphics;
 
             return ret;
         }
@@ -289,14 +292,20 @@ namespace EnemizerLibrary
         Chaos
     }
 
+    public enum SwordTypes
+    {
+        [Description("Normal Sword")]
+        Normal,
+    }
+
     public enum ShieldTypes
     {
         [Description("Normal Shield")]
         Normal,
-        [Description("Skull Shield")]
-        SkullShield,
-        [Description("Square Shield")]
-        SquareShield
+        //[Description("Skull Shield")]
+        //SkullShield,
+        //[Description("Square Shield")]
+        //SquareShield
     }
 
     public enum AbsorbableTypes
