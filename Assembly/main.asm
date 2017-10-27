@@ -63,7 +63,7 @@ incsrc sword_and_shield.asm
 ; data
 incsrc room_object_table.asm
 incsrc shell_gfx.asm
-warnpc $40FFFF
+warnpc $40FFFF ;if we hit this we need to split stuff by bank
 ;================================================================================
 
 incsrc export_symbols.asm
