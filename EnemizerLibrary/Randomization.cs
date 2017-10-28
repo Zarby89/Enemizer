@@ -454,6 +454,12 @@ namespace EnemizerLibrary
             {
                 this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
             }
+            // gloves color
+            this.ROM_DATA[0xDEDF5] = skin_data[0x7036];
+            this.ROM_DATA[0xDEDF6] = skin_data[0x7037];
+            this.ROM_DATA[0xDEDF7] = skin_data[0x7054];
+            this.ROM_DATA[0xDEDF8] = skin_data[0x7055];
+
         }
 
 
