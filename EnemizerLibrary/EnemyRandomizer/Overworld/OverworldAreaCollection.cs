@@ -10,11 +10,13 @@ namespace EnemizerLibrary
         RomData romData;
         Random rand;
         SpriteRequirementCollection spriteRequirementCollection;
+        SpriteGroupCollection spriteGroupCollection;
 
-        public OverworldAreaCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementCollection)
+        public OverworldAreaCollection(RomData romData, Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             this.romData = romData;
             this.rand = rand;
+            this.spriteGroupCollection = spriteGroupCollection;
             this.spriteRequirementCollection = spriteRequirementCollection;
 
             LoadAreas();
@@ -24,7 +26,7 @@ namespace EnemizerLibrary
         {
             for (int i = 0; i < 0x112; i++) // after 0x111 is special stuff we don't want to touch
             {
-                var owArea = new OverworldArea(romData, i);
+                var owArea = new OverworldArea(romData, i, rand, spriteGroupCollection, spriteRequirementCollection);
                 OverworldAreas.Add(owArea);
             }
         }
