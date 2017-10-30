@@ -47,7 +47,7 @@ sprite_bush_spawn:
     CPY.b #$0F : BEQ .newSpriteSpawn
     CPY.b #$11 : BEQ .newSpriteSpawn
     CPY.b #$10 : BEQ .newSpriteSpawn
-    CPY.b #$0E : BEQ .newSpriteSpawn
+    ;CPY.b #$0E : BEQ .newSpriteSpawn
 
     LDA .item_table, Y
     BRA .return

@@ -55,6 +55,7 @@ namespace EnemizerLibrary
             OverworldRequirements.Add(new OverworldGroupRequirement(14, null, null, 12, 68, OverworldAreaConstants.A081_ZorasDomain, 
                                                                                             OverworldAreaConstants.A111_ZorasDomain_PostAga));
 
+            OverworldRequirements.Add(new OverworldGroupRequirement(26, 15, null, null, null, OverworldAreaConstants.A092_LumberJackHouse_PostAga));
             /*
         public void create_sprite_overworld_group()
         {

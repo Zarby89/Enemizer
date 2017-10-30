@@ -808,6 +808,11 @@ namespace EnemizerLibrary
             R268_MimicCave
         };//46 on 2
 
+        public static readonly int[] DontRandomizeRooms =
+        {
+            0, 1, 3, 13, 20, 32, 48, 
+        };
+
         public static readonly int[] RandomizeRooms =
         {
             2,4,9,10,11,14,17,19,21,22,23,25,26,27,30,31,33,34,36,38,39,40,42,43,46,49,50,52,53,54,55,56,57,58,59,
