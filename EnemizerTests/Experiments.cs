@@ -52,7 +52,7 @@ namespace EnemizerTests
             var romData = Utilities.LoadRom("..\\..\\..\\EnemizerGui\\bin\\Debug\\Enemizer 6.0 - alttp - VT_no-glitches-26_normal_open_none_830270265.sfc");
             //var romData = Utilities.LoadRom("..\\..\\..\\Need To Test Seeds\\workingweirdnpc.sfc");
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());
 
             foreach (var owArea in areas.OverworldAreas)
             {
@@ -86,7 +86,7 @@ namespace EnemizerTests
 
             //var romData = Utilities.LoadRom("rando.sfc");
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());
 
             foreach (var owArea in areas.OverworldAreas)
             {
@@ -111,7 +111,7 @@ namespace EnemizerTests
             RoomCollection rc = new RoomCollection(romData, new Random(), spriteRequirements);
             rc.LoadRooms();
 
-            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteRequirementCollection());
+            OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());
 
 
             var spriteGroupsJson = JsonConvert.SerializeObject(sgc.SpriteGroups.Select(x => new { x.GroupId, x.DungeonGroupId, x.SubGroup0, x.SubGroup1, x.SubGroup2, x.SubGroup3 }), Formatting.Indented);

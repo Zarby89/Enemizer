@@ -78,3 +78,4 @@ bld/
 /TestingSeeds
 /Setup/*.exe
 /Setup/setup.7z
+Assembly/main.bin
