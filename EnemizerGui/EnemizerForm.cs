@@ -292,7 +292,16 @@ namespace Enemizer
 
         private void UpdateGraphicsTabUIFromConfig()
         {
+            if((int)config.OptionFlags.SwordGraphics > swordGraphicsCombobox.Items.Count)
+            {
+                config.OptionFlags.SwordGraphics = SwordTypes.Normal;
+            }
             swordGraphicsCombobox.SelectedIndex = (int)config.OptionFlags.SwordGraphics;
+
+            if((int)config.OptionFlags.ShieldGraphics >= shieldSpriteCombobox.Items.Count)
+            {
+                config.OptionFlags.ShieldGraphics = ShieldTypes.Normal;
+            }
             shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
         }
 
