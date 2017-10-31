@@ -162,7 +162,7 @@ namespace EnemizerLibrary
 
             if (optionFlags.ShuffleEnemyDamageGroups)
             {
-                ShuffleDamageGroups(optionFlags.EnemyDamageChaosMode);
+                ShuffleDamageGroups();
             }
 
             //reset seed for all these values so they can be optional
@@ -211,8 +211,8 @@ namespace EnemizerLibrary
                 grayscale_all_dungeons();
             }
 
-            //SetSwordGfx(optionFlags.SwordGraphics);
-            //SetShieldGfx(optionFlags.ShieldGraphics);
+            SetSwordGfx(optionFlags.SwordGraphics);
+            SetShieldGfx(optionFlags.ShieldGraphics);
 
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
@@ -298,24 +298,37 @@ namespace EnemizerLibrary
             f.Close();
         }
 
-        void ShuffleDamageGroups(bool chaos = false)
+        void ShuffleDamageGroups()
         {
             //for 10 groups, 3 damage by groups, green mail, blue mail, red mail
             //example vanilla group will do 4,2,1, 8 = 1 heart
             for(int i = 0; i < 10; i++)
             {
-                int maxRand = 64;
-                if (chaos)
+                int minRand = 4; // min half heart for green
+                if(optionFlags.AllowEnemyZeroDamage)
                 {
-                    maxRand = 128;
+                    minRand = 0;
                 }
-                byte redmail = (byte)rand.Next(0, maxRand);
-                byte bluemail = (byte)rand.Next(0, 128);
-                byte greenmail = (byte)rand.Next(0, 128);
-                if (!chaos)
+
+                int maxRand = 32;
+                if (optionFlags.EnemyDamageChaosMode)
                 {
-                    bluemail = (byte)(redmail / 2);
-                    greenmail = (byte)(redmail / 3);
+                    maxRand = 64;
+                }
+
+                byte greenmail = (byte)rand.Next(minRand, maxRand);
+                byte bluemail;
+                byte redmail;
+
+                if (optionFlags.EnemyDamageChaosMode)
+                {
+                    bluemail = (byte)rand.Next(minRand, maxRand);
+                    redmail = (byte)rand.Next(minRand, maxRand);
+                }
+                else
+                {
+                    bluemail = (byte)(greenmail * 3 / 4);
+                    redmail = (byte)(greenmail * 3 / 8);
                 }
                 this.ROM_DATA[0x3742D + 0 + (i * 3)] = greenmail; //green mail
                 this.ROM_DATA[0x3742D + 1 + (i * 3)] = bluemail; //blue mail
@@ -454,6 +467,12 @@ namespace EnemizerLibrary
             {
                 this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
             }
+            // gloves color
+            this.ROM_DATA[0xDEDF5] = skin_data[0x7036];
+            this.ROM_DATA[0xDEDF6] = skin_data[0x7037];
+            this.ROM_DATA[0xDEDF7] = skin_data[0x7054];
+            this.ROM_DATA[0xDEDF8] = skin_data[0x7055];
+
         }
 
 

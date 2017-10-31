@@ -21,7 +21,7 @@ namespace EnemizerLibrary
             this.spriteGroupCollection = spriteGroupCollection;
             this.spriteRequirementCollection = spriteRequirementCollection;
 
-            areas = new OverworldAreaCollection(romData, rand, spriteRequirementCollection);
+            areas = new OverworldAreaCollection(romData, rand, spriteGroupCollection, spriteRequirementCollection);
         }
 
         public void RandomizeOverworldEnemies(OptionFlags optionFlags)
@@ -49,8 +49,8 @@ namespace EnemizerLibrary
             {
                 // pick random sprite group
                 //area.GraphicsBlockId = ??;
-                area.RandomizeSprites(rand, optionFlags, spriteGroupCollection, spriteRequirementCollection);
-                area.RandomizeBushSprite(rand, spriteGroupCollection, spriteRequirementCollection);
+                area.RandomizeSprites(optionFlags);
+                area.RandomizeBushSprite();
             }
         }
 

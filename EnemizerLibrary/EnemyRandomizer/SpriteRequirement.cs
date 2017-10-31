@@ -307,9 +307,11 @@ namespace EnemizerLibrary
         {
             SpriteRequirements = new List<SpriteRequirement>();
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RavenSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17, 25));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RavenSprite).SetCannotHaveKey().AddSubgroup3(17, 25)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VultureSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(18));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VultureSprite).SetCannotHaveKey().AddSubgroup2(18)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlyingStalfosHeadSprite));
 
@@ -325,7 +327,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Octorok_FourWaySprite).SetKillable().AddSubgroup2(12));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ChickenSprite).AddSubgroup3(21, 80));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ChickenSprite).AddSubgroup3(21, 80)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Octorok_MaybeSprite));
 
@@ -333,7 +336,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SnapdragonSprite).SetKillable().AddSubgroup0(22).AddSubgroup2(23));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(12));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonSprite).SetCannotHaveKey().AddSubgroup2(12)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OctoballoonHatchlingsSprite).SetNeverUse().AddSubgroup2(12));
 
@@ -346,7 +350,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GargoylesDomainGateSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83)
-                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom)); // can make it almost impossible to advance without powder
+                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom)
+                .AddExcludedRooms(DontUseFlyingSprites)); // can make it almost impossible to advance without powder
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SahasrahlaAginahSprite).SetNPC().AddSubgroup2(76));
 
@@ -355,7 +360,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MiniMoldormSprite).SetKillable().AddSubgroup1(30));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PoeSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(14, 21));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PoeSprite).SetCannotHaveKey().AddSubgroup3(14, 21)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DwarvesSprite).SetNPC().SetDoNotRandomize().AddSubgroup1(77).AddSubgroup3(21));
 
@@ -541,7 +547,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AgahnimEnergyBallSprite).SetNeverUse());
 
             // are these killable???
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloatingStalfosHeadSprite).AddSubgroup0(31)); // TODO: check this because it only shows up as stalfos head in game??
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FloatingStalfosHeadSprite).AddSubgroup0(31)
+                .AddExcludedRooms(DontUseFlyingSprites)); // TODO: check this because it only shows up as stalfos head in game??
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BigSpikeTrapSprite).AddSubgroup3(82, 83)
                 .AddExcludedRooms(DontUseImmovableSpritesRooms));
@@ -557,7 +564,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WinderSprite).AddSubgroup0(31));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WaterTektiteSprite).SetWaterSprite().AddSubgroup2(34)
-                .AddDontRandomizeRooms(RoomIdConstants.R40_SwampPalace_EntranceRoom));
+                .AddDontRandomizeRooms(RoomIdConstants.R40_SwampPalace_EntranceRoom)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairyCircleSprite).SetNeverUse().AddSubgroup3(82, 83)); // lag city
 
@@ -630,8 +638,10 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosSprite).SetKillable().AddSubgroup0(31));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworldSprite).SetCannotHaveKey().AddSubgroup3(27)
+                .AddExcludedRooms(DontUseFlyingSprites));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BomberFlyingCreaturesFromDarkworld2Sprite).SetCannotHaveKey().AddSubgroup3(27)
+                .AddExcludedRooms(DontUseFlyingSprites));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PikitSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(27));
 
@@ -911,6 +921,11 @@ namespace EnemizerLibrary
             RoomIdConstants.R249_Cave0xF9, // TODO: test, probably can get past
             RoomIdConstants.R253_Cave0xFD,
             RoomIdConstants.R268_MimicCave,
+        };
+
+        int[] DontUseFlyingSprites =
+        {
+            RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom
         };
     }
 }

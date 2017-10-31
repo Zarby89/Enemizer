@@ -38,6 +38,13 @@ namespace EnemizerLibrary
                 romData[SpriteAddress] = 0;
                 romData[SpriteAddress + 1] = 0;
             }
+
+            // TODO: fix wallmaster houlihan palette (?)
+            if (SpriteId == SpriteConstants.WallmasterSprite)
+            {
+                SpriteId = SpriteConstants.OW_OL_WallMaster_ToHoulihan;
+            }
+            
             //romData[SpriteAddress] = SpriteY;
             //romData[SpriteAddress] = SpriteX;
             romData[SpriteAddress + 2] = (byte)SpriteId;

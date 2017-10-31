@@ -47,7 +47,7 @@ namespace EnemizerLibrary
 
             roomCollection.RandomizeRoomSpriteGroups(spriteGroupCollection);
 
-            foreach (var room in roomCollection.Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
+            foreach (var room in roomCollection.Rooms.Where(x => RoomIdConstants.DontRandomizeRooms.Contains(x.RoomId) == false))
             {
                 room.RandomizeSprites(rand, optionFlags, spriteGroupCollection, spriteRequirementCollection);
 

@@ -18,13 +18,44 @@ namespace EnemizerLibrary
             }
         }
         public List<OverworldSprite> Sprites { get; set; } = new List<OverworldSprite>();
+        public int BushSpriteId
+        {
+            get
+            {
+                return romData[SpriteConstants.RandomizedBushEnemyTableBaseAddress + this.AreaId];
+            }
+            set
+            {
+                romData[SpriteConstants.RandomizedBushEnemyTableBaseAddress + this.AreaId] = (byte)value;
+            }
+        }
+        public string BushSpriteName
+        {
+            get
+            {
+                return SpriteConstants.GetSpriteName(this.BushSpriteId);
+            }
+        }
+        public SpriteGroup SpriteGroup
+        {
+            get
+            {
+                return spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
+            }
+        }
 
         RomData romData;
+        SpriteGroupCollection spriteGroupCollection;
+        SpriteRequirementCollection spriteRequirementCollection;
+        Random rand;
 
-        public OverworldArea(RomData romData, int AreaId)
+        public OverworldArea(RomData romData, int AreaId, Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             this.romData = romData;
             this.AreaId = AreaId;
+            this.spriteGroupCollection = spriteGroupCollection;
+            this.spriteRequirementCollection = spriteRequirementCollection;
+            this.rand = rand;
 
             int spriteTableBaseSnesAddress = (09 << 16) // bank 9
                 + (romData[AddressConstants.OverworldSpritePointerTableBaseAddress + (AreaId * 2) + 1] << 8) 
@@ -100,7 +131,7 @@ namespace EnemizerLibrary
             }
         }
 
-        public void RandomizeSprites(Random rand, OptionFlags optionFlags, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        public void RandomizeSprites(OptionFlags optionFlags)
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
 
@@ -130,7 +161,7 @@ namespace EnemizerLibrary
             }
         }
 
-        public void RandomizeBushSprite(Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
+        public void RandomizeBushSprite()
         {
             var spriteGroup = spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
 

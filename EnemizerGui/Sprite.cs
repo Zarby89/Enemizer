@@ -39,7 +39,7 @@ namespace Enemizer
         {
             data = spriteData;
             load_palette();
-            load4bpp(0);
+            //load4bpp(0);
             return updateGraphic(0, backgroundColor, picImage);
         }
 
