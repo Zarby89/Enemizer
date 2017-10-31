@@ -53,7 +53,12 @@ sprite_bush_spawn:
     BRA .return
 
     .newSpriteSpawn
-    LDA $7E040A : TAY
+    LDA $7E040A : TAY                               ; load the area ID
+    LDA $7EF3C5 : CMP.b #$03 : !BLT .dontGoPhase2   ; check if agahnim 1 is alive
+    ; aga1 is dead
+    LDA $7E040A : CMP.b #$40 : !BGE .dontGoPhase2   ; check if we are in DW, if so we can skip shifting table index
+    !ADD #$90 : TAY                                 ; agahnim 1 is dead, so we need to go to the 2nd phase table for LW
+    .dontGoPhase2
     LDA sprite_bush_spawn_table_overworld, Y ;LDA 408000 + area id
 
     .return
