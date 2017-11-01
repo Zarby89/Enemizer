@@ -21,6 +21,7 @@ namespace EnemizerLibrary
 
         // reserve 0x50 bytes for flags/options
         public const int EnemizerInfoFlagsOffset = EnemizerInfoVersionOffset + EnemizerInfoVersionLength;
+
         public const int EnemizerInfoFlagsLength = 0x50;
 
         // 0x20 flags total
@@ -416,7 +417,7 @@ namespace EnemizerLibrary
             }
             set
             {
-                if(i >= 0x7B41 && i < 0x7C41)
+                if(i >= 0 && i < 1)
                 {
                     Debugger.Break();
                 }

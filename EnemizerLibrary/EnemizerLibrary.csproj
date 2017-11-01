@@ -53,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BossRandomizer\Boss\GTArmosBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\GTLanmolaBoss.cs" />
+    <Compile Include="BossRandomizer\Boss\GTMoldormBoss.cs" />
+    <Compile Include="BossRandomizer\VanillaBossRandomizer.cs" />
     <Compile Include="BossRandomizer\Pool\BossPool.cs" />
     <Compile Include="BossRandomizer\Boss\TrinexxBoss.cs" />
     <Compile Include="BossRandomizer\Boss\EmptyBoss.cs" />

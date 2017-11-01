@@ -410,6 +410,14 @@ namespace Enemizer
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
                 Randomization randomize = new Randomization();
                 RomData romData = new RomData(rom_data);
+                if(romData.IsEnemizerRom)
+                {
+                    if(DialogResult.No == MessageBox.Show("Enemizer rom detected: this will cause Enemizer to try to reset the rom and rerun the same settings that are embedded in the rom. This feature exists for debugging purposes only. If you think this is a mistake, please double check the input file you selected. Do you wish to continue?", "Enemizer rom detected", MessageBoxButtons.YesNo))
+                    {
+                        // user picked no
+                        return;
+                    }
+                }
                 RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
                 using (var fbd = new FolderBrowserDialog())
