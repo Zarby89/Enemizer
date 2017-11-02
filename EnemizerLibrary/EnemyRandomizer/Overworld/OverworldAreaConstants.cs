@@ -382,12 +382,12 @@ namespace EnemizerLibrary
 
             //DarkWorld					
             A040_SkullWoods_DW = 0x040,
-            A041_LumberJackHouse_DW = 0x041,	//doublecheck,thisshouldbeSkullWoods....		
-            A042_LumberJackHouse_2_DW = 0x042,
+            A041_LumberJackHouse_Wrong_DW = 0x041,	//doublecheck,thisshouldbeSkullWoods....		
+            A042_LumberJackHouse_DW = 0x042,
             A043_WestDeathMountain_DW = 0x043,
-            A044_EastDeathMountain_DW = 0x044,	//doublecheck,thisshouldbeWestDM....		
-            A045_EastDeathMountain_2_DW = 0x045,	//doublecheck,thisshouldbeEast1		
-            A046_Unknown_0x46 = 0x046,	//doublecheck,thisshouldbeEast_2		
+            A044_EastDeathMountain_Wrong_DW = 0x044,	//doublecheck,thisshouldbeWestDM....		
+            A045_EastDeathMountain_DW = 0x045,	//doublecheck,thisshouldbeEast1		
+            A046_Unknown_Should_Be_East_Fake_0x46 = 0x046,	//doublecheck,thisshouldbeEast_2		
             A047_TurtleRock = 0x047,
             A048_LostWoods_3_DW = 0x048,
             A049_LostWoods_4_DW = 0x049,
@@ -430,13 +430,13 @@ namespace EnemizerLibrary
             A06E_CavesSouthofPalaceofDarkness_left_DW = 0x06E,
             A06F_CavesSouthofPalaceofDarkness_right_DW = 0x06F,
             A070_MiseryMire_DW = 0x070,
-            A071_SouthofHauntedGrove_DW = 0x071,
-            A072_SouthofHauntedGrove_DW_Duplicate = 0x072,
+            A071_SouthofHauntedGrove_Fake_DW = 0x071,
+            A072_SouthofHauntedGrove_DW = 0x072,
             A073_NorthWesternGreatSwamp_DW = 0x073,
             A074_NorthEasternGreatSwamp_DW = 0x074,
             A075_LakeHylia_DW = 0x075,
-            A076_IceCave_DW = 0x076,
-            A077_IceCave_DW_2 = 0x077,
+            A076_IceCave_Fake_DW = 0x076,
+            A077_IceCave_DW = 0x077,
             A078_MiseryMire_3_DW = 0x078,
             A079_MiseryMire_4_DW = 0x079,
             A07A_PathBetweenMiseryMireandGreatSwamp_DW = 0x07A,
@@ -607,29 +607,46 @@ namespace EnemizerLibrary
 
         public static readonly int[] DoNotRandomizeAreas =
         {
-            A018_KakarikoVillage,
-            A019_KakarikoVillage_2,
-            A020_KakarikoVillage_3,
-            A021_KakarikoVillage_4,
-            A028_KakarikoVillageMazeRace,
-            A02A_HauntedGrove,
-            A068_DiggingGame_DW,
-            A06A_HauntedGrove_DW,
-            //A080_MasterSwordGlade_UnderBridge,
-            //A081_ZorasDomain,
+            A001_LostWoods_2, A004_WestDeathMountain_2, A006_EastDeathMountain_2,
+            A008_LostWoods_3, A009_LostWoods_4, A00B_WestDeathMountain_3, A00C_WestDeathMountain_4,
+            A00D_EastDeathMountain_3, A00E_EastDeathMountain_3_2, A019_KakarikoVillage_2,
+            A01C_HyruleCastle_2, A01F_EasternPalace_2, A020_KakarikoVillage_3, A021_KakarikoVillage_4,
+            A023_HyruleCastle_3, A024_HyruleCastle_4, A026_EasternPalace_3, A027_EasternPalace_4,
+            A031_DesertofMystery_2, A036_LakeHylia_2, A038_DesertofMystery_3, A039_DesertofMystery_4,
+            A03D_LakeHylia_3, A03E_LakeHylia_4,
+
+            A041_LumberJackHouse_Wrong_DW, A044_EastDeathMountain_Wrong_DW, A046_Unknown_Should_Be_East_Fake_0x46, 
+            A048_LostWoods_3_DW, A049_LostWoods_4_DW, A04B_WestDeathMountain_3_DW, A04C_WestDeathMountain_4_DW,
+            A04D_EastDeathMountain_3_DW, A04E_EastDeathMountain_4_DW, A059_VillageofOutcasts_2_DW,
+            A05C_Pyramid_2_DW, A05F_PalaceofDarkness_2_DW, A060_VillageofOutcasts_3_DW, A061_VillageofOutcasts_4_DW,
+            A063_Pyramid_3_DW, A064_Pyramid_4_DW, A066_PalaceofDarkness_3_DW, A067_PalaceofDarkness_4_DW,
+            A071_SouthofHauntedGrove_Fake_DW, A076_IceCave_Fake_DW, A078_MiseryMire_3_DW, A079_MiseryMire_4_DW,
+            A07D_LakeHylia_3_DW, A07E_LakeHylia_4_DW, 
+            //A018_KakarikoVillage,
+            //A019_KakarikoVillage_2,
+            //A020_KakarikoVillage_3,
+            //A021_KakarikoVillage_4,
+            //A028_KakarikoVillageMazeRace,
+            //A02A_HauntedGrove,
+            //A068_DiggingGame_DW,
+            //A06A_HauntedGrove_DW,
             A082_Unknown_0x82, A083_Unknown_0x83, A084_Unknown_0x84, A085_Unknown_0x85, A086_Unknown_0x86, A087_Unknown_0x87, A088_Unknown_0x88, A089_Unknown_0x89,
             A08A_Unknown_0x8A, A08B_Unknown_0x8B, A08C_Unknown_0x8C, A08D_Unknown_0x8D, A08E_Unknown_0x8E, A08F_Unknown_0x8F,
-            A092_LumberJackHouse_PostAga,
-            A0A8_KakarikoVillage_PostAga,
-            A0A9_KakarikoVillage_2_PostAga,
-            A0B0_KakarikoVillage_3_PostAga,
-            A0B1_KakarikoVillage_4_PostAga,
-            A0B8_KakarikoVillageMazeRace_PostAga,
-            A0BA_HauntedGrove_PostAga,
-            A0F8_DiggingGame_DW_PostAga,
-            A0FA_HauntedGrove_DW_PostAga,
-            //A110_MasterSwordGlade_UnderBridge_PostAga,
-            //A111_ZorasDomain_PostAga,
+            //A092_LumberJackHouse_PostAga,
+            //A0A8_KakarikoVillage_PostAga,
+            //A0A9_KakarikoVillage_2_PostAga,
+            //A0B0_KakarikoVillage_3_PostAga,
+            //A0B1_KakarikoVillage_4_PostAga,
+            //A0B8_KakarikoVillageMazeRace_PostAga,
+            //A0BA_HauntedGrove_PostAga,
+            //A0F8_DiggingGame_DW_PostAga,
+            //A0FA_HauntedGrove_DW_PostAga,
+            A091_LostWoods_2_PostAga, A094_WestDeathMountain_2_PostAga, A096_EastDeathMountain_2_PostAga,
+            A098_LostWoods_3_PostAga, A099_LostWoods_4_PostAga, A09B_WestDeathMountain_3_PostAga, A09C_WestDeathMountain_4_PostAga,
+            A09E_EastDeathMountain_3_PostAga_2, A0A9_KakarikoVillage_2_PostAga, A0AC_HyruleCastle_2_PostAga, A0AF_EasternPalace_2_PostAga,
+            A0B0_KakarikoVillage_3_PostAga, A0B1_KakarikoVillage_4_PostAga, A0B3_HyruleCastle_3_PostAga, A0B4_HyruleCastle_4_PostAga,
+            A0B6_EasternPalace_3_PostAga, A0B7_EasternPalace_4_PostAga, A0C1_DesertofMystery_2_PostAga, A0C6_IceCave_PostAga_ShouldBeHylia2,
+            A0C8_DesertofMystery_3_PostAga,
             0x112, 0x113, 0x114, 0x115, 0x116, 0x117, 0x119, 0x120
         };
     }
