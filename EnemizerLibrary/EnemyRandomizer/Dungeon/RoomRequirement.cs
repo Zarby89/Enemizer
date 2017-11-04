@@ -95,13 +95,14 @@ namespace EnemizerLibrary
                 RoomIdConstants.R273_ArcherGame,
                 RoomIdConstants.R282_Mutant,
                 RoomIdConstants.R284_BombShop,
-                RoomIdConstants.R289_SmithHouse,
                 RoomIdConstants.R290_FortuneTellers));
             // TODO: these probably can be combined with above safely but leave for now
             RoomRequirements.Add(new RoomGroupRequirement(null, 75, null, null, null,
                 RoomIdConstants.R255_Cave0xFF,
                 RoomIdConstants.R274_CaveShop0x112,
                 RoomIdConstants.R287_Shop0x11F));
+            RoomRequirements.Add(new RoomGroupRequirement(null, null, 77, null, 21,
+                RoomIdConstants.R289_SmithHouse));
 
             RoomRequirements.Add(new RoomGroupRequirement(7, 75, 77, 57, 54,
                 RoomIdConstants.R8_Cave_HealingFairy,

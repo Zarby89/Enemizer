@@ -161,7 +161,7 @@ namespace EnemizerLibrary
             
             if (optionFlags.RandomizePots)
             {
-                randomizePots(); //default on for now
+                randomizePots(seed); //default on for now
             }
 
             if (optionFlags.ShuffleEnemyDamageGroups)
@@ -314,18 +314,16 @@ namespace EnemizerLibrary
             return seed;
         }
 
-        void SetSwordGfx(SwordTypes swordType)
+        void SetSwordGfx(string swordType)
         {
-            string filename = swordType.ToString().Replace(" ", "").Trim() + ".gfx";
-            FileStream f = new FileStream("sword_gfx\\" + filename, FileMode.Open, FileAccess.Read);
+            FileStream f = new FileStream(swordType, FileMode.Open, FileAccess.Read);
             f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
             f.Close();
         }
 
-        void SetShieldGfx(ShieldTypes shieldType)
+        void SetShieldGfx(string shieldType)
         {
-            string filename = shieldType.ToString().Replace(" ", "").Trim() + ".gfx";
-            FileStream f = new FileStream("shield_gfx\\" + filename, FileMode.Open, FileAccess.Read);
+            FileStream f = new FileStream(shieldType, FileMode.Open, FileAccess.Read);
             f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
             f.Close();
         }
@@ -515,7 +513,6 @@ namespace EnemizerLibrary
                 randomize_wall(i);
                 randomize_floors(i);
             }
-            //grayscale_all_dungeons();
         }
 
         public void black_all_dungeons()
@@ -545,7 +542,11 @@ namespace EnemizerLibrary
 
         public Color getColor(short c)
         {
-            return Color.FromArgb(((c & 0x1F) * 8), (((c & 0x3E0) >> 5) * 8), (((c & 0x7C00) >> 10) * 8));
+            int r = (int)((float)(c & 0x1F) / (float)0x1F * (float)0xFF);
+            int g = (int)((float)((c >> 5) & 0x1F) / (float)0x1F * (float)0xFF);
+            int b = (int)((float)((c >> 10) & 0x1F) / (float)0x1F * (float)0xFF);
+            //return Color.FromArgb(((c & 0x1F) * 8), (((c & 0x3E0) >> 5) * 8), (((c & 0x7C00) >> 10) * 8));
+            return Color.FromArgb(r, g, b);
         }
 
         public void grayscale_all_dungeons()
@@ -585,10 +586,7 @@ namespace EnemizerLibrary
 
         public void randomize_wall(int dungeon)
         {
-
-            
             Color wall_color = Color.FromArgb(60+rand.Next(180), 60+rand.Next(180), 60+rand.Next(180));
-            //byte shade = (byte)(6 + rand.Next(8) -((wall_color.R+wall_color.G+wall_color.B)/80));
 
             for (int i = 0; i < 5; i++)
             {
@@ -602,21 +600,16 @@ namespace EnemizerLibrary
                 {
                     setColor((0x0DD7CA + (0xB4 * dungeon)) + (i * 2), wall_color, shadex);
                 }
-                /*setColor(0x0DD74C - (i * 2), Color.LimeGreen, (byte)(i * 2));
-                setColor(0x0DD778 - (i * 2), Color.LimeGreen, (byte)(i * 2));
-                setColor(0x0DD73C - (i * 2), Color.LimeGreen, (byte)(i * 2));*/
             }
 
             if (dungeon == 2)
             {
                 setColor((0x0DD74E + (0xB4 * dungeon)), wall_color, 3);
-                setColor((0x0DD74E+2 + (0xB4 * dungeon)), wall_color, 7);
+                setColor((0x0DD74E + 2 + (0xB4 * dungeon)), wall_color, 7);
                 setColor((0x0DD73E + (0xB4 * dungeon)), wall_color, 3);
                 setColor((0x0DD73E + 2 + (0xB4 * dungeon)), wall_color, 7);
                 
             }
-
-            //setColor(0x0DD76A + (0xB4 * dungeon), wall_color, (byte)(shade - 6));
 
             //Ceiling
             setColor(0x0DD7E4 + (0xB4 * dungeon), wall_color, (byte)(2)); //outer wall darker
@@ -640,7 +633,6 @@ namespace EnemizerLibrary
 
             //Decoration?
 
-
             //WHAT ARE THOSE !!
             //setColor((0x0DD7DA + (0xB4 * dungeon)), wall_color, (byte)(shade - (0 * 4)));
             //setColor((0x0DD7DA + 2 + (0xB4 * dungeon)), wall_color, (byte)(shade - (1 * 4)));
@@ -648,58 +640,22 @@ namespace EnemizerLibrary
 
         public void randomize_floors(int dungeon)
         {
-
-
             Color floor_color1 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
             Color floor_color2 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
             Color floor_color3 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
 
-            /*if (dungeon == 7)
+            for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine("Dungeon = 7");
-                for (int i = 0; i < 3; i++)
-                {
-                    setColor(0x0DD764 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade1-1 ) - (i * 3)));
-                    setColor(0x0DD782 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade1) - (i * 3)));
-                    setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade2-1 ) - (i * 3)));
-                    setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)((shade2) - (i * 3)));
-
-                    if (i <= 1)
-                    {
-                        setColor((0x0DD764 + (0xB4 * dungeon) + 8) + (i * 2), floor_color1, (byte)((shade1-1 ) - (i * 3)));
-                        setColor((0x0DD782 + (0xB4 * dungeon) + 8) + (i * 2), floor_color1, (byte)((shade1) - (i * 3)));
-                        setColor((0x0DD7A0 + (0xB4 * dungeon) + 8) + (i * 2), floor_color1, (byte)((shade2-1 ) - (i * 3)));
-                        setColor((0x0DD7BE + (0xB4 * dungeon) + 8) + (i * 2), floor_color1, (byte)((shade2) - (i * 3)));
-                    }
-                }
-                setColor(0x0DD7E2 + (0xB4 * dungeon), floor_color1, 3);
-                setColor(0x0DD796 + (0xB4 * dungeon), floor_color1, 3);
-            }
-            else
-            {*/
-                for (int i = 0; i < 3; i++)
-                {
                 byte shadex = (byte)(6 - (i * 2));
-                    setColor(0x0DD764 + (0xB4 * dungeon) + (i * 2), floor_color1, shadex);
-                    setColor(0x0DD782 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)(shadex+3));
+                setColor(0x0DD764 + (0xB4 * dungeon) + (i * 2), floor_color1, shadex);
+                setColor(0x0DD782 + (0xB4 * dungeon) + (i * 2), floor_color1, (byte)(shadex+3));
 
                 setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color2, shadex);
                 setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)(shadex + 3));
-                //setColor(0x0DD7A0 + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2-1 ) - (i * 3)));
-                //setColor(0x0DD7BE + (0xB4 * dungeon) + (i * 2), floor_color2, (byte)((shade2) - (i * 3)));
-
-                /*if (i <= 1)
-                {
-                    setColor((0x0DD764 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
-                    setColor((0x0DD782 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3) - (i * 3)));
-                    setColor((0x0DD7A0 + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3-1 ) - (i * 3)));
-                    setColor((0x0DD7BE + (0xB4 * dungeon) + 8) + (i * 2), floor_color3, (byte)((shade3 ) - (i * 3)));
-                }*/
             }
 
-                setColor(0x0DD7E2 + (0xB4 * dungeon), floor_color3, 3);
-                setColor(0x0DD796 + (0xB4 * dungeon), floor_color3, 4);
-            //}
+            setColor(0x0DD7E2 + (0xB4 * dungeon), floor_color3, 3);
+            setColor(0x0DD796 + (0xB4 * dungeon), floor_color3, 4);
         }
 
         public void setColor(int address, Color col, byte shade)
@@ -712,12 +668,14 @@ namespace EnemizerLibrary
             for (int i = 0; i < shade; i++)
             {
                 r = (r - (r / 5));
-                g = (g - (g/ 5));
+                g = (g - (g / 5));
                 b = (b - (b / 5));
             }
-            r = (r / 8);
-            g = (g / 8);
-            b = (b / 8);
+
+            r = (int)((float)r / 255f * 0x1F);
+            g = (int)((float)g / 255f * 0x1F);
+            b = (int)((float)b / 255f * 0x1F);
+
             short s = (short)(((b) << 10) | ((g) << 5) | ((r) << 0));
 
             ROM_DATA[address] = (byte)(s & 0x00FF);

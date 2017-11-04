@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,8 @@ namespace Enemizer
         }
         public override string ToString()
         {
-            return name;
+            TextInfo ti = new CultureInfo("en-US", false).TextInfo;
+            return ti.ToTitleCase(name);
         }
 
     }

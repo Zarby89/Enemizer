@@ -341,9 +341,9 @@ namespace EnemizerLibrary
 
         };
 
-            public void randomizePots()
+            public void randomizePots(int seed)
             {
-                Random r = new Random();
+                Random r = new Random(seed);
                 foreach (GameRoom g in roomList)
                 {
                     //scan all items and pots to see if there is a key or switch and pots reserved

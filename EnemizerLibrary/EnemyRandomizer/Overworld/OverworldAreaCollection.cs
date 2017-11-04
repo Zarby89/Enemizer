@@ -66,14 +66,15 @@ namespace EnemizerLibrary
                 a.GraphicsBlockId = (byte)possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].GroupId;
             }
 
-            //// force any rooms we need to
-            //foreach (var sg in spriteGroups.SpriteGroups.Where(x => x.ForceRoomsToGroup != null && x.ForceRoomsToGroup.Count > 0))
-            //{
-            //    foreach (var forcedR in OverworldAreas.Where(x => sg.ForceRoomsToGroup.Contains(x.AreaId)))
-            //    {
-            //        forcedR.GraphicsBlockId = (byte)sg.GroupId;
-            //    }
-            //}
+            OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
+            // force any areas we need to
+            foreach (var sg in owReqs.OverworldRequirements)
+            {
+                foreach (var forcedR in OverworldAreas.Where(x => sg.Areas.Contains(x.AreaId)))
+                {
+                    forcedR.GraphicsBlockId = (byte)sg.GroupId;
+                }
+            }
         }
 
     }

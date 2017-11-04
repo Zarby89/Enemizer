@@ -90,15 +90,15 @@ namespace EnemizerLibrary
 
             // Dark World
             { 0x040, "Skull Woods (DW)" },
-            { 0x041, "Lumber Jack House (DW)" }, // double check, this should be Skull Woods....
-            { 0x042, "Lumber Jack House (2) (DW)" },
+            { 0x041, "Wrong Fake Lumber Jack House, should be Skull Woods (DW)" }, // double check, this should be Skull Woods....
+            { 0x042, "Lumber Jack House (DW)" },
             { 0x043, "West Death Mountain (DW)" },
-            { 0x044, "East Death Mountain (DW)" }, // double check, this should be West DM....
-            { 0x045, "East Death Mountain (2) (DW)" }, // double check, this should be East 1
-            { 0x046, "??" }, // double check, this should be East (2)
+            { 0x044, "Fake East Death Mountain, should be West 2 (DW)" }, // double check, this should be West DM....
+            { 0x045, "East Death Mountain (DW)" }, // double check, this should be East 1
+            { 0x046, "?? Should be East but points to junk" }, // double check, this should be East (2)
             { 0x047, "Turtle Rock" },
-            { 0x048, "Lost Woods (3?) (DW)" },
-            { 0x049, "Lost Woods (4?) (DW)" },
+            { 0x048, "Skull Woods (3?) (DW)" },
+            { 0x049, "Skull Woods (4?) (DW)" },
             { 0x04A, "Bumper Cave Entrance (DW)" },
             { 0x04B, "West Death Mountain (3?) (DW)" },
             { 0x04C, "West Death Mountain (4?) (DW)" },
@@ -138,12 +138,12 @@ namespace EnemizerLibrary
             { 0x06E, "Caves South of Palace of Darkness (left) (DW)" },
             { 0x06F, "Caves South of Palace of Darkness (right) (DW)" },
             { 0x070, "Misery Mire (DW)" },
-            { 0x071, "South of Haunted Grove (DW) (Should be Mire 2)" },
-            { 0x072, "South of Haunted Grove (DW) (Duplicate)" },
+            { 0x071, "Fake South of Haunted Grove, Should be Mire 2 (DW)" },
+            { 0x072, "South of Haunted Grove (DW)" },
             { 0x073, "North-western Great Swamp (DW)" },
             { 0x074, "North-eastern Great Swamp (DW)" },
             { 0x075, "Lake Hylia (DW)" },
-            { 0x076, "Ice Cave (DW)" },
+            { 0x076, "Fake Ice Cave, should be Lake Hylia (DW)" },
             { 0x077, "Ice Cave (DW)" },
             { 0x078, "Misery Mire (3?) (DW)" },
             { 0x079, "Misery Mire (4?) (DW)" },
@@ -229,29 +229,29 @@ namespace EnemizerLibrary
             { 0x0C4, "North-eastern Great Swamp (Post-Aga)" },
             { 0x0C5, "Lake Hylia (Post-Aga)" },
             //{ 0x0C6, "Lake Hylia (2) (Post-Aga)" },
-            { 0x0C6, "Ice Cave (Post-Aga)??" }, // check, should be hylia (2)
+            { 0x0C6, "Should be Lake Hylia, Ice Cave (Post-Aga)??" }, // check, should be hylia (2)
             { 0x0C7, "Ice Cave (Post-Aga)" },
             //{ 0x0C8, "Desert of Mystery (3?) (Post-Aga)" },
             //{ 0x0C9, "Desert of Mystery (4?) (Post-Aga)" },
-            { 0x0C8, "Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (3)
-            { 0x0C9, "Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (4)
+            { 0x0C8, "Should be Desert 3, Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (3)
+            { 0x0C9, "Should be Desert 4, Path Between Desert of Mystery and Great Swamp (Post-Aga)??" }, // check, should be desert (4)
             { 0x0CA, "Path Between Desert of Mystery and Great Swamp (Post-Aga)" },
             { 0x0CB, "South-western Great Swamp (Post-Aga)" },
             { 0x0CC, "South-eastern Great Swamp (Post-Aga)" },
             //{ 0x0CD, "Lake Hylia (3?) (Post-Aga)" },
             //{ 0x0CE, "Lake Hylia (4?) (Post-Aga)" },
-            { 0x0CD, "Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (3)
-            { 0x0CE, "Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (4)
+            { 0x0CD, "Should be Lake 3, Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (3)
+            { 0x0CE, "Should be Lake 4, Path Between Lake Hylia and Ice Cave (Post-Aga)??" }, // check, should be lake (4)
             { 0x0CF, "Path Between Lake Hylia and Ice Cave (Post-Aga)" },
 
             // Dark World (Post-Aga?)
             { 0x0D0, "Skull Woods (DW) (Post-Aga)" },
-            { 0x0D1, "Lumber Jack House (DW) (Post-Aga)" }, // double check, this should be Skull Woods....
-            { 0x0D2, "Lumber Jack House (2) (DW) (Post-Aga)" },
+            { 0x0D1, "Should be Skull Woods2, Lumber Jack House (DW) (Post-Aga)" }, // double check, this should be Skull Woods....
+            { 0x0D2, "Lumber Jack House (DW) (Post-Aga)" },
             { 0x0D3, "West Death Mountain (DW) (Post-Aga)" },
-            { 0x0D4, "East Death Mountain (DW) (Post-Aga)" }, // double check, this should be West DM....
-            { 0x0D5, "East Death Mountain (2) (DW) (Post-Aga)" }, // double check, this should be East 1
-            { 0x0D6, "?? (Post-Aga)" }, // double check, this should be East (2)
+            { 0x0D4, "Should be west 2, East Death Mountain (DW) (Post-Aga)" }, // double check, this should be West DM....
+            { 0x0D5, "East Death Mountain (DW) (Post-Aga)" }, // double check, this should be East 1
+            { 0x0D6, "?? should be east 2 (Post-Aga)" }, // double check, this should be East (2)
             { 0x0D7, "Turtle Rock (Post-Aga)" },
             { 0x0D8, "Lost Woods (3?) (DW) (Post-Aga)" },
             { 0x0D9, "Lost Woods (4?) (DW) (Post-Aga)" },
@@ -294,12 +294,12 @@ namespace EnemizerLibrary
             { 0x0FE, "Caves South of Palace of Darkness (left) (DW) (Post-Aga)" },
             { 0x0FF, "Caves South of Palace of Darkness (right) (DW) (Post-Aga)" },
             { 0x100, "Misery Mire (DW) (Post-Aga)" },
-            { 0x101, "South of Haunted Grove (DW) (Post-Aga)" },
-            { 0x102, "South of Haunted Grove (DW) (Duplicate) (Post-Aga)" },
+            { 0x101, "Should be Mire 2, South of Haunted Grove (DW) (Post-Aga)" },
+            { 0x102, "South of Haunted Grove (DW) (Post-Aga)" },
             { 0x103, "North-western Great Swamp (DW) (Post-Aga)" },
             { 0x104, "North-eastern Great Swamp (DW) (Post-Aga)" },
             { 0x105, "Lake Hylia (DW) (Post-Aga)" },
-            { 0x106, "Ice Cave (DW) (Post-Aga)" },
+            { 0x106, "Should be Hylia 2, Ice Cave (DW) (Post-Aga)" },
             { 0x107, "Ice Cave (DW) (Post-Aga)" },
             { 0x108, "Misery Mire (3?) (DW) (Post-Aga)" },
             { 0x109, "Misery Mire (4?) (DW) (Post-Aga)" },
@@ -627,20 +627,23 @@ namespace EnemizerLibrary
             //A020_KakarikoVillage_3,
             //A021_KakarikoVillage_4,
             //A028_KakarikoVillageMazeRace,
-            //A02A_HauntedGrove,
+            A02A_HauntedGrove,
             //A068_DiggingGame_DW,
-            //A06A_HauntedGrove_DW,
+            A06A_HauntedGrove_DW,
+
             A082_Unknown_0x82, A083_Unknown_0x83, A084_Unknown_0x84, A085_Unknown_0x85, A086_Unknown_0x86, A087_Unknown_0x87, A088_Unknown_0x88, A089_Unknown_0x89,
             A08A_Unknown_0x8A, A08B_Unknown_0x8B, A08C_Unknown_0x8C, A08D_Unknown_0x8D, A08E_Unknown_0x8E, A08F_Unknown_0x8F,
+            
             //A092_LumberJackHouse_PostAga,
             //A0A8_KakarikoVillage_PostAga,
             //A0A9_KakarikoVillage_2_PostAga,
             //A0B0_KakarikoVillage_3_PostAga,
             //A0B1_KakarikoVillage_4_PostAga,
             //A0B8_KakarikoVillageMazeRace_PostAga,
-            //A0BA_HauntedGrove_PostAga,
+            A0BA_HauntedGrove_PostAga,
             //A0F8_DiggingGame_DW_PostAga,
-            //A0FA_HauntedGrove_DW_PostAga,
+            A0FA_HauntedGrove_DW_PostAga,
+
             A091_LostWoods_2_PostAga, A094_WestDeathMountain_2_PostAga, A096_EastDeathMountain_2_PostAga,
             A098_LostWoods_3_PostAga, A099_LostWoods_4_PostAga, A09B_WestDeathMountain_3_PostAga, A09C_WestDeathMountain_4_PostAga,
             A09E_EastDeathMountain_3_PostAga_2, A0A9_KakarikoVillage_2_PostAga, A0AC_HyruleCastle_2_PostAga, A0AF_EasternPalace_2_PostAga,

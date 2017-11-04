@@ -11,12 +11,14 @@ namespace EnemizerLibrary
         public List<Room> Rooms { get; set; } = new List<Room>();
         RomData romData;
         Random rand;
+        SpriteGroupCollection spriteGroupCollection;
         SpriteRequirementCollection spriteRequirementCollection;
 
-        public RoomCollection(RomData romData, Random rand, SpriteRequirementCollection spriteRequirementCollection)
+        public RoomCollection(RomData romData, Random rand, SpriteGroupCollection spriteGroupCollection, SpriteRequirementCollection spriteRequirementCollection)
         {
             this.romData = romData;
             this.rand = rand;
+            this.spriteGroupCollection = spriteGroupCollection;
             this.spriteRequirementCollection = spriteRequirementCollection;
         }
 
@@ -26,7 +28,7 @@ namespace EnemizerLibrary
 
             for (int i=0; i<0x250; i+=2) // 0x128 = 296 rooms
             {
-                Room r = new Room(currentRoomId, romData);
+                Room r = new Room(currentRoomId, romData, spriteGroupCollection, spriteRequirementCollection);
                 r.LoadRoom();
                 Rooms.Add(r);
 
@@ -36,7 +38,7 @@ namespace EnemizerLibrary
 
         public void RandomizeRoomSpriteGroups(SpriteGroupCollection spriteGroups)
         {
-            foreach (var r in Rooms.Where(x => RoomIdConstants.RandomizeRooms.Contains(x.RoomId)))
+            foreach (var r in Rooms.Where(x => RoomIdConstants.DontRandomizeRooms.Contains(x.RoomId) == false))
             {
                 List<SpriteRequirement> doNotUpdateSprites = spriteRequirementCollection
                                                             .DoNotRandomizeSprites
