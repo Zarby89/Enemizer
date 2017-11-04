@@ -823,16 +823,17 @@ namespace EnemizerLibrary
             216,217,218,219,220,223,224,228,232,238,239,240,249,251,235,254,263,264,268,269,291,267,185,286,181,150,
             R200_EasternPalace_ArmosKnights,
             R51_DesertPalace_Lanmolas,
-            R108_GanonsTower_LanmolasRoom,
             R7_TowerofHera_Moldorm,
-            R77_GanonsTower_MoldormRoom,
             R90_PalaceofDarkness_HelmasaurKing,
             R6_SwampPalace_Arrghus,
             R41_SkullWoods_Mothula,
             R172_ThievesTown_BlindTheThief,
             R222_IcePalace_Kholdstare,
             R144_MiseryMire_Vitreous,
-            R164_TurtleRock_Trinexx
+            R164_TurtleRock_Trinexx,
+            R28_GanonsTower_IceArmos,
+            R108_GanonsTower_LanmolasRoom,
+            R77_GanonsTower_MoldormRoom,
         };
 
         public static readonly int[] BossRooms =

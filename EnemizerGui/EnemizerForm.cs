@@ -97,18 +97,30 @@ namespace Enemizer
         void LoadSwordDropdown()
         {
             swordGraphicsCombobox.Items.Clear();
-            foreach (var e in Enum.GetValues(typeof(SwordTypes)))
+            //foreach (var e in Enum.GetValues(typeof(SwordTypes)))
+            //{
+            //    swordGraphicsCombobox.Items.Add(((SwordTypes)e).GetDescription());
+            //}
+
+            foreach (string f in Directory.GetFiles("sword_gfx\\"))
             {
-                swordGraphicsCombobox.Items.Add(((SwordTypes)e).GetDescription());
+                files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
+                swordGraphicsCombobox.Items.Add(item);
             }
         }
 
         void LoadShieldDropdown()
         {
             shieldSpriteCombobox.Items.Clear();
-            foreach(var e in Enum.GetValues(typeof(ShieldTypes)))
+            //foreach(var e in Enum.GetValues(typeof(ShieldTypes)))
+            //{
+            //    shieldSpriteCombobox.Items.Add(((ShieldTypes)e).GetDescription());
+            //}
+
+            foreach (string f in Directory.GetFiles("shield_gfx\\"))
             {
-                shieldSpriteCombobox.Items.Add(((ShieldTypes)e).GetDescription());
+                files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
+                shieldSpriteCombobox.Items.Add(item);
             }
         }
 
@@ -292,17 +304,20 @@ namespace Enemizer
 
         private void UpdateGraphicsTabUIFromConfig()
         {
-            if((int)config.OptionFlags.SwordGraphics > swordGraphicsCombobox.Items.Count)
+            
+            var swords = swordGraphicsCombobox.Items.Cast<files_names>();
+            if(false == swords.Any(x => x.file == config.OptionFlags.SwordGraphics))
             {
-                config.OptionFlags.SwordGraphics = SwordTypes.Normal;
+                config.OptionFlags.SwordGraphics = "sword_gfx\\normal.gfx";
             }
-            swordGraphicsCombobox.SelectedIndex = (int)config.OptionFlags.SwordGraphics;
+            swordGraphicsCombobox.SelectedIndex = swordGraphicsCombobox.Items.IndexOf(swords.FirstOrDefault(x => x.file == config.OptionFlags.SwordGraphics));
 
-            if((int)config.OptionFlags.ShieldGraphics >= shieldSpriteCombobox.Items.Count)
+            var shields = shieldSpriteCombobox.Items.Cast<files_names>();
+            if (false == shields.Any(x => x.file == config.OptionFlags.ShieldGraphics))
             {
-                config.OptionFlags.ShieldGraphics = ShieldTypes.Normal;
+                config.OptionFlags.ShieldGraphics = "shield_gfx\\normal.gfx";
             }
-            shieldSpriteCombobox.SelectedIndex = (int)config.OptionFlags.ShieldGraphics;
+            shieldSpriteCombobox.SelectedIndex = shieldSpriteCombobox.Items.IndexOf(shields.FirstOrDefault(x => x.file == config.OptionFlags.ShieldGraphics));
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -410,6 +425,14 @@ namespace Enemizer
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
                 Randomization randomize = new Randomization();
                 RomData romData = new RomData(rom_data);
+                if(romData.IsEnemizerRom)
+                {
+                    if(DialogResult.No == MessageBox.Show("Enemizer rom detected: this will cause Enemizer to try to reset the rom and rerun the same settings that are embedded in the rom. This feature exists for debugging purposes only. If you think this is a mistake, please double check the input file you selected. Do you wish to continue?", "Enemizer rom detected", MessageBoxButtons.YesNo))
+                    {
+                        // user picked no
+                        return;
+                    }
+                }
                 RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
                 using (var fbd = new FolderBrowserDialog())
@@ -732,12 +755,12 @@ namespace Enemizer
 
         private void swordGraphicsCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.SwordGraphics = (SwordTypes)swordGraphicsCombobox.SelectedIndex;
+            config.OptionFlags.SwordGraphics = (swordGraphicsCombobox.SelectedItem as files_names).file.ToString();
         }
 
         private void shieldSpriteCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            config.OptionFlags.ShieldGraphics = (ShieldTypes)shieldSpriteCombobox.SelectedIndex;
+            config.OptionFlags.ShieldGraphics = (shieldSpriteCombobox.SelectedItem as files_names).file.ToString();
         }
 
         private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)

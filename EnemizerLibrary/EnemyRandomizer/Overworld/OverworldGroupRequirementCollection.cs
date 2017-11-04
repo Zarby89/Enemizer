@@ -25,7 +25,8 @@ namespace EnemizerLibrary
 
             OverworldRequirements.Add(new OverworldGroupRequirement(4, null, null, null, null, OverworldAreaConstants.A00F_EntrancetoZorasDomain));
 
-            OverworldRequirements.Add(new OverworldGroupRequirement(3, null, null, null, null, OverworldAreaConstants.A014_Graveyard));
+            OverworldRequirements.Add(new OverworldGroupRequirement(3, null, null, null, 14, OverworldAreaConstants.A014_Graveyard,
+                                                                                             OverworldAreaConstants.A0A4_Graveyard_PostAga));
 
             OverworldRequirements.Add(new OverworldGroupRequirement(1, null, null, null, null, OverworldAreaConstants.A01B_HyruleCastle));
 

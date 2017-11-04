@@ -25,7 +25,12 @@ namespace EnemizerLibrary
         void LoadAreas()
         {
             //for (int i = 0; i < 0x112; i++) // after 0x111 is special stuff we don't want to touch
-            for (int i = 0; i < 0xD0; i++) // Let's stop before post-aga DW, it all seems to just mirror pre-aga and we end up screwing up DW bushes
+            for (int i = 0; i < 0x82; i++) // stop before unknown special areas
+            {
+                var owArea = new OverworldArea(romData, i, rand, spriteGroupCollection, spriteRequirementCollection);
+                OverworldAreas.Add(owArea);
+            }
+            for (int i = 0x90; i < 0xD0; i++) // post-aga LW areas
             {
                 var owArea = new OverworldArea(romData, i, rand, spriteGroupCollection, spriteRequirementCollection);
                 OverworldAreas.Add(owArea);
@@ -61,14 +66,15 @@ namespace EnemizerLibrary
                 a.GraphicsBlockId = (byte)possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].GroupId;
             }
 
-            //// force any rooms we need to
-            //foreach (var sg in spriteGroups.SpriteGroups.Where(x => x.ForceRoomsToGroup != null && x.ForceRoomsToGroup.Count > 0))
-            //{
-            //    foreach (var forcedR in OverworldAreas.Where(x => sg.ForceRoomsToGroup.Contains(x.AreaId)))
-            //    {
-            //        forcedR.GraphicsBlockId = (byte)sg.GroupId;
-            //    }
-            //}
+            OverworldGroupRequirementCollection owReqs = new OverworldGroupRequirementCollection();
+            // force any areas we need to
+            foreach (var sg in owReqs.OverworldRequirements)
+            {
+                foreach (var forcedR in OverworldAreas.Where(x => sg.Areas.Contains(x.AreaId)))
+                {
+                    forcedR.GraphicsBlockId = (byte)sg.GroupId;
+                }
+            }
         }
 
     }

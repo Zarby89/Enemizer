@@ -63,8 +63,8 @@ namespace EnemizerLibrary
         public bool AndyMode { get; set; } = false;
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
-        public ShieldTypes ShieldGraphics { get; set; } = ShieldTypes.Normal;
-        public SwordTypes SwordGraphics { get; set; } = SwordTypes.Normal;
+        public string ShieldGraphics { get; set; } = "Normal";
+        public string SwordGraphics { get; set; } = "Normal";
 
         public OptionFlags()
         {
@@ -174,10 +174,12 @@ namespace EnemizerLibrary
             this.AndyMode = Convert.ToBoolean(optionBytes[i++]);
             this.HeartBeepSpeed = (EnemizerLibrary.HeartBeepSpeed)optionBytes[i++];
             this.AlternateGfx = Convert.ToBoolean(optionBytes[i++]);
-            this.ShieldGraphics = (EnemizerLibrary.ShieldTypes)optionBytes[i++];
+            //this.ShieldGraphics = optionBytes[i++];
+            i++;
             this.ShuffleEnemyDamageGroups = Convert.ToBoolean(optionBytes[i++]);
             this.EnemyDamageChaosMode = Convert.ToBoolean(optionBytes[i++]);
-            this.SwordGraphics = (EnemizerLibrary.SwordTypes)optionBytes[i++];
+            //this.SwordGraphics = optionBytes[i++];
+            i++;
 
         }
 
@@ -267,10 +269,10 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.AndyMode);
             ret[i++] = (byte)this.HeartBeepSpeed;
             ret[i++] = Convert.ToByte(this.AlternateGfx);
-            ret[i++] = (byte)this.ShieldGraphics;
+            ret[i++] = 0; // (byte)this.ShieldGraphics;
             ret[i++] = Convert.ToByte(this.ShuffleEnemyDamageGroups);
             ret[i++] = Convert.ToByte(this.EnemyDamageChaosMode);
-            ret[i++] = (byte)this.SwordGraphics;
+            ret[i++] = 0; // (byte)this.SwordGraphics;
 
             return ret;
         }

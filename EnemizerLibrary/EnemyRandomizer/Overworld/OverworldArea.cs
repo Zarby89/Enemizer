@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace EnemizerLibrary
@@ -41,6 +42,47 @@ namespace EnemizerLibrary
             get
             {
                 return spriteGroupCollection.SpriteGroups.First(x => x.GroupId == this.GraphicsBlockId);
+            }
+        }
+
+        public bool AllSpritesValid
+        {
+            get
+            {
+                var ret = true;
+                foreach (var s in this.Sprites)
+                {
+                    var sr = spriteRequirementCollection.SpriteRequirements.Where(x => x.SpriteId == s.SpriteId).FirstOrDefault();
+                    if(sr == null)
+                    {
+                        //Debugger.Break();
+                        //return false;
+                        continue;
+                    }
+
+                    if(!(sr.SubGroup0.Count == 0 || sr.SubGroup0.Contains((byte)this.SpriteGroup.SubGroup0)))
+                    {
+                        //Debugger.Break();
+                        return false;
+                    }
+                    if (!(sr.SubGroup1.Count == 0 || sr.SubGroup1.Contains((byte)this.SpriteGroup.SubGroup1)))
+                    {
+                        //Debugger.Break();
+                        return false;
+                    }
+                    if (!(sr.SubGroup2.Count == 0 || sr.SubGroup2.Contains((byte)this.SpriteGroup.SubGroup2)))
+                    {
+                        //Debugger.Break();
+                        return false;
+                    }
+                    if (!(sr.SubGroup3.Count == 0 || sr.SubGroup3.Contains((byte)this.SpriteGroup.SubGroup3)))
+                    {
+                        //Debugger.Break();
+                        return false;
+                    }
+                }
+
+                return ret;
             }
         }
 

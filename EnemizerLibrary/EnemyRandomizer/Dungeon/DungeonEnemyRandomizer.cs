@@ -24,7 +24,7 @@ namespace EnemizerLibrary
             this.spriteGroupCollection = spriteGroupCollection;
             this.spriteRequirementCollection = spriteRequirementCollection;
 
-            this.roomCollection = new RoomCollection(romData, rand, spriteRequirementCollection);
+            this.roomCollection = new RoomCollection(romData, rand, spriteGroupCollection, spriteRequirementCollection);
         }
 
         public void RandomizeDungeonEnemies(OptionFlags optionFlags)

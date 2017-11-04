@@ -23,7 +23,7 @@ namespace EnemizerTests
             RomData romData = Utilities.LoadRom("..\\..\\..\\20170104 Testing\\Enemizer 6.0 - ER_er-no-glitches-0.4.7_normal-open-ganon_297664836.sfc");
             Random rand = new Random(0);
 
-            RoomCollection rc = new RoomCollection(romData, rand, new SpriteRequirementCollection());
+            RoomCollection rc = new RoomCollection(romData, rand, new SpriteGroupCollection(romData, rand, new SpriteRequirementCollection()), new SpriteRequirementCollection());
             rc.LoadRooms();
             foreach(var r in rc.Rooms)
             {

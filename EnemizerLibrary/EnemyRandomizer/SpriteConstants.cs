@@ -161,7 +161,7 @@ namespace EnemizerLibrary
             { 0x79, "Bee" },
             { 0x7A, "Agahnim" },
             { 0x7B, "Agahnim Energy Ball" },
-            { 0x7C, "Hyu (DW Ghosts)" },
+            { 0x7C, "Floating Stalfos Head Sprite" },
             { 0x7D, "Big Spike Trap" },
             { 0x7E, "Guruguru Bar (Clockwise)" },
             { 0x7F, "Guruguru Bar (Counter Clockwise)" },

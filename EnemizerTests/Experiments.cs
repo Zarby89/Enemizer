@@ -22,7 +22,7 @@ namespace EnemizerTests
         {
             var romData = Utilities.LoadRom("rando.sfc");
 
-            RoomCollection rc = new RoomCollection(romData, new Random(), new SpriteRequirementCollection());
+            RoomCollection rc = new RoomCollection(romData, new Random(), new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());
             rc.LoadRooms();
 
             // invert the masks
@@ -108,7 +108,7 @@ namespace EnemizerTests
             SpriteGroupCollection sgc = new SpriteGroupCollection(romData, new Random(), spriteRequirements);
             sgc.LoadSpriteGroups();
 
-            RoomCollection rc = new RoomCollection(romData, new Random(), spriteRequirements);
+            RoomCollection rc = new RoomCollection(romData, new Random(), sgc, spriteRequirements);
             rc.LoadRooms();
 
             OverworldAreaCollection areas = new OverworldAreaCollection(romData, new Random(), new SpriteGroupCollection(romData, new Random(), new SpriteRequirementCollection()), new SpriteRequirementCollection());

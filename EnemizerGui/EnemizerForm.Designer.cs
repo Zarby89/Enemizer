@@ -93,16 +93,16 @@
             this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
             this.bootlegMagicCheckbox = new System.Windows.Forms.CheckBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblSeedNumber = new System.Windows.Forms.Label();
-            this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.swordGraphicsCombobox = new System.Windows.Forms.ComboBox();
+            this.lblSwordGfx = new System.Windows.Forms.Label();
             this.completeModificationCombobox = new System.Windows.Forms.ComboBox();
             this.lblCompleteModificationGfx = new System.Windows.Forms.Label();
             this.shieldSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.lblShieldGfx = new System.Windows.Forms.Label();
-            this.lblSwordGfx = new System.Windows.Forms.Label();
-            this.swordGraphicsCombobox = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblSeedNumber = new System.Windows.Forms.Label();
+            this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -866,23 +866,6 @@
             this.bootlegMagicCheckbox.UseVisualStyleBackColor = true;
             this.bootlegMagicCheckbox.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
-            // lblSeedNumber
-            // 
-            this.lblSeedNumber.AutoSize = true;
-            this.lblSeedNumber.Location = new System.Drawing.Point(484, 240);
-            this.lblSeedNumber.Name = "lblSeedNumber";
-            this.lblSeedNumber.Size = new System.Drawing.Size(72, 13);
-            this.lblSeedNumber.TabIndex = 23;
-            this.lblSeedNumber.Text = "Seed Number";
-            // 
-            // seedNumberTextbox
-            // 
-            this.seedNumberTextbox.Location = new System.Drawing.Point(487, 254);
-            this.seedNumberTextbox.MaxLength = 9;
-            this.seedNumberTextbox.Name = "seedNumberTextbox";
-            this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
-            this.seedNumberTextbox.TabIndex = 24;
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.swordGraphicsCombobox);
@@ -897,6 +880,25 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Graphics";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // swordGraphicsCombobox
+            // 
+            this.swordGraphicsCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.swordGraphicsCombobox.FormattingEnabled = true;
+            this.swordGraphicsCombobox.Location = new System.Drawing.Point(6, 22);
+            this.swordGraphicsCombobox.Name = "swordGraphicsCombobox";
+            this.swordGraphicsCombobox.Size = new System.Drawing.Size(180, 21);
+            this.swordGraphicsCombobox.TabIndex = 23;
+            this.swordGraphicsCombobox.SelectedIndexChanged += new System.EventHandler(this.swordGraphicsCombobox_SelectedIndexChanged);
+            // 
+            // lblSwordGfx
+            // 
+            this.lblSwordGfx.AutoSize = true;
+            this.lblSwordGfx.Location = new System.Drawing.Point(3, 6);
+            this.lblSwordGfx.Name = "lblSwordGfx";
+            this.lblSwordGfx.Size = new System.Drawing.Size(59, 13);
+            this.lblSwordGfx.TabIndex = 22;
+            this.lblSwordGfx.Text = "Sword Gfx:";
             // 
             // completeModificationCombobox
             // 
@@ -932,6 +934,7 @@
             this.shieldSpriteCombobox.Name = "shieldSpriteCombobox";
             this.shieldSpriteCombobox.Size = new System.Drawing.Size(180, 21);
             this.shieldSpriteCombobox.TabIndex = 19;
+            this.shieldSpriteCombobox.SelectedIndexChanged += new System.EventHandler(this.shieldSpriteCombobox_SelectedIndexChanged);
             // 
             // lblShieldGfx
             // 
@@ -942,24 +945,22 @@
             this.lblShieldGfx.TabIndex = 18;
             this.lblShieldGfx.Text = "Shield Gfx :";
             // 
-            // lblSwordGfx
+            // lblSeedNumber
             // 
-            this.lblSwordGfx.AutoSize = true;
-            this.lblSwordGfx.Location = new System.Drawing.Point(3, 6);
-            this.lblSwordGfx.Name = "lblSwordGfx";
-            this.lblSwordGfx.Size = new System.Drawing.Size(59, 13);
-            this.lblSwordGfx.TabIndex = 22;
-            this.lblSwordGfx.Text = "Sword Gfx:";
+            this.lblSeedNumber.AutoSize = true;
+            this.lblSeedNumber.Location = new System.Drawing.Point(484, 240);
+            this.lblSeedNumber.Name = "lblSeedNumber";
+            this.lblSeedNumber.Size = new System.Drawing.Size(72, 13);
+            this.lblSeedNumber.TabIndex = 23;
+            this.lblSeedNumber.Text = "Seed Number";
             // 
-            // swordGraphicsCombobox
+            // seedNumberTextbox
             // 
-            this.swordGraphicsCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.swordGraphicsCombobox.FormattingEnabled = true;
-            this.swordGraphicsCombobox.Location = new System.Drawing.Point(6, 22);
-            this.swordGraphicsCombobox.Name = "swordGraphicsCombobox";
-            this.swordGraphicsCombobox.Size = new System.Drawing.Size(180, 21);
-            this.swordGraphicsCombobox.TabIndex = 23;
-            this.swordGraphicsCombobox.SelectedIndexChanged += new System.EventHandler(this.swordGraphicsCombobox_SelectedIndexChanged);
+            this.seedNumberTextbox.Location = new System.Drawing.Point(487, 254);
+            this.seedNumberTextbox.MaxLength = 9;
+            this.seedNumberTextbox.Name = "seedNumberTextbox";
+            this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
+            this.seedNumberTextbox.TabIndex = 24;
             // 
             // EnemizerForm
             // 

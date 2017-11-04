@@ -45,7 +45,7 @@ namespace EnemizerLibrary
         {
             areas.RandomizeAreaSpriteGroups(spriteGroupCollection);
 
-            foreach (var area in areas.OverworldAreas)
+            foreach (var area in areas.OverworldAreas.Where(x => OverworldAreaConstants.DoNotRandomizeAreas.Contains(x.AreaId) == false))
             {
                 // pick random sprite group
                 //area.GraphicsBlockId = ??;
