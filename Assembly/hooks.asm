@@ -2,7 +2,7 @@ incsrc NMI_hook.asm
 incsrc terrorpin_hooks.asm
 incsrc bushes_hooks.asm
 incsrc bossdrop_hooks.asm
-incsrc bolder_hooks.asm
+;incsrc bolder_hooks.asm ; remove this for now because it needs to be rewritten
 incsrc blinddoor_hooks.asm
 incsrc bosses_hooks.asm
 incsrc moldorm_hooks.asm
