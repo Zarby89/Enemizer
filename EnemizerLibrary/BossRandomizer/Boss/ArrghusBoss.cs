@@ -15,6 +15,8 @@ namespace EnemizerLibrary
             BossSpriteId = SpriteConstants.ArrghusSprite;
             BossNode = "swamp-arrghus";
 
+            Requirements = "Hookshot";
+
             BossSpriteArray = new byte[]
             {
                 0x07, 0x07, 0x8C, // arrghus

@@ -445,7 +445,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TutorialSoldierSprite).SetNPC().SetNeverUse().SetDoNotRandomize());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LightningLockSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup2(12).AddSubgroup3(29)); // TODO: check sub 2 is needed
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LightningLockSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(29));
 
             // probably needs 19 and 41 for sub 2 for falling animation
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueSwordSoldier_DetectPlayerSprite).SetKillable().AddSubgroup1(13, 73));
@@ -527,7 +527,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LeeverSprite).SetKillable().AddSubgroup0(47));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite).SetNeverUse().SetDoNotRandomize());
+            // this is for both type of big fairy. sprite picks based on room
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ActivatoForThePonds_WhereYouThrowInItemsSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(54));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.UnclePriestSprite).SetNPC().SetDoNotRandomize().AddSubgroup0(71, 81));
 

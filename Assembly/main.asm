@@ -59,6 +59,7 @@ incsrc load_file.asm
 incsrc soundfx_changes.asm
 incsrc msu1.asm
 incsrc sword_and_shield.asm
+incsrc overworld_sprites.asm
 
 ; data
 incsrc room_object_table.asm

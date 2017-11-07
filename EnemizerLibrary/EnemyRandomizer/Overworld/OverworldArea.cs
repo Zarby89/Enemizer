@@ -187,6 +187,26 @@ namespace EnemizerLibrary
                 spritesToUpdate/*.Where(x => x.SpriteId != SpriteConstants.RavenSprite)*/.ToList()
                     .ForEach(x => x.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)]);
 
+                if (spritesToUpdate.Count(x => x.SpriteId == SpriteConstants.FloppingFishSprite) > 1)
+                {
+                    possibleSprites = possibleSprites.Where(x => x != SpriteConstants.FloppingFishSprite).ToArray();
+
+                    if (possibleSprites.Length > 0)
+                    {
+                        bool first = true;
+                        foreach(var s in spritesToUpdate.Where(x => x.SpriteId == SpriteConstants.FloppingFishSprite).ToList())
+                        {
+                            if(first)
+                            {
+                                first = false;
+                                continue;
+                            }
+
+                            s.SpriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                        }
+                    }
+                }
+
                 // Kodongo are not allowed in overworld for now, until ASM can be fixed, then this won't be needed at all.
                 /*
                 // Kodongo in Raven place will crash the game

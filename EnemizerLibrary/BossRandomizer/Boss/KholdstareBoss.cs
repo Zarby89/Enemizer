@@ -15,6 +15,8 @@ namespace EnemizerLibrary
             BossSpriteId = SpriteConstants.KholdstareSprite;
             BossNode = "ice-kholdstare";
 
+            Requirements = "Fire Rod;Bombos,L1 Sword";
+
             BossSpriteArray = new byte[]
             {
                 0x05, 0x07, 0xA3, // shell

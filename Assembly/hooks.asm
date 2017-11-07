@@ -17,3 +17,4 @@ incsrc load_file_hooks.asm
 incsrc damage_hooks.asm
 incsrc msu1_hooks.asm
 incsrc sword_and_shield_hooks.asm
+incsrc overworld_sprite_hooks.asm
