@@ -29,7 +29,7 @@ namespace EnemizerTests
                     output.WriteLine($"duplicates for area: {a.AreaId}");
                 }
 
-                Assert.Equal(false, duplicate);
+                Assert.False(duplicate);
             }
 
         }

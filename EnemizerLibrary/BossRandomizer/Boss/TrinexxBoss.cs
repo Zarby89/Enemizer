@@ -15,6 +15,8 @@ namespace EnemizerLibrary
             BossSpriteId = SpriteConstants.TrinexxSprite;
             BossNode = "turtle-trinexx";
 
+            Requirements = "Fire Rod,Ice Rod";
+
             BossSpriteArray = new byte[]
             {
                 0x05, 0x07, 0xCB, // trinexx body?

@@ -493,15 +493,36 @@ namespace EnemizerLibrary
             {
                 this.ROM_DATA[0x80000 + i] = skin_data[i];
             }
+
+            // Check to see if blue and red mails have different hand colors from green mail
+            // if they do, assume they are custom glove colors and overwrite glove change
+            // if they don't, skip this step so we don't overwrite vanilla glove change
+            if (skin_data[0x7036] == skin_data[0x7018]
+                && skin_data[0x7037] == skin_data[0x7019]
+                && skin_data[0x7054] == skin_data[0x7018]
+                && skin_data[0x7055] == skin_data[0x7019])
+            {
+                // Do nothing
+            }
+            else
+            {
+                // gloves color
+                this.ROM_DATA[0xDEDF5] = skin_data[0x7036];
+                this.ROM_DATA[0xDEDF6] = skin_data[0x7037];
+                this.ROM_DATA[0xDEDF7] = skin_data[0x7054];
+                this.ROM_DATA[0xDEDF8] = skin_data[0x7055];
+
+                // reset red and blue mail gloves to green mail's color
+                skin_data[0x7036] = skin_data[0x7018];
+                skin_data[0x7037] = skin_data[0x7019];
+                skin_data[0x7054] = skin_data[0x7018];
+                skin_data[0x7055] = skin_data[0x7019];
+            }
+
             for (int i = 0; i < 0x78; i++)
             {
                 this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
             }
-            // gloves color
-            this.ROM_DATA[0xDEDF5] = skin_data[0x7036];
-            this.ROM_DATA[0xDEDF6] = skin_data[0x7037];
-            this.ROM_DATA[0xDEDF7] = skin_data[0x7054];
-            this.ROM_DATA[0xDEDF8] = skin_data[0x7055];
 
         }
 

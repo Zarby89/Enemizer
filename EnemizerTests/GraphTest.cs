@@ -47,7 +47,7 @@ namespace EnemizerTests
 
             var result = graph.FindPath(graphData.AllNodes["cave-links-house"], graphData.AllNodes["triforce-room"], true);
             output.WriteLine(result.ToString());
-            Assert.Equal(true, result.Success);
+            Assert.True(result.Success);
         }
     }
 }

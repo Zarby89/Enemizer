@@ -63,8 +63,8 @@ namespace EnemizerLibrary
         public bool AndyMode { get; set; } = false;
         public HeartBeepSpeed HeartBeepSpeed { get; set; } = HeartBeepSpeed.Half;
         public bool AlternateGfx { get; set; }
-        public string ShieldGraphics { get; set; } = "Normal";
-        public string SwordGraphics { get; set; } = "Normal";
+        public string ShieldGraphics { get; set; } = "shield_gfx\\normal.gfx";
+        public string SwordGraphics { get; set; } = "sword_gfx\\normal.gfx";
 
         public OptionFlags()
         {

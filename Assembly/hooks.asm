@@ -2,7 +2,7 @@ incsrc NMI_hook.asm
 incsrc terrorpin_hooks.asm
 incsrc bushes_hooks.asm
 incsrc bossdrop_hooks.asm
-incsrc bolder_hooks.asm
+;incsrc bolder_hooks.asm ; remove this for now because it needs to be rewritten
 incsrc blinddoor_hooks.asm
 incsrc bosses_hooks.asm
 incsrc moldorm_hooks.asm
@@ -17,3 +17,4 @@ incsrc load_file_hooks.asm
 incsrc damage_hooks.asm
 incsrc msu1_hooks.asm
 incsrc sword_and_shield_hooks.asm
+incsrc overworld_sprite_hooks.asm

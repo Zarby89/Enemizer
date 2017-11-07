@@ -37,7 +37,7 @@ namespace EnemizerTests
                 {
                     output.WriteLine($"duplicates for room: {r.RoomId}");
                 }
-                Assert.Equal(false, duplicate);
+                Assert.False(duplicate);
             }
         }
 
@@ -96,7 +96,7 @@ namespace EnemizerTests
                 {
                     output.WriteLine($"Group 82 Only Room: {r.RoomId} has non-82 also");
                 }
-                Assert.Equal(false, duplicate);
+                Assert.False(duplicate);
             }
         }
 
@@ -113,7 +113,7 @@ namespace EnemizerTests
                 {
                     output.WriteLine($"Group 83 Only Room: {r.RoomId} has non-83 also");
                 }
-                Assert.Equal(false, duplicate);
+                Assert.False(duplicate);
             }
         }
 
