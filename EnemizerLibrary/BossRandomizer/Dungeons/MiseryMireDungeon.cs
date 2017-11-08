@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.MiseryMireCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 144;
+            LogicalBossRoomId = "mire-vitreous";
             DungeonRoomSpritePointerAddress = 0x04D74E;
             BossDropItemAddress = 0x180158;
 

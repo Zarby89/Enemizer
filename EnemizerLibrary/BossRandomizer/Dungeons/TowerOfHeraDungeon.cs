@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.TowerOfHeraCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 7;
+            LogicalBossRoomId = "hera-moldorm";
             DungeonRoomSpritePointerAddress = 0x04D63C;
             BossDropItemAddress = 0x180152;
 

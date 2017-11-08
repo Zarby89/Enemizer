@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.SwampPalaceCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 6;
+            LogicalBossRoomId = "swamp-arrghus";
             DungeonRoomSpritePointerAddress = 0x04D63A;
             BossDropItemAddress = 0x180154;
 

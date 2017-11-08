@@ -19,9 +19,9 @@ namespace EnemizerLibrary
             // do nothing, we will fake a pool
         }
 
-        public override Boss GetRandomBoss(List<BossType> excludedBossTypes, Graph graph)
+        public override Boss GetRandomBoss(Dungeon dungeon, Graph graph)
         {
-            return Boss.GetRandomBoss(rand, excludedBossTypes, graph);
+            return Boss.GetRandomBoss(rand, dungeon, dungeon.DisallowedBosses, graph);
         }
 
         public override void ReaddBoss(Boss boss)

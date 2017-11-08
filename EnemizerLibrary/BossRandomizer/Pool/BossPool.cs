@@ -43,16 +43,16 @@ namespace EnemizerLibrary
             pool.Add(new MoldormBoss()); // GT3
         }
 
-        public virtual Boss GetRandomBoss(List<BossType> excludedBossTypes, Graph graph)
+        public virtual Boss GetRandomBoss(Dungeon dungeon, Graph graph)
         {
-            var possibleBosses = this.pool.Where(x => excludedBossTypes.Contains(x.BossType) == false).ToList();
+            var possibleBosses = this.pool.Where(x => dungeon.DisallowedBosses.Contains(x.BossType) == false).ToList();
             if (possibleBosses.Any() == false)
             {
                 //throw new Exception($"Couldn't find any possible bosses not disallowed");
                 return null;
             }
 
-            possibleBosses = possibleBosses.Where(x => x.CanBeUsed(graph)).ToList();
+            possibleBosses = possibleBosses.Where(x => x.CanBeUsed(dungeon, graph)).ToList();
             if (possibleBosses.Any() == false)
             {
                 //throw new Exception($"Couldn't find any possible bosses meeting item checks");

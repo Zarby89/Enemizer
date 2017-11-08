@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 77;
+            LogicalBossRoomId = "gt-moldorm";
             DungeonRoomSpritePointerAddress = 0x04D6C8;
             BossDropItemAddress = null;
 

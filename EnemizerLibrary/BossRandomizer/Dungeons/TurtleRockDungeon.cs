@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.TurtleRockCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 164;
+            LogicalBossRoomId = "turtle-trinexx";
             DungeonRoomSpritePointerAddress = 0x04D776;
             BossDropItemAddress = 0x180159;
 

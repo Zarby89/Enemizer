@@ -37,12 +37,12 @@ namespace EnemizerLibrary
 
         public Graph(GraphData graphData)
         {
-            foreach(var node in graphData.AllNodes)
+            foreach (var node in graphData.AllNodes)
             {
                 this.Nodes.Add(node.Value);
             }
 
-            foreach(var edge in graphData.AllEdges)
+            foreach (var edge in graphData.AllEdges)
             {
                 this.Edges.Add(edge);
             }
@@ -50,6 +50,18 @@ namespace EnemizerLibrary
 
         public List<Node> Nodes { get; set; } = new List<Node>();
         public List<Edge> Edges { get; set; } = new List<Edge>();
+
+        public void ResetState()
+        {
+            foreach(var n in this.Nodes)
+            {
+                n.Reset();
+            }
+            foreach(var e in this.Edges)
+            {
+                e.Reset();
+            }
+        }
 
         public void UpdateDungeonBoss(Dungeon dungeon)
         {
@@ -151,6 +163,8 @@ namespace EnemizerLibrary
 
         public GraphResult FindPath(Node sourceNode, Node destinationNode, bool exhaustiveSearch = false, List<Item> startingItems = null, List<Requirement> requirements = null)
         {
+            this.ResetState(); // reset our nodes and edges (really just edges unless something changes on nodes)
+
             var orderedVisit = new LinkedList<Node>();
 
             var obtainedItems = new List<Item>();
@@ -206,7 +220,7 @@ namespace EnemizerLibrary
                 {
                     foundDestination = true;
 
-                    if (!exhaustiveSearch || (exhaustiveSearch && retryQueue.Count == 0))
+                    if (!exhaustiveSearch || (exhaustiveSearch && nextToVisit.Count == 0 && retryQueue.Count == 0))
                     {
                         // found it
                         var result = new GraphResult();
@@ -220,6 +234,7 @@ namespace EnemizerLibrary
                 }
 
                 var nextEdges = Edges.Where(x => x.SourceNode == next)
+                    .Where(x => x.SourceNode != destinationNode) // don't go past the node we are looking for
                     .Where(x => !exhaustiveSearch || (exhaustiveSearch && x.SourceNode != destinationNode))
                     .Where(x => x.MeetsRequirements(obtainedItems))
                     .Where(x => !visitedNodes.Contains(x.DestinationNode));
@@ -229,6 +244,7 @@ namespace EnemizerLibrary
                 }
 
                 var retryEdges = Edges.Where(x => x.SourceNode == next)
+                    .Where(x => x.SourceNode != destinationNode)
                     .Where(x => !exhaustiveSearch || (exhaustiveSearch && x.SourceNode != destinationNode))
                     .Where(x => !x.MeetsRequirements(obtainedItems));
                 foreach(var e in retryEdges)
