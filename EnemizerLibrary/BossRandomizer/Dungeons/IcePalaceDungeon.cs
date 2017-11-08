@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.IcePalaceCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 222;
+            LogicalBossRoomId = "ice-kholdstare";
             DungeonRoomSpritePointerAddress = 0x04D7EA;
             BossDropItemAddress = 0x180157;
 

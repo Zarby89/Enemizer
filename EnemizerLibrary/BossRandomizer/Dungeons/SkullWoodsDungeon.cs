@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = CrystalConstants.SkullWoodsCrystalAddress;
             SelectedBoss = null;
             BossRoomId = 41;
+            LogicalBossRoomId = "skull-mothula";
             DungeonRoomSpritePointerAddress = 0x04D680;
             BossDropItemAddress = 0x180155;
 

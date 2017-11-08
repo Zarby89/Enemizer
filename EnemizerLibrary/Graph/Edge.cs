@@ -15,6 +15,11 @@ namespace EnemizerLibrary
         bool Unlocked { get; set; } = false;
         public Edge LinkedEdge { get; set; }
 
+        public virtual void Reset()
+        {
+            this.Unlocked = false;
+        }
+
         public static List<Edge> MakeEdges(Node sourceNode, Node destinationNode, string requirements, bool isTwoWay)
         {
             var ret = new List<Edge>();

@@ -16,6 +16,7 @@ namespace EnemizerLibrary
             DungeonCrystalAddress = null;
             SelectedBoss = null;
             BossRoomId = 28;
+            LogicalBossRoomId = "gt-armos";
             DungeonRoomSpritePointerAddress = 0x04D666;
             BossDropItemAddress = null;
 

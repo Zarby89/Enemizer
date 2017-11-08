@@ -26,7 +26,7 @@ namespace EnemizerLibrary
                     continue;
                 }
 
-                dungeon.SelectedBoss = bossPool.GetRandomBoss(dungeon.DisallowedBosses, graph);
+                dungeon.SelectedBoss = bossPool.GetRandomBoss(dungeon, graph);
                 graph.UpdateDungeonBoss(dungeon);
                 /*
                 var result = graph.FindPath("cave-links-house", "triforce-room");

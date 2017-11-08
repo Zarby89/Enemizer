@@ -26,9 +26,9 @@ namespace EnemizerLibrary
             BossGraphics = 0;
         }
 
-        public bool CanBeUsed(Graph graph)
+        public bool CanBeUsed(Dungeon dungeon, Graph graph)
         {
-            var res = graph.FindPath("cave-links-house", BossNode, true, null, Requirements);
+            var res = graph.FindPath("cave-links-house", dungeon.LogicalBossRoomId, true, null, Requirements);
             return res.Success;
         }
 
@@ -61,7 +61,7 @@ namespace EnemizerLibrary
             }
         }
 
-        public static Boss GetRandomBoss(Random rand, List<BossType> excludedBossTypes=null, Graph graph=null)
+        public static Boss GetRandomBoss(Random rand, Dungeon dungeon, List<BossType> excludedBossTypes=null, Graph graph=null)
         {
             var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
                 .Where(x => x != BossType.NoBoss)
@@ -73,7 +73,7 @@ namespace EnemizerLibrary
             while (boss == null)
             {
                 boss = GetBossFromType(bosses[rand.Next(bosses.Count)]);
-                if(graph != null && !boss.CanBeUsed(graph))
+                if(graph != null && !boss.CanBeUsed(dungeon, graph))
                 {
                     boss = null;
                 }

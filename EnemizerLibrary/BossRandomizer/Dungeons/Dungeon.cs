@@ -15,6 +15,7 @@ namespace EnemizerLibrary
         public BossType BossType { get; set; } // TODO: need?
         public Boss SelectedBoss { get; set; }
         public int BossRoomId { get; set; }
+        public string LogicalBossRoomId { get; set; }
         public int DungeonRoomSpritePointerAddress { get; set; }
         public int? BossDropItemAddress { get; set; }
 

@@ -15,5 +15,10 @@ namespace EnemizerLibrary
         {
             return $"({LogicalId}-{Name})";
         }
+
+        public virtual void Reset()
+        {
+            
+        }
     }
 }
