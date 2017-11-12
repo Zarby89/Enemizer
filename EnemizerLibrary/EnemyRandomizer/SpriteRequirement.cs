@@ -332,7 +332,8 @@ namespace EnemizerLibrary
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Octorok_MaybeSprite));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BuzzblobSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BuzzblobSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SnapdragonSprite).SetKillable().AddSubgroup0(22).AddSubgroup2(23));
 
@@ -350,13 +351,14 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GargoylesDomainGateSprite).SetDoNotRandomize().SetIsObject().SetNeverUse());
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairySprite).AddSubgroup3(82, 83)
-                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom)
-                .AddExcludedRooms(DontUseFlyingSprites)); // can make it almost impossible to advance without powder
-
+                .AddExcludedRooms(RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom) // can make it almost impossible to advance without powder
+                .AddExcludedRooms(DontUseFlyingSprites)); 
+            
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SahasrahlaAginahSprite).SetNPC().AddSubgroup2(76));
 
             // if you remove their bush before killing them they won't drop a key, so exclude them from key mob pool
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushHoarderSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BushHoarderSprite).SetCannotHaveKey().SetKillable().AddSubgroup3(17)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MiniMoldormSprite).SetKillable().AddSubgroup1(30));
 
@@ -394,7 +396,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HardhatBeetleSprite).AddSubgroup1(30));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.DeadrockSprite).AddSubgroup3(16)
-                .AddExcludedRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
+                .AddExcludedRooms(RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StorytellersSprite).SetNPC().SetDoNotRandomize()); // TODO: add
 
@@ -441,7 +444,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Signs_ChickenLadyAlsoShowedUp_ScaredLadiesOutsideHousesSprite).SetNPC().SetDoNotRandomize().AddGroup(6));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RockHoarderSprite).AddSubgroup3(17));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RockHoarderSprite).AddSubgroup3(17)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TutorialSoldierSprite).SetNPC().SetNeverUse().SetDoNotRandomize());
 
@@ -460,7 +464,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedBombSoldiersSprite).SetKillable().AddSubgroup0(70).AddSubgroup1(73));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenSoldierRecruits_HMKnightSprite).SetKillable().AddSubgroup1(73).AddSubgroup2(19));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GeldmanSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(18));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GeldmanSprite).SetCannotHaveKey().SetKillable().AddSubgroup2(18)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RabbitSprite).AddSubgroup3(17));
 
@@ -469,7 +474,8 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.CannonBallsSprite).SetDoNotRandomize().SetNeverUse().AddSubgroup2(46));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArmosSprite).SetKillable().AddSubgroup3(16));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArmosSprite).SetKillable().AddSubgroup3(16)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GiantZoraSprite).SetNPC().SetDoNotRandomize().AddSubgroup3(68));
 
@@ -570,8 +576,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.AntifairyCircleSprite).SetNeverUse().AddSubgroup3(82, 83)); // lag city
 
-            // TODO: mimic rooms are hard coded (4 rooms) rest are always eyegore
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable()/*.AddSubgroup1(44)*/.AddSubgroup2(46)); // one is mimic, one is eyegore...
+            // mimics are no longer hard coded to 4 rooms. they replaced the dialogue testing sprite
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable()/*.AddSubgroup1(44)*/.AddSubgroup2(46)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave)); // one is mimic, one is eyegore...
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite)/*.AddSubgroup1(44)*/.AddSubgroup2(46));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.YellowStalfosSprite)); // TODO: add
@@ -593,7 +600,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrghusSprite).SetBoss().AddSubgroup2(57));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.ArrghusSpawnSprite).SetBoss().AddSubgroup2(57));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TerrorpinSprite).AddSubgroup2(42));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TerrorpinSprite).AddSubgroup2(42)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SlimeSprite_JumpsOutOfTheFloor).AddSubgroup1(32));
 
@@ -601,7 +609,8 @@ namespace EnemizerLibrary
             // and only work in rooms with an exit (0-255), technically in 260 (link's house) as well
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().AddSubgroup2(35));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).AddSubgroup1(32)
+                .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HelmasaurKingSprite).SetBoss().AddSubgroup2(58).AddSubgroup3(62));
 
@@ -617,7 +626,8 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.PengatorSprite).SetKillable().AddSubgroup2(38));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KyameronWaterSplashSprite).SetWaterSprite().AddSubgroup2(34)
-                    .AddDontRandomizeRooms(RoomIdConstants.R40_SwampPalace_EntranceRoom));
+                    .AddDontRandomizeRooms(RoomIdConstants.R40_SwampPalace_EntranceRoom)
+                    .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WizzrobeSprite).AddSubgroup2(37, 41)); // can't be killed with bombs so don't put them in key/shutter rooms
 
@@ -926,7 +936,8 @@ namespace EnemizerLibrary
 
         int[] DontUseFlyingSprites =
         {
-            RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom
+            RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom,
+            RoomIdConstants.R268_MimicCave
         };
     }
 }

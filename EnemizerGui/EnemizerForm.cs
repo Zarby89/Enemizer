@@ -194,6 +194,11 @@ namespace Enemizer
             randomizeLinksPaletteCheckbox.Checked = config.OptionFlags.RandomizeLinkSpritePalette;
 
             generateSpoilerCheckbox.Checked = config.OptionFlags.GenerateSpoilers;
+
+            bulkSeedsCheckbox.Checked = config.BulkSeeds;
+            numberOfBulkSeeds.Enabled = config.BulkSeeds;
+            seedNumberTextbox.Enabled = !config.BulkSeeds;
+            numberOfBulkSeeds.Value = config.NumberOfBulkSeeds;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -766,6 +771,12 @@ namespace Enemizer
         private void completeModificationCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //TODO: wire this up
+        }
+
+        private void bulkSeedsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.numberOfBulkSeeds.Enabled = bulkSeedsCheckbox.Checked;
+            this.seedNumberTextbox.Enabled = !bulkSeedsCheckbox.Checked;
         }
     }
 

@@ -124,6 +124,10 @@ namespace EnemizerLibrary
                 {
                     this.ROM_DATA.RandomizeHiddenEnemyChancePool();
                 }
+                //0x1F2E5
+                //54 9C
+                this.ROM_DATA[0x1F2E5] = 0x54;
+                this.ROM_DATA[0x1F2E5 + 1] = 0x9C;
             }
 
             //dungeons
@@ -503,6 +507,7 @@ namespace EnemizerLibrary
                 && skin_data[0x7055] == skin_data[0x7019])
             {
                 // Do nothing
+                // vanilla gloves: F652 7603
             }
             else
             {

@@ -103,6 +103,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblSeedNumber = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
+            this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
+            this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -117,6 +119,7 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).BeginInit();
             this.SuspendLayout();
             // 
             // generateRomButton
@@ -962,11 +965,46 @@
             this.seedNumberTextbox.Size = new System.Drawing.Size(121, 20);
             this.seedNumberTextbox.TabIndex = 24;
             // 
+            // bulkSeedsCheckbox
+            // 
+            this.bulkSeedsCheckbox.AutoSize = true;
+            this.bulkSeedsCheckbox.Location = new System.Drawing.Point(487, 185);
+            this.bulkSeedsCheckbox.Name = "bulkSeedsCheckbox";
+            this.bulkSeedsCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.bulkSeedsCheckbox.TabIndex = 26;
+            this.bulkSeedsCheckbox.Text = "Bulk Seeds";
+            this.bulkSeedsCheckbox.UseVisualStyleBackColor = true;
+            this.bulkSeedsCheckbox.CheckedChanged += new System.EventHandler(this.bulkSeedsCheckbox_CheckedChanged);
+            // 
+            // numberOfBulkSeeds
+            // 
+            this.numberOfBulkSeeds.Location = new System.Drawing.Point(486, 208);
+            this.numberOfBulkSeeds.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numberOfBulkSeeds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numberOfBulkSeeds.Name = "numberOfBulkSeeds";
+            this.numberOfBulkSeeds.Size = new System.Drawing.Size(120, 20);
+            this.numberOfBulkSeeds.TabIndex = 27;
+            this.numberOfBulkSeeds.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 331);
+            this.Controls.Add(this.numberOfBulkSeeds);
+            this.Controls.Add(this.bulkSeedsCheckbox);
             this.Controls.Add(this.seedNumberTextbox);
             this.Controls.Add(this.lblSeedNumber);
             this.Controls.Add(this.tabControl1);
@@ -1002,6 +1040,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1082,6 +1121,8 @@
         private System.Windows.Forms.Label lblCompleteModificationGfx;
         private System.Windows.Forms.ComboBox shieldSpriteCombobox;
         private System.Windows.Forms.Label lblShieldGfx;
+        private System.Windows.Forms.CheckBox bulkSeedsCheckbox;
+        private System.Windows.Forms.NumericUpDown numberOfBulkSeeds;
     }
 }
 
