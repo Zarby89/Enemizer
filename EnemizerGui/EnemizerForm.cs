@@ -390,33 +390,16 @@ namespace Enemizer
 
         private void generateRomButton_Click(object sender, EventArgs e)
         {
-            int seed = 0;
-            if (String.IsNullOrEmpty(seedNumberTextbox.Text))
-            {
-                seed = rand.Next(0, 999999999);
-            }
-            else
-            {
-                // TODO: add validation to the textbox so it can't be anything but a number
-                if (!int.TryParse(seedNumberTextbox.Text, out seed))
-                {
-                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.", "Enemizer");
-                    return;
-                }
-                if(seed < 0)
-                {
-                    MessageBox.Show("Please enter a positive Seed Number.", "Enemizer");
-                    return;
-                }
-            }
-
+            var oldCursor = this.Cursor;
 #if !DEBUG
-            try // make sure we don't crash in release build
+            try
             {
 #endif
+            int seed = 0;
+
             OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
-                ofd.Title = "Select a Randomizer Rom File";
+            ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
+            ofd.Title = "Select a Randomizer Rom File";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -428,17 +411,15 @@ namespace Enemizer
                 SaveConfig();
 
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
-                Randomization randomize = new Randomization();
                 RomData romData = new RomData(rom_data);
-                if(romData.IsEnemizerRom)
+                if (romData.IsEnemizerRom)
                 {
-                    if(DialogResult.No == MessageBox.Show("Enemizer rom detected: this will cause Enemizer to try to reset the rom and rerun the same settings that are embedded in the rom. This feature exists for debugging purposes only. If you think this is a mistake, please double check the input file you selected. Do you wish to continue?", "Enemizer rom detected", MessageBoxButtons.YesNo))
+                    if (DialogResult.No == MessageBox.Show("Enemizer rom detected: this will cause Enemizer to try to reset the rom and rerun the same settings that are embedded in the rom. This feature exists for debugging purposes only. If you think this is a mistake, please double check the input file you selected. Do you wish to continue?", "Enemizer rom detected", MessageBoxButtons.YesNo))
                     {
                         // user picked no
                         return;
                     }
                 }
-                RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
 
                 using (var fbd = new FolderBrowserDialog())
                 {
@@ -451,27 +432,100 @@ namespace Enemizer
                     {
                         fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     }
-                    
+
                     var result = fbd.ShowDialog();
                     if (result == DialogResult.OK)
                     {
                         config.DefaultFolder = fbd.SelectedPath;
 
-                        string fileNameNoExtension = Path.Combine(fbd.SelectedPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(ofd.FileName)} (EN{randomizedRom.EnemizerSeed})");
+                        this.Cursor = Cursors.WaitCursor;
 
-                        if (config.OptionFlags.GenerateSpoilers)
+                        if (this.bulkSeedsCheckbox.Checked)
                         {
-                            File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
-                        }
-                        string fileName = $"{fileNameNoExtension}.sfc";
-                        fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-                        randomizedRom.WriteRom(fs);
-                        fs.Close();
+                            int totalSeeds = 0;
+                            var sb = new StringBuilder();
+                            if (Int32.TryParse(this.numberOfBulkSeeds.Text, out totalSeeds))
+                            {
+                                sb.AppendLine($"{totalSeeds} seeds created:");
+                                for (int i = 0; i < totalSeeds; i++)
+                                {
+                                    seed = rand.Next(0, 999999999);
 
-                        MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                                    var fileName = GenerateSeed(seed, rom_data, linkSpriteFilename, ofd.FileName, fbd.SelectedPath);
+                                    sb.Append(fileName + (i == totalSeeds ? "" : ", "));
+                                }
+                                MessageBox.Show(sb.ToString(), "Bulk Enemizer Roms Created");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid bulk seed number");
+                            }
+                        }
+                        else
+                        {
+
+                            if (String.IsNullOrEmpty(seedNumberTextbox.Text))
+                            {
+                                seed = rand.Next(0, 999999999);
+                            }
+                            else
+                            {
+                                // TODO: add validation to the textbox so it can't be anything but a number
+                                if (!int.TryParse(seedNumberTextbox.Text, out seed))
+                                {
+                                    MessageBox.Show("Invalid Seed Number entered. Please enter an integer value.", "Enemizer");
+                                    return;
+                                }
+                                if (seed < 0)
+                                {
+                                    MessageBox.Show("Please enter a positive Seed Number.", "Enemizer");
+                                    return;
+                                }
+                            }
+
+                            var fileName = GenerateSeed(seed, rom_data, linkSpriteFilename, ofd.FileName, fbd.SelectedPath);
+
+                            MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                        }
                     }
                 }
             }
+#if !DEBUG
+            }
+            finally
+            {
+                this.Cursor = oldCursor;
+            }
+#endif
+            this.Cursor = oldCursor;
+
+        }
+
+        string GenerateSeed(int seed, byte[] rom_data, string linkSpriteFilename, string inputFilename, string outputPath)
+        {
+
+#if !DEBUG
+            try // make sure we don't crash in release build
+            {
+#endif
+
+            RomData romData = new RomData(rom_data);
+            Randomization randomize = new Randomization();
+            RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
+
+            string fileNameNoExtension = Path.Combine(outputPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(inputFilename)} (EN{randomizedRom.EnemizerSeed})");
+
+            if (config.OptionFlags.GenerateSpoilers)
+            {
+                File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
+            }
+            string fileName = $"{fileNameNoExtension}.sfc";
+            var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+            randomizedRom.WriteRom(fs);
+            fs.Close();
+
+            return fileName;
+
 #if !DEBUG
             }
             catch(Exception ex)

@@ -124,10 +124,13 @@ namespace EnemizerLibrary
                 {
                     this.ROM_DATA.RandomizeHiddenEnemyChancePool();
                 }
+                // remove mimic room barrier
                 //0x1F2E5
                 //54 9C
-                this.ROM_DATA[0x1F2E5] = 0x54;
-                this.ROM_DATA[0x1F2E5 + 1] = 0x9C;
+                this.ROM_DATA[0x1F2D5] = 0x54;
+                this.ROM_DATA[0x1F2D5 + 1] = 0x9C;
+                this.ROM_DATA[0x1F2E5] = 0xB0;
+                this.ROM_DATA[0x1F2EB] = 0xD0;
             }
 
             //dungeons
@@ -168,7 +171,7 @@ namespace EnemizerLibrary
                 randomizePots(seed); //default on for now
             }
 
-            if (optionFlags.ShuffleEnemyDamageGroups)
+            if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups)
             {
                 ShuffleDamageGroups();
             }
