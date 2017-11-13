@@ -532,6 +532,8 @@ namespace Enemizer
             {
                 MessageBox.Show(ex.Message, "Enemizer");
             }
+
+            return "Failed";
 #endif
         }
 
