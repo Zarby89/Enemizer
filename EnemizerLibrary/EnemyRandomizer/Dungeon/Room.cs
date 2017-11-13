@@ -238,42 +238,27 @@ namespace EnemizerLibrary
                 {
                     int spriteId = -1;
 
+                    // don't put stal in shutter rooms
+                    if (false == this.IsShutterRoom && rand.Next(0, 100) <= 5)
+                    {
+                        //spawn a stal
+                        spriteId = SpriteConstants.StalSprite;
+                    }
+                    else
+                    {
+                        spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
+                    }
+
                     if (optionFlags.EnemiesAbsorbable && optionFlags.AbsorbableSpawnRate > 0 && optionFlags.AbsorbableTypes.Where(x => x.Value).Count() > 0)
                     {
                         if (rand.Next(0, 100) <= optionFlags.AbsorbableSpawnRate)
                         {
                             spriteId = possibleAbsorbableSprites[rand.Next(possibleAbsorbableSprites.Length)];
                         }
-                        else
-                        {
-                            if (rand.Next(0, 100) <= 5)
-                            {
-                                //spawn a stal
-                                spriteId = SpriteConstants.StalSprite;
-                            }
-                            else
-                            {
-                                spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (rand.Next(0, 100) <= 5)
-                        {
-                            //spawn a stal
-                            spriteId = SpriteConstants.StalSprite;
-                        }
-                        else
-                        {
-                            spriteId = possibleSprites[rand.Next(possibleSprites.Length)];
-                        }
                     }
 
                     s.SpriteId = spriteId;
 
-                    // leave this out for now
-                    
                     if(spriteId == SpriteConstants.StalSprite)
                     {
                         stalCount++;

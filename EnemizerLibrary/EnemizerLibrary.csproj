@@ -143,6 +143,7 @@
     <Compile Include="Graph\LogicalBoss.cs" />
     <Compile Include="Graph\Node.cs" />
     <Compile Include="Graph\OverworldAreaNode.cs" />
+    <Compile Include="Graph\OverworldGlitchedGraphData.cs" />
     <Compile Include="Graph\Requirement.cs" />
     <Compile Include="Graph\RomChests.cs" />
     <Compile Include="Graph\RoomNode.cs" />
