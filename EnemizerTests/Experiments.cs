@@ -129,6 +129,17 @@ namespace EnemizerTests
         }
 
         [Fact]
+        public void zarbys_chests()
+        {
+            var romData = Utilities.LoadRom("zarbychests.sfc");
+
+            RomChestCollection c = new RomChestCollection(romData);
+            c.LoadChests(new EnemizerLibrary.Data.RawItemLocationCollection());
+
+            output.WriteLine("test");
+        }
+
+        [Fact]
         public void fishing_expedition()
         {
             var romData = Utilities.LoadRom("rando.sfc");

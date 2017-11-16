@@ -105,6 +105,8 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
+            this.beeMizerCheckBox = new System.Windows.Forms.CheckBox();
+            this.beeLevelComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -716,6 +718,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.beeLevelComboBox);
+            this.tabPage4.Controls.Add(this.beeMizerCheckBox);
             this.tabPage4.Controls.Add(this.uiLanguageCombobox);
             this.tabPage4.Controls.Add(this.lblUILanguage);
             this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
@@ -998,6 +1002,28 @@
             0,
             0});
             // 
+            // beeMizerCheckBox
+            // 
+            this.beeMizerCheckBox.AutoSize = true;
+            this.beeMizerCheckBox.Location = new System.Drawing.Point(7, 53);
+            this.beeMizerCheckBox.Name = "beeMizerCheckBox";
+            this.beeMizerCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.beeMizerCheckBox.TabIndex = 18;
+            this.beeMizerCheckBox.Text = "BeeMizer";
+            this.beeMizerCheckBox.UseVisualStyleBackColor = true;
+            this.beeMizerCheckBox.CheckedChanged += new System.EventHandler(this.beeMizerCheckBox_CheckedChanged);
+            // 
+            // beeLevelComboBox
+            // 
+            this.beeLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.beeLevelComboBox.Enabled = false;
+            this.beeLevelComboBox.FormattingEnabled = true;
+            this.beeLevelComboBox.Location = new System.Drawing.Point(83, 51);
+            this.beeLevelComboBox.Name = "beeLevelComboBox";
+            this.beeLevelComboBox.Size = new System.Drawing.Size(162, 21);
+            this.beeLevelComboBox.TabIndex = 19;
+            this.beeLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.beeLevelComboBox_SelectedIndexChanged);
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1123,6 +1149,8 @@
         private System.Windows.Forms.Label lblShieldGfx;
         private System.Windows.Forms.CheckBox bulkSeedsCheckbox;
         private System.Windows.Forms.NumericUpDown numberOfBulkSeeds;
+        private System.Windows.Forms.ComboBox beeLevelComboBox;
+        private System.Windows.Forms.CheckBox beeMizerCheckBox;
     }
 }
 

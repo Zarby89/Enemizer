@@ -497,10 +497,15 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Spark_LeftToRightSprite).AddSubgroup0(31));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Spark_RightToLeftSprite).AddSubgroup0(31));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_VerticalMovingSprite).AddSubgroup2(39));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_VerticalMoving2Sprite).AddSubgroup2(39));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RollerSprite).AddSubgroup2(39));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_HorizontalMovingSprite).AddSubgroup2(39));
+            // TODO: need to figure out other places they shouldn't be used. Or need to add code to check sprite position vs door position and exclude these there
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_VerticalMovingSprite).AddSubgroup2(39)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_VerticalMoving2Sprite).AddSubgroup2(39)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RollerSprite).AddSubgroup2(39)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Roller_HorizontalMovingSprite).AddSubgroup2(39)
+                .AddExcludedRooms(DontUseImmovableSpritesRooms));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BeamosSprite).AddSubgroup1(44)
                 .AddExcludedRooms(DontUseImmovableSpritesRooms));
@@ -631,8 +636,9 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WizzrobeSprite).AddSubgroup2(37, 41)); // can't be killed with bombs so don't put them in key/shutter rooms
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VerminHorizontalSprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VerminVerticalSprite).SetDoNotRandomize().SetKillable().AddSubgroup1(32));
+            // removed from keys because key could get stuck in wall if you kill it in the wall
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VerminHorizontalSprite).SetDoNotRandomize().SetCannotHaveKey().SetKillable().AddSubgroup1(32));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.VerminVerticalSprite).SetDoNotRandomize().SetCannotHaveKey().SetKillable().AddSubgroup1(32));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.Ostrich_HauntedGroveSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup2(78));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FluteSprite).SetNeverUse().SetDoNotRandomize()); // TODO: where is this?
@@ -812,7 +818,7 @@ namespace EnemizerLibrary
             // turn these off for now outside DM. they can only spawn in large (1024x1024 areas)
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_FallingRocks).SetOverlord().SetNeverUseDungeon().SetDoNotRandomize().AddSubgroup3(16));
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetOverlord().SetNeverUseDungeon().AddSubgroup2(35));
+            //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OW_OL_WallMaster_ToHoulihan).SetOverlord().SetNeverUseDungeon().AddSubgroup2(35));
 
             // Overlords
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_CanonBalls_EP4Walls).SetNeverUse().SetOverlord().AddSubgroup2(46));

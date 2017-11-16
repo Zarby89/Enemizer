@@ -225,6 +225,12 @@ namespace EnemizerLibrary
             SetSwordGfx(optionFlags.SwordGraphics);
             SetShieldGfx(optionFlags.ShieldGraphics);
 
+            if(optionflags.BeeMizer)
+            {
+                var bees = new Bees(this.ROM_DATA, this.optionFlags, new Random(seed));
+                bees.BeeMeUp();
+            }
+
             rand = new Random(seed);
             if (optionflags.BootlegMagic)
             {
