@@ -14,7 +14,18 @@ namespace EnemizerLibrary
         public byte BossGraphics { get; internal set; }
         public int BossSpriteId { get; internal set; }
 
-        public string Requirements { get; protected set; }
+        string requirements;
+        public string Requirements
+        {
+            get { return requirements; }
+            protected set
+            {
+                requirements = value;
+                RequirementList = Requirement.MakeRequirementListFromString(requirements);
+            }
+        }
+        public List<Requirement> RequirementList { get; protected set; }
+
         protected string BossNode { get; set; }
 
         public byte[] BossSpriteArray { get; protected set; }
@@ -29,7 +40,82 @@ namespace EnemizerLibrary
         public bool CanBeUsed(Dungeon dungeon, Graph graph)
         {
             var res = graph.FindPath("cave-links-house", dungeon.LogicalBossRoomId, true, null, Requirements);
-            return res.Success;
+
+
+            return res.Success || MeetsRequirements(res.ItemsObtained);
+        }
+
+        bool MeetsRequirements(List<Item> items)
+        {
+            if (RequirementList == null || RequirementList.Count == 0)
+            {
+                return true;
+            }
+
+            var needConsume = new List<ConsumableItem>();
+
+            int swordCount = items.Where(x => x.LogicalId == "Progressive Sword").Count();
+            int gloveCount = items.Where(x => x.LogicalId == "Progressive Gloves").Count();
+
+            foreach (var r in RequirementList)
+            {
+                int count = 0;
+                foreach (var i in r.Requirements)
+                {
+                    if (i is ConsumableItem)
+                    {
+                        var c = i as ConsumableItem;
+                        if (items.Contains(c) && items.Any(x => x == c && ((ConsumableItem)x).Usable))
+                        {
+                            count++;
+                            needConsume.Add(c);
+                        }
+                    }
+                    else if (items.Contains(i))
+                    {
+                        count++;
+                    }
+                    else if (i is BottleItem && items.Any(x => x is BottleItem))
+                    {
+                        count++;
+                    }
+                    else if (i is ProgressiveItem)
+                    {
+                        var split = i.LogicalId.Split(' ');
+                        if (split.Length > 1)
+                        {
+                            int level = (int)char.GetNumericValue(split[0][1]);
+
+                            switch (split[1])
+                            {
+                                case "Sword":
+                                    if (swordCount >= level)
+                                    {
+                                        count++;
+                                    }
+                                    break;
+                                case "Gloves":
+                                    if (gloveCount >= level)
+                                    {
+                                        count++;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Boss.MeetsRequirements - Invalid progressive item");
+                        }
+                    }
+                }
+                if (count == r.Requirements.Count)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static Boss GetBossFromType(BossType boss)

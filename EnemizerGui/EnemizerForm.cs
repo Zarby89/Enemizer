@@ -33,6 +33,7 @@ namespace Enemizer
             LoadSpriteDropdown();
             LoadSwordDropdown();
             LoadShieldDropdown();
+            LoadBeeMizerDropdown();
 
             LoadLanguageDropdown();
 
@@ -121,6 +122,15 @@ namespace Enemizer
             {
                 files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
                 shieldSpriteCombobox.Items.Add(item);
+            }
+        }
+
+        void LoadBeeMizerDropdown()
+        {
+            beeLevelComboBox.Items.Clear();
+            foreach (var e in Enum.GetValues(typeof(BeeLevel)))
+            {
+                beeLevelComboBox.Items.Add(((BeeLevel)e).GetDescription());
             }
         }
 
@@ -305,6 +315,10 @@ namespace Enemizer
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
             grayscaleModeCheckbox.Checked = config.OptionFlags.GrayscaleMode;
             negativeModeCheckbox.Checked = config.OptionFlags.NegativeMode;
+
+            beeMizerCheckBox.Checked = config.OptionFlags.BeeMizer;
+            beeLevelComboBox.Enabled = config.OptionFlags.BeeMizer;
+            beeLevelComboBox.SelectedIndex = (int)config.OptionFlags.BeesLevel;
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -833,6 +847,17 @@ namespace Enemizer
         {
             this.numberOfBulkSeeds.Enabled = bulkSeedsCheckbox.Checked;
             this.seedNumberTextbox.Enabled = !bulkSeedsCheckbox.Checked;
+        }
+
+        private void beeMizerCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.BeeMizer = beeMizerCheckBox.Checked;
+            beeLevelComboBox.Enabled = config.OptionFlags.BeeMizer;
+        }
+
+        private void beeLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.BeesLevel = (BeeLevel)beeLevelComboBox.SelectedIndex;
         }
     }
 

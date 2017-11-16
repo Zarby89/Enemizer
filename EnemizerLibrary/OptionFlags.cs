@@ -65,6 +65,8 @@ namespace EnemizerLibrary
         public bool AlternateGfx { get; set; }
         public string ShieldGraphics { get; set; } = "shield_gfx\\normal.gfx";
         public string SwordGraphics { get; set; } = "sword_gfx\\normal.gfx";
+        public bool BeeMizer { get; set; }
+        public BeeLevel BeesLevel { get; set; }
 
         public OptionFlags()
         {
@@ -180,6 +182,8 @@ namespace EnemizerLibrary
             this.EnemyDamageChaosMode = Convert.ToBoolean(optionBytes[i++]);
             //this.SwordGraphics = optionBytes[i++];
             i++;
+            this.BeeMizer = Convert.ToBoolean(optionBytes[i++]);
+            this.BeesLevel = (BeeLevel)optionBytes[i++];
 
         }
 
@@ -273,6 +277,8 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.ShuffleEnemyDamageGroups);
             ret[i++] = Convert.ToByte(this.EnemyDamageChaosMode);
             ret[i++] = 0; // (byte)this.SwordGraphics;
+            ret[i++] = Convert.ToByte(this.BeeMizer);
+            ret[i++] = Convert.ToByte(this.BeesLevel);
 
             return ret;
         }
@@ -348,5 +354,17 @@ namespace EnemizerLibrary
         Half,
         Quarter,
         Off
+    }
+
+    public enum BeeLevel
+    {
+        [Description("Bees??")]
+        Level1,
+        [Description("Bees!")]
+        Level2,
+        [Description("Beeeeees!?")]
+        Level3,
+        [Description("Beeeeeeeeeeeeeeeeeeeees")]
+        Level4
     }
 }

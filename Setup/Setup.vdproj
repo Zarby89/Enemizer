@@ -240,7 +240,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6526.12929, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6529.28004, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_9E2B15FD4EA4B1677A86EBA3F8E013EF"
@@ -365,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{61BEE75A-21EC-420D-9BE8-DCCFADF7F052}"
-        "PackageCode" = "8:{DA62B30A-50EE-4E07-9718-037A87391BA1}"
+        "ProductCode" = "8:{CDBE1FDC-A2E9-4DAF-9664-9C797A3E0218}"
+        "PackageCode" = "8:{EEC90FF9-A4F9-4588-B922-454B3016CD82}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.15"
+        "ProductVersion" = "8:6.0.16"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

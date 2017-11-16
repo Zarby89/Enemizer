@@ -16,6 +16,6 @@ export.label modified_room_object_table
 export.label DMAKholdstare
 export.label swordgfx
 export.label shieldgfx
-;export.label 
+export.label Spawn_Bees
 ;export.label 
 export.close
