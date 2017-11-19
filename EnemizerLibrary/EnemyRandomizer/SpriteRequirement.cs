@@ -593,7 +593,7 @@ namespace EnemizerLibrary
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.FlamesSprite)); // Kodongo fireball
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MothulaSprite).SetBoss().AddSubgroup2(56));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MothulaSprite).SetBoss().AddSubgroup2(56).AddSubgroup3(82));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.MothulasBeamSprite).SetNeverUse().AddSubgroup2(56));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SpikeTrapSprite).AddSubgroup3(82, 83)
@@ -610,9 +610,10 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.SlimeSprite_JumpsOutOfTheFloor).AddSubgroup1(32));
 
-            // these will never work right in the overworld
-            // and only work in rooms with an exit (0-255), technically in 260 (link's house) as well
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().AddSubgroup2(35));
+            // these will never work right in the overworld without rewriting the asm
+            // and only work in dungeons with exists
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.WallmasterSprite).SetDoNotRandomize().SetNeverUseOverworld().AddSubgroup2(35)
+                .AddSpawnableRooms(DungeonRooms));
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.StalfosKnightSprite).AddSubgroup1(32)
                 .AddExcludedRooms(RoomIdConstants.R268_MimicCave));
@@ -834,7 +835,7 @@ namespace EnemizerLibrary
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_LeftEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_DownEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_UpEvil_PirogusuSpawner).SetNeverUse().SetOverlord().AddSubgroup2(34));
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FlyingFloorTileTrap).SetOverlord()); // TODO: is this special sprites?
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_FlyingFloorTileTrap).SetOverlord()/*.AddSubgroup1(44)*/.AddSubgroup3(82)); // TODO: is this special sprites?
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_WizzrobeSpawner).SetOverlord().AddSubgroup2(37, 41));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_BlackSpawn_Zoro_BombHole).SetNeverUse().SetOverlord().AddSubgroup1(32));
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.OL_4Skull_Trap_Pot).SetNeverUse().SetOverlord().AddSubgroup0(31));
@@ -944,6 +945,210 @@ namespace EnemizerLibrary
         {
             RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom,
             RoomIdConstants.R268_MimicCave
+        };
+
+        int[] DungeonRooms =
+        {
+            RoomIdConstants.R1_HyruleCastle_NorthCorridor,
+            RoomIdConstants.R2_HyruleCastle_SwitchRoom,
+            RoomIdConstants.R17_HyruleCastle_BombableStockRoom,
+            RoomIdConstants.R33_HyruleCastle_KeyRatRoom,
+            RoomIdConstants.R34_HyruleCastle_SewerTextTriggerRoom,
+            RoomIdConstants.R50_HyruleCastle_SewerKeyChestRoom,
+            RoomIdConstants.R65_HyruleCastle_FirstDarkRoom,
+            RoomIdConstants.R66_HyruleCastle_6RopesRoom,
+            RoomIdConstants.R80_HyruleCastle_WestCorridor,
+            RoomIdConstants.R81_HyruleCastle_ThroneRoom,
+            RoomIdConstants.R82_HyruleCastle_EastCorridor,
+            RoomIdConstants.R96_HyruleCastle_WestEntranceRoom,
+            RoomIdConstants.R97_HyruleCastle_MainEntranceRoom,
+            RoomIdConstants.R98_HyruleCastle_EastEntranceRoom,
+            RoomIdConstants.R112_HyruleCastle_SmallCorridortoJailCells,
+            RoomIdConstants.R113_HyruleCastle_BoomerangChestRoom,
+            RoomIdConstants.R114_HyruleCastle_MapChestRoom,
+            RoomIdConstants.R128_HyruleCastle_JailCellRoom,
+            RoomIdConstants.R129_HyruleCastle_NextToChasmRoom,
+            RoomIdConstants.R130_HyruleCastle_BasementChasmRoom,
+
+            RoomIdConstants.R137_EasternPalace_FairyRoom,
+            RoomIdConstants.R153_EasternPalace_EyegoreKeyRoom,
+            RoomIdConstants.R168_EasternPalace_StalfosSpawnRoom,
+            RoomIdConstants.R169_EasternPalace_BigChestRoom,
+            RoomIdConstants.R170_EasternPalace_MapChestRoom,
+            RoomIdConstants.R184_EasternPalace_BigKeyRoom,
+            RoomIdConstants.R185_EasternPalace_LobbyCannonballsRoom,
+            RoomIdConstants.R186_EasternPalace_DarkAntifairy_KeyPotRoom,
+            RoomIdConstants.R200_EasternPalace_ArmosKnights,
+            RoomIdConstants.R201_EasternPalace_EntranceRoom,
+            RoomIdConstants.R216_EasternPalace_PreArmosKnightsRoom,
+            RoomIdConstants.R217_EasternPalace_CanonballRoom,
+            RoomIdConstants.R218_EasternPalace,
+
+            RoomIdConstants.R51_DesertPalace_Lanmolas,
+            RoomIdConstants.R67_DesertPalace_TorchPuzzle_MovingWallRoom,
+            RoomIdConstants.R83_DesertPalace_Popos2_BeamosHellwayRoom,
+            RoomIdConstants.R99_DesertPalace_FinalSectionEntranceRoom,
+            RoomIdConstants.R115_DesertPalace_BigChestRoom,
+            RoomIdConstants.R116_DesertPalace_MapChestRoom,
+            RoomIdConstants.R117_DesertPalace_BigKeyChestRoom,
+            RoomIdConstants.R131_DesertPalace_WestEntranceRoom,
+            RoomIdConstants.R132_DesertPalace_MainEntranceRoom,
+            RoomIdConstants.R133_DesertPalace_EastEntranceRoom,
+
+            RoomIdConstants.R7_TowerofHera_Moldorm,
+            RoomIdConstants.R23_TowerofHera_MoldormFallRoom,
+            RoomIdConstants.R39_TowerofHera_BigChest,
+            RoomIdConstants.R49_TowerofHera_HardhatBeetlesRoom,
+            RoomIdConstants.R119_TowerofHera_EntranceRoom,
+            RoomIdConstants.R135_TowerofHera_TileRoom,
+            RoomIdConstants.R167_TowerofHera_FairyRoom,
+
+            RoomIdConstants.R32_AgahnimsTower_Agahnim,
+            RoomIdConstants.R48_AgahnimsTower_MaidenSacrificeChamber,
+            RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom,
+            RoomIdConstants.R176_AgahnimsTower_CircleofPots,
+            RoomIdConstants.R192_AgahnimsTower_DarkBridgeRoom,
+            RoomIdConstants.R208_AgahnimsTower_DarkMaze,
+            RoomIdConstants.R224_AgahnimsTower_EntranceRoom,
+
+            RoomIdConstants.R9_PalaceofDarkness0x09,
+            RoomIdConstants.R10_PalaceofDarkness_StalfosTrapRoom,
+            RoomIdConstants.R11_PalaceofDarkness_TurtleRoom,
+            RoomIdConstants.R25_PalaceofDarkness_DarkMaze,
+            RoomIdConstants.R26_PalaceofDarkness_BigChestRoom,
+            RoomIdConstants.R27_PalaceofDarkness_Mimics_MovingWallRoom,
+            RoomIdConstants.R42_PalaceofDarkness_BigHubRoom,
+            RoomIdConstants.R43_PalaceofDarkness_MapChest_FairyRoom,
+            RoomIdConstants.R58_PalaceofDarkness_BombableFloorRoom,
+            RoomIdConstants.R59_PalaceofDarkness_SpikeBlock_ConveyorRoom,
+            RoomIdConstants.R74_PalaceofDarkness_EntranceRoom,
+            RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom,
+            RoomIdConstants.R90_PalaceofDarkness_HelmasaurKing,
+            RoomIdConstants.R106_PalaceofDarkness_RupeeRoom,
+
+            RoomIdConstants.R6_SwampPalace_Arrghus,
+            RoomIdConstants.R22_SwampPalace_SwimmingTreadmill,
+            RoomIdConstants.R38_SwampPalace_StatueRoom,
+            RoomIdConstants.R40_SwampPalace_EntranceRoom,
+            RoomIdConstants.R52_SwampPalace_PushBlockPuzzle_Pre_BigKeyRoom,
+            RoomIdConstants.R53_SwampPalace_BigKey_BSRoom,
+            RoomIdConstants.R54_SwampPalace_BigChestRoom,
+            RoomIdConstants.R55_SwampPalace_MapChest_WaterFillRoom,
+            RoomIdConstants.R56_SwampPalace_KeyPotRoom,
+            RoomIdConstants.R70_SwampPalace_CompassChestRoom,
+            RoomIdConstants.R84_SwampPalace_UpstairsPitsRoom,
+            RoomIdConstants.R102_SwampPalace_HiddenChest_HiddenDoorRoom,
+            RoomIdConstants.R118_SwampPalace_WaterDrainRoom,
+
+            RoomIdConstants.R41_SkullWoods_Mothula,
+            RoomIdConstants.R57_SkullWoods_GibdoKey_MothulaHoleRoom,
+            RoomIdConstants.R73_SkullWoods_GibdoTorchPuzzleRoom,
+            RoomIdConstants.R86_SkullWoods_KeyPot_TrapRoom,
+            RoomIdConstants.R87_SkullWoods_BigKeyRoom,
+            RoomIdConstants.R88_SkullWoods_BigChestRoom,
+            RoomIdConstants.R89_SkullWoods_FinalSectionEntranceRoom,
+            RoomIdConstants.R103_SkullWoods_CompassChestRoom,
+            RoomIdConstants.R104_SkullWoods_KeyChest_TrapRoom,
+
+            RoomIdConstants.R68_ThievesTown_BigChestRoom,
+            RoomIdConstants.R69_ThievesTown_JailCellsRoom,
+            RoomIdConstants.R100_ThievesTown_WestAtticRoom,
+            RoomIdConstants.R101_ThievesTown_EastAtticRoom,
+            RoomIdConstants.R171_ThievesTown_MovingSpikes_KeyPotRoom,
+            RoomIdConstants.R172_ThievesTown_BlindTheThief,
+            RoomIdConstants.R187_ThievesTown_Hellway,
+            RoomIdConstants.R188_ThievesTown_ConveyorToilet,
+            RoomIdConstants.R203_ThievesTown_NorthWestEntranceRoom,
+            RoomIdConstants.R204_ThievesTown_NorthEastEntranceRoom,
+            RoomIdConstants.R219_ThievesTown_Main_SouthWestEntranceRoom,
+            RoomIdConstants.R220_ThievesTown_SouthEastEntranceRoom,
+
+            RoomIdConstants.R14_IcePalace_EntranceRoom,
+            RoomIdConstants.R30_IcePalace_BombFloor_BariRoom,
+            RoomIdConstants.R31_IcePalace_Pengator_BigKeyRoom,
+            RoomIdConstants.R46_IcePalace_CompassRoom,
+            RoomIdConstants.R62_IcePalace_StalfosKnights_ConveyorHellway,
+            RoomIdConstants.R63_IcePalace_MapChestRoom,
+            RoomIdConstants.R78_IcePalace_Bomb_JumpRoom,
+            RoomIdConstants.R79_IcePalaceCloneRoom_FairyRoom,
+            RoomIdConstants.R94_IcePalace_LonelyFirebar,
+            RoomIdConstants.R95_IcePalace_HiddenChest_SpikeFloorRoom,
+            RoomIdConstants.R110_IcePalace_PengatorsRoom,
+            RoomIdConstants.R126_IcePalace_HiddenChest_BombableFloorRoom,
+            RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom,
+            RoomIdConstants.R142_IcePalace0x8E,
+            RoomIdConstants.R158_IcePalace_BigChestRoom,
+            RoomIdConstants.R159_IcePalace0x9F,
+            RoomIdConstants.R174_IcePalace0xAE,
+            RoomIdConstants.R175_IcePalace_IceBridgeRoom,
+            RoomIdConstants.R190_IcePalace_BlockPuzzleRoom,
+            RoomIdConstants.R191_IcePalaceCloneRoom_SwitchRoom,
+            RoomIdConstants.R206_IcePalace_HoletoKholdstareRoom,
+            RoomIdConstants.R222_IcePalace_Kholdstare,
+
+            RoomIdConstants.R144_MiseryMire_Vitreous,
+            RoomIdConstants.R145_MiseryMire_FinalSwitchRoom,
+            RoomIdConstants.R146_MiseryMire_DarkBombWall_SwitchesRoom,
+            RoomIdConstants.R147_MiseryMire_DarkCaneFloorSwitchPuzzleRoom,
+            RoomIdConstants.R151_MiseryMire_TorchPuzzle_MovingWallRoom,
+            RoomIdConstants.R152_MiseryMire_EntranceRoom,
+            RoomIdConstants.R160_MiseryMire_Pre_VitreousRoom,
+            RoomIdConstants.R161_MiseryMire_FishRoom,
+            RoomIdConstants.R162_MiseryMire_BridgeKeyChestRoom,
+            RoomIdConstants.R163_MiseryMire0xA3,
+            RoomIdConstants.R177_MiseryMire_HourglassRoom,
+            RoomIdConstants.R178_MiseryMire_SlugRoom,
+            RoomIdConstants.R179_MiseryMire_SpikeKeyChestRoom,
+            RoomIdConstants.R193_MiseryMire_CompassChest_TileRoom,
+            RoomIdConstants.R194_MiseryMire_BigHubRoom,
+            RoomIdConstants.R195_MiseryMire_BigChestRoom,
+            RoomIdConstants.R209_MiseryMire_ConveyorSlug_BigKeyRoom,
+            RoomIdConstants.R210_MiseryMire_Mire02_WizzrobesRoom,
+
+            RoomIdConstants.R4_TurtleRock_CrystalRollerRoom,
+            RoomIdConstants.R19_TurtleRock_Hokku_BokkuKeyRoom2,
+            RoomIdConstants.R20_TurtleRock_BigKeyRoom,
+            RoomIdConstants.R21_TurtleRock0x15,
+            RoomIdConstants.R35_TurtleRock_WestExittoBalcony,
+            RoomIdConstants.R36_TurtleRock_DoubleHokku_Bokku_BigchestRoom,
+            RoomIdConstants.R164_TurtleRock_Trinexx,
+            RoomIdConstants.R180_TurtleRock_Pre_TrinexxRoom,
+            RoomIdConstants.R181_TurtleRock_DarkMaze,
+            RoomIdConstants.R182_TurtleRock_ChainChompsRoom,
+            RoomIdConstants.R183_TurtleRock_MapChest_KeyChest_RollerRoom,
+            RoomIdConstants.R196_TurtleRock_FinalCrystalSwitchPuzzleRoom,
+            RoomIdConstants.R197_TurtleRock_LaserBridge,
+            RoomIdConstants.R198_TurtleRock0xC6,
+            RoomIdConstants.R199_TurtleRock_TorchPuzzle,
+            RoomIdConstants.R213_TurtleRock_LaserKeyRoom,
+            RoomIdConstants.R214_TurtleRock_EntranceRoom,
+
+            RoomIdConstants.R12_GanonsTower_EntranceRoom,
+            RoomIdConstants.R13_GanonsTower_Agahnim2,
+            RoomIdConstants.R28_GanonsTower_IceArmos,
+            RoomIdConstants.R29_GanonsTower_FinalHallway,
+            RoomIdConstants.R61_GanonsTower_TorchRoom2,
+            RoomIdConstants.R76_GanonsTower_Mini_HelmasaurConveyorRoom,
+            RoomIdConstants.R77_GanonsTower_MoldormRoom,
+            RoomIdConstants.R91_GanonsTower_SpikePitRoom,
+            RoomIdConstants.R92_GanonsTower_Ganon_BallZ,
+            RoomIdConstants.R93_GanonsTower_Gauntlet1_2_3,
+            RoomIdConstants.R107_GanonsTower_MimicsRooms,
+            RoomIdConstants.R108_GanonsTower_LanmolasRoom,
+            RoomIdConstants.R109_GanonsTower_Gauntlet4_5,
+            RoomIdConstants.R123_GanonsTower,
+            RoomIdConstants.R124_GanonsTower_EastSideCollapsingBridge_ExplodingWallRoom,
+            RoomIdConstants.R125_GanonsTower_Winder_WarpMazeRoom,
+            RoomIdConstants.R139_GanonsTower_BlockPuzzle_SpikeSkip_MapChestRoom,
+            RoomIdConstants.R140_GanonsTower_EastandWestDownstairs_BigChestRoom,
+            RoomIdConstants.R141_GanonsTower_Tile_TorchPuzzleRoom,
+            RoomIdConstants.R149_GanonsTower_FinalCollapsingBridgeRoom,
+            RoomIdConstants.R150_GanonsTower_Torches1Room,
+            RoomIdConstants.R155_GanonsTower_ManySpikes_WarpMazeRoom,
+            RoomIdConstants.R156_GanonsTower_InvisibleFloorMazeRoom,
+            RoomIdConstants.R157_GanonsTower_CompassChest_InvisibleFloorRoom,
+            RoomIdConstants.R165_GanonsTower_WizzrobesRooms,
+            RoomIdConstants.R166_GanonsTower_MoldormFallRoom,
         };
     }
 }

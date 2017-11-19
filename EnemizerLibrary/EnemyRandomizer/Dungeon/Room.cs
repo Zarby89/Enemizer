@@ -17,6 +17,9 @@ namespace EnemizerLibrary
         }
         public int RoomId { get; set; }
         public int GraphicsBlockId { get; set; }
+        public int Tag1 { get; set; }
+        public int Tag2 { get; set; }
+
         public bool IsShutterRoom
         {
             get
@@ -147,11 +150,15 @@ namespace EnemizerLibrary
         private void UpdateHeader()
         {
             romData[RoomHeaderBaseAddress + 3] = (byte)(this.GraphicsBlockId);
+            romData[RoomHeaderBaseAddress + 5] = (byte)(this.Tag1);
+            romData[RoomHeaderBaseAddress + 6] = (byte)(this.Tag2);
         }
 
         void LoadHeader()
         {
             this.GraphicsBlockId = romData[RoomHeaderBaseAddress + 3];
+            this.Tag1 = romData[RoomHeaderBaseAddress + 5];
+            this.Tag2 = romData[RoomHeaderBaseAddress + 6];
         }
 
         void LoadSprites()

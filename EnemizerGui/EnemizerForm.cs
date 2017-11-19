@@ -30,12 +30,19 @@ namespace Enemizer
             //panel1.BackColor = Color.FromArgb(255, 128, 192);
             this.Text = "Enemizer " + EnemizerLibrary.Version.CurrentVersion;
 
+            LoadAbsorbablesListBox();
+
             LoadSpriteDropdown();
             LoadSwordDropdown();
             LoadShieldDropdown();
             LoadBeeMizerDropdown();
 
+            LoadDebugEnemyListBox();
+            LoadDebugBossListBox();
+
             LoadLanguageDropdown();
+
+            tabControl1.TabPages.Remove(tabDebug); // remove it for now
 
             LoadConfig();
             UpdateUIFromConfig();
@@ -143,6 +150,37 @@ namespace Enemizer
             }
         }
 
+        void LoadDebugEnemyListBox()
+        {
+            debugForceEnemyComboBox.Items.Clear();
+            debugForceEnemyComboBox.DataSource = EnemizerLibrary.SpriteConstants.spriteNames
+                    .Where(x => EnemizerLibrary.SpriteConstants.DebugUsableSprites.Contains(x.Key))
+                    .OrderBy(x => x.Value)
+                    .ToList();
+            debugForceEnemyComboBox.ValueMember = "Key";
+            debugForceEnemyComboBox.DisplayMember = "Value";
+        }
+
+        void LoadDebugBossListBox()
+        {
+            var bossTypes = new Dictionary<int, string>();
+            bossTypes.Add((int)BossType.Armos, "Armos");
+            bossTypes.Add((int)BossType.Lanmola, "Lanmola");
+            bossTypes.Add((int)BossType.Moldorm, "Moldorm");
+            bossTypes.Add((int)BossType.Helmasaur, "Helmasaur King");
+            bossTypes.Add((int)BossType.Arrghus, "Arrghus");
+            bossTypes.Add((int)BossType.Mothula, "Mothula");
+            bossTypes.Add((int)BossType.Blind, "Blind");
+            bossTypes.Add((int)BossType.Kholdstare, "Kholdstare");
+            bossTypes.Add((int)BossType.Vitreous, "Vitreous");
+            bossTypes.Add((int)BossType.Trinexx, "Trinexx");
+
+            debugForceBossComboBox.Items.Clear();
+            debugForceBossComboBox.DataSource = bossTypes.ToList();
+            debugForceBossComboBox.ValueMember = "Key";
+            debugForceBossComboBox.DisplayMember = "Value";
+        }
+
         private bool LoadConfig()
         {
             var configFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Enemizer", configFilename);
@@ -195,6 +233,8 @@ namespace Enemizer
             UpdateExtrasTabUIFromConfig();
 
             UpdateGraphicsTabUIFromConfig();
+
+            UpdateDebugTabUIFromConfig();
         }
 
         private void UpdateMainFormUIFromConfig()
@@ -337,6 +377,23 @@ namespace Enemizer
                 config.OptionFlags.ShieldGraphics = "shield_gfx\\normal.gfx";
             }
             shieldSpriteCombobox.SelectedIndex = shieldSpriteCombobox.Items.IndexOf(shields.FirstOrDefault(x => x.file == config.OptionFlags.ShieldGraphics));
+        }
+
+        private void UpdateDebugTabUIFromConfig()
+        {
+            debugForceEnemyCheckBox.Checked = config.OptionFlags.DebugForceEnemy;
+            debugForceEnemyComboBox.Enabled = config.OptionFlags.DebugForceEnemy;
+            //var forcedEnemy = ((List<KeyValuePair<int, string>>)(debugForceEnemyComboBox.DataSource)).FirstOrDefault(x => x.Key == config.OptionFlags.DebugForceEnemyId);
+            debugForceEnemyComboBox.SelectedValue = config.OptionFlags.DebugForceEnemyId;
+
+            debugForceBossCheckBox.Checked = config.OptionFlags.DebugForceBoss;
+            debugForceBossComboBox.Enabled = config.OptionFlags.DebugForceBoss;
+            //var forcedBoss = ((List<KeyValuePair<int, string>>)(debugForceBossComboBox.DataSource)).FirstOrDefault(x => x.Key == (int)config.OptionFlags.DebugForceBossId);
+            debugForceBossComboBox.SelectedValue = (int)config.OptionFlags.DebugForceBossId;
+
+            debugDisableShutterDoorsCheckBox.Checked = config.OptionFlags.DebugOpenShutterDoors;
+            debugSetEnemyDamageZero.Checked = config.OptionFlags.DebugForceEnemyDamageZero;
+            debugShowRoomIdInRupeeCounterCheckBox.Checked = config.OptionFlags.DebugShowRoomIdInRupeeCounter;
         }
 
         private void LoadAbsorbableItemsChecklistFromConfig()
@@ -776,6 +833,14 @@ namespace Enemizer
         private void debugModeCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.DebugMode = debugModeCheckbox.Checked;
+            if (config.OptionFlags.DebugMode)
+            {
+                tabControl1.TabPages.Add(tabDebug);
+            }
+            else
+            {
+                tabControl1.TabPages.Remove(tabDebug);
+            }
         }
 
         private void shuffleMusicCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -858,6 +923,43 @@ namespace Enemizer
         private void beeLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             config.OptionFlags.BeesLevel = (BeeLevel)beeLevelComboBox.SelectedIndex;
+        }
+
+        private void debugForceEnemyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugForceEnemy = debugForceEnemyCheckBox.Checked;
+            debugForceEnemyComboBox.Enabled = config.OptionFlags.DebugForceEnemy;
+        }
+
+        private void debugForceEnemyComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugForceEnemyId = ((KeyValuePair<int, string>)(debugForceEnemyComboBox.SelectedItem)).Key;
+        }
+
+        private void debugForceBossCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugForceBoss = debugForceBossCheckBox.Checked;
+            debugForceBossComboBox.Enabled = config.OptionFlags.DebugForceBoss;
+        }
+
+        private void debugForceBossComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugForceBossId = (BossType)((KeyValuePair<int, string>)(debugForceBossComboBox.SelectedItem)).Key;
+        }
+
+        private void debugDisableShutterDoorsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugOpenShutterDoors = debugDisableShutterDoorsCheckBox.Checked;
+        }
+
+        private void debugSetEnemyDamageZero_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugForceEnemyDamageZero = debugSetEnemyDamageZero.Checked;
+        }
+
+        private void debugShowRoomIdInRupeeCounterCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.DebugShowRoomIdInRupeeCounter = debugShowRoomIdInRupeeCounterCheckBox.Checked;
         }
     }
 

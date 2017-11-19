@@ -417,7 +417,7 @@ namespace EnemizerLibrary
             }
             set
             {
-                if(i >= 0x0 && i < 0x0)
+                if(i >= 0x0 && i <= 0x0)
                 {
                     Debugger.Break();
                 }

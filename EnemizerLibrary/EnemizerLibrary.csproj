@@ -57,6 +57,7 @@
     <Compile Include="BossRandomizer\Boss\GTArmosBoss.cs" />
     <Compile Include="BossRandomizer\Boss\GTLanmolaBoss.cs" />
     <Compile Include="BossRandomizer\Boss\GTMoldormBoss.cs" />
+    <Compile Include="BossRandomizer\DebugBossRandomizer.cs" />
     <Compile Include="BossRandomizer\VanillaBossRandomizer.cs" />
     <Compile Include="BossRandomizer\Pool\BossPool.cs" />
     <Compile Include="BossRandomizer\Boss\TrinexxBoss.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="BossRandomizer\Dungeons\EasternPalaceDungeon.cs" />
     <Compile Include="BossRandomizer\Dungeons\DungeonType.cs" />
     <Compile Include="BossRandomizer\Dungeons\Dungeon.cs" />
+    <Compile Include="DebugMode.cs" />
     <Compile Include="DungeonObject\DoorDungeonObject.cs" />
     <Compile Include="DungeonObject\SubType1Object.cs" />
     <Compile Include="DungeonObject\LayerDungeonObject.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Graph\RomExit.cs" />
     <Compile Include="Graph\ExitConstants.cs" />
     <Compile Include="DungeonObject\SubType2Object.cs" />
+    <Compile Include="RoomTags.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="XkasSymbols.cs" />

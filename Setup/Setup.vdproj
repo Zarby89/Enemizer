@@ -15,13 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5C1A005C8159178B30CB1B7DBA610017"
+        "MsmKey" = "8:_2896B7332445E328168218B8E8DDA736"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7574527D6719C7BEDC188604CDDC34CA"
+        "MsmKey" = "8:_530B25DF3B7708868B066AFC3B478836"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C1A005C8159178B30CB1B7DBA610017"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,14 +39,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
-        "OwnerKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+        "OwnerKey" = "8:_2896B7332445E328168218B8E8DDA736"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+        "OwnerKey" = "8:_2896B7332445E328168218B8E8DDA736"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7574527D6719C7BEDC188604CDDC34CA"
+        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -174,20 +174,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5C1A005C8159178B30CB1B7DBA610017"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2896B7332445E328168218B8E8DDA736"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6532.15014, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5C1A005C8159178B30CB1B7DBA610017"
+                    "_2896B7332445E328168218B8E8DDA736"
                     {
-                    "Name" = "8:System.Net.Http.dll"
+                    "Name" = "8:EnemizerLibrary.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Net.Http.dll"
+            "SourcePath" = "8:EnemizerLibrary.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
@@ -205,14 +205,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7574527D6719C7BEDC188604CDDC34CA"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_530B25DF3B7708868B066AFC3B478836"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Assembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7574527D6719C7BEDC188604CDDC34CA"
+                    "_530B25DF3B7708868B066AFC3B478836"
                     {
                     "Name" = "8:Assembly.dll"
                     "Attributes" = "3:512"
@@ -236,20 +236,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5C1A005C8159178B30CB1B7DBA610017"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6529.28004, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+                    "_5C1A005C8159178B30CB1B7DBA610017"
                     {
-                    "Name" = "8:EnemizerLibrary.dll"
+                    "Name" = "8:System.Net.Http.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EnemizerLibrary.dll"
+            "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
@@ -365,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{CDBE1FDC-A2E9-4DAF-9664-9C797A3E0218}"
-        "PackageCode" = "8:{EEC90FF9-A4F9-4588-B922-454B3016CD82}"
+        "ProductCode" = "8:{6204B2F6-6665-4796-899B-8DD9FABB9327}"
+        "PackageCode" = "8:{A17F8F9B-A5C5-4684-9985-28D4A478BE46}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.16"
+        "ProductVersion" = "8:6.0.17"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -929,7 +929,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
