@@ -40,7 +40,7 @@
             this.linkSpritePicturebox = new System.Windows.Forms.PictureBox();
             this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabEnemies = new System.Windows.Forms.TabPage();
             this.enemyDamageChaosModeCheckbox = new System.Windows.Forms.CheckBox();
             this.shuffleEnemyDamageGroupsCheckbox = new System.Windows.Forms.CheckBox();
             this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
@@ -59,7 +59,7 @@
             this.lblTypeOfRandomization = new System.Windows.Forms.Label();
             this.randomizationTypeTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeEnemiesCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabBosses = new System.Windows.Forms.TabPage();
             this.randomizeBossBehaviorCheckbox = new System.Windows.Forms.CheckBox();
             this.bossdamageLabel = new System.Windows.Forms.Label();
             this.bossDamageRandomizationTrackbar = new System.Windows.Forms.TrackBar();
@@ -71,7 +71,7 @@
             this.lblBossTypeOfRandomization = new System.Windows.Forms.Label();
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPalettes = new System.Windows.Forms.TabPage();
             this.negativeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.grayscaleModeCheckbox = new System.Windows.Forms.CheckBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
@@ -80,7 +80,9 @@
             this.randomizeSpritePalettesBasicCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabExtra = new System.Windows.Forms.TabPage();
+            this.beeLevelComboBox = new System.Windows.Forms.ComboBox();
+            this.beeMizerCheckBox = new System.Windows.Forms.CheckBox();
             this.uiLanguageCombobox = new System.Windows.Forms.ComboBox();
             this.lblUILanguage = new System.Windows.Forms.Label();
             this.heartBeepSpeedLabel = new System.Windows.Forms.Label();
@@ -93,7 +95,7 @@
             this.shuffleMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
             this.bootlegMagicCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabGraphics = new System.Windows.Forms.TabPage();
             this.swordGraphicsCombobox = new System.Windows.Forms.ComboBox();
             this.lblSwordGfx = new System.Windows.Forms.Label();
             this.completeModificationCombobox = new System.Windows.Forms.ComboBox();
@@ -105,23 +107,30 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
-            this.beeMizerCheckBox = new System.Windows.Forms.CheckBox();
-            this.beeLevelComboBox = new System.Windows.Forms.ComboBox();
+            this.tabDebug = new System.Windows.Forms.TabPage();
+            this.debugForceEnemyCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugForceEnemyComboBox = new System.Windows.Forms.ComboBox();
+            this.debugForceBossCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugForceBossComboBox = new System.Windows.Forms.ComboBox();
+            this.debugDisableShutterDoorsCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugSetEnemyDamageZero = new System.Windows.Forms.CheckBox();
+            this.debugShowRoomIdInRupeeCounterCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabEnemies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.absorbableItemsSpawnrateTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomizeEnemiesHealthTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomizationTypeTrackbar)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.tabBosses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossDamageRandomizationTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bossHealthRandomizationTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPalettes.SuspendLayout();
+            this.tabExtra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).BeginInit();
-            this.tabPage5.SuspendLayout();
+            this.tabGraphics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).BeginInit();
+            this.tabDebug.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateRomButton
@@ -216,44 +225,45 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabEnemies);
+            this.tabControl1.Controls.Add(this.tabBosses);
+            this.tabControl1.Controls.Add(this.tabPalettes);
+            this.tabControl1.Controls.Add(this.tabExtra);
+            this.tabControl1.Controls.Add(this.tabGraphics);
+            this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Location = new System.Drawing.Point(12, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(466, 318);
             this.tabControl1.TabIndex = 22;
             // 
-            // tabPage1
+            // tabEnemies
             // 
-            this.tabPage1.Controls.Add(this.enemyDamageChaosModeCheckbox);
-            this.tabPage1.Controls.Add(this.shuffleEnemyDamageGroupsCheckbox);
-            this.tabPage1.Controls.Add(this.chkRandomizeBushEnemyChance);
-            this.tabPage1.Controls.Add(this.allowZeroDamageCheckbox);
-            this.tabPage1.Controls.Add(this.absorbableItemsChecklist);
-            this.tabPage1.Controls.Add(this.spawnrateLabel);
-            this.tabPage1.Controls.Add(this.lblAbsorbSpawnRate);
-            this.tabPage1.Controls.Add(this.absorbableItemsSpawnrateTrackbar);
-            this.tabPage1.Controls.Add(this.allowAbsorbableItemsCheckbox);
-            this.tabPage1.Controls.Add(this.easyModeEscapeCheckbox);
-            this.tabPage1.Controls.Add(this.randomizeEnemiesDamageCheckbox);
-            this.tabPage1.Controls.Add(this.healthLabel);
-            this.tabPage1.Controls.Add(this.randomizeEnemiesHealthTrackbar);
-            this.tabPage1.Controls.Add(this.randomizeEnemiesHealthCheckbox);
-            this.tabPage1.Controls.Add(this.randomizationTypeLabel);
-            this.tabPage1.Controls.Add(this.lblTypeOfRandomization);
-            this.tabPage1.Controls.Add(this.randomizationTypeTrackbar);
-            this.tabPage1.Controls.Add(this.randomizeEnemiesCheckbox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(458, 292);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Enemies";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabEnemies.Controls.Add(this.enemyDamageChaosModeCheckbox);
+            this.tabEnemies.Controls.Add(this.shuffleEnemyDamageGroupsCheckbox);
+            this.tabEnemies.Controls.Add(this.chkRandomizeBushEnemyChance);
+            this.tabEnemies.Controls.Add(this.allowZeroDamageCheckbox);
+            this.tabEnemies.Controls.Add(this.absorbableItemsChecklist);
+            this.tabEnemies.Controls.Add(this.spawnrateLabel);
+            this.tabEnemies.Controls.Add(this.lblAbsorbSpawnRate);
+            this.tabEnemies.Controls.Add(this.absorbableItemsSpawnrateTrackbar);
+            this.tabEnemies.Controls.Add(this.allowAbsorbableItemsCheckbox);
+            this.tabEnemies.Controls.Add(this.easyModeEscapeCheckbox);
+            this.tabEnemies.Controls.Add(this.randomizeEnemiesDamageCheckbox);
+            this.tabEnemies.Controls.Add(this.healthLabel);
+            this.tabEnemies.Controls.Add(this.randomizeEnemiesHealthTrackbar);
+            this.tabEnemies.Controls.Add(this.randomizeEnemiesHealthCheckbox);
+            this.tabEnemies.Controls.Add(this.randomizationTypeLabel);
+            this.tabEnemies.Controls.Add(this.lblTypeOfRandomization);
+            this.tabEnemies.Controls.Add(this.randomizationTypeTrackbar);
+            this.tabEnemies.Controls.Add(this.randomizeEnemiesCheckbox);
+            this.tabEnemies.Location = new System.Drawing.Point(4, 22);
+            this.tabEnemies.Name = "tabEnemies";
+            this.tabEnemies.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEnemies.Size = new System.Drawing.Size(458, 292);
+            this.tabEnemies.TabIndex = 0;
+            this.tabEnemies.Text = "Enemies";
+            this.tabEnemies.UseVisualStyleBackColor = true;
             // 
             // enemyDamageChaosModeCheckbox
             // 
@@ -468,26 +478,26 @@
             this.randomizeEnemiesCheckbox.UseVisualStyleBackColor = true;
             this.randomizeEnemiesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeEnemiesCheckbox_CheckedChanged);
             // 
-            // tabPage2
+            // tabBosses
             // 
-            this.tabPage2.Controls.Add(this.randomizeBossBehaviorCheckbox);
-            this.tabPage2.Controls.Add(this.bossdamageLabel);
-            this.tabPage2.Controls.Add(this.bossDamageRandomizationTrackbar);
-            this.tabPage2.Controls.Add(this.randomizeBossDamageCheckbox);
-            this.tabPage2.Controls.Add(this.bosshealthLabel);
-            this.tabPage2.Controls.Add(this.bossHealthRandomizationTrackbar);
-            this.tabPage2.Controls.Add(this.randomizeBossHealthCheckbox);
-            this.tabPage2.Controls.Add(this.typebossLabel);
-            this.tabPage2.Controls.Add(this.lblBossTypeOfRandomization);
-            this.tabPage2.Controls.Add(this.bossRandomizationTypesTrackbar);
-            this.tabPage2.Controls.Add(this.randomizeBossesCheckbox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(458, 292);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Bosses";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabBosses.Controls.Add(this.randomizeBossBehaviorCheckbox);
+            this.tabBosses.Controls.Add(this.bossdamageLabel);
+            this.tabBosses.Controls.Add(this.bossDamageRandomizationTrackbar);
+            this.tabBosses.Controls.Add(this.randomizeBossDamageCheckbox);
+            this.tabBosses.Controls.Add(this.bosshealthLabel);
+            this.tabBosses.Controls.Add(this.bossHealthRandomizationTrackbar);
+            this.tabBosses.Controls.Add(this.randomizeBossHealthCheckbox);
+            this.tabBosses.Controls.Add(this.typebossLabel);
+            this.tabBosses.Controls.Add(this.lblBossTypeOfRandomization);
+            this.tabBosses.Controls.Add(this.bossRandomizationTypesTrackbar);
+            this.tabBosses.Controls.Add(this.randomizeBossesCheckbox);
+            this.tabBosses.Location = new System.Drawing.Point(4, 22);
+            this.tabBosses.Name = "tabBosses";
+            this.tabBosses.Padding = new System.Windows.Forms.Padding(3);
+            this.tabBosses.Size = new System.Drawing.Size(458, 292);
+            this.tabBosses.TabIndex = 1;
+            this.tabBosses.Text = "Bosses";
+            this.tabBosses.UseVisualStyleBackColor = true;
             // 
             // randomizeBossBehaviorCheckbox
             // 
@@ -609,22 +619,22 @@
             this.randomizeBossesCheckbox.UseVisualStyleBackColor = true;
             this.randomizeBossesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeBossesCheckbox_CheckedChanged);
             // 
-            // tabPage3
+            // tabPalettes
             // 
-            this.tabPage3.Controls.Add(this.negativeModeCheckbox);
-            this.tabPage3.Controls.Add(this.grayscaleModeCheckbox);
-            this.tabPage3.Controls.Add(this.pukeModeCheckbox);
-            this.tabPage3.Controls.Add(this.setBlackoutModeCheckbox);
-            this.tabPage3.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
-            this.tabPage3.Controls.Add(this.randomizeSpritePalettesBasicCheckbox);
-            this.tabPage3.Controls.Add(this.randomizeOverworldPalettesCheckbox);
-            this.tabPage3.Controls.Add(this.randomizeDungeonPalettesCheckbox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(458, 292);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Palettes";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPalettes.Controls.Add(this.negativeModeCheckbox);
+            this.tabPalettes.Controls.Add(this.grayscaleModeCheckbox);
+            this.tabPalettes.Controls.Add(this.pukeModeCheckbox);
+            this.tabPalettes.Controls.Add(this.setBlackoutModeCheckbox);
+            this.tabPalettes.Controls.Add(this.randomizeSpritePalettesAdvancedCheckbox);
+            this.tabPalettes.Controls.Add(this.randomizeSpritePalettesBasicCheckbox);
+            this.tabPalettes.Controls.Add(this.randomizeOverworldPalettesCheckbox);
+            this.tabPalettes.Controls.Add(this.randomizeDungeonPalettesCheckbox);
+            this.tabPalettes.Location = new System.Drawing.Point(4, 22);
+            this.tabPalettes.Name = "tabPalettes";
+            this.tabPalettes.Size = new System.Drawing.Size(458, 292);
+            this.tabPalettes.TabIndex = 2;
+            this.tabPalettes.Text = "Palettes";
+            this.tabPalettes.UseVisualStyleBackColor = true;
             // 
             // negativeModeCheckbox
             // 
@@ -716,28 +726,50 @@
             this.randomizeDungeonPalettesCheckbox.UseVisualStyleBackColor = true;
             this.randomizeDungeonPalettesCheckbox.CheckedChanged += new System.EventHandler(this.randomizeDungeonPalettesCheckbox_CheckedChanged);
             // 
-            // tabPage4
+            // tabExtra
             // 
-            this.tabPage4.Controls.Add(this.beeLevelComboBox);
-            this.tabPage4.Controls.Add(this.beeMizerCheckBox);
-            this.tabPage4.Controls.Add(this.uiLanguageCombobox);
-            this.tabPage4.Controls.Add(this.lblUILanguage);
-            this.tabPage4.Controls.Add(this.heartBeepSpeedLabel);
-            this.tabPage4.Controls.Add(this.heartBeepSpeedTrackbar);
-            this.tabPage4.Controls.Add(this.lblHeartBeepSpeed);
-            this.tabPage4.Controls.Add(this.alternateGfxCheckbox);
-            this.tabPage4.Controls.Add(this.andyModeCheckbox);
-            this.tabPage4.Controls.Add(this.customBossesCheckbox);
-            this.tabPage4.Controls.Add(this.shufflePotContentsCheckbox);
-            this.tabPage4.Controls.Add(this.shuffleMusicCheckBox);
-            this.tabPage4.Controls.Add(this.debugModeCheckbox);
-            this.tabPage4.Controls.Add(this.bootlegMagicCheckbox);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(458, 292);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Extra";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabExtra.Controls.Add(this.beeLevelComboBox);
+            this.tabExtra.Controls.Add(this.beeMizerCheckBox);
+            this.tabExtra.Controls.Add(this.uiLanguageCombobox);
+            this.tabExtra.Controls.Add(this.lblUILanguage);
+            this.tabExtra.Controls.Add(this.heartBeepSpeedLabel);
+            this.tabExtra.Controls.Add(this.heartBeepSpeedTrackbar);
+            this.tabExtra.Controls.Add(this.lblHeartBeepSpeed);
+            this.tabExtra.Controls.Add(this.alternateGfxCheckbox);
+            this.tabExtra.Controls.Add(this.andyModeCheckbox);
+            this.tabExtra.Controls.Add(this.customBossesCheckbox);
+            this.tabExtra.Controls.Add(this.shufflePotContentsCheckbox);
+            this.tabExtra.Controls.Add(this.shuffleMusicCheckBox);
+            this.tabExtra.Controls.Add(this.debugModeCheckbox);
+            this.tabExtra.Controls.Add(this.bootlegMagicCheckbox);
+            this.tabExtra.Location = new System.Drawing.Point(4, 22);
+            this.tabExtra.Name = "tabExtra";
+            this.tabExtra.Size = new System.Drawing.Size(458, 292);
+            this.tabExtra.TabIndex = 3;
+            this.tabExtra.Text = "Extra";
+            this.tabExtra.UseVisualStyleBackColor = true;
+            // 
+            // beeLevelComboBox
+            // 
+            this.beeLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.beeLevelComboBox.Enabled = false;
+            this.beeLevelComboBox.FormattingEnabled = true;
+            this.beeLevelComboBox.Location = new System.Drawing.Point(83, 51);
+            this.beeLevelComboBox.Name = "beeLevelComboBox";
+            this.beeLevelComboBox.Size = new System.Drawing.Size(162, 21);
+            this.beeLevelComboBox.TabIndex = 19;
+            this.beeLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.beeLevelComboBox_SelectedIndexChanged);
+            // 
+            // beeMizerCheckBox
+            // 
+            this.beeMizerCheckBox.AutoSize = true;
+            this.beeMizerCheckBox.Location = new System.Drawing.Point(7, 53);
+            this.beeMizerCheckBox.Name = "beeMizerCheckBox";
+            this.beeMizerCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.beeMizerCheckBox.TabIndex = 18;
+            this.beeMizerCheckBox.Text = "BeeMizer";
+            this.beeMizerCheckBox.UseVisualStyleBackColor = true;
+            this.beeMizerCheckBox.CheckedChanged += new System.EventHandler(this.beeMizerCheckBox_CheckedChanged);
             // 
             // uiLanguageCombobox
             // 
@@ -873,20 +905,20 @@
             this.bootlegMagicCheckbox.UseVisualStyleBackColor = true;
             this.bootlegMagicCheckbox.CheckedChanged += new System.EventHandler(this.chkBootlegMagic_CheckedChanged);
             // 
-            // tabPage5
+            // tabGraphics
             // 
-            this.tabPage5.Controls.Add(this.swordGraphicsCombobox);
-            this.tabPage5.Controls.Add(this.lblSwordGfx);
-            this.tabPage5.Controls.Add(this.completeModificationCombobox);
-            this.tabPage5.Controls.Add(this.lblCompleteModificationGfx);
-            this.tabPage5.Controls.Add(this.shieldSpriteCombobox);
-            this.tabPage5.Controls.Add(this.lblShieldGfx);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(458, 292);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Graphics";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabGraphics.Controls.Add(this.swordGraphicsCombobox);
+            this.tabGraphics.Controls.Add(this.lblSwordGfx);
+            this.tabGraphics.Controls.Add(this.completeModificationCombobox);
+            this.tabGraphics.Controls.Add(this.lblCompleteModificationGfx);
+            this.tabGraphics.Controls.Add(this.shieldSpriteCombobox);
+            this.tabGraphics.Controls.Add(this.lblShieldGfx);
+            this.tabGraphics.Location = new System.Drawing.Point(4, 22);
+            this.tabGraphics.Name = "tabGraphics";
+            this.tabGraphics.Size = new System.Drawing.Size(458, 292);
+            this.tabGraphics.TabIndex = 4;
+            this.tabGraphics.Text = "Graphics";
+            this.tabGraphics.UseVisualStyleBackColor = true;
             // 
             // swordGraphicsCombobox
             // 
@@ -1002,27 +1034,96 @@
             0,
             0});
             // 
-            // beeMizerCheckBox
+            // tabDebug
             // 
-            this.beeMizerCheckBox.AutoSize = true;
-            this.beeMizerCheckBox.Location = new System.Drawing.Point(7, 53);
-            this.beeMizerCheckBox.Name = "beeMizerCheckBox";
-            this.beeMizerCheckBox.Size = new System.Drawing.Size(70, 17);
-            this.beeMizerCheckBox.TabIndex = 18;
-            this.beeMizerCheckBox.Text = "BeeMizer";
-            this.beeMizerCheckBox.UseVisualStyleBackColor = true;
-            this.beeMizerCheckBox.CheckedChanged += new System.EventHandler(this.beeMizerCheckBox_CheckedChanged);
+            this.tabDebug.Controls.Add(this.debugShowRoomIdInRupeeCounterCheckBox);
+            this.tabDebug.Controls.Add(this.debugSetEnemyDamageZero);
+            this.tabDebug.Controls.Add(this.debugDisableShutterDoorsCheckBox);
+            this.tabDebug.Controls.Add(this.debugForceBossComboBox);
+            this.tabDebug.Controls.Add(this.debugForceBossCheckBox);
+            this.tabDebug.Controls.Add(this.debugForceEnemyComboBox);
+            this.tabDebug.Controls.Add(this.debugForceEnemyCheckBox);
+            this.tabDebug.Location = new System.Drawing.Point(4, 22);
+            this.tabDebug.Name = "tabDebug";
+            this.tabDebug.Size = new System.Drawing.Size(458, 292);
+            this.tabDebug.TabIndex = 5;
+            this.tabDebug.Text = "Debug";
+            this.tabDebug.UseVisualStyleBackColor = true;
             // 
-            // beeLevelComboBox
+            // debugForceEnemyCheckBox
             // 
-            this.beeLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.beeLevelComboBox.Enabled = false;
-            this.beeLevelComboBox.FormattingEnabled = true;
-            this.beeLevelComboBox.Location = new System.Drawing.Point(83, 51);
-            this.beeLevelComboBox.Name = "beeLevelComboBox";
-            this.beeLevelComboBox.Size = new System.Drawing.Size(162, 21);
-            this.beeLevelComboBox.TabIndex = 19;
-            this.beeLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.beeLevelComboBox_SelectedIndexChanged);
+            this.debugForceEnemyCheckBox.AutoSize = true;
+            this.debugForceEnemyCheckBox.Location = new System.Drawing.Point(6, 7);
+            this.debugForceEnemyCheckBox.Name = "debugForceEnemyCheckBox";
+            this.debugForceEnemyCheckBox.Size = new System.Drawing.Size(110, 17);
+            this.debugForceEnemyCheckBox.TabIndex = 0;
+            this.debugForceEnemyCheckBox.Text = "Force All Enemies";
+            this.debugForceEnemyCheckBox.UseVisualStyleBackColor = true;
+            this.debugForceEnemyCheckBox.CheckedChanged += new System.EventHandler(this.debugForceEnemyCheckBox_CheckedChanged);
+            // 
+            // debugForceEnemyComboBox
+            // 
+            this.debugForceEnemyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.debugForceEnemyComboBox.FormattingEnabled = true;
+            this.debugForceEnemyComboBox.Location = new System.Drawing.Point(23, 30);
+            this.debugForceEnemyComboBox.Name = "debugForceEnemyComboBox";
+            this.debugForceEnemyComboBox.Size = new System.Drawing.Size(169, 21);
+            this.debugForceEnemyComboBox.TabIndex = 1;
+            this.debugForceEnemyComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceEnemyComboBox_SelectedIndexChanged);
+            // 
+            // debugForceBossCheckBox
+            // 
+            this.debugForceBossCheckBox.AutoSize = true;
+            this.debugForceBossCheckBox.Location = new System.Drawing.Point(6, 70);
+            this.debugForceBossCheckBox.Name = "debugForceBossCheckBox";
+            this.debugForceBossCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.debugForceBossCheckBox.TabIndex = 2;
+            this.debugForceBossCheckBox.Text = "Force All Bosses";
+            this.debugForceBossCheckBox.UseVisualStyleBackColor = true;
+            this.debugForceBossCheckBox.CheckedChanged += new System.EventHandler(this.debugForceBossCheckBox_CheckedChanged);
+            // 
+            // debugForceBossComboBox
+            // 
+            this.debugForceBossComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.debugForceBossComboBox.FormattingEnabled = true;
+            this.debugForceBossComboBox.Location = new System.Drawing.Point(23, 93);
+            this.debugForceBossComboBox.Name = "debugForceBossComboBox";
+            this.debugForceBossComboBox.Size = new System.Drawing.Size(169, 21);
+            this.debugForceBossComboBox.TabIndex = 3;
+            this.debugForceBossComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceBossComboBox_SelectedIndexChanged);
+            // 
+            // debugDisableShutterDoorsCheckBox
+            // 
+            this.debugDisableShutterDoorsCheckBox.AutoSize = true;
+            this.debugDisableShutterDoorsCheckBox.Location = new System.Drawing.Point(236, 7);
+            this.debugDisableShutterDoorsCheckBox.Name = "debugDisableShutterDoorsCheckBox";
+            this.debugDisableShutterDoorsCheckBox.Size = new System.Drawing.Size(129, 17);
+            this.debugDisableShutterDoorsCheckBox.TabIndex = 4;
+            this.debugDisableShutterDoorsCheckBox.Text = "Disable Shutter Doors";
+            this.debugDisableShutterDoorsCheckBox.UseVisualStyleBackColor = true;
+            this.debugDisableShutterDoorsCheckBox.CheckedChanged += new System.EventHandler(this.debugDisableShutterDoorsCheckBox_CheckedChanged);
+            // 
+            // debugSetEnemyDamageZero
+            // 
+            this.debugSetEnemyDamageZero.AutoSize = true;
+            this.debugSetEnemyDamageZero.Location = new System.Drawing.Point(236, 30);
+            this.debugSetEnemyDamageZero.Name = "debugSetEnemyDamageZero";
+            this.debugSetEnemyDamageZero.Size = new System.Drawing.Size(152, 17);
+            this.debugSetEnemyDamageZero.TabIndex = 5;
+            this.debugSetEnemyDamageZero.Text = "Force Enemy Damage to 0";
+            this.debugSetEnemyDamageZero.UseVisualStyleBackColor = true;
+            this.debugSetEnemyDamageZero.CheckedChanged += new System.EventHandler(this.debugSetEnemyDamageZero_CheckedChanged);
+            // 
+            // debugShowRoomIdInRupeeCounterCheckBox
+            // 
+            this.debugShowRoomIdInRupeeCounterCheckBox.AutoSize = true;
+            this.debugShowRoomIdInRupeeCounterCheckBox.Location = new System.Drawing.Point(236, 53);
+            this.debugShowRoomIdInRupeeCounterCheckBox.Name = "debugShowRoomIdInRupeeCounterCheckBox";
+            this.debugShowRoomIdInRupeeCounterCheckBox.Size = new System.Drawing.Size(218, 17);
+            this.debugShowRoomIdInRupeeCounterCheckBox.TabIndex = 6;
+            this.debugShowRoomIdInRupeeCounterCheckBox.Text = "Show Current RoomID in Rupee Counter";
+            this.debugShowRoomIdInRupeeCounterCheckBox.UseVisualStyleBackColor = true;
+            this.debugShowRoomIdInRupeeCounterCheckBox.CheckedChanged += new System.EventHandler(this.debugShowRoomIdInRupeeCounterCheckBox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1049,24 +1150,26 @@
             this.Load += new System.EventHandler(this.EnemizerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabEnemies.ResumeLayout(false);
+            this.tabEnemies.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.absorbableItemsSpawnrateTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomizeEnemiesHealthTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomizationTypeTrackbar)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabBosses.ResumeLayout(false);
+            this.tabBosses.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossDamageRandomizationTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bossHealthRandomizationTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bossRandomizationTypesTrackbar)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabPalettes.ResumeLayout(false);
+            this.tabPalettes.PerformLayout();
+            this.tabExtra.ResumeLayout(false);
+            this.tabExtra.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).EndInit();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.tabGraphics.ResumeLayout(false);
+            this.tabGraphics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).EndInit();
+            this.tabDebug.ResumeLayout(false);
+            this.tabDebug.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1085,12 +1188,12 @@
         public System.Windows.Forms.CheckBox randomizeLinksPaletteCheckbox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabEnemies;
         private System.Windows.Forms.TrackBar randomizationTypeTrackbar;
         private System.Windows.Forms.CheckBox randomizeEnemiesCheckbox;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabBosses;
+        private System.Windows.Forms.TabPage tabPalettes;
+        private System.Windows.Forms.TabPage tabExtra;
         private System.Windows.Forms.Label lblTypeOfRandomization;
         private System.Windows.Forms.Label randomizationTypeLabel;
         private System.Windows.Forms.Label healthLabel;
@@ -1140,7 +1243,7 @@
         private System.Windows.Forms.Label lblUILanguage;
         private System.Windows.Forms.CheckBox enemyDamageChaosModeCheckbox;
         private System.Windows.Forms.CheckBox shuffleEnemyDamageGroupsCheckbox;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabGraphics;
         private System.Windows.Forms.ComboBox swordGraphicsCombobox;
         private System.Windows.Forms.Label lblSwordGfx;
         private System.Windows.Forms.ComboBox completeModificationCombobox;
@@ -1151,6 +1254,14 @@
         private System.Windows.Forms.NumericUpDown numberOfBulkSeeds;
         private System.Windows.Forms.ComboBox beeLevelComboBox;
         private System.Windows.Forms.CheckBox beeMizerCheckBox;
+        private System.Windows.Forms.TabPage tabDebug;
+        private System.Windows.Forms.ComboBox debugForceBossComboBox;
+        private System.Windows.Forms.CheckBox debugForceBossCheckBox;
+        private System.Windows.Forms.ComboBox debugForceEnemyComboBox;
+        private System.Windows.Forms.CheckBox debugForceEnemyCheckBox;
+        private System.Windows.Forms.CheckBox debugDisableShutterDoorsCheckBox;
+        private System.Windows.Forms.CheckBox debugSetEnemyDamageZero;
+        private System.Windows.Forms.CheckBox debugShowRoomIdInRupeeCounterCheckBox;
     }
 }
 

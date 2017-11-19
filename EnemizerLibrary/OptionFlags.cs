@@ -67,6 +67,13 @@ namespace EnemizerLibrary
         public string SwordGraphics { get; set; } = "sword_gfx\\normal.gfx";
         public bool BeeMizer { get; set; }
         public BeeLevel BeesLevel { get; set; }
+        public bool DebugForceEnemy { get; set; }
+        public int DebugForceEnemyId { get; set; }
+        public bool DebugForceBoss { get; set; }
+        public BossType DebugForceBossId { get; set; }
+        public bool DebugOpenShutterDoors { get; set; }
+        public bool DebugForceEnemyDamageZero { get; set; }
+        public bool DebugShowRoomIdInRupeeCounter { get; set; }
 
         public OptionFlags()
         {

@@ -98,19 +98,26 @@ namespace EnemizerLibrary
 
                 BossRandomizer br;
 
-                switch (optionFlags.RandomizeBossesType)
+                if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                 {
-                    case RandomizeBossesType.Basic:
-                        br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
-                        break;
-                    case RandomizeBossesType.Normal:
-                        br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
-                        break;
-                    case RandomizeBossesType.Chaos:
-                        br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
-                        break;
-                    default:
-                        throw new Exception("Unknown Boss Randomization Type");
+                    br = new DebugBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                }
+                else
+                {
+                    switch (optionFlags.RandomizeBossesType)
+                    {
+                        case RandomizeBossesType.Basic:
+                            br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                            break;
+                        case RandomizeBossesType.Normal:
+                            br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                            break;
+                        case RandomizeBossesType.Chaos:
+                            br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                            break;
+                        default:
+                            throw new Exception("Unknown Boss Randomization Type");
+                    }
                 }
                 br.RandomizeRom(this.ROM_DATA, spriteGroupCollection, spriteRequirements);
             }
@@ -289,10 +296,8 @@ namespace EnemizerLibrary
 
             if (optionFlags.DebugMode)
             {
-                // put the room id in the rupee slot
-                this.ROM_DATA[0x1017A9] = 0xA0;
-                this.ROM_DATA[0x1017A9 + 1] = 0x00;
-                this.ROM_DATA[0x1017A9 + 2] = 0x7E;
+                var debug = new DebugMode(this.ROM_DATA, this.optionFlags);
+                debug.SetDebugMode();
             }
 
             return this.ROM_DATA;

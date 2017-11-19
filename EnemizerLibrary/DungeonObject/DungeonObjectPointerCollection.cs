@@ -118,6 +118,57 @@ namespace EnemizerLibrary
             }
         }
 
+        // used for debug
+        public void MakeShutterDoorsNormal()
+        {
+            foreach(var door in Data.Layer1DoorObjects.ToList())
+            {
+                if (trapDoors.Contains(door.Bytes[1]))
+                {
+                    IsModified = true;
+                    if (door.Bytes[1] == 0x44)
+                    {
+                        door.Bytes[1] = 0x40;
+                    }
+                    else
+                    {
+                        door.Bytes[1] = 0x00;
+                    }
+                }
+            }
+            foreach (var door in Data.Layer2DoorObjects.ToList())
+            {
+                if (trapDoors.Contains(door.Bytes[1]))
+                {
+                    IsModified = true;
+                    if (door.Bytes[1] == 0x44)
+                    {
+                        door.Bytes[1] = 0x40;
+                    }
+                    else
+                    {
+                        door.Bytes[1] = 0x00;
+                    }
+                }
+            }
+            foreach (var door in Data.Layer3DoorObjects.ToList())
+            {
+                if (trapDoors.Contains(door.Bytes[1]))
+                {
+                    IsModified = true;
+                    if (door.Bytes[1] == 0x44)
+                    {
+                        door.Bytes[1] = 0x40;
+                    }
+                    else
+                    {
+                        door.Bytes[1] = 0x00;
+                    }
+                }
+            }
+        }
+        byte[] trapDoors = { 0x16, 0x18, 0x36, 0x38, 0x44 }; //, 0x48, 0x4A };
+
         public int WriteRom(RomData romData, int newAddess)
         {
             //this.pointerAddress = newAddess;

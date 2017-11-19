@@ -85,7 +85,7 @@ namespace EnemizerLibrary
             {
                 var dungeon = dungeonQueue.Dequeue();
 
-                if (optionFlags.DebugMode)
+                if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                 {
                     dungeon.SelectedBoss = new KholdstareBoss();
                     //dungeon.SelectedBoss = new TrinexxBoss();
