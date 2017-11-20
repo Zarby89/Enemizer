@@ -74,6 +74,7 @@ namespace EnemizerLibrary
         public bool DebugOpenShutterDoors { get; set; }
         public bool DebugForceEnemyDamageZero { get; set; }
         public bool DebugShowRoomIdInRupeeCounter { get; set; }
+        public bool OHKO { get; set; }
 
         public OptionFlags()
         {
@@ -192,6 +193,14 @@ namespace EnemizerLibrary
             this.BeeMizer = Convert.ToBoolean(optionBytes[i++]);
             this.BeesLevel = (BeeLevel)optionBytes[i++];
 
+            this.DebugForceEnemy = Convert.ToBoolean(optionBytes[i++]);
+            this.DebugForceEnemyId = optionBytes[i++];
+            this.DebugForceBoss = Convert.ToBoolean(optionBytes[i++]);
+            this.DebugForceBossId = (BossType)optionBytes[i++];
+            this.DebugOpenShutterDoors = Convert.ToBoolean(optionBytes[i++]);
+            this.DebugForceEnemyDamageZero = Convert.ToBoolean(optionBytes[i++]);
+            this.DebugShowRoomIdInRupeeCounter = Convert.ToBoolean(optionBytes[i++]);
+            this.OHKO = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -286,6 +295,15 @@ namespace EnemizerLibrary
             ret[i++] = 0; // (byte)this.SwordGraphics;
             ret[i++] = Convert.ToByte(this.BeeMizer);
             ret[i++] = Convert.ToByte(this.BeesLevel);
+
+            ret[i++] = Convert.ToByte(this.DebugForceEnemy);
+            ret[i++] = Convert.ToByte(this.DebugForceEnemyId);
+            ret[i++] = Convert.ToByte(this.DebugForceBoss);
+            ret[i++] = Convert.ToByte(this.DebugForceBossId);
+            ret[i++] = Convert.ToByte(this.DebugOpenShutterDoors);
+            ret[i++] = Convert.ToByte(this.DebugForceEnemyDamageZero);
+            ret[i++] = Convert.ToByte(this.DebugShowRoomIdInRupeeCounter);
+            ret[i++] = Convert.ToByte(this.OHKO);
 
             return ret;
         }

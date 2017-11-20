@@ -167,7 +167,7 @@ namespace EnemizerLibrary
                 Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthRangeAmount);
             }
 
-            if (optionFlags.RandomizeEnemyDamage)
+            if (optionFlags.RandomizeEnemyDamage && !optionFlags.OHKO)
             {
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
@@ -178,9 +178,14 @@ namespace EnemizerLibrary
                 randomizePots(seed); //default on for now
             }
 
-            if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups)
+            if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups && !optionFlags.OHKO)
             {
                 ShuffleDamageGroups();
+            }
+
+            if (optionFlags.OHKO)
+            {
+                SetOHKO();
             }
 
             //reset seed for all these values so they can be optional
@@ -383,6 +388,26 @@ namespace EnemizerLibrary
                 this.ROM_DATA[0x3742D + 2 + (i * 3)] = redmail; //red mail
             }
             
+        }
+
+        void SetOHKO()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0xff; //green mail
+                this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0xff; //blue mail
+                this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0xff; //red mail
+            }
+
+            for (int j = 0; j < 0xF3; j++)
+            {
+                //if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+                //    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
+                //    && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
+                //{
+                    this.ROM_DATA[0x6B266 + j] = 0xff;
+                //}
+            }
         }
 
         void SetBossGfx()
