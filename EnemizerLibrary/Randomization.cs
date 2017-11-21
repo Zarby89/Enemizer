@@ -392,22 +392,38 @@ namespace EnemizerLibrary
 
         void SetOHKO()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0xff; //green mail
-                this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0xff; //blue mail
-                this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0xff; //red mail
-            }
+            // set ohko-countdown
+            this.ROM_DATA[0x180190] = 0x01; // countdown
+            this.ROM_DATA[0x180191] = 0x02; // ohko
 
-            for (int j = 0; j < 0xF3; j++)
-            {
-                //if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
-                //    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
-                //    && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
-                //{
-                    this.ROM_DATA[0x6B266 + j] = 0xff;
-                //}
-            }
+            // set red clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180200, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set blue clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180204, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set green clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180208, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set start time = 0
+            this.ROM_DATA.WriteDataChunk(0x18020C, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0xff; //green mail
+            //    this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0xff; //blue mail
+            //    this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0xff; //red mail
+            //}
+
+            //for (int j = 0; j < 0xF3; j++)
+            //{
+            //    //if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+            //    //    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
+            //    //    && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
+            //    //{
+            //        this.ROM_DATA[0x6B266 + j] = 0xff;
+            //    //}
+            //}
         }
 
         void SetBossGfx()
