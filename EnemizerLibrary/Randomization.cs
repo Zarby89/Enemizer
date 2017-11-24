@@ -335,6 +335,10 @@ namespace EnemizerLibrary
 
         private void RandomizeTileTrapFloorTile(RomData romData, Random rand)
         {
+            romData[0xE7A5] = 0x88;
+            romData[0xE7A5 + 1] = 0x01;
+            romData[0xF3BED] = 0x12;
+
             /*
             // spike tiles
             0xF3BED : 0C
