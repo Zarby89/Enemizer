@@ -294,6 +294,13 @@ namespace Enemizer
             spawnrateLabel.Text = $"{config.OptionFlags.AbsorbableSpawnRate}%";
 
             LoadAbsorbableItemsChecklistFromConfig();
+
+            ohkoCheckBox.Checked = config.OptionFlags.OHKO;
+
+            randomizeEnemiesDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && !config.OptionFlags.OHKO;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked && !config.OptionFlags.OHKO;
         }
 
         private void UpdateBossesTabUIFromConfig()
@@ -359,6 +366,9 @@ namespace Enemizer
             beeMizerCheckBox.Checked = config.OptionFlags.BeeMizer;
             beeLevelComboBox.Enabled = config.OptionFlags.BeeMizer;
             beeLevelComboBox.SelectedIndex = (int)config.OptionFlags.BeesLevel;
+
+            randomizeTileTrapPatternCheckBox.Checked = config.OptionFlags.RandomizeTileTrapPattern;
+            randomizeTileTrapFloorTile.Checked = config.OptionFlags.RandomizeTileTrapFloorTile;
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -960,6 +970,26 @@ namespace Enemizer
         private void debugShowRoomIdInRupeeCounterCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.DebugShowRoomIdInRupeeCounter = debugShowRoomIdInRupeeCounterCheckBox.Checked;
+        }
+
+        private void ohkoCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.OHKO = ohkoCheckBox.Checked;
+
+            randomizeEnemiesDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && !config.OptionFlags.OHKO;
+            enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked && !config.OptionFlags.OHKO;
+        }
+
+        private void randomizeTileTrapPatternCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeTileTrapPattern = randomizeTileTrapPatternCheckBox.Checked;
+        }
+
+        private void randomizeTileTrapFloorTile_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeTileTrapFloorTile = randomizeTileTrapFloorTile.Checked;
         }
     }
 

@@ -162,6 +162,7 @@
     <Compile Include="Graph\ExitConstants.cs" />
     <Compile Include="DungeonObject\SubType2Object.cs" />
     <Compile Include="RoomTags.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="XkasSymbols.cs" />

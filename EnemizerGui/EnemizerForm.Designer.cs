@@ -41,6 +41,7 @@
             this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabEnemies = new System.Windows.Forms.TabPage();
+            this.ohkoCheckBox = new System.Windows.Forms.CheckBox();
             this.enemyDamageChaosModeCheckbox = new System.Windows.Forms.CheckBox();
             this.shuffleEnemyDamageGroupsCheckbox = new System.Windows.Forms.CheckBox();
             this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
@@ -102,19 +103,21 @@
             this.lblCompleteModificationGfx = new System.Windows.Forms.Label();
             this.shieldSpriteCombobox = new System.Windows.Forms.ComboBox();
             this.lblShieldGfx = new System.Windows.Forms.Label();
+            this.tabDebug = new System.Windows.Forms.TabPage();
+            this.debugShowRoomIdInRupeeCounterCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugSetEnemyDamageZero = new System.Windows.Forms.CheckBox();
+            this.debugDisableShutterDoorsCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugForceBossComboBox = new System.Windows.Forms.ComboBox();
+            this.debugForceBossCheckBox = new System.Windows.Forms.CheckBox();
+            this.debugForceEnemyComboBox = new System.Windows.Forms.ComboBox();
+            this.debugForceEnemyCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblSeedNumber = new System.Windows.Forms.Label();
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
-            this.tabDebug = new System.Windows.Forms.TabPage();
-            this.debugForceEnemyCheckBox = new System.Windows.Forms.CheckBox();
-            this.debugForceEnemyComboBox = new System.Windows.Forms.ComboBox();
-            this.debugForceBossCheckBox = new System.Windows.Forms.CheckBox();
-            this.debugForceBossComboBox = new System.Windows.Forms.ComboBox();
-            this.debugDisableShutterDoorsCheckBox = new System.Windows.Forms.CheckBox();
-            this.debugSetEnemyDamageZero = new System.Windows.Forms.CheckBox();
-            this.debugShowRoomIdInRupeeCounterCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -129,8 +132,8 @@
             this.tabExtra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).BeginInit();
             this.tabGraphics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).BeginInit();
             this.tabDebug.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).BeginInit();
             this.SuspendLayout();
             // 
             // generateRomButton
@@ -239,6 +242,7 @@
             // 
             // tabEnemies
             // 
+            this.tabEnemies.Controls.Add(this.ohkoCheckBox);
             this.tabEnemies.Controls.Add(this.enemyDamageChaosModeCheckbox);
             this.tabEnemies.Controls.Add(this.shuffleEnemyDamageGroupsCheckbox);
             this.tabEnemies.Controls.Add(this.chkRandomizeBushEnemyChance);
@@ -264,6 +268,17 @@
             this.tabEnemies.TabIndex = 0;
             this.tabEnemies.Text = "Enemies";
             this.tabEnemies.UseVisualStyleBackColor = true;
+            // 
+            // ohkoCheckBox
+            // 
+            this.ohkoCheckBox.AutoSize = true;
+            this.ohkoCheckBox.Location = new System.Drawing.Point(179, 176);
+            this.ohkoCheckBox.Name = "ohkoCheckBox";
+            this.ohkoCheckBox.Size = new System.Drawing.Size(57, 17);
+            this.ohkoCheckBox.TabIndex = 20;
+            this.ohkoCheckBox.Text = "OHKO";
+            this.ohkoCheckBox.UseVisualStyleBackColor = true;
+            this.ohkoCheckBox.CheckedChanged += new System.EventHandler(this.ohkoCheckBox_CheckedChanged);
             // 
             // enemyDamageChaosModeCheckbox
             // 
@@ -728,6 +743,8 @@
             // 
             // tabExtra
             // 
+            this.tabExtra.Controls.Add(this.randomizeTileTrapFloorTile);
+            this.tabExtra.Controls.Add(this.randomizeTileTrapPatternCheckBox);
             this.tabExtra.Controls.Add(this.beeLevelComboBox);
             this.tabExtra.Controls.Add(this.beeMizerCheckBox);
             this.tabExtra.Controls.Add(this.uiLanguageCombobox);
@@ -984,6 +1001,97 @@
             this.lblShieldGfx.TabIndex = 18;
             this.lblShieldGfx.Text = "Shield Gfx :";
             // 
+            // tabDebug
+            // 
+            this.tabDebug.Controls.Add(this.debugShowRoomIdInRupeeCounterCheckBox);
+            this.tabDebug.Controls.Add(this.debugSetEnemyDamageZero);
+            this.tabDebug.Controls.Add(this.debugDisableShutterDoorsCheckBox);
+            this.tabDebug.Controls.Add(this.debugForceBossComboBox);
+            this.tabDebug.Controls.Add(this.debugForceBossCheckBox);
+            this.tabDebug.Controls.Add(this.debugForceEnemyComboBox);
+            this.tabDebug.Controls.Add(this.debugForceEnemyCheckBox);
+            this.tabDebug.Location = new System.Drawing.Point(4, 22);
+            this.tabDebug.Name = "tabDebug";
+            this.tabDebug.Size = new System.Drawing.Size(458, 292);
+            this.tabDebug.TabIndex = 5;
+            this.tabDebug.Text = "Debug";
+            this.tabDebug.UseVisualStyleBackColor = true;
+            // 
+            // debugShowRoomIdInRupeeCounterCheckBox
+            // 
+            this.debugShowRoomIdInRupeeCounterCheckBox.AutoSize = true;
+            this.debugShowRoomIdInRupeeCounterCheckBox.Location = new System.Drawing.Point(236, 53);
+            this.debugShowRoomIdInRupeeCounterCheckBox.Name = "debugShowRoomIdInRupeeCounterCheckBox";
+            this.debugShowRoomIdInRupeeCounterCheckBox.Size = new System.Drawing.Size(218, 17);
+            this.debugShowRoomIdInRupeeCounterCheckBox.TabIndex = 6;
+            this.debugShowRoomIdInRupeeCounterCheckBox.Text = "Show Current RoomID in Rupee Counter";
+            this.debugShowRoomIdInRupeeCounterCheckBox.UseVisualStyleBackColor = true;
+            this.debugShowRoomIdInRupeeCounterCheckBox.CheckedChanged += new System.EventHandler(this.debugShowRoomIdInRupeeCounterCheckBox_CheckedChanged);
+            // 
+            // debugSetEnemyDamageZero
+            // 
+            this.debugSetEnemyDamageZero.AutoSize = true;
+            this.debugSetEnemyDamageZero.Location = new System.Drawing.Point(236, 30);
+            this.debugSetEnemyDamageZero.Name = "debugSetEnemyDamageZero";
+            this.debugSetEnemyDamageZero.Size = new System.Drawing.Size(152, 17);
+            this.debugSetEnemyDamageZero.TabIndex = 5;
+            this.debugSetEnemyDamageZero.Text = "Force Enemy Damage to 0";
+            this.debugSetEnemyDamageZero.UseVisualStyleBackColor = true;
+            this.debugSetEnemyDamageZero.CheckedChanged += new System.EventHandler(this.debugSetEnemyDamageZero_CheckedChanged);
+            // 
+            // debugDisableShutterDoorsCheckBox
+            // 
+            this.debugDisableShutterDoorsCheckBox.AutoSize = true;
+            this.debugDisableShutterDoorsCheckBox.Location = new System.Drawing.Point(236, 7);
+            this.debugDisableShutterDoorsCheckBox.Name = "debugDisableShutterDoorsCheckBox";
+            this.debugDisableShutterDoorsCheckBox.Size = new System.Drawing.Size(129, 17);
+            this.debugDisableShutterDoorsCheckBox.TabIndex = 4;
+            this.debugDisableShutterDoorsCheckBox.Text = "Disable Shutter Doors";
+            this.debugDisableShutterDoorsCheckBox.UseVisualStyleBackColor = true;
+            this.debugDisableShutterDoorsCheckBox.CheckedChanged += new System.EventHandler(this.debugDisableShutterDoorsCheckBox_CheckedChanged);
+            // 
+            // debugForceBossComboBox
+            // 
+            this.debugForceBossComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.debugForceBossComboBox.FormattingEnabled = true;
+            this.debugForceBossComboBox.Location = new System.Drawing.Point(23, 93);
+            this.debugForceBossComboBox.Name = "debugForceBossComboBox";
+            this.debugForceBossComboBox.Size = new System.Drawing.Size(169, 21);
+            this.debugForceBossComboBox.TabIndex = 3;
+            this.debugForceBossComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceBossComboBox_SelectedIndexChanged);
+            // 
+            // debugForceBossCheckBox
+            // 
+            this.debugForceBossCheckBox.AutoSize = true;
+            this.debugForceBossCheckBox.Location = new System.Drawing.Point(6, 70);
+            this.debugForceBossCheckBox.Name = "debugForceBossCheckBox";
+            this.debugForceBossCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.debugForceBossCheckBox.TabIndex = 2;
+            this.debugForceBossCheckBox.Text = "Force All Bosses";
+            this.debugForceBossCheckBox.UseVisualStyleBackColor = true;
+            this.debugForceBossCheckBox.CheckedChanged += new System.EventHandler(this.debugForceBossCheckBox_CheckedChanged);
+            // 
+            // debugForceEnemyComboBox
+            // 
+            this.debugForceEnemyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.debugForceEnemyComboBox.FormattingEnabled = true;
+            this.debugForceEnemyComboBox.Location = new System.Drawing.Point(23, 30);
+            this.debugForceEnemyComboBox.Name = "debugForceEnemyComboBox";
+            this.debugForceEnemyComboBox.Size = new System.Drawing.Size(169, 21);
+            this.debugForceEnemyComboBox.TabIndex = 1;
+            this.debugForceEnemyComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceEnemyComboBox_SelectedIndexChanged);
+            // 
+            // debugForceEnemyCheckBox
+            // 
+            this.debugForceEnemyCheckBox.AutoSize = true;
+            this.debugForceEnemyCheckBox.Location = new System.Drawing.Point(6, 7);
+            this.debugForceEnemyCheckBox.Name = "debugForceEnemyCheckBox";
+            this.debugForceEnemyCheckBox.Size = new System.Drawing.Size(110, 17);
+            this.debugForceEnemyCheckBox.TabIndex = 0;
+            this.debugForceEnemyCheckBox.Text = "Force All Enemies";
+            this.debugForceEnemyCheckBox.UseVisualStyleBackColor = true;
+            this.debugForceEnemyCheckBox.CheckedChanged += new System.EventHandler(this.debugForceEnemyCheckBox_CheckedChanged);
+            // 
             // lblSeedNumber
             // 
             this.lblSeedNumber.AutoSize = true;
@@ -1034,96 +1142,27 @@
             0,
             0});
             // 
-            // tabDebug
+            // randomizeTileTrapPatternCheckBox
             // 
-            this.tabDebug.Controls.Add(this.debugShowRoomIdInRupeeCounterCheckBox);
-            this.tabDebug.Controls.Add(this.debugSetEnemyDamageZero);
-            this.tabDebug.Controls.Add(this.debugDisableShutterDoorsCheckBox);
-            this.tabDebug.Controls.Add(this.debugForceBossComboBox);
-            this.tabDebug.Controls.Add(this.debugForceBossCheckBox);
-            this.tabDebug.Controls.Add(this.debugForceEnemyComboBox);
-            this.tabDebug.Controls.Add(this.debugForceEnemyCheckBox);
-            this.tabDebug.Location = new System.Drawing.Point(4, 22);
-            this.tabDebug.Name = "tabDebug";
-            this.tabDebug.Size = new System.Drawing.Size(458, 292);
-            this.tabDebug.TabIndex = 5;
-            this.tabDebug.Text = "Debug";
-            this.tabDebug.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapPatternCheckBox.AutoSize = true;
+            this.randomizeTileTrapPatternCheckBox.Location = new System.Drawing.Point(7, 76);
+            this.randomizeTileTrapPatternCheckBox.Name = "randomizeTileTrapPatternCheckBox";
+            this.randomizeTileTrapPatternCheckBox.Size = new System.Drawing.Size(161, 17);
+            this.randomizeTileTrapPatternCheckBox.TabIndex = 20;
+            this.randomizeTileTrapPatternCheckBox.Text = "Randomize Tile Trap Pattern";
+            this.randomizeTileTrapPatternCheckBox.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapPatternCheckBox.CheckedChanged += new System.EventHandler(this.randomizeTileTrapPatternCheckBox_CheckedChanged);
             // 
-            // debugForceEnemyCheckBox
+            // randomizeTileTrapFloorTile
             // 
-            this.debugForceEnemyCheckBox.AutoSize = true;
-            this.debugForceEnemyCheckBox.Location = new System.Drawing.Point(6, 7);
-            this.debugForceEnemyCheckBox.Name = "debugForceEnemyCheckBox";
-            this.debugForceEnemyCheckBox.Size = new System.Drawing.Size(110, 17);
-            this.debugForceEnemyCheckBox.TabIndex = 0;
-            this.debugForceEnemyCheckBox.Text = "Force All Enemies";
-            this.debugForceEnemyCheckBox.UseVisualStyleBackColor = true;
-            this.debugForceEnemyCheckBox.CheckedChanged += new System.EventHandler(this.debugForceEnemyCheckBox_CheckedChanged);
-            // 
-            // debugForceEnemyComboBox
-            // 
-            this.debugForceEnemyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.debugForceEnemyComboBox.FormattingEnabled = true;
-            this.debugForceEnemyComboBox.Location = new System.Drawing.Point(23, 30);
-            this.debugForceEnemyComboBox.Name = "debugForceEnemyComboBox";
-            this.debugForceEnemyComboBox.Size = new System.Drawing.Size(169, 21);
-            this.debugForceEnemyComboBox.TabIndex = 1;
-            this.debugForceEnemyComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceEnemyComboBox_SelectedIndexChanged);
-            // 
-            // debugForceBossCheckBox
-            // 
-            this.debugForceBossCheckBox.AutoSize = true;
-            this.debugForceBossCheckBox.Location = new System.Drawing.Point(6, 70);
-            this.debugForceBossCheckBox.Name = "debugForceBossCheckBox";
-            this.debugForceBossCheckBox.Size = new System.Drawing.Size(104, 17);
-            this.debugForceBossCheckBox.TabIndex = 2;
-            this.debugForceBossCheckBox.Text = "Force All Bosses";
-            this.debugForceBossCheckBox.UseVisualStyleBackColor = true;
-            this.debugForceBossCheckBox.CheckedChanged += new System.EventHandler(this.debugForceBossCheckBox_CheckedChanged);
-            // 
-            // debugForceBossComboBox
-            // 
-            this.debugForceBossComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.debugForceBossComboBox.FormattingEnabled = true;
-            this.debugForceBossComboBox.Location = new System.Drawing.Point(23, 93);
-            this.debugForceBossComboBox.Name = "debugForceBossComboBox";
-            this.debugForceBossComboBox.Size = new System.Drawing.Size(169, 21);
-            this.debugForceBossComboBox.TabIndex = 3;
-            this.debugForceBossComboBox.SelectedIndexChanged += new System.EventHandler(this.debugForceBossComboBox_SelectedIndexChanged);
-            // 
-            // debugDisableShutterDoorsCheckBox
-            // 
-            this.debugDisableShutterDoorsCheckBox.AutoSize = true;
-            this.debugDisableShutterDoorsCheckBox.Location = new System.Drawing.Point(236, 7);
-            this.debugDisableShutterDoorsCheckBox.Name = "debugDisableShutterDoorsCheckBox";
-            this.debugDisableShutterDoorsCheckBox.Size = new System.Drawing.Size(129, 17);
-            this.debugDisableShutterDoorsCheckBox.TabIndex = 4;
-            this.debugDisableShutterDoorsCheckBox.Text = "Disable Shutter Doors";
-            this.debugDisableShutterDoorsCheckBox.UseVisualStyleBackColor = true;
-            this.debugDisableShutterDoorsCheckBox.CheckedChanged += new System.EventHandler(this.debugDisableShutterDoorsCheckBox_CheckedChanged);
-            // 
-            // debugSetEnemyDamageZero
-            // 
-            this.debugSetEnemyDamageZero.AutoSize = true;
-            this.debugSetEnemyDamageZero.Location = new System.Drawing.Point(236, 30);
-            this.debugSetEnemyDamageZero.Name = "debugSetEnemyDamageZero";
-            this.debugSetEnemyDamageZero.Size = new System.Drawing.Size(152, 17);
-            this.debugSetEnemyDamageZero.TabIndex = 5;
-            this.debugSetEnemyDamageZero.Text = "Force Enemy Damage to 0";
-            this.debugSetEnemyDamageZero.UseVisualStyleBackColor = true;
-            this.debugSetEnemyDamageZero.CheckedChanged += new System.EventHandler(this.debugSetEnemyDamageZero_CheckedChanged);
-            // 
-            // debugShowRoomIdInRupeeCounterCheckBox
-            // 
-            this.debugShowRoomIdInRupeeCounterCheckBox.AutoSize = true;
-            this.debugShowRoomIdInRupeeCounterCheckBox.Location = new System.Drawing.Point(236, 53);
-            this.debugShowRoomIdInRupeeCounterCheckBox.Name = "debugShowRoomIdInRupeeCounterCheckBox";
-            this.debugShowRoomIdInRupeeCounterCheckBox.Size = new System.Drawing.Size(218, 17);
-            this.debugShowRoomIdInRupeeCounterCheckBox.TabIndex = 6;
-            this.debugShowRoomIdInRupeeCounterCheckBox.Text = "Show Current RoomID in Rupee Counter";
-            this.debugShowRoomIdInRupeeCounterCheckBox.UseVisualStyleBackColor = true;
-            this.debugShowRoomIdInRupeeCounterCheckBox.CheckedChanged += new System.EventHandler(this.debugShowRoomIdInRupeeCounterCheckBox_CheckedChanged);
+            this.randomizeTileTrapFloorTile.AutoSize = true;
+            this.randomizeTileTrapFloorTile.Location = new System.Drawing.Point(7, 99);
+            this.randomizeTileTrapFloorTile.Name = "randomizeTileTrapFloorTile";
+            this.randomizeTileTrapFloorTile.Size = new System.Drawing.Size(197, 17);
+            this.randomizeTileTrapFloorTile.TabIndex = 21;
+            this.randomizeTileTrapFloorTile.Text = "Randomize Tile Trap Floor Tile Type";
+            this.randomizeTileTrapFloorTile.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapFloorTile.CheckedChanged += new System.EventHandler(this.randomizeTileTrapFloorTile_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1167,9 +1206,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.heartBeepSpeedTrackbar)).EndInit();
             this.tabGraphics.ResumeLayout(false);
             this.tabGraphics.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).EndInit();
             this.tabDebug.ResumeLayout(false);
             this.tabDebug.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfBulkSeeds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1262,6 +1301,9 @@
         private System.Windows.Forms.CheckBox debugDisableShutterDoorsCheckBox;
         private System.Windows.Forms.CheckBox debugSetEnemyDamageZero;
         private System.Windows.Forms.CheckBox debugShowRoomIdInRupeeCounterCheckBox;
+        private System.Windows.Forms.CheckBox ohkoCheckBox;
+        private System.Windows.Forms.CheckBox randomizeTileTrapFloorTile;
+        private System.Windows.Forms.CheckBox randomizeTileTrapPatternCheckBox;
     }
 }
 

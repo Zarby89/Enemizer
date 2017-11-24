@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 //using System.Windows.Forms;
 
 namespace EnemizerLibrary
@@ -167,20 +168,34 @@ namespace EnemizerLibrary
                 Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthRangeAmount);
             }
 
-            if (optionFlags.RandomizeEnemyDamage)
+            if (optionFlags.RandomizeEnemyDamage && !optionFlags.OHKO)
             {
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            
+            if(optionFlags.RandomizeTileTrapPattern)
+            {
+                RandomizeTileTrapPattern(this.ROM_DATA, this.rand);
+            }
+
+            if (optionFlags.RandomizeTileTrapFloorTile)
+            {
+                RandomizeTileTrapFloorTile(this.ROM_DATA, this.rand);
+            }
+
             if (optionFlags.RandomizePots)
             {
                 randomizePots(seed); //default on for now
             }
 
-            if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups)
+            if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups && !optionFlags.OHKO)
             {
                 ShuffleDamageGroups();
+            }
+
+            if (optionFlags.OHKO)
+            {
+                SetOHKO();
             }
 
             //reset seed for all these values so they can be optional
@@ -304,6 +319,51 @@ namespace EnemizerLibrary
 
         }
 
+        private void RandomizeTileTrapPattern(RomData romData, Random rand)
+        {
+            List<string> skins = Directory.GetFiles("tiles\\").ToList();
+            if (skins.Count > 0)
+            {
+                var tileData = JsonConvert.DeserializeObject<TileCollection>(File.ReadAllText(skins[rand.Next(skins.Count)]));
+
+                if (tileData != null)
+                {
+                    tileData.UpdateRom(romData);
+                }
+            }
+        }
+
+        private void RandomizeTileTrapFloorTile(RomData romData, Random rand)
+        {
+            romData[0xE7A5] = 0x88;
+            romData[0xE7A5 + 1] = 0x01;
+            romData[0xF3BED] = 0x12;
+
+            /*
+            // spike tiles
+            0xF3BED : 0C
+            0xE79F : 88 01
+
+            // make trinexx ice head shoot spikes
+            0xE7A5  : 0x88 0x01
+            0xF3BED : 0x12
+
+            dw $00E0 ; 0x00 - pit (floor, rather?) (empty space?)
+            dw $0ADE ; 0x02 - spike block
+            dw $05AA ; 0x04 - pit
+            dw $0198 ; 0x06 - hole from floor tile lifting up and attacking you
+            dw $0210 ; 0x08 - ice man tile part 1
+            dw $0218 ; 0x0A - ice man tile part 2
+            dw $1F3A ; 0x0C - warp tiles (WRONG: I think this one is unused. Could be interesting to know what the tiles were intended for.)
+            dw $0EAA ; 0x0E - Perky trigger Tile
+            dw $0EB2 ; 0x10 - Depressed trigger tile
+            dw $0140 ; 0x12 - Trinexx ice tile (pretty sure, but not certain)
+
+            // flying popo
+            0x4BA57 : 4E
+            */
+        }
+
         private int ResetEnemizerRom()
         {
             // loaded an enemizer rom. let's just reset the bosses and load the saved options so we can try to debug roms
@@ -383,6 +443,42 @@ namespace EnemizerLibrary
                 this.ROM_DATA[0x3742D + 2 + (i * 3)] = redmail; //red mail
             }
             
+        }
+
+        void SetOHKO()
+        {
+            // set ohko-countdown
+            this.ROM_DATA[0x180190] = 0x01; // countdown
+            this.ROM_DATA[0x180191] = 0x02; // ohko
+
+            // set red clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180200, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set blue clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180204, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set green clocks = 0
+            this.ROM_DATA.WriteDataChunk(0x180208, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            // set start time = 0
+            this.ROM_DATA.WriteDataChunk(0x18020C, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    this.ROM_DATA[0x3742D + 0 + (i * 3)] = 0xff; //green mail
+            //    this.ROM_DATA[0x3742D + 1 + (i * 3)] = 0xff; //blue mail
+            //    this.ROM_DATA[0x3742D + 2 + (i * 3)] = 0xff; //red mail
+            //}
+
+            //for (int j = 0; j < 0xF3; j++)
+            //{
+            //    //if (j != 0x54 && j != 0x09 && j != 0x53 && j != 0x88 && j != 0x89 && j != 0x53 && j != 0x8C && j != 0x92
+            //    //    && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3 && j != 0x8D
+            //    //    && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
+            //    //{
+            //        this.ROM_DATA[0x6B266 + j] = 0xff;
+            //    //}
+            //}
         }
 
         void SetBossGfx()
