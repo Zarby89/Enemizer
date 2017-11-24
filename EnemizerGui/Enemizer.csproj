@@ -366,7 +366,7 @@
     <Content Include="tiles\NO.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="tiles\panda python.json">
+    <Content Include="tiles\JK.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="tiles\panda shocked emoji.json">
@@ -450,6 +450,7 @@
     <Content Include="tiles\ze.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="tiles\moldorm vertical.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
