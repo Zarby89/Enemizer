@@ -75,6 +75,8 @@ namespace EnemizerLibrary
         public bool DebugForceEnemyDamageZero { get; set; }
         public bool DebugShowRoomIdInRupeeCounter { get; set; }
         public bool OHKO { get; set; }
+        public bool RandomizeTileTrapPattern { get; set; }
+        public bool RandomizeTileTrapFloorTile { get; set; }
 
         public OptionFlags()
         {
@@ -201,6 +203,8 @@ namespace EnemizerLibrary
             this.DebugForceEnemyDamageZero = Convert.ToBoolean(optionBytes[i++]);
             this.DebugShowRoomIdInRupeeCounter = Convert.ToBoolean(optionBytes[i++]);
             this.OHKO = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeTileTrapPattern = Convert.ToBoolean(optionBytes[i++]);
+            this.RandomizeTileTrapFloorTile = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -304,6 +308,8 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.DebugForceEnemyDamageZero);
             ret[i++] = Convert.ToByte(this.DebugShowRoomIdInRupeeCounter);
             ret[i++] = Convert.ToByte(this.OHKO);
+            ret[i++] = Convert.ToByte(this.RandomizeTileTrapPattern);
+            ret[i++] = Convert.ToByte(this.RandomizeTileTrapFloorTile);
 
             return ret;
         }

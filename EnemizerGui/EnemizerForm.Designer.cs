@@ -41,6 +41,7 @@
             this.randomizeLinksPaletteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabEnemies = new System.Windows.Forms.TabPage();
+            this.ohkoCheckBox = new System.Windows.Forms.CheckBox();
             this.enemyDamageChaosModeCheckbox = new System.Windows.Forms.CheckBox();
             this.shuffleEnemyDamageGroupsCheckbox = new System.Windows.Forms.CheckBox();
             this.chkRandomizeBushEnemyChance = new System.Windows.Forms.CheckBox();
@@ -115,7 +116,8 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
-            this.ohkoCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -266,6 +268,17 @@
             this.tabEnemies.TabIndex = 0;
             this.tabEnemies.Text = "Enemies";
             this.tabEnemies.UseVisualStyleBackColor = true;
+            // 
+            // ohkoCheckBox
+            // 
+            this.ohkoCheckBox.AutoSize = true;
+            this.ohkoCheckBox.Location = new System.Drawing.Point(179, 176);
+            this.ohkoCheckBox.Name = "ohkoCheckBox";
+            this.ohkoCheckBox.Size = new System.Drawing.Size(57, 17);
+            this.ohkoCheckBox.TabIndex = 20;
+            this.ohkoCheckBox.Text = "OHKO";
+            this.ohkoCheckBox.UseVisualStyleBackColor = true;
+            this.ohkoCheckBox.CheckedChanged += new System.EventHandler(this.ohkoCheckBox_CheckedChanged);
             // 
             // enemyDamageChaosModeCheckbox
             // 
@@ -730,6 +743,8 @@
             // 
             // tabExtra
             // 
+            this.tabExtra.Controls.Add(this.randomizeTileTrapFloorTile);
+            this.tabExtra.Controls.Add(this.randomizeTileTrapPatternCheckBox);
             this.tabExtra.Controls.Add(this.beeLevelComboBox);
             this.tabExtra.Controls.Add(this.beeMizerCheckBox);
             this.tabExtra.Controls.Add(this.uiLanguageCombobox);
@@ -1127,16 +1142,27 @@
             0,
             0});
             // 
-            // ohkoCheckBox
+            // randomizeTileTrapPatternCheckBox
             // 
-            this.ohkoCheckBox.AutoSize = true;
-            this.ohkoCheckBox.Location = new System.Drawing.Point(179, 176);
-            this.ohkoCheckBox.Name = "ohkoCheckBox";
-            this.ohkoCheckBox.Size = new System.Drawing.Size(57, 17);
-            this.ohkoCheckBox.TabIndex = 20;
-            this.ohkoCheckBox.Text = "OHKO";
-            this.ohkoCheckBox.UseVisualStyleBackColor = true;
-            this.ohkoCheckBox.CheckedChanged += new System.EventHandler(this.ohkoCheckBox_CheckedChanged);
+            this.randomizeTileTrapPatternCheckBox.AutoSize = true;
+            this.randomizeTileTrapPatternCheckBox.Location = new System.Drawing.Point(7, 76);
+            this.randomizeTileTrapPatternCheckBox.Name = "randomizeTileTrapPatternCheckBox";
+            this.randomizeTileTrapPatternCheckBox.Size = new System.Drawing.Size(161, 17);
+            this.randomizeTileTrapPatternCheckBox.TabIndex = 20;
+            this.randomizeTileTrapPatternCheckBox.Text = "Randomize Tile Trap Pattern";
+            this.randomizeTileTrapPatternCheckBox.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapPatternCheckBox.CheckedChanged += new System.EventHandler(this.randomizeTileTrapPatternCheckBox_CheckedChanged);
+            // 
+            // randomizeTileTrapFloorTile
+            // 
+            this.randomizeTileTrapFloorTile.AutoSize = true;
+            this.randomizeTileTrapFloorTile.Location = new System.Drawing.Point(7, 99);
+            this.randomizeTileTrapFloorTile.Name = "randomizeTileTrapFloorTile";
+            this.randomizeTileTrapFloorTile.Size = new System.Drawing.Size(197, 17);
+            this.randomizeTileTrapFloorTile.TabIndex = 21;
+            this.randomizeTileTrapFloorTile.Text = "Randomize Tile Trap Floor Tile Type";
+            this.randomizeTileTrapFloorTile.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapFloorTile.CheckedChanged += new System.EventHandler(this.randomizeTileTrapFloorTile_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1276,6 +1302,8 @@
         private System.Windows.Forms.CheckBox debugSetEnemyDamageZero;
         private System.Windows.Forms.CheckBox debugShowRoomIdInRupeeCounterCheckBox;
         private System.Windows.Forms.CheckBox ohkoCheckBox;
+        private System.Windows.Forms.CheckBox randomizeTileTrapFloorTile;
+        private System.Windows.Forms.CheckBox randomizeTileTrapPatternCheckBox;
     }
 }
 

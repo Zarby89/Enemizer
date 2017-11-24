@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 //using System.Windows.Forms;
 
 namespace EnemizerLibrary
@@ -172,7 +173,16 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            
+            if(optionFlags.RandomizeTileTrapPattern)
+            {
+                RandomizeTileTrapPattern(this.ROM_DATA, this.rand);
+            }
+
+            if (optionFlags.RandomizeTileTrapFloorTile)
+            {
+                RandomizeTileTrapFloorTile(this.ROM_DATA, this.rand);
+            }
+
             if (optionFlags.RandomizePots)
             {
                 randomizePots(seed); //default on for now
@@ -307,6 +317,47 @@ namespace EnemizerLibrary
 
             return this.ROM_DATA;
 
+        }
+
+        private void RandomizeTileTrapPattern(RomData romData, Random rand)
+        {
+            List<string> skins = Directory.GetFiles("tiles\\").ToList();
+            if (skins.Count > 0)
+            {
+                var tileData = JsonConvert.DeserializeObject<TileCollection>(File.ReadAllText(skins[rand.Next(skins.Count)]));
+
+                if (tileData != null)
+                {
+                    tileData.UpdateRom(romData);
+                }
+            }
+        }
+
+        private void RandomizeTileTrapFloorTile(RomData romData, Random rand)
+        {
+            /*
+            // spike tiles
+            0xF3BED : 0C
+            0xE79F : 88 01
+
+            // make trinexx ice head shoot spikes
+            0xE7A5  : 0x88 0x01
+            0xF3BED : 0x12
+
+            dw $00E0 ; 0x00 - pit (floor, rather?) (empty space?)
+            dw $0ADE ; 0x02 - spike block
+            dw $05AA ; 0x04 - pit
+            dw $0198 ; 0x06 - hole from floor tile lifting up and attacking you
+            dw $0210 ; 0x08 - ice man tile part 1
+            dw $0218 ; 0x0A - ice man tile part 2
+            dw $1F3A ; 0x0C - warp tiles (WRONG: I think this one is unused. Could be interesting to know what the tiles were intended for.)
+            dw $0EAA ; 0x0E - Perky trigger Tile
+            dw $0EB2 ; 0x10 - Depressed trigger tile
+            dw $0140 ; 0x12 - Trinexx ice tile (pretty sure, but not certain)
+
+            // flying popo
+            0x4BA57 : 4E
+            */
         }
 
         private int ResetEnemizerRom()

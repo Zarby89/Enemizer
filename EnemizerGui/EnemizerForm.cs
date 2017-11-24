@@ -366,6 +366,9 @@ namespace Enemizer
             beeMizerCheckBox.Checked = config.OptionFlags.BeeMizer;
             beeLevelComboBox.Enabled = config.OptionFlags.BeeMizer;
             beeLevelComboBox.SelectedIndex = (int)config.OptionFlags.BeesLevel;
+
+            randomizeTileTrapPatternCheckBox.Checked = config.OptionFlags.RandomizeTileTrapPattern;
+            randomizeTileTrapFloorTile.Checked = config.OptionFlags.RandomizeTileTrapFloorTile;
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -977,6 +980,16 @@ namespace Enemizer
             allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
             shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && !config.OptionFlags.OHKO;
             enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked && !config.OptionFlags.OHKO;
+        }
+
+        private void randomizeTileTrapPatternCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeTileTrapPattern = randomizeTileTrapPatternCheckBox.Checked;
+        }
+
+        private void randomizeTileTrapFloorTile_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeTileTrapFloorTile = randomizeTileTrapFloorTile.Checked;
         }
     }
 
