@@ -162,10 +162,15 @@ namespace EnemizerLibrary
                 spriteGroupCollection.UpdateRom();
             }
 
+            // do this before randomize HP so we can set a new default for thief HP
+            if (optionFlags.AllowKillableThief)
+            {
+                SetKillableThief(this.ROM_DATA);
+            }
 
             if (optionFlags.RandomizeEnemyHealthRange)
             {
-                Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthRangeAmount);
+                Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthType);
             }
 
             if (optionFlags.RandomizeEnemyDamage && !optionFlags.OHKO)
@@ -270,8 +275,6 @@ namespace EnemizerLibrary
                 }
             }
 
-
-
             //Remove Trinexx Ice Floor : 
             this.ROM_DATA[0x04B37E] = AssemblyConstants.NoOp;
             this.ROM_DATA[0x04B37E+1] = AssemblyConstants.NoOp;
@@ -317,6 +320,17 @@ namespace EnemizerLibrary
 
             return this.ROM_DATA;
 
+        }
+
+        private void SetKillableThief(RomData romData)
+        {
+            romData[XkasSymbols.Instance.Symbols["notItemSprite_Mimic"] + 4] = SpriteConstants.ThiefSprite;
+
+            if (ROM_DATA[0x6B173 + SpriteConstants.ThiefSprite] != 0xFF)
+            {
+                int new_hp = 4; // same as soldier
+                ROM_DATA[0x6B173 + SpriteConstants.ThiefSprite] = (byte)new_hp;
+            }
         }
 
         private void RandomizeTileTrapPattern(RomData romData, Random rand)
@@ -1305,8 +1319,32 @@ namespace EnemizerLibrary
 
         }
 
-        public void Randomize_Sprites_HP(int rangeValue)
+        public void Randomize_Sprites_HP(RandomizeEnemyHPType type)
         {
+            int maxAdd = 0;
+            int minHP = 1;
+            switch(type)
+            {
+                case RandomizeEnemyHPType.Easy:
+                    minHP = 1;
+                    maxAdd = 4;
+                    break;
+                case RandomizeEnemyHPType.Medium:
+                    minHP = 2;
+                    maxAdd = 15;
+                    break;
+                case RandomizeEnemyHPType.Hard:
+                    minHP = 2;
+                    maxAdd = 25;
+                    break;
+                case RandomizeEnemyHPType.Patty:
+                    minHP = 4;
+                    maxAdd = 50;
+                    break;
+                default:
+                    return;
+            }
+
             for (int j = 0; j < 0xF3; j++)
             {
                 if (ROM_DATA[0x6B173 + j] != 0xFF)
@@ -1315,15 +1353,8 @@ namespace EnemizerLibrary
                         && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
                        && j != 0x8D && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                     {
-                        int new_hp = ROM_DATA[0x6B173 + j] + rand.Next(-rangeValue, rangeValue);
-                        if (new_hp >= 0xFF)
-                        {
-                            new_hp = 0xFF;
-                        }
-                        if (new_hp <= 0)
-                        {
-                            new_hp = 1;
-                        }
+                        // +/- straight value
+                        int new_hp = rand.Next(minHP, maxAdd);
                         ROM_DATA[0x6B173 + j] = (byte)new_hp;
                     }
                 }

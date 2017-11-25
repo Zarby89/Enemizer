@@ -14,7 +14,7 @@ namespace EnemizerLibrary
         public bool RandomizeBushEnemyChance { get; set; } = true;
 
         public bool RandomizeEnemyHealthRange { get; set; }
-        public int RandomizeEnemyHealthRangeAmount { get; set; }
+        public RandomizeEnemyHPType RandomizeEnemyHealthType { get; set; }
 
         public bool RandomizeEnemyDamage { get; set; }
         public bool AllowEnemyZeroDamage { get; set; }
@@ -77,6 +77,7 @@ namespace EnemizerLibrary
         public bool OHKO { get; set; }
         public bool RandomizeTileTrapPattern { get; set; }
         public bool RandomizeTileTrapFloorTile { get; set; }
+        public bool AllowKillableThief { get; set; }
 
         public OptionFlags()
         {
@@ -90,7 +91,7 @@ namespace EnemizerLibrary
             this.RandomizeEnemiesType = (RandomizeEnemiesType)optionBytes[i++];
             this.RandomizeBushEnemyChance = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeEnemyHealthRange = Convert.ToBoolean(optionBytes[i++]);
-            this.RandomizeEnemyHealthRangeAmount = optionBytes[i++];
+            this.RandomizeEnemyHealthType = (RandomizeEnemyHPType)optionBytes[i++];
             this.RandomizeEnemyDamage = Convert.ToBoolean(optionBytes[i++]);
             this.AllowEnemyZeroDamage = Convert.ToBoolean(optionBytes[i++]);
             this.EasyModeEscape = Convert.ToBoolean(optionBytes[i++]);
@@ -205,6 +206,7 @@ namespace EnemizerLibrary
             this.OHKO = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeTileTrapPattern = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeTileTrapFloorTile = Convert.ToBoolean(optionBytes[i++]);
+            this.AllowKillableThief = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -215,7 +217,7 @@ namespace EnemizerLibrary
             ret[i++] = (byte)this.RandomizeEnemiesType;
             ret[i++] = Convert.ToByte(this.RandomizeBushEnemyChance);
             ret[i++] = Convert.ToByte(this.RandomizeEnemyHealthRange);
-            ret[i++] = (byte)this.RandomizeEnemyHealthRangeAmount;
+            ret[i++] = (byte)this.RandomizeEnemyHealthType;
             ret[i++] = Convert.ToByte(this.RandomizeEnemyDamage);
             ret[i++] = Convert.ToByte(this.AllowEnemyZeroDamage);
             ret[i++] = Convert.ToByte(this.EasyModeEscape);
@@ -310,6 +312,7 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.OHKO);
             ret[i++] = Convert.ToByte(this.RandomizeTileTrapPattern);
             ret[i++] = Convert.ToByte(this.RandomizeTileTrapFloorTile);
+            ret[i++] = Convert.ToByte(this.AllowKillableThief);
 
             return ret;
         }
@@ -322,6 +325,14 @@ namespace EnemizerLibrary
         Hard,
         Chaos,
         Insanity
+    }
+
+    public enum RandomizeEnemyHPType
+    {
+        Easy,
+        Medium,
+        Hard,
+        Patty
     }
 
     public enum RandomizeBossesType
@@ -375,7 +386,7 @@ namespace EnemizerLibrary
         Fairy,
         [Description("Key")]
         Key,
-        [Description("Big Key(Test)")]
+        [Description("Big Key")]
         BigKey
     }
 
