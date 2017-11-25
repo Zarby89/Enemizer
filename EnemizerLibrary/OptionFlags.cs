@@ -14,7 +14,7 @@ namespace EnemizerLibrary
         public bool RandomizeBushEnemyChance { get; set; } = true;
 
         public bool RandomizeEnemyHealthRange { get; set; }
-        public int RandomizeEnemyHealthRangeAmount { get; set; }
+        public RandomizeEnemyHPType RandomizeEnemyHealthType { get; set; }
 
         public bool RandomizeEnemyDamage { get; set; }
         public bool AllowEnemyZeroDamage { get; set; }
@@ -91,7 +91,7 @@ namespace EnemizerLibrary
             this.RandomizeEnemiesType = (RandomizeEnemiesType)optionBytes[i++];
             this.RandomizeBushEnemyChance = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeEnemyHealthRange = Convert.ToBoolean(optionBytes[i++]);
-            this.RandomizeEnemyHealthRangeAmount = optionBytes[i++];
+            this.RandomizeEnemyHealthType = (RandomizeEnemyHPType)optionBytes[i++];
             this.RandomizeEnemyDamage = Convert.ToBoolean(optionBytes[i++]);
             this.AllowEnemyZeroDamage = Convert.ToBoolean(optionBytes[i++]);
             this.EasyModeEscape = Convert.ToBoolean(optionBytes[i++]);
@@ -217,7 +217,7 @@ namespace EnemizerLibrary
             ret[i++] = (byte)this.RandomizeEnemiesType;
             ret[i++] = Convert.ToByte(this.RandomizeBushEnemyChance);
             ret[i++] = Convert.ToByte(this.RandomizeEnemyHealthRange);
-            ret[i++] = (byte)this.RandomizeEnemyHealthRangeAmount;
+            ret[i++] = (byte)this.RandomizeEnemyHealthType;
             ret[i++] = Convert.ToByte(this.RandomizeEnemyDamage);
             ret[i++] = Convert.ToByte(this.AllowEnemyZeroDamage);
             ret[i++] = Convert.ToByte(this.EasyModeEscape);
@@ -327,6 +327,14 @@ namespace EnemizerLibrary
         Insanity
     }
 
+    public enum RandomizeEnemyHPType
+    {
+        Easy,
+        Medium,
+        Hard,
+        Patty
+    }
+
     public enum RandomizeBossesType
     {
         Basic,
@@ -378,7 +386,7 @@ namespace EnemizerLibrary
         Fairy,
         [Description("Key")]
         Key,
-        [Description("Big Key(Test)")]
+        [Description("Big Key")]
         BigKey
     }
 

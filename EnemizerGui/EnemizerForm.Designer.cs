@@ -348,7 +348,7 @@
             "Arrow (10)",
             "Fairy",
             "Key",
-            "Big Key(Test)"});
+            "Big Key"});
             this.absorbableItemsChecklist.Location = new System.Drawing.Point(265, 74);
             this.absorbableItemsChecklist.Name = "absorbableItemsChecklist";
             this.absorbableItemsChecklist.Size = new System.Drawing.Size(140, 214);
@@ -424,16 +424,16 @@
             this.healthLabel.AutoSize = true;
             this.healthLabel.Location = new System.Drawing.Point(146, 140);
             this.healthLabel.Name = "healthLabel";
-            this.healthLabel.Size = new System.Drawing.Size(22, 13);
+            this.healthLabel.Size = new System.Drawing.Size(30, 13);
             this.healthLabel.TabIndex = 6;
-            this.healthLabel.Text = " ±0";
+            this.healthLabel.Text = "Easy";
             // 
             // randomizeEnemiesHealthTrackbar
             // 
             this.randomizeEnemiesHealthTrackbar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.randomizeEnemiesHealthTrackbar.Enabled = false;
             this.randomizeEnemiesHealthTrackbar.Location = new System.Drawing.Point(27, 138);
-            this.randomizeEnemiesHealthTrackbar.Maximum = 20;
+            this.randomizeEnemiesHealthTrackbar.Maximum = 3;
             this.randomizeEnemiesHealthTrackbar.Name = "randomizeEnemiesHealthTrackbar";
             this.randomizeEnemiesHealthTrackbar.Size = new System.Drawing.Size(113, 45);
             this.randomizeEnemiesHealthTrackbar.TabIndex = 5;

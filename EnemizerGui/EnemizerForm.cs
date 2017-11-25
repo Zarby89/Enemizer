@@ -267,12 +267,12 @@ namespace Enemizer
             randomizeEnemiesHealthCheckbox.Checked = config.OptionFlags.RandomizeEnemyHealthRange;
             randomizeEnemiesHealthTrackbar.Enabled = config.OptionFlags.RandomizeEnemyHealthRange;
 
-            if(config.OptionFlags.RandomizeEnemyHealthRangeAmount > randomizeEnemiesHealthTrackbar.Maximum)
+            if((int)config.OptionFlags.RandomizeEnemyHealthType > randomizeEnemiesHealthTrackbar.Maximum)
             {
-                config.OptionFlags.RandomizeEnemyHealthRangeAmount = randomizeEnemiesHealthTrackbar.Maximum;
+                config.OptionFlags.RandomizeEnemyHealthType = RandomizeEnemyHPType.Easy;
             }
-            randomizeEnemiesHealthTrackbar.Value = config.OptionFlags.RandomizeEnemyHealthRangeAmount; // TODO: don't hardcode magic numbers
-            healthLabel.Text = $"±{config.OptionFlags.RandomizeEnemyHealthRangeAmount}";
+            randomizeEnemiesHealthTrackbar.Value = (int)config.OptionFlags.RandomizeEnemyHealthType;
+            healthLabel.Text = ((RandomizeEnemyHPType)randomizeEnemiesHealthTrackbar.Value).ToString();
 
             randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
@@ -661,9 +661,11 @@ namespace Enemizer
 
         private void randomizeEnemiesHealthTrackbar_ValueChanged(object sender, EventArgs e)
         {
-            var healthMin = (randomizeEnemiesHealthTrackbar.Value);
-            healthLabel.Text = $"±{healthMin}";
-            config.OptionFlags.RandomizeEnemyHealthRangeAmount = healthMin;
+            //var healthMin = (randomizeEnemiesHealthTrackbar.Value);
+            //healthLabel.Text = $"±{healthMin}";
+            //config.OptionFlags.RandomizeEnemyHealthType = healthMin;
+            config.OptionFlags.RandomizeEnemyHealthType = (RandomizeEnemyHPType)randomizeEnemiesHealthTrackbar.Value;
+            healthLabel.Text = ((RandomizeEnemyHPType)randomizeEnemiesHealthTrackbar.Value).ToString();
         }
 
         private void randomizeEnemiesDamageCheckbox_CheckedChanged(object sender, EventArgs e)

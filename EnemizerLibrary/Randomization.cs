@@ -170,7 +170,7 @@ namespace EnemizerLibrary
 
             if (optionFlags.RandomizeEnemyHealthRange)
             {
-                Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthRangeAmount);
+                Randomize_Sprites_HP(optionFlags.RandomizeEnemyHealthType);
             }
 
             if (optionFlags.RandomizeEnemyDamage && !optionFlags.OHKO)
@@ -1319,8 +1319,32 @@ namespace EnemizerLibrary
 
         }
 
-        public void Randomize_Sprites_HP(int rangeValue)
+        public void Randomize_Sprites_HP(RandomizeEnemyHPType type)
         {
+            int maxAdd = 0;
+            int minHP = 1;
+            switch(type)
+            {
+                case RandomizeEnemyHPType.Easy:
+                    minHP = 1;
+                    maxAdd = 4;
+                    break;
+                case RandomizeEnemyHPType.Medium:
+                    minHP = 2;
+                    maxAdd = 15;
+                    break;
+                case RandomizeEnemyHPType.Hard:
+                    minHP = 2;
+                    maxAdd = 25;
+                    break;
+                case RandomizeEnemyHPType.Patty:
+                    minHP = 4;
+                    maxAdd = 50;
+                    break;
+                default:
+                    return;
+            }
+
             for (int j = 0; j < 0xF3; j++)
             {
                 if (ROM_DATA[0x6B173 + j] != 0xFF)
@@ -1329,20 +1353,8 @@ namespace EnemizerLibrary
                         && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
                        && j != 0x8D && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                     {
-                        // +/- %
-                        //float adjust = rand.Next(-rangeValue, rangeValue) / 100f;
-                        //int new_hp = ROM_DATA[0x6B173 + j] + (int)(adjust * ROM_DATA[0x6B173 + j]);
-
                         // +/- straight value
-                        int new_hp = ROM_DATA[0x6B173 + j] + rand.Next(-rangeValue, rangeValue);
-                        if (new_hp >= 0xFF)
-                        {
-                            new_hp = 0xFF;
-                        }
-                        if (new_hp <= 0)
-                        {
-                            new_hp = 1;
-                        }
+                        int new_hp = rand.Next(minHP, maxAdd);
                         ROM_DATA[0x6B173 + j] = (byte)new_hp;
                     }
                 }
