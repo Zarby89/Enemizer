@@ -894,6 +894,7 @@ namespace EnemizerLibrary
             RoomIdConstants.R66_HyruleCastle_6RopesRoom, // only if two stack, but why push it
             RoomIdConstants.R64_AgahnimsTower_FinalBridgeRoom, // spikes are bad in here
             RoomIdConstants.R70_SwampPalace_CompassChestRoom,
+            RoomIdConstants.R73_SkullWoods_GibdoTorchPuzzleRoom,
             RoomIdConstants.R75_PalaceofDarkness_Warps_SouthMimicsRoom, // TODO: test
             RoomIdConstants.R78_IcePalace_Bomb_JumpRoom,
             RoomIdConstants.R85_CastleSecretEntrance_UncleDeathRoom, // TODO: test
