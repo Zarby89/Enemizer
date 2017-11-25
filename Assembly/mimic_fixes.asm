@@ -33,7 +33,7 @@ SpritePrep_EyegoreNew:
         LDA $0CAA, X : AND #$FB : ORA #$80 : STA $0CAA, X ; STZ $0CAA, X
         ;INC $0DA0, X
         JSL $1EC70D ;0xF470D set eyegore to be mimic (.is_goriya?)
-    RTL
+RTL
 }
 
 resetSprite_Mimic:
@@ -48,5 +48,25 @@ resetSprite_Mimic:
     
     CMP.b #$7A
 
-    RTL
+RTL
+}
+
+notItemSprite_Mimic:
+{ ; don't change this unless you go update SetKillableThief in c# side
+    LDA $0E20, X
+    CMP.b #$B8 : BEQ .changeSpriteId ; thief #$C4
+    CMP.b #$B8 : BNE .notMimic2      ; mimic
+.changeSpriteId
+    LDA #$83
+
+.notMimic2
+
+    ; restore code
+    REP #$20 : ASL #2
+    ;REP #$20 : ASL #4 : ORA $0CF2 : PHX : REP #$10 : TAX
+    ;SEP #$20
+    ;LDA $7F6000, X : STA $02
+    ;SEP #$10
+
+RTL
 }

@@ -162,6 +162,11 @@ namespace EnemizerLibrary
                 spriteGroupCollection.UpdateRom();
             }
 
+            // do this before randomize HP so we can set a new default for thief HP
+            if (optionFlags.AllowKillableThief)
+            {
+                SetKillableThief(this.ROM_DATA);
+            }
 
             if (optionFlags.RandomizeEnemyHealthRange)
             {
@@ -270,8 +275,6 @@ namespace EnemizerLibrary
                 }
             }
 
-
-
             //Remove Trinexx Ice Floor : 
             this.ROM_DATA[0x04B37E] = AssemblyConstants.NoOp;
             this.ROM_DATA[0x04B37E+1] = AssemblyConstants.NoOp;
@@ -317,6 +320,17 @@ namespace EnemizerLibrary
 
             return this.ROM_DATA;
 
+        }
+
+        private void SetKillableThief(RomData romData)
+        {
+            romData[XkasSymbols.Instance.Symbols["notItemSprite_Mimic"] + 4] = SpriteConstants.ThiefSprite;
+
+            if (ROM_DATA[0x6B173 + SpriteConstants.ThiefSprite] != 0xFF)
+            {
+                int new_hp = 4; // same as soldier
+                ROM_DATA[0x6B173 + SpriteConstants.ThiefSprite] = (byte)new_hp;
+            }
         }
 
         private void RandomizeTileTrapPattern(RomData romData, Random rand)
@@ -1315,6 +1329,11 @@ namespace EnemizerLibrary
                         && j != 0x70 && j != 0xBD && j != 0xBE && j != 0xBF && j != 0xCB && j != 0xCE && j != 0xA2 && j != 0xA3
                        && j != 0x8D && j != 0x7A && j != 0x7B && j != 0xCC && j != 0xCD && j != 0xA4 && j != 0xD6 && j != 0xD7)
                     {
+                        // +/- %
+                        //float adjust = rand.Next(-rangeValue, rangeValue) / 100f;
+                        //int new_hp = ROM_DATA[0x6B173 + j] + (int)(adjust * ROM_DATA[0x6B173 + j]);
+
+                        // +/- straight value
                         int new_hp = ROM_DATA[0x6B173 + j] + rand.Next(-rangeValue, rangeValue);
                         if (new_hp >= 0xFF)
                         {

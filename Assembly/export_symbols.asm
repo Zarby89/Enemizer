@@ -17,5 +17,13 @@ export.label DMAKholdstare
 export.label swordgfx
 export.label shieldgfx
 export.label Spawn_Bees
+export.label notItemSprite_Mimic
+;export.label 
+;export.label 
+;export.label 
+;export.label 
+;export.label 
+;export.label 
+;export.label 
 ;export.label 
 export.close

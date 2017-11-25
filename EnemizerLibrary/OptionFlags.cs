@@ -77,6 +77,7 @@ namespace EnemizerLibrary
         public bool OHKO { get; set; }
         public bool RandomizeTileTrapPattern { get; set; }
         public bool RandomizeTileTrapFloorTile { get; set; }
+        public bool AllowKillableThief { get; set; }
 
         public OptionFlags()
         {
@@ -205,6 +206,7 @@ namespace EnemizerLibrary
             this.OHKO = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeTileTrapPattern = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeTileTrapFloorTile = Convert.ToBoolean(optionBytes[i++]);
+            this.AllowKillableThief = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -310,6 +312,7 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.OHKO);
             ret[i++] = Convert.ToByte(this.RandomizeTileTrapPattern);
             ret[i++] = Convert.ToByte(this.RandomizeTileTrapFloorTile);
+            ret[i++] = Convert.ToByte(this.AllowKillableThief);
 
             return ret;
         }

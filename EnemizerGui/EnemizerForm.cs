@@ -267,8 +267,12 @@ namespace Enemizer
             randomizeEnemiesHealthCheckbox.Checked = config.OptionFlags.RandomizeEnemyHealthRange;
             randomizeEnemiesHealthTrackbar.Enabled = config.OptionFlags.RandomizeEnemyHealthRange;
 
-            randomizeEnemiesHealthTrackbar.Value = config.OptionFlags.RandomizeEnemyHealthRangeAmount / 2; // TODO: don't hardcode magic numbers
-            healthLabel.Text = $"±{config.OptionFlags.RandomizeEnemyHealthRangeAmount}%";
+            if(config.OptionFlags.RandomizeEnemyHealthRangeAmount > randomizeEnemiesHealthTrackbar.Maximum)
+            {
+                config.OptionFlags.RandomizeEnemyHealthRangeAmount = randomizeEnemiesHealthTrackbar.Maximum;
+            }
+            randomizeEnemiesHealthTrackbar.Value = config.OptionFlags.RandomizeEnemyHealthRangeAmount; // TODO: don't hardcode magic numbers
+            healthLabel.Text = $"±{config.OptionFlags.RandomizeEnemyHealthRangeAmount}";
 
             randomizeEnemiesDamageCheckbox.Checked = config.OptionFlags.RandomizeEnemyDamage;
             allowZeroDamageCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage;
@@ -369,6 +373,8 @@ namespace Enemizer
 
             randomizeTileTrapPatternCheckBox.Checked = config.OptionFlags.RandomizeTileTrapPattern;
             randomizeTileTrapFloorTile.Checked = config.OptionFlags.RandomizeTileTrapFloorTile;
+
+            allowKillableThiefCheckBox.Checked = config.OptionFlags.AllowKillableThief;
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -655,8 +661,8 @@ namespace Enemizer
 
         private void randomizeEnemiesHealthTrackbar_ValueChanged(object sender, EventArgs e)
         {
-            var healthMin = (2 * randomizeEnemiesHealthTrackbar.Value);
-            healthLabel.Text = $"±{healthMin}%";
+            var healthMin = (randomizeEnemiesHealthTrackbar.Value);
+            healthLabel.Text = $"±{healthMin}";
             config.OptionFlags.RandomizeEnemyHealthRangeAmount = healthMin;
         }
 
@@ -990,6 +996,11 @@ namespace Enemizer
         private void randomizeTileTrapFloorTile_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.RandomizeTileTrapFloorTile = randomizeTileTrapFloorTile.Checked;
+        }
+
+        private void allowKillableThiefCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AllowKillableThief = allowKillableThiefCheckBox.Checked;
         }
     }
 

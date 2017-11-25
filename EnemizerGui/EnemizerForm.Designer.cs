@@ -82,6 +82,8 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabExtra = new System.Windows.Forms.TabPage();
+            this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
+            this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
             this.beeLevelComboBox = new System.Windows.Forms.ComboBox();
             this.beeMizerCheckBox = new System.Windows.Forms.CheckBox();
             this.uiLanguageCombobox = new System.Windows.Forms.ComboBox();
@@ -116,8 +118,7 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
-            this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
-            this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
+            this.allowKillableThiefCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -423,9 +424,9 @@
             this.healthLabel.AutoSize = true;
             this.healthLabel.Location = new System.Drawing.Point(146, 140);
             this.healthLabel.Name = "healthLabel";
-            this.healthLabel.Size = new System.Drawing.Size(30, 13);
+            this.healthLabel.Size = new System.Drawing.Size(22, 13);
             this.healthLabel.TabIndex = 6;
-            this.healthLabel.Text = " ±0%";
+            this.healthLabel.Text = " ±0";
             // 
             // randomizeEnemiesHealthTrackbar
             // 
@@ -743,6 +744,7 @@
             // 
             // tabExtra
             // 
+            this.tabExtra.Controls.Add(this.allowKillableThiefCheckBox);
             this.tabExtra.Controls.Add(this.randomizeTileTrapFloorTile);
             this.tabExtra.Controls.Add(this.randomizeTileTrapPatternCheckBox);
             this.tabExtra.Controls.Add(this.beeLevelComboBox);
@@ -765,6 +767,28 @@
             this.tabExtra.TabIndex = 3;
             this.tabExtra.Text = "Extra";
             this.tabExtra.UseVisualStyleBackColor = true;
+            // 
+            // randomizeTileTrapFloorTile
+            // 
+            this.randomizeTileTrapFloorTile.AutoSize = true;
+            this.randomizeTileTrapFloorTile.Location = new System.Drawing.Point(7, 99);
+            this.randomizeTileTrapFloorTile.Name = "randomizeTileTrapFloorTile";
+            this.randomizeTileTrapFloorTile.Size = new System.Drawing.Size(197, 17);
+            this.randomizeTileTrapFloorTile.TabIndex = 21;
+            this.randomizeTileTrapFloorTile.Text = "Randomize Tile Trap Floor Tile Type";
+            this.randomizeTileTrapFloorTile.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapFloorTile.CheckedChanged += new System.EventHandler(this.randomizeTileTrapFloorTile_CheckedChanged);
+            // 
+            // randomizeTileTrapPatternCheckBox
+            // 
+            this.randomizeTileTrapPatternCheckBox.AutoSize = true;
+            this.randomizeTileTrapPatternCheckBox.Location = new System.Drawing.Point(7, 76);
+            this.randomizeTileTrapPatternCheckBox.Name = "randomizeTileTrapPatternCheckBox";
+            this.randomizeTileTrapPatternCheckBox.Size = new System.Drawing.Size(161, 17);
+            this.randomizeTileTrapPatternCheckBox.TabIndex = 20;
+            this.randomizeTileTrapPatternCheckBox.Text = "Randomize Tile Trap Pattern";
+            this.randomizeTileTrapPatternCheckBox.UseVisualStyleBackColor = true;
+            this.randomizeTileTrapPatternCheckBox.CheckedChanged += new System.EventHandler(this.randomizeTileTrapPatternCheckBox_CheckedChanged);
             // 
             // beeLevelComboBox
             // 
@@ -811,7 +835,7 @@
             // heartBeepSpeedLabel
             // 
             this.heartBeepSpeedLabel.AutoSize = true;
-            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 164);
+            this.heartBeepSpeedLabel.Location = new System.Drawing.Point(381, 213);
             this.heartBeepSpeedLabel.Name = "heartBeepSpeedLabel";
             this.heartBeepSpeedLabel.Size = new System.Drawing.Size(26, 13);
             this.heartBeepSpeedLabel.TabIndex = 15;
@@ -821,7 +845,7 @@
             // 
             this.heartBeepSpeedTrackbar.BackColor = System.Drawing.SystemColors.Window;
             this.heartBeepSpeedTrackbar.LargeChange = 1;
-            this.heartBeepSpeedTrackbar.Location = new System.Drawing.Point(219, 164);
+            this.heartBeepSpeedTrackbar.Location = new System.Drawing.Point(219, 213);
             this.heartBeepSpeedTrackbar.Maximum = 3;
             this.heartBeepSpeedTrackbar.Name = "heartBeepSpeedTrackbar";
             this.heartBeepSpeedTrackbar.Size = new System.Drawing.Size(156, 45);
@@ -832,7 +856,7 @@
             // lblHeartBeepSpeed
             // 
             this.lblHeartBeepSpeed.AutoSize = true;
-            this.lblHeartBeepSpeed.Location = new System.Drawing.Point(216, 148);
+            this.lblHeartBeepSpeed.Location = new System.Drawing.Point(216, 197);
             this.lblHeartBeepSpeed.Name = "lblHeartBeepSpeed";
             this.lblHeartBeepSpeed.Size = new System.Drawing.Size(95, 13);
             this.lblHeartBeepSpeed.TabIndex = 13;
@@ -888,7 +912,7 @@
             // shuffleMusicCheckBox
             // 
             this.shuffleMusicCheckBox.AutoSize = true;
-            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 148);
+            this.shuffleMusicCheckBox.Location = new System.Drawing.Point(7, 197);
             this.shuffleMusicCheckBox.Name = "shuffleMusicCheckBox";
             this.shuffleMusicCheckBox.Size = new System.Drawing.Size(177, 17);
             this.shuffleMusicCheckBox.TabIndex = 9;
@@ -1142,27 +1166,16 @@
             0,
             0});
             // 
-            // randomizeTileTrapPatternCheckBox
+            // allowKillableThiefCheckBox
             // 
-            this.randomizeTileTrapPatternCheckBox.AutoSize = true;
-            this.randomizeTileTrapPatternCheckBox.Location = new System.Drawing.Point(7, 76);
-            this.randomizeTileTrapPatternCheckBox.Name = "randomizeTileTrapPatternCheckBox";
-            this.randomizeTileTrapPatternCheckBox.Size = new System.Drawing.Size(161, 17);
-            this.randomizeTileTrapPatternCheckBox.TabIndex = 20;
-            this.randomizeTileTrapPatternCheckBox.Text = "Randomize Tile Trap Pattern";
-            this.randomizeTileTrapPatternCheckBox.UseVisualStyleBackColor = true;
-            this.randomizeTileTrapPatternCheckBox.CheckedChanged += new System.EventHandler(this.randomizeTileTrapPatternCheckBox_CheckedChanged);
-            // 
-            // randomizeTileTrapFloorTile
-            // 
-            this.randomizeTileTrapFloorTile.AutoSize = true;
-            this.randomizeTileTrapFloorTile.Location = new System.Drawing.Point(7, 99);
-            this.randomizeTileTrapFloorTile.Name = "randomizeTileTrapFloorTile";
-            this.randomizeTileTrapFloorTile.Size = new System.Drawing.Size(197, 17);
-            this.randomizeTileTrapFloorTile.TabIndex = 21;
-            this.randomizeTileTrapFloorTile.Text = "Randomize Tile Trap Floor Tile Type";
-            this.randomizeTileTrapFloorTile.UseVisualStyleBackColor = true;
-            this.randomizeTileTrapFloorTile.CheckedChanged += new System.EventHandler(this.randomizeTileTrapFloorTile_CheckedChanged);
+            this.allowKillableThiefCheckBox.AutoSize = true;
+            this.allowKillableThiefCheckBox.Location = new System.Drawing.Point(7, 122);
+            this.allowKillableThiefCheckBox.Name = "allowKillableThiefCheckBox";
+            this.allowKillableThiefCheckBox.Size = new System.Drawing.Size(128, 17);
+            this.allowKillableThiefCheckBox.TabIndex = 22;
+            this.allowKillableThiefCheckBox.Text = "Allow Killable Thieves";
+            this.allowKillableThiefCheckBox.UseVisualStyleBackColor = true;
+            this.allowKillableThiefCheckBox.CheckedChanged += new System.EventHandler(this.allowKillableThiefCheckBox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1304,6 +1317,7 @@
         private System.Windows.Forms.CheckBox ohkoCheckBox;
         private System.Windows.Forms.CheckBox randomizeTileTrapFloorTile;
         private System.Windows.Forms.CheckBox randomizeTileTrapPatternCheckBox;
+        private System.Windows.Forms.CheckBox allowKillableThiefCheckBox;
     }
 }
 

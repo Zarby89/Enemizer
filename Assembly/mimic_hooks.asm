@@ -18,5 +18,21 @@ org $0DB9A9
 db $00 ; sprite B8 needs a damage type
 
 org $06EC08 ; Bank06.asm (4593) - damage calcs
+{
 JSL resetSprite_Mimic
 NOP
+}
+
+org $06EDA6 ; Bank06.asm (4876) - .notItemSprite
+{
+; REP #$20 : ASL #4 : ORA $0CF2 : PHX : REP #$10 : TAX  ;C2 20 : 0A 0A 0A 0A : 0D F2 0C : DA : C2 10 : AA
+; SEP #$20                                              ;E2 20
+; LDA $7F6000, X : STA $02                              ;BF 00 60 7F : 85 02
+; SEP #$10
+
+JSL notItemSprite_Mimic                             ; C2 20 : 0A 0A
+;NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP ; 0A 0A : 0D F2 0C : DA : C2 10 : AA
+;NOP : NOP                                           ; E2 20
+;NOP : NOP : NOP : NOP : NOP : NOP                   ; BF 00 60 7F : 85 02
+;NOP                                                 ; 
+}
