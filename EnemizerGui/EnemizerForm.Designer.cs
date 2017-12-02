@@ -82,6 +82,7 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabExtra = new System.Windows.Forms.TabPage();
+            this.allowKillableThiefCheckBox = new System.Windows.Forms.CheckBox();
             this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
             this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
             this.beeLevelComboBox = new System.Windows.Forms.ComboBox();
@@ -118,7 +119,6 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
-            this.allowKillableThiefCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -768,6 +768,17 @@
             this.tabExtra.Text = "Extra";
             this.tabExtra.UseVisualStyleBackColor = true;
             // 
+            // allowKillableThiefCheckBox
+            // 
+            this.allowKillableThiefCheckBox.AutoSize = true;
+            this.allowKillableThiefCheckBox.Location = new System.Drawing.Point(7, 122);
+            this.allowKillableThiefCheckBox.Name = "allowKillableThiefCheckBox";
+            this.allowKillableThiefCheckBox.Size = new System.Drawing.Size(128, 17);
+            this.allowKillableThiefCheckBox.TabIndex = 22;
+            this.allowKillableThiefCheckBox.Text = "Allow Killable Thieves";
+            this.allowKillableThiefCheckBox.UseVisualStyleBackColor = true;
+            this.allowKillableThiefCheckBox.CheckedChanged += new System.EventHandler(this.allowKillableThiefCheckBox_CheckedChanged);
+            // 
             // randomizeTileTrapFloorTile
             // 
             this.randomizeTileTrapFloorTile.AutoSize = true;
@@ -1116,6 +1127,13 @@
             this.debugForceEnemyCheckBox.UseVisualStyleBackColor = true;
             this.debugForceEnemyCheckBox.CheckedChanged += new System.EventHandler(this.debugForceEnemyCheckBox_CheckedChanged);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 32767;
+            this.toolTip1.BackColor = System.Drawing.SystemColors.InfoText;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
+            // 
             // lblSeedNumber
             // 
             this.lblSeedNumber.AutoSize = true;
@@ -1165,17 +1183,6 @@
             0,
             0,
             0});
-            // 
-            // allowKillableThiefCheckBox
-            // 
-            this.allowKillableThiefCheckBox.AutoSize = true;
-            this.allowKillableThiefCheckBox.Location = new System.Drawing.Point(7, 122);
-            this.allowKillableThiefCheckBox.Name = "allowKillableThiefCheckBox";
-            this.allowKillableThiefCheckBox.Size = new System.Drawing.Size(128, 17);
-            this.allowKillableThiefCheckBox.TabIndex = 22;
-            this.allowKillableThiefCheckBox.Text = "Allow Killable Thieves";
-            this.allowKillableThiefCheckBox.UseVisualStyleBackColor = true;
-            this.allowKillableThiefCheckBox.CheckedChanged += new System.EventHandler(this.allowKillableThiefCheckBox_CheckedChanged);
             // 
             // EnemizerForm
             // 

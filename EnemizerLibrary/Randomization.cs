@@ -409,14 +409,14 @@ namespace EnemizerLibrary
         void SetSwordGfx(string swordType)
         {
             FileStream f = new FileStream(swordType, FileMode.Open, FileAccess.Read);
-            f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
+            this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
             f.Close();
         }
 
         void SetShieldGfx(string shieldType)
         {
             FileStream f = new FileStream(shieldType, FileMode.Open, FileAccess.Read);
-            f.Read(this.ROM_DATA.romData, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
+            this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
             f.Close();
         }
 
@@ -549,7 +549,7 @@ namespace EnemizerLibrary
             for(int i = 0; i < bossgfxindex.Length; i++)
             {
                 FileStream f = new FileStream("bosses_gfx\\"+bossgfxfiles[i], FileMode.Open, FileAccess.Read);
-                f.Read(this.ROM_DATA.romData, newGfxPosition, (int)f.Length);
+                this.ROM_DATA.ReadFileStreamIntoRom(f, newGfxPosition, (int)f.Length);
                 byte[] address = Utilities.PCAddressToSnesByteArray(newGfxPosition);
                 this.ROM_DATA[0x4FC0 + bossgfxindex[i]] = address[0]; //bank
                 this.ROM_DATA[0x509F + bossgfxindex[i]] = address[1];  //highbyte
@@ -1439,7 +1439,7 @@ namespace EnemizerLibrary
                 // force pug sprite
                 r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
                 fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
-                fsx.Read(this.ROM_DATA.romData, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
+                this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
                 i++;
@@ -1449,7 +1449,7 @@ namespace EnemizerLibrary
             {
                 r = random.Next(skins.Count);
                 fsx = new FileStream(skins[r], FileMode.Open, FileAccess.Read);
-                fsx.Read(this.ROM_DATA.romData, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
+                this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
             }

@@ -156,6 +156,53 @@ namespace EnemizerLibrary
 
         void LoadHeader()
         {
+            /*
+        byte 0: aaab bbcd
+        the a bits are transformed into 0000 0aaa and stored to $0414 ("BG2" in Hyrule Magic)
+        the b bits are transformed into 0000 0bbb and stored to $046C ("Collision" in Hyrule Magic)
+        the c bit is unused
+        the d bit is stored to $7EC005 (If set, use a lights out routine in the room transition)
+        
+        byte 1: aabb bbbb
+        the a bits are unused
+        the b bits are transformed into bbbb bb00, thus making them a multiple of 4.
+        This value is used to load 4 different palettes for the dungeon, and corresponds to,
+        you guessed it, Palette # in Hyrule Magic!
+        
+        The resulting index is used to load values for $0AB6, $0AAC, $0AAD, and $0AAE 
+        
+        byte 2: gets stored to $0AA2 (GFX # in Hyrule Magic)
+        
+        byte 3: value + #$40 gets stored to $0AA3 (Sprite GFX # in Hyrule Magic)
+        
+        byte 4: gets stored to $00AD ("Effect" in Hyrule Magic)
+        
+        byte 5: gets stored to $00AE ("Tag1" in Hyrule Magic)
+        
+        byte 6: gets stored to $00AF ("Tag2" in Hyrule Magic)
+        
+        ; These are the planes to use for bytes 9 through D. This determines which 
+        ; BG you appear on, and possibly more.
+        
+        byte 7: aabb ccdd
+        the a bits are transformed into 0000 00aa and stored to $063F 
+        the b bits are transformed into 0000 00bb and stored to $063E
+        the c bits are transformed into 0000 00cc and stored to $063D
+        the d bits are transformed into 0000 00dd and stored to $063C
+        
+        ; Note, the only safe values for a plane seem to be 0,1, or 2. Hyrule Magic
+        appears to violate this rule by letting you put 3 down, but nothing higher.
+        
+        byte 8: aaaa aabb
+        the a bits are unused
+        the b bits are transformed into 0000 00bb and stored to $0640
+        
+        byte 9: stored to $7EC000 These are all room numbers that you could possibly exit to.
+        byte A: stored to $7EC001
+        byte B: stored to $7EC002
+        byte C: stored to $7EC003
+        byte D: stored to $7EC004
+             */
             this.GraphicsBlockId = romData[RoomHeaderBaseAddress + 3];
             this.Tag1 = romData[RoomHeaderBaseAddress + 5];
             this.Tag2 = romData[RoomHeaderBaseAddress + 6];

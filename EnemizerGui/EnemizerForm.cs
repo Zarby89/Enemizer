@@ -611,6 +611,13 @@ namespace Enemizer
             randomizedRom.WriteRom(fs);
             fs.Close();
 
+#if DEBUG
+            // build a patch for testing
+            var romPatch = randomizedRom.GeneratePatch();
+            string patch = JsonConvert.SerializeObject(romPatch);
+            File.WriteAllText($"{fileNameNoExtension}.patch", patch);
+#endif
+
             return fileName;
 
 #if !DEBUG

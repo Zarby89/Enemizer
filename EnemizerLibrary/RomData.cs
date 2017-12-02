@@ -35,6 +35,46 @@ namespace EnemizerLibrary
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
+        Dictionary<int, byte> patchData = new Dictionary<int, byte>();
+
+        public List<PatchObject> GeneratePatch()
+        {
+            var patches = new List<PatchObject>();
+
+            PatchObject currentPatch = null;
+            int lastAddress = 0;
+            foreach(var pd in patchData.OrderBy(x => x.Key))
+            {
+                if(lastAddress + 1 != pd.Key)
+                {
+                    // add previous patch
+                    if (currentPatch != null)
+                    {
+                        patches.Add(currentPatch);
+                    }
+
+                    // new patch
+                    currentPatch = new PatchObject();
+                    currentPatch.address = pd.Key;
+                }
+                // add the patch byte
+                currentPatch.patchData.Add(pd.Value);
+
+                // update our address tracker
+                lastAddress = pd.Key;
+            }
+
+            return patches;
+        }
+
+        void SetPatchBytes(int offset, int length)
+        {
+            for(int i=offset; i<offset+length; i++)
+            {
+                patchData[i] = romData[i];
+            }
+        }
+
         public bool IsEnemizerRom
         {
             get
@@ -71,6 +111,8 @@ namespace EnemizerLibrary
                 Array.Resize(ref seedString, EnemizerInfoSeedStringLength); // make sure it's long enough
                 Array.Copy(seedString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, EnemizerInfoSeedStringLength);
                 seed = value;
+
+                SetPatchBytes(EnemizerInfoTableBaseAddress + EnemizerInfoSeedOffset, EnemizerInfoSeedStringLength);
             }
         }
 
@@ -98,6 +140,8 @@ namespace EnemizerLibrary
                 var versionString = ASCIIEncoding.ASCII.GetBytes(value);
                 Array.Resize(ref versionString, EnemizerInfoVersionLength); // make sure it's long enough
                 Array.Copy(versionString, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, EnemizerInfoVersionLength);
+
+                SetPatchBytes(EnemizerInfoTableBaseAddress + EnemizerInfoVersionOffset, EnemizerInfoVersionLength);
             }
         }
 
@@ -109,6 +153,7 @@ namespace EnemizerLibrary
                 throw new Exception("Option flags is too long to fit in the space allocated. Need to move data/code in asm file.");
             }
             Array.Copy(optionByteArray, 0, romData, EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray.Length);
+            SetPatchBytes(EnemizerInfoTableBaseAddress + EnemizerInfoFlagsOffset, optionByteArray.Length);
         }
 
         public OptionFlags GetOptionFlagsFromRom()
@@ -126,7 +171,7 @@ namespace EnemizerLibrary
         /// <summary>
         /// Try to avoid using this because we can't set break points to find bad writes to ROM.
         /// </summary>
-        public byte[] romData;
+        byte[] romData;
 
         public RomData(byte[] romData)
         {
@@ -179,6 +224,8 @@ namespace EnemizerLibrary
         internal void SetFlag(int offset, bool val)
         {
             romData[EnemizerOptionFlagsBaseAddress + offset] = (byte)(val ? 0x01 : 0x00);
+
+            SetPatchBytes(EnemizerOptionFlagsBaseAddress + offset, 1);
         }
 
         public void FillVanillaHiddenEnemyChancePool()
@@ -189,6 +236,8 @@ namespace EnemizerLibrary
              */
             byte[] vanilla = { 0x01, 0x01, 0x01, 0x01, 0x0F, 0x01, 0x01, 0x12, 0x10, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x03 };
             Array.Copy(vanilla, 0, romData, AddressConstants.HiddenEnemyChancePoolBaseAddress, 16);
+
+            SetPatchBytes(AddressConstants.HiddenEnemyChancePoolBaseAddress, 16);
         }
 
         public void RandomizeHiddenEnemyChancePool()
@@ -218,6 +267,9 @@ namespace EnemizerLibrary
             romData[i++] = 0x0F;
             romData[i++] = 0x0F;
             romData[i++] = 0x03;
+
+            SetPatchBytes(AddressConstants.HiddenEnemyChancePoolBaseAddress, 16);
+
         }
 
         public void SetCharacterSelectScreenVersion()
@@ -264,6 +316,8 @@ namespace EnemizerLibrary
             };
 
             Array.Copy(text, 0, romData, 0x65E94, text.Length);
+
+            SetPatchBytes(0x65E94, text.Length);
         }
 
         public bool IsRandomizerRom
@@ -363,6 +417,7 @@ namespace EnemizerLibrary
         {
             Array.Resize(ref this.romData, 0x400000); // 4MB
             this.romData[0x7FD7] = 0x0C; // update header length
+            SetPatchBytes(0x7FD7, 1);
 
             this.EnemizerVersion = EnemizerLibrary.Version.CurrentVersion;
         }
@@ -422,6 +477,7 @@ namespace EnemizerLibrary
                     Debugger.Break();
                 }
                 romData[i] = value;
+                SetPatchBytes(i, 1);
             }
         }
 
@@ -439,6 +495,7 @@ namespace EnemizerLibrary
                 length = data.Length;
             }
             Array.Copy(data, 0, this.romData, startingAddress, length);
+            SetPatchBytes(startingAddress, length);
         }
 
         public void WriteRom(FileStream fs)
@@ -451,11 +508,14 @@ namespace EnemizerLibrary
         public void PatchData(int address, byte[] patchData)
         {
             Array.Copy(patchData, 0, romData, address, patchData.Length);
+            SetPatchBytes(address, patchData.Length);
         }
 
         public void PatchData(PatchObject patch)
         {
-            Array.Copy(patch.patchData.ToArray(), 0, romData, patch.address, patch.patchData.ToArray().Length);
+            var patchDataArray = patch.patchData.ToArray();
+            Array.Copy(patchDataArray, 0, romData, patch.address, patchDataArray.Length);
+            SetPatchBytes(patch.address, patchDataArray.Length);
         }
 
         public void UpdateChecksum()
@@ -480,6 +540,8 @@ namespace EnemizerLibrary
             int compliment = checksum ^ 0xFFFF; // compliment
             romData[ChecksumComplimentAddress] = (byte)(compliment & 0xFF);
             romData[ChecksumComplimentAddress+1] = (byte)((compliment >> 8) & 0xFF);
+
+            SetPatchBytes(ChecksumComplimentAddress, 4);
         }
 
         public HeartBeepSpeed HeartBeep
@@ -520,30 +582,37 @@ namespace EnemizerLibrary
                         break;
                 }
                 romData[0x180033] = beepSpeed;
+                SetPatchBytes(0x180033, 1);
             }
         }
+
+        public void ReadFileStreamIntoRom(FileStream f, int address, int length)
+        {
+            f.Read(romData, address, length);
+            SetPatchBytes(address, length);
+        }
         /*
-	public function setHeartBeepSpeed(string $setting) : self {
-		switch ($setting) {
-			case 'off':
-				$byte = 0x00;
-				break;
-			case 'half':
-				$byte = 0x40;
-				break;
-			case 'quarter':
-				$byte = 0x80;
-				break;
-			case 'normal':
-			default:
-				$byte = 0x20;
-		}
+public function setHeartBeepSpeed(string $setting) : self {
+switch ($setting) {
+   case 'off':
+       $byte = 0x00;
+       break;
+   case 'half':
+       $byte = 0x40;
+       break;
+   case 'quarter':
+       $byte = 0x80;
+       break;
+   case 'normal':
+   default:
+       $byte = 0x20;
+}
 
-		$this->write(0x180033, pack('C', $byte));
+$this->write(0x180033, pack('C', $byte));
 
-		return $this;
-	}
-         */
+return $this;
+}
+*/
 
         /*
 	public function setGoalRequiredCount(int $goal = 0) : self {
