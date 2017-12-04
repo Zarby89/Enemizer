@@ -1,0 +1,278 @@
+<div class="container">
+    <h1>Enemizer Form</h1>
+
+    <form>
+        <div class="form-group">
+            <label for="RandomizeEnemies">Randomize Enemies</label>
+            <input type="checkbox" class="form-control" id="RandomizeEnemies" [(ngModel)]="optionFlags.RandomizeEnemies" name="RandomizeEnemies"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeEnemiesType">Randomize Enemies Type</label>
+            <select class="form-control" id="RandomizeEnemiesType" [(ngModel)]="optionFlags.RandomizeEnemiesType" name="RandomizeEnemiesType" disabled>
+                <option *ngFor="let enemiesType of RandomizeEnemiesTypeList | keys" [value]="enemiesType.key">{{enemiesType.value}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="RandomizeBushEnemyChance">Randomize Bush Enemy Chance</label>
+            <input type="checkbox" class="form-control" id="RandomizeBushEnemyChance" [(ngModel)]="optionFlags.RandomizeBushEnemyChance" name="RandomizeBushEnemyChance"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeEnemyHealthRange">Randomize Enemy Health Range</label>
+            <input type="checkbox" class="form-control" id="RandomizeEnemyHealthRange" [(ngModel)]="optionFlags.RandomizeEnemyHealthRange" name="RandomizeEnemyHealthRange"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeEnemyHealthType">RandomizeEnemyHealthType</label>
+            <select class="form-control" id="RandomizeEnemyHealthType" [(ngModel)]="optionFlags.RandomizeEnemyHealthType" name="RandomizeEnemyHealthType">
+                <option *ngFor="let randomizeEnemyHPType of RandomizeEnemyHPTypeList | keys" [value]="randomizeEnemyHPType.key">{{randomizeEnemyHPType.value}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeEnemyDamage">RandomizeEnemyDamage</label>
+            <input type="checkbox" class="form-control" id="RandomizeEnemyDamage" [(ngModel)]="optionFlags.RandomizeEnemyDamage" name="RandomizeEnemyDamage"/>
+        </div>
+
+        <div class="form-group">
+            <label for="AllowEnemyZeroDamage">AllowEnemyZeroDamage</label>
+            <input type="checkbox" class="form-control" id="AllowEnemyZeroDamage" [(ngModel)]="optionFlags.AllowEnemyZeroDamage" name="AllowEnemyZeroDamage"/>
+        </div>
+
+        <div class="form-group">
+            <label for="ShuffleEnemyDamageGroups">ShuffleEnemyDamageGroups</label>
+            <input type="checkbox" class="form-control" id="ShuffleEnemyDamageGroups" [(ngModel)]="optionFlags.ShuffleEnemyDamageGroups" name="ShuffleEnemyDamageGroups"/>
+        </div>
+
+        <div class="form-group">
+            <label for="EnemyDamageChaosMode">EnemyDamageChaosMode</label>
+            <input type="checkbox" class="form-control" id="EnemyDamageChaosMode" [(ngModel)]="optionFlags.EnemyDamageChaosMode" name="EnemyDamageChaosMode"/>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="EasyModeEscape">EasyModeEscape</label>
+            <input type="checkbox" class="form-control" id="EasyModeEscape" [(ngModel)]="optionFlags.EasyModeEscape" name="EasyModeEscape"/>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="EnemiesAbsorbable">EnemiesAbsorbable</label>
+            <input type="checkbox" class="form-control" id="EnemiesAbsorbable" [(ngModel)]="optionFlags.EnemiesAbsorbable" name="EnemiesAbsorbable"/>
+        </div>
+
+<!--
+    AbsorbableSpawnRate: number;
+    AbsorbableTypes: AbsorbableTypesDictionary;
+-->
+
+        <div class="form-group">
+            <label for="RandomizeBosses">RandomizeBosses</label>
+            <input type="checkbox" class="form-control" id="RandomizeBosses" [(ngModel)]="optionFlags.RandomizeBosses" name="RandomizeBosses"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeBossesType">RandomizeBossesType</label>
+            <select class="form-control" id="RandomizeBossesType" [(ngModel)]="optionFlags.RandomizeBossesType" name="RandomizeBossesType">
+                <option *ngFor="let randomizeBossesType of RandomizeBossesTypeList | keys" [value]="randomizeBossesType.key">{{randomizeBossesType.value}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeBossHealth">RandomizeBossHealth</label>
+            <input type="checkbox" class="form-control" id="RandomizeBossHealth" [(ngModel)]="optionFlags.RandomizeBossHealth" name="RandomizeBossHealth"/>
+        </div>
+
+<!--
+    RandomizeBossHealthMinAmount: number;
+    RandomizeBossHealthMaxAmount: number;
+-->
+
+        <div class="form-group">
+            <label for="RandomizeBossDamage">RandomizeBossDamage</label>
+            <input type="checkbox" class="form-control" id="RandomizeBossDamage" [(ngModel)]="optionFlags.RandomizeBossDamage" name="RandomizeBossDamage"/>
+        </div>
+
+<!--
+    RandomizeBossDamageMinAmount: number;
+    RandomizeBossDamageMaxAmount: number;
+-->
+
+        <div class="form-group">
+            <label for="RandomizeBossBehavior">RandomizeBossBehavior</label>
+            <input type="checkbox" class="form-control" id="RandomizeBossBehavior" [(ngModel)]="optionFlags.RandomizeBossBehavior" name="RandomizeBossBehavior"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for="RandomizeDungeonPalettes">RandomizeDungeonPalettes</label>
+            <input type="checkbox" class="form-control" id="RandomizeDungeonPalettes" [(ngModel)]="optionFlags.RandomizeDungeonPalettes" name="RandomizeDungeonPalettes"/>
+        </div>
+
+        <div class="form-group">
+            <label for="SetBlackoutMode">SetBlackoutMode</label>
+            <input type="checkbox" class="form-control" id="SetBlackoutMode" [(ngModel)]="optionFlags.SetBlackoutMode" name="SetBlackoutMode"/>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="RandomizeOverworldPalettes">RandomizeOverworldPalettes</label>
+            <input type="checkbox" class="form-control" id="RandomizeOverworldPalettes" [(ngModel)]="optionFlags.RandomizeOverworldPalettes" name="RandomizeOverworldPalettes"/>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="RandomizeSpritePalettes">RandomizeSpritePalettes</label>
+            <input type="checkbox" class="form-control" id="RandomizeSpritePalettes" [(ngModel)]="optionFlags.RandomizeSpritePalettes" name="RandomizeSpritePalettes"/>
+        </div>
+
+        <div class="form-group">
+            <label for="SetAdvancedSpritePalettes">SetAdvancedSpritePalettes</label>
+            <input type="checkbox" class="form-control" id="SetAdvancedSpritePalettes" [(ngModel)]="optionFlags.SetAdvancedSpritePalettes" name="SetAdvancedSpritePalettes"/>
+        </div>
+
+        <div class="form-group">
+            <label for="PukeMode">PukeMode</label>
+            <input type="checkbox" class="form-control" id="PukeMode" [(ngModel)]="optionFlags.PukeMode" name="PukeMode"/>
+        </div>
+
+        <div class="form-group">
+            <label for="NegativeMode">NegativeMode</label>
+            <input type="checkbox" class="form-control" id="NegativeMode" [(ngModel)]="optionFlags.NegativeMode" name="NegativeMode"/>
+        </div>
+
+        <div class="form-group">
+            <label for="GrayscaleMode">GrayscaleMode</label>
+            <input type="checkbox" class="form-control" id="GrayscaleMode" [(ngModel)]="optionFlags.GrayscaleMode" name="GrayscaleMode"/>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="GenerateSpoilers">GenerateSpoilers</label>
+            <input type="checkbox" class="form-control" id="GenerateSpoilers" [(ngModel)]="optionFlags.GenerateSpoilers" name="GenerateSpoilers"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeLinkSpritePalette">RandomizeLinkSpritePalette</label>
+            <input type="checkbox" class="form-control" id="RandomizeLinkSpritePalette" [(ngModel)]="optionFlags.RandomizeLinkSpritePalette" name="RandomizeLinkSpritePalette"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizePots">RandomizePots</label>
+            <input type="checkbox" class="form-control" id="RandomizePots" [(ngModel)]="optionFlags.RandomizePots" name="RandomizePots"/>
+        </div>
+
+        <div class="form-group">
+            <label for="ShuffleMusic">ShuffleMusic</label>
+            <input type="checkbox" class="form-control" id="ShuffleMusic" [(ngModel)]="optionFlags.ShuffleMusic" name="ShuffleMusic"/>
+        </div>
+
+        <div class="form-group">
+            <label for="BootlegMagic">BootlegMagic</label>
+            <input type="checkbox" class="form-control" id="BootlegMagic" [(ngModel)]="optionFlags.BootlegMagic" name="BootlegMagic"/>
+        </div>
+
+        <div class="form-group">
+            <label for="DebugMode">DebugMode</label>
+            <input type="checkbox" class="form-control" id="DebugMode" [(ngModel)]="optionFlags.DebugMode" name="DebugMode"/>
+        </div>
+
+        <div class="form-group">
+            <label for="CustomBosses">CustomBosses</label>
+            <input type="checkbox" class="form-control" id="CustomBosses" [(ngModel)]="optionFlags.CustomBosses" name="CustomBosses"/>
+        </div>
+
+        <div class="form-group">
+            <label for="AndyMode">AndyMode</label>
+            <input type="checkbox" class="form-control" id="AndyMode" [(ngModel)]="optionFlags.AndyMode" name="AndyMode"/>
+        </div>
+
+        <div class="form-group">
+            <label for="HeartBeepSpeed">HeartBeepSpeed</label>
+            <select class="form-control" id="HeartBeepSpeed" [(ngModel)]="optionFlags.HeartBeepSpeed" name="HeartBeepSpeed">
+                <option *ngFor="let heartBeepSpeed of HeartBeepSpeedList | keys" [value]="heartBeepSpeed.key">{{heartBeepSpeed.value}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="AlternateGfx">AlternateGfx</label>
+            <input type="checkbox" class="form-control" id="AlternateGfx" [(ngModel)]="optionFlags.AlternateGfx" name="AlternateGfx"/>
+        </div>
+
+<!--
+    ShieldGraphics: string;
+    SwordGraphics: string;
+-->
+    
+        <div class="form-group">
+            <label for="BeeMizer">BeeMizer</label>
+            <input type="checkbox" class="form-control" id="BeeMizer" [(ngModel)]="optionFlags.BeeMizer" name="BeeMizer"/>
+        </div>
+
+        <div class="form-group">
+            <label for="BeesLevel">BeesLevel</label>
+            <select class="form-control" id="BeesLevel" [(ngModel)]="optionFlags.BeesLevel" name="BeesLevel">
+                <option *ngFor="let beeLevel of BeeLevelList | keys" [value]="beeLevel.key">{{beeLevel.value}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="DebugForceEnemy">DebugForceEnemy</label>
+            <input type="checkbox" class="form-control" id="DebugForceEnemy" [(ngModel)]="optionFlags.DebugForceEnemy" name="DebugForceEnemy"/>
+        </div>
+
+<!--
+    DebugForceEnemyId: number;
+-->
+    
+        <div class="form-group">
+            <label for="DebugForceBoss">DebugForceBoss</label>
+            <input type="checkbox" class="form-control" id="DebugForceBoss" [(ngModel)]="optionFlags.DebugForceBoss" name="DebugForceBoss"/>
+        </div>
+
+        <div class="form-group">
+            <label for="DebugForceBossId">DebugForceBossId</label>
+            <select class="form-control" id="DebugForceBossId" [(ngModel)]="optionFlags.DebugForceBossId" name="DebugForceBossId">
+                <option *ngFor="let bossType of BossTypeList | keys" [value]="bossType.key">{{bossType.value}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="DebugOpenShutterDoors">DebugOpenShutterDoors</label>
+            <input type="checkbox" class="form-control" id="DebugOpenShutterDoors" [(ngModel)]="optionFlags.DebugOpenShutterDoors" name="DebugOpenShutterDoors"/>
+        </div>
+
+        <div class="form-group">
+            <label for="DebugForceEnemyDamageZero">DebugForceEnemyDamageZero</label>
+            <input type="checkbox" class="form-control" id="DebugForceEnemyDamageZero" [(ngModel)]="optionFlags.DebugForceEnemyDamageZero" name="DebugForceEnemyDamageZero"/>
+        </div>
+
+        <div class="form-group">
+            <label for="DebugShowRoomIdInRupeeCounter">DebugShowRoomIdInRupeeCounter</label>
+            <input type="checkbox" class="form-control" id="DebugShowRoomIdInRupeeCounter" [(ngModel)]="optionFlags.DebugShowRoomIdInRupeeCounter" name="DebugShowRoomIdInRupeeCounter"/>
+        </div>
+
+        <div class="form-group">
+            <label for="OHKO">OHKO</label>
+            <input type="checkbox" class="form-control" id="OHKO" [(ngModel)]="optionFlags.OHKO" name="OHKO"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeTileTrapPattern">RandomizeTileTrapPattern</label>
+            <input type="checkbox" class="form-control" id="RandomizeTileTrapPattern" [(ngModel)]="optionFlags.RandomizeTileTrapPattern" name="RandomizeTileTrapPattern"/>
+        </div>
+
+        <div class="form-group">
+            <label for="RandomizeTileTrapFloorTile">RandomizeTileTrapFloorTile</label>
+            <input type="checkbox" class="form-control" id="RandomizeTileTrapFloorTile" [(ngModel)]="optionFlags.RandomizeTileTrapFloorTile" name="RandomizeTileTrapFloorTile"/>
+        </div>
+
+        <div class="form-group">
+            <label for="AllowKillableThief">AllowKillableThief</label>
+            <input type="checkbox" class="form-control" id="AllowKillableThief" [(ngModel)]="optionFlags.AllowKillableThief" name="AllowKillableThief"/>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
