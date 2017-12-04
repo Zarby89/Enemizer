@@ -15,8 +15,8 @@ export class KeysPipe implements PipeTransform
                 let isValueProperty = parseInt(enumMember, 10) >= 0;
                 if (isValueProperty)
                 {
-                    keys.push({ key: enumMember, value: value[enumMember] });
-                    console.log("enum member: ", value[enumMember]);
+                    keys.push({ key: parseInt(enumMember, 10), value: value[parseInt(enumMember, 10)] });
+                    //console.log("enum member: ", value[parseInt(enumMember, 10)]);
                 }
             }
         }

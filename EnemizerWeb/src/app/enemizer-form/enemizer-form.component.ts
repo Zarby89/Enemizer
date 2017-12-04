@@ -36,5 +36,12 @@ export class EnemizerFormComponent implements OnInit
 
     }
 
+    compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByKey;
+
+    compareByKey(f1: any, f2: any)
+    {
+        return f1 && f2 && f1.toString() === f2.toString();
+    }
+
     get diagnostic() { return JSON.stringify(this.optionFlags); }
 }
