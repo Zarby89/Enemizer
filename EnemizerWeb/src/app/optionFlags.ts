@@ -17,7 +17,7 @@ export class OptionFlags
 
     EnemiesAbsorbable: boolean = false;
     AbsorbableSpawnRate: number = 0;
-    AbsorbableTypes: AbsorbableTypesDictionary;
+    AbsorbableTypes: AbsorbableTypesDictionary = new AbsorbableTypesDictionary();
 
     BossMadness: boolean = false; // unused
 
@@ -72,7 +72,7 @@ export class OptionFlags
     AllowKillableThief: boolean = false;
 }
 
-export interface AbsorbableTypesDictionary
+export class AbsorbableTypesDictionary
 {
     Heart: boolean;
     GreenRupee: boolean;

@@ -6,13 +6,13 @@
 /*@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';*/
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 
-body {
+/* body {
     margin: 0;
     font-family: Roboto, sans-serif;
-}
+} */
 
 /* start flexing */
-.flex-outer li,
+/* .flex-outer li,
 .flex-inner {
   display: flex;
   flex-wrap: wrap;
@@ -28,12 +28,12 @@ body {
 .flex-outer > li > label + *,
 .flex-inner {
   flex: 1 0 220px;
-}
+} */
 
-.flex-outer li label,
+/* .flex-outer li label,
 .flex-outer li p {
     padding: 8px;
-}
+} */
 
 .flex-buttons {
     display: flex;
@@ -69,4 +69,31 @@ body {
 
 .options-slider {
     max-width: 240px;
+}
+
+.options-container {
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.options-container>div {
+    padding: 4px;
+}
+
+.fake-label {
+    font-size: 11px;
+}
+
+.options-absorbables-list {
+    padding: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100px;
+}
+
+.options-absorbables-list>div {
+    padding: 4px;
+    min-width: 160px;
 }
