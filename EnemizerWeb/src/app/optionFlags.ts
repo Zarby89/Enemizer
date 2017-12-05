@@ -5,71 +5,71 @@ export class OptionFlags
     RandomizeEnemiesType: RandomizeEnemiesType = RandomizeEnemiesType.Chaos;
     RandomizeBushEnemyChance: boolean = true;
 
-    RandomizeEnemyHealthRange: boolean;
-    RandomizeEnemyHealthType: RandomizeEnemyHPType;
+    RandomizeEnemyHealthRange: boolean = false;
+    RandomizeEnemyHealthType: RandomizeEnemyHPType = RandomizeEnemyHPType.Hard;
 
-    RandomizeEnemyDamage: boolean;
-    AllowEnemyZeroDamage: boolean;
-    ShuffleEnemyDamageGroups: boolean;
-    EnemyDamageChaosMode: boolean;
+    RandomizeEnemyDamage: boolean = false;
+    AllowEnemyZeroDamage: boolean = false;
+    ShuffleEnemyDamageGroups: boolean = false;
+    EnemyDamageChaosMode: boolean = false;
 
-    EasyModeEscape: boolean;
+    EasyModeEscape: boolean = false;
 
-    EnemiesAbsorbable: boolean;
-    AbsorbableSpawnRate: number;
+    EnemiesAbsorbable: boolean = false;
+    AbsorbableSpawnRate: number = 0;
     AbsorbableTypes: AbsorbableTypesDictionary;
 
-    BossMadness: boolean; // unused
+    BossMadness: boolean = false; // unused
 
-    RandomizeBosses: boolean;
+    RandomizeBosses: boolean = false;
     RandomizeBossesType: RandomizeBossesType = RandomizeBossesType.Chaos;
 
-    RandomizeBossHealth: boolean;
-    RandomizeBossHealthMinAmount: number;
-    RandomizeBossHealthMaxAmount: number;
+    RandomizeBossHealth: boolean = false;
+    RandomizeBossHealthMinAmount: number = 0;
+    RandomizeBossHealthMaxAmount: number = 0;
 
-    RandomizeBossDamage: boolean;
-    RandomizeBossDamageMinAmount: number;
-    RandomizeBossDamageMaxAmount: number;
+    RandomizeBossDamage: boolean = false;
+    RandomizeBossDamageMinAmount: number = 0;
+    RandomizeBossDamageMaxAmount: number = 0;
 
-    RandomizeBossBehavior: boolean;
+    RandomizeBossBehavior: boolean = false;
 
     RandomizeDungeonPalettes: boolean = true;
-    SetBlackoutMode: boolean;
+    SetBlackoutMode: boolean = false;
 
     RandomizeOverworldPalettes: boolean = true;
 
     RandomizeSpritePalettes: boolean = true;
-    SetAdvancedSpritePalettes: boolean;
-    PukeMode: boolean;
-    NegativeMode: boolean;
-    GrayscaleMode: boolean;
+    SetAdvancedSpritePalettes: boolean = false;
+    PukeMode: boolean = false;
+    NegativeMode: boolean = false;
+    GrayscaleMode: boolean = false;
 
     GenerateSpoilers: boolean = true;
-    RandomizeLinkSpritePalette: boolean;
+    RandomizeLinkSpritePalette: boolean = false;
     RandomizePots: boolean = true;
-    ShuffleMusic: boolean;
+    ShuffleMusic: boolean = false;
     BootlegMagic: boolean = false;
     DebugMode: boolean = false;
-    CustomBosses: boolean;
+    CustomBosses: boolean = false;
     AndyMode: boolean = false;
     HeartBeepSpeed: HeartBeepSpeed = HeartBeepSpeed.Half;
-    AlternateGfx: boolean;
+    AlternateGfx: boolean = false;
     ShieldGraphics: string;
     SwordGraphics: string;
-    BeeMizer: boolean;
-    BeesLevel: BeeLevel;
-    DebugForceEnemy: boolean;
-    DebugForceEnemyId: number;
-    DebugForceBoss: boolean;
-    DebugForceBossId: BossType;
-    DebugOpenShutterDoors: boolean;
-    DebugForceEnemyDamageZero: boolean;
-    DebugShowRoomIdInRupeeCounter: boolean;
-    OHKO: boolean;
-    RandomizeTileTrapPattern: boolean;
-    RandomizeTileTrapFloorTile: boolean;
-    AllowKillableThief: boolean;
+    BeeMizer: boolean = false;
+    BeesLevel: BeeLevel = BeeLevel.Level1;
+    DebugForceEnemy: boolean = false;
+    DebugForceEnemyId: number = 0;
+    DebugForceBoss: boolean = false;
+    DebugForceBossId: BossType = BossType.Kholdstare;
+    DebugOpenShutterDoors: boolean = false;
+    DebugForceEnemyDamageZero: boolean = false;
+    DebugShowRoomIdInRupeeCounter: boolean = false;
+    OHKO: boolean = false;
+    RandomizeTileTrapPattern: boolean = false;
+    RandomizeTileTrapFloorTile: boolean = false;
+    AllowKillableThief: boolean = false;
 }
 
 export interface AbsorbableTypesDictionary
@@ -195,4 +195,19 @@ export enum BossType
     Arrghus = 8,
     Trinexx = 9,
     NoBoss = 255
+}
+
+export class RandomizerOptions
+{
+    logic: string = "NoMajorGlitches";
+    difficulty: string = "normal";
+    variation: string = "none";
+    mode: string = "open";
+    goal: string = "ganon";
+    heart_speed: string = "quarter";
+    sram_trace: boolean = false;
+    menu_fast: boolean = false;
+    debug: boolean = false;
+    tournament: boolean = false;
+    shuffle: string = "full";
 }

@@ -1,4 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css'); */
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+/*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';*/
+/*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+/* start flexing */
+.flex-outer li,
+.flex-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flex-outer > li > label,
+.flex-outer li p {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.flex-outer > li > label + *,
+.flex-inner {
+  flex: 1 0 220px;
+}
+
+.flex-outer li label,
+.flex-outer li p {
+    padding: 8px;
+}
+
+.flex-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.options-card {
+    width: 600px;
+    margin: auto;
+}
+
+.options-tab-group {
+    border: 1px solid black;
+}
+
+.mat-tab-label {
+    min-width: 20px !important;
+    padding: 0 10px !important;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.toolbar-icon {
+    padding: 0 15px;
+}
+
+.options-field {
+    max-width: 200px;
+}
+
+.options-slider {
+    max-width: 240px;
+}

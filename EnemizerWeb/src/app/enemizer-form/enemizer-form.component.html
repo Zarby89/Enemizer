@@ -1,359 +1,491 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <mat-icon class="toolbar-icon">mood</mat-icon>
+        <span class="toolbar-spacer"></span>
+        <span>Enemizer</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button [mat-menu-trigger-for]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item>Option 1</button>
+    <button mat-menu-item>Option 2</button>
+</mat-menu>
 <mat-card class="options-card">
     <mat-card-content>
-        <h1>Enemizer Form</h1>
 
         <form>
-            <section name="Enemies">
-                <ul class="flex-outer">
-                <li>
-                    <label class="option-label" for="RandomizeEnemies">Randomize Enemies</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.RandomizeEnemies" name="RandomizeEnemies">
-                    </mat-slide-toggle>
-                </li>
+            <mat-tab-group>
+                <!-- class="options-tab-group"> -->
+                <mat-tab label="Item/Entrance">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
 
-                <li>
-                    <label class="option-label" for="RandomizeEnemiesType">Randomize Enemies Type</label>
-                    <mat-form-field class="option-field">
-                        <mat-select [ngModel]="optionFlags.RandomizeEnemiesType" 
-                                    name="RandomizeEnemiesType" 
-                                    [disabled]="'true'">
-                            <mat-option *ngFor="let enemiesType of RandomizeEnemiesTypeList | keys" [value]="enemiesType.key">{{enemiesType.value}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </li>
+                        <li>
+                            <label class="options-label" for="logic">logic</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.logic" name="logic" [disabled]="'false'">
+                                    <mat-option *ngFor="let logicType of LogicTypeList" [value]="logicType.key">{{logicType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="RandomizeBushEnemyChance">Randomize Bush Enemy Chance</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.RandomizeBushEnemyChance" name="RandomizeBushEnemyChance">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="difficulty">difficulty</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.difficulty" name="difficulty" [disabled]="'false'">
+                                    <mat-option *ngFor="let difficultyType of DifficultyTypeList" [value]="difficultyType.key">{{difficultyType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="RandomizeEnemyHealthRange">Randomize Enemy Health Range</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.RandomizeEnemyHealthRange" name="RandomizeEnemyHealthRange">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="variation">variation</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.variation" name="variation" [disabled]="'false'">
+                                    <mat-option *ngFor="let variationType of VariationTypeList" [value]="variationType.key">{{variationType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="RandomizeEnemyHealthType">RandomizeEnemyHealthType</label>
-                    <mat-form-field class="option-field">
-                        <mat-select [ngModel]="optionFlags.RandomizeEnemyHealthType" 
-                                    name="RandomizeEnemyHealthType" 
-                                    [disabled]="'false'">
-                            <mat-option *ngFor="let randomizeEnemyHPType of RandomizeEnemyHPTypeList | keys" [value]="randomizeEnemyHPType.key">{{randomizeEnemyHPType.value}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </li>
+                        <li>
+                            <label class="options-label" for="mode">mode</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.mode" name="mode" [disabled]="'false'">
+                                    <mat-option *ngFor="let modeType of ModeTypeList" [value]="modeType.key">{{modeType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="RandomizeEnemyDamage">RandomizeEnemyDamage</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.RandomizeEnemyDamage" name="RandomizeEnemyDamage">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="goal">goal</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.goal" name="goal" [disabled]="'false'">
+                                    <mat-option *ngFor="let goalType of GoalTypeList" [value]="goalType.key">{{goalType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label class="options-label" for="shuffle">shuffle</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.shuffle" name="shuffle" [disabled]="'false'">
+                                    <mat-option *ngFor="let shuffleType of ShuffleTypeList" [value]="shuffleType.key">{{shuffleType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="AllowEnemyZeroDamage">AllowEnemyZeroDamage</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.AllowEnemyZeroDamage" name="AllowEnemyZeroDamage">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="heart_speed">heart_speed</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="randomizerOptions.heart_speed" name="heart_speed" [disabled]="'false'">
+                                    <mat-option *ngFor="let heartSpeedType of HeartBeepSpeedTypeList" [value]="heartSpeedType.key">{{heartSpeedType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="ShuffleEnemyDamageGroups">ShuffleEnemyDamageGroups</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.ShuffleEnemyDamageGroups" name="ShuffleEnemyDamageGroups">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="sram_trace">sram_trace</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="randomizerOptions.sram_trace" name="sram_trace">
+                            </mat-slide-toggle>
+                        </li>
+                        <li>
+                            <label class="options-label" for="menu_fast">menu_fast</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="randomizerOptions.menu_fast" name="menu_fast">
+                            </mat-slide-toggle>
+                        </li>
+                        <li>
+                            <label class="options-label" for="debug">debug</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="randomizerOptions.debug" name="debug">
+                            </mat-slide-toggle>
+                        </li>
+                        <li>
+                            <label class="options-label" for="tournament">tournament</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="randomizerOptions.tournament" name="tournament">
+                            </mat-slide-toggle>
+                        </li>
 
-                <li>
-                    <label class="option-label" for="EnemyDamageChaosMode">EnemyDamageChaosMode</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.EnemyDamageChaosMode" name="EnemyDamageChaosMode">
-                    </mat-slide-toggle>
-                </li>
+                    </ul>
+                </mat-tab>
+
+                <mat-tab label="Enemies">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+                        <li>
+                            <label class="options-label" for="RandomizeEnemies">Randomize Enemies</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeEnemies" name="RandomizeEnemies">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeEnemiesType">Randomize Enemies Type</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.RandomizeEnemiesType" name="RandomizeEnemiesType" [disabled]="'true'">
+                                    <mat-option *ngFor="let enemiesType of RandomizeEnemiesTypeList | keys" [value]="enemiesType.key">{{enemiesType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeBushEnemyChance">Randomize Bush Enemy Chance</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBushEnemyChance" name="RandomizeBushEnemyChance">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeEnemyHealthRange">Randomize Enemy Health Range</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeEnemyHealthRange" name="RandomizeEnemyHealthRange">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeEnemyHealthType">RandomizeEnemyHealthType</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.RandomizeEnemyHealthType" name="RandomizeEnemyHealthType" [disabled]="'false'">
+                                    <mat-option *ngFor="let randomizeEnemyHPType of RandomizeEnemyHPTypeList | keys" [value]="randomizeEnemyHPType.key">{{randomizeEnemyHPType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeEnemyDamage">RandomizeEnemyDamage</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeEnemyDamage" name="RandomizeEnemyDamage">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="AllowEnemyZeroDamage">AllowEnemyZeroDamage</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AllowEnemyZeroDamage" name="AllowEnemyZeroDamage">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="ShuffleEnemyDamageGroups">ShuffleEnemyDamageGroups</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.ShuffleEnemyDamageGroups" name="ShuffleEnemyDamageGroups">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="EnemyDamageChaosMode">EnemyDamageChaosMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemyDamageChaosMode" name="EnemyDamageChaosMode">
+                            </mat-slide-toggle>
+                        </li>
 
 
-                <li>
-                    <label class="option-label" for="EasyModeEscape">EasyModeEscape</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.EasyModeEscape" name="EasyModeEscape">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="EasyModeEscape">EasyModeEscape</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EasyModeEscape" name="EasyModeEscape">
+                            </mat-slide-toggle>
+                        </li>
 
 
-                <li>
-                    <label class="option-label" for="EnemiesAbsorbable">EnemiesAbsorbable</label>
-                    <mat-slide-toggle
-                        class="option-toggle"
-                        [color]="'primary'"
-                        [(ngModel)]="optionFlags.EnemiesAbsorbable" name="EnemiesAbsorbable">
-                    </mat-slide-toggle>
-                </li>
+                        <li>
+                            <label class="options-label" for="EnemiesAbsorbable">EnemiesAbsorbable</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemiesAbsorbable" name="EnemiesAbsorbable">
+                            </mat-slide-toggle>
+                        </li>
 
-                <!-- <div class="form-group">
-            <label class="option-label" for="AbsorbableSpawnRate">AbsorbableSpawnRate</label>
-            <input type="checkbox" class="form-control" id="AbsorbableSpawnRate" [(ngModel)]="optionFlags.AbsorbableSpawnRate" name="AbsorbableSpawnRate"/>
-        </div> -->
-                <!--
+                        <li>
+                            <label class="options-label" for="EnemiesAbsorbable">EnemiesAbsorbable</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemiesAbsorbable" name="EnemiesAbsorbable">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="AbsorbableSpawnRate">AbsorbableSpawnRate</label>
+                            <mat-slider class="options-slider" [disabled]="'false'" [min]="'0'" [max]="'20'" [step]="'1'" [tick-interval]="'1'" [(ngModel)]="optionFlags.AbsorbableSpawnRate"
+                                name="AbsorbableSpawnRate">
+                            </mat-slider>
+                            +/-{{optionFlags.AbsorbableSpawnRate}}%
+                        </li>
+                        <!--
     AbsorbableSpawnRate: number;
     AbsorbableTypes: AbsorbableTypesDictionary;
 -->
-                </ul>
-            </section>
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeBosses">RandomizeBosses</label>
-                <input type="checkbox" class="form-control" id="RandomizeBosses" [(ngModel)]="optionFlags.RandomizeBosses" name="RandomizeBosses"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="OHKO">OHKO</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.OHKO" name="OHKO">
+                            </mat-slide-toggle>
+                        </li>
+                    </ul>
+                </mat-tab>
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeBossesType">RandomizeBossesType</label>
-                <select class="form-control" id="RandomizeBossesType" [(ngModel)]="optionFlags.RandomizeBossesType" name="RandomizeBossesType">
-                    <option *ngFor="let randomizeBossesType of RandomizeBossesTypeList | keys" [value]="randomizeBossesType.key">{{randomizeBossesType.value}}</option>
-                </select>
-            </div>
+                <mat-tab label="Bosses">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+                        <li>
+                            <label class="options-label" for="RandomizeBosses">RandomizeBosses</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBosses" name="RandomizeBosses">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeBossHealth">RandomizeBossHealth</label>
-                <input type="checkbox" class="form-control" id="RandomizeBossHealth" [(ngModel)]="optionFlags.RandomizeBossHealth" name="RandomizeBossHealth"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeBossesType">RandomizeBossesType</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.RandomizeBossesType" name="RandomizeBossesType" [disabled]="'false'">
+                                    <mat-option *ngFor="let randomizeBossesType of RandomizeBossesTypeList | keys" [value]="randomizeBossesType.key">{{randomizeBossesType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-            <!--
+                        <li>
+                            <label class="options-label" for="RandomizeBossHealth">RandomizeBossHealth</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBossHealth" name="RandomizeBossHealth">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <!--
     RandomizeBossHealthMinAmount: number;
     RandomizeBossHealthMaxAmount: number;
 -->
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeBossDamage">RandomizeBossDamage</label>
-                <input type="checkbox" class="form-control" id="RandomizeBossDamage" [(ngModel)]="optionFlags.RandomizeBossDamage" name="RandomizeBossDamage"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeBossDamage">RandomizeBossDamage</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBossDamage" name="RandomizeBossDamage">
+                            </mat-slide-toggle>
+                        </li>
 
-            <!--
+                        <!--
     RandomizeBossDamageMinAmount: number;
     RandomizeBossDamageMaxAmount: number;
 -->
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeBossBehavior">RandomizeBossBehavior</label>
-                <input type="checkbox" class="form-control" id="RandomizeBossBehavior" [(ngModel)]="optionFlags.RandomizeBossBehavior" name="RandomizeBossBehavior"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeBossBehavior">RandomizeBossBehavior</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBossBehavior" name="RandomizeBossBehavior">
+                            </mat-slide-toggle>
+                        </li>
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Palettes">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+
+                        <li>
+                            <label class="options-label" for="RandomizeDungeonPalettes">RandomizeDungeonPalettes</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeDungeonPalettes" name="RandomizeDungeonPalettes">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="SetBlackoutMode">SetBlackoutMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.SetBlackoutMode" name="SetBlackoutMode">
+                            </mat-slide-toggle>
+                        </li>
 
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeDungeonPalettes">RandomizeDungeonPalettes</label>
-                <input type="checkbox" class="form-control" id="RandomizeDungeonPalettes" [(ngModel)]="optionFlags.RandomizeDungeonPalettes"
-                    name="RandomizeDungeonPalettes" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="SetBlackoutMode">SetBlackoutMode</label>
-                <input type="checkbox" class="form-control" id="SetBlackoutMode" [(ngModel)]="optionFlags.SetBlackoutMode" name="SetBlackoutMode"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeOverworldPalettes">RandomizeOverworldPalettes</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeOverworldPalettes" name="RandomizeOverworldPalettes">
+                            </mat-slide-toggle>
+                        </li>
 
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeOverworldPalettes">RandomizeOverworldPalettes</label>
-                <input type="checkbox" class="form-control" id="RandomizeOverworldPalettes" [(ngModel)]="optionFlags.RandomizeOverworldPalettes"
-                    name="RandomizeOverworldPalettes" />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeSpritePalettes">RandomizeSpritePalettes</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeSpritePalettes" name="RandomizeSpritePalettes">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="SetAdvancedSpritePalettes">SetAdvancedSpritePalettes</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.SetAdvancedSpritePalettes" name="SetAdvancedSpritePalettes">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="PukeMode">PukeMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.PukeMode" name="PukeMode">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="NegativeMode">NegativeMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.NegativeMode" name="NegativeMode">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="GrayscaleMode">GrayscaleMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.GrayscaleMode" name="GrayscaleMode">
+                            </mat-slide-toggle>
+                        </li>
+
+                    </ul>
+                </mat-tab>
+                <mat-tab label="General">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+                        <li>
+                            <label class="options-label" for="GenerateSpoilers">GenerateSpoilers</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.GenerateSpoilers" name="GenerateSpoilers">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="RandomizeLinkSpritePalette">RandomizeLinkSpritePalette</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeLinkSpritePalette" name="RandomizeLinkSpritePalette">
+                            </mat-slide-toggle>
+                        </li>
+
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Extra">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+
+                        <li>
+                            <label class="options-label" for="RandomizePots">RandomizePots</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizePots" name="RandomizePots">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="ShuffleMusic">ShuffleMusic</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.ShuffleMusic" name="ShuffleMusic">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="BootlegMagic">BootlegMagic</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.BootlegMagic" name="BootlegMagic">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="DebugMode">DebugMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugMode" name="DebugMode">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="CustomBosses">CustomBosses</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.CustomBosses" name="CustomBosses">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="AndyMode">AndyMode</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AndyMode" name="AndyMode">
+                            </mat-slide-toggle>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="HeartBeepSpeed">HeartBeepSpeed</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.HeartBeepSpeed" name="HeartBeepSpeed" [disabled]="'false'">
+                                    <mat-option *ngFor="let heartBeepSpeed of HeartBeepSpeedList | keys" [value]="heartBeepSpeed.key">{{heartBeepSpeed.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+
+                        <li>
+                            <label class="options-label" for="AlternateGfx">AlternateGfx</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AlternateGfx" name="AlternateGfx">
+                            </mat-slide-toggle>
+                        </li>
 
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeSpritePalettes">RandomizeSpritePalettes</label>
-                <input type="checkbox" class="form-control" id="RandomizeSpritePalettes" [(ngModel)]="optionFlags.RandomizeSpritePalettes"
-                    name="RandomizeSpritePalettes" />
-            </div>
+                        <li>
+                            <label class="options-label" for="BeeMizer">BeeMizer</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.BeeMizer" name="BeeMizer">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="SetAdvancedSpritePalettes">SetAdvancedSpritePalettes</label>
-                <input type="checkbox" class="form-control" id="SetAdvancedSpritePalettes" [(ngModel)]="optionFlags.SetAdvancedSpritePalettes"
-                    name="SetAdvancedSpritePalettes" />
-            </div>
+                        <li>
+                            <label class="options-label" for="BeesLevel">BeesLevel</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.BeesLevel" name="BeesLevel" [disabled]="'false'">
+                                    <mat-option *ngFor="let beeLevel of BeeLevelList" [value]="beeLevel.key">{{beeLevel.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label class="options-label" for="RandomizeTileTrapPattern">RandomizeTileTrapPattern</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeTileTrapPattern" name="RandomizeTileTrapPattern">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="PukeMode">PukeMode</label>
-                <input type="checkbox" class="form-control" id="PukeMode" [(ngModel)]="optionFlags.PukeMode" name="PukeMode" />
-            </div>
+                        <li>
+                            <label class="options-label" for="RandomizeTileTrapFloorTile">RandomizeTileTrapFloorTile</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeTileTrapFloorTile" name="RandomizeTileTrapFloorTile">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="NegativeMode">NegativeMode</label>
-                <input type="checkbox" class="form-control" id="NegativeMode" [(ngModel)]="optionFlags.NegativeMode" name="NegativeMode"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="AllowKillableThief">AllowKillableThief</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AllowKillableThief" name="AllowKillableThief">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="GrayscaleMode">GrayscaleMode</label>
-                <input type="checkbox" class="form-control" id="GrayscaleMode" [(ngModel)]="optionFlags.GrayscaleMode" name="GrayscaleMode"
-                />
-            </div>
+                    </ul>
+                </mat-tab>
 
-
-            <div class="form-group">
-                <label class="option-label" for="GenerateSpoilers">GenerateSpoilers</label>
-                <input type="checkbox" class="form-control" id="GenerateSpoilers" [(ngModel)]="optionFlags.GenerateSpoilers" name="GenerateSpoilers"
-                />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="RandomizeLinkSpritePalette">RandomizeLinkSpritePalette</label>
-                <input type="checkbox" class="form-control" id="RandomizeLinkSpritePalette" [(ngModel)]="optionFlags.RandomizeLinkSpritePalette"
-                    name="RandomizeLinkSpritePalette" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="RandomizePots">RandomizePots</label>
-                <input type="checkbox" class="form-control" id="RandomizePots" [(ngModel)]="optionFlags.RandomizePots" name="RandomizePots"
-                />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="ShuffleMusic">ShuffleMusic</label>
-                <input type="checkbox" class="form-control" id="ShuffleMusic" [(ngModel)]="optionFlags.ShuffleMusic" name="ShuffleMusic"
-                />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="BootlegMagic">BootlegMagic</label>
-                <input type="checkbox" class="form-control" id="BootlegMagic" [(ngModel)]="optionFlags.BootlegMagic" name="BootlegMagic"
-                />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="DebugMode">DebugMode</label>
-                <input type="checkbox" class="form-control" id="DebugMode" [(ngModel)]="optionFlags.DebugMode" name="DebugMode" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="CustomBosses">CustomBosses</label>
-                <input type="checkbox" class="form-control" id="CustomBosses" [(ngModel)]="optionFlags.CustomBosses" name="CustomBosses"
-                />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="AndyMode">AndyMode</label>
-                <input type="checkbox" class="form-control" id="AndyMode" [(ngModel)]="optionFlags.AndyMode" name="AndyMode" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="HeartBeepSpeed">HeartBeepSpeed</label>
-                <select class="form-control" id="HeartBeepSpeed" [(ngModel)]="optionFlags.HeartBeepSpeed" name="HeartBeepSpeed">
-                    <option *ngFor="let heartBeepSpeed of HeartBeepSpeedList | keys" [value]="heartBeepSpeed.key">{{heartBeepSpeed.value}}</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="AlternateGfx">AlternateGfx</label>
-                <input type="checkbox" class="form-control" id="AlternateGfx" [(ngModel)]="optionFlags.AlternateGfx" name="AlternateGfx"
-                />
-            </div>
-
-            <!--
+                <mat-tab label="Graphics">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
+                        <!--
     ShieldGraphics: string;
     SwordGraphics: string;
 -->
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Debug">
+                    <!--  class="options-tab"> -->
+                    <ul class="flex-outer">
 
-            <div class="form-group">
-                <label class="option-label" for="BeeMizer">BeeMizer</label>
-                <input type="checkbox" class="form-control" id="BeeMizer" [(ngModel)]="optionFlags.BeeMizer" name="BeeMizer" />
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugForceEnemy">DebugForceEnemy</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugForceEnemy" name="DebugForceEnemy">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="BeesLevel">BeesLevel</label>
-                <select class="form-control" id="BeesLevel" [(ngModel)]="optionFlags.BeesLevel" name="BeesLevel">
-                    <option *ngFor="let beeLevel of BeeLevelList | keys" [value]="beeLevel.key">{{beeLevel.value}}</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="DebugForceEnemy">DebugForceEnemy</label>
-                <input type="checkbox" class="form-control" id="DebugForceEnemy" [(ngModel)]="optionFlags.DebugForceEnemy" name="DebugForceEnemy"
-                />
-            </div>
-
-            <!--
+                        <!--
     DebugForceEnemyId: number;
 -->
 
-            <div class="form-group">
-                <label class="option-label" for="DebugForceBoss">DebugForceBoss</label>
-                <input type="checkbox" class="form-control" id="DebugForceBoss" [(ngModel)]="optionFlags.DebugForceBoss" name="DebugForceBoss"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugForceBoss">DebugForceBoss</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugForceBoss" name="DebugForceBoss">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="DebugForceBossId">DebugForceBossId</label>
-                <select class="form-control" id="DebugForceBossId" [(ngModel)]="optionFlags.DebugForceBossId" name="DebugForceBossId">
-                    <option *ngFor="let bossType of BossTypeList | keys" [value]="bossType.key">{{bossType.value}}</option>
-                </select>
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugForceBossId">DebugForceBossId</label>
+                            <mat-form-field class="options-field">
+                                <mat-select [ngModel]="optionFlags.DebugForceBossId" name="DebugForceBossId" [disabled]="'false'">
+                                    <mat-option *ngFor="let bossType of BossTypeList | keys" [value]="bossType.key">{{bossType.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="DebugOpenShutterDoors">DebugOpenShutterDoors</label>
-                <input type="checkbox" class="form-control" id="DebugOpenShutterDoors" [(ngModel)]="optionFlags.DebugOpenShutterDoors" name="DebugOpenShutterDoors"
-                />
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugOpenShutterDoors">DebugOpenShutterDoors</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugOpenShutterDoors" name="DebugOpenShutterDoors">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="DebugForceEnemyDamageZero">DebugForceEnemyDamageZero</label>
-                <input type="checkbox" class="form-control" id="DebugForceEnemyDamageZero" [(ngModel)]="optionFlags.DebugForceEnemyDamageZero"
-                    name="DebugForceEnemyDamageZero" />
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugForceEnemyDamageZero">DebugForceEnemyDamageZero</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugForceEnemyDamageZero" name="DebugForceEnemyDamageZero">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="DebugShowRoomIdInRupeeCounter">DebugShowRoomIdInRupeeCounter</label>
-                <input type="checkbox" class="form-control" id="DebugShowRoomIdInRupeeCounter" [(ngModel)]="optionFlags.DebugShowRoomIdInRupeeCounter"
-                    name="DebugShowRoomIdInRupeeCounter" />
-            </div>
+                        <li>
+                            <label class="options-label" for="DebugShowRoomIdInRupeeCounter">DebugShowRoomIdInRupeeCounter</label>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.DebugShowRoomIdInRupeeCounter" name="DebugShowRoomIdInRupeeCounter">
+                            </mat-slide-toggle>
+                        </li>
 
-            <div class="form-group">
-                <label class="option-label" for="OHKO">OHKO</label>
-                <input type="checkbox" class="form-control" id="OHKO" [(ngModel)]="optionFlags.OHKO" name="OHKO" />
-            </div>
 
-            <div class="form-group">
-                <label class="option-label" for="RandomizeTileTrapPattern">RandomizeTileTrapPattern</label>
-                <input type="checkbox" class="form-control" id="RandomizeTileTrapPattern" [(ngModel)]="optionFlags.RandomizeTileTrapPattern"
-                    name="RandomizeTileTrapPattern" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="RandomizeTileTrapFloorTile">RandomizeTileTrapFloorTile</label>
-                <input type="checkbox" class="form-control" id="RandomizeTileTrapFloorTile" [(ngModel)]="optionFlags.RandomizeTileTrapFloorTile"
-                    name="RandomizeTileTrapFloorTile" />
-            </div>
-
-            <div class="form-group">
-                <label class="option-label" for="AllowKillableThief">AllowKillableThief</label>
-                <input type="checkbox" class="form-control" id="AllowKillableThief" [(ngModel)]="optionFlags.AllowKillableThief" name="AllowKillableThief"
-                />
-            </div>
-
-            <button type="submit" class="btn btn-success">Submit</button>
+                    </ul>
+                </mat-tab>
+            </mat-tab-group>
+            <section class="flex-buttons">
+                <button mat-raised-button type="submit" color="primary">Submit</button>
+            </section>
         </form>
     </mat-card-content>
 </mat-card>
