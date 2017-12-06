@@ -450,7 +450,9 @@
     <Content Include="tiles\ze.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="tiles\moldorm vertical.json" />
+    <None Include="tiles\moldorm vertical.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

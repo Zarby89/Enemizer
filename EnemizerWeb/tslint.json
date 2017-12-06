@@ -13,7 +13,6 @@
       true,
       "rxjs"
     ],
-    "import-spacing": true,
     "indent": [
       true,
       "spaces"

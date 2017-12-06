@@ -13,9 +13,10 @@ namespace EnemizerWebApi
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            GlobalConfiguration.Configuration.Routes.MapHttpRoute("Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional });
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            //GlobalConfiguration.Configuration.Routes.MapHttpRoute("Default",
+            //    "{controller}/{id}",
+            //    new { id = RouteParameter.Optional });
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -25,7 +26,11 @@ namespace EnemizerWebApi
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            // handle cors stuff
+            if(Request.Headers.AllKeys.Contains("Origin") && Request.HttpMethod == "OPTIONS")
+            {
+                Response.Flush();
+            }
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
-import { OptionFlags, AbsorbableTypesDictionary, RandomizeEnemiesType, 
-         RandomizeEnemyHPType, RandomizeBossesType, SwordTypes, ShieldTypes, 
-         AbsorbableTypes, HeartBeepSpeed, BeeLevel, BossType, RandomizerOptions 
-       } from '../optionFlags';
+import
+{
+    OptionFlags, AbsorbableTypesDictionary, RandomizeEnemiesType,
+    RandomizeEnemyHPType, RandomizeBossesType, SwordTypes, ShieldTypes,
+    AbsorbableTypes, HeartBeepSpeed, BeeLevel, BossType, RandomizerOptions
+} from '../optionFlags';
 
 import { KeysPipe } from '../keys.pipe';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
     selector: 'app-enemizer-form',
@@ -71,23 +76,50 @@ export class EnemizerFormComponent implements OnInit
     RandomizeBossesTypeList = RandomizeBossesType;
     HeartBeepSpeedList = HeartBeepSpeed;
     BeeLevelList = [
-        { key: 0, value: "Bees??" }, 
-        { key: 1, value: "Bees!" }, 
-        { key: 2, value: "Beeeeees!?" }, 
+        { key: 0, value: "Bees??" },
+        { key: 1, value: "Bees!" },
+        { key: 2, value: "Beeeeees!?" },
         { key: 3, value: "Beeeeeeeeeeeeeeeeeeeees" }
     ];
     BossTypeList = BossType;
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     ngOnInit ()
     {
     }
 
-    onSubmit() 
-    { 
+    onSubmit () 
+    {
+        const randoOptions = JSON.stringify(this.randomizerOptions);
+        const enemOptions = JSON.stringify(this.optionFlags);
 
+        console.log(randoOptions);
+
+        let params = new HttpParams()
+            .set('randomizerOptions', JSON.stringify(this.randomizerOptions))
+            .set('enemizerOptions', JSON.stringify(this.optionFlags));
+
+        const req = this.http.get("http://localhost:49375/api/enemizer", { params: params })
+            .subscribe(
+            data =>
+            {
+                console.log(data);
+            },
+            (err: HttpErrorResponse) =>
+            {
+                if (err.error instanceof Error)
+                {
+                    console.log("Client side error");
+                }
+                else
+                {
+                    console.log("Server side error");
+                }
+                //console.log("error");
+            }
+            );
     }
 
-    get diagnostic() { return JSON.stringify(this.optionFlags); }
+    get diagnostic () { return JSON.stringify(this.optionFlags); }
 }

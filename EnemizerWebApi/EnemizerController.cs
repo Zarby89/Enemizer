@@ -1,4 +1,5 @@
 ﻿using EnemizerLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,18 @@ namespace EnemizerWebApi
 {
     public class EnemizerController : ApiController
     {
-        public async Task<string> Get() //OptionFlags optionFlags)
+        public async Task<string> Get(string randomizerOptions, string enemizerOptions) //OptionFlags optionFlags)
         {
-            OptionFlags optionFlags;
+            EntranceRandomizerOptions randoOptions = JsonConvert.DeserializeObject<EntranceRandomizerOptions>(randomizerOptions);
+            OptionFlags optionFlags = JsonConvert.DeserializeObject<OptionFlags>(enemizerOptions);
+
             var rando = new RandomizerClient();
 
-            return await rando.GetData(new EntranceRandomizerOptions());
+            var randoPatchJson = await rando.GetData(randoOptions);
+
+            var randoPatch = JsonConvert.DeserializeObject<RandomizerPatch>(randoPatchJson);
+
+            return randoPatchJson;
         }
     }
 }

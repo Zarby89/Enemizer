@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +18,14 @@ namespace EnemizerWebApi
 
         public async Task<string> GetData(EntranceRandomizerOptions options)
         {
-            return await GetData(options, "entrance/seed");
+            if (options.shuffle == "off")
+            {
+                return await GetData(options as RandomizerOptions);
+            }
+            else
+            {
+                return await GetData(options, "entrance/seed");
+            }
         }
 
         async Task<string> GetData(RandomizerOptions options, string endpoint)
@@ -63,5 +71,26 @@ namespace EnemizerWebApi
     public class EntranceRandomizerOptions : RandomizerOptions
     {
         public string shuffle { get; set; } = "full";
+    }
+
+    public class RandomizerPatch
+    {
+        [JsonProperty(PropertyName = "seed")]
+        public string Seed { get; set; }
+
+        [JsonProperty(PropertyName = "logic")]
+        public string Logic { get; set; }
+
+        [JsonProperty(PropertyName = "difficulty")]
+        public string Difficulty { get; set; }
+
+        [JsonProperty(PropertyName="patch")]
+        public Dictionary<string, byte[]> Patches { get; set; }
+
+        [JsonProperty(PropertyName = "spoiler")]
+        public Dictionary<string, object> Spoilers { get; set; }
+
+        [JsonProperty(PropertyName = "hash")]
+        public string Hash { get; set; }
     }
 }

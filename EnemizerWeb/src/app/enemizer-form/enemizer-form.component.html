@@ -16,7 +16,7 @@
 <mat-card class="options-card">
     <mat-card-content>
 
-        <form>
+        <form (ngSubmit)="onSubmit()">
             <mat-tab-group>
                 <mat-tab label="General">
                     <div class="options-container">
@@ -44,49 +44,51 @@
                     <div class="options-container">
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Logic" [ngModel]="randomizerOptions.logic" name="logic" [disabled]="'false'">
+                                <mat-select placeholder="Logic" [(ngModel)]="randomizerOptions.logic" name="logic" [disabled]="'false'">
                                     <mat-option *ngFor="let logicType of LogicTypeList" [value]="logicType.key">{{logicType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Difficulty" [ngModel]="randomizerOptions.difficulty" name="difficulty" [disabled]="'false'">
+                                <mat-select placeholder="Difficulty" [(ngModel)]="randomizerOptions.difficulty" name="difficulty" [disabled]="'false'">
                                     <mat-option *ngFor="let difficultyType of DifficultyTypeList" [value]="difficultyType.key">{{difficultyType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Variation" [ngModel]="randomizerOptions.variation" name="variation" [disabled]="'false'">
+                                <mat-select placeholder="Variation" [(ngModel)]="randomizerOptions.variation" name="variation" [disabled]="'false'">
                                     <mat-option *ngFor="let variationType of VariationTypeList" [value]="variationType.key">{{variationType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Mode" [ngModel]="randomizerOptions.mode" name="mode" [disabled]="'false'">
+                                <mat-select placeholder="Mode" [(ngModel)]="randomizerOptions.mode" name="mode" [disabled]="'false'">
                                     <mat-option *ngFor="let modeType of ModeTypeList" [value]="modeType.key">{{modeType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Goal" [ngModel]="randomizerOptions.goal" name="goal" [disabled]="'false'">
+                                <mat-select placeholder="Goal" [(ngModel)]="randomizerOptions.goal" name="goal" [disabled]="'false'">
                                     <mat-option *ngFor="let goalType of GoalTypeList" [value]="goalType.key">{{goalType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            {{randomizerOptions.goal}}
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Entrance Shuffle" [ngModel]="randomizerOptions.shuffle" name="shuffle" [disabled]="'false'">
+                                <mat-select placeholder="Entrance Shuffle" [(ngModel)]="randomizerOptions.shuffle" name="shuffle" [disabled]="'false'">
                                     <mat-option *ngFor="let shuffleType of ShuffleTypeList" [value]="shuffleType.key">{{shuffleType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            {{randomizerOptions.shuffle}}
                         </div>
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Heart Beep Speed" [ngModel]="randomizerOptions.heart_speed" name="heart_speed" [disabled]="'false'">
+                                <mat-select placeholder="Heart Beep Speed" [(ngModel)]="randomizerOptions.heart_speed" name="heart_speed" [disabled]="'false'">
                                     <mat-option *ngFor="let heartSpeedType of HeartBeepSpeedTypeList" [value]="heartSpeedType.key">{{heartSpeedType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -124,7 +126,7 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Type of Randomization" [ngModel]="optionFlags.RandomizeEnemiesType" name="RandomizeEnemiesType"
+                                <mat-select placeholder="Type of Randomization" [(ngModel)]="optionFlags.RandomizeEnemiesType" name="RandomizeEnemiesType"
                                     [disabled]="'true'">
                                     <mat-option *ngFor="let enemiesType of RandomizeEnemiesTypeList | keys" [value]="enemiesType.key">{{enemiesType.value}}</mat-option>
                                 </mat-select>
@@ -132,7 +134,8 @@
                         </div>
 
                         <div>
-                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBushEnemyChance" name="RandomizeBushEnemyChance">
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeBushEnemyChance" name="RandomizeBushEnemyChance"
+                                [disabled]="!optionFlags.RandomizeEnemies">
                                 Randomize Bush/Grass Enemy Chance
                             </mat-slide-toggle>
                         </div>
@@ -145,35 +148,12 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Randomize Enemy Health Type" [ngModel]="optionFlags.RandomizeEnemyHealthType" name="RandomizeEnemyHealthType"
-                                    [disabled]="'false'">
+                                <mat-select placeholder="Randomize Enemy Health Type" [(ngModel)]="optionFlags.RandomizeEnemyHealthType" name="RandomizeEnemyHealthType"
+                                    [disabled]="!optionFlags.RandomizeEnemyHealthRange">
                                     <mat-option *ngFor="let randomizeEnemyHPType of RandomizeEnemyHPTypeList | keys" [value]="randomizeEnemyHPType.key">{{randomizeEnemyHPType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
-
-                        <div>
-                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeEnemyDamage" name="RandomizeEnemyDamage">
-                                Randomize Enemy Damage
-                            </mat-slide-toggle>
-                        </div>
-
-                        <div>
-                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AllowEnemyZeroDamage" name="AllowEnemyZeroDamage">
-                                Allow Enemy Zero Damage
-                            </mat-slide-toggle>
-                        </div>
-
-                        <div>
-                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.ShuffleEnemyDamageGroups" name="ShuffleEnemyDamageGroups">
-                                Shuffle Enemy Damage Groups
-                            </mat-slide-toggle>
-                        </div>
-
-                        <div>
-                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemyDamageChaosMode" name="EnemyDamageChaosMode">
-                                Enemy Damage Chaos Mode
-                            </mat-slide-toggle>
+                            {{optionFlags.RandomizeEnemyHealthType}}
                         </div>
                         <div>
                             <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.OHKO" name="OHKO">
@@ -181,6 +161,33 @@
                             </mat-slide-toggle>
                         </div>
 
+                        <div>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.RandomizeEnemyDamage" name="RandomizeEnemyDamage"
+                                [disabled]="optionFlags.OHKO">
+                                Randomize Enemy Damage
+                            </mat-slide-toggle>
+                        </div>
+
+                        <div>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AllowEnemyZeroDamage" name="AllowEnemyZeroDamage"
+                                [disabled]="optionFlags.OHKO || !optionFlags.RandomizeEnemyDamage">
+                                Allow Enemy Zero Damage
+                            </mat-slide-toggle>
+                        </div>
+
+                        <div>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.ShuffleEnemyDamageGroups" name="ShuffleEnemyDamageGroups"
+                                [disabled]="optionFlags.OHKO || !optionFlags.RandomizeEnemyDamage">
+                                Shuffle Enemy Damage Groups
+                            </mat-slide-toggle>
+                        </div>
+
+                        <div>
+                            <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemyDamageChaosMode" name="EnemyDamageChaosMode"
+                                [disabled]="optionFlags.OHKO || (!optionFlags.RandomizeEnemyDamage || !optionFlags.ShuffleEnemyDamageGroups)">
+                                Enemy Damage Chaos Mode
+                            </mat-slide-toggle>
+                        </div>
 
                         <div>
                             <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EasyModeEscape" name="EasyModeEscape"
@@ -188,93 +195,104 @@
                                 Easy Mode Escape
                             </mat-slide-toggle>
                         </div>
-
-
                         <div>
                             <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.EnemiesAbsorbable" name="EnemiesAbsorbable">
                                 Allow Absorbable Items (Dungeons)
                             </mat-slide-toggle>
                         </div>
-
-                        <div>
+                        <div> 
+                        <!-- *ngIf="optionFlags.EnemiesAbsorbable"> -->
                             <span class="fake-label">Absorbable Spawn Rate</span>
                             <br>
-                            <mat-slider placeholder="Absorbable Spawn Rate" class="options-slider" [disabled]="'false'" [min]="'0'" [max]="'20'" [step]="'1'"
-                                [tick-interval]="'1'" [(ngModel)]="optionFlags.AbsorbableSpawnRate" name="AbsorbableSpawnRate">
+                            <mat-slider placeholder="Absorbable Spawn Rate" class="options-slider" [min]="'0'" [max]="'20'" [step]="'1'" [tick-interval]="'1'"
+                                [(ngModel)]="optionFlags.AbsorbableSpawnRate" name="AbsorbableSpawnRate" [disabled]="!optionFlags.EnemiesAbsorbable">
                             </mat-slider>
                             +/-{{optionFlags.AbsorbableSpawnRate}}%
                         </div>
-
                         <mat-card>
+                            <!-- *ngIf="optionFlags.EnemiesAbsorbable" -->
                             Absorbables
                             <div class="options-absorbables-list">
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Heart" name="Heart">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Heart" name="Heart"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Heart
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.GreenRupee" name="GreenRupee">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.GreenRupee" name="GreenRupee"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Green Rupee
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.BlueRupee" name="BlueRupee">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.BlueRupee" name="BlueRupee"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Blue Rupee
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.RedRupee" name="RedRupee">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.RedRupee" name="RedRupee"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Red Rupee
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_1" name="Bomb_1">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_1" name="Bomb_1"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Bomb (1)
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_4" name="Bomb_4">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_4" name="Bomb_4"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Bomb (4)
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_8" name="Bomb_8">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Bomb_8" name="Bomb_8"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Bomb (8)
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.SmallMagic" name="SmallMagic">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.SmallMagic" name="SmallMagic"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Small Magic
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.FullMagic" name="FullMagic">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.FullMagic" name="FullMagic"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Full Magic
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Arrow_5" name="Arrow_5">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Arrow_5" name="Arrow_5"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Arrow (5)
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Arrow_10" name="Arrow_10">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Arrow_10" name="Arrow_10"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Arrow (10)
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Fairy" name="Fairy">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Fairy" name="Fairy"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Fairy
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Key" name="Key">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.Key" name="Key" [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Key
                                     </mat-slide-toggle>
                                 </div>
                                 <div>
-                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.BigKey" name="BigKey">
+                                    <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.AbsorbableTypes.BigKey" name="BigKey"
+                                        [disabled]="!optionFlags.EnemiesAbsorbable">
                                         Big Key
                                     </mat-slide-toggle>
                                 </div>
@@ -295,7 +313,7 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Type of Randomization" [ngModel]="optionFlags.RandomizeBossesType" name="RandomizeBossesType" [disabled]="'false'">
+                                <mat-select placeholder="Type of Randomization" [(ngModel)]="optionFlags.RandomizeBossesType" name="RandomizeBossesType" [disabled]="'false'">
                                     <mat-option *ngFor="let randomizeBossesType of RandomizeBossesTypeList | keys" [value]="randomizeBossesType.key">{{randomizeBossesType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -452,7 +470,7 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Heart Beep Speed" [ngModel]="optionFlags.HeartBeepSpeed" name="HeartBeepSpeed" [disabled]="'false'">
+                                <mat-select placeholder="Heart Beep Speed" [(ngModel)]="optionFlags.HeartBeepSpeed" name="HeartBeepSpeed" [disabled]="'false'">
                                     <mat-option *ngFor="let heartBeepSpeed of HeartBeepSpeedList | keys" [value]="heartBeepSpeed.key">{{heartBeepSpeed.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -473,7 +491,7 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Bee Level" [ngModel]="optionFlags.BeesLevel" name="BeesLevel" [disabled]="'false'">
+                                <mat-select placeholder="Bee Level" [(ngModel)]="optionFlags.BeesLevel" name="BeesLevel" [disabled]="'false'">
                                     <mat-option *ngFor="let beeLevel of BeeLevelList" [value]="beeLevel.key">{{beeLevel.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -528,7 +546,7 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Forced Boss" [ngModel]="optionFlags.DebugForceBossId" name="DebugForceBossId" [disabled]="'false'">
+                                <mat-select placeholder="Forced Boss" [(ngModel)]="optionFlags.DebugForceBossId" name="DebugForceBossId" [disabled]="'false'">
                                     <mat-option *ngFor="let bossType of BossTypeList | keys" [value]="bossType.key">{{bossType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
