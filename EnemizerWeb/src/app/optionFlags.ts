@@ -211,3 +211,25 @@ export class RandomizerOptions
     tournament: boolean = false;
     shuffle: string = "full";
 }
+
+export interface Patch
+{
+    randoPatch: RandomizerPatch;
+    enemPatch: Array<PatchData>;
+}
+
+export interface RandomizerPatch
+{
+    Seed: string;
+    Logic: string;
+    Difficulty: string;
+    Patches: Array<PatchData>;
+    Spoilers: any;
+    Hash: string;
+}
+
+export interface PatchData
+{
+    address: number;
+    patchData: number[];
+}

@@ -54,10 +54,12 @@ copy patchData.json $(SolutionDir)
 copy patchData.json $(SolutionDir)EnemizerGui\
 copy patchData.json $(SolutionDir)EnemizerGui\$(OutDir)
 copy patchData.json $(SolutionDir)EnemizerTests\$(OutDir)
+copy patchData.json $(SolutionDir)EnemizerWebApi\
 copy exported_symbols.txt $(SolutionDir)
 copy exported_symbols.txt $(SolutionDir)EnemizerGui\
 copy exported_symbols.txt $(SolutionDir)EnemizerGui\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)EnemizerTests\$(OutDir)
+copy exported_symbols.txt $(SolutionDir)EnemizerWebApi\
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

@@ -6,7 +6,8 @@ import
 {
     OptionFlags, AbsorbableTypesDictionary, RandomizeEnemiesType,
     RandomizeEnemyHPType, RandomizeBossesType, SwordTypes, ShieldTypes,
-    AbsorbableTypes, HeartBeepSpeed, BeeLevel, BossType, RandomizerOptions
+    AbsorbableTypes, HeartBeepSpeed, BeeLevel, BossType, RandomizerOptions,
+    Patch
 } from '../optionFlags';
 
 import { KeysPipe } from '../keys.pipe';
@@ -97,12 +98,12 @@ export class EnemizerFormComponent implements OnInit
         console.log(randoOptions);
 
         let params = new HttpParams()
+            .set('seedNumber', null)
             .set('randomizerOptions', JSON.stringify(this.randomizerOptions))
             .set('enemizerOptions', JSON.stringify(this.optionFlags));
 
-        const req = this.http.get("http://localhost:49375/api/enemizer", { params: params })
-            .subscribe(
-            data =>
+        const req = this.http.get<Patch>("http://localhost:49375/api/enemizer", { params: params })
+            .subscribe(data =>
             {
                 console.log(data);
             },

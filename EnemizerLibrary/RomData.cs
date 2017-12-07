@@ -498,7 +498,7 @@ namespace EnemizerLibrary
             SetPatchBytes(startingAddress, length);
         }
 
-        public void WriteRom(FileStream fs)
+        public void WriteRom(Stream fs)
         {
             UpdateChecksum();
 

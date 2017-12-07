@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using EnemizerLibrary;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,22 +77,55 @@ namespace EnemizerWebApi
 
     public class RandomizerPatch
     {
-        [JsonProperty(PropertyName = "seed")]
         public string Seed { get; set; }
 
-        [JsonProperty(PropertyName = "logic")]
         public string Logic { get; set; }
 
-        [JsonProperty(PropertyName = "difficulty")]
         public string Difficulty { get; set; }
 
-        [JsonProperty(PropertyName="patch")]
-        public Dictionary<string, byte[]> Patches { get; set; }
+        public List<PatchObject> Patches { get; set; } = new List<PatchObject>();
 
-        [JsonProperty(PropertyName = "spoiler")]
-        public Dictionary<string, object> Spoilers { get; set; }
+        public object Spoilers { get; set; }
 
-        [JsonProperty(PropertyName = "hash")]
         public string Hash { get; set; }
+
+        public RandomizerPatch(string json)
+        {
+            var rawPatch = JObject.Parse(json);
+
+            Seed = (string)rawPatch["seed"];
+            Logic = (string)rawPatch["logic"];
+            Difficulty = (string)rawPatch["difficulty"];
+
+            foreach(var p in rawPatch["patch"])
+            {
+                foreach(var prop in p)
+                {
+                    var property = prop as JProperty;
+
+                    if(property != null)
+                    {
+                        var v = property.Value as JArray;
+                        if(v != null)
+                        {
+                            int address;
+                            if (Int32.TryParse(property.Name, out address))
+                            {
+                                Patches.Add(new PatchObject() { address = address, patchData = v.Select(x => (byte)x).ToList() });
+                                //Patches[address] = v.Select(x => (byte)x).ToList();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void PatchRom(ref byte[] rom)
+        {
+            foreach(var p in Patches)
+            {
+                Array.Copy(p.patchData.ToArray(), 0, rom, p.address, p.patchData.Count);
+            }
+        }
     }
 }
