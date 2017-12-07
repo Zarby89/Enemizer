@@ -53,6 +53,30 @@ namespace EnemizerWebApi
                 return null;
             }
         }
+
+        public async Task<string> GetJsonAsString(string endpoint)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://vt.alttp.run");
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/html"));
+
+            HttpResponseMessage response = await client.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+
+                Debug.Write(result);
+
+                return result;
+            }
+            else
+            {
+                // call failed
+                return null;
+            }
+        }
     }
 
     public class RandomizerOptions
@@ -89,8 +113,44 @@ namespace EnemizerWebApi
 
         public string Hash { get; set; }
 
-        public RandomizerPatch(string json)
+        public RandomizerPatch(string basePatchJson, string json)
         {
+            var rawBase = JArray.Parse(basePatchJson);
+
+            foreach(var p in rawBase)
+            {
+                foreach(var prop in p)
+                {
+                    var property = prop as JProperty;
+
+                    if (property != null)
+                    {
+                        var v = property.Value as JArray;
+                        if (v != null)
+                        {
+                            int address;
+                            if (Int32.TryParse(property.Name, out address))
+                            {
+                                Patches.Add(new PatchObject() { address = address, patchData = v.Select(x => (byte)x).ToList() });
+                                //Patches[address] = v.Select(x => (byte)x).ToList();
+                            }
+                            else
+                            {
+                                throw new Exception($"invalid address: {property.Name}");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception($"invalid patch property value: {property.Value.ToString()}");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception($"invalid patch property: {prop.ToString()}");
+                    }
+                }
+            }
+
             var rawPatch = JObject.Parse(json);
 
             Seed = (string)rawPatch["seed"];
@@ -114,7 +174,19 @@ namespace EnemizerWebApi
                                 Patches.Add(new PatchObject() { address = address, patchData = v.Select(x => (byte)x).ToList() });
                                 //Patches[address] = v.Select(x => (byte)x).ToList();
                             }
+                            else
+                            {
+                                throw new Exception($"invalid address: {property.Name}");
+                            }
                         }
+                        else
+                        {
+                            throw new Exception($"invalid patch property value: {property.Value.ToString()}");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception($"invalid patch property: {prop.ToString()}");
                     }
                 }
             }

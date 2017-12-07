@@ -22,6 +22,10 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http/src/respon
 export class EnemizerFormComponent implements OnInit
 {
     randomizerOptions: RandomizerOptions = new RandomizerOptions();
+    romFilename: string;
+    romError: string;
+    romBytes: Uint8Array = null;
+    
     LogicTypeList = [
         { key: "NoMajorGlitches", value: "No Glitches" },
         { key: "OverworldGlitches", value: "Overworld Glitches" },
@@ -90,6 +94,36 @@ export class EnemizerFormComponent implements OnInit
     {
     }
 
+    onRomChange (event?: HTMLInputEvent)
+    {
+        console.log('onRomChange');
+        let files = event.target.files;
+        if (files.length === 0)
+        {
+            return;
+        }
+
+        this.romError = '';
+        this.romFilename = files[0].name;
+
+        let reader = new FileReader();
+        reader.onload = () =>
+        {
+            let arrayBuffer = reader.result;
+            let array = new Uint8Array(arrayBuffer);
+            this.romBytes = array;
+            // if (!this.isValidRom(this.romBytes))
+            // {
+            //     this.romError = 'Invalid rom file';
+            //     return;
+            // }
+        };
+
+        reader.readAsArrayBuffer(files[0]);
+
+        console.log(files);
+    }
+
     onSubmit () 
     {
         const randoOptions = JSON.stringify(this.randomizerOptions);
@@ -106,6 +140,28 @@ export class EnemizerFormComponent implements OnInit
             .subscribe(data =>
             {
                 console.log(data);
+                this.romBytes = this.resizeUint8(this.romBytes, 4 * 1024 * 1024);
+
+                if (this.romBytes)
+                {
+                    for (let randoPatch of data.randoPatch.Patches)
+                    {
+                        for (let i = 0; i < randoPatch.patchData.length; i++)
+                        {
+                            this.romBytes[randoPatch.address + i] = randoPatch.patchData[i];
+                        }
+                    }
+
+                    for (let enemizerPatch of data.enemPatch)
+                    {
+                        for (let i = 0; i < enemizerPatch.patchData.length; i++)
+                        {
+                            this.romBytes[enemizerPatch.address + i] = enemizerPatch.patchData[i];
+                        }
+                    }
+
+                    this.downloadBlob(this.romBytes, this.romFilename, 'application/octet-stream');
+                }
             },
             (err: HttpErrorResponse) =>
             {
@@ -122,5 +178,46 @@ export class EnemizerFormComponent implements OnInit
             );
     }
 
+    downloadBlob = (data, fileName, mimeType) =>
+    {
+        let blob, url;
+        blob = new Blob([data], {
+            type: mimeType
+        });
+        url = window.URL.createObjectURL(blob);
+        this.downloadURL(url, fileName);
+        setTimeout(function ()
+        {
+            return window.URL.revokeObjectURL(url);
+        }, 1000);
+    }
+
+    downloadURL = (data, fileName) =>
+    {
+        let a;
+        a = document.createElement('a');
+        a.href = data;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.style = 'display: none';
+        a.click();
+        a.remove();
+    }
+
+    resizeUint8 = (baseArrayBuffer, newByteSize) =>
+    {
+        let resizedArrayBuffer = new ArrayBuffer(newByteSize),
+            len = baseArrayBuffer.byteLength,
+            resizeLen = (len > newByteSize) ? newByteSize : len;
+    
+            (new Uint8Array(resizedArrayBuffer, 0, resizeLen)).set(new Uint8Array(baseArrayBuffer, 0, resizeLen));
+    
+        return new Uint8Array(resizedArrayBuffer);
+    }
     get diagnostic () { return JSON.stringify(this.optionFlags); }
+}
+
+interface HTMLInputEvent extends Event
+{
+    target: HTMLInputElement & EventTarget;
 }

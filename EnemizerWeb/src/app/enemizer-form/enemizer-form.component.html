@@ -21,6 +21,14 @@
                 <mat-tab label="General">
                     <div class="options-container">
                         <div>
+                            <label class="btn btn-primary btn-file">
+                                Select Rom
+                                <input type="file" style="display: none;" (change)="onRomChange($event)" />
+                            </label>
+                            <label>{{romFilename}}</label>
+                            <label class="text-danger">{{romError}}</label>
+                        </div>
+                        <div>
                             <mat-slide-toggle class="options-toggle" [color]="'primary'" [(ngModel)]="optionFlags.GenerateSpoilers" name="GenerateSpoilers">
                                 Generate Spoilers
                             </mat-slide-toggle>
@@ -200,8 +208,8 @@
                                 Allow Absorbable Items (Dungeons)
                             </mat-slide-toggle>
                         </div>
-                        <div> 
-                        <!-- *ngIf="optionFlags.EnemiesAbsorbable"> -->
+                        <div>
+                            <!-- *ngIf="optionFlags.EnemiesAbsorbable"> -->
                             <span class="fake-label">Absorbable Spawn Rate</span>
                             <br>
                             <mat-slider placeholder="Absorbable Spawn Rate" class="options-slider" [min]="'0'" [max]="'20'" [step]="'1'" [tick-interval]="'1'"
@@ -313,7 +321,8 @@
 
                         <div>
                             <mat-form-field class="options-field">
-                                <mat-select placeholder="Type of Randomization" [(ngModel)]="optionFlags.RandomizeBossesType" name="RandomizeBossesType" [disabled]="'false'">
+                                <mat-select placeholder="Type of Randomization" [(ngModel)]="optionFlags.RandomizeBossesType" name="RandomizeBossesType"
+                                    [disabled]="'false'">
                                     <mat-option *ngFor="let randomizeBossesType of RandomizeBossesTypeList | keys" [value]="randomizeBossesType.key">{{randomizeBossesType.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
