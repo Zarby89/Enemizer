@@ -16,10 +16,7 @@ namespace EnemizerLibrary
         {
             patchFilename = patchFile;
 
-            if (HostingEnvironment.IsHosted)
-            {
-                patchFilename = HostingEnvironment.MapPath("~/" + patchFilename);
-            }
+            patchFilename = Path.Combine(EnemizerBasePath.Instance.BasePath, patchFilename);
         }
 
         public void PatchRom(RomData rom)

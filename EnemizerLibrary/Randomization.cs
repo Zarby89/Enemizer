@@ -21,8 +21,10 @@ namespace EnemizerLibrary
 
         OptionFlags optionFlags;
 
-        public RomData MakeRandomization(int seed, OptionFlags optionflags, RomData romData, string skin = "") //Initialization of the randomization
+        public RomData MakeRandomization(string basePath, int seed, OptionFlags optionflags, RomData romData, string skin = "") //Initialization of the randomization
         {
+            EnemizerBasePath.Instance.BasePath = basePath;
+
             this.optionFlags = optionflags;
 
             this.ROM_DATA = romData;
@@ -337,20 +339,14 @@ namespace EnemizerLibrary
         private void RandomizeTileTrapPattern(RomData romData, Random rand)
         {
             var tilePath = "tiles";
-            if (HostingEnvironment.IsHosted)
-            {
-                tilePath = HostingEnvironment.MapPath("~/" + tilePath);
-            }
+            tilePath = Path.Combine(EnemizerBasePath.Instance.BasePath, tilePath);
 
             List<string> skins = Directory.GetFiles(tilePath).ToList();
 
             if (skins.Count > 0)
             {
                 var filename = skins[rand.Next(skins.Count)];
-                if (HostingEnvironment.IsHosted)
-                {
-                    filename = HostingEnvironment.MapPath("~/" + filename);
-                }
+                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
                 var tileData = JsonConvert.DeserializeObject<TileCollection>(File.ReadAllText(filename));
 
@@ -422,10 +418,8 @@ namespace EnemizerLibrary
 
         void SetSwordGfx(string swordType)
         {
-            if (HostingEnvironment.IsHosted)
-            {
-                swordType = HostingEnvironment.MapPath("~/" + swordType);
-            }
+            swordType = Path.Combine(EnemizerBasePath.Instance.BasePath, swordType);
+
             FileStream f = new FileStream(swordType, FileMode.Open, FileAccess.Read);
             this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
             f.Close();
@@ -433,10 +427,8 @@ namespace EnemizerLibrary
 
         void SetShieldGfx(string shieldType)
         {
-            if (HostingEnvironment.IsHosted)
-            {
-                shieldType = HostingEnvironment.MapPath("~/" + shieldType);
-            }
+            shieldType = Path.Combine(EnemizerBasePath.Instance.BasePath, shieldType);
+
             FileStream f = new FileStream(shieldType, FileMode.Open, FileAccess.Read);
             this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
             f.Close();
@@ -571,11 +563,7 @@ namespace EnemizerLibrary
             for(int i = 0; i < bossgfxindex.Length; i++)
             {
                 var filename = "bosses_gfx\\" + bossgfxfiles[i];
-
-                if (HostingEnvironment.IsHosted)
-                {
-                    filename = HostingEnvironment.MapPath("~/" + filename);
-                }
+                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
                 FileStream f = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 this.ROM_DATA.ReadFileStreamIntoRom(f, newGfxPosition, (int)f.Length);
@@ -638,10 +626,7 @@ namespace EnemizerLibrary
         private void ChangeSkin(string skin)
         {
             var spritePath = "sprites";
-            if (HostingEnvironment.IsHosted)
-            {
-                spritePath = HostingEnvironment.MapPath("~/" + spritePath);
-            }
+            spritePath = Path.Combine(EnemizerBasePath.Instance.BasePath, spritePath);
 
             if (skin == "Random")
             {
@@ -649,10 +634,8 @@ namespace EnemizerLibrary
                 skin = skins[rand.Next(skins.Length)];
             }
 
-            if(HostingEnvironment.IsHosted)
-            {
-                skin = HostingEnvironment.MapPath("~/" + skin);
-            }
+            skin = Path.Combine(EnemizerBasePath.Instance.BasePath, skin);
+
             FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
             byte[] skin_data = new byte[0x7078];
             fsx.Read(skin_data, 0, 0x7078);
@@ -1464,10 +1447,8 @@ namespace EnemizerLibrary
         private void BuildRandomLinkSpriteTable(Random random)
         {
             var spritePath = "sprites";
-            if (HostingEnvironment.IsHosted)
-            {
-                spritePath = HostingEnvironment.MapPath("~/" + spritePath);
-            }
+            spritePath = Path.Combine(EnemizerBasePath.Instance.BasePath, spritePath);
+
             List<string> skins = Directory.GetFiles(spritePath).ToList();
             int totalSprites = 32;
             //if(totalSprites > skins.Count)
@@ -1485,10 +1466,7 @@ namespace EnemizerLibrary
                 // force pug sprite
                 r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
                 filename = skins[r];
-                if (HostingEnvironment.IsHosted)
-                {
-                    filename = HostingEnvironment.MapPath("~/" + filename);
-                }
+                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
                 fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
@@ -1501,10 +1479,8 @@ namespace EnemizerLibrary
             {
                 r = random.Next(skins.Count);
                 filename = skins[r];
-                if (HostingEnvironment.IsHosted)
-                {
-                    filename = HostingEnvironment.MapPath("~/" + filename);
-                }
+                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
+
                 fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();

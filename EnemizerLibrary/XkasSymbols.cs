@@ -14,10 +14,7 @@ namespace EnemizerLibrary
         public Dictionary<string, int> Symbols { get; private set; }
         private XkasSymbols(string filename)
         {
-            if(HostingEnvironment.IsHosted)
-            {
-                filename = HostingEnvironment.MapPath("~/" + filename);
-            }
+            filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
             Symbols = new Dictionary<string, int>();
 

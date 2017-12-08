@@ -598,7 +598,7 @@ namespace Enemizer
 
             RomData romData = new RomData(rom_data);
             Randomization randomize = new Randomization();
-            RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
+            RomData randomizedRom = randomize.MakeRandomization("", seed, config.OptionFlags, romData, linkSpriteFilename);
 
             string fileNameNoExtension = Path.Combine(outputPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(inputFilename)} (EN{randomizedRom.EnemizerSeed})");
 
