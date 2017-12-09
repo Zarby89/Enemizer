@@ -84,6 +84,8 @@ namespace EnemizerCLI
             var patchJson = JsonConvert.SerializeObject(enemPatch);
 
             File.WriteAllText(options.OutputPatchJsonFilename, patchJson);
+
+            Console.WriteLine($"Generated file {options.OutputPatchJsonFilename}");
         }
 
         static List<PatchObject> GenerateSeed(int seed, byte[] rom_data, OptionFlags optionFlags)

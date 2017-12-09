@@ -334,7 +334,7 @@ namespace EnemizerLibrary
             else if (!RoomIdConstants.BossRooms.Contains(this.RoomId))
             {
                 // TODO: log this because it's not a boss room
-                Console.WriteLine($"Skipped randomizing sprites in room {this.RoomId}");
+                Debug.WriteLine($"Skipped randomizing sprites in room {this.RoomId}");
             }
         }
 
