@@ -598,7 +598,7 @@ namespace Enemizer
 
             RomData romData = new RomData(rom_data);
             Randomization randomize = new Randomization();
-            RomData randomizedRom = randomize.MakeRandomization(seed, config.OptionFlags, romData, linkSpriteFilename);
+            RomData randomizedRom = randomize.MakeRandomization("", seed, config.OptionFlags, romData, linkSpriteFilename);
 
             string fileNameNoExtension = Path.Combine(outputPath, $"Enemizer {EnemizerLibrary.Version.CurrentVersion} - {Path.GetFileNameWithoutExtension(inputFilename)} (EN{randomizedRom.EnemizerSeed})");
 
@@ -610,6 +610,13 @@ namespace Enemizer
             var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             randomizedRom.WriteRom(fs);
             fs.Close();
+
+#if DEBUG
+            // build a patch for testing
+            var romPatch = randomizedRom.GeneratePatch();
+            string patch = JsonConvert.SerializeObject(romPatch);
+            File.WriteAllText($"{fileNameNoExtension}.patch", patch);
+#endif
 
             return fileName;
 

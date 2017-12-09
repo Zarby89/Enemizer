@@ -30,7 +30,7 @@ namespace EnemizerTests
             for(int i=0; i<10; i++)
             {
                 RomData romData = new RomData(rom_data);
-                randomizer.MakeRandomization(rand.Next(), options, romData);
+                randomizer.MakeRandomization("", rand.Next(), options, romData);
             }
         }
 
@@ -48,7 +48,7 @@ namespace EnemizerTests
             for (int i = 0; i < 100; i++)
             {
                 RomData romData = new RomData(rom_data);
-                randomizer.MakeRandomization(rand.Next(), options, romData);
+                randomizer.MakeRandomization("", rand.Next(), options, romData);
             }
         }
 
@@ -67,7 +67,7 @@ namespace EnemizerTests
             for (int i = 0; i < 100; i++)
             {
                 RomData romData = new RomData(rom_data);
-                randomizer.MakeRandomization(rand.Next(), options, romData);
+                randomizer.MakeRandomization("", rand.Next(), options, romData);
             }
         }
 
@@ -101,7 +101,7 @@ namespace EnemizerTests
             for (int i = 0; i < 10; i++)
             {
                 RomData romData = new RomData(rom_data);
-                randomizer.MakeRandomization(rand.Next(), options, romData);
+                randomizer.MakeRandomization("", rand.Next(), options, romData);
             }
         }
 

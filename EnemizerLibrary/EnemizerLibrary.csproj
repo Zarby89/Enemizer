@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -101,6 +102,7 @@
     <Compile Include="DungeonObject\DungeonObjectDataTable.cs" />
     <Compile Include="DungeonObject\DungeonObjectPointerCollection.cs" />
     <Compile Include="DungeonObject\SubType3Object.cs" />
+    <Compile Include="EnemizerBasePath.cs" />
     <Compile Include="EnemyRandomizer\Dungeon\DungeonEnemyRandomizer.cs" />
     <Compile Include="EnemyRandomizer\Overworld\OverworldArea.cs" />
     <Compile Include="EnemyRandomizer\Overworld\OverworldAreaCollection.cs" />

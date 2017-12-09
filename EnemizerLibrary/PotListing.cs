@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -385,7 +386,7 @@ namespace EnemizerLibrary
 
                     if (g.id == 201)
                     {
-                        Console.WriteLine("(Room201)NBR ITEMS ORIG: " + g.items.Length + " / copied items :" + roomItems.Count + "Original pots :" + g.pots.Length + " / copied pots : " + roomEmptyPots.Count);
+                        Debug.WriteLine("(Room201)NBR ITEMS ORIG: " + g.items.Length + " / copied items :" + roomItems.Count + "Original pots :" + g.pots.Length + " / copied pots : " + roomEmptyPots.Count);
                     }
 
                     while (reservedkey || reservedswitch) // loop until we find a spot for a key and switch if they have reserved spot

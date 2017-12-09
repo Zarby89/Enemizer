@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 
 namespace EnemizerLibrary
 {
@@ -13,6 +14,8 @@ namespace EnemizerLibrary
         public Dictionary<string, int> Symbols { get; private set; }
         private XkasSymbols(string filename)
         {
+            filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
+
             Symbols = new Dictionary<string, int>();
 
             var lines = File.ReadAllLines(filename);

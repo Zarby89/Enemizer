@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Web.Hosting;
 
 namespace EnemizerLibrary
 {
@@ -14,6 +15,8 @@ namespace EnemizerLibrary
         public Patch(string patchFile)
         {
             patchFilename = patchFile;
+
+            patchFilename = Path.Combine(EnemizerBasePath.Instance.BasePath, patchFilename);
         }
 
         public void PatchRom(RomData rom)

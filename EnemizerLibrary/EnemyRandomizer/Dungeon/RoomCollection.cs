@@ -50,8 +50,10 @@ namespace EnemizerLibrary
                 var possibleSpriteGroups = spriteGroups.GetPossibleDungeonSpriteGroups(r, doNotUpdateSprites).ToList();
 
                 //Debug.Assert(possibleSpriteGroups.Count > 0);
-
-                r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
+                if (possibleSpriteGroups.Count > 0)
+                {
+                    r.GraphicsBlockId = possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].DungeonGroupId;
+                }
             }
 
             // force any rooms we need to
