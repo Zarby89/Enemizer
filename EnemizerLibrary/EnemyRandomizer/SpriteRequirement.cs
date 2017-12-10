@@ -532,7 +532,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RopeSprite).SetKillable().AddSubgroup2(28, 36)); // 36 isn't used anywhere in vanilla beside a trap in TT I think
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeeseSprite).SetKillable().SetCannotHaveKey().AddSubgroup2(28, 36));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.KeeseSprite).SetKillable()/*.SetCannotHaveKey()*/.AddSubgroup2(28, 36));
 
             //SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.HelmasaurKingFireballSprite));
 

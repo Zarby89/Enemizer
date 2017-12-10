@@ -70,10 +70,12 @@ namespace EnemizerLibrary.Data
             {
                 Edges.Add(new Edge(e.Value.Area, e.Value.Entrance.Room, e.Value.Requirements));
 
-                if(e.Value.Entrance.Room.RoomId > 0xFF && e.Value.Entrance.Room.RoomId != RoomIdConstants.R260_LinksHouse) // exclude link's house because it has an exit
-                {
-                    Edges.Add(new Edge(e.Value.Entrance.Room, e.Value.Area, e.Value.Requirements));
-                }
+                // I guess we don't need this? It just causes problems with caves like 274 that are reused and have only one way in and out
+                //if(e.Value.Entrance.Room.RoomId > 0xFF && e.Value.Entrance.Room.RoomId != RoomIdConstants.R260_LinksHouse) // exclude link's house because it has an exit
+                //{
+                //    Edges.Add(new Edge(e.Value.Entrance.Room, e.Value.Area, e.Value.Requirements));
+                //}
+
                 // room -> area(?) only for fake ones
             }
         }
