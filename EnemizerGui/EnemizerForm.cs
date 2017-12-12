@@ -253,6 +253,8 @@ namespace Enemizer
             numberOfBulkSeeds.Enabled = config.BulkSeeds;
             seedNumberTextbox.Enabled = !config.BulkSeeds;
             numberOfBulkSeeds.Value = config.NumberOfBulkSeeds;
+
+            randomSpriteOnHitCheckBox.Checked = config.OptionFlags.RandomizeSpriteOnHit;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -1016,6 +1018,11 @@ namespace Enemizer
         private void allowKillableThiefCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AllowKillableThief = allowKillableThiefCheckBox.Checked;
+        }
+
+        private void randomSpriteOnHitCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeSpriteOnHit = randomSpriteOnHitCheckBox.Checked;
         }
     }
 
