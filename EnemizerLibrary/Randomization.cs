@@ -66,7 +66,7 @@ namespace EnemizerLibrary
                 ChangeSkin(skin);
             }
 
-            if(skin == "Random")
+            if(optionFlags.RandomizeSpriteOnHit)
             {
                 this.ROM_DATA.RandomizeSprites = true;
                 BuildRandomLinkSpriteTable(new Random(seed));

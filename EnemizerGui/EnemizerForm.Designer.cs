@@ -119,6 +119,7 @@
             this.seedNumberTextbox = new System.Windows.Forms.TextBox();
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
+            this.randomSpriteOnHitCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -1184,11 +1185,23 @@
             0,
             0});
             // 
+            // randomSpriteOnHitCheckBox
+            // 
+            this.randomSpriteOnHitCheckBox.AutoSize = true;
+            this.randomSpriteOnHitCheckBox.Location = new System.Drawing.Point(487, 163);
+            this.randomSpriteOnHitCheckBox.Name = "randomSpriteOnHitCheckBox";
+            this.randomSpriteOnHitCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.randomSpriteOnHitCheckBox.TabIndex = 28;
+            this.randomSpriteOnHitCheckBox.Text = "Random Sprite on Hit";
+            this.randomSpriteOnHitCheckBox.UseVisualStyleBackColor = true;
+            this.randomSpriteOnHitCheckBox.CheckedChanged += new System.EventHandler(this.randomSpriteOnHitCheckBox_CheckedChanged);
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 331);
+            this.Controls.Add(this.randomSpriteOnHitCheckBox);
             this.Controls.Add(this.numberOfBulkSeeds);
             this.Controls.Add(this.bulkSeedsCheckbox);
             this.Controls.Add(this.seedNumberTextbox);
@@ -1325,6 +1338,7 @@
         private System.Windows.Forms.CheckBox randomizeTileTrapFloorTile;
         private System.Windows.Forms.CheckBox randomizeTileTrapPatternCheckBox;
         private System.Windows.Forms.CheckBox allowKillableThiefCheckBox;
+        public System.Windows.Forms.CheckBox randomSpriteOnHitCheckBox;
     }
 }
 

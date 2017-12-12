@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using System.IO;
 using EnemizerLibrary;
 using Newtonsoft.Json;
+using NLog;
 
 namespace Enemizer
 {
     public partial class EnemizerForm : Form
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         readonly string configFilename = "setting.cfg";
         EnemizerConfig config = new EnemizerConfig();
         //OptionFlags optionFlags = new OptionFlags();
@@ -196,9 +199,10 @@ namespace Enemizer
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 // invalid file
+                logger.Error(ex);
                 MessageBox.Show("Invalid setting file. Loading defaults.", "Enemizer");
             }
 
@@ -249,6 +253,8 @@ namespace Enemizer
             numberOfBulkSeeds.Enabled = config.BulkSeeds;
             seedNumberTextbox.Enabled = !config.BulkSeeds;
             numberOfBulkSeeds.Value = config.NumberOfBulkSeeds;
+
+            randomSpriteOnHitCheckBox.Checked = config.OptionFlags.RandomizeSpriteOnHit;
         }
 
         private void UpdateEnemiesTabUIFromConfig()
@@ -428,8 +434,9 @@ namespace Enemizer
                         absorbableItemsChecklist.SetItemChecked(i, isSet);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    logger.Error(ex);
                     // probably a value that wasn't in our AbsorbableTypes enum
                     absorbableItemsChecklist.SetItemChecked(i, false);
                 }
@@ -624,7 +631,8 @@ namespace Enemizer
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Enemizer");
+                logger.Error(ex);
+                MessageBox.Show($"{ex.Message}\r\n{ex.StackTrace}", "Enemizer");
             }
 
             return "Failed";
@@ -1010,6 +1018,11 @@ namespace Enemizer
         private void allowKillableThiefCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.AllowKillableThief = allowKillableThiefCheckBox.Checked;
+        }
+
+        private void randomSpriteOnHitCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.RandomizeSpriteOnHit = randomSpriteOnHitCheckBox.Checked;
         }
     }
 

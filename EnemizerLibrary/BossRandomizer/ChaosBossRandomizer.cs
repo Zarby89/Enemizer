@@ -19,7 +19,7 @@ namespace EnemizerLibrary
         {
             foreach(var dungeon in this.DungeonPool)
             {
-                if (optionFlags.DebugMode)
+                if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                 {
                     dungeon.SelectedBoss = new KholdstareBoss();
                     //dungeon.SelectedBoss = new TrinexxBoss();
