@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -79,10 +80,20 @@ namespace EnemizerLibrary
 
         protected virtual void GenerateRandomizedBosses()
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+
             var dungeonQueue = new Queue<Dungeon>(this.DungeonPool);
 
             while(dungeonQueue.Count > 0)
             {
+                if(sw.ElapsedMilliseconds > 10000) // 10000ms = 10 seconds
+                {
+                    // give up because it's taking too long
+                    SetDefaultBosses();
+                    return;
+                }
                 var dungeon = dungeonQueue.Dequeue();
 
                 if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
@@ -135,6 +146,52 @@ namespace EnemizerLibrary
                     bossPool.RemoveBoss(boss);
                 }
             }
+        }
+        
+        protected void SetDefaultBosses()
+        {
+            foreach(var dungeon in this.DungeonPool)
+            {
+                dungeon.SelectedBoss = GetDefaultBoss(dungeon);
+            }
+        }
+
+        private Boss GetDefaultBoss(Dungeon dungeon)
+        {
+            switch(dungeon.DungeonType)
+            {
+                case DungeonType.EasternPalace:
+                case DungeonType.GanonsTower1:
+                    return new ArmosBoss();
+                case DungeonType.DesertPalace:
+                case DungeonType.GanonsTower2:
+                    return new LanmolaBoss();
+                case DungeonType.TowerOfHera:
+                case DungeonType.GanonsTower3:
+                    return new MoldormBoss();
+                case DungeonType.PalaceOfDarkness:
+                    return new HelmasaurBoss();
+                case DungeonType.SwampPalace:
+                    return new ArrghusBoss();
+                case DungeonType.SkullWoods:
+                    return new MothulaBoss();
+                case DungeonType.ThievesTown:
+                    return new BlindBoss();
+                case DungeonType.IcePalace:
+                    return new KholdstareBoss();
+                case DungeonType.MiseryMire:
+                    return new VitreousBoss();
+                case DungeonType.TurtleRock:
+                    return new TrinexxBoss();
+                //case DungeonType.GanonsTower1:
+                //    return new GTArmosBoss();
+                //case DungeonType.GanonsTower2:
+                //    return new GTLanmolaBoss();
+                //case DungeonType.GanonsTower3:
+                //    return new GTMoldormBoss();
+            }
+
+            return null;
         }
 
         private void WriteRom(RomData romData)

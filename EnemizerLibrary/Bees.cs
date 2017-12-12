@@ -78,6 +78,10 @@ namespace EnemizerLibrary
             var spawnBeesAddress = XkasSymbols.Instance.Symbols["Spawn_Bees"];
             var snesAddress = Utilities.PCAddressToSnesByteArray(spawnBeesAddress);
 
+            // z3randomizer:
+            // org $308060 ; PC 0x180060
+            // ProgrammableItemLogicJump_1:
+            // JSL.l $000000 : RTL
             romData[0x180061] = snesAddress[2];
             romData[0x180061 + 1] = snesAddress[1];
             romData[0x180061 + 2] = snesAddress[0];
