@@ -1,86 +1,87 @@
 # Enemizer Options File Format
 
-```
+<big><pre>
 {
-	"RandomizeEnemies": true,
-	"RandomizeEnemiesType": 3,
-	"RandomizeBushEnemyChance": true,
-	"RandomizeEnemyHealthRange": true,
-	"RandomizeEnemyHealthType": 1,
-	"RandomizeEnemyDamage": true,
-	"AllowEnemyZeroDamage": true,
-	"ShuffleEnemyDamageGroups": false,
-	"EnemyDamageChaosMode": false,
-	"EasyModeEscape": false,
-	"EnemiesAbsorbable": false,
-	"AbsorbableSpawnRate": 10,
-	"AbsorbableTypes": {
-		"FullMagic": true,
-		"SmallMagic": true,
-		"Bomb_1": true,
-		"BlueRupee": true,
-		"Heart": true,
-		"BigKey": true,
-		"Key": true,
-		"Fairy": true,
-		"Arrow_10": true,
-		"Arrow_5": true,
-		"Bomb_8": true,
-		"Bomb_4": true,
-		"GreenRupee": true,
-		"RedRupee": true
-	},
-	"BossMadness": false,
-	"RandomizeBosses": true,
-	"RandomizeBossesType": 0,
-	"RandomizeBossHealth": false,
-	"RandomizeBossHealthMinAmount": 0,
-	"RandomizeBossHealthMaxAmount": 300,
-	"RandomizeBossDamage": false,
-	"RandomizeBossDamageMinAmount": 0,
-	"RandomizeBossDamageMaxAmount": 200,
-	"RandomizeBossBehavior": false,
-	"RandomizeDungeonPalettes": true,
-	"SetBlackoutMode": false,
-	"RandomizeOverworldPalettes": true,
-	"RandomizeSpritePalettes": true,
-	"SetAdvancedSpritePalettes": false,
-	"PukeMode": false,
-	"NegativeMode": false,
-	"GrayscaleMode": false,
-	"GenerateSpoilers": true,
-	"RandomizeLinkSpritePalette": false,
-	"RandomizePots": true,
-	"ShuffleMusic": false,
-	"BootlegMagic": true,
-	"DebugMode": false,
-	"CustomBosses": false,
-	"AndyMode": false,
-	"HeartBeepSpeed": 2,
-	"AlternateGfx": false,
-	"ShieldGraphics": "shield_gfx\\normal.gfx",
-	"SwordGraphics": "sword_gfx\\normal.gfx",
-	"BeeMizer": false,
-	"BeesLevel": 3,
-	"DebugForceEnemy": true,
-	"DebugForceEnemyId": 196,
-	"DebugForceBoss": false,
-	"DebugForceBossId": 4,
-	"DebugOpenShutterDoors": false,
-	"DebugForceEnemyDamageZero": true,
-	"DebugShowRoomIdInRupeeCounter": true,
-	"OHKO": false,
-	"RandomizeTileTrapPattern": true,
-	"RandomizeTileTrapFloorTile": false,
-	"AllowKillableThief": true,
-	"RandomizeSpriteOnHit": true
+&emsp;"[RandomizeEnemies](#RandomizeEnemies)": true,
+&emsp;"[RandomizeEnemiesType](#RandomizeEnemiesType)": 3,
+&emsp;"[RandomizeBushEnemyChance](#RandomizeBushEnemyChance)": true,
+&emsp;"[RandomizeEnemyHealthRange](#RandomizeEnemyHealthRange)": true,
+&emsp;"[RandomizeEnemyHealthType](#RandomizeEnemyHealthType)": 1,
+&emsp;"[OHKO](#OHKO)": false,
+&emsp;"[RandomizeEnemyDamage](#RandomizeEnemyDamage)": true,
+&emsp;"[AllowEnemyZeroDamage](#AllowEnemyZeroDamage)": true,
+&emsp;"[ShuffleEnemyDamageGroups](#ShuffleEnemyDamageGroups)": false,
+&emsp;"[EnemyDamageChaosMode](#EnemyDamageChaosMode)": false,
+&emsp;"[EasyModeEscape](#EasyModeEscape)": false,
+&emsp;"[EnemiesAbsorbable](#EnemiesAbsorbable)": false,
+&emsp;"[AbsorbableSpawnRate](#AbsorbableSpawnRate)": 10,
+&emsp;"[AbsorbableTypes](#AbsorbableTypes)": {
+&emsp;&emsp;&emsp;"FullMagic": true,
+&emsp;&emsp;&emsp;"SmallMagic": true,
+&emsp;&emsp;&emsp;"Bomb_1": true,
+&emsp;&emsp;&emsp;"BlueRupee": true,
+&emsp;&emsp;&emsp;"Heart": true,
+&emsp;&emsp;&emsp;"BigKey": true,
+&emsp;&emsp;&emsp;"Key": true,
+&emsp;&emsp;&emsp;"Fairy": true,
+&emsp;&emsp;&emsp;"Arrow_10": true,
+&emsp;&emsp;&emsp;"Arrow_5": true,
+&emsp;&emsp;&emsp;"Bomb_8": true,
+&emsp;&emsp;&emsp;"Bomb_4": true,
+&emsp;&emsp;&emsp;"GreenRupee": true,
+&emsp;&emsp;&emsp;"RedRupee": true
+&emsp;},
+&emsp;"[BossMadness](#BossMadness)": false,
+&emsp;"[RandomizeBosses](#RandomizeBosses)": true,
+&emsp;"[RandomizeBossesType](#RandomizeBossesType)": 0,
+&emsp;"[RandomizeBossHealth](#RandomizeBossHealth)": false,
+&emsp;"[RandomizeBossHealthMinAmount](#RandomizeBossHealthMinAmount)": 0,
+&emsp;"[RandomizeBossHealthMaxAmount](#RandomizeBossHealthMaxAmount)": 300,
+&emsp;"[RandomizeBossDamage](#RandomizeBossDamage)": false,
+&emsp;"[RandomizeBossDamageMinAmount](#RandomizeBossDamageMinAmount)": 0,
+&emsp;"[RandomizeBossDamageMaxAmount](#RandomizeBossDamageMaxAmount)": 200,
+&emsp;"[RandomizeBossBehavior](#RandomizeBossBehavior)": false,
+&emsp;"[RandomizeDungeonPalettes](#RandomizeDungeonPalettes)": true,
+&emsp;"[SetBlackoutMode](#SetBlackoutMode)": false,
+&emsp;"[RandomizeOverworldPalettes](#RandomizeOverworldPalettes)": true,
+&emsp;"[RandomizeSpritePalettes](#RandomizeSpritePalettes)": true,
+&emsp;"[SetAdvancedSpritePalettes](#SetAdvancedSpritePalettes)": false,
+&emsp;"[PukeMode](#PukeMode)": false,
+&emsp;"[NegativeMode](#NegativeMode)": false,
+&emsp;"[GrayscaleMode](#GrayscaleMode)": false,
+&emsp;"[GenerateSpoilers](#GenerateSpoilers)": true,
+&emsp;"[RandomizeLinkSpritePalette](#RandomizeLinkSpritePalette)": false,
+&emsp;"[RandomizePots](#RandomizePots)": true,
+&emsp;"[ShuffleMusic](#ShuffleMusic)": false,
+&emsp;"[BootlegMagic](#BootlegMagic)": true,
+&emsp;"[CustomBosses](#CustomBosses)": false,
+&emsp;"[AndyMode](#AndyMode)": false,
+&emsp;"[HeartBeepSpeed](#HeartBeepSpeed)": 2,
+&emsp;"[AlternateGfx](#AlternateGfx)": false,
+&emsp;"[ShieldGraphics](#ShieldGraphics)": "shield_gfx\\normal.gfx",
+&emsp;"[SwordGraphics](#SwordGraphics)": "sword_gfx\\normal.gfx",
+&emsp;"[BeeMizer](#BeeMizer)": false,
+&emsp;"[BeesLevel](#BeesLevel)": 3,
+&emsp;"[RandomizeTileTrapPattern](#RandomizeTileTrapPattern)": true,
+&emsp;"[RandomizeTileTrapFloorTile](#RandomizeTileTrapFloorTile)": false,
+&emsp;"[AllowKillableThief](#AllowKillableThief)": true,
+&emsp;"[RandomizeSpriteOnHit](#RandomizeSpriteOnHit)": true,
+&emsp;"[DebugMode](#DebugMode)": false,
+&emsp;"[DebugForceEnemy](#DebugForceEnemy)": true,
+&emsp;"[DebugForceEnemyId](#DebugForceEnemyId)": 196,
+&emsp;"[DebugForceBoss](#DebugForceBoss)": false,
+&emsp;"[DebugForceBossId](#DebugForceBossId)": 4,
+&emsp;"[DebugOpenShutterDoors](#DebugOpenShutterDoors)": false,
+&emsp;"[DebugForceEnemyDamageZero](#DebugForceEnemyDamageZero)": true,
+&emsp;"[DebugShowRoomIdInRupeeCounter](#DebugShowRoomIdInRupeeCounter)": true
 }
-```
+</pre></big>
 
-### RandomizeEnemies (boolean)
+### <a name="RandomizeEnemies"></a>RandomizeEnemies (boolean)
 Enable enemy randomization.
 
-### RandomizeEnemiesType (enum/number)
+### <a name="RandomizeEnemiesType"></a>RandomizeEnemiesType (enum/number)
+Requires: [_RandomizeEnemies_](#RandomizeEnemies)<br/>
 Enemy randomization mode. Must be set to 3 (Chaos) because nothing else is implemented.
 Possible values: 
 * Basic (0)
@@ -89,13 +90,15 @@ Possible values:
 * Chaos (3)
 * Insanity (4)
 
-### RandomizeBushEnemyChance (boolean)
+### <a name="RandomizeBushEnemyChance"></a>RandomizeBushEnemyChance (boolean)
+Requires: [_RandomizeEnemies_](#RandomizeEnemies)<br/>
 Randomize bush/grass enemy to be one of the possible enemies for a given area. If disabled this will default to guards, but the graphics may be wrong.
 
-### RandomizeEnemyHealthRange (boolean)
+### <a name="RandomizeEnemyHealthRange"></a>RandomizeEnemyHealthRange (boolean)
 Enable randomization of enemy health range.
 
-### RandomizeEnemyHealthType (enum/number)
+### <a name="RandomizeEnemyHealthType"></a>RandomizeEnemyHealthType (enum/number)
+Requires: [_RandomizeEnemyHealthRange_](#RandomizeEnemyHealthRange)<br/>
 Type of enemy health randomization.
 Possible values:
 * Easy (1-4 hp)
@@ -103,168 +106,196 @@ Possible values:
 * Hard (2-30 hp)
 * Patty (4-50 hp)
 
-### RandomizeEnemyDamage (boolean)
+### <a name="OHKO"></a>OHKO (boolean)
+Enables OHKO mode with no timer. This was added because OHKO wasn't available in ER for some new mode, but this seems to have been added, so this is probably no longer needed. Note that this should disable [_RandomizeEnemyDamage_](#RandomizeEnemyDamage) and its children.
+
+### <a name="RandomizeEnemyDamage"></a>RandomizeEnemyDamage (boolean)
 Enable randomization of enemy damage. Groups stay the same.
 
-### AllowEnemyZeroDamage (boolean)
+### <a name="AllowEnemyZeroDamage"></a>AllowEnemyZeroDamage (boolean)
+Requires: [_RandomizeEnemyDamage_](#RandomizeEnemyDamage)<br/>
 Allow enemies to do zero damage (this can cause a softlock with fake flippers).
 
-### ShuffleEnemyDamageGroups (boolean)
+### <a name="ShuffleEnemyDamageGroups"></a>ShuffleEnemyDamageGroups (boolean)
+Requires: [_RandomizeEnemyDamage_](#RandomizeEnemyDamage)<br/>
 Shuffles the enemy damage groups. Groups cannot be shuffled without also being randomized.
 
-### EnemyDamageChaosMode (boolean)
+### <a name="EnemyDamageChaosMode"></a>EnemyDamageChaosMode (boolean)
+Requires: [_ShuffleEnemyDamageGroups_](#ShuffleEnemyDamageGroups)<br/>
 Scrambles damage groups and mail upgrade damage reduction. Green mail could be stronger than red mail against certain enemies with this mode enabled. (FYI this is rather broken because it hasn't been tuned and usually makes most mobs OHKO)
 
-### EasyModeEscape (boolean)
+### <a name="EasyModeEscape"></a>EasyModeEscape (boolean)
 Currently not implemented.
 
-### EnemiesAbsorbable (boolean)
+### <a name="EnemiesAbsorbable"></a>EnemiesAbsorbable (boolean)
 Allow absorbables (from selected types) to spawn in place of enemies.
 
-### AbsorbableSpawnRate (number)
+### <a name="AbsorbableSpawnRate"></a>AbsorbableSpawnRate (number)
+Requires: [_EnemiesAbsorbable_](#EnemiesAbsorbable)<br/>
 The spawn rate for absorbables instead of enemies (%).
 
-### AbsorbableTypes (collection)
+### <a name="AbsorbableTypes"></a>AbsorbableTypes (collection)
+Requires: [_EnemiesAbsorbable_](#EnemiesAbsorbable)<br/>
 Possible absorbable types. Self-explanitory.
 ```
 {
-    "FullMagic": true,
-    "SmallMagic": true,
-    "Bomb_1": true,
-    "BlueRupee": true,
     "Heart": true,
-    "BigKey": true,
-    "Key": true,
-    "Fairy": true,
-    "Arrow_10": true,
-    "Arrow_5": true,
-    "Bomb_8": true,
-    "Bomb_4": true,
     "GreenRupee": true,
-    "RedRupee": true
+    "BlueRupee": true,
+    "RedRupee": true,
+    "Bomb_1": true,
+    "Bomb_4": true,
+    "Bomb_8": true,
+    "SmallMagic": true,
+    "FullMagic": true,
+    "Arrow_5": true,
+    "Arrow_10": true,
+    "Fairy": true,
+    "Key": true,
+    "BigKey": true
 }
 ```
 
-### BossMadness (boolean)
+### <a name="BossMadness"></a>BossMadness (boolean)
 Unused, depreciated.
 
-### RandomizeBosses (boolean)
+### <a name="RandomizeBosses"></a>RandomizeBosses (boolean)
 Enable boss randomization. Pool of possible bosses is created based on the RandomizeBossesType set.
 
-### RandomizeBossesType (enum/number)
+### <a name="RandomizeBossesType"></a>RandomizeBossesType (enum/number)
+Requires: [_RandomizeBosses_](#RandomizeBosses)<br/>
 Possible values:
 * Basic (0) - Vanilla bosses
 * Normal (1) - GT bosses are randomized in pool
 * Chaos (2) - Boss pool is completely random
 
-### RandomizeBossHealth (boolean)
+### <a name="RandomizeBossHealth"></a>RandomizeBossHealth (boolean)
 Currently not implemented.
 
-### RandomizeBossHealthMinAmount (number)
+### <a name="RandomizeBossHealthMinAmount"></a>RandomizeBossHealthMinAmount (number)
 currently not implemented.
 
-### RandomizeBossHealthMaxAmount (number)
+### <a name="RandomizeBossHealthMaxAmount"></a>RandomizeBossHealthMaxAmount (number)
 Currently not implemented.
 
-### RandomizeBossDamage (boolean)
+### <a name="RandomizeBossDamage"></a>RandomizeBossDamage (boolean)
 Currently not implemented.
 
-### RandomizeBossDamageMinAmount (number)
+### <a name="RandomizeBossDamageMinAmount"></a>RandomizeBossDamageMinAmount (number)
 Currently not implemented.
 
-### RandomizeBossDamageMaxAmount (number)
+### <a name="RandomizeBossDamageMaxAmount"></a>RandomizeBossDamageMaxAmount (number)
 Currently not implemented.
 
-### RandomizeBossBehavior (boolean)
+### <a name="RandomizeBossBehavior"></a>RandomizeBossBehavior (boolean)
 Currently not implemented.
 
-### RandomizeDungeonPalettes (boolean)
+### <a name="RandomizeDungeonPalettes"></a>RandomizeDungeonPalettes (boolean)
 Randomizes palettes used in dungeons.
 
-### SetBlackoutMode (boolean)
+### <a name="SetBlackoutMode"></a>SetBlackoutMode (boolean)
+Requires: [_RandomizeDungeonPalettes_](#RandomizeDungeonPalettes)<br/>
 Sets palettes to completely black in dungeons. Torches, chests, and pots are not blacked out.
 
-### RandomizeOverworldPalettes (boolean)
+### <a name="RandomizeOverworldPalettes"></a>RandomizeOverworldPalettes (boolean)
 Randomizes palettes used in the overworld.
 
-### RandomizeSpritePalettes (boolean)
+### <a name="RandomizeSpritePalettes"></a>RandomizeSpritePalettes (boolean)
 Randomizes palettes used by sprites (shuffles existing palettes).
 
-### SetAdvancedSpritePalettes (boolean)
+### <a name="SetAdvancedSpritePalettes"></a>SetAdvancedSpritePalettes (boolean)
+Requires: [_RandomizeSpritePalettes_](#RandomizeSpritePalettes)<br/>
 Randomizes palettes used by sprites (randomizes the colors in the palettes).
 
-### PukeMode (boolean)
+### <a name="PukeMode"></a>PukeMode (boolean)
 Random palettes... the name says it all.
 
-### NegativeMode (boolean)
+### <a name="NegativeMode"></a>NegativeMode (boolean)
 Inverted palette mode.
 
-### GrayscaleMode (boolean)
+### <a name="GrayscaleMode"></a>GrayscaleMode (boolean)
 Grayscale palette mode.
 
-### GenerateSpoilers (boolean)
+### <a name="GenerateSpoilers"></a>GenerateSpoilers (boolean)
 Generate spoilers. Should always be turned on for web.
 
-### RandomizeLinkSpritePalette (boolean)
+### <a name="RandomizeLinkSpritePalette"></a>RandomizeLinkSpritePalette (boolean)
 Randomizes Links sprite palette.
 
-### RandomizePots (boolean)
+### <a name="RandomizePots"></a>RandomizePots (boolean)
 Shuffles the contents of pots in a given super room.
 
-### ShuffleMusic (boolean)
+### <a name="ShuffleMusic"></a>ShuffleMusic (boolean)
 Shuffles music (can cause hard locks).
 
-### BootlegMagic (boolean)
+### <a name="BootlegMagic"></a>BootlegMagic (boolean)
 Bootleg Chinese inspired magic (currently just gives Moldorm random number of eyes). This should always be on...just because.
 
-### DebugMode (boolean)
-Enables debug options.
-
-### CustomBosses (boolean)
+### <a name="CustomBosses"></a>CustomBosses (boolean)
 Currently not implemented
 
-### AndyMode (boolean)
+### <a name="AndyMode"></a>AndyMode (boolean)
 Adds Andy inspired soundfx for chest opening. Forces pug sprite into sprite pool if RandomizeSpriteOnHit is enabled. Requires pug sprite to be in `sprites` directory.
 
-### HeartBeepSpeed (enum/number)
+### <a name="HeartBeepSpeed"></a>HeartBeepSpeed (enum/number)
 Heart beep speed. This will override randomizer setting, so make sure they are the same.
 Possible values:
-* Default,
-* Half,
-* Quarter,
-* Off
+* Default (0)
+* Half (1)
+* Quarter (2)
+* Off (3)
 
-### AlternateGfx (boolean)
+### <a name="AlternateGfx"></a>AlternateGfx (boolean)
 Swaps boss graphics with alternatives (currently only one set is implemented).
 
-### ShieldGraphics (string)
+### <a name="ShieldGraphics"></a>ShieldGraphics (string)
 Relative string path to the shield graphics file.
 Should be set to `"shield_gfx\\normal.gfx"` for race roms.
 
-### SwordGraphics (string)
+### <a name="SwordGraphics"></a>SwordGraphics (string)
 Relative string path to the sword graphics file. 
 Should be set to `"sword_gfx\\normal.gfx"` for race roms.
 
-### BeeMizer (boolean)
+### <a name="BeeMizer"></a>BeeMizer (boolean)
 Enable Beeeeeeeeeeeees!
 
-### BeesLevel (enum/number)
+### <a name="BeesLevel"></a>BeesLevel (enum/number)
+Requires: [_BeesLevel_](#BeesLevel)<br/>
 Possible values:
-* Bees?? (0) - 
-* Bees! (1) - 
-* Beeeeees!? (2) - 
-* Beeeeeeeeeeeeeeeeeeeees (3) - replaces every item not needed to beat the game with bee trap
+* Bees?? (0) - Replaces Arrows, Bombs, Rupees, Compass, Maps, Arrow Upgrade, and Bomb Upgrades with bee traps
+* Bees! (1) - Same as 0, but also introduces single bees and increases chance of trap.
+* Beeeeees!? (2) - Randomly replaces items not needed to beat the game with bee trap (including: bug net, boomerangs, heart container and heart pieces, magic, shield and armor upgrades).
+* Beeeeeeeeeeeeeeeeeeeees (3) - Always replaces items not needed to beat the game with bee trap (including: bug net, boomerangs, heart container and heart pieces, magic, shield and armor upgrades).
 
-### DebugForceEnemy (boolean)
+### <a name="RandomizeTileTrapPattern"></a>RandomizeTileTrapPattern (boolean)
+Enables random tile trap pattern. Pattens are stored in the `tiles` directory.
+
+### <a name="RandomizeTileTrapFloorTile"></a>RandomizeTileTrapFloorTile (boolean)
+Enables "random" tile trap floor replacement tile. Currently this picks from a pool of 1 value (spike floor).
+
+### <a name="AllowKillableThief"></a>AllowKillableThief (boolean)
+Lets you kill those bastards.
+
+### <a name="RandomizeSpriteOnHit"></a>RandomizeSpriteOnHit (boolean)
+Sets sprite randomization on hit mode on. This requires at least 32 sprite files in the `sprites` directory.
+
+### <a name="DebugMode"></a>DebugMode (boolean)
+Enables debug options.
+
+### <a name="DebugForceEnemy"></a>DebugForceEnemy (boolean)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Enable forced enemy debug flag (requires DebugMode to be set).
 
-### DebugForceEnemyId (number)
+### <a name="DebugForceEnemyId"></a>DebugForceEnemyId (number)
+Requires: [_DebugMode_](#DebugMode)<br/>
 SpriteId. See enemizer source code, or z3 compendium for list of possible sprites. Do not allow overlord sprites to be selected.
 
-### DebugForceBoss (boolean)
+### <a name="DebugForceBoss"></a>DebugForceBoss (boolean)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Enable forced boss debug flag (requires DebugMode to be set).
 
-### DebugForceBossId (enum/number)
+### <a name="DebugForceBossId"></a>DebugForceBossId (enum/number)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Possible values:
 * Kholdstare (0)
 * Moldorm (1)
@@ -277,26 +308,14 @@ Possible values:
 * Arrghus (8)
 * Trinexx (9)
 
-### DebugOpenShutterDoors (boolean)
+### <a name="DebugOpenShutterDoors"></a>DebugOpenShutterDoors (boolean)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Causes all shutter doors to be open (requires DebugMode to be set).
 
-### DebugForceEnemyDamageZero (boolean)
+### <a name="DebugForceEnemyDamageZero"></a>DebugForceEnemyDamageZero (boolean)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Set all enemy damage to zero (requires DebugMode to be set).
 
-### DebugShowRoomIdInRupeeCounter (boolean)
+### <a name="DebugShowRoomIdInRupeeCounter"></a>DebugShowRoomIdInRupeeCounter (boolean)
+Requires: [_DebugMode_](#DebugMode)<br/>
 Shows the current roomId in the rupee counter (requires DebugMode to be set).
-
-### OHKO (boolean)
-Enables OHKO mode with no timer. This was added because OHKO wasn't available in ER for some new mode, but this seems to have been added, so this is probably no longer needed.
-
-### RandomizeTileTrapPattern (boolean)
-Enables random tile trap pattern. Pattens are stored in the `tiles` directory.
-
-### RandomizeTileTrapFloorTile (boolean)
-Enables "random" tile trap floor replacement tile. Currently this picks from a pool of 1 value (spike floor).
-
-### AllowKillableThief (boolean)
-Lets you kill those bastards.
-
-### RandomizeSpriteOnHit (boolean)
-Sets sprite randomization on hit mode on. This requires at least 32 sprite files in the `sprites` directory.
