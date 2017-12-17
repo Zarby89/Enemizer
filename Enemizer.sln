@@ -23,6 +23,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher", "Patcher\Patcher.csproj", "{D7B406AD-AE16-4541-BA0B-CFD81304E9EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{96B8BA10-5259-4D5E-A134-AEEB9D5E1B4A}"
+	ProjectSection(SolutionItems) = preProject
+		optionflags.md = optionflags.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerCLI", "EnemizerCLI\EnemizerCLI.csproj", "{52B08DAE-8563-47C9-AB59-98907C7E43B0}"
 EndProject
