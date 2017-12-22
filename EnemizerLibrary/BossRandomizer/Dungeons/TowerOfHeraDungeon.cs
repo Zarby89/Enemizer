@@ -23,7 +23,7 @@ namespace EnemizerLibrary
             DisallowedBosses.Add(BossType.Armos);
             DisallowedBosses.Add(BossType.Arrghus);
             DisallowedBosses.Add(BossType.Blind);
-            DisallowedBosses.Add(BossType.Lanmola);
+            //DisallowedBosses.Add(BossType.Lanmola); // should be safe now that drop is in middle
             DisallowedBosses.Add(BossType.Trinexx);
 
             ShellX = 0x18;

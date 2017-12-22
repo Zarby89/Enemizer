@@ -19,3 +19,4 @@ incsrc msu1_hooks.asm
 incsrc sword_and_shield_hooks.asm
 incsrc overworld_sprite_hooks.asm
 incsrc bee_hooks.asm
+incsrc vitreous_hooks.asm

@@ -21,7 +21,7 @@ namespace EnemizerLibrary.Data
             { new RawOverworldEntrance(0xDB859, "Bat Cave Drop", 0x022, "22-smithy", "0x7E", "Hammer;L2 Gloves,Mirror,Moon Pearl") },
             { new RawOverworldEntrance(0xDB85B, "Lumberjack Tree Drop", 0x002, "02-lumberjack-house", "0x7F", "<Agahnim 1>") },
             { new RawOverworldEntrance(0xDB85C, "Kakariko Well Drop", 0x018, "18-kakariko", "0x80", "") },
-            { new RawOverworldEntrance(0xDB85E, "Sanctuary Grave", 0x014, "14-graveyard", "0x81", "Boots,L1 Gloves") },
+            { new RawOverworldEntrance(0xDB85E, "Sanctuary Grave", 0x014, "14-graveyard", "0x81", "L1 Gloves") },
             { new RawOverworldEntrance(0xDBB73, "Link's House", 0x02C, "2C-link-house", "0x01", "") },
             { new RawOverworldEntrance(0xDBB74, "Sanctuary", 0x013, "13-sanctuary", "0x02", "") },
             { new RawOverworldEntrance(0xDBB75, "Hyrule Castle Entrance (West)", 0x01B, "1B-castle", "0x03", "") },
