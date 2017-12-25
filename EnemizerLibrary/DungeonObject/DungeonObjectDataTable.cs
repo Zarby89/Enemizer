@@ -173,5 +173,65 @@ namespace EnemizerLibrary
         {
             return romData[index] == 0xF0 && romData[index + 1] == 0xFF;
         }
+
+        public override bool Equals(object obj)
+        {
+            var t = obj as DungeonObjectDataTable;
+
+            if (Object.ReferenceEquals(null, t))
+            {
+                return false;
+            }
+
+            return this.HeaderByte0 == t.HeaderByte0
+                && this.HeaderByte1 == t.HeaderByte1
+                && this.Layer1DoorObjects.Count == t.Layer1DoorObjects.Count
+                && this.Layer1Objects.Count == t.Layer1Objects.Count
+                && this.Layer2DoorObjects.Count == t.Layer2DoorObjects.Count
+                && this.Layer2Objects.Count == t.Layer2Objects.Count
+                && this.Layer3DoorObjects.Count == t.Layer3DoorObjects.Count
+                && this.Layer3Objects.Count == t.Layer3Objects.Count
+                && this.Length == t.Length;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                const int HashingBase = (int)2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+                hash = (hash * HashingMultiplier) ^ HeaderByte0.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ HeaderByte1.GetHashCode();
+                hash = (hash * HashingMultiplier) ^ Length.GetHashCode();
+                return hash;
+            }
+        }
+
+        public static bool operator ==(DungeonObjectDataTable t1, DungeonObjectDataTable t2)
+        {
+            if (ReferenceEquals(t1, t2))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(t1, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(t2, null))
+            {
+                return false;
+            }
+
+            return t1.Equals(t2);
+        }
+
+        public static bool operator !=(DungeonObjectDataTable t1, DungeonObjectDataTable t2)
+        {
+            return !(t1 == t2);
+        }
+
     }
 }

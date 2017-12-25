@@ -50,5 +50,35 @@ namespace EnemizerTests
                 output.WriteLine($"{p.RoomId}\t{p.SnesAddress.ToString("X")}\t{p.ROMAddress.ToString("X")}");
             }
         }
+
+        // TODO: remove this later
+        [Fact]
+        public void why_is_zscreammagic_making_extra_room_data()
+        {
+            RomData romData = Utilities.LoadRom("ALttP - VT_no-glitches-27_normal-open-ganon_521333165 original.sfc");
+            Random rand = new Random(0);
+
+            var originalRooms = new DungeonObjectDataPointerCollection(romData);
+            //foreach (var r in originalRooms.Rooms)
+            //{
+            //    output.WriteLine($"RoomId: {r.RoomId}, RoomName: {r.RoomName}, RoomGfx: {r.GraphicsBlockId}, sprite count: {r.Sprites.Count}, sprites: {String.Join(",", r.Sprites.Select(x => (x.IsOverlord ? "1" : "") + x.SpriteId.ToString("X2") + (x.HasAKey ? "(HasKey)" : "")))}");
+            //}
+
+            romData = Utilities.LoadRom("ALttP - VT_no-glitches-27_normal-open-ganon_521333165 mod.sfc");
+            var bustedRooms = new DungeonObjectDataPointerCollection(romData);
+
+            foreach (var r in originalRooms.RoomDungeonObjectDataPointers.Values)
+            {
+                var bustedRoom = bustedRooms.RoomDungeonObjectDataPointers.Values.Where(x => x.RoomId == r.RoomId).FirstOrDefault();
+
+                if(bustedRoom != null)
+                {
+                    if(r.Data != bustedRoom.Data)
+                    {
+                        output.WriteLine($"RoomId: {r.RoomId}, original length: {r.Data.Length}, modified length: {bustedRoom.Data.Length}");
+                    }
+                }
+            }
+        }
     }
 }
