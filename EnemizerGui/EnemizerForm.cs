@@ -490,7 +490,7 @@ namespace Enemizer
             {
 #endif
             int seed = 0;
-
+            
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Randomizer Roms (*.sfc)|*.sfc|All Files (*.*)|*.*";
             ofd.Title = "Select a Randomizer Rom File";
@@ -506,6 +506,16 @@ namespace Enemizer
 
                 var linkSpriteFilename = (linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString();
                 RomData romData = new RomData(rom_data);
+                if(romData.IsRaceRom)
+                {
+                    MessageBox.Show("Enemizer does not support race roms.", "Enemizer");
+                    return;
+                }
+                if(romData.IsRandomizerRom == false)
+                {
+                    MessageBox.Show("Enemizer only supports randomizer roms for input.", "Enemizer");
+                    return;
+                }
                 if (romData.IsEnemizerRom)
                 {
                     if (DialogResult.No == MessageBox.Show("Enemizer rom detected: this will cause Enemizer to try to reset the rom and rerun the same settings that are embedded in the rom. This feature exists for debugging purposes only. If you think this is a mistake, please double check the input file you selected. Do you wish to continue?", "Enemizer rom detected", MessageBoxButtons.YesNo))
@@ -578,8 +588,10 @@ namespace Enemizer
                             }
 
                             var fileName = GenerateSeed(seed, rom_data, linkSpriteFilename, ofd.FileName, fbd.SelectedPath);
-
-                            MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                            if (fileName != "Failed")
+                            {
+                                MessageBox.Show($"{fileName} has been created!", "Enemizer Rom Created");
+                            }
                         }
                     }
                 }

@@ -193,7 +193,7 @@ namespace EnemizerLibrary
             {
                 var next = nextToVisit.Dequeue();
 
-                if(visitedNodes.Contains(next))
+                if(visitedNodes.Contains(next) && nextToVisit.Count > 0)
                 {
                     // already visited
                     continue;

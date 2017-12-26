@@ -38,7 +38,7 @@ namespace EnemizerLibrary
         public List<DungeonSprite> Sprites { get; set; } = new List<DungeonSprite>();
         //public List<RoomRequirement> Requirements { get; set; }
 
-        int RoomHeaderBaseAddress
+        internal int RoomHeaderBaseAddress
         {
             get
             {

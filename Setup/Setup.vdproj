@@ -15,6 +15,18 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_2896B7332445E328168218B8E8DDA736"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_530B25DF3B7708868B066AFC3B478836"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_532E74397B6FA6D3CD5F81B08720E464"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,20 +45,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7574527D6719C7BEDC188604CDDC34CA"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_E7307616848865DEE53FBE4D86C94ABA"
-        "OwnerKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+        "OwnerKey" = "8:_2896B7332445E328168218B8E8DDA736"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
+        "OwnerKey" = "8:_2896B7332445E328168218B8E8DDA736"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,7 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7574527D6719C7BEDC188604CDDC34CA"
+        "OwnerKey" = "8:_530B25DF3B7708868B066AFC3B478836"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -204,6 +204,68 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2896B7332445E328168218B8E8DDA736"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6560.17938, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2896B7332445E328168218B8E8DDA736"
+                    {
+                    "Name" = "8:EnemizerLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:EnemizerLibrary.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_530B25DF3B7708868B066AFC3B478836"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Assembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_530B25DF3B7708868B066AFC3B478836"
+                    {
+                    "Name" = "8:Assembly.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Assembly.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_532E74397B6FA6D3CD5F81B08720E464"
             {
             "AssemblyRegister" = "3:1"
@@ -249,68 +311,6 @@
                     }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7574527D6719C7BEDC188604CDDC34CA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Assembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_7574527D6719C7BEDC188604CDDC34CA"
-                    {
-                    "Name" = "8:Assembly.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Assembly.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9E2B15FD4EA4B1677A86EBA3F8E013EF"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.0.6560.17924, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_9E2B15FD4EA4B1677A86EBA3F8E013EF"
-                    {
-                    "Name" = "8:EnemizerLibrary.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:EnemizerLibrary.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
@@ -457,15 +457,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{C6DD2698-8CB9-4ACD-B3DC-1DB012DC622F}"
-        "PackageCode" = "8:{529120F2-0343-4416-A5DC-40246543F8E9}"
+        "ProductCode" = "8:{FC329B18-A47B-4E2E-BD09-E89625BA6135}"
+        "PackageCode" = "8:{D2A1FD2C-D210-4382-89C8-1B9CA6665E53}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.22"
+        "ProductVersion" = "8:6.0.23"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

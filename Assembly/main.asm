@@ -61,6 +61,7 @@ incsrc msu1.asm
 incsrc sword_and_shield.asm
 incsrc overworld_sprites.asm
 incsrc bees.asm
+incsrc vitreous_fixes.asm
 
 ; data
 incsrc room_object_table.asm

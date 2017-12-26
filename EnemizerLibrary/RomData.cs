@@ -35,7 +35,7 @@ namespace EnemizerLibrary
 
         public StringBuilder Spoiler { get; private set; } = new StringBuilder();
 
-        Dictionary<int, byte> patchData = new Dictionary<int, byte>();
+        internal Dictionary<int, byte> patchData = new Dictionary<int, byte>();
 
         public List<PatchObject> GeneratePatch()
         {
@@ -171,7 +171,7 @@ namespace EnemizerLibrary
         /// <summary>
         /// Try to avoid using this because we can't set break points to find bad writes to ROM.
         /// </summary>
-        byte[] romData;
+        internal byte[] romData;
 
         public RomData(byte[] romData)
         {
