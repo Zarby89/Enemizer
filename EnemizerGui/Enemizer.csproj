@@ -153,6 +153,9 @@
     </Content>
     <None Include="nlog.config" />
     <None Include="packages.config" />
+    <Content Include="enemizerBasePatch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="patchData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -476,11 +479,19 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(TargetDir)
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>copy $(SolutionDir)\patchData.json $(TargetDir)</PreBuildEvent>
+    <PreBuildEvent>cd $(SolutionDir)BasePatchGenerator\$(OutDir)
+$(SolutionDir)BasePatchGenerator\$(OutDir)BasePatchGenerator.exe
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(ProjectDir)
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(TargetDir)
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\$(OutDir)
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerTests\
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerTests\$(OutDir)
+copy $(SolutionDir)\patchData.json $(TargetDir)</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>

@@ -10,30 +10,30 @@ namespace EnemizerCLI
 {
     public class RandomizerPatch
     {
-        public string Seed { get; set; }
+        //public string Seed { get; set; }
 
-        public string Logic { get; set; }
+        //public string Logic { get; set; }
 
-        public string Difficulty { get; set; }
+        //public string Difficulty { get; set; }
 
         public List<PatchObject> Patches { get; set; } = new List<PatchObject>();
 
-        public object Spoilers { get; set; }
+        //public object Spoilers { get; set; }
 
-        public string Hash { get; set; }
+        //public string Hash { get; set; }
 
         public RandomizerPatch(string basePatchJson, string json)
         {
             var rawBase = JArray.Parse(basePatchJson);
             ConvertPatch(rawBase);
 
-            var rawPatch = JObject.Parse(json);
-            Seed = (string)rawPatch["seed"];
-            Logic = (string)rawPatch["logic"];
-            Difficulty = (string)rawPatch["difficulty"];
-            ConvertPatch(rawPatch["patch"] as JArray);
-            Spoilers = rawPatch["spoilers"];
-            Hash = (string)rawPatch["hash"];
+            var rawPatch = JArray.Parse(json); // JObject.Parse(json);
+            //Seed = (string)rawPatch["seed"];
+            //Logic = (string)rawPatch["logic"];
+            //Difficulty = (string)rawPatch["difficulty"];
+            ConvertPatch(rawPatch); //["patch"] as JArray);
+            //Spoilers = rawPatch["spoilers"];
+            //Hash = (string)rawPatch["hash"];
         }
 
         void ConvertPatch(JArray patchBase)

@@ -52,10 +52,11 @@ namespace EnemizerLibrary
             // patch in our assembly binary data
             // TODO: figure out if this should be done first or after some other code below
             // TODO: and really this should all be modified to add patches onto this and then just write everything to the rom at once if possible (but there are some reads from the rom I need to look into first)
+            // this should be in caller now so it will no longer be included in the patch this generates
             Patch patch = new Patch("patchData.json");
             patch.PatchRom(this.ROM_DATA);
 
-            GeneralPatches.MoveRoomHeaders(this.ROM_DATA);
+            GeneralPatches.MoveRoomHeaders(this.ROM_DATA); // this is in base patch now
 
             rand = new Random(seed);
 
@@ -69,7 +70,8 @@ namespace EnemizerLibrary
             if(optionFlags.RandomizeSpriteOnHit)
             {
                 this.ROM_DATA.RandomizeSprites = true;
-                BuildRandomLinkSpriteTable(new Random(seed));
+                // do this client side
+                //BuildRandomLinkSpriteTable(this.ROM_DATA, seed, optionFlags);
             }
             else
             {
@@ -252,8 +254,9 @@ namespace EnemizerLibrary
                 grayscale_all_dungeons();
             }
 
-            SetSwordGfx(optionFlags.SwordGraphics);
-            SetShieldGfx(optionFlags.ShieldGraphics);
+            // do client side
+            //SetSwordGfx(this.ROM_DATA, optionFlags.SwordGraphics);
+            //SetShieldGfx(this.ROM_DATA, optionFlags.ShieldGraphics);
 
             if(optionflags.BeeMizer)
             {
@@ -416,21 +419,21 @@ namespace EnemizerLibrary
             return seed;
         }
 
-        void SetSwordGfx(string swordType)
+        public static void SetSwordGfx(RomData rom, string swordType)
         {
             swordType = Path.Combine(EnemizerBasePath.Instance.BasePath, swordType);
 
             FileStream f = new FileStream(swordType, FileMode.Open, FileAccess.Read);
-            this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
+            rom.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["swordgfx"], (int)f.Length);
             f.Close();
         }
 
-        void SetShieldGfx(string shieldType)
+        public static void SetShieldGfx(RomData rom, string shieldType)
         {
             shieldType = Path.Combine(EnemizerBasePath.Instance.BasePath, shieldType);
 
             FileStream f = new FileStream(shieldType, FileMode.Open, FileAccess.Read);
-            this.ROM_DATA.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
+            rom.ReadFileStreamIntoRom(f, XkasSymbols.Instance.Symbols["shieldgfx"], (int)f.Length);
             f.Close();
         }
 
@@ -1444,8 +1447,10 @@ namespace EnemizerLibrary
             }
         }
 
-        private void BuildRandomLinkSpriteTable(Random random)
+        public static void BuildRandomLinkSpriteTable(RomData rom, int seed, OptionFlags optionFlags)
         {
+            Random random = new Random(seed);
+
             var spritePath = "sprites";
             spritePath = Path.Combine(EnemizerBasePath.Instance.BasePath, spritePath);
 
@@ -1469,7 +1474,7 @@ namespace EnemizerLibrary
                 filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
                 fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
+                rom.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
                 i++;
@@ -1482,7 +1487,7 @@ namespace EnemizerLibrary
                 filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
                 fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                this.ROM_DATA.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
+                rom.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
                 fsx.Close();
                 skins.RemoveAt(r);
             }

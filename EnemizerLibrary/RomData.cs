@@ -508,14 +508,14 @@ namespace EnemizerLibrary
         public void PatchData(int address, byte[] patchData)
         {
             Array.Copy(patchData, 0, romData, address, patchData.Length);
-            SetPatchBytes(address, patchData.Length);
+            //SetPatchBytes(address, patchData.Length); // need to move this outside so it can be done client-side on web
         }
 
         public void PatchData(PatchObject patch)
         {
             var patchDataArray = patch.patchData.ToArray();
             Array.Copy(patchDataArray, 0, romData, patch.address, patchDataArray.Length);
-            SetPatchBytes(patch.address, patchDataArray.Length);
+            //SetPatchBytes(patch.address, patchDataArray.Length); // need to move this outside so it can be done client-side on web
         }
 
         public void UpdateChecksum()

@@ -4,8 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enemizer", "EnemizerGui\Enemizer.csproj", "{0FAA42FE-8942-4CDA-98DD-8BF0E8BCBD7D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215} = {9A0541F2-7595-40A8-A532-4DEDE7F78215}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerLibrary", "EnemizerLibrary\EnemizerLibrary.csproj", "{E6D1C409-E9DE-42B9-BD0B-B6F07EAC31B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883} = {D91E0DD6-AF9F-4293-A2E0-D27C508C3883}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{4D330833-32B5-47CE-B135-C56030F588A4}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,10 +23,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly", "Assembly\Assembly.csproj", "{D91E0DD6-AF9F-4293-A2E0-D27C508C3883}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerTests", "EnemizerTests\EnemizerTests.csproj", "{098A5180-0882-4C59-A557-B1CC0770856C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883} = {D91E0DD6-AF9F-4293-A2E0-D27C508C3883}
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215} = {9A0541F2-7595-40A8-A532-4DEDE7F78215}
+	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{92F59EFE-6F82-4266-A6A7-47F5F508EA98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher", "Patcher\Patcher.csproj", "{D7B406AD-AE16-4541-BA0B-CFD81304E9EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D91E0DD6-AF9F-4293-A2E0-D27C508C3883} = {D91E0DD6-AF9F-4293-A2E0-D27C508C3883}
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215} = {9A0541F2-7595-40A8-A532-4DEDE7F78215}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{96B8BA10-5259-4D5E-A134-AEEB9D5E1B4A}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,6 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemizerCLI", "EnemizerCLI\EnemizerCLI.csproj", "{52B08DAE-8563-47C9-AB59-98907C7E43B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215} = {9A0541F2-7595-40A8-A532-4DEDE7F78215}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasePatchGenerator", "BasePatchGenerator\BasePatchGenerator.csproj", "{9A0541F2-7595-40A8-A532-4DEDE7F78215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +110,14 @@ Global
 		{52B08DAE-8563-47C9-AB59-98907C7E43B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52B08DAE-8563-47C9-AB59-98907C7E43B0}.Release|x86.ActiveCfg = Release|Any CPU
 		{52B08DAE-8563-47C9-AB59-98907C7E43B0}.Release|x86.Build.0 = Release|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A0541F2-7595-40A8-A532-4DEDE7F78215}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
