@@ -48,14 +48,15 @@ namespace EnemizerLibrary
                 if(lastAddress + 1 != pd.Key)
                 {
                     // add previous patch
-                    if (currentPatch != null)
-                    {
-                        patches.Add(currentPatch);
-                    }
+                    //if (currentPatch != null)
+                    //{
+                    //    patches.Add(currentPatch);
+                    //}
 
                     // new patch
                     currentPatch = new PatchObject();
                     currentPatch.address = pd.Key;
+                    patches.Add(currentPatch);
                 }
                 // add the patch byte
                 currentPatch.patchData.Add(pd.Value);

@@ -489,6 +489,8 @@ copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(ProjectD
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(TargetDir)
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\$(OutDir)
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI.Core\
+copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI.Core\$(OutDir)
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerTests\
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerTests\$(OutDir)
 copy $(SolutionDir)\patchData.json $(TargetDir)</PreBuildEvent>

@@ -56,6 +56,8 @@ copy patchData.json $(SolutionDir)EnemizerGui\$(OutDir)
 copy patchData.json $(SolutionDir)EnemizerTests\$(OutDir)
 copy patchData.json $(SolutionDir)EnemizerCLI\
 copy patchData.json $(SolutionDir)EnemizerCLI\$(OutDir)
+copy patchData.json $(SolutionDir)EnemizerCLI.Core\
+copy patchData.json $(SolutionDir)EnemizerCLI.Core\$(OutDir)
 copy patchData.json $(SolutionDir)BasePatchGenerator\
 copy patchData.json $(SolutionDir)BasePatchGenerator\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)
@@ -64,6 +66,8 @@ copy exported_symbols.txt $(SolutionDir)EnemizerGui\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)EnemizerTests\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)EnemizerCLI\
 copy exported_symbols.txt $(SolutionDir)EnemizerCLI\$(OutDir)
+copy exported_symbols.txt $(SolutionDir)EnemizerCLI.Core\
+copy exported_symbols.txt $(SolutionDir)EnemizerCLI.Core\$(OutDir)
 copy exported_symbols.txt $(SolutionDir)BasePatchGenerator\
 copy exported_symbols.txt $(SolutionDir)BasePatchGenerator\$(OutDir)
 </PreBuildEvent>

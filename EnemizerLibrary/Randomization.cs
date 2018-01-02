@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Web.Hosting;
+//using System.Web.Hosting;
 //using System.Windows.Forms;
 
 namespace EnemizerLibrary
@@ -53,10 +53,10 @@ namespace EnemizerLibrary
             // TODO: figure out if this should be done first or after some other code below
             // TODO: and really this should all be modified to add patches onto this and then just write everything to the rom at once if possible (but there are some reads from the rom I need to look into first)
             // this should be in caller now so it will no longer be included in the patch this generates
-            Patch patch = new Patch("patchData.json");
+            Patch patch = new Patch("enemizerBasePatch.json");
             patch.PatchRom(this.ROM_DATA);
 
-            GeneralPatches.MoveRoomHeaders(this.ROM_DATA); // this is in base patch now
+            //GeneralPatches.MoveRoomHeaders(this.ROM_DATA); // this is in base patch now
 
             rand = new Random(seed);
 

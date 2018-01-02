@@ -61,6 +61,15 @@
     <Compile Include="RandomizerPatch.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="enemizerBasePatch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="exported_symbols.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="patchData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="tiles\arrghus.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
