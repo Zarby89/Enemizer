@@ -625,10 +625,6 @@ namespace Enemizer
             {
                 File.WriteAllText($"{fileNameNoExtension}.txt", randomizedRom.Spoiler.ToString());
             }
-            string fileName = $"{fileNameNoExtension}.sfc";
-            var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-            randomizedRom.WriteRom(fs);
-            fs.Close();
 
 #if DEBUG
             // build a patch for testing
@@ -636,6 +632,19 @@ namespace Enemizer
             string patch = JsonConvert.SerializeObject(romPatch);
             File.WriteAllText($"{fileNameNoExtension}.patch", patch);
 #endif
+
+            Randomization.SetSwordGfx(randomizedRom, config.OptionFlags.SwordGraphics);
+            Randomization.SetShieldGfx(randomizedRom, config.OptionFlags.ShieldGraphics);
+            if (config.OptionFlags.RandomizeSpriteOnHit)
+            {
+                Randomization.BuildRandomLinkSpriteTable(randomizedRom, seed, config.OptionFlags);
+            }
+
+            string fileName = $"{fileNameNoExtension}.sfc";
+            var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+            randomizedRom.WriteRom(fs);
+            fs.Close();
+
 
             return fileName;
 

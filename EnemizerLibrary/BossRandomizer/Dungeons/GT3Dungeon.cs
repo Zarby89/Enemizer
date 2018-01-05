@@ -23,7 +23,7 @@ namespace EnemizerLibrary
             DisallowedBosses.Add(BossType.Armos);
             DisallowedBosses.Add(BossType.Arrghus);
             DisallowedBosses.Add(BossType.Blind);
-            //DisallowedBosses.Add(BossType.Lanmola); // shouldn't even matter because no drop, but this is safe now
+            DisallowedBosses.Add(BossType.Lanmola); // still broken. will spawn on the top left after first cycle and you'll be stuck
             DisallowedBosses.Add(BossType.Trinexx);
 
             ShellX = 0x18;

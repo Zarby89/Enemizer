@@ -48,14 +48,15 @@ namespace EnemizerLibrary
                 if(lastAddress + 1 != pd.Key)
                 {
                     // add previous patch
-                    if (currentPatch != null)
-                    {
-                        patches.Add(currentPatch);
-                    }
+                    //if (currentPatch != null)
+                    //{
+                    //    patches.Add(currentPatch);
+                    //}
 
                     // new patch
                     currentPatch = new PatchObject();
                     currentPatch.address = pd.Key;
+                    patches.Add(currentPatch);
                 }
                 // add the patch byte
                 currentPatch.patchData.Add(pd.Value);
@@ -508,14 +509,14 @@ namespace EnemizerLibrary
         public void PatchData(int address, byte[] patchData)
         {
             Array.Copy(patchData, 0, romData, address, patchData.Length);
-            SetPatchBytes(address, patchData.Length);
+            //SetPatchBytes(address, patchData.Length); // need to move this outside so it can be done client-side on web
         }
 
         public void PatchData(PatchObject patch)
         {
             var patchDataArray = patch.patchData.ToArray();
             Array.Copy(patchDataArray, 0, romData, patch.address, patchDataArray.Length);
-            SetPatchBytes(patch.address, patchDataArray.Length);
+            //SetPatchBytes(patch.address, patchDataArray.Length); // need to move this outside so it can be done client-side on web
         }
 
         public void UpdateChecksum()

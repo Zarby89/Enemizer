@@ -4,6 +4,7 @@ using EnemizerLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,10 @@ namespace EnemizerCLI
             var options = new CommandLineOptions();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
             {
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 MakeEnemizerPatch(options);
+                stopwatch.Stop();
+                Console.WriteLine($"Seed generated in: {stopwatch.Elapsed}");
             }
             else
             {

@@ -20,7 +20,7 @@ namespace EnemizerTests
             RomData romData = new RomData(rom_data);
             romData.ExpandRom();
 
-            Patch patch = new Patch("patchData.json");
+            Patch patch = new Patch("enemizerBasePatch.json");
             patch.PatchRom(romData);
 
             return romData;
