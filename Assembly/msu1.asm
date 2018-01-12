@@ -44,7 +44,6 @@ do_fade:
     BCC .increment
 .decrement
     SBC !VAL_VOLUME_DECREMENT
-;   CMP !VAL_VOLUME_MUTE
     BCS .set
 .mute
     STZ !REG_CURRENT_VOLUME
@@ -69,7 +68,6 @@ command_f3:
     CPX !VAL_COMMAND_FULL_VOLUME
     BNE command_f2
     STX !REG_SPC_CONTROL
-    STX !REG_CURRENT_COMMAND
     LDA !VAL_VOLUME_FULL
     STA !REG_TARGET_VOLUME
     JML spc_continue
@@ -78,7 +76,6 @@ command_f2:
     CPX !VAL_COMMAND_FADE_HALF
     BNE command_f1
     STX !REG_SPC_CONTROL
-    STX !REG_CURRENT_COMMAND
     LDA !VAL_VOLUME_HALF
     STA !REG_TARGET_VOLUME
     JML spc_continue
@@ -87,8 +84,6 @@ command_f1:
     CPX !VAL_COMMAND_FADE_OUT
     BNE load_track
     STX !REG_SPC_CONTROL
-    STX !REG_CURRENT_COMMAND
-    STX !REG_CURRENT_TRACK
     STZ !REG_TARGET_VOLUME
     JML spc_continue
 
@@ -123,88 +118,7 @@ spc_fallback:
     JML spc_continue
 
 msu_play:
-    LDA $1A9D28 ;   Check if SPC data is already muted
-    BEQ .continue
-    LDA !VAL_COMMAND_FADE_OUT
-    STA !REG_SPC_CONTROL
-.continue
     LDA track_list,x
     STA !REG_MSU_CONTROL
-    STX !REG_CURRENT_COMMAND
-    STX !REG_CURRENT_TRACK
     STX !REG_CURRENT_MSU_TRACK
     JML spc_continue
-
-
-pendant_fanfare:
-    REP #$20
-    LDA !REG_MSU_ID_01
-    CMP !VAL_MSU_ID_01
-    BNE .fallback
-    LDA !REG_MSU_ID_23
-    CMP !VAL_MSU_ID_23
-    BNE .fallback
-    LDA !REG_MSU_ID_45
-    CMP !VAL_MSU_ID_45
-    BNE .fallback
-    SEP #$20
-    LDA !REG_MSU_STATUS
-    BIT !FLAG_MSU_STATUS_AUDIO_PLAYING
-    BNE .continue
-.done
-    JML pendant_done
-.continue
-    JML pendant_continue
-.fallback
-    SEP #$20
-    LDA !REG_SPC_CONTROL
-    BNE .continue
-    BRA .done
-
-
-crystal_fanfare:
-    REP #$20
-    LDA !REG_MSU_ID_01
-    CMP !VAL_MSU_ID_01
-    BNE .fallback
-    LDA !REG_MSU_ID_23
-    CMP !VAL_MSU_ID_23
-    BNE .fallback
-    LDA !REG_MSU_ID_45
-    CMP !VAL_MSU_ID_45
-    BNE .fallback
-    SEP #$20
-    LDA !REG_MSU_STATUS
-    BIT !FLAG_MSU_STATUS_AUDIO_PLAYING
-    BNE .continue
-.done
-    JML crystal_done
-.continue
-    JML crystal_continue
-.fallback
-    SEP #$20
-    LDA !REG_SPC_CONTROL
-    BNE .continue
-    BRA .done
-
-
-ending_wait:
-    REP #$20
-    LDA !REG_MSU_ID_01
-    CMP !VAL_MSU_ID_01
-    BNE .done
-    LDA !REG_MSU_ID_23
-    CMP !VAL_MSU_ID_23
-    BNE .done
-    LDA !REG_MSU_ID_45
-    CMP !VAL_MSU_ID_45
-    BNE .done
-    SEP #$20
-.wait
-    LDA !REG_MSU_STATUS
-    BIT !FLAG_MSU_STATUS_AUDIO_PLAYING
-    BNE .wait
-.done
-    SEP #$20
-    LDA #$22
-    RTL
