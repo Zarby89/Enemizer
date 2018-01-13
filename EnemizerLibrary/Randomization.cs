@@ -9,14 +9,14 @@ using System.Drawing;
 using Newtonsoft.Json;
 //using System.Web.Hosting;
 //using System.Windows.Forms;
-
+using System.IO.Compression;
 namespace EnemizerLibrary
 {
     public partial class Randomization
     {
         Random rand;
         RomData ROM_DATA;
-
+        
         //StreamWriter spoilerfile;
 
         OptionFlags optionFlags;
@@ -26,7 +26,7 @@ namespace EnemizerLibrary
             EnemizerBasePath.Instance.BasePath = basePath;
 
             this.optionFlags = optionflags;
-
+            
             this.ROM_DATA = romData;
             if(this.ROM_DATA.IsEnemizerRom)
             {
@@ -511,74 +511,67 @@ namespace EnemizerLibrary
             //    //}
             //}
         }
-
+        Dictionary<string, byte> bosses_gfx_index = new Dictionary<string, byte>();
         void SetBossGfx()
         {
+            bosses_gfx_index.Add("Agahnim1", 0x8D);
+            bosses_gfx_index.Add("Agahnim2", 0xB5);
+            bosses_gfx_index.Add("Agahnim3", 0xC8);
+            bosses_gfx_index.Add("Agahnim4", 0xB6);
+            bosses_gfx_index.Add("ArmosKnight1", 0x90);
+            bosses_gfx_index.Add("Ganon1", 0x94);
+            bosses_gfx_index.Add("Ganon2", 0xA6);
+            bosses_gfx_index.Add("Ganon3", 0xB4);
+            bosses_gfx_index.Add("Ganon4", 0xB8);
+            bosses_gfx_index.Add("Moldorm1", 0xA3);
+            bosses_gfx_index.Add("Lanmola1", 0xA4);
+            bosses_gfx_index.Add("Arrghus1", 0xAC);
+            bosses_gfx_index.Add("Mothula1", 0xAB);
+            bosses_gfx_index.Add("Helmasaure1", 0xAD);
+            bosses_gfx_index.Add("Helmasaure2", 0xB1);
+            bosses_gfx_index.Add("Blind1", 0xAE);
+            bosses_gfx_index.Add("Kholdstare1", 0xAF);
+            bosses_gfx_index.Add("Vitreous1", 0xB0);
+            bosses_gfx_index.Add("Trinexx1", 0xB2);
+            bosses_gfx_index.Add("Trinexx2", 0xB3);
+
             //they all must need to be at the same place since they generate new addresses/pointers
             int newGfxPosition = AddressConstants.NewBossGraphicsBaseAddress;
-            byte[] bossgfxindex =
-            {
-                0x8D,
-                0xB5,
-                0xC8,
-                0xB6,
-                0x90,
-                0x94,
-                0xA3,
-                0xA4,
-                0xA6,
-                0xAB,
-                0xAC,
-                0xAD,
-                0xAE,
-                0xAF,
-                0xB0,
-                0xB1,
-                0xB2,
-                0xB3,
-                0xB4,
-                0xB8
-            };
-            string[] bossgfxfiles =
-            {
-                "agahnim1.bin",
-                "agahnim2.bin",
-                "agahnim3.bin",
-                "agahnim4.bin",
-                "armosknight.bin",
-                "ganon1.bin",
-                "moldorm.bin",
-                "lanmola.bin",
-                "ganon2.bin",
-                "mothula.bin",
-                "arrghus.bin",
-                "helmasaure1.bin",
-                "blind.bin",
-                "kholdstare.bin",
-                "vitreous.bin",
-                "helmasaure2.bin",
-                "trinexx1.bin",
-                "trinexx2.bin",
-                "ganon3.bin",
-                "ganon4.bin"
-            };
+            setSingleBossGfx("Agahnim", ref newGfxPosition, 4);
+            setSingleBossGfx("ArmosKnight", ref newGfxPosition, 1);
+            setSingleBossGfx("Ganon", ref newGfxPosition, 4);
+            setSingleBossGfx("Arrghus", ref newGfxPosition, 1);
+            setSingleBossGfx("Moldorm", ref newGfxPosition, 1);
+            setSingleBossGfx("Lanmola", ref newGfxPosition, 1);
+            setSingleBossGfx("Mothula", ref newGfxPosition, 1);
+            setSingleBossGfx("Blind", ref newGfxPosition, 1);
+            setSingleBossGfx("Kholdstare", ref newGfxPosition, 1);
+            setSingleBossGfx("Vitreous", ref newGfxPosition, 1);
+            setSingleBossGfx("Trinexx", ref newGfxPosition, 2);
+            setSingleBossGfx("Helmasaure", ref newGfxPosition, 2);
+        }
 
-            for(int i = 0; i < bossgfxindex.Length; i++)
+        void setSingleBossGfx(string name,ref int newGfxPosition,int numberSheets)
+        {
+            var folder = "bosses_gfx\\"+name;
+            string[] files = Directory.GetFiles(folder);
+            int fileIndex = rand.Next(files.Length);
+            string filename = Path.Combine(EnemizerBasePath.Instance.BasePath, files[fileIndex]);
+            //FileStream f = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            ZipArchive fileZip = ZipFile.Open(filename, ZipArchiveMode.Read);
+            for (int i = 0; i < numberSheets; i++)
             {
-                var filename = "bosses_gfx\\" + bossgfxfiles[i];
-                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
+                ZipArchiveEntry entry = fileZip.GetEntry((i + 1) + ".bin");
+                Stream zipstream = entry.Open();
 
-                FileStream f = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                this.ROM_DATA.ReadFileStreamIntoRom(f, newGfxPosition, (int)f.Length);
+                int length = this.ROM_DATA.ReadStreamIntoRom(zipstream, newGfxPosition);
                 byte[] address = Utilities.PCAddressToSnesByteArray(newGfxPosition);
-                this.ROM_DATA[0x4FC0 + bossgfxindex[i]] = address[0]; //bank
-                this.ROM_DATA[0x509F + bossgfxindex[i]] = address[1];  //highbyte
-                this.ROM_DATA[0x517E + bossgfxindex[i]] = address[2];  //lowbyte
-                newGfxPosition += (int)f.Length;
-                f.Close();
+                this.ROM_DATA[0x4FC0 + bosses_gfx_index[name + (i + 1)]] = address[0]; //bank
+                this.ROM_DATA[0x509F + bosses_gfx_index[name + (i + 1)]] = address[1];  //highbyte
+                this.ROM_DATA[0x517E + bosses_gfx_index[name + (i + 1)]] = address[2];  //lowbyte
+                newGfxPosition += length;
+                zipstream.Close();
             }
-            
-
         }
 
     
@@ -760,9 +753,10 @@ namespace EnemizerLibrary
             }
         }
 
-        public void randomize_wall(int dungeon)
+        public void randomize_wall(int dungeon, int brigthness = 60)
         {
-            Color wall_color = Color.FromArgb(60+rand.Next(180), 60+rand.Next(180), 60+rand.Next(180));
+
+            Color wall_color = getColorBrigthness();
 
             for (int i = 0; i < 5; i++)
             {
@@ -781,31 +775,32 @@ namespace EnemizerLibrary
             if (dungeon == 2)
             {
                 setColor((0x0DD74E + (0xB4 * dungeon)), wall_color, 3);
-                setColor((0x0DD74E + 2 + (0xB4 * dungeon)), wall_color, 7);
+                setColor((0x0DD74E + 2 + (0xB4 * dungeon)), wall_color, 5);
                 setColor((0x0DD73E + (0xB4 * dungeon)), wall_color, 3);
-                setColor((0x0DD73E + 2 + (0xB4 * dungeon)), wall_color, 7);
+                setColor((0x0DD73E + 2 + (0xB4 * dungeon)), wall_color, 5);
                 
             }
 
             //Ceiling
-            setColor(0x0DD7E4 + (0xB4 * dungeon), wall_color, (byte)(2)); //outer wall darker
-            setColor(0x0DD7E6 + (0xB4 * dungeon), wall_color, (byte)(4)); //outter wall brighter
+            setColor(0x0DD7E4 + (0xB4 * dungeon), wall_color, (byte)(4)); //outer wall darker
+            setColor(0x0DD7E6 + (0xB4 * dungeon), wall_color, (byte)(2)); //outter wall brighter
 
             //pits walls
-            setColor(0x0DD7DA + (0xB4 * dungeon), wall_color, (byte)(6));
-            setColor(0x0DD7DC + (0xB4 * dungeon), wall_color, (byte)(4));
+            setColor(0x0DD7DA + (0xB4 * dungeon), wall_color, (byte)(10));
+            setColor(0x0DD7DC + (0xB4 * dungeon), wall_color, (byte)(8));
 
-            Color pot_color = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
+
+            Color pot_color = getColorBrigthness();
             //Pots
-            setColor(0x0DD75A + (0xB4 * dungeon), pot_color, 6);
+            setColor(0x0DD75A + (0xB4 * dungeon), pot_color, 7);
             setColor(0x0DD75C + (0xB4 * dungeon), pot_color, 1);
             setColor(0x0DD75E + (0xB4 * dungeon), pot_color, 3);
 
             //Wall Contour?
             //f,c,m
             setColor(0x0DD76A + (0xB4 * dungeon), wall_color, 7);
-            setColor(0x0DD76C + (0xB4 * dungeon), wall_color, 3);
-            setColor(0x0DD76E + (0xB4 * dungeon), wall_color, 5);
+            setColor(0x0DD76C + (0xB4 * dungeon), wall_color, 2);
+            setColor(0x0DD76E + (0xB4 * dungeon), wall_color, 4);
 
             //Decoration?
 
@@ -814,11 +809,36 @@ namespace EnemizerLibrary
             //setColor((0x0DD7DA + 2 + (0xB4 * dungeon)), wall_color, (byte)(shade - (1 * 4)));
         }
 
-        public void randomize_floors(int dungeon)
+        public Color getColorBrigthness()
         {
-            Color floor_color1 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
-            Color floor_color2 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
-            Color floor_color3 = Color.FromArgb(60 + rand.Next(180), 60 + rand.Next(180), 60 + rand.Next(180));
+            int brigthness = 60;
+            int r = brigthness + rand.Next(240 - brigthness);
+            int g = brigthness + rand.Next(240 - brigthness);
+            int b = brigthness + rand.Next(240 - brigthness);
+            if (optionFlags.IncreaseBrightness == true)
+            {
+                if (r < 220)
+                {
+                    r += 30;
+                }
+                if (g < 220)
+                {
+                    g += 30;
+                }
+                if (b < 220)
+                {
+                    b += 30;
+                }
+            }
+            return Color.FromArgb(r, g, b);
+        }
+
+        public void randomize_floors(int dungeon, int brigthness = 60)
+        {
+
+            Color floor_color1 = getColorBrigthness();
+            Color floor_color2 = getColorBrigthness();
+            Color floor_color3 = getColorBrigthness();
 
             for (int i = 0; i < 3; i++)
             {
@@ -836,7 +856,6 @@ namespace EnemizerLibrary
 
         public void setColor(int address, Color col, byte shade)
         {
-
             int r = col.R;
             int g = col.G;
             int b = col.B;
@@ -1491,6 +1510,11 @@ namespace EnemizerLibrary
                 fsx.Close();
                 skins.RemoveAt(r);
             }
+        }
+
+        public void heroMode()
+        {
+
         }
     }
 }

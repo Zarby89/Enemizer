@@ -353,6 +353,8 @@ namespace Enemizer
             pukeModeCheckbox.Checked = config.OptionFlags.PukeMode;
             randomizeDungeonPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
             setBlackoutModeCheckbox.Enabled = !pukeModeCheckbox.Checked;
+
+            increaseBrightnessCheckbox.Checked = config.OptionFlags.IncreaseBrightness;
             //randomizeOverworldPalettesCheckbox.Enabled = !pukeModeCheckbox.Checked;
             //randomizeSpritePalettesBasicCheckbox.Enabled = !pukeModeCheckbox.Checked;
             //randomizeSpritePalettesAdvancedCheckbox.Enabled = !pukeModeCheckbox.Checked;
@@ -381,6 +383,8 @@ namespace Enemizer
             randomizeTileTrapFloorTile.Checked = config.OptionFlags.RandomizeTileTrapFloorTile;
 
             allowKillableThiefCheckBox.Checked = config.OptionFlags.AllowKillableThief;
+            heroModeCheckbox.Checked = config.OptionFlags.HeroMode;
+
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -1044,6 +1048,16 @@ namespace Enemizer
         private void randomSpriteOnHitCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.RandomizeSpriteOnHit = randomSpriteOnHitCheckBox.Checked;
+        }
+
+        private void heroModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.HeroMode = heroModeCheckbox.Checked;
+        }
+
+        private void increaseBrightnessCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.IncreaseBrightness = increaseBrightnessCheckbox.Checked;
         }
     }
 

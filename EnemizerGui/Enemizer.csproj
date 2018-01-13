@@ -91,66 +91,42 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="bosses_gfx\agahnim1.bin">
+    <None Include="bosses_gfx\Agahnim\agahlink.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim2.bin">
+    </None>
+    <None Include="bosses_gfx\ArmosKnight\Twompmos.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim3.bin">
+    </None>
+    <None Include="bosses_gfx\Arrghus\poorrghus.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\armosknight.bin">
+    </None>
+    <None Include="bosses_gfx\Blind\bootlegblind.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\arrghus.bin">
+    </None>
+    <None Include="bosses_gfx\Ganon\headlessganon.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\blind.bin">
+    </None>
+    <None Include="bosses_gfx\Helmasaure\nofacemasaure.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon1.bin">
+    </None>
+    <None Include="bosses_gfx\Kholdstare\sunstare.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon2.bin">
+    </None>
+    <None Include="bosses_gfx\Lanmola\bonemola.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon3.bin">
+    </None>
+    <None Include="bosses_gfx\Moldorm\yoshieggdorm.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon4.bin">
+    </None>
+    <None Include="bosses_gfx\Mothula\bathula.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\helmasaure1.bin">
+    </None>
+    <None Include="bosses_gfx\Trinexx\chomptrinexx.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\helmasaure2.bin">
+    </None>
+    <None Include="bosses_gfx\Vitreous\pumpkintreous.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\kholdstare.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\lanmola.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\moldorm.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\mothula.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\trinexx1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\trinexx2.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\vitreous.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim4.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="nlog.config" />
     <None Include="packages.config" />
     <Content Include="enemizerBasePatch.json">
