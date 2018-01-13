@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace EnemizerLibrary
 {
 
-        public partial class Randomization
-        {
-            public static GameRoom[] roomList = new GameRoom[]{
+    public partial class Randomization
+    {
+        public static GameRoom[] roomList = new GameRoom[]{
         //Game Rooom 4
         new GameRoom(4,new EmptyPot[]{ new EmptyPot(0xA2,0x19),new EmptyPot(0x98,0x19),new EmptyPot(0x98,0x16),
         new EmptyPot(0xA2,0x16),new EmptyPot(0xF0,0x13),new EmptyPot(0xCC,0x13)},new byte[]{0x0A,0x0A}),
@@ -342,124 +342,176 @@ namespace EnemizerLibrary
 
         };
 
-            public void randomizePots(int seed)
+        public void randomizePots(int seed)
+        {
+            Random r = new Random(seed);
+            foreach (GameRoom g in roomList)
             {
-                Random r = new Random(seed);
-                foreach (GameRoom g in roomList)
+                //scan all items and pots to see if there is a key or switch and pots reserved
+                bool reservedkey = false;
+                bool reservedswitch = false;
+                List<byte> roomItems = new List<byte>();
+                List<EmptyPot> roomEmptyPots = new List<EmptyPot>();
+                List<FilledPot> roomPots = new List<FilledPot>();
+                for (int i = 0; i < g.items.Length; i++)
                 {
-                    //scan all items and pots to see if there is a key or switch and pots reserved
-                    bool reservedkey = false;
-                    bool reservedswitch = false;
-                    List<byte> roomItems = new List<byte>();
-                    List<EmptyPot> roomEmptyPots = new List<EmptyPot>();
-                    List<FilledPot> roomPots = new List<FilledPot>();
-                    for (int i = 0; i < g.items.Length; i++)
+                    if (g.items[i] != 0x80) // if it a hole we don't want it
                     {
-                        if (g.items[i] != 0x80) // if it a hole we don't want it
-                        {
-                            roomItems.Add(g.items[i]);
-                        }
-
+                        roomItems.Add(g.items[i]);
                     }
 
-                    for (int i = 0; i < g.pots.Length; i++)
+                }
+
+                for (int i = 0; i < g.pots.Length; i++)
+                {
+                    if (g.pots[i].reserved == 3)
                     {
-                        if (g.pots[i].reserved == 3)
-                        {
-                            roomPots.Add(new FilledPot(g.pots[i].x, g.pots[i].y, 0x80)); //if it a hole it stay in the default pot
-                        }
-                        else
-                        {
-                            roomEmptyPots.Add(g.pots[i]); // as long as it not a hole we push a possible pot in empty pots list
-                        }
-                        if (g.pots[i].reserved == 1)
-                        {
-                            reservedkey = true;
-                        }
-                        if (g.pots[i].reserved == 2)
-                        {
-                            reservedswitch = true;
-                        }
-
-
+                        roomPots.Add(new FilledPot(g.pots[i].x, g.pots[i].y, 0x80)); //if it a hole it stay in the default pot
                     }
-
-                    if (g.id == 201)
+                    else
                     {
-                        Debug.WriteLine("(Room201)NBR ITEMS ORIG: " + g.items.Length + " / copied items :" + roomItems.Count + "Original pots :" + g.pots.Length + " / copied pots : " + roomEmptyPots.Count);
+                        roomEmptyPots.Add(g.pots[i]); // as long as it not a hole we push a possible pot in empty pots list
                     }
-
-                    while (reservedkey || reservedswitch) // loop until we find a spot for a key and switch if they have reserved spot
+                    if (g.pots[i].reserved == 1)
                     {
-
-                        if (reservedkey)//try to place a key in a reserved pot
-                        {
-                            int pid = r.Next(0, roomEmptyPots.Count);
-                            if (g.pots[pid].reserved == 1)
-                            {
-                                roomItems.Remove(0x08);
-                                roomPots.Add(new FilledPot(g.pots[pid].x, g.pots[pid].y, 0x08));
-                                roomEmptyPots.Remove(g.pots[pid]);
-                                reservedkey = false;
-                            }
-                        }
-
-                        if (reservedswitch)//try to place a switch in a reserved pot
-                        {
-                            int pid = r.Next(0, roomEmptyPots.Count);
-                            if (g.pots[pid].reserved == 2)
-                            {
-                                roomItems.Remove(0x88);
-                                roomPots.Add(new FilledPot(g.pots[pid].x, g.pots[pid].y, 0x88));
-                                roomEmptyPots.Remove(g.pots[pid]);
-
-                                reservedswitch = false;
-                            }
-                        }
+                        reservedkey = true;
                     }
-
-                    while (roomItems.Count > 0) // as long we have items to place we place them in an empty pot and remove the empty pot from the list
+                    if (g.pots[i].reserved == 2)
                     {
-                        int pid = r.Next(0, roomEmptyPots.Count);
-                        byte oid = (byte)roomItems[r.Next(0, roomItems.Count)];
-                        roomPots.Add(new FilledPot(roomEmptyPots[pid].x, roomEmptyPots[pid].y, oid));
-                        roomItems.Remove(oid);
-                        roomEmptyPots.RemoveAt(pid);
-                        if (roomItems.Count == 0)
-                        {
-                            break;
-                        }
+                        reservedswitch = true;
                     }
-
-                    byte[] itemPointer = new byte[4];
-                    itemPointer[2] = 01;//
-                    itemPointer[0] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 0];
-                    itemPointer[1] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 1];
-                    int itemaddress = BitConverter.ToInt32(itemPointer, 0);
-                    int addr = Utilities.SnesToPCAddress(itemaddress);
-
-                    // TODO: unused?
-                    byte[] exportPots = new byte[roomPots.Count * 3];
-
-
-                    for (int i = 0; i < roomPots.Count; i++)
-                    {
-                        ROM_DATA[addr + (i * 3) + 0] = roomPots[i].x;
-                        ROM_DATA[addr + (i * 3) + 1] = roomPots[i].y;
-                        ROM_DATA[addr + (i * 3) + 2] = roomPots[i].id;
-                    }
-
-
-
 
 
                 }
+
+                if (g.id == 201)
+                {
+                    //Debug.WriteLine("(Room201)NBR ITEMS ORIG: " + g.items.Length + " / copied items :" + roomItems.Count + "Original pots :" + g.pots.Length + " / copied pots : " + roomEmptyPots.Count);
+                }
+
+                while (reservedkey || reservedswitch) // loop until we find a spot for a key and switch if they have reserved spot
+                {
+
+                    if (reservedkey)//try to place a key in a reserved pot
+                    {
+                        int pid = r.Next(0, roomEmptyPots.Count);
+                        if (g.pots[pid].reserved == 1)
+                        {
+                            roomItems.Remove(0x08);
+                            roomPots.Add(new FilledPot(g.pots[pid].x, g.pots[pid].y, 0x08));
+                            roomEmptyPots.Remove(g.pots[pid]);
+                            reservedkey = false;
+                        }
+                    }
+
+                    if (reservedswitch)//try to place a switch in a reserved pot
+                    {
+                        int pid = r.Next(0, roomEmptyPots.Count);
+                        if (g.pots[pid].reserved == 2)
+                        {
+                            roomItems.Remove(0x88);
+                            roomPots.Add(new FilledPot(g.pots[pid].x, g.pots[pid].y, 0x88));
+                            roomEmptyPots.Remove(g.pots[pid]);
+
+                            reservedswitch = false;
+                        }
+                    }
+                }
+
+                while (roomItems.Count > 0) // as long we have items to place we place them in an empty pot and remove the empty pot from the list
+                {
+                    int pid = r.Next(0, roomEmptyPots.Count);
+                    byte oid = (byte)roomItems[r.Next(0, roomItems.Count)];
+                    if (optionFlags.HeroMode == true)
+                    {
+                        if (oid == 0x0B)
+                        {
+                            byte nid = 0;
+                            while (true)
+                            {
+                                nid = (byte)r.Next(0, 0x13);
+                                if (nid != 0x08 && nid != 0x0F && nid != 0x10 && nid != 0x11 && nid != 0x0B)
+                                {
+                                    break;
+                                }
+
+                            }
+                            roomPots.Add(new FilledPot(roomEmptyPots[pid].x, roomEmptyPots[pid].y, 0x0B));
+                            roomItems.Remove(oid);
+                            roomEmptyPots.RemoveAt(pid);
+                            continue;
+                        }
+
+                        //Also need to remove hearts in hera
+                        for (int i = 0; i < 12; i++)
+                        {
+
+                        }
+                    }
+
+
+                    roomPots.Add(new FilledPot(roomEmptyPots[pid].x, roomEmptyPots[pid].y, oid));
+                    roomItems.Remove(oid);
+                    roomEmptyPots.RemoveAt(pid);
+                    if (roomItems.Count == 0)
+                    {
+                        break;
+                    }
+                }
+
+
+                //Zarby Note : wow what is that code :scream:
+                byte[] itemPointer = new byte[4];
+                itemPointer[2] = 01;//
+                itemPointer[0] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 0];
+                itemPointer[1] = ROM_DATA[(0xDB67 + ((int)g.id * 2)) + 1];
+                int itemaddress = BitConverter.ToInt32(itemPointer, 0);
+                int addr = Utilities.SnesToPCAddress(itemaddress);
+
+                // TODO: unused - Zarby: was used to list all the pots in the console i think
+                byte[] exportPots = new byte[roomPots.Count * 3];
+
+                //replace hearts in hera if hero mode is on
+                if (optionFlags.HeroMode == true)
+                {
+                    if (g.id == 23) // if room id == 23 then change all the pots by something else than hearts
+                    for (int i = 0; i < 12; i++)
+                    {
+                        byte nid = 0;
+                        while (true)
+                        {
+                            nid = (byte)r.Next(0, 0x13);
+                            if (nid != 0x08 && nid != 0x0F && nid != 0x10 && nid != 0x11 && nid != 0x0B)
+                            {
+                                ROM_DATA[addr + (i * 3)+2] = nid;
+                                break;
+                            }
+
+                        }
+
+                    }
+                }
+
+
+
+                for (int i = 0; i < roomPots.Count; i++)
+                {
+                    ROM_DATA[addr + (i * 3) + 0] = roomPots[i].x;
+                    ROM_DATA[addr + (i * 3) + 1] = roomPots[i].y;
+                    ROM_DATA[addr + (i * 3) + 2] = roomPots[i].id;
+                }
+
+
+
+
+
             }
-
-
-
-
         }
+
+
+
+
+    }
 
         public class GameRoom
         {

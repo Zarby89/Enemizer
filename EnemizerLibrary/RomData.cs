@@ -607,6 +607,25 @@ namespace EnemizerLibrary
             f.Read(romData, address, length);
             SetPatchBytes(address, length);
         }
+
+        public int ReadStreamIntoRom(Stream f, int address)
+        {
+            int b = 0;
+            int pos = address;
+            int length = 0;
+            while (b != -1)
+            {
+                b = f.ReadByte();
+                if (b != -1)
+                {
+                    romData[pos] = (byte)b;
+                    length++;
+                    pos++;
+                }
+            }
+            SetPatchBytes(address, length);
+            return length;
+        }
         /*
 public function setHeartBeepSpeed(string $setting) : self {
 switch ($setting) {

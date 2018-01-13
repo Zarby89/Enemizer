@@ -79,7 +79,8 @@ namespace EnemizerLibrary
         public bool RandomizeTileTrapFloorTile { get; set; }
         public bool AllowKillableThief { get; set; }
         public bool RandomizeSpriteOnHit { get; set; }
-
+        public bool HeroMode { get; set; }
+        public bool IncreaseBrightness { get; set; }
         public OptionFlags()
         {
 
@@ -209,6 +210,8 @@ namespace EnemizerLibrary
             this.RandomizeTileTrapFloorTile = Convert.ToBoolean(optionBytes[i++]);
             this.AllowKillableThief = Convert.ToBoolean(optionBytes[i++]);
             this.RandomizeSpriteOnHit = Convert.ToBoolean(optionBytes[i++]);
+            this.HeroMode = Convert.ToBoolean(optionBytes[i++]);
+            this.IncreaseBrightness = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -316,7 +319,7 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.RandomizeTileTrapFloorTile);
             ret[i++] = Convert.ToByte(this.AllowKillableThief);
             ret[i++] = Convert.ToByte(this.RandomizeSpriteOnHit);
-
+            ret[i++] = Convert.ToByte(this.HeroMode);
             return ret;
         }
     }

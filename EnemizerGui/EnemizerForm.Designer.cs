@@ -73,6 +73,7 @@
             this.bossRandomizationTypesTrackbar = new System.Windows.Forms.TrackBar();
             this.randomizeBossesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPalettes = new System.Windows.Forms.TabPage();
+            this.increaseBrightnessCheckbox = new System.Windows.Forms.CheckBox();
             this.negativeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.grayscaleModeCheckbox = new System.Windows.Forms.CheckBox();
             this.pukeModeCheckbox = new System.Windows.Forms.CheckBox();
@@ -82,6 +83,7 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabExtra = new System.Windows.Forms.TabPage();
+            this.heroModeCheckbox = new System.Windows.Forms.CheckBox();
             this.allowKillableThiefCheckBox = new System.Windows.Forms.CheckBox();
             this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
             this.randomizeTileTrapPatternCheckBox = new System.Windows.Forms.CheckBox();
@@ -638,6 +640,7 @@
             // 
             // tabPalettes
             // 
+            this.tabPalettes.Controls.Add(this.increaseBrightnessCheckbox);
             this.tabPalettes.Controls.Add(this.negativeModeCheckbox);
             this.tabPalettes.Controls.Add(this.grayscaleModeCheckbox);
             this.tabPalettes.Controls.Add(this.pukeModeCheckbox);
@@ -652,6 +655,19 @@
             this.tabPalettes.TabIndex = 2;
             this.tabPalettes.Text = "Palettes";
             this.tabPalettes.UseVisualStyleBackColor = true;
+            // 
+            // increaseBrightnessCheckbox
+            // 
+            this.increaseBrightnessCheckbox.AutoSize = true;
+            this.increaseBrightnessCheckbox.Location = new System.Drawing.Point(249, 4);
+            this.increaseBrightnessCheckbox.Name = "increaseBrightnessCheckbox";
+            this.increaseBrightnessCheckbox.Size = new System.Drawing.Size(119, 17);
+            this.increaseBrightnessCheckbox.TabIndex = 8;
+            this.increaseBrightnessCheckbox.Text = "Increase Brightness";
+            this.toolTip1.SetToolTip(this.increaseBrightnessCheckbox, "Increase the brightness for dungeons palettes, useful if you play on console, bsn" +
+        "es or you find colors too dark");
+            this.increaseBrightnessCheckbox.UseVisualStyleBackColor = true;
+            this.increaseBrightnessCheckbox.CheckedChanged += new System.EventHandler(this.increaseBrightnessCheckbox_CheckedChanged);
             // 
             // negativeModeCheckbox
             // 
@@ -745,6 +761,7 @@
             // 
             // tabExtra
             // 
+            this.tabExtra.Controls.Add(this.heroModeCheckbox);
             this.tabExtra.Controls.Add(this.allowKillableThiefCheckBox);
             this.tabExtra.Controls.Add(this.randomizeTileTrapFloorTile);
             this.tabExtra.Controls.Add(this.randomizeTileTrapPatternCheckBox);
@@ -768,6 +785,19 @@
             this.tabExtra.TabIndex = 3;
             this.tabExtra.Text = "Extra";
             this.tabExtra.UseVisualStyleBackColor = true;
+            // 
+            // heroModeCheckbox
+            // 
+            this.heroModeCheckbox.AutoSize = true;
+            this.heroModeCheckbox.Location = new System.Drawing.Point(318, 30);
+            this.heroModeCheckbox.Name = "heroModeCheckbox";
+            this.heroModeCheckbox.Size = new System.Drawing.Size(79, 17);
+            this.heroModeCheckbox.TabIndex = 23;
+            this.heroModeCheckbox.Text = "Hero Mode";
+            this.toolTip1.SetToolTip(this.heroModeCheckbox, "Increase difficulty");
+            this.heroModeCheckbox.UseVisualStyleBackColor = true;
+            this.heroModeCheckbox.Visible = false;
+            this.heroModeCheckbox.CheckedChanged += new System.EventHandler(this.heroModeCheckbox_CheckedChanged);
             // 
             // allowKillableThiefCheckBox
             // 
@@ -1339,6 +1369,8 @@
         private System.Windows.Forms.CheckBox randomizeTileTrapPatternCheckBox;
         private System.Windows.Forms.CheckBox allowKillableThiefCheckBox;
         public System.Windows.Forms.CheckBox randomSpriteOnHitCheckBox;
+        private System.Windows.Forms.CheckBox heroModeCheckbox;
+        private System.Windows.Forms.CheckBox increaseBrightnessCheckbox;
     }
 }
 
