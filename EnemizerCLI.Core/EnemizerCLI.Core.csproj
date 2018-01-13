@@ -6,26 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="bosses_gfx\agahnim1.bin" />
-    <None Remove="bosses_gfx\agahnim2.bin" />
-    <None Remove="bosses_gfx\agahnim3.bin" />
-    <None Remove="bosses_gfx\agahnim4.bin" />
-    <None Remove="bosses_gfx\armosknight.bin" />
-    <None Remove="bosses_gfx\arrghus.bin" />
-    <None Remove="bosses_gfx\blind.bin" />
-    <None Remove="bosses_gfx\ganon1.bin" />
-    <None Remove="bosses_gfx\ganon2.bin" />
-    <None Remove="bosses_gfx\ganon3.bin" />
-    <None Remove="bosses_gfx\ganon4.bin" />
-    <None Remove="bosses_gfx\helmasaure1.bin" />
-    <None Remove="bosses_gfx\helmasaure2.bin" />
-    <None Remove="bosses_gfx\kholdstare.bin" />
-    <None Remove="bosses_gfx\lanmola.bin" />
-    <None Remove="bosses_gfx\moldorm.bin" />
-    <None Remove="bosses_gfx\mothula.bin" />
-    <None Remove="bosses_gfx\trinexx1.bin" />
-    <None Remove="bosses_gfx\trinexx2.bin" />
-    <None Remove="bosses_gfx\vitreous.bin" />
+    <None Remove="bosses_gfx\Agahnim\agahlink.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\Twompmos.zip" />
+    <None Remove="bosses_gfx\Arrghus\poorrghus.zip" />
+    <None Remove="bosses_gfx\Blind\bootlegblind.zip" />
+    <None Remove="bosses_gfx\Ganon\headlessganon.zip" />
+    <None Remove="bosses_gfx\Helmasaure\nofacemasaure.zip" />
+    <None Remove="bosses_gfx\Kholdstare\sunstare.zip" />
+    <None Remove="bosses_gfx\Lanmola\bonemola.zip" />
+    <None Remove="bosses_gfx\Moldorm\yoshieggdorm.zip" />
+    <None Remove="bosses_gfx\Mothula\bathula.zip" />
+    <None Remove="bosses_gfx\Trinexx\chomptrinexx.zip" />
+    <None Remove="bosses_gfx\Vitreous\pumpkintreous.zip" />
     <None Remove="enemizerBasePatch.json" />
     <None Remove="exported_symbols.txt" />
     <None Remove="patchData.json" />
@@ -129,6 +121,54 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="bosses_gfx\Agahnim\agahlink.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\Twompmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\poorrghus.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Blind\bootlegblind.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Ganon\headlessganon.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Helmasaure\nofacemasaure.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\sunstare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\bonemola.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\yoshieggdorm.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bosses_gfx\Mothula\bathula.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bosses_gfx\Trinexx\chomptrinexx.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bosses_gfx\Vitreous\pumpkintreous.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="enemizerBasePatch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -141,66 +181,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bosses_gfx\agahnim1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim2.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim3.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\agahnim4.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\armosknight.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\arrghus.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\blind.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon2.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon3.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\ganon4.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\helmasaure1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\helmasaure2.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\kholdstare.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\lanmola.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\moldorm.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\mothula.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\trinexx1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\trinexx2.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bosses_gfx\vitreous.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="shield_gfx\normal.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

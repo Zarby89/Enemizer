@@ -393,6 +393,21 @@ namespace EnemizerLibrary
                     return true;
                 }
 
+                if (romData[0x7FC0] == 0x56
+                    && romData[0x7FC1] == 0x54
+                    && romData[0x7FC2] == 0x20
+                    && romData[0x7FC3] == 0x54
+                    && romData[0x7FC4] == 0x4F
+                    && romData[0x7FC5] == 0x55
+                    && romData[0x7FC6] == 0x52
+                    && romData[0x7FC7] == 0x4E
+                    && romData[0x7FC8] == 0x45
+                    && romData[0x7FC9] == 0x59
+                    )
+                {
+                    return true;
+                }
+
                 return false;
             }
         }

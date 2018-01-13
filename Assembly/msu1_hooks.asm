@@ -61,6 +61,7 @@
 !REG_SPC_CONTROL = $2140
 !REG_NMI_FLAGS = $4210
 
+
 !VAL_COMMAND_FADE_OUT = #$F1
 !VAL_COMMAND_FADE_HALF = #$F2
 !VAL_COMMAND_FULL_VOLUME = #$F3
@@ -68,7 +69,6 @@
 
 !VAL_VOLUME_INCREMENT = #$10
 !VAL_VOLUME_DECREMENT = #$02
-!VAL_VOLUME_MUTE = #$0F
 !VAL_VOLUME_HALF = #$80
 !VAL_VOLUME_FULL = #$FF
 
@@ -78,23 +78,3 @@ spc_nmi:
     JML msu_main
     NOP
 spc_continue:
-
-
-ORG $08C421
-    JML pendant_fanfare
-    NOP
-pendant_continue:
-ORG $08C42B
-pendant_done:
-
-
-ORG $08C62A
-    JML crystal_fanfare
-    NOP
-crystal_done:
-ORG $08C637
-crystal_continue:
-
-
-ORG $0EE6EC
-    JSL ending_wait

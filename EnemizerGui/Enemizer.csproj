@@ -91,42 +91,42 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="bosses_gfx\Agahnim\agahlink.zip">
+    <Content Include="bosses_gfx\Agahnim\agahlink.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\ArmosKnight\Twompmos.zip">
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\Twompmos.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Arrghus\poorrghus.zip">
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\poorrghus.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Blind\bootlegblind.zip">
+    </Content>
+    <Content Include="bosses_gfx\Blind\bootlegblind.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Ganon\headlessganon.zip">
+    </Content>
+    <Content Include="bosses_gfx\Ganon\headlessganon.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Helmasaure\nofacemasaure.zip">
+    </Content>
+    <Content Include="bosses_gfx\Helmasaure\nofacemasaure.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Kholdstare\sunstare.zip">
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\sunstare.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Lanmola\bonemola.zip">
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\bonemola.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Moldorm\yoshieggdorm.zip">
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\yoshieggdorm.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Mothula\bathula.zip">
+    </Content>
+    <Content Include="bosses_gfx\Mothula\bathula.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Trinexx\chomptrinexx.zip">
+    </Content>
+    <Content Include="bosses_gfx\Trinexx\chomptrinexx.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bosses_gfx\Vitreous\pumpkintreous.zip">
+    </Content>
+    <Content Include="bosses_gfx\Vitreous\pumpkintreous.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="nlog.config" />
     <None Include="packages.config" />
     <Content Include="enemizerBasePatch.json">
@@ -463,8 +463,6 @@
 $(SolutionDir)BasePatchGenerator\$(OutDir)BasePatchGenerator.exe
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(ProjectDir)
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(TargetDir)
-copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\
-copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI\$(OutDir)
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI.Core\
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerCLI.Core\$(OutDir)
 copy $(SolutionDir)BasePatchGenerator\$(OutDir)enemizerBasePatch.json $(SolutionDir)EnemizerTests\
