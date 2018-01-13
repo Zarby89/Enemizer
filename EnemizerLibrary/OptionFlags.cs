@@ -320,6 +320,7 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.AllowKillableThief);
             ret[i++] = Convert.ToByte(this.RandomizeSpriteOnHit);
             ret[i++] = Convert.ToByte(this.HeroMode);
+            ret[i++] = Convert.ToByte(this.IncreaseBrightness);
             return ret;
         }
     }
