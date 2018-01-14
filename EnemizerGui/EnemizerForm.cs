@@ -385,6 +385,14 @@ namespace Enemizer
             allowKillableThiefCheckBox.Checked = config.OptionFlags.AllowKillableThief;
             heroModeCheckbox.Checked = config.OptionFlags.HeroMode;
 
+            muteMusicCheckBox.Checked = config.OptionFlags.MuteMusicEnableMSU1;
+
+            if(muteMusicCheckBox.Checked && shuffleMusicCheckBox.Checked)
+            {
+                // don't allow both or you won't be able to turn them off
+                shuffleMusicCheckBox.Checked = false;
+                shuffleMusicCheckBox.Enabled = false;
+            }
         }
 
         private void UpdateGraphicsTabUIFromConfig()
@@ -904,6 +912,8 @@ namespace Enemizer
         private void shuffleMusicCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.ShuffleMusic = shuffleMusicCheckBox.Checked;
+
+            muteMusicCheckBox.Enabled = !shuffleMusicCheckBox.Checked;
         }
 
         private void shufflePotContentsCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -1058,6 +1068,13 @@ namespace Enemizer
         private void increaseBrightnessCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             config.OptionFlags.IncreaseBrightness = increaseBrightnessCheckbox.Checked;
+        }
+
+        private void muteMusicCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.MuteMusicEnableMSU1 = muteMusicCheckBox.Checked;
+
+            shuffleMusicCheckBox.Enabled = !muteMusicCheckBox.Checked;
         }
     }
 

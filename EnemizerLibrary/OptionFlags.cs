@@ -81,6 +81,8 @@ namespace EnemizerLibrary
         public bool RandomizeSpriteOnHit { get; set; }
         public bool HeroMode { get; set; }
         public bool IncreaseBrightness { get; set; }
+        public bool MuteMusicEnableMSU1 { get; set; }
+
         public OptionFlags()
         {
 
@@ -212,6 +214,7 @@ namespace EnemizerLibrary
             this.RandomizeSpriteOnHit = Convert.ToBoolean(optionBytes[i++]);
             this.HeroMode = Convert.ToBoolean(optionBytes[i++]);
             this.IncreaseBrightness = Convert.ToBoolean(optionBytes[i++]);
+            this.MuteMusicEnableMSU1 = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -321,6 +324,7 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.RandomizeSpriteOnHit);
             ret[i++] = Convert.ToByte(this.HeroMode);
             ret[i++] = Convert.ToByte(this.IncreaseBrightness);
+            ret[i++] = Convert.ToByte(this.MuteMusicEnableMSU1);
             return ret;
         }
     }

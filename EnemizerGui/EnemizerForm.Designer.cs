@@ -122,6 +122,7 @@
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
             this.randomSpriteOnHitCheckBox = new System.Windows.Forms.CheckBox();
+            this.muteMusicCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -761,6 +762,7 @@
             // 
             // tabExtra
             // 
+            this.tabExtra.Controls.Add(this.muteMusicCheckBox);
             this.tabExtra.Controls.Add(this.heroModeCheckbox);
             this.tabExtra.Controls.Add(this.allowKillableThiefCheckBox);
             this.tabExtra.Controls.Add(this.randomizeTileTrapFloorTile);
@@ -1226,6 +1228,18 @@
             this.randomSpriteOnHitCheckBox.UseVisualStyleBackColor = true;
             this.randomSpriteOnHitCheckBox.CheckedChanged += new System.EventHandler(this.randomSpriteOnHitCheckBox_CheckedChanged);
             // 
+            // muteMusicCheckBox
+            // 
+            this.muteMusicCheckBox.AutoSize = true;
+            this.muteMusicCheckBox.Location = new System.Drawing.Point(7, 174);
+            this.muteMusicCheckBox.Name = "muteMusicCheckBox";
+            this.muteMusicCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.muteMusicCheckBox.TabIndex = 24;
+            this.muteMusicCheckBox.Text = "Mute Music/Enable MSU1";
+            this.toolTip1.SetToolTip(this.muteMusicCheckBox, resources.GetString("muteMusicCheckBox.ToolTip"));
+            this.muteMusicCheckBox.UseVisualStyleBackColor = true;
+            this.muteMusicCheckBox.CheckedChanged += new System.EventHandler(this.muteMusicCheckBox_CheckedChanged);
+            // 
             // EnemizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1371,6 +1385,7 @@
         public System.Windows.Forms.CheckBox randomSpriteOnHitCheckBox;
         private System.Windows.Forms.CheckBox heroModeCheckbox;
         private System.Windows.Forms.CheckBox increaseBrightnessCheckbox;
+        private System.Windows.Forms.CheckBox muteMusicCheckBox;
     }
 }
 
