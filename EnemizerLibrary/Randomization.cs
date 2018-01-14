@@ -318,6 +318,11 @@ namespace EnemizerLibrary
                 SetAndyMode();
             }
 
+            if (optionFlags.MuteMusicEnableMSU1)
+            {
+                this.ROM_DATA.MuteMusic(true);
+            }
+
             if (optionFlags.DebugMode)
             {
                 var debug = new DebugMode(this.ROM_DATA, this.optionFlags);
