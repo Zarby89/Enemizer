@@ -388,6 +388,11 @@ namespace EnemizerLibrary
         {
             get
             {
+                if(IsRandomizerRom == false)
+                {
+                    return false;
+                }
+
                 if (romData[0x180213] == 0x01 && romData[0x180214] == 0x00)
                 {
                     return true;
