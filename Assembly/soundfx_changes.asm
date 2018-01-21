@@ -26,7 +26,7 @@ LoadNewSoundFx:
     
     STZ $0136
     
-    LDA.b #$FF : STA $2140
+    LDA.b #$FF : STA $2140 ; tell N-SPC to load data
 
     ; new code
     ; load up our new instrument and sample incbin

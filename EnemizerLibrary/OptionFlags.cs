@@ -83,6 +83,9 @@ namespace EnemizerLibrary
         public bool IncreaseBrightness { get; set; }
         public bool MuteMusicEnableMSU1 { get; set; }
 
+        public bool UseManualBosses { get; set; } = false; // used by randomizer web
+        public ManualBosses ManualBosses { get; set; }
+
         public OptionFlags()
         {
 
@@ -327,6 +330,26 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.MuteMusicEnableMSU1);
             return ret;
         }
+    }
+
+    public class ManualBosses
+    {
+        public string EasternPalace { get; set; }
+        public string DesertPalace { get; set; }
+        public string TowerOfHera { get; set; }
+        public string AgahnimsTower { get; set; }
+        public string PalaceOfDarkness { get; set; }
+        public string SwampPalace { get; set; }
+        public string SkullWoods { get; set; }
+        public string ThievesTown { get; set; }
+        public string IcePalace { get; set; }
+        public string MiseryMire { get; set; }
+        public string TurtleRock { get; set; }
+        public string GanonsTower1 { get; set; }
+        public string GanonsTower2 { get; set; }
+        public string GanonsTower3 { get; set; }
+        public string GanonsTower4 { get; set; }
+        public string Ganon { get; set; }
     }
 
     public enum RandomizeEnemiesType

@@ -150,7 +150,7 @@ namespace EnemizerLibrary
         public static Boss GetRandomBoss(Random rand, Dungeon dungeon, List<BossType> excludedBossTypes=null, Graph graph=null)
         {
             var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
-                .Where(x => x != BossType.NoBoss)
+                .Where(x => x != BossType.NoBoss && x != BossType.Agahnim && x != BossType.Agahnim2 && x != BossType.Ganon)
                 .Where(x => excludedBossTypes == null || excludedBossTypes.Contains(x) == false)
                 .ToList();
 
@@ -171,7 +171,7 @@ namespace EnemizerLibrary
         {
             // exclude bosses that require special weapons
             var bosses = Enum.GetValues(typeof(BossType)).Cast<BossType>()
-                                .Where(x => x != BossType.NoBoss)
+                                .Where(x => x != BossType.NoBoss && x != BossType.Agahnim && x != BossType.Agahnim2 && x != BossType.Ganon)
                                 .Where(x => x != BossType.Trinexx
                                          && x != BossType.Kholdstare
                                          && x != BossType.Arrghus

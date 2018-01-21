@@ -104,7 +104,11 @@ namespace EnemizerLibrary
 
                 BossRandomizer br;
 
-                if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
+                if(optionflags.UseManualBosses)
+                {
+                    br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                }
+                else if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                 {
                     br = new DebugBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
                 }
