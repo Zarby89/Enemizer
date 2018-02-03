@@ -120,17 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <data name="muteMusicCheckBox.ToolTip" xml:space="preserve">
-    <value>Mute the game music. Note that MSU1 is always enabled, 
-however if you do not enable this option you will hear both 
-in game music and MSU1 music if you have setup MSU1 files 
-for your emulator.
-Also note that this will not reverse muted music in the base 
-randomizer rom if that option was enabled.</value>
-  </data>
   <data name="randomizationTypeTrackbar.ToolTip" xml:space="preserve">
     <value>Basic Type - enemies are shuffled but not the groups
 eg. room with guards will have random guard in it
@@ -149,5 +138,13 @@ Normal - same as Basic but refight are also random
 e.g you could have 2 kholdstare, 2 trinexx, 2 vitreous
 Chaos - this allow duplicated bosses
 e.g you could have 5 trinexx, 3 mothula, 2 armos, etc...</value>
+  </data>
+  <data name="muteMusicCheckBox.ToolTip" xml:space="preserve">
+    <value>Mute the game music. Note that MSU1 is always enabled, 
+however if you do not enable this option you will hear both 
+in game music and MSU1 music if you have setup MSU1 files 
+for your emulator.
+Also note that this will not reverse muted music in the base 
+randomizer rom if that option was enabled.</value>
   </data>
 </root>

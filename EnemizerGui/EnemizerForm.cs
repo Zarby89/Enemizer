@@ -334,6 +334,8 @@ namespace Enemizer
             bossdamageLabel.Text = $"{config.OptionFlags.RandomizeBossDamageMinAmount}% - {config.OptionFlags.RandomizeBossDamageMaxAmount}%";
 
             randomizeBossBehaviorCheckbox.Checked = config.OptionFlags.RandomizeBossBehavior;
+
+            agahnimBounceBallsCheckBox.Checked = config.OptionFlags.AgahnimBounceBalls;
         }
 
         private void UpdatePalettesTabUIFromConfig()
@@ -1075,6 +1077,12 @@ namespace Enemizer
             config.OptionFlags.MuteMusicEnableMSU1 = muteMusicCheckBox.Checked;
 
             shuffleMusicCheckBox.Enabled = !muteMusicCheckBox.Checked;
+        }
+
+        private void agahnimBounceBallsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            config.OptionFlags.AgahnimBounceBalls = agahnimBounceBallsCheckBox.Checked;
+
         }
     }
 

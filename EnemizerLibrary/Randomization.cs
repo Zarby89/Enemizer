@@ -285,6 +285,9 @@ namespace EnemizerLibrary
                 }
             }
 
+            // turn on Agahnim ball deflection
+            this.ROM_DATA.AgahnimBounceBalls = optionFlags.AgahnimBounceBalls;
+
             //Remove Trinexx Ice Floor : 
             this.ROM_DATA[0x04B37E] = AssemblyConstants.NoOp;
             this.ROM_DATA[0x04B37E+1] = AssemblyConstants.NoOp;
