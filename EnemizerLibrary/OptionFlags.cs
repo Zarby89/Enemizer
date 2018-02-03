@@ -82,6 +82,10 @@ namespace EnemizerLibrary
         public bool HeroMode { get; set; }
         public bool IncreaseBrightness { get; set; }
         public bool MuteMusicEnableMSU1 { get; set; }
+        public bool AgahnimBounceBalls { get; set; }
+
+        public bool UseManualBosses { get; set; } = false; // used by randomizer web
+        public ManualBosses ManualBosses { get; set; }
 
         public OptionFlags()
         {
@@ -102,7 +106,7 @@ namespace EnemizerLibrary
             this.EnemiesAbsorbable = Convert.ToBoolean(optionBytes[i++]);
             this.AbsorbableSpawnRate = optionBytes[i++];
 
-            foreach(var e in Enum.GetValues(typeof(AbsorbableTypes)))
+            foreach (var e in Enum.GetValues(typeof(AbsorbableTypes)))
             {
                 AbsorbableTypes[(AbsorbableTypes)e] = false;
             }
@@ -215,6 +219,7 @@ namespace EnemizerLibrary
             this.HeroMode = Convert.ToBoolean(optionBytes[i++]);
             this.IncreaseBrightness = Convert.ToBoolean(optionBytes[i++]);
             this.MuteMusicEnableMSU1 = Convert.ToBoolean(optionBytes[i++]);
+            this.AgahnimBounceBalls = Convert.ToBoolean(optionBytes[i++]);
         }
 
         public byte[] ToByteArray()
@@ -325,8 +330,29 @@ namespace EnemizerLibrary
             ret[i++] = Convert.ToByte(this.HeroMode);
             ret[i++] = Convert.ToByte(this.IncreaseBrightness);
             ret[i++] = Convert.ToByte(this.MuteMusicEnableMSU1);
+            ret[i++] = Convert.ToByte(this.AgahnimBounceBalls);
             return ret;
         }
+    }
+
+    public class ManualBosses
+    {
+        public string EasternPalace { get; set; }
+        public string DesertPalace { get; set; }
+        public string TowerOfHera { get; set; }
+        public string AgahnimsTower { get; set; }
+        public string PalaceOfDarkness { get; set; }
+        public string SwampPalace { get; set; }
+        public string SkullWoods { get; set; }
+        public string ThievesTown { get; set; }
+        public string IcePalace { get; set; }
+        public string MiseryMire { get; set; }
+        public string TurtleRock { get; set; }
+        public string GanonsTower1 { get; set; }
+        public string GanonsTower2 { get; set; }
+        public string GanonsTower3 { get; set; }
+        public string GanonsTower4 { get; set; }
+        public string Ganon { get; set; }
     }
 
     public enum RandomizeEnemiesType

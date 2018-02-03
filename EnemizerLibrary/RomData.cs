@@ -30,6 +30,7 @@ namespace EnemizerLibrary
         public const int CloseBlindDoorFlag = 0x01;
         public const int MoldormEyesFlag = 0x02;
         public const int RandomSpriteFlag = 0x03;
+        public const int AgahnimBounceBallsFlag = 0x04;
         public const int ChecksumComplimentAddress = 0x7FDC;
         public const int ChecksumAddress = 0x7FDE;
 
@@ -218,6 +219,12 @@ namespace EnemizerLibrary
             set { SetFlag(RandomSpriteFlag, value); }
         }
 
+        public bool AgahnimBounceBalls
+        {
+            get { return GetFlag(AgahnimBounceBallsFlag); }
+            set { SetFlag(AgahnimBounceBallsFlag, value); }
+        }
+
         internal bool GetFlag(int offset)
         {
             return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
@@ -388,6 +395,11 @@ namespace EnemizerLibrary
         {
             get
             {
+                if(IsRandomizerRom == false)
+                {
+                    return false;
+                }
+
                 if (romData[0x180213] == 0x01 && romData[0x180214] == 0x00)
                 {
                     return true;

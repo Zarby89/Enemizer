@@ -104,7 +104,11 @@ namespace EnemizerLibrary
 
                 BossRandomizer br;
 
-                if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
+                if(optionflags.UseManualBosses)
+                {
+                    br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                }
+                else if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                 {
                     br = new DebugBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
                 }
@@ -280,6 +284,9 @@ namespace EnemizerLibrary
                     //this.ROM_DATA[0xFFD7] = 0x0C;
                 }
             }
+
+            // turn on Agahnim ball deflection
+            this.ROM_DATA.AgahnimBounceBalls = optionFlags.AgahnimBounceBalls;
 
             //Remove Trinexx Ice Floor : 
             this.ROM_DATA[0x04B37E] = AssemblyConstants.NoOp;

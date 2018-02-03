@@ -19,6 +19,7 @@ db #$00
 !BLIND_DOOR_FLAG = "$408101"
 !MOLDORM_EYES_FLAG = "$408102"
 !RANDOM_SPRITE_FLAG = "$408103"
+!AGAHNIM_FUN_BALLS = "$408104"
 
 ; Enemizer reserved memory
 ; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
@@ -62,6 +63,7 @@ incsrc sword_and_shield.asm
 incsrc overworld_sprites.asm
 incsrc bees.asm
 incsrc vitreous_fixes.asm
+incsrc agahnim.asm
 
 ; data
 incsrc room_object_table.asm

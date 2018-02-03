@@ -8,7 +8,9 @@ db #$00 ;408101 : 200101 ; Enable blind's door closing for other bosses
 db #$01 ;408102 : 200102 ; Moldorm eye count, default to 2 eyes (1)
 .randomize_sprites
 db #$00 ;408103 : 200103 ; Randomize Sprites.
-db #$00 ;408104 : 200104
+.agahnim_fun_balls
+db #$00 ;408104 : 200104 ; make Agahnim balls deflect back
+
 db #$00 ;408105 : 200105
 db #$00 ;408106 : 200106
 db #$00 ;408107 : 200107

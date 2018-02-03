@@ -83,6 +83,7 @@
             this.randomizeOverworldPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.randomizeDungeonPalettesCheckbox = new System.Windows.Forms.CheckBox();
             this.tabExtra = new System.Windows.Forms.TabPage();
+            this.muteMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.heroModeCheckbox = new System.Windows.Forms.CheckBox();
             this.allowKillableThiefCheckBox = new System.Windows.Forms.CheckBox();
             this.randomizeTileTrapFloorTile = new System.Windows.Forms.CheckBox();
@@ -122,7 +123,7 @@
             this.bulkSeedsCheckbox = new System.Windows.Forms.CheckBox();
             this.numberOfBulkSeeds = new System.Windows.Forms.NumericUpDown();
             this.randomSpriteOnHitCheckBox = new System.Windows.Forms.CheckBox();
-            this.muteMusicCheckBox = new System.Windows.Forms.CheckBox();
+            this.agahnimBounceBallsCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.linkSpritePicturebox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabEnemies.SuspendLayout();
@@ -500,6 +501,7 @@
             // 
             // tabBosses
             // 
+            this.tabBosses.Controls.Add(this.agahnimBounceBallsCheckBox);
             this.tabBosses.Controls.Add(this.randomizeBossBehaviorCheckbox);
             this.tabBosses.Controls.Add(this.bossdamageLabel);
             this.tabBosses.Controls.Add(this.bossDamageRandomizationTrackbar);
@@ -787,6 +789,18 @@
             this.tabExtra.TabIndex = 3;
             this.tabExtra.Text = "Extra";
             this.tabExtra.UseVisualStyleBackColor = true;
+            // 
+            // muteMusicCheckBox
+            // 
+            this.muteMusicCheckBox.AutoSize = true;
+            this.muteMusicCheckBox.Location = new System.Drawing.Point(7, 174);
+            this.muteMusicCheckBox.Name = "muteMusicCheckBox";
+            this.muteMusicCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.muteMusicCheckBox.TabIndex = 24;
+            this.muteMusicCheckBox.Text = "Mute Music/Enable MSU1";
+            this.toolTip1.SetToolTip(this.muteMusicCheckBox, resources.GetString("muteMusicCheckBox.ToolTip"));
+            this.muteMusicCheckBox.UseVisualStyleBackColor = true;
+            this.muteMusicCheckBox.CheckedChanged += new System.EventHandler(this.muteMusicCheckBox_CheckedChanged);
             // 
             // heroModeCheckbox
             // 
@@ -1228,17 +1242,16 @@
             this.randomSpriteOnHitCheckBox.UseVisualStyleBackColor = true;
             this.randomSpriteOnHitCheckBox.CheckedChanged += new System.EventHandler(this.randomSpriteOnHitCheckBox_CheckedChanged);
             // 
-            // muteMusicCheckBox
+            // agahnimBounceBallsCheckBox
             // 
-            this.muteMusicCheckBox.AutoSize = true;
-            this.muteMusicCheckBox.Location = new System.Drawing.Point(7, 174);
-            this.muteMusicCheckBox.Name = "muteMusicCheckBox";
-            this.muteMusicCheckBox.Size = new System.Drawing.Size(152, 17);
-            this.muteMusicCheckBox.TabIndex = 24;
-            this.muteMusicCheckBox.Text = "Mute Music/Enable MSU1";
-            this.toolTip1.SetToolTip(this.muteMusicCheckBox, resources.GetString("muteMusicCheckBox.ToolTip"));
-            this.muteMusicCheckBox.UseVisualStyleBackColor = true;
-            this.muteMusicCheckBox.CheckedChanged += new System.EventHandler(this.muteMusicCheckBox_CheckedChanged);
+            this.agahnimBounceBallsCheckBox.AutoSize = true;
+            this.agahnimBounceBallsCheckBox.Location = new System.Drawing.Point(6, 181);
+            this.agahnimBounceBallsCheckBox.Name = "agahnimBounceBallsCheckBox";
+            this.agahnimBounceBallsCheckBox.Size = new System.Drawing.Size(131, 17);
+            this.agahnimBounceBallsCheckBox.TabIndex = 28;
+            this.agahnimBounceBallsCheckBox.Text = "Agahnim Bouncy Balls";
+            this.agahnimBounceBallsCheckBox.UseVisualStyleBackColor = true;
+            this.agahnimBounceBallsCheckBox.CheckedChanged += new System.EventHandler(this.agahnimBounceBallsCheckBox_CheckedChanged);
             // 
             // EnemizerForm
             // 
@@ -1386,6 +1399,7 @@
         private System.Windows.Forms.CheckBox heroModeCheckbox;
         private System.Windows.Forms.CheckBox increaseBrightnessCheckbox;
         private System.Windows.Forms.CheckBox muteMusicCheckBox;
+        private System.Windows.Forms.CheckBox agahnimBounceBallsCheckBox;
     }
 }
 

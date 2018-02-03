@@ -810,9 +810,10 @@ namespace EnemizerLibrary
 
         public static readonly int[] DontRandomizeRooms =
         {
-            0, 1, 3, 13, 20, 32, 48, 
+            0, 1, 3, 13, 20, 32, 48, RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom
         };
 
+        /*
         public static readonly int[] RandomizeRooms =
         {
             2,4,9,10,11,14,17,19,21,22,23,25,26,27,30,31,33,34,36,38,39,40,42,43,46,49,50,52,53,54,55,56,57,58,59,
@@ -834,7 +835,7 @@ namespace EnemizerLibrary
             R28_GanonsTower_IceArmos,
             R108_GanonsTower_LanmolasRoom,
             R77_GanonsTower_MoldormRoom,
-        };
+        }; */
 
         public static readonly int[] BossRooms =
         {
