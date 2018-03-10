@@ -1485,12 +1485,17 @@ namespace EnemizerLibrary
             var spritePath = "sprites";
             spritePath = Path.Combine(EnemizerBasePath.Instance.BasePath, spritePath);
 
-            List<string> skins = Directory.GetFiles(spritePath).ToList();
+            List<string> skins = Directory.GetFiles(spritePath, "*.*spr").ToList();
+            if(skins.Count == 0)
+            {
+                // fail
+                throw new Exception("No sprites found. You need sprites in the sprite folder to use randomize sprite on hit");
+            }
             int totalSprites = 32;
-            //if(totalSprites > skins.Count)
-            //{
-            //    totalSprites = skins.Count;
-            //}
+            while(totalSprites > skins.Count)
+            {
+                skins.AddRange(skins.ToList()); // just add more
+            }
 
             int i = 0;
             FileStream fsx;
@@ -1500,15 +1505,23 @@ namespace EnemizerLibrary
             if (optionFlags.AndyMode)
             {
                 // force pug sprite
-                r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr")).FirstOrDefault());
-                filename = skins[r];
-                filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
+                r = skins.IndexOf(skins.Where(x => x.Contains("pug.spr") || x.Contains("pug.zspr")).FirstOrDefault());
+                if (r >= 0)
+                {
+                    filename = skins[r];
+                    filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
-                fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                rom.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
-                fsx.Close();
-                skins.RemoveAt(r);
-                i++;
+                    try
+                    {
+                        Sprite s = new Sprite(File.ReadAllBytes(filename));
+                        WriteSpriteToTable(rom, i, s);
+                    }
+                    finally
+                    {
+                        skins.RemoveAt(r);
+                    }
+                    i++;
+                }
             }
 
             for (; i < totalSprites; i++)
@@ -1517,11 +1530,23 @@ namespace EnemizerLibrary
                 filename = skins[r];
                 filename = Path.Combine(EnemizerBasePath.Instance.BasePath, filename);
 
-                fsx = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                rom.ReadFileStreamIntoRom(fsx, AddressConstants.RandomSpriteGraphicsBaseAddress + (i * 0x8000), 0x7078);
-                fsx.Close();
-                skins.RemoveAt(r);
+                try
+                {
+                    Sprite s = new Sprite(File.ReadAllBytes(filename));
+                    WriteSpriteToTable(rom, i, s);
+                }
+                finally
+                {
+                    // make sure the sprite gets removed even if we fail to load/write it
+                    skins.RemoveAt(r);
+                }
             }
+        }
+
+        public static void WriteSpriteToTable(RomData rom, int index, Sprite sprite)
+        {
+            rom.WriteDataChunk(AddressConstants.RandomSpriteGraphicsBaseAddress + (index * 0x8000), sprite.PixelData);
+            rom.WriteDataChunk(AddressConstants.RandomSpriteGraphicsBaseAddress + (index * 0x8000) + 0x7000, sprite.PaletteData);
         }
 
         public void heroMode()
