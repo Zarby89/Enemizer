@@ -308,7 +308,7 @@ namespace Enemizer
             ohkoCheckBox.Checked = config.OptionFlags.OHKO;
 
             randomizeEnemiesDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
-            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO && randomizeEnemiesDamageCheckbox.Checked;
             shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && !config.OptionFlags.OHKO;
             enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked && !config.OptionFlags.OHKO;
         }
@@ -1037,7 +1037,7 @@ namespace Enemizer
             config.OptionFlags.OHKO = ohkoCheckBox.Checked;
 
             randomizeEnemiesDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
-            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO;
+            allowZeroDamageCheckbox.Enabled = !config.OptionFlags.OHKO && randomizeEnemiesDamageCheckbox.Checked;
             shuffleEnemyDamageGroupsCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && !config.OptionFlags.OHKO;
             enemyDamageChaosModeCheckbox.Enabled = config.OptionFlags.RandomizeEnemyDamage && shuffleEnemyDamageGroupsCheckbox.Checked && !config.OptionFlags.OHKO;
         }

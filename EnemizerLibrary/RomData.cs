@@ -343,6 +343,27 @@ namespace EnemizerLibrary
                     return true;
                 }
 
+                if(romData[0x7FC0] == 'Z' 
+                    && romData[0x7FC1] == 'E'
+                    && romData[0x7FC2] == 'L'
+                    && romData[0x7FC3] == 'D'
+                    && romData[0x7FC4] == 'A'
+                    && romData[0x7FC5] == 'N'
+                    && romData[0x7FC6] == 'O'
+                    && romData[0x7FC7] == 'D'
+                    && romData[0x7FC8] == 'E'
+                    && romData[0x7FC9] == 'N'
+                    && romData[0x7FCA] == 'S'
+                    && romData[0x7FCB] == 'E'
+                    && romData[0x7FCC] == 'T'
+                    && romData[0x7FCD] == 'S'
+                    && romData[0x7FCE] == 'U'
+                    && romData.Length >= 0x200000
+                    )
+                {
+                    return true;
+                }
+
                 return false;
             }
         }

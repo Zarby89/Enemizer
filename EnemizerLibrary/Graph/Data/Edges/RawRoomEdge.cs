@@ -304,7 +304,7 @@ namespace EnemizerLibrary.Data
             { new RawRoomEdge("swamp-big-chest", "swamp-53-switch", true, "<Swamp Key>", "", "") },
             { new RawRoomEdge("swamp-big-chest", "swamp-compass-chest", true, "", "", "") },
             { new RawRoomEdge("swamp-big-chest", "swamp-statue", true, "<Swamp Key>,Hookshot", "", "") },
-            { new RawRoomEdge("swamp-entrance", "swamp-key-pot", true, "<Swamp Key>", "", "") },
+            { new RawRoomEdge("swamp-entrance", "swamp-key-pot", true, "<Swamp Key>,Flippers", "", "") },
             { new RawRoomEdge("swamp-key-pot", "<key>", false, "", "<Swamp Key>", "") },
             { new RawRoomEdge("swamp-key-pot", "swamp-map-chest", true, "", "", "") },
             { new RawRoomEdge("swamp-key-pot", "swamp-map-chest-lower", true, "<Swamp Key>", "", "") },
