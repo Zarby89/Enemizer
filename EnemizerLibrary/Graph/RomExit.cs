@@ -14,6 +14,8 @@ namespace EnemizerLibrary
         public int RoomId { get; set; }
         public int AreaAddress { get; set; }
         public int AreaId { get; set; }
+        public int VramAddress { get; set; }
+        public int VramValue { get; set; }
         public string RoomName
         {
             get
@@ -44,9 +46,11 @@ namespace EnemizerLibrary
 
             this.RoomAddress = 0x15AEE + (index * 2);
             this.AreaAddress = 0x15B8C + index;
+            this.VramAddress = 0x15BDB + (index * 2);
 
             this.RoomId = (romData[RoomAddress+1] << 8) + romData[RoomAddress];
             this.AreaId = romData[AreaAddress];
+            this.VramValue = (romData[VramAddress + 1] << 8) + romData[VramAddress];
         }
     }
 

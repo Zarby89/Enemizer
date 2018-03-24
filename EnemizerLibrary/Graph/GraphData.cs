@@ -107,10 +107,21 @@ namespace EnemizerLibrary
 
             foreach(var e in romExits.Exits)
             {
-                var exit = rawExitCollection.RawExits.Where(x => x.ExitRoomAddress == e.RoomAddress).FirstOrDefault();
-                var newExit = originalExits.Where(x => x.RoomId == e.RoomId).FirstOrDefault();
+                // TODO: add support for older ER roms that used this.
+                //var exit = rawExitCollection.RawExits.Where(x => x.ExitRoomAddress == e.RoomAddress).FirstOrDefault();
+                //var newExit = originalExits.Where(x => x.RoomId == e.RoomId).FirstOrDefault();
 
-                if(exit != null && newExit != null)
+                //if(exit != null && newExit != null)
+                //{
+                //    exit.RoomId = newExit.RoomId;
+                //    exit.LogicalRoomId = newExit.LogicalRoomId;
+                //    exit.ExitRoomName = newExit.ExitRoomName;
+                //}
+
+                var exit = rawExitCollection.RawExits.Where(x => x.ExitAreaAddress == e.AreaAddress && x.ExitVramAddress == e.VramAddress).FirstOrDefault();
+                var newExit = originalExits.Where(x => x.AreaId == e.AreaId && x.VramValue == e.VramValue).FirstOrDefault();
+
+                if (exit != null && newExit != null)
                 {
                     exit.RoomId = newExit.RoomId;
                     exit.LogicalRoomId = newExit.LogicalRoomId;
