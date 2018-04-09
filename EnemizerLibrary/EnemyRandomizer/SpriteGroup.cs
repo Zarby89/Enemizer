@@ -53,6 +53,12 @@ namespace EnemizerLibrary
             this.PreserveSubGroup3 = false;
 
             this.ForceRoomsToGroup = new List<int>();
+
+            // Fuck it. Hard code shops
+            if(this.DungeonGroupId == 5)
+            {
+                this.PreserveSubGroup3 = true;
+            }
         }
 
         public SpriteGroup(RomData romData, SpriteRequirementCollection spriteRequirementsCollection, int groupId, params int[] forcedRooms)

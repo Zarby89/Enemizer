@@ -1516,6 +1516,7 @@ namespace EnemizerLibrary
                         Sprite s = new Sprite(File.ReadAllBytes(filename));
                         WriteSpriteToTable(rom, i, s);
                     }
+                    catch { }
                     finally
                     {
                         skins.RemoveAt(r);
@@ -1524,7 +1525,7 @@ namespace EnemizerLibrary
                 }
             }
 
-            for (; i < totalSprites; i++)
+            for (; i < totalSprites && skins.Count > 0; i++)
             {
                 r = random.Next(skins.Count);
                 filename = skins[r];
@@ -1535,6 +1536,7 @@ namespace EnemizerLibrary
                     Sprite s = new Sprite(File.ReadAllBytes(filename));
                     WriteSpriteToTable(rom, i, s);
                 }
+                catch { }
                 finally
                 {
                     // make sure the sprite gets removed even if we fail to load/write it
