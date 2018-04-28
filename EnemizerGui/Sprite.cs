@@ -17,15 +17,15 @@ namespace Enemizer
         {
             for (int i = 0; i < 15; i++)
             {
-                palette[i + 1] = getColor((short)((data[0x7000 + (i * 2) + 1] << 8) + (data[0x7000 + (i * 2)])));
+                palette[i + 1] = getColor((short)(paletteData[i*2] + (paletteData[i*2+1]<<8))); // ((data[0x7000 + (i * 2) + 1] << 8) + (data[0x7000 + (i * 2)])));
             }
             for (int i = 0; i < 15; i++)
             {
-                palette2[i + 1] = getColor((short)((data[0x7000 + 30 + (i * 2) + 1] << 8) + (data[0x7000 + 30 + (i * 2)])));
+                palette2[i + 1] = getColor((short)(paletteData[30 + i * 2] + (paletteData[30 + i * 2 + 1] << 8))); // getColor((short)((data[0x7000 + 30 + (i * 2) + 1] << 8) + (data[0x7000 + 30 + (i * 2)])));
             }
             for (int i = 0; i < 15; i++)
             {
-                palette3[i + 1] = getColor((short)((data[0x7000 + 60 + (i * 2) + 1] << 8) + (data[0x7000 + 60 + (i * 2)])));
+                palette3[i + 1] = getColor((short)(paletteData[60 + i * 2] + (paletteData[60 + i * 2 + 1] << 8))); // getColor((short)((data[0x7000 + 60 + (i * 2) + 1] << 8) + (data[0x7000 + 60 + (i * 2)])));
             }
         }
 
@@ -35,9 +35,10 @@ namespace Enemizer
         }
 
 
-        public Image refreshEverything(Color backgroundColor, Image picImage, byte[] spriteData)
+        public Image refreshEverything(Color backgroundColor, Image picImage, byte[] spriteData, byte[] paletteData)
         {
             data = spriteData;
+            this.paletteData = paletteData;
             load_palette();
             //load4bpp(0);
             return updateGraphic(0, backgroundColor, picImage);
@@ -45,6 +46,7 @@ namespace Enemizer
 
         byte[,] imgdata = new byte[128, 32];
         byte[] data;
+        byte[] paletteData;
         int[] positions = new int[] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
         int hexOffset = 0x0;
         void load4bpp(int pos = 0)

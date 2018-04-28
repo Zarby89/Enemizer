@@ -100,8 +100,13 @@ namespace Enemizer
 
             foreach (string f in Directory.GetFiles("sprites\\"))
             {
-                files_names item = new files_names(Path.GetFileNameWithoutExtension(f), f);
-                linkSpriteCombobox.Items.Add(item);
+                try
+                {
+                    var s = new EnemizerLibrary.Sprite(File.ReadAllBytes(f));
+                    files_names item = new files_names(String.IsNullOrEmpty(s.DisplayText) ? Path.GetFileNameWithoutExtension(f) : s.DisplayText, f);
+                    linkSpriteCombobox.Items.Add(item);
+                }
+                catch { } // skip the bad sprite
             }
         }
 
@@ -471,14 +476,23 @@ namespace Enemizer
         {
             if (linkSpriteCombobox.SelectedIndex > 1)
             {
-                FileStream fs = new FileStream((linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString(), FileMode.Open, FileAccess.Read);
-                var data = new byte[fs.Length];
-                fs.Read(data, 0, (int)fs.Length);
-                fs.Close();
+                try
+                {
+                    var s = new EnemizerLibrary.Sprite(File.ReadAllBytes((linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString()));
 
-                Sprite linkSprite = new Sprite();
-                linkSpritePicturebox.Image = linkSprite.refreshEverything(linkSpritePicturebox.BackColor, linkSpritePicturebox.Image, data);
-                linkSpritePicturebox.Refresh();
+                    Sprite linkSprite = new Sprite();
+                    linkSpritePicturebox.Image = linkSprite.refreshEverything(linkSpritePicturebox.BackColor, linkSpritePicturebox.Image, s.PixelData, s.PaletteData);
+                    linkSpritePicturebox.Refresh();
+                }
+                catch { }
+                //FileStream fs = new FileStream((linkSpriteCombobox.Items[linkSpriteCombobox.SelectedIndex] as files_names).file.ToString(), FileMode.Open, FileAccess.Read);
+                //var data = new byte[fs.Length];
+                //fs.Read(data, 0, (int)fs.Length);
+                //fs.Close();
+
+                //Sprite linkSprite = new Sprite();
+                //linkSpritePicturebox.Image = linkSprite.refreshEverything(linkSpritePicturebox.BackColor, linkSpritePicturebox.Image, data);
+                //linkSpritePicturebox.Refresh();
             }
         }
 
