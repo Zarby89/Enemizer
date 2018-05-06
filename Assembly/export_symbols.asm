@@ -19,7 +19,7 @@ export.label swordgfx
 export.label shieldgfx
 export.label Spawn_Bees
 export.label notItemSprite_Mimic
-;export.label 
+export.label sprite_bush_spawn_item_table
 ;export.label 
 ;export.label 
 ;export.label 

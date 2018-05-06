@@ -7,76 +7,187 @@
 
   <ItemGroup>
     <None Remove="bosses_gfx\Agahnim\agahlink.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\Arrgmos.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\KirbyArmos.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\MagicarpArmos.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\thinkmos.zip" />
     <None Remove="bosses_gfx\ArmosKnight\Twompmos.zip" />
+    <None Remove="bosses_gfx\ArmosKnight\VitreousArmos.zip" />
+    <None Remove="bosses_gfx\Arrghus\Antifairy.zip" />
+    <None Remove="bosses_gfx\Arrghus\LinkArrghus.zip" />
+    <None Remove="bosses_gfx\Arrghus\PhantoonArrghus.zip" />
     <None Remove="bosses_gfx\Arrghus\poorrghus.zip" />
+    <None Remove="bosses_gfx\Arrghus\thinkghus.zip" />
+    <None Remove="bosses_gfx\Arrghus\VitreousArrghus.zip" />
     <None Remove="bosses_gfx\Blind\bootlegblind.zip" />
+    <None Remove="bosses_gfx\Blind\maidenblind.zip" />
+    <None Remove="bosses_gfx\Blind\thinkingblind.zip" />
     <None Remove="bosses_gfx\Ganon\headlessganon.zip" />
+    <None Remove="bosses_gfx\Helmasaure\Kraidhelmasaure.zip" />
     <None Remove="bosses_gfx\Helmasaure\nofacemasaure.zip" />
+    <None Remove="bosses_gfx\Helmasaure\thinkasaur.zip" />
+    <None Remove="bosses_gfx\Kholdstare\bombstare.zip" />
+    <None Remove="bosses_gfx\Kholdstare\bublestare.zip" />
+    <None Remove="bosses_gfx\Kholdstare\kappastare.zip" />
+    <None Remove="bosses_gfx\Kholdstare\kirbystare.zip" />
     <None Remove="bosses_gfx\Kholdstare\sunstare.zip" />
+    <None Remove="bosses_gfx\Kholdstare\thinkingKhold.zip" />
+    <None Remove="bosses_gfx\Kholdstare\vitreostare.zip" />
+    <None Remove="bosses_gfx\Kholdstare\weirdstare.zip" />
+    <None Remove="bosses_gfx\Lanmola\beelanmolas.zip" />
     <None Remove="bosses_gfx\Lanmola\bonemola.zip" />
+    <None Remove="bosses_gfx\Lanmola\boomolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\chickenmolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\lumbermolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\metroimolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\shellmolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\smithmolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\sparkmolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\spineymolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\thinkmola.zip" />
+    <None Remove="bosses_gfx\Lanmola\vittymolas.zip" />
+    <None Remove="bosses_gfx\Lanmola\weirdmolas.zip" />
+    <None Remove="bosses_gfx\Moldorm\Chomp.zip" />
+    <None Remove="bosses_gfx\Moldorm\Pug.zip" />
+    <None Remove="bosses_gfx\Moldorm\Skull.zip" />
+    <None Remove="bosses_gfx\Moldorm\thinkdorm.zip" />
+    <None Remove="bosses_gfx\Moldorm\Vitreous.zip" />
     <None Remove="bosses_gfx\Moldorm\yoshieggdorm.zip" />
     <None Remove="bosses_gfx\Mothula\bathula.zip" />
+    <None Remove="bosses_gfx\Mothula\RidleyMothula.zip" />
+    <None Remove="bosses_gfx\Mothula\thinkula.zip" />
     <None Remove="bosses_gfx\Trinexx\chomptrinexx.zip" />
     <None Remove="bosses_gfx\Vitreous\pumpkintreous.zip" />
+    <None Remove="bosses_gfx\Vitreous\thinktreous.zip" />
     <None Remove="enemizerBasePatch.json" />
     <None Remove="exported_symbols.txt" />
     <None Remove="patchData.json" />
+    <None Remove="shield_gfx\fighter only.gfx" />
+    <None Remove="shield_gfx\guard shield.gfx" />
+    <None Remove="shield_gfx\medallion.gfx" />
     <None Remove="shield_gfx\normal.gfx" />
+    <None Remove="shield_gfx\puff.gfx" />
     <None Remove="shield_gfx\rupee.gfx" />
-    <None Remove="sprites\4slink-armors.spr" />
-    <None Remove="sprites\4SLinkSplit.spr" />
-    <None Remove="sprites\boy.spr" />
-    <None Remove="sprites\BreastCancer.spr" />
-    <None Remove="sprites\CaplessBlondeLink.spr" />
-    <None Remove="sprites\CaplessPinkLink.spr.spr" />
-    <None Remove="sprites\Cat.spr" />
-    <None Remove="sprites\ChampionLink.spr" />
-    <None Remove="sprites\CheerLink.spr" />
-    <None Remove="sprites\Cucco.spr" />
-    <None Remove="sprites\darkgirl.spr" />
-    <None Remove="sprites\darklink.1.spr" />
-    <None Remove="sprites\Darklink.spr" />
-    <None Remove="sprites\darkswatchy.spr" />
-    <None Remove="sprites\darkzelda.spr" />
-    <None Remove="sprites\Decidueye.spr" />
-    <None Remove="sprites\Demon link.spr" />
-    <None Remove="sprites\demonlink.spr" />
-    <None Remove="sprites\Frog Link.spr" />
-    <None Remove="sprites\Ganondorf.spr" />
-    <None Remove="sprites\girl.spr" />
-    <None Remove="sprites\Karkat.spr" />
-    <None Remove="sprites\kirby-gooey.spr" />
-    <None Remove="sprites\KirbyGooey.spr" />
-    <None Remove="sprites\Kore8.spr" />
-    <None Remove="sprites\link.spr" />
-    <None Remove="sprites\maiden.spr" />
-    <None Remove="sprites\maplequeen.spr" />
-    <None Remove="sprites\MarioClassic.spr" />
-    <None Remove="sprites\Mike Jones.spr" />
-    <None Remove="sprites\Minish Cap Link.spr" />
-    <None Remove="sprites\ModernLink.spr" />
-    <None Remove="sprites\Mog.spr" />
-    <None Remove="sprites\Mouse.spr" />
-    <None Remove="sprites\NatureLink.spr" />
-    <None Remove="sprites\NegativeLink.spr" />
-    <None Remove="sprites\oldman.spr" />
-    <None Remove="sprites\Orb.spr" />
-    <None Remove="sprites\Popoi.spr" />
-    <None Remove="sprites\pug.spr" />
-    <None Remove="sprites\Roy Koopa.spr" />
-    <None Remove="sprites\Rumia.spr" />
-    <None Remove="sprites\samus.spr" />
-    <None Remove="sprites\StaticLink.spr" />
-    <None Remove="sprites\Super Bunny.spr" />
-    <None Remove="sprites\Swatchy.spr" />
-    <None Remove="sprites\TileroomTile.spr" />
-    <None Remove="sprites\Tingle.spr" />
-    <None Remove="sprites\Toad.spr" />
-    <None Remove="sprites\Valeera.spr" />
-    <None Remove="sprites\Will.spr" />
-    <None Remove="sprites\wizzrobe.spr" />
-    <None Remove="sprites\zelda-update.spr" />
-    <None Remove="sprites\Zora.spr" />
+    <None Remove="shield_gfx\SMB_shields.gfx" />
+    <None Remove="shield_gfx\thinking.gfx" />
+    <None Remove="shield_gfx\tile.gfx" />
+    <None Remove="shield_gfx\vitreous.gfx" />
+    <None Remove="sprites\001.link.1.zspr" />
+    <None Remove="sprites\4slink-armors.1.zspr" />
+    <None Remove="sprites\arrghus.1.zspr" />
+    <None Remove="sprites\beau.1.zspr" />
+    <None Remove="sprites\bigkey.1.zspr" />
+    <None Remove="sprites\blacksmithlink.1.zspr" />
+    <None Remove="sprites\bob.1.zspr" />
+    <None Remove="sprites\boo-two.1.zspr" />
+    <None Remove="sprites\boo.1.zspr" />
+    <None Remove="sprites\boy.1.zspr" />
+    <None Remove="sprites\broccoli.1.zspr" />
+    <None Remove="sprites\bronzor.zspr" />
+    <None Remove="sprites\bsboy.1.zspr" />
+    <None Remove="sprites\bsgirl.1.zspr" />
+    <None Remove="sprites\cactuar.1.zspr" />
+    <None Remove="sprites\cat.1.zspr" />
+    <None Remove="sprites\catboo.1.zspr" />
+    <None Remove="sprites\cdi-link.zspr" />
+    <None Remove="sprites\cheepcheep.1.zspr" />
+    <None Remove="sprites\cirno.1.zspr" />
+    <None Remove="sprites\clifford.zspr" />
+    <None Remove="sprites\conker.1.zspr" />
+    <None Remove="sprites\Cucco.zspr" />
+    <None Remove="sprites\darkboy.1.zspr" />
+    <None Remove="sprites\darkgirl.1.zspr" />
+    <None Remove="sprites\darklink-tunic.1.zspr" />
+    <None Remove="sprites\darklink.1.zspr" />
+    <None Remove="sprites\darkswatchy.1.zspr" />
+    <None Remove="sprites\darkzelda.1.zspr" />
+    <None Remove="sprites\darkzora.1.zspr" />
+    <None Remove="sprites\decidueye.1.zspr" />
+    <None Remove="sprites\demonlink.1.zspr" />
+    <None Remove="sprites\digdug.zspr" />
+    <None Remove="sprites\emosaru.1.zspr" />
+    <None Remove="sprites\Feesh Mode Zelda.zspr" />
+    <None Remove="sprites\foxlink.1.zspr" />
+    <None Remove="sprites\froglink.1.zspr" />
+    <None Remove="sprites\ganondorf.1.zspr" />
+    <None Remove="sprites\garfield.1.zspr" />
+    <None Remove="sprites\girl.1.zspr" />
+    <None Remove="sprites\headlesslink.1.zspr" />
+    <None Remove="sprites\hyruleknight.1.zspr" />
+    <None Remove="sprites\ignignokt.1.zspr" />
+    <None Remove="sprites\inkling.1.zspr" />
+    <None Remove="sprites\invisibleman.1.zspr" />
+    <None Remove="sprites\jogurt.1.zspr" />
+    <None Remove="sprites\kecleon.zspr" />
+    <None Remove="sprites\kholdstare.zspr" />
+    <None Remove="sprites\kirby-meta.1.zspr" />
+    <None Remove="sprites\kore8.1.zspr" />
+    <None Remove="sprites\linkhatcolor.1.zspr" />
+    <None Remove="sprites\linktuniccolor.1.zspr" />
+    <None Remove="sprites\littlepony.1.zspr" />
+    <None Remove="sprites\luigi.1.zspr" />
+    <None Remove="sprites\maiden.1.zspr" />
+    <None Remove="sprites\mangalink.1.zspr" />
+    <None Remove="sprites\maplequeen.1.zspr" />
+    <None Remove="sprites\mario-classic.1.zspr" />
+    <None Remove="sprites\mariocappy.1.zspr" />
+    <None Remove="sprites\marisa.1.zspr" />
+    <None Remove="sprites\meatwad.zspr" />
+    <None Remove="sprites\mikejones.1.zspr" />
+    <None Remove="sprites\minishcaplink.1.zspr" />
+    <None Remove="sprites\missingno.1.zspr" />
+    <None Remove="sprites\modernlink.1.zspr" />
+    <None Remove="sprites\mog.1.zspr" />
+    <None Remove="sprites\mouse.1.zspr" />
+    <None Remove="sprites\naturelink.1.zspr" />
+    <None Remove="sprites\navi.1.zspr" />
+    <None Remove="sprites\negativelink.1.zspr" />
+    <None Remove="sprites\neslink.1.zspr" />
+    <None Remove="sprites\Ness.zspr" />
+    <None Remove="sprites\oldman.1.zspr" />
+    <None Remove="sprites\outlinelink.1.zspr" />
+    <None Remove="sprites\penguinlink.1.zspr" />
+    <None Remove="sprites\phoenixwright.zspr" />
+    <None Remove="sprites\pikachu.1.zspr" />
+    <None Remove="sprites\pinkribbonlink.1.zspr" />
+    <None Remove="sprites\popoi.1.zspr" />
+    <None Remove="sprites\Pot Hoarder.zspr" />
+    <None Remove="sprites\pug.1.zspr" />
+    <None Remove="sprites\purplechest-bottle.1.zspr" />
+    <None Remove="sprites\rainbow link.zspr" />
+    <None Remove="sprites\robotlink.1.zspr" />
+    <None Remove="sprites\roykoopa.1.zspr" />
+    <None Remove="sprites\rumia.1.zspr" />
+    <None Remove="sprites\samus.1.zspr" />
+    <None Remove="sprites\santalink.1.zspr" />
+    <None Remove="sprites\shadowsaku.1.zspr" />
+    <None Remove="sprites\shuppet.zspr" />
+    <None Remove="sprites\sodacan.1.zspr" />
+    <None Remove="sprites\soldiersprite.1.zspr" />
+    <None Remove="sprites\sonic.1.zspr" />
+    <None Remove="sprites\sora.1.zspr" />
+    <None Remove="sprites\squirtle.1.zspr" />
+    <None Remove="sprites\staticlink.1.zspr" />
+    <None Remove="sprites\superbunny.1.zspr" />
+    <None Remove="sprites\supermeatboy.1.zspr" />
+    <None Remove="sprites\swatchy.1.zspr" />
+    <None Remove="sprites\tea_time.zspr" />
+    <None Remove="sprites\terra.1.zspr" />
+    <None Remove="sprites\tile.1.zspr" />
+    <None Remove="sprites\tingle.1.zspr" />
+    <None Remove="sprites\tmnt.zspr" />
+    <None Remove="sprites\toad.1.zspr" />
+    <None Remove="sprites\trogdor.1.zspr" />
+    <None Remove="sprites\twilightprincesszelda.1.zspr" />
+    <None Remove="sprites\valeera.1.zspr" />
+    <None Remove="sprites\vitreous.1.zspr" />
+    <None Remove="sprites\vivi.1.zspr" />
+    <None Remove="sprites\will.1.zspr" />
+    <None Remove="sprites\wizzrobe.1.zspr" />
+    <None Remove="sprites\yunica.1.zspr" />
+    <None Remove="sprites\zelda.1.zspr" />
+    <None Remove="sprites\zerosuitsamus.1.zspr" />
+    <None Remove="sprites\zora.1.zspr" />
     <None Remove="sword_gfx\normal.gfx" />
     <None Remove="tiles\arrghus.json" />
     <None Remove="tiles\bomb.json" />
@@ -124,51 +235,162 @@
     <Content Include="bosses_gfx\Agahnim\agahlink.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="bosses_gfx\ArmosKnight\Arrgmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\KirbyArmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\MagicarpArmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\thinkmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bosses_gfx\ArmosKnight\Twompmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\ArmosKnight\VitreousArmos.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\Antifairy.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\LinkArrghus.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\PhantoonArrghus.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="bosses_gfx\Arrghus\poorrghus.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="bosses_gfx\Arrghus\thinkghus.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Arrghus\VitreousArrghus.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bosses_gfx\Blind\bootlegblind.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Blind\maidenblind.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Blind\thinkingblind.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="bosses_gfx\Ganon\headlessganon.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="bosses_gfx\Helmasaure\Kraidhelmasaure.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bosses_gfx\Helmasaure\nofacemasaure.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Helmasaure\thinkasaur.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\bombstare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\bublestare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\kappastare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\kirbystare.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="bosses_gfx\Kholdstare\sunstare.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="bosses_gfx\Kholdstare\thinkingKhold.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\vitreostare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Kholdstare\weirdstare.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\beelanmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bosses_gfx\Lanmola\bonemola.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\boomolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\chickenmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\lumbermolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\metroimolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\shellmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\smithmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\sparkmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\spineymolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\thinkmola.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\vittymolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Lanmola\weirdmolas.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\Chomp.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\Pug.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\Skull.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\thinkdorm.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Moldorm\Vitreous.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="bosses_gfx\Moldorm\yoshieggdorm.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="bosses_gfx\Mothula\bathula.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="bosses_gfx\Mothula\RidleyMothula.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bosses_gfx\Mothula\thinkula.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bosses_gfx\Trinexx\chomptrinexx.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="bosses_gfx\Vitreous\pumpkintreous.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="bosses_gfx\Vitreous\thinktreous.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="enemizerBasePatch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -178,175 +400,381 @@
     <Content Include="patchData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="shield_gfx\fighter only.gfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shield_gfx\guard shield.gfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shield_gfx\medallion.gfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="shield_gfx\normal.gfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shield_gfx\puff.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="shield_gfx\rupee.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\4slink-armors.spr">
+    <Content Include="shield_gfx\SMB_shields.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\4SLinkSplit.spr">
+    <Content Include="shield_gfx\thinking.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\boy.spr">
+    <Content Include="shield_gfx\tile.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\BreastCancer.spr">
+    <Content Include="shield_gfx\vitreous.gfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\CaplessBlondeLink.spr">
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sprites\001.link.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\CaplessPinkLink.spr.spr">
+    <Content Include="sprites\4slink-armors.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Cat.spr">
+    <Content Include="sprites\arrghus.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\ChampionLink.spr">
+    <Content Include="sprites\beau.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\CheerLink.spr">
+    <Content Include="sprites\bigkey.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Cucco.spr">
+    <Content Include="sprites\blacksmithlink.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\darkgirl.spr">
+    <Content Include="sprites\bob.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\darklink.1.spr">
+    <Content Include="sprites\boo-two.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Darklink.spr">
+    <Content Include="sprites\boo.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\darkswatchy.spr">
+    <Content Include="sprites\boy.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\darkzelda.spr">
+    <Content Include="sprites\broccoli.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Decidueye.spr">
+    <Content Include="sprites\bronzor.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Demon link.spr">
+    <Content Include="sprites\bsboy.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\demonlink.spr">
+    <Content Include="sprites\bsgirl.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Frog Link.spr">
+    <Content Include="sprites\cactuar.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Ganondorf.spr">
+    <Content Include="sprites\cat.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\girl.spr">
+    <Content Include="sprites\catboo.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Karkat.spr">
+    <Content Include="sprites\cdi-link.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\kirby-gooey.spr">
+    <Content Include="sprites\cheepcheep.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\KirbyGooey.spr">
+    <Content Include="sprites\cirno.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Kore8.spr">
+    <Content Include="sprites\clifford.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\link.spr">
+    <Content Include="sprites\conker.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\maiden.spr">
+    <Content Include="sprites\Cucco.zspr" />
+    <Content Include="sprites\darkboy.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\maplequeen.spr">
+    <Content Include="sprites\darkgirl.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\MarioClassic.spr">
+    <Content Include="sprites\darklink-tunic.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Mike Jones.spr">
+    <Content Include="sprites\darklink.1.zspr" />
+    <Content Include="sprites\darkswatchy.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Minish Cap Link.spr">
+    <Content Include="sprites\darkzelda.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\ModernLink.spr">
+    <Content Include="sprites\darkzora.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Mog.spr">
+    <Content Include="sprites\decidueye.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Mouse.spr">
+    <Content Include="sprites\demonlink.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\NatureLink.spr">
+    <Content Include="sprites\digdug.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\NegativeLink.spr">
+    <Content Include="sprites\emosaru.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\oldman.spr">
+    <Content Include="sprites\Feesh Mode Zelda.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Orb.spr">
+    <Content Include="sprites\foxlink.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Popoi.spr">
+    <Content Include="sprites\froglink.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\pug.spr">
+    <Content Include="sprites\ganondorf.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Roy Koopa.spr">
+    <Content Include="sprites\garfield.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Rumia.spr">
+    <Content Include="sprites\girl.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\samus.spr">
+    <Content Include="sprites\headlesslink.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\StaticLink.spr">
+    <Content Include="sprites\hyruleknight.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Super Bunny.spr">
+    <Content Include="sprites\ignignokt.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Swatchy.spr">
+    <Content Include="sprites\inkling.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\TileroomTile.spr">
+    <Content Include="sprites\invisibleman.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Tingle.spr">
+    <Content Include="sprites\jogurt.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Toad.spr">
+    <Content Include="sprites\kecleon.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Valeera.spr">
+    <Content Include="sprites\kholdstare.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Will.spr">
+    <Content Include="sprites\kirby-meta.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\wizzrobe.spr">
+    <Content Include="sprites\kore8.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\zelda-update.spr">
+    <Content Include="sprites\linkhatcolor.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sprites\Zora.spr">
+    <Content Include="sprites\linktuniccolor.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\littlepony.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\luigi.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\maiden.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mangalink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\maplequeen.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mario-classic.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mariocappy.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\marisa.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\meatwad.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mikejones.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\minishcaplink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\missingno.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\modernlink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mog.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\mouse.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\naturelink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\navi.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\negativelink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\neslink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\Ness.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\oldman.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\outlinelink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\penguinlink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\phoenixwright.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\pikachu.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\pinkribbonlink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\popoi.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\Pot Hoarder.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\pug.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\purplechest-bottle.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\rainbow link.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\robotlink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\roykoopa.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\rumia.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\samus.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\santalink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\shadowsaku.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\shuppet.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\sodacan.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\soldiersprite.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\sonic.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\sora.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\squirtle.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\staticlink.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\superbunny.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\supermeatboy.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\swatchy.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\tea_time.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\terra.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\tile.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\tingle.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\tmnt.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\toad.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\trogdor.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\twilightprincesszelda.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\valeera.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\vitreous.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\vivi.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\will.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\wizzrobe.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\yunica.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\zelda.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\zerosuitsamus.1.zspr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprites\zora.1.zspr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sword_gfx\normal.gfx">

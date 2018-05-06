@@ -26,9 +26,9 @@ namespace EnemizerLibrary
             EnemizerBasePath.Instance.BasePath = basePath;
 
             this.optionFlags = optionflags;
-            
+
             this.ROM_DATA = romData;
-            if(this.ROM_DATA.IsEnemizerRom)
+            if (this.ROM_DATA.IsEnemizerRom)
             {
                 seed = ResetEnemizerRom();
             }
@@ -67,7 +67,7 @@ namespace EnemizerLibrary
                 ChangeSkin(skin);
             }
 
-            if(optionFlags.RandomizeSpriteOnHit)
+            if (optionFlags.RandomizeSpriteOnHit)
             {
                 this.ROM_DATA.RandomizeSprites = true;
                 // do this client side
@@ -104,7 +104,7 @@ namespace EnemizerLibrary
 
                 BossRandomizer br;
 
-                if(optionflags.UseManualBosses)
+                if (optionflags.UseManualBosses)
                 {
                     br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
                 }
@@ -134,7 +134,7 @@ namespace EnemizerLibrary
 
             // -----sprites---------------------
 
-            if(optionFlags.RandomizeEnemies)
+            if (optionFlags.RandomizeEnemies)
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
                 if (optionflags.RandomizeBushEnemyChance)
@@ -187,7 +187,7 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            if(optionFlags.RandomizeTileTrapPattern)
+            if (optionFlags.RandomizeTileTrapPattern)
             {
                 RandomizeTileTrapPattern(this.ROM_DATA, this.rand);
             }
@@ -200,6 +200,17 @@ namespace EnemizerLibrary
             if (optionFlags.RandomizePots)
             {
                 randomizePots(seed); //default on for now
+            }
+
+            if (this.ROM_DATA[0x301FC] == 0xDA) // arrows replaced with rupee for retro mode
+            {
+                for (int i = 0; i < 22; ++i)
+                {
+                    if (this.ROM_DATA[XkasSymbols.Instance.Symbols["sprite_bush_spawn_item_table"]+i] == 0xE1)
+                    {
+                        this.ROM_DATA[XkasSymbols.Instance.Symbols["sprite_bush_spawn_item_table"] + i] = 0xDA; // update our table to match
+                    }
+                }
             }
 
             if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups && !optionFlags.OHKO)

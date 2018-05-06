@@ -79,3 +79,4 @@ bld/
 /Setup/*.exe
 /Setup/setup.7z
 Assembly/main.bin
+/add to release
