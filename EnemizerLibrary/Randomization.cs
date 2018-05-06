@@ -26,9 +26,9 @@ namespace EnemizerLibrary
             EnemizerBasePath.Instance.BasePath = basePath;
 
             this.optionFlags = optionflags;
-            
+
             this.ROM_DATA = romData;
-            if(this.ROM_DATA.IsEnemizerRom)
+            if (this.ROM_DATA.IsEnemizerRom)
             {
                 seed = ResetEnemizerRom();
             }
@@ -67,7 +67,7 @@ namespace EnemizerLibrary
                 ChangeSkin(skin);
             }
 
-            if(optionFlags.RandomizeSpriteOnHit)
+            if (optionFlags.RandomizeSpriteOnHit)
             {
                 this.ROM_DATA.RandomizeSprites = true;
                 // do this client side
@@ -104,7 +104,7 @@ namespace EnemizerLibrary
 
                 BossRandomizer br;
 
-                if(optionflags.UseManualBosses)
+                if (optionflags.UseManualBosses)
                 {
                     br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
                 }
@@ -134,7 +134,7 @@ namespace EnemizerLibrary
 
             // -----sprites---------------------
 
-            if(optionFlags.RandomizeEnemies)
+            if (optionFlags.RandomizeEnemies)
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
                 if (optionflags.RandomizeBushEnemyChance)
@@ -187,7 +187,7 @@ namespace EnemizerLibrary
                 Randomize_Sprites_DMG(optionFlags.AllowEnemyZeroDamage);
             }
 
-            if(optionFlags.RandomizeTileTrapPattern)
+            if (optionFlags.RandomizeTileTrapPattern)
             {
                 RandomizeTileTrapPattern(this.ROM_DATA, this.rand);
             }
@@ -200,6 +200,17 @@ namespace EnemizerLibrary
             if (optionFlags.RandomizePots)
             {
                 randomizePots(seed); //default on for now
+            }
+
+            if (this.ROM_DATA[0x301FC] == 0xDA) // arrows replaced with rupee for retro mode
+            {
+                for (int i = 0; i < 22; ++i)
+                {
+                    if (this.ROM_DATA[XkasSymbols.Instance.Symbols["sprite_bush_spawn_item_table"]+i] == 0xE1)
+                    {
+                        this.ROM_DATA[XkasSymbols.Instance.Symbols["sprite_bush_spawn_item_table"] + i] = 0xDA; // update our table to match
+                    }
+                }
             }
 
             if (optionFlags.RandomizeEnemyDamage && optionFlags.ShuffleEnemyDamageGroups && !optionFlags.OHKO)
@@ -644,46 +655,18 @@ namespace EnemizerLibrary
 
             skin = Path.Combine(EnemizerBasePath.Instance.BasePath, skin);
 
-            FileStream fsx = new FileStream(skin, FileMode.Open, FileAccess.Read);
-            byte[] skin_data = new byte[0x7078];
-            fsx.Read(skin_data, 0, 0x7078);
-            fsx.Close();
-            for (int i = 0; i < 0x7000; i++)
-            {
-                this.ROM_DATA[0x80000 + i] = skin_data[i];
-            }
+            Sprite s = new Sprite(File.ReadAllBytes(skin));
+            this.ROM_DATA.WriteDataChunk(0x80000, s.PixelData, 0x7000);
+            this.ROM_DATA.WriteDataChunk(0x0DD308, s.PaletteData, 0x78);
 
-            // Check to see if blue and red mails have different hand colors from green mail
-            // if they do, assume they are custom glove colors and overwrite glove change
-            // if they don't, skip this step so we don't overwrite vanilla glove change
-            if (skin_data[0x7036] == skin_data[0x7018]
-                && skin_data[0x7037] == skin_data[0x7019]
-                && skin_data[0x7054] == skin_data[0x7018]
-                && skin_data[0x7055] == skin_data[0x7019])
-            {
-                // Do nothing
-                // vanilla gloves: F652 7603
-            }
-            else
+            if (s.PaletteData.Length > 0x78)
             {
                 // gloves color
-                this.ROM_DATA[0xDEDF5] = skin_data[0x7036];
-                this.ROM_DATA[0xDEDF6] = skin_data[0x7037];
-                this.ROM_DATA[0xDEDF7] = skin_data[0x7054];
-                this.ROM_DATA[0xDEDF8] = skin_data[0x7055];
-
-                // reset red and blue mail gloves to green mail's color
-                skin_data[0x7036] = skin_data[0x7018];
-                skin_data[0x7037] = skin_data[0x7019];
-                skin_data[0x7054] = skin_data[0x7018];
-                skin_data[0x7055] = skin_data[0x7019];
+                this.ROM_DATA[0xDEDF5] = s.PaletteData[0x78];
+                this.ROM_DATA[0xDEDF6] = s.PaletteData[0x79];
+                this.ROM_DATA[0xDEDF7] = s.PaletteData[0x7A];
+                this.ROM_DATA[0xDEDF8] = s.PaletteData[0x7B];
             }
-
-            for (int i = 0; i < 0x78; i++)
-            {
-                this.ROM_DATA[0x0DD308 + i] = skin_data[0x7000 + i];
-            }
-
         }
 
 
@@ -1516,6 +1499,7 @@ namespace EnemizerLibrary
                         Sprite s = new Sprite(File.ReadAllBytes(filename));
                         WriteSpriteToTable(rom, i, s);
                     }
+                    catch { }
                     finally
                     {
                         skins.RemoveAt(r);
@@ -1524,7 +1508,7 @@ namespace EnemizerLibrary
                 }
             }
 
-            for (; i < totalSprites; i++)
+            for (; i < totalSprites && skins.Count > 0; i++)
             {
                 r = random.Next(skins.Count);
                 filename = skins[r];
@@ -1535,6 +1519,7 @@ namespace EnemizerLibrary
                     Sprite s = new Sprite(File.ReadAllBytes(filename));
                     WriteSpriteToTable(rom, i, s);
                 }
+                catch { }
                 finally
                 {
                     // make sure the sprite gets removed even if we fail to load/write it

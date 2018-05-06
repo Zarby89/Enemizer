@@ -8,7 +8,41 @@ using System.Threading.Tasks;
 
 namespace EnemizerLibrary
 {
+    /*
+    0x0 = "Nothing",
+    0x1 = "Rupee",
+    0x2 = "RockCrab",
+    0x3 = "Bee",
+    0x4 = "Random",
+    0x5 = "Bomb",
+    0x6 = "Heart",
+    0x7 = "Blue Rupee",
+    0x8 = "Key",
+    0x9 = "Arrow",
+    0xA = "Bomb",
+    0xB = "Heart",
+    0xC = "Magic",
+    0xD = "Big Magic",
+    0xE = "Chicken",
+    0xF = "Green Soldier",
+    0x10 = "AliveRock?",
+    0x11 = "Blue Soldier",
+    0x12 = "Ground Bomb",
+    0x13 = "Heart",
+    0x14 = "Fairy",
+    0x15 = "Heart",
+    //? = "Nothing",
+    0x80 = "Hole",
+    0x82 = "Warp",
+    0x84 = "Staircase",
+    0x86 = "Bombable",
+    0x88 = "Switch"
 
+    if ((room.items[i].id & 0x80) == 0x80)
+    {
+        nid = (byte)(((room.items[i].id - 0x80) / 2) + 0x17);
+    }
+    */
     public partial class Randomization
     {
         public static GameRoom[] roomList = new GameRoom[]{
@@ -344,6 +378,9 @@ namespace EnemizerLibrary
 
         public void randomizePots(int seed)
         {
+            fixRetroArrows();
+
+
             Random r = new Random(seed);
             foreach (GameRoom g in roomList)
             {
@@ -508,7 +545,26 @@ namespace EnemizerLibrary
             }
         }
 
+        void fixRetroArrows()
+        {
+            // check if retro mode arrows set
+            if(ROM_DATA[0x180175] == 0x0)
+            {
+                return;
+            }
 
+            foreach (GameRoom g in roomList)
+            {
+                for(var i=0; i<g.items.Length; ++i)
+                {
+                    if(g.items[i] == 0x9) // arrows
+                    {
+                        g.items[i] = 0x7; // blue rupees
+                    }
+                }
+            }
+
+        }
 
 
     }
