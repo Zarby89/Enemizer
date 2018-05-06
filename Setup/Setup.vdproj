@@ -3824,7 +3824,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.39, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.63, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_4E91F58C6704BF15C4F4A1AC5D06621E"
@@ -6894,8 +6894,8 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{E747B682-6730-4F35-A7EA-3A514BC1DF0C}"
-        "PackageCode" = "8:{EE6ACEEC-70CC-47A9-9013-9E6DDFB6FA24}"
+        "ProductCode" = "8:{AEB0C1FC-B444-44DE-B4EB-5B01C79555B0}"
+        "PackageCode" = "8:{E5634513-98F2-4567-A942-ED35752FFEDD}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -7458,7 +7458,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
