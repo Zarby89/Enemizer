@@ -10,8 +10,9 @@ db #$01 ;408102 : 200102 ; Moldorm eye count, default to 2 eyes (1)
 db #$00 ;408103 : 200103 ; Randomize Sprites.
 .agahnim_fun_balls
 db #$00 ;408104 : 200104 ; make Agahnim balls deflect back
+.enable_mimic_override
+db #$00 ;408105 : 200105 ; toggle mimic code between new and old
 
-db #$00 ;408105 : 200105
 db #$00 ;408106 : 200106
 db #$00 ;408107 : 200107
 db #$00 ;408108 : 200108

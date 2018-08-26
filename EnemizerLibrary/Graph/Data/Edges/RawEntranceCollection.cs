@@ -100,7 +100,7 @@ namespace EnemizerLibrary.Data
             { new RawOverworldEntrance(0xDBBBE, "Witch Hut", 0x016, "16-witch-hut", "0x4C", "") },
             //{ new RawOverworldEntrance(0xDBBBF, "Aginah's Cave", 0x030, "30-desert", "0x4D", "") }, // ER doesn't use this copy
             { new RawOverworldEntrance(0xDBBC0, "Dam", 0x03B, "3B-southwest-swamp", "0x4E", "") },
-            { new RawOverworldEntrance(0xDBBC1, "Mimic Cave Mirror Spot", 0x005, "05-east-death-mountain", "0x4F", "") },
+            { new RawOverworldEntrance(0xDBBC1, "Mimic Cave Mirror Spot", 0x005, "05-east-death-mountain-mimic-ledge", "0x4F", "Mirror") },
             { new RawOverworldEntrance(0xDBBC2, "Hookshot Fairy", 0x005, "05-east-death-mountain", "0x50", "") },
             { new RawOverworldEntrance(0xDBBC3, "Cave South of Haunted Grove", 0x032, "32-south-of-haunted-grove-ledge", "0x51", "") },
             { new RawOverworldEntrance(0xDBBC4, "Graveyard Cave", 0x014, "14-graveyard-ledge", "0x52", "") },
@@ -234,7 +234,7 @@ namespace EnemizerLibrary.Data
             { new RawEntrance("0x4D", 0x4D, "Aginah's Cave", 0x10A, "Aginah's Cave", "cave-aginah") },
             { new RawEntrance("0x4E", 0x4E, "Dam", 0x10B, "Swamp Floodway Room", "cave-dam") },
             { new RawEntrance("0x4F", 0x4F, "Mimic Cave", 0x10C, "Mimic Cave", "cave-mimic-cave") },
-            { new RawEntrance("0x50", 0x50, "Hookshot Fairy (East DM Next to Upside-down Cave)", 0x10C, "Mimic Cave", "cave-mimic-cave") },
+            { new RawEntrance("0x50", 0x50, "Hookshot Fairy (East DM Next to Upside-down Cave)", 0x10C, "Hookshot Fairy", "cave-hookshot-fairy-cave") },
             { new RawEntrance("0x51", 0x51, "Cave South of Haunted Grove", 0x11B, "Mirror Caves (South of Tree Boy / Above Kings Tomb)", "cave-haunted-mirror-cave") },
             { new RawEntrance("0x52", 0x52, "Graveyard Cave (Mirror Cave)", 0x11B, "Mirror Caves (South of Tree Boy / Above Kings Tomb)", "cave-graveyard-mirror-cave") },
             { new RawEntrance("0x53", 0x53, "Big Bomb Shop", 0x11C, "Bomb Shop", "cave-big-bomb-shop") },

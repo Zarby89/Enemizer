@@ -136,6 +136,7 @@ namespace EnemizerLibrary.Data
             { new RawAreaEdge("7F-dw-between-lake-ice-cave", "77-dw-ice-cave", true, "") },
             { new RawAreaEdge("45-dw-east-death-mountain", "47-turtle-rock", true, "") },
             { new RawAreaEdge("45-dw-east-death-mountain", "43-dw-west-death-mountain-upper", true, "") },
+            { new RawAreaEdge("45-dw-east-death-mountain-turtle-isolated", "05-east-death-mountain-mimic-ledge", false, "Mirror") },
             { new RawAreaEdge("55-river-between-graveyard-witch", "7F-dw-between-lake-ice-cave", true, "Flippers") },
             { new RawAreaEdge("03-west-death-mountain-lower", "43-dw-west-death-mountain-lower", false, "") },
             { new RawAreaEdge("43-dw-west-death-mountain-lower", "03-west-death-mountain-lower", false, "Mirror") },

@@ -231,6 +231,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2B5681EE5E552617D5203A62141D5D8B"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2E668615E9B6EC700FF9FF66FEF71B01"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
@@ -370,12 +376,6 @@
         "Entry"
         {
         "MsmKey" = "8:_4E1C303E8E956CAADFBE6F36C8826F8F"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4E91F58C6704BF15C4F4A1AC5D06621E"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -556,7 +556,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8A6688EAA71CBB61BFC12103B6F6FB54"
-        "OwnerKey" = "8:_4E91F58C6704BF15C4F4A1AC5D06621E"
+        "OwnerKey" = "8:_D5506A9C16F715E080F5F00D4CC7E872"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -580,7 +580,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8D2F9ACA09524B6CD471CB88402A1707"
-        "OwnerKey" = "8:_4E91F58C6704BF15C4F4A1AC5D06621E"
+        "OwnerKey" = "8:_D5506A9C16F715E080F5F00D4CC7E872"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1389,6 +1389,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D5506A9C16F715E080F5F00D4CC7E872"
+        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D9DC8DA13917B3A9F25A5F81B6E68248"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
@@ -1455,12 +1461,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FB6C62FC609594B4969D118B2065F1FC"
-        "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_FB6FA460E1EC294D4C46ED33530C7E8E"
         "OwnerKey" = "8:_93E4D7B6E38F4DD0B4B291980CB51BBF"
         "MsmSig" = "8:_UNDEFINED"
@@ -1498,7 +1498,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB6C62FC609594B4969D118B2065F1FC"
+        "OwnerKey" = "8:_2B5681EE5E552617D5203A62141D5D8B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3107,6 +3107,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2B5681EE5E552617D5203A62141D5D8B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Assembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2B5681EE5E552617D5203A62141D5D8B"
+                    {
+                    "Name" = "8:Assembly.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Assembly.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2E668615E9B6EC700FF9FF66FEF71B01"
             {
             "AssemblyRegister" = "3:1"
@@ -3803,37 +3834,6 @@
                     }
                 }
             "SourcePath" = "8:System.Linq.Parallel.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E91F58C6704BF15C4F4A1AC5D06621E"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.63, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_4E91F58C6704BF15C4F4A1AC5D06621E"
-                    {
-                    "Name" = "8:EnemizerLibrary.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:EnemizerLibrary.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
@@ -6362,6 +6362,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5506A9C16F715E080F5F00D4CC7E872"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.80, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D5506A9C16F715E080F5F00D4CC7E872"
+                    {
+                    "Name" = "8:EnemizerLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:EnemizerLibrary.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D9DC8DA13917B3A9F25A5F81B6E68248"
             {
             "AssemblyRegister" = "3:1"
@@ -6703,37 +6734,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB6C62FC609594B4969D118B2065F1FC"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Assembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FB6C62FC609594B4969D118B2065F1FC"
-                    {
-                    "Name" = "8:Assembly.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Assembly.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB6FA460E1EC294D4C46ED33530C7E8E"
             {
             "AssemblyRegister" = "3:1"
@@ -6894,15 +6894,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{AEB0C1FC-B444-44DE-B4EB-5B01C79555B0}"
-        "PackageCode" = "8:{E5634513-98F2-4567-A942-ED35752FFEDD}"
+        "ProductCode" = "8:{94136CAA-02C2-434E-B85B-3BCA8EF0C38A}"
+        "PackageCode" = "8:{4F8D14B8-81E1-47D0-BA43-94887B51AF81}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.29"
+        "ProductVersion" = "8:6.0.30"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -7458,7 +7458,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"
