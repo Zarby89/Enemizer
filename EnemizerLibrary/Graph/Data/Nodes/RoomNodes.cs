@@ -85,6 +85,7 @@ namespace EnemizerLibrary.Data
             { "cave-lw-chest-game", new RoomNode("cave-lw-chest-game", 0x118, "Kakariko Gamble Game", "Kakariko Gamble Game") },
             { "cave-magic-bat", new RoomNode("cave-magic-bat", 0x0E3, "Cave (1/2 Magic)", "Cave (1/2 Magic)") },
             { "cave-mimic-cave", new RoomNode("cave-mimic-cave", 0x10C, "Mimic Cave", "Mimic Cave") },
+            { "cave-hookshot-fairy-cave", new RoomNode("cave-hookshot-fairy-cave", 0x10C, "Hookshot Fairy", "Hookshot Fairy") },
             { "cave-mini-moldorm", new RoomNode("cave-mini-moldorm", 0x123, "Mini-Moldorm Cave", "Mini-Moldorm Cave") },
             { "cave-mire-chests", new RoomNode("cave-mire-chests", 0x10D, "Cave outside Misery Mire", "Cave outside Misery Mire") },
             { "cave-north-fairy", new RoomNode("cave-north-fairy", 0x008, "Cave (North Healing Fairy)", "Cave (North Healing Fairy)") },

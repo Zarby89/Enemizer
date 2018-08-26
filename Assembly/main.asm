@@ -20,6 +20,7 @@ db #$00
 !MOLDORM_EYES_FLAG = "$408102"
 !RANDOM_SPRITE_FLAG = "$408103"
 !AGAHNIM_FUN_BALLS = "$408104"
+!ENABLE_MIMIC_OVERRIDE = "$408105"
 
 ; Enemizer reserved memory
 ; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)
@@ -82,3 +83,5 @@ Sound_SetSfxPanWithPlayerCoords:
 org $0DBB8A
 Sound_SetSfx3PanLong:
 
+org $1EC6FA ;F46FA
+SpritePrep_Eyegore:

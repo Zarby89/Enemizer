@@ -137,6 +137,7 @@ namespace EnemizerLibrary
             if (optionFlags.RandomizeEnemies)
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
+                this.ROM_DATA.EnableMimicOverride = true;
                 if (optionflags.RandomizeBushEnemyChance)
                 {
                     this.ROM_DATA.RandomizeHiddenEnemyChancePool();

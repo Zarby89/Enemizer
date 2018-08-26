@@ -21,6 +21,7 @@ namespace EnemizerLibrary.Data
             { "03-west-death-mountain-upper", new OverworldAreaNode("03-west-death-mountain-upper", 0x003, "West Death Mountain (Upper)", 0x093) },
             { "03-west-death-mountain-spectical", new OverworldAreaNode("03-west-death-mountain-spectical", 0x003, "West Death Mountain (Spectical Rock)", 0x093) },
             { "05-east-death-mountain", new OverworldAreaNode("05-east-death-mountain", 0x005, "East Death Mountain", 0x095) },
+            { "05-east-death-mountain-mimic-ledge", new OverworldAreaNode("05-east-death-mountain-mimic-ledge", 0x005, "East Death Mountain (Mimic Cave Ledge)", 0x095) },
             { "07-east-death-mountain-turtle-warp", new OverworldAreaNode("07-east-death-mountain-turtle-warp", 0x007, "East Death Mountain Warp for Turtle Rock", 0x097) },
             { "0A-entrance-death-mountain", new OverworldAreaNode("0A-entrance-death-mountain", 0x00A, "Entrance to Death Mountain", 0x09A) },
             { "0F-entrance-zora-domain", new OverworldAreaNode("0F-entrance-zora-domain", 0x00F, "Entrance to Zora's Domain", 0x09F) },

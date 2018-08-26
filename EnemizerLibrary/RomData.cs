@@ -31,6 +31,7 @@ namespace EnemizerLibrary
         public const int MoldormEyesFlag = 0x02;
         public const int RandomSpriteFlag = 0x03;
         public const int AgahnimBounceBallsFlag = 0x04;
+        public const int EnableMimicOverrideFlag = 0x05;
         public const int ChecksumComplimentAddress = 0x7FDC;
         public const int ChecksumAddress = 0x7FDE;
 
@@ -223,6 +224,12 @@ namespace EnemizerLibrary
         {
             get { return GetFlag(AgahnimBounceBallsFlag); }
             set { SetFlag(AgahnimBounceBallsFlag, value); }
+        }
+
+        public bool EnableMimicOverride
+        {
+            get { return GetFlag(EnableMimicOverrideFlag); }
+            set { SetFlag(EnableMimicOverrideFlag, value); }
         }
 
         internal bool GetFlag(int offset)
