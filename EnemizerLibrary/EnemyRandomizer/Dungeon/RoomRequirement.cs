@@ -220,6 +220,10 @@ namespace EnemizerLibrary
                 RoomIdConstants.R62_IcePalace_StalfosKnights_ConveyorHellway,
                 RoomIdConstants.R159_IcePalace0x9F));
 
+            // Bari
+            RoomRequirements.Add(new RoomGroupRequirement(null, 31, null, null, null,
+                RoomIdConstants.R127_IcePalace_BigSpikeTrapsRoom));
+
             // Wallmaster
             RoomRequirements.Add(new RoomGroupRequirement(null, null, null, 35, null,
                 RoomIdConstants.R57_SkullWoods_GibdoKey_MothulaHoleRoom,

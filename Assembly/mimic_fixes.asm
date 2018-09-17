@@ -37,11 +37,12 @@ RTL
 }
 
 notItemSprite_Mimic:
-{ ; don't change this unless you go update SetKillableThief in c# side
-    LDA !ENABLE_MIMIC_OVERRIDE : BEQ .notMimic2 ; skip to what it would have done normally
-
+{ ; don't change this unless you go update SetKillableThief in c# side since it assumes +4 bytes to update the value
     LDA $0E20, X
     CMP.b #$B8 : BEQ .changeSpriteId ; thief #$C4
+
+    LDA !ENABLE_MIMIC_OVERRIDE : BEQ .notMimic2 ; skip to what it would have done normally
+
     CMP.b #$B8 : BNE .notMimic2      ; mimic
 .changeSpriteId
     LDA #$83

@@ -21,6 +21,7 @@ db #$00
 !RANDOM_SPRITE_FLAG = "$408103"
 !AGAHNIM_FUN_BALLS = "$408104"
 !ENABLE_MIMIC_OVERRIDE = "$408105"
+!ENABLE_TERRORPIN_AI_FIX = "$408106"
 
 ; Enemizer reserved memory
 ; $7F50B0 - $7F50BF - Downstream Reserved (Enemizer)

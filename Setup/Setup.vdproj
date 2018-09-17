@@ -6366,7 +6366,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.80, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EnemizerLibrary, Version=6.1.0.90, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_D5506A9C16F715E080F5F00D4CC7E872"
@@ -6894,15 +6894,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Enemizer"
-        "ProductCode" = "8:{94136CAA-02C2-434E-B85B-3BCA8EF0C38A}"
-        "PackageCode" = "8:{4F8D14B8-81E1-47D0-BA43-94887B51AF81}"
+        "ProductCode" = "8:{D56A8519-9BCA-4EDE-97E7-5D8C39996346}"
+        "PackageCode" = "8:{9CF401A8-CBD0-40BD-AFA0-C7EF2F2F7F65}"
         "UpgradeCode" = "8:{A462B5FE-AB93-4F7C-94A6-ACB91E41E24B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:6.0.30"
+        "ProductVersion" = "8:6.0.31"
         "Manufacturer" = "8:Enemizer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -7458,7 +7458,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E4D7B6E38F4DD0B4B291980CB51BBF"
             {
-            "SourcePath" = "8:..\\EnemizerGui\\obj\\Debug\\Enemizer.exe"
+            "SourcePath" = "8:..\\EnemizerGui\\obj\\Release\\Enemizer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_619B23E8A775467D9D841EEA3F1DB28B"

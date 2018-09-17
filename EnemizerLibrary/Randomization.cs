@@ -138,6 +138,8 @@ namespace EnemizerLibrary
             {
                 this.ROM_DATA.RandomizeHiddenEnemies = true;
                 this.ROM_DATA.EnableMimicOverride = true;
+                this.ROM_DATA.EnableTerrorpinAiFix = true;
+
                 if (optionflags.RandomizeBushEnemyChance)
                 {
                     this.ROM_DATA.RandomizeHiddenEnemyChancePool();

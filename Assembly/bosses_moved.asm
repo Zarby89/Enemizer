@@ -11,6 +11,8 @@ boss_move:
 
 	CMP #7   : BNE +                    ; Is is Hera Tower Boss Room
 	CPX #$00 : BNE +
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
 		BRL .move_to_middle
 	+
 
@@ -22,6 +24,8 @@ boss_move:
 
 	CMP #41 : BNE +                     ; Is is Skull Woods Boss Room
         ; TODO: Add moving floor sprite
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
         BRL .move_to_bottom_right
 	+
 
@@ -67,15 +71,21 @@ boss_move:
 	+
 
 	CMP #222 : BNE +                    ; Is is Ice Palace Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
     	BRL .move_to_top_right
 	+
 
 	CMP #164 : BNE +                    ; Is is Turtle Rock Boss Room
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
     	BRL .move_to_bottom_left
 	+
 
 	CMP #28 : BNE +                     ; Is is Gtower (Armos2) Boss Room
 	CPX #$00 : BNE +
+        JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
+        JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
     	BRL .move_to_bottom_right
 	+
 
