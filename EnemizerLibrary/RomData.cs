@@ -32,6 +32,7 @@ namespace EnemizerLibrary
         public const int RandomSpriteFlag = 0x03;
         public const int AgahnimBounceBallsFlag = 0x04;
         public const int EnableMimicOverrideFlag = 0x05;
+        public const int EnableTerrorpinAiFixFlag = 0x06;
         public const int ChecksumComplimentAddress = 0x7FDC;
         public const int ChecksumAddress = 0x7FDE;
 
@@ -232,6 +233,12 @@ namespace EnemizerLibrary
             set { SetFlag(EnableMimicOverrideFlag, value); }
         }
 
+        public bool EnableTerrorpinAiFix
+        {
+            get { return GetFlag(EnableTerrorpinAiFixFlag); }
+            set { SetFlag(EnableTerrorpinAiFixFlag, value); }
+        }
+
         internal bool GetFlag(int offset)
         {
             return romData[EnemizerOptionFlagsBaseAddress + offset] == 0x01;
@@ -423,6 +430,9 @@ namespace EnemizerLibrary
         {
             get
             {
+#if DEBUG
+                return false;
+#endif
                 if(IsRandomizerRom == false)
                 {
                     return false;

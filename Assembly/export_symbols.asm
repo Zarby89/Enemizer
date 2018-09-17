@@ -11,6 +11,7 @@ export.label EnemizerFlags_moldorm_eye_count
 export.label EnemizerFlags_randomize_sprites
 export.label EnemizerFlags_agahnim_fun_balls
 export.label EnemizerFlags_enable_mimic_override
+export.label EnemizerFlags_enable_terrorpin_ai_fix
 export.label room_header_table
 export.label enemizer_info_table
 export.label moved_room_header_bank_value_address

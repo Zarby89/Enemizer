@@ -583,6 +583,7 @@ namespace EnemizerLibrary
 
             // mimics are no longer hard coded to 4 rooms. they replaced the dialogue testing sprite
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.GreenEyegoreSprite).SetKillable()/*.AddSubgroup1(44)*/.AddSubgroup2(46)
+                //.SetCannotHaveKey() // can't be killed with bombs
                 .AddExcludedRooms(RoomIdConstants.R268_MimicCave)); // one is mimic, one is eyegore...
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.RedEyegoreSprite)/*.AddSubgroup1(44)*/.AddSubgroup2(46));
 

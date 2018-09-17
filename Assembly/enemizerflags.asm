@@ -12,8 +12,9 @@ db #$00 ;408103 : 200103 ; Randomize Sprites.
 db #$00 ;408104 : 200104 ; make Agahnim balls deflect back
 .enable_mimic_override
 db #$00 ;408105 : 200105 ; toggle mimic code between new and old
+.enable_terrorpin_ai_fix
+db #$00 ;408106 : 200106 ; toggle to turn on terrorpin ai "fix"
 
-db #$00 ;408106 : 200106
 db #$00 ;408107 : 200107
 db #$00 ;408108 : 200108
 db #$00 ;408109 : 200109
