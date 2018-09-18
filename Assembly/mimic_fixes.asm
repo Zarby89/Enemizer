@@ -37,13 +37,14 @@ RTL
 }
 
 notItemSprite_Mimic:
-{ ; don't change this unless you go update SetKillableThief in c# side since it assumes +4 bytes to update the value
+{ ; don't change this unless you go update SetKillableThief in c# side since it assumes +4 bytes to update the value on the CMP from B8 to C4
     LDA $0E20, X
     CMP.b #$B8 : BEQ .changeSpriteId ; thief #$C4
 
     LDA !ENABLE_MIMIC_OVERRIDE : BEQ .notMimic2 ; skip to what it would have done normally
 
-    CMP.b #$B8 : BNE .notMimic2      ; mimic
+    LDA $0E20, X ; I hate assembly
+    CMP.b #$B8 : BNE .notMimic2      ; "mimic" (dialogue test sprite we hijacked)
 .changeSpriteId
     LDA #$83
 
