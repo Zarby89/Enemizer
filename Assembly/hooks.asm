@@ -32,8 +32,6 @@ incsrc load_file_hooks.asm
 
 incsrc damage_hooks.asm
 
-incsrc msu1_hooks.asm
-
 ; leave this out until we make it toggle
 ;incsrc sword_and_shield_hooks.asm
 
