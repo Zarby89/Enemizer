@@ -38,17 +38,24 @@ RTL
 
 notItemSprite_Mimic:
 { ; don't change this unless you go update SetKillableThief in c# side since it assumes +4 bytes to update the value on the CMP from B8 to C4
+    ; if we set killable thief we want to update the sprite id so it can be killed
     LDA $0E20, X
     CMP.b #$B8 : BEQ .changeSpriteId ; thief #$C4
 
-    LDA !ENABLE_MIMIC_OVERRIDE : BEQ .notMimic2 ; skip to what it would have done normally
+    ; if we don't have mimic code turned on we want to skip, but we also need to reload the sprite id because we just smoked it with this LDA
+    LDA !ENABLE_MIMIC_OVERRIDE : BEQ .reloadSpriteIdAndSkipMimic ; skip to what it would have done normally
 
     LDA $0E20, X ; I hate assembly
-    CMP.b #$B8 : BNE .notMimic2      ; "mimic" (dialogue test sprite we hijacked)
-.changeSpriteId
-    LDA #$83
+    CMP.b #$B8 : BNE .continue      ; "mimic" (dialogue test sprite we hijacked). skip to vanilla behavior if it's not a "mimic"
 
-.notMimic2
+.changeSpriteId
+    LDA #$83 ; load green eyegore sprite id so we can kill the thing
+    JMP .continue
+
+.reloadSpriteIdAndSkipMimic
+    LDA $0E20, X
+
+.continue
 
     ; restore code
     REP #$20 : ASL #2
