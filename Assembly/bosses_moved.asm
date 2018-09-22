@@ -26,6 +26,9 @@ boss_move:
         ; TODO: Add moving floor sprite
         JSL Sprite_ResetAll             ; reset sprites twice in that room for some reasons (fix bug with kholdstare)
         JSL Dungeon_ResetSprites        ; Restore the dungeon_resetsprites
+        LDA #$07 : STA $0B00;Spawn the moving floor sprite
+        STZ $0B28
+        INC $0B08
         BRL .move_to_bottom_right
 	+
 

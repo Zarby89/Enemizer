@@ -126,7 +126,7 @@ namespace EnemizerLibrary
                             br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
                             break;
                         default:
-                            throw new Exception("Unknown Boss Randomization Type");
+                            throw new Exception("Unknown Boss Randomization Type.");
                     }
                 }
                 br.RandomizeRom(this.ROM_DATA, spriteGroupCollection, spriteRequirements);
@@ -800,6 +800,12 @@ namespace EnemizerLibrary
             setColor(0x0DD76C + (0xB4 * dungeon), wall_color, 2);
             setColor(0x0DD76E + (0xB4 * dungeon), wall_color, 4);
 
+
+            Color chest_color = getColorBrigthness();
+            setColor(0x0DD7AE + (0xB4 * dungeon), chest_color,2);
+            setColor(0x0DD7B0 + (0xB4 * dungeon), chest_color,0);
+            //Chests
+
             //Decoration?
 
             //WHAT ARE THOSE !!
@@ -922,6 +928,11 @@ namespace EnemizerLibrary
             // TODO: unused?
             Color bridge = Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255));
 
+            //Hardcoded Grass (hobo an special area?)
+            setColor(0x67FB4, grass, 0);
+            setColor(0x67F94, grass, 0);
+            setColor(0x67FC6, grass, 0);
+            setColor(0x67FE6, grass, 0);
 
             setColor(0x05FEA9, grass, 0);//hardcoded grass palette LW
 
@@ -1005,6 +1016,19 @@ namespace EnemizerLibrary
             setColor(0x0DE920, dirt, 2);
             setColor(0x0DE916, dirt, 3);
 
+
+            setColor(0x0DE932, dirt, 2);
+            setColor(0x0DE934, dirt, 3);
+            setColor(0x0DE936, dirt, 4);
+            setColor(0x0DE93C, dirt, 1);
+
+
+            setColor(0x0DE938, grass, 2);
+            setColor(0x0DE93A, grass, 0);
+
+
+
+
             setColor(0x0DE92C, grass, 0);
             setColor(0x0DE93A, grass, 0);
             setColor(0x0DE93C, dirt, 2);
@@ -1066,6 +1090,11 @@ namespace EnemizerLibrary
             setColor(0x0DE66C, water, 0); //water lighter
             setColor(0x0DE91A, water, 0); //water lighter
             setColor(0x0DE92E, water, 1);// water light
+
+            setColor(0x0DEA1A, water, 1);//light
+            setColor(0x0DEA16, water, 3);//dark
+            setColor(0x0DEA10, water, 4);//darker
+
 
             setColor(0x0DE66E, dirt, 3); //ground dark
 
@@ -1208,7 +1237,7 @@ namespace EnemizerLibrary
             setColor(0x0DE662, dwwater, 2); //light
             setColor(0x0DE65E, dwwater, 1); //lighter
             setColor(0x0DEABE, dwwater, 1);//lighter
-
+            setColor(0x0DEA98, dwwater, 2);//light
 
             //Death Mountain
 
