@@ -60,7 +60,6 @@ incsrc mimic_fixes.asm
 ;incsrc location_menu.asm
 incsrc load_file.asm
 incsrc soundfx_changes.asm
-incsrc msu1.asm
 incsrc sword_and_shield.asm
 incsrc overworld_sprites.asm
 incsrc bees.asm
