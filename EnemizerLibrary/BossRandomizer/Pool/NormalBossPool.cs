@@ -14,20 +14,20 @@ namespace EnemizerLibrary
 
         }
 
-        protected override void FillGTPool()
-        {
-            List<Boss> GTPool;
-            Boss newBoss = Boss.GetRandomBoss(rand, new GT1Dungeon()); // GT1
-            GTPool.Add(newBoss);
-            do {
-                newBoss = Boss.GetRandomBoss(rand, new GT2Dungeon()); // GT2
-            } while (GTPool.contains(newBoss));
-            GTPool.Add(newBoss);
-            do {
-                newBoss = Boss.GetRandomBoss(rand, new GT3Dungeon()); // GT3
-            } while (GTPool.contains(newBoss));
-            GTPool.Add(newBoss);
-            GTPool.ForEach(boss => pool.add(boss));
-        }
+		protected override void FillGTPool()
+		{
+			List<Boss> GTPool;
+			Boss newBoss = Boss.GetRandomBoss(rand, new GT1Dungeon()); // GT1
+			GTPool.Add(newBoss);
+			do {
+				newBoss = Boss.GetRandomBoss(rand, new GT2Dungeon()); // GT2
+			} while (GTPool.contains(newBoss));
+			GTPool.Add(newBoss);
+			do {
+				newBoss = Boss.GetRandomBoss(rand, new GT3Dungeon()); // GT3
+			} while (GTPool.contains(newBoss));
+			GTPool.Add(newBoss);
+			GTPool.ForEach(boss => pool.add(boss));
+		}
     }
 }
