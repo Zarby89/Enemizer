@@ -147,27 +147,27 @@ namespace EnemizerLibrary
         new EmptyPot(0x90,0x14),new EmptyPot(0x68,0x0F),new EmptyPot(0x68,0x10),new EmptyPot(0x90,0x13),
         new EmptyPot(0xAC,0x14),new EmptyPot(0x90,0x1B),new EmptyPot(0xAC,0x1C),new EmptyPot(0xA0,0x1B),},
         new byte[]{0x0B,0x0B,0x0C,0x0C,0x0C,0x0C}),
-        //Game Room 74 - PoD entrance
-        new GameRoom(74, new EmptyPot[] 
-            {
-                //new EmptyPot(0x0E, 0x05), // switch
-                new EmptyPot(0x20, 0x05),
-                new EmptyPot(0x5C, 0x05),
-                //new EmptyPot(0x6E, 0x05), // switch
+        ////Game Room 74 - PoD entrance
+        //new GameRoom(74, new EmptyPot[] 
+        //    {
+        //        //new EmptyPot(0x0E, 0x05), // switch
+        //        new EmptyPot(0x20, 0x05),
+        //        new EmptyPot(0x5C, 0x05),
+        //        //new EmptyPot(0x6E, 0x05), // switch
 
-                new EmptyPot(0x38, 0x08),
-                new EmptyPot(0x44, 0x08),
+        //        new EmptyPot(0x38, 0x08),
+        //        new EmptyPot(0x44, 0x08),
 
-                new EmptyPot(0x0E, 0x0B),
-                new EmptyPot(0x20, 0x0B),
-                new EmptyPot(0x5C, 0x0B),
-                new EmptyPot(0x6E, 0x0B),
-            },
-            new byte[]
-            {
-                0x0B, 0x0B, 0x0A, 0x0A, 0x0A, 0x0A, 0x01, 0x01//, 0x88, 0x88
-            }
-        ),
+        //        new EmptyPot(0x0E, 0x0B),
+        //        new EmptyPot(0x20, 0x0B),
+        //        new EmptyPot(0x5C, 0x0B),
+        //        new EmptyPot(0x6E, 0x0B),
+        //    },
+        //    new byte[]
+        //    {
+        //        0x0B, 0x0B, 0x0A, 0x0A, 0x0A, 0x0A, 0x01, 0x01//, 0x88, 0x88
+        //    }
+        //),
         //Game Room 78
         new GameRoom(78,new EmptyPot[]{new EmptyPot(0x30,0x0A,2),new EmptyPot(0x8C,0x0B,2),new EmptyPot(0x1C,0x0C,2),
         new EmptyPot(0x70,0x0C),},new byte[]{0x88,0x0B,0x0C}),

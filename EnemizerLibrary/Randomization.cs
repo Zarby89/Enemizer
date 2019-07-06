@@ -60,8 +60,6 @@ namespace EnemizerLibrary
 
             rand = new Random(seed);
 
-            Graph graph = new Graph(new GraphData(this.ROM_DATA, this.optionFlags));
-
             if (skin != "Unchanged" && skin != "")
             {
                 ChangeSkin(skin);
@@ -106,27 +104,32 @@ namespace EnemizerLibrary
 
                 if (optionflags.UseManualBosses)
                 {
-                    br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
-                }
-                else if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
-                {
-                    br = new DebugBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                    br = new ManualBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, null);
                 }
                 else
                 {
-                    switch (optionFlags.RandomizeBossesType)
+                    Graph graph = new Graph(new GraphData(this.ROM_DATA, this.optionFlags));
+
+                    if (optionFlags.DebugMode && optionFlags.DebugForceBoss)
                     {
-                        case RandomizeBossesType.Basic:
-                            br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
-                            break;
-                        case RandomizeBossesType.Normal:
-                            br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
-                            break;
-                        case RandomizeBossesType.Chaos:
-                            br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
-                            break;
-                        default:
-                            throw new Exception("Unknown Boss Randomization Type.");
+                        br = new DebugBossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                    }
+                    else
+                    {
+                        switch (optionFlags.RandomizeBossesType)
+                        {
+                            case RandomizeBossesType.Basic:
+                                br = new BossRandomizer(rand, optionFlags, this.ROM_DATA.Spoiler, graph);
+                                break;
+                            case RandomizeBossesType.Normal:
+                                br = new NormalBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                                break;
+                            case RandomizeBossesType.Chaos:
+                                br = new ChaosBossRandomizer(rand, optionflags, this.ROM_DATA.Spoiler, graph);
+                                break;
+                            default:
+                                throw new Exception("Unknown Boss Randomization Type.");
+                        }
                     }
                 }
                 br.RandomizeRom(this.ROM_DATA, spriteGroupCollection, spriteRequirements);
@@ -1513,7 +1516,6 @@ namespace EnemizerLibrary
             }
 
             int i = 0;
-            FileStream fsx;
             int r;
             string filename;
 
