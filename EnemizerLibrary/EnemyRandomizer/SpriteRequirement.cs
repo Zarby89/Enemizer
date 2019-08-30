@@ -449,7 +449,7 @@ namespace EnemizerLibrary
 
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.TutorialSoldierSprite).SetNPC().SetNeverUse().SetDoNotRandomize());
 
-            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LightningLockSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(29));
+            SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.LightningLockSprite).SetNeverUse().SetDoNotRandomize().AddSubgroup3(63));
 
             // probably needs 19 and 41 for sub 2 for falling animation
             SpriteRequirements.Add(SpriteRequirement.New(SpriteConstants.BlueSwordSoldier_DetectPlayerSprite).SetKillable().AddSubgroup1(13, 73));

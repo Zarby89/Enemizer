@@ -62,6 +62,11 @@ namespace EnemizerLibrary
                 var possibleSpriteGroups = spriteGroups.GetPossibleOverworldSpriteGroups(doNotUpdateSprites).ToList();
 
                 //Debug.Assert(possibleSpriteGroups.Count > 0);
+                if (possibleSpriteGroups.Count == 0)
+                {
+                    Console.WriteLine($"possibleSpriteGroups is 0! Skipping area {a.AreaName}");
+                    continue;
+                }
 
                 a.GraphicsBlockId = (byte)possibleSpriteGroups[rand.Next(possibleSpriteGroups.Count)].GroupId;
             }

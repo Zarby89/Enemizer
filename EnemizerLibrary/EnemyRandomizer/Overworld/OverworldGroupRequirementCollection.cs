@@ -32,8 +32,8 @@ namespace EnemizerLibrary
 
             OverworldRequirements.Add(new OverworldGroupRequirement(3, null, null, null, 14, OverworldAreaConstants.A014_Graveyard,
                                                                                              OverworldAreaConstants.A0A4_Graveyard_PostAga));
-
-            OverworldRequirements.Add(new OverworldGroupRequirement(1, null, null, null, 29, OverworldAreaConstants.A01B_HyruleCastle,
+            // probably 63 for v31?
+            OverworldRequirements.Add(new OverworldGroupRequirement(1, null, null, 76, 63, OverworldAreaConstants.A01B_HyruleCastle,
                                                                                              OverworldAreaConstants.A0AB_HyruleCastle_PostAga));
 
             OverworldRequirements.Add(new OverworldGroupRequirement(6, null, null, null, null, OverworldAreaConstants.A022_Smithy, 
