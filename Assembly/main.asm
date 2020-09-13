@@ -7,11 +7,11 @@ lorom
 !BLT = "BCC"
 !BGE = "BCS"
 
-org $00FFD7 ; Set rom on 2mb
-db #$0C
+; org $00FFD7 ; Set rom on 2mb
+; db #$0C
 
-org $3FFFFF ; write at the last position to expand on 2mb
-db #$00
+; org $3FFFFF ; write at the last position to expand on 2mb
+; db #$00
 
 ;=Constants======================================================================
 
@@ -54,7 +54,7 @@ incsrc bosses_moved.asm
 incsrc damage.asm
 incsrc bossdrop.asm
 incsrc moldorm.asm
-incsrc sprite_randomizer.asm
+;incsrc sprite_randomizer.asm
 incsrc kodongo_fixes.asm
 incsrc mimic_fixes.asm
 ;incsrc location_menu.asm
@@ -69,7 +69,7 @@ incsrc vitreous_fixes.asm
 ; data
 incsrc room_object_table.asm
 incsrc shell_gfx.asm
-warnpc $35FFFF ;if we hit this we need to split stuff by bank
+warnpc $36FFFF ;if we hit this we need to split stuff by bank
 ;================================================================================
 
 incsrc export_symbols.asm

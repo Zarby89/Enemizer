@@ -14,7 +14,7 @@ incsrc bosses_hooks.asm
 
 incsrc moldorm_hooks.asm
 
-incsrc sprite_randomizer_hooks.asm
+;incsrc sprite_randomizer_hooks.asm
 
 incsrc kodongo_hooks.asm
 
