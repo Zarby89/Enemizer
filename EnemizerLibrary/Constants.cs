@@ -24,13 +24,13 @@ namespace EnemizerLibrary
         public const int OverworldSpritePointerTableBaseAddress = 0x04C901;
 
         public const int MoldormEyeCountAddressVanilla = 0x0EDBB3;
-        public const int MoldormEyeCountAddressEnemizer = 0x200102;
+        public const int MoldormEyeCountAddressEnemizer = 0x1A8102;
 
-        public const int NewBossGraphicsBaseAddress = 0x2F8000;
+        public const int NewBossGraphicsBaseAddress = 0x1B0000;
 
         public const int RandomSpriteGraphicsBaseAddress = 0x300000;
 
-        public const int EnemizerFileLength = 0x400000;
+        public const int EnemizerFileLength = 0x200000;
 
         public const int HiddenEnemyChancePoolBaseAddress = 0xD7BBB;
 
