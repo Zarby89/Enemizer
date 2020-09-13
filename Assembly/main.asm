@@ -10,7 +10,7 @@ lorom
 org $00FFD7 ; Set rom on 2mb
 db #$0C
 
-org $5FFFFF ; write at the last position to expand on 2mb
+org $3FFFFF ; write at the last position to expand on 2mb
 db #$00
 
 ;=Constants======================================================================
@@ -35,7 +35,7 @@ incsrc DMA.asm
 incsrc externalhooks.asm ; this is from z3randomizer source. be sure to check for updates
 
 ;================================================================================
-org $408000
+org $358000
 EnemizerTablesStart:
 incsrc enemizer_info_table.asm
 incsrc enemizerflags.asm
@@ -64,12 +64,12 @@ incsrc sword_and_shield.asm
 incsrc overworld_sprites.asm
 incsrc bees.asm
 incsrc vitreous_fixes.asm
-incsrc agahnim.asm
+;incsrc agahnim.asm
 
 ; data
 incsrc room_object_table.asm
 incsrc shell_gfx.asm
-warnpc $40FFFF ;if we hit this we need to split stuff by bank
+warnpc $35FFFF ;if we hit this we need to split stuff by bank
 ;================================================================================
 
 incsrc export_symbols.asm
