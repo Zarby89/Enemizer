@@ -24,7 +24,7 @@ namespace EnemizerLibrary
         public const int OverworldSpritePointerTableBaseAddress = 0x04C901;
 
         public const int MoldormEyeCountAddressVanilla = 0x0EDBB3;
-        public const int MoldormEyeCountAddressEnemizer = 0x1A8102;
+        public const int MoldormEyeCountAddressEnemizer = 0x1B0102;
 
         public const int NewBossGraphicsBaseAddress = 0x1B0000;
 

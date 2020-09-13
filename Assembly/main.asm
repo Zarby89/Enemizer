@@ -35,7 +35,7 @@ incsrc DMA.asm
 incsrc externalhooks.asm ; this is from z3randomizer source. be sure to check for updates
 
 ;================================================================================
-org $358000
+org $368000
 EnemizerTablesStart:
 incsrc enemizer_info_table.asm
 incsrc enemizerflags.asm
